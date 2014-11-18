@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 18, 2014 at 05:19 AM
+-- Generation Time: Nov 18, 2014 at 05:28 AM
 -- Server version: 5.6.11
 -- PHP Version: 5.5.3
 
@@ -52,7 +52,27 @@ CREATE TABLE IF NOT EXISTS `post` (
   `konten` text,
   `published` tinyint(4) NOT NULL DEFAULT '0',
   `image_url` varchar(500) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `user_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user`
+--
+
+CREATE TABLE IF NOT EXISTS `user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `email` int(200) NOT NULL,
+  `password` varchar(200) NOT NULL,
+  `nama` varchar(200) NOT NULL,
+  `is_admin` tinyint(4) NOT NULL DEFAULT '0',
+  `is_owner` tinyint(4) NOT NULL DEFAULT '0',
+  `is_editor` tinyint(4) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `email` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 --
@@ -64,6 +84,12 @@ CREATE TABLE IF NOT EXISTS `post` (
 --
 ALTER TABLE `comment`
   ADD CONSTRAINT `comment_ibfk_1` FOREIGN KEY (`post_id`) REFERENCES `post` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `post`
+--
+ALTER TABLE `post`
+  ADD CONSTRAINT `post_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
