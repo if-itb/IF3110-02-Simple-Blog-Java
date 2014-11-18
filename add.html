@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Simple Blog | Add Post</title>
+
+    <link href='http://fonts.googleapis.com/css?family=Leckerli+One' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css'>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/custom.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+
+    <div class="container-fluid">
+      
+      <div class="row" id="header">
+        <div class="row">
+          <div class="col-md-6 col-xs-6 col-sm-6 col-lg-6">
+            <p class="header-logo resize"><a href="#">Simple Blog</a></p>
+            <p class="header-text resize">Because we're hungry.</p>
+          </div>
+          <div class="col-md-6 col-xs-6 col-sm-6 col-lg-6">
+            <div class="pull-right icon-header">
+              <button type="button" class="btn btn-info btn-circle btn-lg" data-toggle="tooltip" data-placement="left" title="Add Post"><a href="#"><i class="glyphicon glyphicon-plus"></i></a></button>
+              <button type="button" class="btn btn-warning btn-circle btn-lg" data-toggle="tooltip" data-placement="left" title="Users Database"><a href="#"><i class="glyphicon glyphicon-user"></i></a></button>
+              <button type="button" class="btn btn-danger btn-circle btn-lg" data-toggle="tooltip" data-placement="left" title="Sign Out"><a href="#"><i class="glyphicon glyphicon-log-out"></i></a></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+
+        <div class="col-md-10 col-md-offset-1">
+          <div class="edit"></div>
+          <div class="post">
+            <div class="post-title">Add Post</div>
+            <form role="form">
+              <div class="form-group">
+                <label for="exampleInputEmail1">Title</label>
+                <input type="text" class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1">Date</label>
+                <input type="text" class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1">Content</label>
+                <textarea class="form-control" rows="5"></textarea>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1">Status</label>
+                <div class="radio">
+                  <label>
+                    <input type="radio" name="status" id="status" value="publish">
+                    Publish
+                  </label>
+                </div>
+                <div class="radio">
+                  <label>
+                    <input type="radio" name="status" id="status" value="unpublish">
+                    Unpublish
+                  </label>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-default">Submit</button>
+            </form>
+
+
+          </div>
+        </div>
+
+      </div>
+
+      <div class="row" id="footer">
+        <div class="footer-text">
+          <p class="text-right">IF3110 Pengembangan Aplikasi Berbasis Web</p>
+          <p class="text-right">Arina Listyarini Dwiastuti (13512006) | Gifari Kautsar (13512020) | Indam Muhammad (13512026)</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <script type="text/javascript">
+      $(function() {
+        $('[data-toggle="tooltip"]').tooltip();
+      });
+    </script>
+
+  </body>
+</html>
