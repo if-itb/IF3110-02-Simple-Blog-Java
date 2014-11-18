@@ -6,33 +6,31 @@ and open the template in the editor.
 -->
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <head>
         <link type="text/css" rel="stylesheet" href="screen.css"/>
-        <title>Simple Blog</title>
+        <title>Owner's Simple Blog</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </head>
-    <body class="default">
+    <h:body class="default">
 <div class="wrapper">
 
 <nav class="nav">
     <a style="border:none;" id="logo" href="index.html"><h1>Simple<span>-</span>Blog</h1></a>
     <ul class="nav-primary">
-        <h:form>
-            <li>
-                <input type="text" name="username" placeholder="Username"/>&nbsp;<input type="password" name="password" placeholder="Password"/>&nbsp;
-                <h:commandButton action="Owner?faces-redirect=true" value="Login!" />
-            </li><br/>
-            <li>Don't have an account? You can
-                <h:commandLink action="#" value="register" /> here.
-            </li>
-        </h:form>
+        <li>You are logged in as <u><a href="#">Author.</a></u></li><br/>
     </ul>
 </nav>
 
 <div id="home">
+    
     <div class="posts">
         <nav class="art-list">
+            <h:form>
+                <h:commandLink class="art-list-addpost" action="AddPost?faces-redirect=true" value="+ Add Post">
+                </h:commandLink>
+            </h:form>
           <ul class="art-list-body">
             <li class="art-list-item">
                 <div class="art-list-item-title-and-time">
@@ -84,5 +82,5 @@ and open the template in the editor.
 </footer>
 
 </div>
-    </body>
+    </h:body>
 </html>

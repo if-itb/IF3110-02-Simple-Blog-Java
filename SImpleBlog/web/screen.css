@@ -171,7 +171,6 @@ a:hover {
   font-weight: 500;
 }
 #logo h1,
-.nav-primary li,
 .nav-primary li a {
   font-family: "proxima-nova", "helvetica neue", "helvetica", sans-serif;
   font-weight: 700;
@@ -180,6 +179,16 @@ a:hover {
   color: #E50000;
   text-transform: initial;
   text-align: right;
+}
+
+.nav-primary li {
+  font-family: "proxima-nova", "helvetica neue", "helvetica", sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 30px;
+  color: #000;
+  text-transform: initial;
+  text-align: right;  
 }
 
 #logo h1 {
@@ -417,6 +426,15 @@ div.cover > img {
   text-transform: uppercase;
   color: #999;
 }
+
+.art-list-addpost {
+  font-size: 15px;
+  line-height: 20px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #999;
+}
+
 .art-list-title a {
   color: #000;
 }
