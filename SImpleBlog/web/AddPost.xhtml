@@ -33,18 +33,19 @@ and open the template in the editor.
             <h2>Add Post</h2>
 
             <div id="contact-area">
-                <form action="#" method="post">
+                <!--form action="#" method="post">-->
+                <h:form>
                     <label for="Judul">Title:</label>
                     <input type="text" name="Judul" id="Judul" />
 
                     <label for="Tanggal">Date:</label>
-                    <input type="text" name="Tanggal" id="Tanggal" />
+                    <input type="date" name="Tanggal" id="Tanggal" />
                     
                     <label for="Konten">Content:</label><br />
                     <textarea name="Konten" rows="20" cols="20" id="Konten"></textarea>
-
-                    <input type="submit" name="submit" value="Simpan" class="submit-button" />
-                </form>
+                    
+                    <h:commandButton value="Save" class="submit-button" action="#" />
+                </h:form>
             </div>
         </div>
     </div>
