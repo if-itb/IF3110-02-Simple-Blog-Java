@@ -1,3 +1,4 @@
+<%@taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
 @import url(http://fonts.googleapis.com/css?family=Open+Sans);
 @import url(http://fonts.googleapis.com/css?family=Questrial);
 
@@ -859,4 +860,14 @@ label {
   margin-right: 15px;
   width: 100px;
   padding-top: 5px;
+}
+
+#sign-up{
+    position: relative;
+    left: 200px;
+    text-transform: none;
+}
+
+#sign-up:hover{
+    color: #4099ff;
 }
