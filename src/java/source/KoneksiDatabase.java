@@ -21,18 +21,14 @@ public class KoneksiDatabase {
     /**
      * Fungsi untuk mendapatkan koneksi ke database. User dan password dari database harus diset terlebih dahulu.
      * @return Mengembalikan koneksi ke database.
+     * @throws java.sql.SQLException
      */
-    public static Connection getKoneksi(){
+    public static Connection getKoneksi() throws SQLException{
         if(koneksi == null && user != null && password != null) {
-            try {
                 String url = "jdbc:mysql://localhost:3306/blog";
                 DriverManager.registerDriver(new com.mysql.jdbc.Driver());
                 koneksi = DriverManager.getConnection(url, user, password);
                 System.out.println("Berhasil terkoneksi");
-            }
-            catch(SQLException t){
-                System.out.println("eror database");
-            }
         }
         return koneksi;
     }
