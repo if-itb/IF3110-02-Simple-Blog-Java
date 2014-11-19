@@ -15,7 +15,8 @@
     </context-param>
     <context-param>
         <param-name>DB-USER</param-name>
-        <param-value>root
+        <param-value>root</param-value>
+    </context-param>
     <context-param>
         <param-name>DB-PASSWORD</param-name>
         <param-value></param-value>
