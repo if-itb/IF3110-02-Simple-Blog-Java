@@ -38,7 +38,7 @@
 			statement.close();
 			connection.close();
 		}catch(Exception ex){
-			out.println("Can't connect to database");
+			out.println("Gagal tersambung. Terdaapat kesalahan.");
 		}	
 		%>
 		

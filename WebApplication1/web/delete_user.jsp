@@ -28,7 +28,7 @@
 					}
 
 				}catch(SQLException ex){
-					out.println("Koneksi Bermasalah");
+					out.println("Koneksi Bermasalah. Tidak dapat menghapus user.");
 				}finally{
 
 				}
