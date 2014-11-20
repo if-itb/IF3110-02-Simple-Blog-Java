@@ -27,7 +27,7 @@
 			
 			while(rs.next()){
 		%>	
-			<form method="post">
+			<form method="post" action="update.jsp">
 				<label>Nama: </label><input type="text" id="user_name" name="user_name" value="<%=rs.getString("nama")%>">
 				<br/>
 				<label>Username: </label><input type="text" id="user_username" name="user_username" value="<%=rs.getString("username")%>">
@@ -47,6 +47,7 @@
 			out.println("Gagal tersambung. Terdaapat kesalahan.");
 		}	
 		%>
+		
 
     </body>
 </html>

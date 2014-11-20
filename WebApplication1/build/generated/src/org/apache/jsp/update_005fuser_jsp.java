@@ -3,8 +3,6 @@ package org.apache.jsp;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.jsp.*;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.sql.*;
 import java.io.*;
 
@@ -53,8 +51,6 @@ public final class update_005fuser_jsp extends org.apache.jasper.runtime.HttpJsp
       out.write("\n");
       out.write("\n");
       out.write("\n");
-      out.write("\n");
-      out.write("\n");
       out.write('\n');
 
 String xDRIVER = "com.mysql.jdbc.Driver";
@@ -74,37 +70,53 @@ Class.forName(xDRIVER);
       out.write("        <title>Update User</title>\n");
       out.write("    </head>\n");
       out.write("    <body>\n");
+      out.write("        ");
+
+		try{
+			Connection connection = null;
+			Statement statement = null;
+			ResultSet rs = null;
+			Class.forName(xDRIVER);
+			connection = DriverManager.getConnection(xSTRING,xUSERNAME,xPASSWORD);
+			statement = connection.createStatement();
+			String Data = "select * from users where username = 'aryya'";
+			rs = statement.executeQuery(Data);
+			
+			while(rs.next()){
+		
+      out.write("\t\n");
+      out.write("\t\t\t<form method=\"post\" action=\"jspf/update.jspf\">\n");
+      out.write("\t\t\t\t<label>Nama: </label><input type=\"text\" id=\"user_name\" name=\"user_name\" value=\"");
+      out.print(rs.getString("nama"));
+      out.write("\">\n");
+      out.write("\t\t\t\t<br/>\n");
+      out.write("\t\t\t\t<label>Username: </label><input type=\"text\" id=\"user_username\" name=\"user_username\" value=\"");
+      out.print(rs.getString("username"));
+      out.write("\">\n");
+      out.write("\t\t\t\t<br/>\n");
+      out.write("\t\t\t\t<label>Password: </label><input type=\"text\" id=\"user_password\" name=\"user_password\" value=\"");
+      out.print(rs.getString("password"));
+      out.write("\">\n");
+      out.write("\t\t\t\t<br/>\n");
+      out.write("\t\t\t\t<label>Email: </label><input type=\"text\" id=\"user_email\" name=\"user_email\" value=\"");
+      out.print(rs.getString("email"));
+      out.write("\">\n");
+      out.write("\t\t\t\t<br/>\n");
+      out.write("\t\t\t\t<input type=\"submit\" value=\"Update\">\n");
+      out.write("\t\t\t</form>\n");
       out.write("\t\t");
 
-					PreparedStatement preparedStatement;
-					ResultSet result = null;
-					Class.forName(xDRIVER);
-					Connection connection = DriverManager.getConnection(xSTRING,xUSERNAME,xPASSWORD);
-					preparedStatement = connection.prepareStatement("select name,username,password,email from users where username = ?");
-					preparedStatement.setString(1,"adwisatya2");
-					preparedStatement.execute();
-					
-				
+			}
+			rs.close();
+			statement.close();
+			connection.close();
+		}catch(Exception ex){
+			out.println("Gagal tersambung. Terdaapat kesalahan.");
+		}	
+		
       out.write("\n");
-      out.write("        <form method=\"post\">\n");
-      out.write("\t\t\t<label>Nama: </label><input type=\"text\" id=\"user_name\" name=\"user_name\" value=\"");
-      out.print(result.getString("name") );
-      out.write("\">\n");
-      out.write("\t\t\t<br/>\n");
-      out.write("\t\t\t<label>Username: </label><input type=\"text\" id=\"user_username\" name=\"user_username\" value=\"");
-      out.print(result.getString("username") );
-      out.write("\">\n");
-      out.write("\t\t\t<br/>\n");
-      out.write("\t\t\t<label>Password: </label><input type=\"text\" id=\"user_password\" name=\"user_password\" value=\"\"");
-      out.print(result.getString("password") );
-      out.write(">\n");
-      out.write("\t\t\t<br/>\n");
-      out.write("\t\t\t<label>Email: </label><input type=\"text\" id=\"user_email\" name=\"user_email\" value=\"");
-      out.print(result.getString("email") );
-      out.write("\">\n");
-      out.write("\t\t\t<br/>\n");
-      out.write("\t\t\t<input type=\"submit\" value=\"Update\">\n");
-      out.write("\t\t</form>\n");
+      out.write("\t\t\n");
+      out.write("\n");
       out.write("    </body>\n");
       out.write("</html>\n");
     } catch (Throwable t) {
