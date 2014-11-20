@@ -1777,8 +1777,7 @@ pre code {
   }
   .col-md-1 {
     width: 8.33333333%;
-  
-}
+  }
   .col-md-pull-12 {
     right: 100%;
   }
@@ -3958,10 +3957,8 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 @media (min-width: 768px) {
   .navbar > .container .navbar-brand,
   .navbar > .container-fluid .navbar-brand {
-    margin-left: -27px;
-  
-    color: white;
-}
+    margin-left: -15px;
+  }
 }
 .navbar-toggle {
   position: relative;
@@ -4164,27 +4161,28 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   }
 }
 .navbar-default {
-  background-color: #3b5998;
+  background-color: #f8f8f8;
+  border-color: #e7e7e7;
 }
 .navbar-default .navbar-brand {
   color: #777;
 }
 .navbar-default .navbar-brand:hover,
 .navbar-default .navbar-brand:focus {
-  color: lightgreen;
+  color: #5e5e5e;
   background-color: transparent;
 }
 .navbar-default .navbar-text {
   color: #777;
 }
 .navbar-default .navbar-nav > li > a {
+  color: #777;
   position: relative;
-  color: white;
-  text-align: right;
+  left: 40px;
 }
 .navbar-default .navbar-nav > li > a:hover,
 .navbar-default .navbar-nav > li > a:focus {
-  color: lightgreen;
+  color: #333;
   background-color: transparent;
 }
 .navbar-default .navbar-nav > .active > a,
@@ -6333,32 +6331,4 @@ button.close {
     display: none !important;
   }
 }
-
-.post {
-    
-}
-.post .title {
-    font-weight: bold;
-    font-size: 36px;
-    display: block;
-    margin: auto;
-    text-align: center;
-    color: black;
-}
-.post .title:hover {
-    color: lightgreen;
-    text-decoration: none;
-    -webkit-transition: color .2s ease-in-out;
-}
-.post .date {
-    text-align: center;
-    margin-bottom: 20px;
-}
-.post .content {
-    margin-left: 20%;
-    margin-right: 20%;
-    text-align: justify;
-    border-bottom: solid 1px;
-    padding-bottom: 25px;
-    margin-bottom: 25px;
-}
+/*# sourceMappingURL=bootstrap.css.map */
