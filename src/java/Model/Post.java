@@ -106,6 +106,7 @@ public class Post {
     /* Asumsi : koneksi diurus oleh kelas yang memanggil atau controller */
        
         DatabaseAccess databaseAccess = DatabaseAccess.getInstance();
+        comments = new Vector<Comment>();
         //query sql
         ArrayList<String> columns = new ArrayList(Arrays.asList("id", "post_id", "creator", "email", "text", "timestamp"));
         String condition = "post_id=" + this.id; // jika ada kondisi dapat dimasukkan seperti pada
