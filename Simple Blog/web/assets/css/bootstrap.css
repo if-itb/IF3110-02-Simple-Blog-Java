@@ -3958,7 +3958,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 @media (min-width: 768px) {
   .navbar > .container .navbar-brand,
   .navbar > .container-fluid .navbar-brand {
-    margin-left: -27px;
+    margin-left: -20px;
   
     color: white;
 }
@@ -4175,7 +4175,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   background-color: transparent;
 }
 .navbar-default .navbar-text {
-  color: #777;
+  color: #FFF;
 }
 .navbar-default .navbar-nav > li > a {
   position: relative;
@@ -6335,7 +6335,12 @@ button.close {
 }
 
 .post {
+    border-bottom: solid 1px black;
     
+    margin-left: 20%;
+    margin-right: 20%;
+    margin-bottom: 25px;
+    padding-bottom: 25px;
 }
 .post .title {
     font-weight: bold;
@@ -6354,11 +6359,18 @@ button.close {
     text-align: center;
     margin-bottom: 20px;
 }
+.post .option{
+    display: block;
+    text-align: left;
+    color: blue;
+    padding-top: 5px;
+}
 .post .content {
-    margin-left: 20%;
-    margin-right: 20%;
     text-align: justify;
-    border-bottom: solid 1px;
-    padding-bottom: 25px;
-    margin-bottom: 25px;
+}
+.back-to-top {
+    float: left; 
+    font-size: 14px; 
+    margin-bottom: 10px; 
+    margin-left: 20%
 }
