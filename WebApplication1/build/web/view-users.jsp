@@ -22,7 +22,7 @@
 			Class.forName(xDRIVER);
 			connection = DriverManager.getConnection(xSTRING,xUSERNAME,xPASSWORD);
 			statement = connection.createStatement();
-			String Data = "select * from user";
+			String Data = "select * from users";
 			rs = statement.executeQuery(Data);
 			
 			while(rs.next()){
@@ -38,7 +38,7 @@
 			statement.close();
 			connection.close();
 		}catch(Exception ex){
-			out.println("Can't connect to database");
+			out.println("Gagal tersambung. Terdaapat kesalahan.");
 		}	
 		%>
 		
