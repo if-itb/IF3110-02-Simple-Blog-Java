@@ -5,12 +5,23 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
+        <title>Login</title>
     </h:head>
     <h:body>
         <ui:composition template="layouts/main.xhtml">
             <ui:define name="content">
-                <h1>ini file ampas loh</h1>
-                #{postController.getTest()}
+                <h1>login</h1>
+                <h:form>
+                    <h:inputText value="#{userIdentity.email}">
+                        <f:validator validatorId="Email Validator"/>
+                    </h:inputText>
+                    
+                   
+                    <h:inputSecret value="#{userIdentity.password}">Password</h:inputSecret>
+                    
+                    <h:commandButton action="#{userIdentity.login()}" value="Login" class="btn btn-primary"></h:commandButton>
+                    
+                </h:form>
             </ui:define>
         </ui:composition>
         

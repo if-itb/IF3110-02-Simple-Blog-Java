@@ -6,16 +6,13 @@
 
 package models;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Post {
+public class Post implements Serializable {
     private int id;
     private Date createdAt;
     private String content;
-    
-    public Post(){
-        id = 0; content = new String("hello, world!");
-    }
     
     public int getId() {
         return id;

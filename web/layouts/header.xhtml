@@ -3,13 +3,23 @@
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"   
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
         
     </h:head>
     <h:body>
         <ui:composition> 
-            Ini header
+            <h1>Simple Blog</h1>
+            <c:if test="#{!userIdentity.isLoggedIn()}">
+                Anda belum login <a href="#{request.contextPath}/login.xhtml">(Login)</a>
+            </c:if>
+            <c:if test="#{userIdentity.isLoggedIn()}">
+                Welcome, #{userIdentity.getNama()}
+                <h:form>
+                <h:commandLink action="#{userIdentity.logout()}">Logout</h:commandLink>
+                </h:form>
+            </c:if>
         </ui:composition>	
     </h:body>
 

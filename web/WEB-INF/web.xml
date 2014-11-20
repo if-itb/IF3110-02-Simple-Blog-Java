@@ -4,10 +4,10 @@
         <param-value>Development</param-value>
     </context-param>
     
-    <!--    <context-param>
+    <context-param>
         <param-name>javax.faces.CONFIG_FILES</param-name>
         <param-value>WEB-INF/faces-config.xml</param-value>
-    </context-param>-->
+    </context-param>
     
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>
@@ -21,6 +21,16 @@
     </servlet-mapping>-->
     
    
+    <!-- Authentication Filter -->
+    <filter>
+        <filter-name>AuthenticationFilter</filter-name>
+        <filter-class>filters.AuthenticationFilter</filter-class>
+    </filter>
+    
+<!--    <filter-mapping>
+        <filter-name>AuthenticationFilter</filter-name>
+        <url-pattern>/post/*</url-pattern>
+    </filter-mapping>-->
     
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>

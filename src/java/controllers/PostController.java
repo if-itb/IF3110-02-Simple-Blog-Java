@@ -15,9 +15,12 @@ import models.Post;
 @ManagedBean(name="postController", eager = true)
 @RequestScoped
 public class PostController implements Serializable {
+    
     private Post post;
     private List<Post> posts;
     private String test;
+    
+    public String getTest(){ return test; }
     
     public PostController(){
         test = "hai halo";
