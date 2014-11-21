@@ -16,12 +16,14 @@ import javax.faces.bean.RequestScoped;
 @ManagedBean(name = "member")
 @RequestScoped
 public class Member1 {
+    private int id;
     private String email;
     private String name;
     private String password;
     private String role;
     
-    public Member1() {
+    public int getId(){
+        return id;
     }
     
     public String getEmail(){
@@ -38,6 +40,10 @@ public class Member1 {
     
     public String getRole(){
         return role;
+    }
+    
+    public void setId(int id){
+        this.id = id;
     }
     
     public void setEmail(String email){

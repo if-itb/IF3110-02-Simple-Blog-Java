@@ -6,13 +6,9 @@
 
 package com.corejsf;
 
-import java.io.Serializable;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
+import java.io.*;
+import java.sql.*;
+import java.util.*;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -27,7 +23,7 @@ public class Database {
     public Database() {
     }
     
-    public Connection getConnection(){
+    public Connection getConnection() throws SQLException{
         Connection con = null;
 
         String url = "jdbc:mysql://localhost:3306/simpleblog";
@@ -44,18 +40,33 @@ public class Database {
         return con;
     }
     
-    public void addMember(){
-        
+    public void addMember(Member1 member) throws SQLException, ClassNotFoundException{
+        try{
+            PreparedStatement ps; 
+            Connection con = getConnection();
+            String sql = "INSERT INTO member (Email,Name,Password,Role) VALUES ('" + member.getEmail() + "','" + member.getName() + "','" + member.getPassword() + "','" + member.getRole() + "')";
+            ps = con.prepareStatement(sql);
+            ps.executeUpdate();
+        } catch(SQLException e){} 
     }
     
-    public void deleteMember(Member1 member) throws SQLException{
-        PreparedStatement ps; 
-        Connection con = getConnection();
-        String sql = "DELETE FROM member WHERE Email =" + member.getEmail();
-        ps = con.prepareStatement(sql);
-        ps.executeUpdate();
+    public void deleteMember(Member1 member) throws SQLException, ClassNotFoundException{
+        try{
+            PreparedStatement ps; 
+            Connection con = getConnection();
+            String sql = "DELETE FROM member WHERE Email=" + member.getEmail();
+            ps = con.prepareStatement(sql);
+            ps.executeUpdate();
+        } catch(SQLException e){}        
     }
     
-    public void editMember(Member1 member) throws SQLException{
+    public void editMember(Member1 member) throws SQLException, ClassNotFoundException{
+        try{
+            PreparedStatement ps; 
+            Connection con = getConnection();
+            String sql = "UPDATE member SET Email='" + member.getEmail() + "',Name='" + member.getName() + "',Password='" + member.getPassword() + "',Role='" + member.getRole() + "' WHERE id=" + member.getId();
+            ps = con.prepareStatement(sql);
+            ps.executeUpdate();
+        } catch(SQLException e){} 
     }
 }

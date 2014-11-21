@@ -10,11 +10,6 @@
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
     <managed-bean>
-        <managed-bean-name>member_post</managed-bean-name>
-        <managed-bean-class>com.corejsf.MemberPost</managed-bean-class>
-        <managed-bean-scope>request</managed-bean-scope>
-    </managed-bean>
-    <managed-bean>
         <managed-bean-name>post</managed-bean-name>
         <managed-bean-class>com.corejsf.Post</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope>
