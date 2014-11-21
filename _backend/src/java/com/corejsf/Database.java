@@ -53,10 +53,10 @@ public class Database {
         try{
             PreparedStatement ps; 
             Connection con = getConnection();
-            String sql = "DELETE FROM member WHERE Email=" + member.getEmail();
+            String sql = "DELETE FROM member WHERE id=" + member.getId();
             ps = con.prepareStatement(sql);
             ps.executeUpdate();
-        } catch(SQLException e){}        
+        } catch(SQLException e){}
     }
     
     public void editMember(Member1 member) throws SQLException, ClassNotFoundException{
@@ -71,7 +71,7 @@ public class Database {
     
     public ArrayList<Member1> selectAllMember() throws SQLException, ClassNotFoundException{
         try{
-            ArrayList<Member1> members = new ArrayList<Member1>();
+            ArrayList<Member1> members = new ArrayList<>();
             Connection con = getConnection();
             String sql = "SELECT * FROM member";
             Statement statement = con.createStatement();
@@ -86,7 +86,49 @@ public class Database {
                 members.add(member);
             }
             return members;
-        } catch(SQLException e){};
+        } catch(SQLException e){}
         return null;
+    }
+    
+    public void addComment(Comment comment) throws SQLException, ClassNotFoundException{
+        try{
+            PreparedStatement ps; 
+            Connection con = getConnection();
+            String sql = "INSERT INTO comment (id_post,Nama,Email,Tanggal,Komentar) VALUES ('" + comment.getIdPost() + "','" + comment.getNama() + "','" + comment.getEMail() + "','" + comment.getTanggal() + "','" + comment.getKomentar() + "')";
+            ps = con.prepareStatement(sql);
+            ps.executeUpdate();
+        } catch(SQLException e){}
+    }
+    
+    public void deleteComment(Comment comment) throws SQLException, ClassNotFoundException{
+        try{
+            PreparedStatement ps; 
+            Connection con = getConnection();
+            String sql = "DELETE FROM comment WHERE id=" + comment.getId();
+            ps = con.prepareStatement(sql);
+            ps.executeUpdate();
+        } catch(SQLException e){}
+    }
+    
+    public ArrayList<Comment> selectAllComment() throws SQLException, ClassNotFoundException{
+        ArrayList<Comment> comments = new ArrayList<>();
+        return comments;
+    }
+    
+    public void addPost(Post post) throws SQLException, ClassNotFoundException{
+        
+    }
+    
+    public void deletePost(Post post) throws SQLException, ClassNotFoundException{
+        
+    }
+    
+    public void editPost(Post post) throws SQLException, ClassNotFoundException{
+        
+    }
+    
+    public ArrayList<Post> selectAllPost() throws SQLException, ClassNotFoundException{
+        ArrayList<Post> posts = new ArrayList<>();
+        return posts;
     }
 }
