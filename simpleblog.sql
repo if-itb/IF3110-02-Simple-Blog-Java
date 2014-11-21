@@ -33,16 +33,9 @@ CREATE TABLE IF NOT EXISTS `comment` (
   `Email` varchar(255) NOT NULL,
   `Tanggal` varchar(255) NOT NULL,
   `Komentar` text NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
-
---
--- Dumping data for table `comment`
---
-
-INSERT INTO `comment` (`id`, `id_post`, `Nama`, `Email`, `Tanggal`, `Komentar`) VALUES
-(1, 1, 'Keren', 'keren@banget.co', '14 Oct 2014 06:38', 'Ini contoh komentar'),
-(2, 4, 'arina', 'arinalistyarini@yahoo.com', '17 Nov 2014 10:21', 'aku kribo loochh');
+  PRIMARY KEY (`id`),
+  KEY `comment_post` (`id_post`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -51,23 +44,12 @@ INSERT INTO `comment` (`id`, `id_post`, `Nama`, `Email`, `Tanggal`, `Komentar`) 
 --
 
 CREATE TABLE IF NOT EXISTS `member` (
+  `id` int(255) NOT NULL AUTO_INCREMENT,
   `Email` varchar(100) NOT NULL,
   `Name` varchar(100) NOT NULL,
   `Password` varchar(12) NOT NULL,
   `Role` varchar(100) NOT NULL,
-  PRIMARY KEY (`Email`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `member_post`
---
-
-CREATE TABLE IF NOT EXISTS `member_post` (
-  `id_post` int(11) NOT NULL,
-  `member_email` varchar(100) NOT NULL,
-  PRIMARY KEY (`id_post`)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -78,21 +60,21 @@ CREATE TABLE IF NOT EXISTS `member_post` (
 
 CREATE TABLE IF NOT EXISTS `post` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_member` int(255) NOT NULL,
   `Status` varchar(10) NOT NULL,
   `Judul` varchar(255) NOT NULL,
   `Tanggal` varchar(255) NOT NULL,
   `Konten` text NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
-
---
--- Dumping data for table `post`
---
-
-INSERT INTO `post` (`id`, `Status`, `Judul`, `Tanggal`, `Konten`) VALUES
-(1, 'Publish', 'Post Pertama', '14 Oktober 2014', 'Simple blog ini dikerjakan untuk memenuhi tugas matakuliah IF3110 Pengembangan Aplikasi Berbasis Web.\r\n\r\nNama: Arina Listyarini Dwiastuti\r\nNIM: 13512006\r\nKelas: K-01\r\n\r\nSekian.'),
-(4, 'Publish', 'Deadline WBD', '15 Oktober 2014', 'Deadline WBD diundur menjadi pukul 07.00 WIB 15 Oktober 2014.\r\n\r\nTerima kasih\r\n\r\n:)');
+  PRIMARY KEY (`id`),
+  KEY `member_post` (`id_member`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+ALTER TABLE `comment`
+  ADD CONSTRAINT `comment_post` FOREIGN KEY (`id_post`) REFERENCES `post` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE `post`
+  ADD CONSTRAINT `member_post` FOREIGN KEY (`id_member`) REFERENCES `member` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
