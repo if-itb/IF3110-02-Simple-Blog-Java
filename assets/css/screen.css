@@ -157,7 +157,7 @@ a:hover {
   z-index: 2;
 }
 .nav.fixed {
-  position: fixed;
+  /*position: fixed;*/
 }
 #logo {
   float: left;
@@ -228,12 +228,12 @@ div.cover > img {
   height: 900px;
   /* Background image is defined in the post */
   background-position: top center;
-  background-attachment: fixed;
+  /*background-attachment: scroll;*/
   overflow: hidden;
 }
 /* Contains the time, title and subtitle for an article */
 .art-header-inner {
-  position: fixed;
+  position: absolute;
   top: 300px;
   left: 50%;
   margin-left: -490px;
@@ -243,6 +243,7 @@ div.cover > img {
 .art-subtitle {
   text-align: center;
   text-transform: uppercase;
+  position: absolute;
 }
 .art-time {
   font-size: 14px;
@@ -275,6 +276,7 @@ div.cover > img {
 .art-body {
   position: relative;
   width: 100%;
+  margin-top: 100px;
   background: #fff;
   z-index: 100;
   -webkit-box-shadow: 0 -3px 3px rgba(0,0,0,.2);
