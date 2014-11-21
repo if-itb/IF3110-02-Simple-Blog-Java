@@ -9,16 +9,18 @@
     <h:body>
         <nav class="navbar navbar-default" role="navigation">
             <div class="container-fluid">
-                <a class="navbar-brand" href="owner.xhtml">Holy Grail</a>
+                <a class="navbar-brand" href="#{user.role}.xhtml">Holy Grail</a>
                 <ul class="nav navbar-nav navbar-left">
-                    <li><a href="#">New Post</a></li>
+                    <li><a href="new_post.xhtml">New Post</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right ">
                     <li class="navbar-text">
-                        Welcome, [Nama Owner]!
+                        Welcome, <h:outputText value="#{user.username}"/>!
                     </li>
                     <li>
-                        <a href="index.xhtml">Logout</a>
+                        <h:form>
+                            <h:commandLink class="logout" value="Logout" action="#{user.logout()}"/>
+                        </h:form>
                     </li>
                 </ul>
             </div>

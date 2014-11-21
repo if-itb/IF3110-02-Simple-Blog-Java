@@ -14,13 +14,15 @@ and open the template in the editor.
     <h:body>
         <nav class="navbar navbar-default" role="navigation">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">Holy Grail</a>
+                <a class="navbar-brand" href="#{user.role}.xhtml">Holy Grail</a>
                 <ul class="nav navbar-nav navbar-right">
                     <li class="navbar-text">
-                        Welcome, [Nama User]!
+                        Welcome, <h:outputText value="#{user.username}"/>!
                     </li>
                     <li>
-                        <a href="index.xhtml">Logout</a>
+                        <h:form>
+                            <h:commandLink class="logout" value="Logout" action="#{user.logout()}"/>
+                        </h:form>
                     </li>
                 </ul>
             </div>

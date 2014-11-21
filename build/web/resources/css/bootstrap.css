@@ -6423,3 +6423,20 @@ button.close {
     margin-left: 25%;
     margin-right: 25%;
 }
+
+.login-alert {
+    margin-top: 30px;
+}
+
+.logout {
+    position: relative;
+    
+    text-align: right;
+    color: white;
+    padding: 15px;
+    top: 15px;
+}
+
+.error-message {
+    margin-top: 30px;
+}
