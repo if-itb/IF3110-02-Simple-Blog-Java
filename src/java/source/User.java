@@ -75,7 +75,8 @@ public class User {
     }
     
     /**
-     * Fungsi untuk user melakukan login dengan menggunakan username dan password yang telah di set sebelumnya
+     * Fungsi untuk user melakukan login dengan menggunakan username dan password 
+     * yang telah di set sebelumnya
      * @return True jika login berhasil, dan false jika gagal
      * @throws java.sql.SQLException
      */
@@ -101,6 +102,68 @@ public class User {
         return false;
     }
     
+    /**
+     * Fungsi untuk mengecek apakah login sukses atau tidak 
+     * dengan user database dan password database yang custom
+     * @param _userDatabase
+     * @param _passwordDatabase
+     * @return
+     * @throws SQLException 
+     */
+    public boolean successLogin(String _userDatabase, String _passwordDatabase) throws SQLException
+    {
+        KoneksiDatabase.setUser(_userDatabase);
+        KoneksiDatabase.setPassword(_passwordDatabase);
+        KoneksiDatabase.setDatabase("localhost","blog");
+        
+        Connection koneksi = KoneksiDatabase.getKoneksi();
+        Statement statement = koneksi.createStatement();
+        String query = "SELECT username, password FROM user WHERE username = '" + username +"'";
+        System.out.println(query);
+        
+        ResultSet result = statement.executeQuery(query);
+        while(result.next())
+        {
+            System.out.println("User = " + result.getString(1));
+            System.out.println("password = " + result.getString(2));
+            if(username.equalsIgnoreCase(result.getString(1)) && password.equals(result.getString(2)))
+                return true;
+        }
+        return false;
+    }
+    
+    /**
+     * Fungsi untuk mengecek apakah login sukses atau tidak 
+     * dengan user, password, domain, dan nama database yang custom
+     * @param _userDatabase
+     * @param _passwordDatabase
+     * @param _domain
+     * @param _namaDatabase
+     * @return
+     * @throws SQLException 
+     */
+    public boolean successLogin(String _userDatabase, String _passwordDatabase, String _domain, String _namaDatabase) throws SQLException
+    {
+        KoneksiDatabase.setUser(_userDatabase);
+        KoneksiDatabase.setPassword(_passwordDatabase);
+        KoneksiDatabase.setDatabase(_domain,_namaDatabase);
+        
+        Connection koneksi = KoneksiDatabase.getKoneksi();
+        Statement statement = koneksi.createStatement();
+        String query = "SELECT username, password FROM user WHERE username = '" + username +"'";
+        System.out.println(query);
+        
+        ResultSet result = statement.executeQuery(query);
+        while(result.next())
+        {
+            System.out.println("User = " + result.getString(1));
+            System.out.println("password = " + result.getString(2));
+            if(username.equalsIgnoreCase(result.getString(1)) && password.equals(result.getString(2)))
+                return true;
+        }
+        return false;
+    }
+
     /**
      * Testing untuk user
      * @param args 
