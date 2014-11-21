@@ -16,7 +16,9 @@ import java.util.logging.Logger;
  * @author Try Ajitiono
  */
 public class Post {
-    
+    protected static int IDPost;
+    private static String Title;
+    private static String Content;
     /**
      * Mengecek apakah pengguna adalah admin
      * @return
