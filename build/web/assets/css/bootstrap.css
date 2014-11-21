@@ -6399,3 +6399,10 @@ button.close {
     left: -250px;
     padding-top: 2.5%;
 }
+
+.login .row {
+    position: relative;
+    
+    left: -200px;
+    padding-bottom: 15px;
+}
