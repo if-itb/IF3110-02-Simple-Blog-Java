@@ -6405,3 +6405,21 @@ button.close {
     left: -200px;
     padding-bottom: 15px;
 }
+
+.login-button {
+    width: 100px;
+    
+    position: relative;
+    left: 342px;
+}
+
+.first-row {
+    margin-top: 20px;
+}
+
+.login {
+    border: solid 1px black;
+    
+    margin-left: 25%;
+    margin-right: 25%;
+}

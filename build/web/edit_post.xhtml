@@ -2,10 +2,10 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html">
-    <head>
-        <link type="text/css" rel="stylesheet" href="assets/css/bootstrap.css"/>
+    <h:head>
+        <h:outputStylesheet library="css" name="bootstrap.css"/>
         <title>Edit Post</title>
-    </head>
+    </h:head>
     <h:body>
         <nav class="navbar navbar-default" role="navigation">
             <div class="container-fluid">
@@ -25,7 +25,7 @@
             <h1>
                 Edit Post
             </h1>        
-            <form class="form-post" onsubmit="return false;">
+            <h:form class="form-post" onsubmit="return false;">
                 <div class="row form-element">
                     <div class="col-md-3"/>
                     <div class="col-md-3"><label for="Judul">Title</label></div>
@@ -46,7 +46,7 @@
                         <input class="btn-success" type="submit" value="Save" id="save"/>
                     </div>
                 </div>
-            </form>
+            </h:form>
         </div>
             
     </h:body>
