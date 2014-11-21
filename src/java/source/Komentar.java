@@ -6,7 +6,10 @@
 
 package source;
 
+import java.sql.Connection;
 import java.sql.Date;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 /**
  *
@@ -21,9 +24,16 @@ public class Komentar extends Post {
     /**
      * Menambahkan komentar ke dalam basis data
      * @param ID 
+     * @throws java.sql.SQLException 
      */
-    public void AddComment(int ID) {
-        
+    public void AddComment(int ID) throws SQLException {
+        //login database
+        KoneksiDatabase.setUser("root");
+        KoneksiDatabase.setPassword("");
+        KoneksiDatabase.setDatabase("localhost","simpleblogdb");
+        Connection koneksi = KoneksiDatabase.getKoneksi();
+        Statement statement = koneksi.createStatement();
+        String QueryAddComment = "";
     }
     
     /**
