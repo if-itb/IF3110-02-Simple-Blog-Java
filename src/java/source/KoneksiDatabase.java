@@ -25,11 +25,14 @@ public class KoneksiDatabase {
      */
     public static Connection getKoneksi() throws SQLException{
         if(koneksi == null && user != null && password != null) {
-                String url = "jdbc:mysql://localhost:3306/blog";
+                String url = "jdbc:mysql://localhost:3306/simpleblogdb";
                 DriverManager.registerDriver(new com.mysql.jdbc.Driver());
                 koneksi = DriverManager.getConnection(url, user, password);
                 System.out.println("Berhasil terkoneksi");
         }
         return koneksi;
+    }
+    public static void main(String[] args){
+        
     }
 }
