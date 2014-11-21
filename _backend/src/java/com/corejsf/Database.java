@@ -94,7 +94,7 @@ public class Database {
         try{
             PreparedStatement ps; 
             Connection con = getConnection();
-            String sql = "INSERT INTO comment (id_post,Nama,Email,Tanggal,Komentar) VALUES ('" + comment.getIdPost() + "','" + comment.getNama() + "','" + comment.getEMail() + "','" + comment.getTanggal() + "','" + comment.getKomentar() + "')";
+            String sql = "INSERT INTO comment (id_post,Nama,Email,Tanggal,Komentar) VALUES ('" + comment.getIdPost() + "','" + comment.getNama() + "','" + comment.getEmail() + "','" + comment.getTanggal() + "','" + comment.getKomentar() + "')";
             ps = con.prepareStatement(sql);
             ps.executeUpdate();
         } catch(SQLException e){}

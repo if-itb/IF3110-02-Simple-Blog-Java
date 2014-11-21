@@ -39,7 +39,7 @@ public class Comment {
         return nama;
     }
     
-    public String getEMail(){
+    public String getEmail(){
         return email;
     }
     
