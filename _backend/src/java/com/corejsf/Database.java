@@ -6,7 +6,6 @@
 
 package com.corejsf;
 
-import java.io.*;
 import java.sql.*;
 import java.util.*;
 
@@ -68,5 +67,26 @@ public class Database {
             ps = con.prepareStatement(sql);
             ps.executeUpdate();
         } catch(SQLException e){} 
+    }
+    
+    public ArrayList<Member1> selectAllMember() throws SQLException, ClassNotFoundException{
+        try{
+            ArrayList<Member1> members = new ArrayList<Member1>();
+            Connection con = getConnection();
+            String sql = "SELECT * FROM member";
+            Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
+            while (rs.next()){
+                Member1 member = new Member1();
+                member.setId(rs.getInt("id"));
+                member.setName(rs.getString("Name"));
+                member.setEmail(rs.getString("Email"));
+                member.setPassword(rs.getString("Password"));
+                member.setRole(rs.getString("Role"));
+                members.add(member);
+            }
+            return members;
+        } catch(SQLException e){};
+        return null;
     }
 }
