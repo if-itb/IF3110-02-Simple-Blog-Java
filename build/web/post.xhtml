@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <head>
+        <link type="text/css" rel="stylesheet" href="assets/css/bootstrap.css"/>
+        <title>Post</title>
+    </head>
+    <h:body>
+        <nav class="navbar navbar-default" role="navigation">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">Holy Grail</a>
+                <ul class="nav navbar-nav navbar-right ">
+                    <li class="navbar-text">
+                        Welcome, [Nama User]!
+                    </li>
+                    <li>
+                        <a href="index.xhtml">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        
+        <div class="new-post">
+            <div class="post">
+                <a href="#" class="title">
+                    Kunkka
+                </a>
+                <div class="date">
+                    20 November 2014
+                </div>
+                <div class="content">
+                    As Admiral of the mighty Claddish Navy, Kunkka was charged with protecting the isles of his homeland when the Demons of the Cataract made a concerted grab at the lands of men. After years of small sorties, and increasingly bold and devastating attacks, the Demon Fleet flung all its carnivorous ships at the Trembling Isle. Desperate, the Suicide-Mages of Cladd committed their ultimate rite, summoning a host of ancestral spirits to protect the fleet. Against the Demons, this was just barely enough to turn the tide. As Kunkka watched the Demons take his ships down one by one, he had the satisfaction of wearing away their fleet with his ancestral magic. But at the battle's peak, something in the clash of demons, men and atavistic spirits must have stirred a fourth power that had been slumbering in the depths. The waves rose up in towering spouts around the few remaining ships, and Maelrawn the Tentacular appeared amid the fray. His tendrils wove among the ships, drawing demon and human craft together, churning the water and wind into a raging chaos. What happened in the crucible of that storm, none may truly say. The Cataract roars off into the void, deserted by its former denizens. Kunkka is now Admiral of but one ship, a ghostly rig which endlessly replays the final seconds of its destruction. Whether he died in that crash is anyone's guess. Not even Tidehunter, who summoned Maelrawn, knows for sure.
+                </div>
+            </div>
+            <h1 class="comments-title" style="padding-top: 0px;">
+                Comments
+            </h1>
+            <form class="form-post" onsubmit="return false;">
+                <div class="row form-element">
+                    <div class="col-md-3"/>
+                    <div class="col-md-3"><label for="Nama">Nama</label></div>
+                    <div class="col-md-3"><input required="true" id="nama" name="nama" type="text"></input></div>
+                </div>
+                <div class="row form-element">
+                    <div class="col-md-3"/>
+                    <div class="col-md-3"><label for="Email">Email</label></div>
+                    <div class="col-md-3"><input required="true" id="email" name="email" type="text"></input></div>
+                </div>
+                <div class="row form-element">
+                    <div class="col-md-3"/>
+                    <div class="col-md-3"><label for="Tanggal">Komentar</label></div>
+                    <div class="col-md-3"><textarea required="true" id="komentar" name="komentar"></textarea></div>
+                </div>
+                <div class="row form-element">
+                    <div class="col-md-6">
+                        <input class="btn-success" type="submit" value="Save" id="save"/>
+                    </div>
+                </div>
+            </form>
+        </div>
+            
+    </h:body>
+</html>
+

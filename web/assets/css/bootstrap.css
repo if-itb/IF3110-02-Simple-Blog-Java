@@ -910,6 +910,7 @@ input,
 button,
 select,
 textarea {
+  width: 500px;
   font-family: inherit;
   font-size: inherit;
   line-height: inherit;
@@ -1777,7 +1778,8 @@ pre code {
   }
   .col-md-1 {
     width: 8.33333333%;
-  }
+  
+}
   .col-md-pull-12 {
     right: 100%;
   }
@@ -2314,8 +2316,10 @@ legend {
 label {
   display: inline-block;
   max-width: 100%;
-  margin-bottom: 5px;
   font-weight: bold;
+  float: right;
+  vertical-align: middle;
+  padding-top: 3px;
 }
 input[type="search"] {
   -webkit-box-sizing: border-box;
@@ -3957,8 +3961,10 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 @media (min-width: 768px) {
   .navbar > .container .navbar-brand,
   .navbar > .container-fluid .navbar-brand {
-    margin-left: -15px;
-  }
+    margin-left: -20px;
+  
+    color: white;
+}
 }
 .navbar-toggle {
   position: relative;
@@ -4161,28 +4167,27 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   }
 }
 .navbar-default {
-  background-color: #f8f8f8;
-  border-color: #e7e7e7;
+  background-color: #3b5998;
 }
 .navbar-default .navbar-brand {
   color: #777;
 }
 .navbar-default .navbar-brand:hover,
 .navbar-default .navbar-brand:focus {
-  color: #5e5e5e;
+  color: lightgreen;
   background-color: transparent;
 }
 .navbar-default .navbar-text {
-  color: #777;
+  color: #FFF;
 }
 .navbar-default .navbar-nav > li > a {
-  color: #777;
   position: relative;
-  left: 40px;
+  color: white;
+  text-align: right;
 }
 .navbar-default .navbar-nav > li > a:hover,
 .navbar-default .navbar-nav > li > a:focus {
-  color: #333;
+  color: lightgreen;
   background-color: transparent;
 }
 .navbar-default .navbar-nav > .active > a,
@@ -6331,4 +6336,66 @@ button.close {
     display: none !important;
   }
 }
-/*# sourceMappingURL=bootstrap.css.map */
+
+.post {
+    border-bottom: solid 1px black;
+    
+    margin-left: 20%;
+    margin-right: 20%;
+    margin-bottom: 25px;
+    padding-bottom: 25px;
+}
+.post .title {
+    font-weight: bold;
+    font-size: 36px;
+    display: block;
+    margin: auto;
+    text-align: center;
+    color: black;
+}
+.post .title:hover {
+    color: lightgreen;
+    text-decoration: none;
+    -webkit-transition: color .2s ease-in-out;
+}
+.post .date {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.post .option{
+    display: block;
+    text-align: left;
+    color: blue;
+    padding-top: 5px;
+}
+.post .content {
+    text-align: justify;
+}
+.back-to-top {
+    float: left; 
+    font-size: 14px; 
+    margin-bottom: 10px; 
+    margin-left: 20%
+}
+.new-post h1 {
+    text-align: center;
+    padding-top: 40px;
+}
+.new-post .form-element {
+    padding-bottom: 20px;
+    position: relative;
+}
+.new-post #save {
+    float: right;
+    
+    width: 100px;
+    height: 35px;
+    position: relative;
+    left: 130px;
+}
+.form-post {
+    position: relative;
+    
+    left: -250px;
+    padding-top: 2.5%;
+}

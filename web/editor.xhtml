@@ -4,15 +4,18 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html">
     <head>
         <link type="text/css" rel="stylesheet" href="assets/css/bootstrap.css"/>
-        <title>Holy Grail (publish post)</title>
+        <title>Editor</title>
     </head>
     <h:body>
         <nav class="navbar navbar-default" role="navigation">
             <div class="container-fluid">
-                <a class="navbar-brand" href="admin.xhtml">Holy Grail</a>
+                <a class="navbar-brand" href="editor.xhtml">Holy Grail</a>
+                <ul class="nav navbar-nav navbar-left">
+                    <li><a href="publish_post.xhtml">Publish Post</a></li>
+                </ul>
                 <ul class="nav navbar-nav navbar-right ">
                     <li class="navbar-text">
-                        Welcome, [Nama Admin]!
+                        Welcome, [Nama Editor]!
                     </li>
                     <li>
                         <a href="index.xhtml">Logout</a>
@@ -35,8 +38,8 @@
                 <a href="#" class="option">
                     [edit]
                 </a>
-                <a href="#" class="option">
-                    [publish]
+                 <a href="#" class="option">
+                    [delete]
                 </a>
             </div>
             <div class="post">
@@ -52,6 +55,9 @@
                  <a href="#" class="option">
                     [edit]
                 </a>
+                 <a href="#" class="option">
+                    [delete]
+                </a>
             </div>
             <div class="post">
                 <a href="#" class="title">
@@ -65,6 +71,9 @@
                 </div>
                  <a href="#" class="option">
                     [edit]
+                </a>
+                 <a href="#" class="option">
+                    [delete]
                 </a>
             </div>
             <a class="back-to-top" href="#top">Back to top</a>
