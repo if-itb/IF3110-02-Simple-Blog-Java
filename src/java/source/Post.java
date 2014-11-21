@@ -7,6 +7,7 @@ package source;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 /**
  * @author Try Ajitiono
@@ -55,8 +56,20 @@ public class Post {
      * Mengubah status post di database dari unpublished menjadi published
      * @param post_ID post id di database
      */
-    public void publishPost(int post_ID) {
-        
+    public void publishPost(int post_ID) throws SQLException {
+        //login database
+        KoneksiDatabase.setUser("root");
+        KoneksiDatabase.setPassword("akhfa");
+        KoneksiDatabase.setDatabase("localhost","blog");
+        //statement
+        Connection koneksi = KoneksiDatabase.getKoneksi();
+        Statement statement = koneksi.createStatement();
+        //query
+        String queryPublishPost = "UPDATE posts SET published=1";
+        //execute query
+        statement.executeUpdate(queryPublishPost);
+        //tutup koneksi database
+        koneksi.close();
     }
     
     /**
@@ -71,7 +84,21 @@ public class Post {
      * Menghapus post dari database
      * @param post_ID post id di database
      */
-    public void deletePost(int post_ID) {
-        
+    public void deletePost(int post_ID) throws SQLException {
+        //login database
+        KoneksiDatabase.setUser("root");
+        KoneksiDatabase.setPassword("akhfa");
+        KoneksiDatabase.setDatabase("localhost","blog");
+        //statement
+        Connection koneksi = KoneksiDatabase.getKoneksi();
+        Statement statement = koneksi.createStatement();
+        //query
+        String queryDeletePost = "DELETE FROM posts WHERE post_id=" + post_ID;
+        String queryDeleteComments = "DELETE FROM comments WHERE post_id=" + post_ID;
+        //execute query
+        statement.executeUpdate(queryDeletePost);
+        statement.executeUpdate(queryDeleteComments);
+        //tutup koneksi database
+        koneksi.close();
     }
 }
