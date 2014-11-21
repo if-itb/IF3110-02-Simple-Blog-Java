@@ -4,7 +4,7 @@
         <param-name>javax.faces.PROJECT_STAGE</param-name>
         <param-value>Development</param-value>
     </context-param>
-<!--    connect database-->
+
     <context-param>
         <param-name>JDBC-DRIVER</param-name>
         <param-value>com.mysql.jdbc.Driver</param-value>
@@ -21,7 +21,7 @@
         <param-name>DB-PASSWORD</param-name>
         <param-value></param-value>
     </context-param>
-<!--connect database  -->
+
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>
         <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
