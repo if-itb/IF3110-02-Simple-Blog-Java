@@ -7,7 +7,8 @@ and open the template in the editor.
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <head>
         <link type="text/css" rel="stylesheet" href="screen.css"/>
         <title>Owner's Simple Blog</title>
@@ -19,12 +20,10 @@ and open the template in the editor.
 <nav class="nav">
     <a style="border:none;" id="logo" href="index.html"><h1>Simple<span>-</span>Blog</h1></a>
     <ul class="nav-primary">
-        <li>You are logged in as &nbsp;
-            <u><h:form>
-                <h:commandLink action="FetchFromDB" value="Author">
-                    
-                </h:commandLink>
-            </h:form></u>
+        <li>
+            <h:form>
+            You are logged in as <u><h:commandLink action="#" value="Author"></h:commandLink></u>
+            </h:form>
         </li>
     </ul>
 </nav>
@@ -50,10 +49,22 @@ and open the template in the editor.
                   <a href="#">Edit</a> | <a href="#">Hapus</a>
                 </p>
             </li>
-
+              <c:forEach items="#{Posting.post}" var="p">
+                <li class="art-list-item">
+                    <div class="art-list-item-title-and-time">
+                        <h2 class="art-list-title"><a href="post.html">#{p.judul}</a></h2>
+                        <div class="art-list-time">By #{p.author}</div>
+                        <div class="art-list-time">#{p.tanggal}</div>
+                    </div>
+                    <p>#{p.content} &hellip;</p>
+                    <p>
+                      <a href="#">Edit</a> | <a href="#">Hapus</a>
+                    </p>
+                </li>
+              </c:forEach>
             <li class="art-list-item">
                 <div class="art-list-item-title-and-time">
-                    <h2 class="art-list-title"><a href="post.html">Siapa dibalik Simple Blog?</a></h2>
+                    <h2 class="art-list-title"><a href="post.html">asdas</a></h2>
                     <div class="art-list-time">By Author</div>
                     <div class="art-list-time">11 Juli 2014</div>
                 </div>

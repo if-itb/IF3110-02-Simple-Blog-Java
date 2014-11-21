@@ -17,10 +17,6 @@
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>/faces/*</url-pattern>
     </servlet-mapping>
-<!--    <servlet-mapping>
-        <servlet-name>InsertIntoDB</servlet-name>
-        <url-pattern>/InsertIntoDB</url-pattern>
-    </servlet-mapping>-->
     <session-config>
         <session-timeout>
             30
