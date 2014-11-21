@@ -6,7 +6,11 @@
 package source;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -79,9 +83,41 @@ public class User {
     {
         KoneksiDatabase.setUser("root");
         KoneksiDatabase.setPassword("akhfa");
+        KoneksiDatabase.setDatabase("localhost","blog");
         
         Connection koneksi = KoneksiDatabase.getKoneksi();
-        //String query = "SELECT username, password FROM user WHERE "
-        return true;
+        Statement statement = koneksi.createStatement();
+        String query = "SELECT username, password FROM user WHERE username = '" + username +"'";
+        System.out.println(query);
+        
+        ResultSet result = statement.executeQuery(query);
+        while(result.next())
+        {
+            System.out.println("User = " + result.getString(1));
+            System.out.println("password = " + result.getString(2));
+            if(username.equalsIgnoreCase(result.getString(1)) && password.equals(result.getString(2)))
+                return true;
+        }
+        return false;
+    }
+    
+    /**
+     * Testing untuk user
+     * @param args 
+     */
+    public static void main(String[] args) {
+        try {
+            User pertama = new User("akhfa","akhfa");
+            if(pertama.successLogin())
+            {
+                System.out.println("sukses login");
+            }
+            else
+            {
+                System.out.println("gagal login");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
