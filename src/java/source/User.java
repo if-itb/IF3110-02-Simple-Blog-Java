@@ -6,6 +6,7 @@
 package source;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -163,7 +164,28 @@ public class User {
         }
         return false;
     }
-
+    
+    /**
+     * Memasukkan user ke dalam database. 
+     * User di create terlebih dahulu dengan constructor dengan parameter (username, password, dan role).
+     * @throws SQLException 
+     */
+    public void masukDatabase() throws SQLException
+    {
+        KoneksiDatabase.setUser("root");
+        KoneksiDatabase.setPassword("akhfa");
+        KoneksiDatabase.setDatabase("localhost","blog");
+        Connection koneksi = KoneksiDatabase.getKoneksi();
+        String query = "INSERT INTO user VALUES (?, ?, ?)";
+        try (PreparedStatement preStat = koneksi.prepareStatement(query)) {
+            preStat.setString(1, username);
+            preStat.setString(2, password);
+            preStat.setString(3, role);
+            
+            preStat.executeUpdate();
+            preStat.close();
+        }
+    }
     /**
      * Testing untuk user
      * @param args 
@@ -179,6 +201,10 @@ public class User {
             {
                 System.out.println("gagal login");
             }
+            
+            User kedua = new User("akhfa2", "akhfa2", "admin");
+            kedua.masukDatabase();
+            
         } catch (SQLException ex) {
             Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
         }
