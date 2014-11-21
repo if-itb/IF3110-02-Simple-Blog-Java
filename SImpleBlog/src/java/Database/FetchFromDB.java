@@ -24,8 +24,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Rikysamuel
  */
-@WebServlet(name = "DatabaseConnect", urlPatterns = {"/db"})
-public class DatabaseConnect extends HttpServlet {
+@WebServlet(name = "DatabaseConnect", urlPatterns = {"/FetchFromDB"})
+public class FetchFromDB extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

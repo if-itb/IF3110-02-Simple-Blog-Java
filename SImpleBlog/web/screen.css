@@ -166,7 +166,7 @@ a:hover {
   float: right;
 }
 .nav-primary li {
-  display: inline-block;
+  display: initial;
   margin-left: 10px;
   font-weight: 500;
 }
