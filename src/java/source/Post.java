@@ -50,9 +50,29 @@ public class Post {
     
     /**
      * Menambahkan suatu post ke dalam database
+     * @param title judul post
+     * @param date tanggal post
+     * @param content konten post
+     * @throws java.sql.SQLException
      */
-    public void addPost() {
-        
+    public void addPost(String title, String date, String content) throws SQLException {
+        //login database
+        KoneksiDatabase.setUser("root");
+        KoneksiDatabase.setPassword("akhfa");
+        KoneksiDatabase.setDatabase("localhost","blog");
+        try ( //statement
+            Connection koneksi = KoneksiDatabase.getKoneksi()) {
+            Statement statement = koneksi.createStatement();
+            //query
+            String queryAddPost = "INSERT INTO posts (title,body,date) VALUES ('" + title + "', '" + content + "', '" + date + "')";
+            //execute query
+            statement.executeUpdate(queryAddPost);
+            //tutup koneksi database
+            koneksi.close();
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     /**
