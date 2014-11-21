@@ -1,4 +1,16 @@
-/* https://www.dropbox.com/sh/ig1hf108ad9fqxi/AAAXCRvPiig1-MpLzUpE30Q8a/Tugas%20II%20IF3110%20Pengembangan%20Aplikasi%20Berbasis%20Web.pdf?dl=0 */
+@font-face {
+  font-family: 'Leckerli One';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Leckerli One'), local('LeckerliOne-Regular'), url(http://fonts.gstatic.com/s/leckerlione/v7/S2Y_iLrItTu8kIJTkS7DrHhCUOGz7vYGh680lGh-uXM.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Droid Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Droid Sans'), local('DroidSans'), url(http://fonts.gstatic.com/s/droidsans/v6/s-BiyweUPV0v-yRb-cjciBsxEYwM7FgeyaSgU71cLG0.woff) format('woff');
+}
 
 body{
   font-family: 'Droid Sans', sans-serif;
