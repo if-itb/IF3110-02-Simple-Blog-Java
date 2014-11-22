@@ -36,11 +36,13 @@ public class Komentar extends Post {
         String QueryAddComment = "";
     }
     
-    /**
-     * Memuat komentar ke web page
-     * @param ID 
-     */
-    public void LoadComment(int ID) {
-        
+    public String GetComment() {
+        return Content;
+    }
+    public String GetName() {
+        return Nama;
+    }
+    public String GetEmail() {
+        return Email;
     }
 }
