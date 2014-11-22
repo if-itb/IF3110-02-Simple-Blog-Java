@@ -3,7 +3,8 @@
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"   
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     >
     <head>
         <title>Simple Blog - Post list</title>
@@ -11,7 +12,16 @@
     <h:body>
         <ui:composition template="/layouts/main.xhtml">
             <ui:define name="content">
-                <a href="post/create.xhtml">Tambah Post</a>
+                <h1>Daftar Post</h1>
+                <h:outputLink value="#{postCtrl.showCreate()}">Tambah Post</h:outputLink>
+                <c:forEach var="post" items="#{postCtrl.posts}">
+                    <div>
+                        <h3>#{post.tanggal}</h3>
+                        <h4>#{post.judul}</h4>
+                        <p>#{post.konten}</p>
+                        <h:outputLink value="#{postCtrl.showUpdate(post.id)}">Update</h:outputLink>
+                    </div>
+                </c:forEach>
             </ui:define>
         </ui:composition>
 

@@ -1,6 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scene Scope="Project" version="2">
     <Scope Scope="Faces Configuration Only"/>
-    <Scope Scope="Project"/>
+    <Scope Scope="Project">
+        <Node id="resources/js/ckeditor/samples/plugins/magicline/magicline.html" x="1650" y="300" zoom="true"/>
+        <Node id="resources/js/ckeditor/samples/replacebyclass.html" x="1400" y="300" zoom="true"/>
+        <Node id="resources/js/ckeditor/plugins/wsc/dialogs/tmp.html" x="150" y="1200" zoom="true"/>
+        <Node id="resources/js/ckeditor/samples/divreplace.html" x="1150" y="300" zoom="true"/>
+        <Node id="resources/js/ckeditor/plugins/preview/preview.html" x="650" y="900" zoom="true"/>
+        <Node id="layouts/main.xhtml" x="150" y="450" zoom="true"/>
+        <Node id="resources/js/ckeditor/samples/plugins/htmlwriter/outputforflash.html" x="150" y="900" zoom="true"/>
+        <Node id="resources/js/ckeditor/samples/ajax.html" x="1150" y="600" zoom="true"/>
+        <Node id="resources/js/ckeditor/samples/plugins/toolbar/toolbar.html" x="1150" y="450" zoom="true"/>
+        <Node id="resources/js/ckeditor/samples/xhtmlstyle.html" x="600" y="346" zoom="true"/>
+        <Node id="post/index.xhtml" x="400" y="150" zoom="true"/>
+        <Node id="resources/js/ckeditor/samples/plugins/enterkey/enterkey.html" x="400" y="600" zoom="true"/>
+        <Node id="resources/js/ckeditor/samples/uicolor.html" x="650" y="750" zoom="true"/>
+        <Node id="resources/js/ckeditor/samples/tabindex.html" x="400" y="750" zoom="true"/>
+        <Node id="layouts/footer.xhtml" x="400" y="300" zoom="true"/>
+        <Node id="errors/403.xhtml" x="900" y="150" zoom="true"/>
+        <Node id="resources/js/ckeditor/samples/plugins/dialog/dialog.html" x="900" y="450" zoom="true"/>
+        <Node id="resources/js/ckeditor/samples/plugins/wysiwygarea/fullpage.html" x="900" y="750" zoom="true"/>
+        <Node id="layouts/header.xhtml" x="650" y="150" zoom="true"/>
+        <Node id="post/manage.xhtml" x="666" y="46" zoom="true"/>
+        <Node id="resources/js/ckeditor/samples/uilanguages.html" x="1400" y="450" zoom="true"/>
+        <Node id="resources/js/ckeditor/samples/datafiltering.html" x="1400" y="150" zoom="true"/>
+        <Node id="layouts/content.xhtml" x="150" y="150" zoom="true"/>
+        <Node id="login.xhtml" x="400" y="450" zoom="true"/>
+        <Node id="resources/js/ckeditor/samples/plugins/htmlwriter/outputhtml.html" x="650" y="450" zoom="true"/>
+        <Node id="resources/js/ckeditor/samples/replacebycode.html" x="1900" y="150" zoom="true"/>
+        <Node id="resources/js/ckeditor/samples/index.html" x="900" y="300" zoom="true"/>
+        <Node id="resources/js/ckeditor/samples/inlinebycode.html" x="150" y="750" zoom="true"/>
+        <Node id="resources/js/ckeditor/samples/jquery.html" x="900" y="600" zoom="true"/>
+        <Node id="resources/js/ckeditor/plugins/wsc/dialogs/tmpFrameset.html" x="1900" y="300" zoom="true"/>
+        <Node id="resources/js/ckeditor/plugins/wsc/dialogs/ciframe.html" x="2150" y="150" zoom="true"/>
+        <Node id="index.xhtml" x="150" y="600" zoom="true"/>
+        <Node id="resources/js/ckeditor/samples/inlinetextarea.html" x="650" y="600" zoom="true"/>
+        <Node id="resources/js/ckeditor/samples/api.html" x="150" y="1050" zoom="true"/>
+        <Node id="resources/js/ckeditor/samples/appendto.html" x="1650" y="150" zoom="true"/>
+        <Node id="post/view.xhtml" x="1150" y="150" zoom="true"/>
+        <Node id="logout.xhtml" x="150" y="300" zoom="true"/>
+        <Node id="resources/js/ckeditor/samples/inlineall.html" x="400" y="1050" zoom="true"/>
+        <Node id="resources/js/ckeditor/samples/readonly.html" x="400" y="900" zoom="true"/>
+    </Scope>
     <Scope Scope="All Faces Configurations"/>
 </Scene>

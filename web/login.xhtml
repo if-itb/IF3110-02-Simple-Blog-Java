@@ -12,19 +12,19 @@
             <ui:define name="content">
                 <h1>login</h1>
                 <h:form>
-                    <h:inputText value="#{userIdentity.email}">
-                        <f:validator validatorId="Email Validator"/>
-                    </h:inputText>
-                    
-                   
-                    <h:inputSecret value="#{userIdentity.password}">Password</h:inputSecret>
-                    
-                    <h:commandButton action="#{userIdentity.login()}" value="Login" class="btn btn-primary"></h:commandButton>
-                    
+                    Email
+                    <h:inputText value="#{siteCtrl.loginForm.email}" class='form-control'>
+                    </h:inputText>       
+                    Password
+                    <h:inputSecret value="#{siteCtrl.loginForm.password}" class='form-control'>    
+
+                    </h:inputSecret>
+                    <h:commandButton action="#{siteCtrl.doLogin()}" value="Login" class="btn btn-primary"></h:commandButton>
+
                 </h:form>
             </ui:define>
         </ui:composition>
-        
+
         <h:inputText value="hello world"></h:inputText>
     </h:body>
 </html>

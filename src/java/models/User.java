@@ -2,21 +2,26 @@ package models;
 
 import java.io.Serializable;
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import services.CookieService;
 import services.DBConnector;
 
-@ManagedBean(name = "userIdentity")
+@ManagedBean(name="userIdentity")
 @SessionScoped
-
 public class User implements Serializable {
 
-    private boolean isLoggedIn;
+    private boolean loggedIn;
     private int id;
     private String email;
     private String password;
@@ -26,7 +31,8 @@ public class User implements Serializable {
     private boolean isEditor;
 
     private final String tablename = "user";
-
+    
+    
     public int getId() {
         return id;
     }
@@ -72,11 +78,11 @@ public class User implements Serializable {
     }
 
     public boolean isLoggedIn() {
-        return isLoggedIn;
+        return this.loggedIn;
     }
 
     public void setIsLoggedIn(boolean isLoggedIn) {
-        this.isLoggedIn = isLoggedIn;
+        this.loggedIn = isLoggedIn;
     }
 
     public void setIsOwner(boolean isOwner) {
@@ -92,6 +98,8 @@ public class User implements Serializable {
     }
 
     public String login() {
+        FacesContext context =  FacesContext.getCurrentInstance();
+        HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
         try {
             DBConnector dbc = new DBConnector();
             Statement st = dbc.getCon().createStatement();
@@ -99,13 +107,19 @@ public class User implements Serializable {
             String query = "SELECT * FROM " + tablename + " WHERE email='" + email + "' AND password=SHA1('" + password + "')";
             System.out.println(query);
             ResultSet result = st.executeQuery(query);
-
+            
+            //if exist
+            
+            
+            //User user = (User) req.getSession().getAttribute("userIdentity");
+            
             if (result.next()) {
                 this.setId(result.getInt("id"));
                 this.setEmail(result.getString("email"));
                 this.setNama(result.getString("nama"));
                 this.setIsLoggedIn(true);
-                setCookie(email, password);
+                CookieService.setCookie("email",email,CookieService.DEFAULT_AGE);
+                CookieService.setCookie("password",password,CookieService.DEFAULT_AGE);
             } else {
                 //email doesn't exist
             }
@@ -117,25 +131,16 @@ public class User implements Serializable {
     }
 
     public String logout() {
-        ((HttpSession) FacesContext
-                .getCurrentInstance()
-                .getExternalContext()
-                .getSession(true)).invalidate();
-        return "post/index";
+        this.setIsLoggedIn(false);
+        FacesContext context =  FacesContext.getCurrentInstance();
+        HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
+        
+        //request.getSession().invalidate();
+        
+        CookieService.clearCookie("email");
+        CookieService.clearCookie("password");
+        return request.getContextPath() + "/login.xhtml";
     }
-
-    public void setCookie(String email, String password) {
-        HttpServletResponse res;
-        
-        res = (HttpServletResponse) FacesContext.getCurrentInstance();
-        
-        Cookie cookie = new Cookie("email",email);
-        cookie.setMaxAge(3600); //3600 detik 
-        res.addCookie(cookie);
-        
-        cookie = new Cookie("password",password);
-        cookie.setMaxAge(3600);
-        res.addCookie(cookie);
-    }
+    
 
 }

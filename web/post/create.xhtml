@@ -1,21 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"   
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
-      >
-    <head>
-        <title>Simple Blog - Create Post</title>
-    </head>
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    >
     <h:body>
-    	<ui:composition template="/layouts/main.xhtml">
+        
+        <ui:composition template="/layouts/main.xhtml">
             <ui:define name="content">
+                <br/><br/>
+                <h1>Manage Post</h1>
                 <h:form>
-                    <h:inputText class="form-control"></h:inputText>
+                    <c:if test="#{postCtrl.post.id != 0}">
+                        <h:inputHidden value="#{postCtrl.post.id}"></h:inputHidden>
+                    </c:if>
+                    Judul
+                    <h:inputText class="form-control" value="#{postCtrl.post.judul}"></h:inputText>
+                    <br/>Konten
+                    <h:inputTextarea id="konten" value="#{postCtrl.post.konten}"></h:inputTextarea>
+                    <br/>Tanggal
+                    <h:inputText class="form-control" value="#{postCtrl.post.tanggal}"></h:inputText>
+                    <br/>Published
+                    <h:selectBooleanCheckbox value="#{postCtrl.post.published}"></h:selectBooleanCheckbox>
+                    <br/>
+                    <h:inputHidden value="#{postCtrl.post.userId}"></h:inputHidden>
+                    <h:commandLink action="#{postCtrl.doSubmit()}" value="Tambah" class="btn btn-primary"></h:commandLink>
                 </h:form>
             </ui:define>
-    	</ui:composition>
+        </ui:composition>
     </h:body>
- 
+
 </html>

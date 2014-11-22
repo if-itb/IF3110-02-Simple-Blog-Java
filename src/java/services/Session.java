@@ -15,7 +15,6 @@ import models.*;
 @ManagedBean(name="session", eager=true)
 @SessionScoped
 public class Session implements Serializable{
-    @ManagedProperty(value="#{userIdentity}")
     private User userIdentity;
 
     public User getUserIdentity() {

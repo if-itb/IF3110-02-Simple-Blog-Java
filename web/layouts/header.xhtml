@@ -6,20 +6,29 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
-        
+
     </h:head>
     <h:body>
-        <ui:composition> 
-            <h1>Simple Blog</h1>
-            <c:if test="#{!userIdentity.isLoggedIn()}">
-                Anda belum login <a href="#{request.contextPath}/login.xhtml">(Login)</a>
-            </c:if>
-            <c:if test="#{userIdentity.isLoggedIn()}">
-                Welcome, #{userIdentity.getNama()}
-                <h:form>
-                <h:commandLink action="#{userIdentity.logout()}">Logout</h:commandLink>
-                </h:form>
-            </c:if>
+        <ui:composition>
+            <nav class="navbar-inverse navbar-fixed-top navbar">
+                <div class="container">
+                    <div class="navbar-collapse">
+                        <ul class='navbar-nav navbar-right nav'>
+                            <li>
+                                <h:outputLink value="#{postCtrl.showIndex()}">Home</h:outputLink>
+                            </li>
+                            <li>
+                                <c:if test="#{!userIdentity.isLoggedIn()}">
+                                    <h:outputLink value="#{siteCtrl.showLogin()}">Login</h:outputLink>
+                                </c:if>
+                                <c:if test="#{userIdentity.isLoggedIn()}">
+                                    <h:outputLink value="#{siteCtrl.doLogout()}">#{userIdentity.nama} (Logout)</h:outputLink>
+                                </c:if>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
         </ui:composition>	
     </h:body>
 
