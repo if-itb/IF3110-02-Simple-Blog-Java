@@ -8,6 +8,7 @@ package Database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -62,14 +63,28 @@ public class PostingDatabase {
         return records;
    }
    
-    public void addPost(){
-        try {
-            Statement stmt = makeConnection().createStatement();
-            String query = "INSERT INTO `posting` (`Judul`, `Tanggal`, `Content`, `Author`, `Status`) VALUES (`Doremi`, `1-2-3`, `ini adalah not`, `Doni`, `unpublished`)";
-            stmt.execute(query);
-        } catch (ClassNotFoundException | SQLException e) {
-            System.err.println(e);
-        }        
+    public void addPost() throws ClassNotFoundException, SQLException{
+          ResultSet rs;
+          Connection con = makeConnection();
+          Statement stmt = con.createStatement();
+          String query = "Select COUNT(Id) from posting";
+          rs = stmt.executeQuery(query);
+          PreparedStatement ps;
+          int countsumId = 0;
+          while(rs.next()){
+             countsumId = rs.getInt(1);
+           }
+          System.out.println(countsumId);
+          System.out.println("PINGGG");
+            String query2 = "INSERT INTO `posting` (`Id`,`Judul`, `Tanggal`, `Content`, `Author`, `Status`) VALUES (?,?,?,?,?,?)";
+            ps= con.prepareStatement(query2);
+            ps.setInt(1,countsumId+1);
+            ps.setString(2,"Doremi");
+            ps.setString(3,"1-2-3");
+            ps.setString(4,"ini adalah not");
+            ps.setString(5,"Doni");
+            ps.setString(6,"unpublished");
+            int i = ps.executeUpdate();     
     }
     
 }
