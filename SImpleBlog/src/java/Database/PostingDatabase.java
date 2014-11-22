@@ -22,7 +22,7 @@ import javax.faces.bean.SessionScoped;
  */
 @ManagedBean(name="Posting", eager = true)
 @SessionScoped
-public class FetchDataDB {
+public class PostingDatabase {
     /**
      *
      * @return
