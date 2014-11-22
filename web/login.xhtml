@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+<h:head>
+	<title>Simple Blog | Login</title>
+	<link rel="stylesheet" href="assets/css/style.css" type="text/css" />
+	<link rel="shortcut icon" href="favicon.ico" />
+</h:head>
+<h:body>
+	<div id="content">
+		<div class="section page">
+			<h1>Login</h1>
+			<div class="wrapper">
+				<form class="formreg" name="login" method="post" action="login.php">
+                                    <label class="labelreg"> Username</label>
+					<input class="inputreg" type="text" name="username" id="username"/>
+					<span id="unameInfo"></span>
+                                        <label class="labelreg"> Password</label>
+					<input class="inputreg" type="password" name="password" id="password"/>
+					<span id="passInfo"></span><br />
+					<span id="loginInfo"></span><br />
+					<input class="inputreg2" type="button" value="Login" id="submit" name="submit" onclick="validateLogin()"/>
+				</form>
+			</div>
+		</div>
+	</div>
+</h:body>
+
+</html>
+
