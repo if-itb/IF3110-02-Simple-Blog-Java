@@ -85,9 +85,10 @@ public class login extends HttpServlet {
                     //create session
                     HttpSession session = request.getSession();
                     
-                    session.setAttribute("owner", request.getParameter("usrname"));
-                    session.setAttribute("role", role);
                     String name = rset.getString("nama_usr");
+                    session.setAttribute("user", name);
+                    session.setAttribute("role", role);
+                    
                     //set session age
                     Cookie cookie = new Cookie ("user", name);
                     cookie.setMaxAge(3600);
