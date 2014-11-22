@@ -33,6 +33,10 @@
         <servlet-name>logout</servlet-name>
         <servlet-class>paket.logout</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ManageUser</servlet-name>
+        <servlet-class>paket.ManageUser</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>/faces/*</url-pattern>
@@ -44,6 +48,10 @@
     <servlet-mapping>
         <servlet-name>logout</servlet-name>
         <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManageUser</servlet-name>
+        <url-pattern>/ManageUser</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

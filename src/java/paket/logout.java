@@ -44,7 +44,7 @@ public class logout extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        //clean cookies
         Cookie[] cookies = request.getCookies();
         if(cookies != null){
         for(Cookie cookie : cookies){
@@ -53,6 +53,7 @@ public class logout extends HttpServlet {
         }
         }
         
+        //close session
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
         
@@ -61,6 +62,7 @@ public class logout extends HttpServlet {
         session.invalidate();
         
         out.print("Bye...");
+        response.sendRedirect("index.xhtml");
         out.close();
     }
 
