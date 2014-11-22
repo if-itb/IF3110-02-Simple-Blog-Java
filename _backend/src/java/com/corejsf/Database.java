@@ -126,11 +126,24 @@ public class Database {
     }
     
     public void deletePost(Post post) throws SQLException, ClassNotFoundException{
-        
+        try{
+            PreparedStatement ps; 
+            Connection con = getConnection();
+            String sql = "DELETE post, comment FROM post JOIN comment ON post.id=comment.id_post WHERE post.id=" + post.getId();
+            ps = con.prepareStatement(sql);
+            ps.executeUpdate();
+        } catch(SQLException e){}
     }
     
     public void editPost(Post post) throws SQLException, ClassNotFoundException{
-        
+        try{
+            PreparedStatement ps; 
+            Connection con = getConnection();
+            String sql = "UPDATE post SET Status='"+post.getStatus()+"', Judul='"+post.getJudul()+"', Tanggal='"+post.getTanggal()+"', Konten='"+post.getKonten()+"'"
+                    + "     WHERE id="+post.getId();
+            ps = con.prepareStatement(sql);
+            ps.executeUpdate();
+        } catch(SQLException e){}
     }
     
     public ArrayList<Post> selectAllPost() throws SQLException, ClassNotFoundException{
