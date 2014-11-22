@@ -29,7 +29,6 @@
         
         <div class="list-post container-fluid">
             #{post.setQuery_status("published")}
-            #{post.printDB()}
             <ui:repeat value="#{post.getDaftar_post()}" var="posts">
                 <div class="post">
                     <a href="#" class="title">

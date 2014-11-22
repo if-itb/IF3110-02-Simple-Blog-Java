@@ -1,5 +1,6 @@
 package bean;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -8,9 +9,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
+import javax.faces.event.AjaxBehaviorEvent;
+import javax.servlet.http.HttpServletRequest;
 
 @ManagedBean(name = "post", eager=true)
 @RequestScoped
@@ -134,6 +141,7 @@ public class Post implements Serializable
             }
             System.out.println("Posts sucessfully fetched");
             con.close();
+            System.out.println("connection closed");
             
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
             System.out.println(ex.toString());
@@ -153,7 +161,28 @@ public class Post implements Serializable
     }
     public void publish()
     {
-        System.out.println("publish");
-        System.out.println("ID = " + id);
+        try {
+            System.out.println("publish");
+            System.out.println("ID = " + id);
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost/simple_blog_java","root","");
+            System.out.println("connection created");
+            String query = "update post set `status` = 'published' where `id` = " + id;
+            System.out.println("query : " + query);
+            PreparedStatement ps = con.prepareStatement(query);
+            int retval = ps.executeUpdate();
+            if(retval < 0)
+            {
+                System.out.println("Query unsuccessful");
+            }
+            else
+            {
+                System.out.println("Query Succesfu  l");
+            }
+            con.close();
+            System.out.println("connection close");
+        } catch (ClassNotFoundException | SQLException ex) {
+            System.out.println(ex.toString());
+        } 
     }
 }

@@ -10,12 +10,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
 @ManagedBean(name ="user",eager = true)
-@RequestScoped
+@SessionScoped
 public class User implements Serializable
 {
     private String username;
@@ -113,6 +113,7 @@ public class User implements Serializable
                 System.out.println("update failure");
             }
             con.close();
+            System.out.println("connection closed");
         } 
         catch (InstantiationException | IllegalAccessException | SQLException | ClassNotFoundException ex) 
         {
