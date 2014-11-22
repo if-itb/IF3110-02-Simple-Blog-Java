@@ -17,10 +17,15 @@ import java.util.logging.Logger;
  * @author Try Ajitiono
  */
 public class Post {
+
+    /**
+     *
+     */
     protected static int idPost;
     private static String judulPost;
     private static String tanggalPost;
     private static String kontenPost;
+    private static boolean publishStatus;
     /**
      * Mengecek apakah pengguna adalah admin
      * @return
@@ -43,6 +48,57 @@ public class Post {
      */
     public boolean isOwner() {
         return true;
+    }
+    
+    /**
+     * Melakukan set atribut post
+     * @param post_ID id post
+     */
+    public void setAtribut(int post_ID) {
+        try {
+            //login database
+            KoneksiDatabase.setUser("root");
+            KoneksiDatabase.setPassword("");
+            KoneksiDatabase.setDatabase("localhost","blog");
+            //statement
+            Connection koneksi = KoneksiDatabase.getKoneksi();
+            Statement statement = koneksi.createStatement();
+            //query
+            String queryListPosts = "SELECT * from `post` ORDER by tanggal DESC WHERE id=" + post_ID;
+            //execute query
+            ResultSet result = statement.executeQuery(queryListPosts);
+            //tulis hasil query
+            judulPost = result.getString("judul");
+            tanggalPost = result.getString("tanggal");
+            kontenPost = result.getString("konten");
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    /**
+     * Mereturn judul post
+     * @return judulPost
+     */
+    public String getJudul() {
+        return judulPost;
+    }
+    
+    /**
+     * Mereturn tanggal post
+     * @return tanggalPost
+     */
+    public String getTanggal() {
+        return tanggalPost;
+    }
+    
+    /**
+     * Mereturn konten post
+     * @return kontenPost
+     */
+    public String getKonten () {
+        return kontenPost;
     }
     
     /**
@@ -98,13 +154,11 @@ public class Post {
                             
                     if (shortened) //dipotong
                         toHTML += "... <a href=\"post.jsp?id= " + idPost + "\">Read More</a><br/>\n";
-                    else { //tidak dipotong
-                        toHTML +=   "</p>\n" +
-                                    "<p>\n" +
-                                    "<a href=\"edit_post.jsp?id=" + idPost + "\">Edit</a> | <a href=\"delete_post.jsp?id=" + idPost + "\" onclick=\"javascript:confirmDelete()\">Hapus</a>\n" +
-                                    "</p>\n" +
-                                    "</li>";
-                    }
+                    toHTML +=   "</p>\n" +
+                    "<p>\n" +
+                    "<a href=\"edit_post.jsp?id=" + idPost + "\">Edit</a> | <a href=\"delete_post.jsp?id=" + idPost + "\" onclick=\"javascript:confirmDelete()\">Hapus</a>\n" +
+                    "</p>\n" +
+                    "</li>";
                 }
             }
         }
@@ -179,7 +233,7 @@ public class Post {
         try {
             //login database
             KoneksiDatabase.setUser("root");
-            KoneksiDatabase.setPassword("akhfa");
+            KoneksiDatabase.setPassword("");
             KoneksiDatabase.setDatabase("localhost","blog");
             //statement
             Connection koneksi = KoneksiDatabase.getKoneksi(); 
