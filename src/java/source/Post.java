@@ -50,8 +50,9 @@ public class Post {
     /**
      * Melakukan set atribut post
      * @param post_ID id post
+     * @throws java.sql.SQLException
      */
-    public void setAtribut(int post_ID) {
+    public void setAtribut(int post_ID) throws SQLException {
         try {
             //login database
             KoneksiDatabase.setUser("root");
@@ -61,13 +62,17 @@ public class Post {
             Connection koneksi = KoneksiDatabase.getKoneksi();
             Statement statement = koneksi.createStatement();
             //query
-            String queryListPosts = "SELECT * from `post` ORDER by tanggal DESC WHERE id=" + post_ID;
+            String querySelectPost = "SELECT * from post WHERE id=" + post_ID;
             //execute query
-            ResultSet result = statement.executeQuery(queryListPosts);
+            ResultSet result = statement.executeQuery(querySelectPost);
             //tulis hasil query
-            judulPost = result.getString("judul");
-            tanggalPost = result.getString("tanggal");
-            kontenPost = result.getString("konten");
+            idPost = post_ID;
+            while (result.next()) {
+                judulPost = result.getString("judul");
+                tanggalPost = result.getString("tanggal");
+                kontenPost = result.getString("konten");
+                publishStatus = result.getString("publishStatus").compareTo("0") != 0;
+            }
         }
         catch (SQLException ex) {
             Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
