@@ -33,16 +33,16 @@ and open the template in the editor.
                             <!--form action="#" method="post">-->
                             <h:form>
                                 <label for="Name">Name:</label>
-                                <input type="text" name="Name" id="Name" />
+                                <input type="text" name="Name" id="Name" required="required"/>
 
                                 <label for="Username">Username:</label>
-                                <h:inputText id="Username"></h:inputText>
+                                <input type="text" name="Username" id="Username" required="required"/>
 
                                 <label for="Password">Password:</label>
-                                <h:inputSecret id="Password"></h:inputSecret>
+                                <input type="password" name="Password" id="Password" required="required"/>
 
                                 <label for="Re-Password">Retype:</label>
-                                <h:inputSecret id="Re-Password"></h:inputSecret>
+                                <input type="password" name="Re-Password" id="Re-Password" required="required"/>
                                 <br/><br/>
                                 <h:commandButton value="Register" class="submit-button" action="#" />
                             </h:form>

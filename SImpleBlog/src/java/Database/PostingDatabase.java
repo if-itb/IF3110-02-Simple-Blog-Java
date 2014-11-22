@@ -30,7 +30,7 @@ public class PostingDatabase {
     public Connection makeConnection() throws ClassNotFoundException, SQLException{
         Connection con;
         Class.forName("com.mysql.jdbc.Driver");
-        String url = "jdbc:mysql://localhost/simpleblog";
+        String url = "jdbc:mysql://localhost/blog";
         String user = "root";
         String password = "";
         con = DriverManager.getConnection(url,user,password);
@@ -42,7 +42,7 @@ public class PostingDatabase {
         List<Post> records = new ArrayList<>();
         try {
           Statement stmt = makeConnection().createStatement();
-          String query = "Select * from posting where status=\"Published\"";
+          String query = "Select * from post where status=\"Published\"";
           rs = stmt.executeQuery(query);
 
           while(rs.next()){
@@ -66,7 +66,7 @@ public class PostingDatabase {
         List<Post> records = new ArrayList<>();
         try {
           Statement stmt = makeConnection().createStatement();
-          String query = "Select * from posting where author=\"Doni\"";
+          String query = "Select * from post where author=\"chobits\"";
           rs = stmt.executeQuery(query);
 
           while(rs.next()){
