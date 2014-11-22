@@ -17,9 +17,10 @@ import java.util.logging.Logger;
  * @author Try Ajitiono
  */
 public class Post {
-    protected static int IDPost;
-    private static String Title;
-    private static String Content;
+    protected static int idPost;
+    private static String judulPost;
+    private static String tanggalPost;
+    private static String kontenPost;
     /**
      * Mengecek apakah pengguna adalah admin
      * @return
@@ -69,9 +70,6 @@ public class Post {
                 toHTML = "No posts yet.";
             }
             else { //ada hasil
-                //deklarasi variabel
-                int idPost;
-                String judulPost,tanggalPost, kontenPost;
                 Date date;
                 while (result.next()) { //apabila result masih ada
                     //inisialisasi variabel
@@ -151,7 +149,7 @@ public class Post {
             Connection koneksi = KoneksiDatabase.getKoneksi()) {
             Statement statement = koneksi.createStatement();
             //query
-            String queryPublishPost = "UPDATE post SET published=1";
+            String queryPublishPost = "UPDATE post SET published=1 WHERE id=" + post_ID;
             //execute query
             statement.executeUpdate(queryPublishPost);
             //tutup koneksi database
@@ -179,9 +177,9 @@ public class Post {
             Connection koneksi = KoneksiDatabase.getKoneksi()) {
             Statement statement = koneksi.createStatement();
             //query
-            String queryEditJudul = "UPDATE post SET judul='" + judul + "' WHERE post_id=" + post_ID;
-            String queryEditTanggal = "UPDATE post SET tanggal='" + tanggal + "' WHERE post_id=" + post_ID;
-            String queryEditKonten = "UPDATE post SET konten='" + konten + "' WHERE post_id=" + post_ID;
+            String queryEditJudul = "UPDATE post SET judul='" + judul + "' WHERE id=" + post_ID;
+            String queryEditTanggal = "UPDATE post SET tanggal='" + tanggal + "' WHERE id=" + post_ID;
+            String queryEditKonten = "UPDATE post SET konten='" + konten + "' WHERE id=" + post_ID;
             //execute query
             statement.executeUpdate(queryEditJudul);
             statement.executeUpdate(queryEditTanggal);
@@ -208,8 +206,8 @@ public class Post {
             Connection koneksi = KoneksiDatabase.getKoneksi()) {
             Statement statement = koneksi.createStatement();
             //query
-            String queryDeletePost = "DELETE FROM post WHERE post_id=" + post_ID;
-            String queryDeleteComments = "DELETE FROM komentar WHERE post_id=" + post_ID;
+            String queryDeletePost = "DELETE FROM post WHERE id=" + post_ID;
+            String queryDeleteComments = "DELETE FROM komentar WHERE id=" + post_ID;
             //execute query
             statement.executeUpdate(queryDeletePost);
             statement.executeUpdate(queryDeleteComments);
