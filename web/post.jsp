@@ -39,19 +39,12 @@
         <!--[if lt IE 9]>
             <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
-
         <%
-            int ID = Integer.valueOf(request.getParameter("var"));
-            String query ="";
-            KoneksiDatabase.setUser("root");
-            KoneksiDatabase.setPassword("");
-            KoneksiDatabase.setDatabase("localhost","simpleblogdb");
-            Connection koneksi = KoneksiDatabase.getKoneksi();
-            Statement statement = koneksi.createStatement();
-            query = "SELECT Tanggal, Judul, Konten FROM postingan WHERE ID="+ID;
-            ResultSet result = statement.executeQuery(query);
+            Post post = new Post();
+            post.setAtribut(Integer.valueOf(request.getParameter("id")));
+            int ID = Integer.valueOf(request.getParameter("id"));            
         %>
-        <title>Not a Simple Blog | <%= result.getString("Judul") %> </title>
+        <title>Not a Simple Blog | <%= post.getJudul() %> </title>
     </head>
     <body class="default" onload="loadComment(<%= ID %>)>
     <div class="wrapper">
@@ -67,8 +60,8 @@
 
         <header class="art-header">
             <div class="art-header-inner" style="margin-top: 0px; opacity: 1;">
-                <time class="art-time"><%= result.getString("Tanggal") %></time>
-                <h2 class="art-title"><%= result.getString("Judul") %></h2>
+                <time class="art-time"><%= post.getTanggal() %></time>
+                <h2 class="art-title"><%= post.getJudul() %></h2>
                 <p class="art-subtitle"></p>
             </div>
         </header>
@@ -76,7 +69,7 @@
         <div class="art-body">
             <div class="art-body-inner">
                 <hr class="featured-article" />
-                <p><%= result.getString("Konten") %></p>
+                <p><%= post.getKonten() %></p>
                 <p></p>
 
                 <hr />
