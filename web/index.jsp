@@ -4,6 +4,7 @@
     Author     : ART
 --%>
 
+<%@page import="source.Post"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -43,7 +44,7 @@
         <nav class="nav">
             <a style="border:none;" id="logo" href="index.html"><h1>Not<span>-</span>a<span>-</span>Simple<span>-</span>Blog</h1></a>
             <ul class="nav-primary">
-                <li><a href="new_post.html">+ Tambah Post</a></li>
+                <li><a href="new_post.jsp">+ Tambah Post</a></li>
             </ul>
         </nav>
 
@@ -51,28 +52,8 @@
             <div class="posts">
                 <nav class="art-list">
                   <ul class="art-list-body">
-                    <li class="art-list-item">
-                        <div class="art-list-item-title-and-time">
-                            <h2 class="art-list-title"><a href="post.html">Apa itu Simple Blog?</a></h2>
-                            <div class="art-list-time">15 Juli 2014</div>
-                            <div class="art-list-time"><span style="color:#F40034;">&#10029;</span> Featured</div>
-                        </div>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis repudiandae quae natus quos alias eos repellendus a obcaecati cupiditate similique quibusdam, atque omnis illum, minus ex dolorem facilis tempora deserunt! &hellip;</p>
-                        <p>
-                          <a href="#">Edit</a> | <a href="#">Hapus</a>
-                        </p>
-                    </li>
-
-                    <li class="art-list-item">
-                        <div class="art-list-item-title-and-time">
-                            <h2 class="art-list-title"><a href="post.html">Siapa dibalik Simple Blog?</a></h2>
-                            <div class="art-list-time">11 Juli 2014</div>
-                        </div>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis repudiandae quae natus quos alias eos repellendus a obcaecati cupiditate similique quibusdam, atque omnis illum, minus ex dolorem facilis tempora deserunt! &hellip;</p>
-                        <p>
-                          <a href="#">Edit</a> | <a href="#">Hapus</a>
-                        </p>
-                    </li>
+                    <% //instantiasi kelas Post dan pemanggilan dari database
+                        Post listPost = new Post(); %>
                   </ul>
                 </nav>
             </div>
