@@ -94,7 +94,7 @@ public class Post {
                             "... <a href=\"post.jsp?id= " + idPost + "\">Read More</a><br/>\n" +
                             "</p>\n" +
                             "<p>\n" +
-                            "<a href=\"edit_post.jsp?id=" + idPost + "\">Edit</a> | <a href=\"javascript:confirmDelete()\">Hapus</a>\n" +
+                            "<a href=\"edit_post.jsp?id=" + idPost + "\">Edit</a> | <a href=\"delete_post.jsp?id=" + idPost + " onclick=\"javascript:confirmDelete()\">Hapus</a>\n" +
                             "</p>\n" +
                             "</li>";
                 }
@@ -117,8 +117,9 @@ public class Post {
     public void addPost(String judul, String tanggal, String konten) throws SQLException {
         //login database
         KoneksiDatabase.setUser("root");
-        KoneksiDatabase.setPassword("akhfa");
+        KoneksiDatabase.setPassword("");
         KoneksiDatabase.setDatabase("localhost","blog");
+        System.out.println("add");
         try ( //statement
             Connection koneksi = KoneksiDatabase.getKoneksi()) {
             Statement statement = koneksi.createStatement();
@@ -126,8 +127,7 @@ public class Post {
             String queryAddPost = "INSERT INTO post (judul,konten,tanggal) VALUES ('" + judul + "', '" + konten + "', '" + tanggal + "')";
             //execute query
             statement.executeUpdate(queryAddPost);
-            //tutup koneksi database
-            koneksi.close();
+            System.out.println("berhasil add");
         }
         catch (SQLException ex) {
             Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
@@ -151,8 +151,6 @@ public class Post {
             String queryPublishPost = "UPDATE post SET published=1 WHERE id=" + post_ID;
             //execute query
             statement.executeUpdate(queryPublishPost);
-            //tutup koneksi database
-            koneksi.close();
         }
         catch (SQLException ex) {
             Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
@@ -183,8 +181,6 @@ public class Post {
             statement.executeUpdate(queryEditJudul);
             statement.executeUpdate(queryEditTanggal);
             statement.executeUpdate(queryEditKonten);
-            //tutup koneksi database
-            koneksi.close();
         }
         catch (SQLException ex) {
             Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
@@ -199,7 +195,7 @@ public class Post {
     public void deletePost(int post_ID) throws SQLException {
         //login database
         KoneksiDatabase.setUser("root");
-        KoneksiDatabase.setPassword("akhfa");
+        KoneksiDatabase.setPassword("");
         KoneksiDatabase.setDatabase("localhost","blog");
         try ( //statement
             Connection koneksi = KoneksiDatabase.getKoneksi()) {
@@ -210,8 +206,6 @@ public class Post {
             //execute query
             statement.executeUpdate(queryDeletePost);
             statement.executeUpdate(queryDeleteComments);
-            //tutup koneksi database
-            koneksi.close();
         }
         catch (SQLException ex) {
             Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
