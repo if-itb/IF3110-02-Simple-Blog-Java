@@ -9,7 +9,6 @@ function emailValidator()
         if(!result)
         {
             ganti.innerHTML= '<div class="alert alert-danger">wrong email format</div>';
-            alert(ganti.innerHTML);
         }
         else
         {

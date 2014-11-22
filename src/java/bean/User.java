@@ -9,15 +9,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.RequestScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
 @ManagedBean(name ="user",eager = true)
-@SessionScoped
+@RequestScoped
 public class User implements Serializable
 {
     private String username;
@@ -28,6 +26,7 @@ public class User implements Serializable
     
     public User() 
     {
+        System.out.println("User Created");
         username="";
         password="";
         role="";
@@ -149,11 +148,10 @@ public class User implements Serializable
         catch (SQLException | ClassNotFoundException | InstantiationException | IllegalAccessException ex) 
         {
             System.out.println(ex.toString());
-            System.out.println(ex.getMessage());
         }
     }
     
-    private void login()
+    public void login()
     {
         System.out.println("Login");
         ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
