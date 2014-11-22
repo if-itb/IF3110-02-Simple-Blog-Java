@@ -71,6 +71,8 @@ public class Komentar extends Post {
         try (Connection koneksi = KoneksiDatabase.getKoneksi()) {
             Statement statement = koneksi.createStatement();
             InsertQuery = "INSERT INTO komentar (ID, Nama, Email, Komentar) VALUES ('" + Post.idPost + "', '" + nama + "', '" + email + "', '" + comment + "')";
+            statement.executeUpdate(InsertQuery);
+            koneksi.close();
         }
     }
     
