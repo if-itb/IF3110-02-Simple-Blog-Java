@@ -1,7 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/* Kelas: Post.java
  */
 package source;
 
@@ -19,7 +16,7 @@ import java.util.logging.Logger;
 public class Post {
 
     /**
-     *
+     * Atribut-atribut
      */
     protected static int idPost;
     private static String judulPost;
@@ -75,6 +72,10 @@ public class Post {
         catch (SQLException ex) {
             Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public int getID() {
+        return idPost;
     }
     
     /**
@@ -146,7 +147,7 @@ public class Post {
                     toHTML +=    
                             "<li class=\"art-list-item\">\n" +
                             "<div class=\"art-list-item-title-and-time\">\n" +
-                            "<h2 class=\"art-list-title\"><a href=\"post.jsp?id='" + idPost + "\"> " + judulPost + " </a>\n" +
+                            "<h2 class=\"art-list-title\"><a href=\"post.jsp?id=" + idPost + "\"> " + judulPost + " </a>\n" +
                             "<div class=\"art-list-time\">" + tanggalPost + "</div>\n" +
                             "<div class=\"art-list-time\"><span style=\"color:#F40034;\">&#10029;</span> Featured</div>\n" +
                             "</div>\n" +
@@ -202,7 +203,6 @@ public class Post {
      * @throws java.sql.SQLException
      */
     public void publishPost(int post_ID) throws SQLException {
-        
         try { 
             //login database
             KoneksiDatabase.setUser("root");
