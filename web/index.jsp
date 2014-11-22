@@ -54,6 +54,7 @@
                   <ul class="art-list-body">
                     <% //instantiasi kelas Post dan pemanggilan dari database
                         Post listPost = new Post(); %>
+                    <%= listPost.listPosts() %>
                   </ul>
                 </nav>
             </div>

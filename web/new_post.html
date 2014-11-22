@@ -1,15 +1,12 @@
-<%-- 
-    Document   : new_post
-    Created on : Nov 22, 2014, 12:45:59 PM
-    Author     : ASUS
---%>
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <meta name="description" content="Deskripsi Blog">
         <meta name="author" content="Judul Blog">
@@ -35,13 +32,14 @@
             <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
         
-        <title>New Post</title>
+        <title>Tambah Post - Not a Simple Blog</title>
     </head>
-    <body class = "default">
+    <body>
+        <body class = "default">
         <div class="wrapper">
 
         <nav class="nav">
-            <a style="border:none;" id="logo" href="index.html"><h1>Not<span>-</span>a<span>-</span>Simple<span>-</span>Blog</h1></a>
+            <a style="border:none;" id="logo" href="index.jsp"><h1>Not<span>-</span>a<span>-</span>Simple<span>-</span>Blog</h1></a>
             <ul class="nav-primary">
                 <li><a href="new_post.html">+ Tambah Post</a></li>
             </ul>
@@ -57,7 +55,7 @@
                     <h2>Tambah Post</h2>
 
                     <div id="contact-area">
-                        <form method="post" action="new_post.php">
+                        <form method="post" action="index.jsp">
                             <label for="Judul">Judul:</label>
                             <input type="text" name="Judul" id="Judul">
 
