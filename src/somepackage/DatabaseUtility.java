@@ -40,6 +40,7 @@ public class DatabaseUtility {
 		String password = "QKC3zwhJ";
 
 		try {
+			DriverManager.registerDriver(new com.mysql.jdbc.Driver());
 			connection = DriverManager.getConnection(url, user, password);
 			System.out.println("Connection completed");
 		} catch (SQLException exception) {
