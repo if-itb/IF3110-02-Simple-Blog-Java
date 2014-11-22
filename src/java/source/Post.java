@@ -101,7 +101,7 @@ public class Post {
                     else { //tidak dipotong
                         toHTML +=   "</p>\n" +
                                     "<p>\n" +
-                                    "<a href=\"edit_post.jsp?id=" + idPost + "\">Edit</a> | <a href=\"delete_post.jsp?id=" + idPost + " onclick=\"javascript:confirmDelete()\">Hapus</a>\n" +
+                                    "<a href=\"edit_post.jsp?id=" + idPost + "\">Edit</a> | <a href=\"delete_post.jsp?id=" + idPost + "\" onclick=\"javascript:confirmDelete()\">Hapus</a>\n" +
                                     "</p>\n" +
                                     "</li>";
                     }
@@ -204,12 +204,13 @@ public class Post {
      * @throws java.sql.SQLException
      */
     public void deletePost(int post_ID) throws SQLException {
-        //login database
-        KoneksiDatabase.setUser("root");
-        KoneksiDatabase.setPassword("");
-        KoneksiDatabase.setDatabase("localhost","blog");
-        try ( //statement
-            Connection koneksi = KoneksiDatabase.getKoneksi()) {
+        try { 
+            //login database
+            KoneksiDatabase.setUser("root");
+            KoneksiDatabase.setPassword("");
+            KoneksiDatabase.setDatabase("localhost","blog");
+            //statement
+            Connection koneksi = KoneksiDatabase.getKoneksi();
             Statement statement = koneksi.createStatement();
             //query
             String queryDeletePost = "DELETE FROM post WHERE id=" + post_ID;
