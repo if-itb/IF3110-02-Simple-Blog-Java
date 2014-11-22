@@ -16,6 +16,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  *
@@ -107,6 +109,48 @@ public class PostingDatabase {
             ps.setString(5,"Doni");
             ps.setString(6,"unpublished");
             int i = ps.executeUpdate();     
+    }
+    
+    public String addUserOwner() throws ClassNotFoundException, SQLException{
+        
+        HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        String Name = request.getParameter("Name");
+        String Username = request.getParameter("Username");
+        String Email = request.getParameter("Email");
+        String Password = request.getParameter("Password");
+        
+        Connection con = makeConnection();
+        PreparedStatement ps;
+        String query = "INSERT INTO `user` (`Username`,`Password`, `Name`, `email`, `Role`) VALUES (?,?,?,?,?)";
+        ps= con.prepareStatement(query);
+        ps.setString(1,Username);
+        ps.setString(2,Password);
+        ps.setString(3,Name);
+        ps.setString(4,Email);
+        ps.setString(5,"Owner");
+        int i = ps.executeUpdate();
+        return "Home.xhtml";
+    }
+    
+    public String Login() throws ClassNotFoundException, SQLException{
+        HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        String Username = request.getParameter("login_username");
+        String Password = request.getParameter("login_password");
+        ResultSet rs;
+        int existUser=0;
+        Statement stmt = makeConnection().createStatement();
+        String query = "Select COUNT(Username) from user where Username=\""+Username+"\" and Password=\""+Password+"\";";
+        rs = stmt.executeQuery(query);
+
+        while(rs.next()){
+            existUser = rs.getInt(1);
+         }
+        if (existUser>0){
+            return "Role/Owner.xhtml?faces-redirect=true";
+        }
+        else{
+            return "Home.xhtml";
+        }
     }
     
 }

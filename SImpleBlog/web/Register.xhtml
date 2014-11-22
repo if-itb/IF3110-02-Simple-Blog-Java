@@ -6,7 +6,8 @@ and open the template in the editor.
 -->
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <head>
         <link type="text/css" rel="stylesheet" href="assets\screen.css"/>
         <title>Owner's Simple Blog</title>
@@ -38,13 +39,16 @@ and open the template in the editor.
                                 <label for="Username">Username:</label>
                                 <input type="text" name="Username" id="Username" required="required"/>
 
+                                <label for="Email">Email:</label>
+                                <input type="text" name="Email" id="Email" required="required"/>
+                                
                                 <label for="Password">Password:</label>
                                 <input type="password" name="Password" id="Password" required="required"/>
 
-                                <label for="Re-Password">Retype:</label>
-                                <input type="password" name="Re-Password" id="Re-Password" required="required"/>
+<!--                                <label for="Re-Password">Retype:</label>
+                                <input type="password" name="Re-Password" id="Re-Password" required="required"/>-->
                                 <br/><br/>
-                                <h:commandButton value="Register" class="submit-button" action="#" />
+                                <h:commandButton value="Register" class="submit-button" action="#{Posting.addUserOwner}" />
                             </h:form>
                         </div>
                     </div>
