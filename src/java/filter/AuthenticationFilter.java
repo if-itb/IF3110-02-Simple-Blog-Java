@@ -18,6 +18,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import model.UserBean;
 
 /**
  *
@@ -109,18 +110,26 @@ public class AuthenticationFilter implements Filter {
         
         Throwable problem = null;
         try {
-
+            
             // check whether session variable is set
             HttpServletRequest req = (HttpServletRequest) request;
             HttpServletResponse res = (HttpServletResponse) response;
-            HttpSession ses = req.getSession(false);
+            HttpSession ses = req.getSession();
+            UserBean user;
+            user = (UserBean)ses.getAttribute("userBean");
             //  allow user to proccede if url is Login.xhtml or List-Post.xhtml or View-Post.xhtml
             // TODO ganti ini dengan navigation bean kalau navigation bean sudah selesai
             String reqURI = req.getRequestURI();
-            if ( reqURI.indexOf("/Login.xhtml") >= 0 
-                    || reqURI.indexOf("/List-Post.xhtml") >= 0 
-                    || reqURI.indexOf("/View-Post.xhtml") >= 0  )
+            
+            String login = "/Login.xhtml";
+            String listPost = "/List-Post.xhtml";
+            String viewPost = "/View-Post.xhtml";
+            if ( reqURI.indexOf(login) >= 0 
+                    || reqURI.indexOf(listPost) >= 0 
+                    || reqURI.indexOf(viewPost) >= 0  )
                    chain.doFilter(request, response);
+            else if (user.getRole() == UserBean.getAdmin())
+                chain.doFilter(request, response);
             else   
                    res.sendRedirect(req.getContextPath() +"/faces" +"/Login.xhtml");  // Anonymous user. Redirect to login page
         }
