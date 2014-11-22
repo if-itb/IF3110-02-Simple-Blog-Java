@@ -53,7 +53,7 @@ public class Post {
     public String listPosts() throws SQLException {
         //login database
         KoneksiDatabase.setUser("root");
-        KoneksiDatabase.setPassword("akhfa");
+        KoneksiDatabase.setPassword("");
         KoneksiDatabase.setDatabase("localhost","blog");
         //inisialisasi string
         String toHTML = "";
