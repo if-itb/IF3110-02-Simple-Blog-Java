@@ -51,15 +51,17 @@ public class Post {
      * @throws java.sql.SQLException
      */
     public String listPosts() throws SQLException {
-        //login database
-        KoneksiDatabase.setUser("root");
-        KoneksiDatabase.setPassword("");
-        KoneksiDatabase.setDatabase("localhost","blog");
         //inisialisasi string
         String toHTML = "";
-        Connection koneksi = KoneksiDatabase.getKoneksi();
-        Statement statement = koneksi.createStatement();
+        boolean shortened;
         try {
+            //login database
+            KoneksiDatabase.setUser("root");
+            KoneksiDatabase.setPassword("");
+            KoneksiDatabase.setDatabase("localhost","blog");
+            //statement
+            Connection koneksi = KoneksiDatabase.getKoneksi();
+            Statement statement = koneksi.createStatement();
             //query
             String queryListPosts = "SELECT * from `post` ORDER by tanggal DESC";
             //execute query
@@ -73,12 +75,14 @@ public class Post {
                 Date date;
                 result = statement.executeQuery(queryListPosts);
                 while (result.next()) { //apabila result masih ada
+                    shortened = false;
                     //inisialisasi variabel
                     idPost = result.getInt("id");
                     judulPost = result.getString("judul");
                     kontenPost = result.getString("konten");
                     if (kontenPost.length() > 100) {
                         kontenPost = kontenPost.substring(0, 100); //pemotongan teks
+                        shortened = true;
                     }
                     date = result.getDate("tanggal");
                     //ubah menjadi string
@@ -90,13 +94,17 @@ public class Post {
                             "<div class=\"art-list-time\">" + tanggalPost + "</div>\n" +
                             "<div class=\"art-list-time\"><span style=\"color:#F40034;\">&#10029;</span> Featured</div>\n" +
                             "</div>\n" +
-                            "<p> " + kontenPost + "\n" +
-                            "... <a href=\"post.jsp?id= " + idPost + "\">Read More</a><br/>\n" +
-                            "</p>\n" +
-                            "<p>\n" +
-                            "<a href=\"edit_post.jsp?id=" + idPost + "\">Edit</a> | <a href=\"delete_post.jsp?id=" + idPost + " onclick=\"javascript:confirmDelete()\">Hapus</a>\n" +
-                            "</p>\n" +
-                            "</li>";
+                            "<p> " + kontenPost + "\n";
+                            
+                    if (shortened) //dipotong
+                        toHTML += "... <a href=\"post.jsp?id= " + idPost + "\">Read More</a><br/>\n";
+                    else { //tidak dipotong
+                        toHTML +=   "</p>\n" +
+                                    "<p>\n" +
+                                    "<a href=\"edit_post.jsp?id=" + idPost + "\">Edit</a> | <a href=\"delete_post.jsp?id=" + idPost + " onclick=\"javascript:confirmDelete()\">Hapus</a>\n" +
+                                    "</p>\n" +
+                                    "</li>";
+                    }
                 }
             }
         }
@@ -115,23 +123,23 @@ public class Post {
      * @throws java.sql.SQLException
      */
     public void addPost(String judul, String tanggal, String konten) throws SQLException {
-        //login database
-        KoneksiDatabase.setUser("root");
-        KoneksiDatabase.setPassword("");
-        KoneksiDatabase.setDatabase("localhost","blog");
-        System.out.println("add");
-        try ( //statement
-            Connection koneksi = KoneksiDatabase.getKoneksi()) {
+        try { 
+            //login database
+            KoneksiDatabase.setUser("root");
+            KoneksiDatabase.setPassword("");
+            KoneksiDatabase.setDatabase("localhost","blog");
+            //statement
+            Connection koneksi = KoneksiDatabase.getKoneksi();
             Statement statement = koneksi.createStatement();
             //query
             String queryAddPost = "INSERT INTO post (judul,konten,tanggal) VALUES ('" + judul + "', '" + konten + "', '" + tanggal + "')";
             //execute query
             statement.executeUpdate(queryAddPost);
-            System.out.println("berhasil add");
         }
         catch (SQLException ex) {
             Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
     }
     
     /**
@@ -140,12 +148,14 @@ public class Post {
      * @throws java.sql.SQLException
      */
     public void publishPost(int post_ID) throws SQLException {
-        //login database
-        KoneksiDatabase.setUser("root");
-        KoneksiDatabase.setPassword("akhfa");
-        KoneksiDatabase.setDatabase("localhost","blog");
-        try ( //statement
-            Connection koneksi = KoneksiDatabase.getKoneksi()) {
+        
+        try { 
+            //login database
+            KoneksiDatabase.setUser("root");
+            KoneksiDatabase.setPassword("");
+            KoneksiDatabase.setDatabase("localhost","blog");
+            //statement
+            Connection koneksi = KoneksiDatabase.getKoneksi();
             Statement statement = koneksi.createStatement();
             //query
             String queryPublishPost = "UPDATE post SET published=1 WHERE id=" + post_ID;
@@ -166,12 +176,13 @@ public class Post {
      * @throws java.sql.SQLException
      */
     public void editPost(int post_ID, String judul, String tanggal, String konten) throws SQLException {
-        //login database
-        KoneksiDatabase.setUser("root");
-        KoneksiDatabase.setPassword("akhfa");
-        KoneksiDatabase.setDatabase("localhost","blog");
-        try ( //statement
-            Connection koneksi = KoneksiDatabase.getKoneksi()) {
+        try {
+            //login database
+            KoneksiDatabase.setUser("root");
+            KoneksiDatabase.setPassword("akhfa");
+            KoneksiDatabase.setDatabase("localhost","blog");
+            //statement
+            Connection koneksi = KoneksiDatabase.getKoneksi(); 
             Statement statement = koneksi.createStatement();
             //query
             String queryEditJudul = "UPDATE post SET judul='" + judul + "' WHERE id=" + post_ID;
