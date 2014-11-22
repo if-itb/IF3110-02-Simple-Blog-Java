@@ -92,6 +92,23 @@ cite {
   font-style: italic;
   }
 
+.logo{
+  float: left;
+  padding-bottom: 30px;
+  height: 30px;
+  margin-left: 0px;
+  letter-spacing: 1px;
+  font-family: 'Questrial', sans-serif;
+  font-size: 30px;
+  color: #000;
+  text-transform: uppercase;
+  text-align: left;
+  }
+
+span{
+  color: #F40034 !important;
+  }
+ 
 /* Teaser
 ================================================== */
 
