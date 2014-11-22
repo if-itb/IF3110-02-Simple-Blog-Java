@@ -78,24 +78,24 @@ public class Post {
                     idPost = result.getInt("id");
                     judulPost = result.getString("judul");
                     kontenPost = result.getString("konten");
+                    if (kontenPost.length() > 100) {
+                        kontenPost = kontenPost.substring(0, 100); //pemotongan teks
+                    }
                     date = result.getDate("tanggal");
                     //ubah menjadi string
                     tanggalPost = date.toString();
                     toHTML =    
                             "<li class=\"art-list-item\">\n" +
                             "<div class=\"art-list-item-title-and-time\">\n" +
-                            "<h2 class=\"art-list-title\"><?php echo '<a href=\"post.php?id='.$row['id'].'\">'.$row['title'].'</a>'; ?>\n" +
-                            "<div class=\"art-list-time\"><?php echo ''.$row['date'].''; ?></div>\n" +
+                            "<h2 class=\"art-list-title\"><a href=\"post.jsp?id='" + idPost + "\"> " + judulPost + " </a>\n" +
+                            "<div class=\"art-list-time\">" + tanggalPost + "</div>\n" +
                             "<div class=\"art-list-time\"><span style=\"color:#F40034;\">&#10029;</span> Featured</div>\n" +
                             "</div>\n" +
-                            "<p><?php $body = substr($row['body'], 0, 100);\n" +
-                            "echo nl2br($body);\n" +
-                            "if (strlen($row['body']) > 100) {\n" +
-                            "echo '... <a href=\"post.php?id='.$row['id'].'\">Read More</a><br/>';\n" +
-                            "}\n" +
-                            "?></p>\n" +
+                            "<p> " + kontenPost + "\n" +
+                            "... <a href=\"post.jsp?id= " + idPost + "\">Read More</a><br/>\n" +
+                            "</p>\n" +
                             "<p>\n" +
-                            "<?php echo '<a href=\"edit_post.php?id='.$row['id'].'\">Edit</a>' ?> | <?php echo '<a href=\"javascript:confirmPostDelete('.$row['id'].')\">Hapus</a>'; ?>\n" +
+                            "<a href=\"edit_post.jsp?id=" + idPost + "\">Edit</a> | <a href=\"javascript:confirmDelete()\">Hapus</a>\n" +
                             "</p>\n" +
                             "</li>";
                 }
