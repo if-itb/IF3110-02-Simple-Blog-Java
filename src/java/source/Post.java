@@ -57,11 +57,11 @@ public class Post {
         KoneksiDatabase.setDatabase("localhost","blog");
         //inisialisasi string
         String toHTML = "";
-        try ( //statement
-            Connection koneksi = KoneksiDatabase.getKoneksi()) {
-            Statement statement = koneksi.createStatement();
+        Connection koneksi = KoneksiDatabase.getKoneksi();
+        Statement statement = koneksi.createStatement();
+        try {
             //query
-            String queryListPosts = "SELECT * from post ORDER by tanggal DESC";
+            String queryListPosts = "SELECT * from `post` ORDER by tanggal DESC";
             //execute query
             ResultSet result = statement.executeQuery(queryListPosts);
             //tulis hasil query
@@ -71,6 +71,7 @@ public class Post {
             }
             else { //ada hasil
                 Date date;
+                result = statement.executeQuery(queryListPosts);
                 while (result.next()) { //apabila result masih ada
                     //inisialisasi variabel
                     idPost = result.getInt("id");
@@ -82,7 +83,7 @@ public class Post {
                     date = result.getDate("tanggal");
                     //ubah menjadi string
                     tanggalPost = date.toString();
-                    toHTML =    
+                    toHTML +=    
                             "<li class=\"art-list-item\">\n" +
                             "<div class=\"art-list-item-title-and-time\">\n" +
                             "<h2 class=\"art-list-title\"><a href=\"post.jsp?id='" + idPost + "\"> " + judulPost + " </a>\n" +
@@ -98,8 +99,6 @@ public class Post {
                             "</li>";
                 }
             }
-            //tutup koneksi database
-            koneksi.close();
         }
         catch (SQLException ex) {
             Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
