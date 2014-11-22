@@ -38,9 +38,9 @@ public class UserData implements Serializable {
 	}
 
 	public String login() {
-		DatabaseUtility DBConn = DatabaseUtility.getInstance();
+		DatabaseUtility dbUtil = DatabaseUtility.getInstance();
 
-		details = DBConn.findUser(username, password);
+		details = dbUtil.findUser(username, password);
 		if (details != null) {
 			loggedIn = true;
 			return ("index?faces-redirect=true");

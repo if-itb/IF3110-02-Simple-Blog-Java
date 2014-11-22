@@ -31,6 +31,25 @@ public class DatabaseUtility {
 		}
 		return result;
 	}
+	
+	public ResultSet execute(String stm) {
+		ResultSet rs = null;
+		PreparedStatement pst = null;
+
+		if (con == null)
+			con = getConnection();
+
+		try {
+			pst = con.prepareStatement(stm);
+			pst.execute();
+			rs = pst.getResultSet();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return rs;
+	}
+	
 
 	private Connection getConnection() {
 		Connection connection = null;

@@ -12,9 +12,13 @@
 
 <h:body>
 	<h1>Simple-Blog</h1>
-	<h2>Login Successful!</h2>
-	<pre>Name  : #{userData.details.name}<br />
-e-mail: #{userData.details.email}</pre>
-
+	<ul>
+	<ui:repeat value="#{databaseObject.postList}" var="item">
+	<li>Judul: #{item.title}</li>
+	<li>Waktu: #{item.date}</li>
+	<li>Isi: #{item.content}</li>
+	</ui:repeat>
+	</ul>
+	
 </h:body>
 </html>
