@@ -5,10 +5,10 @@
     xmlns:h="http://java.sun.com/jsf/html"
     xmlns:ui="http://java.sun.com/jsf/facelets">
     
-    <ui:include src="header.xhtml"/>
-<body class="default">
+    <ui:include src="header-script.xhtml"/>
+    <h:body class="default" onload="greet()">
 <div class="wrapper">
-<ui:include src="header-script.xhtml"/>
+<ui:include src="header.xhtml"/>
 
 <div id="home">
     <div class="posts">
@@ -46,6 +46,6 @@
 
 <ui:include src="footer-script.xhtml"/>
 
-</body>
+</h:body>
 </html>
 

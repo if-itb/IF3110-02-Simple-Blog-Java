@@ -87,9 +87,9 @@ public class login extends HttpServlet {
                     
                     session.setAttribute("owner", request.getParameter("usrname"));
                     session.setAttribute("role", role);
-                    
+                    String name = rset.getString("nama_usr");
                     //set session age
-                    Cookie cookie = new Cookie ("owner", request.getParameter("usrname"));
+                    Cookie cookie = new Cookie ("user", name);
                     cookie.setMaxAge(3600);
                     Cookie cookie2 = new Cookie("role", role);
                     cookie2.setMaxAge(3600);
@@ -97,6 +97,7 @@ public class login extends HttpServlet {
                     response.addCookie(cookie2);
                     
                     out.print("success");
+                    response.sendRedirect("index.xhtml");
                 }else{
                     out.print("password salah!");
                 }
