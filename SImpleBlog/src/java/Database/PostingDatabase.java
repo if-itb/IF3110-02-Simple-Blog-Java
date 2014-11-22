@@ -42,7 +42,31 @@ public class PostingDatabase {
         List<Post> records = new ArrayList<>();
         try {
           Statement stmt = makeConnection().createStatement();
-          String query = "Select * from posting";
+          String query = "Select * from posting where status=\"Published\"";
+          rs = stmt.executeQuery(query);
+
+          while(rs.next()){
+              Post post = new Post();
+              post.setId(rs.getInt(1));
+              post.setJudul(rs.getString(2));
+              post.setTanggal(rs.getString(3));
+              post.setContent(rs.getString(4));
+              post.setAuthor(rs.getString(5));
+              post.setStatus(rs.getString(6));
+              records.add(post);
+           }
+        } catch (SQLException e) {
+           System.err.println(e);
+        }
+        return records;
+   }
+    
+    public List<Post> getAuthorPost() throws ClassNotFoundException{
+        ResultSet rs;
+        List<Post> records = new ArrayList<>();
+        try {
+          Statement stmt = makeConnection().createStatement();
+          String query = "Select * from posting where author=\"Doni\"";
           rs = stmt.executeQuery(query);
 
           while(rs.next()){
