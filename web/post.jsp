@@ -4,6 +4,9 @@
     Author     : Rakhmatullah Yoga S
 --%>
 
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.Connection"%>
+<%@page import="source.KoneksiDatabase"%>
 <%@page import="source.Post"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -36,7 +39,19 @@
             <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
 
-        <title>Not a Simple Blog | Apa itu Simple Blog?</title>
+        <%
+            int ID = Integer.valueOf(request.getParameter("var"));
+            String query ="";
+            KoneksiDatabase.setUser("root");
+            KoneksiDatabase.setPassword("");
+            KoneksiDatabase.setDatabase("localhost","simpleblogdb");
+            Connection koneksi = KoneksiDatabase.getKoneksi();
+            Statement statement = koneksi.createStatement();
+            query = "SELECT Tanggal, Judul, Konten FROM postingan WHERE ID="+ID;
+            statement.executeUpdate(query);
+            String Judul = statement.getResultSet().getString("Judul");
+            out.println("<title>Not a Simple Blog | <%" + Judul + "%> </title>");
+        %>
     </head>
     <body class="default">
     <div class="wrapper">
