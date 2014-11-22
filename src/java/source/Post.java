@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.ResultSet;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -59,7 +60,7 @@ public class Post {
             Connection koneksi = KoneksiDatabase.getKoneksi()) {
             Statement statement = koneksi.createStatement();
             //query
-            String queryListPosts = "SELECT * from posts ORDER by date DESC";
+            String queryListPosts = "SELECT * from post ORDER by tanggal DESC";
             //execute query
             ResultSet result = statement.executeQuery(queryListPosts);
             //tulis hasil query
@@ -67,9 +68,19 @@ public class Post {
                 //kosong
                 toHTML = "No posts yet.";
             }
-            else {
-                //ada hasil
-                while (result.next()) {
+            else { //ada hasil
+                //deklarasi variabel
+                int idPost;
+                String judulPost,tanggalPost, kontenPost;
+                Date date;
+                while (result.next()) { //apabila result masih ada
+                    //inisialisasi variabel
+                    idPost = result.getInt("id");
+                    judulPost = result.getString("judul");
+                    kontenPost = result.getString("konten");
+                    date = result.getDate("tanggal");
+                    //ubah menjadi string
+                    tanggalPost = date.toString();
                     toHTML =    
                             "<li class=\"art-list-item\">\n" +
                             "<div class=\"art-list-item-title-and-time\">\n" +
@@ -101,12 +112,12 @@ public class Post {
     
     /**
      * Menambahkan suatu post ke dalam database
-     * @param title judul post
-     * @param date tanggal post
-     * @param content konten post
+     * @param judul judul post
+     * @param tanggal tanggal post
+     * @param konten konten post
      * @throws java.sql.SQLException
      */
-    public void addPost(String title, String date, String content) throws SQLException {
+    public void addPost(String judul, String tanggal, String konten) throws SQLException {
         //login database
         KoneksiDatabase.setUser("root");
         KoneksiDatabase.setPassword("akhfa");
@@ -115,7 +126,7 @@ public class Post {
             Connection koneksi = KoneksiDatabase.getKoneksi()) {
             Statement statement = koneksi.createStatement();
             //query
-            String queryAddPost = "INSERT INTO posts (judul,konten,tanggal) VALUES ('" + title + "', '" + content + "', '" + date + "')";
+            String queryAddPost = "INSERT INTO post (judul,konten,tanggal) VALUES ('" + judul + "', '" + konten + "', '" + tanggal + "')";
             //execute query
             statement.executeUpdate(queryAddPost);
             //tutup koneksi database
@@ -140,7 +151,7 @@ public class Post {
             Connection koneksi = KoneksiDatabase.getKoneksi()) {
             Statement statement = koneksi.createStatement();
             //query
-            String queryPublishPost = "UPDATE posts SET published=1";
+            String queryPublishPost = "UPDATE post SET published=1";
             //execute query
             statement.executeUpdate(queryPublishPost);
             //tutup koneksi database
@@ -154,12 +165,12 @@ public class Post {
     /**
      * Mengubah aspek dari post di database
      * @param post_ID post id di database
-     * @param title input judul baru dari pengguna
-     * @param date input tanggal baru dari pengguna
-     * @param content input konten baru dari pengguna
+     * @param judul judul post
+     * @param tanggal tanggal post
+     * @param konten konten post
      * @throws java.sql.SQLException
      */
-    public void editPost(int post_ID, String title, String date, String content) throws SQLException {
+    public void editPost(int post_ID, String judul, String tanggal, String konten) throws SQLException {
         //login database
         KoneksiDatabase.setUser("root");
         KoneksiDatabase.setPassword("akhfa");
@@ -168,13 +179,13 @@ public class Post {
             Connection koneksi = KoneksiDatabase.getKoneksi()) {
             Statement statement = koneksi.createStatement();
             //query
-            String queryEditTitle = "UPDATE posts SET judul='" + title + "' WHERE post_id=" + post_ID;
-            String queryEditDate = "UPDATE posts SET tanggal='" + date + "' WHERE post_id=" + post_ID;
-            String queryEditContent = "UPDATE posts SET konten='" + content + "' WHERE post_id=" + post_ID;
+            String queryEditJudul = "UPDATE post SET judul='" + judul + "' WHERE post_id=" + post_ID;
+            String queryEditTanggal = "UPDATE post SET tanggal='" + tanggal + "' WHERE post_id=" + post_ID;
+            String queryEditKonten = "UPDATE post SET konten='" + konten + "' WHERE post_id=" + post_ID;
             //execute query
-            statement.executeUpdate(queryEditTitle);
-            statement.executeUpdate(queryEditDate);
-            statement.executeUpdate(queryEditContent);
+            statement.executeUpdate(queryEditJudul);
+            statement.executeUpdate(queryEditTanggal);
+            statement.executeUpdate(queryEditKonten);
             //tutup koneksi database
             koneksi.close();
         }
@@ -197,8 +208,8 @@ public class Post {
             Connection koneksi = KoneksiDatabase.getKoneksi()) {
             Statement statement = koneksi.createStatement();
             //query
-            String queryDeletePost = "DELETE FROM posts WHERE post_id=" + post_ID;
-            String queryDeleteComments = "DELETE FROM comments WHERE post_id=" + post_ID;
+            String queryDeletePost = "DELETE FROM post WHERE post_id=" + post_ID;
+            String queryDeleteComments = "DELETE FROM komentar WHERE post_id=" + post_ID;
             //execute query
             statement.executeUpdate(queryDeletePost);
             statement.executeUpdate(queryDeleteComments);
