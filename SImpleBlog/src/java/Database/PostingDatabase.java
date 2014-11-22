@@ -13,6 +13,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
@@ -23,39 +25,51 @@ import javax.faces.bean.SessionScoped;
 @ManagedBean(name="Posting", eager = true)
 @SessionScoped
 public class PostingDatabase {
-    /**
-     *
-     * @return
-     * @throws java.lang.ClassNotFoundException
-     */
-    public List<Post> getPost() throws ClassNotFoundException{
-      ResultSet rs;
+    public PostingDatabase(){
+    }
+    
+    public Connection makeConnection() throws ClassNotFoundException, SQLException{
         Connection con;
-        List<Post> records = new ArrayList<>();
         Class.forName("com.mysql.jdbc.Driver");
         String url = "jdbc:mysql://localhost/simpleblog";
         String user = "root";
         String password = "";
-      try {   
-        con = DriverManager.getConnection("jdbc:mysql://localhost/simpleblog","root","");
-        Statement stmt = con.createStatement();
-        String query = "Select * from posting";
-        rs = stmt.executeQuery(query);
+        con = DriverManager.getConnection(url,user,password);
+        return con;
+    }
+    
+    public List<Post> getPost() throws ClassNotFoundException{
+        ResultSet rs;
+        List<Post> records = new ArrayList<>();
+        try {
+          Statement stmt = makeConnection().createStatement();
+          String query = "Select * from posting";
+          rs = stmt.executeQuery(query);
 
-        while(rs.next()){
-            Post post = new Post();
-            post.setId(rs.getInt(1));
-            post.setJudul(rs.getString(2));
-            post.setTanggal(rs.getString(3));
-            post.setContent(rs.getString(4));
-            post.setAuthor(rs.getString(5));
-            post.setStatus(rs.getString(6));
-            records.add(post);
-         }
-      } catch (SQLException e) {
-         System.err.println(e);
-      }
-      System.out.println("woooooooooyyy: " );
-      return records;
+          while(rs.next()){
+              Post post = new Post();
+              post.setId(rs.getInt(1));
+              post.setJudul(rs.getString(2));
+              post.setTanggal(rs.getString(3));
+              post.setContent(rs.getString(4));
+              post.setAuthor(rs.getString(5));
+              post.setStatus(rs.getString(6));
+              records.add(post);
+           }
+        } catch (SQLException e) {
+           System.err.println(e);
+        }
+        return records;
    }
+   
+    public void addPost(){
+        try {
+            Statement stmt = makeConnection().createStatement();
+            String query = "INSERT INTO `posting` (`Judul`, `Tanggal`, `Content`, `Author`, `Status`) VALUES (`Doremi`, `1-2-3`, `ini adalah not`, `Doni`, `unpublished`)";
+            stmt.execute(query);
+        } catch (ClassNotFoundException | SQLException e) {
+            System.err.println(e);
+        }        
+    }
+    
 }
