@@ -74,6 +74,10 @@ public class Post {
         }
     }
     
+    /**
+     * Mereturn id post
+     * @return idPost
+     */
     public int getID() {
         return idPost;
     }
