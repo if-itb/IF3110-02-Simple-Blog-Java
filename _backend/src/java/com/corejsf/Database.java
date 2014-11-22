@@ -116,7 +116,13 @@ public class Database {
     }
     
     public void addPost(Post post) throws SQLException, ClassNotFoundException{
-        
+        try{
+            PreparedStatement ps; 
+            Connection con = getConnection();
+            String sql = "INSERT INTO post (id_member, Status,Judul,Tanggal,Konten) VALUES (1,'" + post.getStatus() + "','" + post.getJudul() + "','" + post.getTanggal() + "','" + post.getKonten() + "')";
+            ps = con.prepareStatement(sql);
+            ps.executeUpdate();
+        } catch(SQLException e){}
     }
     
     public void deletePost(Post post) throws SQLException, ClassNotFoundException{
