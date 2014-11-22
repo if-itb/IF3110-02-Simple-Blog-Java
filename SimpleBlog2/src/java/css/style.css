@@ -1,0 +1,32 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Nov 22, 2014, 11:44:11 AM
+    Author     : ASUS
+*/
+
+.authorTable{   
+   border-collapse:collapse;
+   border-bottom:1px solid #000000;
+}
+
+.authorTableHeader{
+   text-align:center;
+   background:none repeat scroll 0 0 #B5B5B5;
+   border-bottom:1px solid #000000;
+   border-top:1px solid #000000;
+   padding:2px;
+}
+
+.authorTableOddRow{
+   text-align:center;
+   background:none repeat scroll 0 0 #FFFFFFF;	
+}
+
+.authorTableEvenRow{
+   text-align:center;
+   background:none repeat scroll 0 0 #D3D3D3;
+}
