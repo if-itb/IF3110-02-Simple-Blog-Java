@@ -8,7 +8,7 @@ package source;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Date;
+import java.sql.ResultSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -45,9 +45,58 @@ public class Post {
     
     /**
      * Menampilkan semua post yang statusnya published
+     * @return toHTML yang akan ditulis di HTML
+     * @throws java.sql.SQLException
      */
-    public void listPosts() {
-        
+    public String listPosts() throws SQLException {
+        //login database
+        KoneksiDatabase.setUser("root");
+        KoneksiDatabase.setPassword("akhfa");
+        KoneksiDatabase.setDatabase("localhost","blog");
+        //inisialisasi string
+        String toHTML = "";
+        try ( //statement
+            Connection koneksi = KoneksiDatabase.getKoneksi()) {
+            Statement statement = koneksi.createStatement();
+            //query
+            String queryListPosts = "SELECT * from posts ORDER by date DESC";
+            //execute query
+            ResultSet result = statement.executeQuery(queryListPosts);
+            //tulis hasil query
+            if (!result.next()) {
+                //kosong
+                toHTML = "No posts yet.";
+            }
+            else {
+                //ada hasil
+                while (result.next()) {
+                    toHTML =    
+                            "<li class=\"art-list-item\">\n" +
+                            "<div class=\"art-list-item-title-and-time\">\n" +
+                            "<h2 class=\"art-list-title\"><?php echo '<a href=\"post.php?id='.$row['id'].'\">'.$row['title'].'</a>'; ?>\n" +
+                            "<div class=\"art-list-time\"><?php echo ''.$row['date'].''; ?></div>\n" +
+                            "<div class=\"art-list-time\"><span style=\"color:#F40034;\">&#10029;</span> Featured</div>\n" +
+                            "</div>\n" +
+                            "<p><?php $body = substr($row['body'], 0, 100);\n" +
+                            "echo nl2br($body);\n" +
+                            "if (strlen($row['body']) > 100) {\n" +
+                            "echo '... <a href=\"post.php?id='.$row['id'].'\">Read More</a><br/>';\n" +
+                            "}\n" +
+                            "?></p>\n" +
+                            "<p>\n" +
+                            "<?php echo '<a href=\"edit_post.php?id='.$row['id'].'\">Edit</a>' ?> | <?php echo '<a href=\"javascript:confirmPostDelete('.$row['id'].')\">Hapus</a>'; ?>\n" +
+                            "</p>\n" +
+                            "</li>";
+                }
+            }
+            //tutup koneksi database
+            koneksi.close();
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        //return string
+        return toHTML;
     }
     
     /**
@@ -66,7 +115,7 @@ public class Post {
             Connection koneksi = KoneksiDatabase.getKoneksi()) {
             Statement statement = koneksi.createStatement();
             //query
-            String queryAddPost = "INSERT INTO posts (title,body,date) VALUES ('" + title + "', '" + content + "', '" + date + "')";
+            String queryAddPost = "INSERT INTO posts (judul,konten,tanggal) VALUES ('" + title + "', '" + content + "', '" + date + "')";
             //execute query
             statement.executeUpdate(queryAddPost);
             //tutup koneksi database
@@ -119,9 +168,9 @@ public class Post {
             Connection koneksi = KoneksiDatabase.getKoneksi()) {
             Statement statement = koneksi.createStatement();
             //query
-            String queryEditTitle = "UPDATE posts SET title='" + title + "' WHERE post_id=" + post_ID;
-            String queryEditDate = "UPDATE posts SET date='" + date + "' WHERE post_id=" + post_ID;
-            String queryEditContent = "UPDATE posts SET content='" + content + "' WHERE post_id=" + post_ID;
+            String queryEditTitle = "UPDATE posts SET judul='" + title + "' WHERE post_id=" + post_ID;
+            String queryEditDate = "UPDATE posts SET tanggal='" + date + "' WHERE post_id=" + post_ID;
+            String queryEditContent = "UPDATE posts SET konten='" + content + "' WHERE post_id=" + post_ID;
             //execute query
             statement.executeUpdate(queryEditTitle);
             statement.executeUpdate(queryEditDate);
