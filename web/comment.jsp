@@ -18,7 +18,8 @@
     </head>
     <body>
         <%
-            int IdPost = Integer.valueOf(request.getParameter("var"));
+            int IdPost = Integer.valueOf(request.getParameter("id"));
+            System.out.println(IdPost);
             out.println(Komentar.LoadComment(IdPost));
         %>
     </body>
