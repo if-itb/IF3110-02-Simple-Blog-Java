@@ -20,6 +20,8 @@ import java.util.logging.Logger;
 public class User {
     private String username;
     private String password;
+    private String nama;
+    private String email;
     private String role;
     
     /**
@@ -37,11 +39,15 @@ public class User {
      * Untuk membuat user baru, maka attribute dari user diisi semua terlebih dulu
      * @param _username Username dari user
      * @param _password Password dari user
+     * @param _nama Nama user
+     * @param _email Email user
      * @param _role Role dari user
      */
-    public User(String _username, String _password, String _role){
+    public User(String _username, String _password, String _nama, String _email, String _role){
         username = _username;
         password = _password;
+        nama = _nama;
+        email = _email;
         role = _role;
     }
     
@@ -63,6 +69,26 @@ public class User {
     public String getPassword()
     {
         return password;
+    }
+    
+    public void setNama(String _nama)
+    {
+        nama = _nama;
+    }
+    
+    public String getNama()
+    {
+        return nama;
+    }
+    
+    public void setEmail(String _email)
+    {
+        email = _email;
+    }
+    
+    public String getEmail()
+    {
+        return email;
     }
     
     public void setRole(String _role)
@@ -176,11 +202,13 @@ public class User {
         KoneksiDatabase.setPassword("akhfa");
         KoneksiDatabase.setDatabase("localhost","blog");
         Connection koneksi = KoneksiDatabase.getKoneksi();
-        String query = "INSERT INTO user VALUES (?, ?, ?)";
+        String query = "INSERT INTO user VALUES (?, ?, ?, ?, ?)";
         try (PreparedStatement preStat = koneksi.prepareStatement(query)) {
             preStat.setString(1, username);
             preStat.setString(2, password);
-            preStat.setString(3, role);
+            preStat.setString(3, nama);
+            preStat.setString(4, email);
+            preStat.setString(5, role);
             
             preStat.executeUpdate();
             preStat.close();
@@ -202,7 +230,7 @@ public class User {
                 System.out.println("gagal login");
             }
             
-            User kedua = new User("akhfa2", "akhfa2", "admin");
+            User kedua = new User("akhfa3", "akhfa2", "namaAkhfa","akhmadfakhoni@gmail.com","admin");
             kedua.masukDatabase();
             
         } catch (SQLException ex) {
