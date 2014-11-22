@@ -26,14 +26,14 @@ public class Komentar extends Post {
      * @param ID 
      * @throws java.sql.SQLException 
      */
-    public void AddComment(int ID) throws SQLException {
+    public static void AddComment(int ID) throws SQLException {
         //login database
         KoneksiDatabase.setUser("root");
         KoneksiDatabase.setPassword("");
         KoneksiDatabase.setDatabase("localhost","simpleblogdb");
         Connection koneksi = KoneksiDatabase.getKoneksi();
-        Statement statement = koneksi.createStatement();
-        String QueryAddComment = "";
+        //Statement statement = koneksi.createStatement();
+        //String QueryAddComment = "";
     }
     
     public String GetComment() {
@@ -44,5 +44,9 @@ public class Komentar extends Post {
     }
     public String GetEmail() {
         return Email;
+    }
+    
+    public static void main(String[] args) throws SQLException {
+        Komentar.AddComment(31);
     }
 }
