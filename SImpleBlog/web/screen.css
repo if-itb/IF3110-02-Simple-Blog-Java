@@ -413,6 +413,7 @@ div.cover > img {
   font-size: 26px;
   line-height: 26px;
   font-weight: 700;
+  width: 300px;
 }
 .art-list-item-title-and-time {
   float: left;

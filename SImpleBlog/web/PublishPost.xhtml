@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <head>
+        <link type="text/css" rel="stylesheet" href="screen.css"/>
+        <title>Publish Post</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <h:body class="default">
+<div class="wrapper">
+
+<nav class="nav">
+    <a style="border:none;" id="logo" href="index.html"><h1>Simple<span>-</span>Blog</h1></a>
+    <ul class="nav-primary">
+        <li>
+            <h:form>
+            You are logged in as <u><h:commandLink action="#" value="Admin"></h:commandLink></u>
+            </h:form>
+        </li>
+    </ul>
+</nav>
+
+<div id="home">
+    
+    <div class="posts">
+        <nav class="art-list">
+          <ul class="art-list-body">
+              <c:forEach items="#{Publishpost.unpublishedPost}" var="post">
+                <li class="art-list-item">
+                    <div class="art-list-item-title-and-time">
+                        <h2 class="art-list-title"><a href="post.html">#{post.judul}</a></h2>
+                        <div class="art-list-time">By #{post.author}</div>
+                        <div class="art-list-time">#{post.tanggal}</div>
+                    </div>
+                    <p>#{post.content} &hellip;</p>
+                    <p>
+                      <a href="#">Edit</a> | <a href="#">Hapus</a>
+                    </p>
+                </li>
+              </c:forEach>
+          </ul>
+        </nav>
+    </div>
+</div>
+
+<footer class="footer">
+    <div class="back-to-top"><a href=""> Back to top</a>
+    </div>
+    <!-- <div class="footer-nav"><p></p></div> -->
+    <div class="psi">
+        <h:form>
+            <h:commandLink action="#{Posting.addPost}" value="Logout" />
+        </h:form>
+    </div>
+    <aside class="offsite-links"> Tubes IF3110 /
+        <a class="rss-link" href="#rss">RSS</a> /
+        <br/>
+        <a class="twitter-link" href="#">Mario Filino</a> /
+        <a class="twitter-link" href="#">Rikysamuel</a> /
+        <a class="twitter-link" href="#">Qin Shi Huang, Bi Xia</a> /
+        <br/>
+        
+    </aside>
+</footer>
+
+</div>
+    </h:body>
+</html>
