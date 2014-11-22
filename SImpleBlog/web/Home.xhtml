@@ -9,7 +9,7 @@ and open the template in the editor.
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <head>
-        <link type="text/css" rel="stylesheet" href="screen.css"/>
+        <link type="text/css" rel="stylesheet" href="assets\screen.css"/>
         <title>Simple Blog</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </head>
@@ -17,15 +17,17 @@ and open the template in the editor.
 <div class="wrapper">
 
 <nav class="nav">
-    <a style="border:none;" id="logo" href="index.html"><h1>Simple<span>-</span>Blog</h1></a>
+    <h:form>
+        <h:commandLink action="Home" ><h1 style="border:none;" class="logo">Simple<span>-</span>Blog</h1></h:commandLink>
+    </h:form>
     <ul class="nav-primary">
         <h:form>
             <li>
-                <input type="text" name="username" placeholder="Username"/>&nbsp;<input type="password" name="password" placeholder="Password"/>&nbsp;
-                <h:commandButton action="Owner?faces-redirect=true" value="Login!" />
+                <input type="text" name="login_username" placeholder="Username"/>&nbsp;<input type="password" name="login_password" placeholder="Password"/>&nbsp;
+                <h:commandButton value="Login!" action="#{Posting.Login}"/>
             </li><br/>
             <li>Don't have an account? You can
-                <h:commandLink action="#" value="register" /> here.
+                <h:commandLink action="Register?faces-redirect=true" value="register" /> here.
             </li>
         </h:form>
     </ul>
