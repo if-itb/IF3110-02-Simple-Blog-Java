@@ -9,7 +9,7 @@ and open the template in the editor.
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <head>
-        <link type="text/css" rel="stylesheet" href="screen.css"/>
+        <link type="text/css" rel="stylesheet" href="assets\screen.css"/>
         <title>Simple Blog</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </head>
@@ -22,7 +22,7 @@ and open the template in the editor.
         <h:form>
             <li>
                 <input type="text" name="username" placeholder="Username"/>&nbsp;<input type="password" name="password" placeholder="Password"/>&nbsp;
-                <h:commandButton action="Owner?faces-redirect=true" value="Login!" />
+                <h:commandButton action="Role/Owner?faces-redirect=true" value="Login!" />
             </li><br/>
             <li>Don't have an account? You can
                 <h:commandLink action="#" value="register" /> here.
