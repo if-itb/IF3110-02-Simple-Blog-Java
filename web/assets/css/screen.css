@@ -106,14 +106,10 @@ header#teaser h1 {
 /* Links
 ================================================== */
 a {
-  color: #F40034;
   text-decoration: none;
   -webkit-transition: color .2s ease-in-out;
      -moz-transition: color .2s ease-in-out;
           transition: color .2s ease-in-out;
-}
-a:hover {
-  color: #F40034;
 }
 
 /*  Layout
@@ -843,13 +839,19 @@ hr.featured-article:after {
   height: 90px;
 }
 
-#contact-area textarea:focus, #contact-area input:focus {
+#contact-area textarea:focus, #contact-area input:focus, #contact-area select:focus {
   border: 2px solid #900;
 }
 
 #contact-area input.submit-button {
   width: 100px;
   
+}
+
+#contact-area select {
+	width : 100px;
+	padding : 5px;
+	border: 2px solid #ccc;
 }
 
 label {
@@ -970,4 +972,54 @@ label {
 	font-family: "proxima-nova", "helvetica neue", "helvetica", sans-serif;
 	font-size : 15px;
 	color : #3E3E33;
+}
+
+.crudContaier {
+	height : 500px;
+}
+
+.navManagement {
+	font-family: "proxima-nova", "helvetica neue", "helvetica", sans-serif;
+	margin-left : 0px;
+	position : absolute;
+	top : calc(16%);
+	left: calc(13%);
+	z-index : 2;
+}
+.navManagement ul
+{
+	list-style-type	: none;
+	margin			: 0;
+	padding-left	: 0;
+}
+
+.navManagement li
+{
+	display		: inline;
+	float		: left;
+	padding 	: 8px;
+	padding-left : 20px;
+}
+
+.navManagement a,
+.navManagement a:focus,
+.navManagement a:visited,
+.navManagement a:hover,
+.navManagement a:active {
+	color : #000000;
+	text-decoration : none; 
+}
+
+.navManagement a:hover {
+	color : #FF9933;
+}
+
+.form {
+	margin-top : 200px;
+	margin-left : 300px;
+	margin-bottom : 40px;
+}
+
+.userdata {
+	margin-bottom : 40px;
 }
