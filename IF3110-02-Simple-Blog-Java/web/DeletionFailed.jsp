@@ -1,7 +1,7 @@
 <%-- 
     Document   : DeletionFailed
     Created on : Nov 23, 2014, 6:23:16 PM
-    Author     : Asus
+    Author     : Asep Saepudin
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

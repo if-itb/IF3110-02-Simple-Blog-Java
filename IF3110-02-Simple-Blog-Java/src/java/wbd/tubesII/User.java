@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
  *
- * @author Asus
+ * @author Asep Saepudin
  */
 public class User {
     private int id;

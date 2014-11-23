@@ -14,7 +14,7 @@ import javax.servlet.http.Cookie;
 
 /**
  *
- * @author Asus
+ * @author Asep Saepudin
  */
 @WebServlet(name = "LoginServlet", urlPatterns = {"/Login"})
 public class LoginServlet extends HttpServlet {

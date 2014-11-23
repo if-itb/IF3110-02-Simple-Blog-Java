@@ -1,7 +1,7 @@
 <%-- 
     Document   : EditUser
     Created on : Nov 23, 2014, 6:41:33 PM
-    Author     : Asus
+    Author     : Asep Saepudin
 --%>
 
 <%@page import="wbd.tubesII.User"%>

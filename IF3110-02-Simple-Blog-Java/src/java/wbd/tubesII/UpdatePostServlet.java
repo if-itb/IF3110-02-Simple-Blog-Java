@@ -2,6 +2,11 @@ package wbd.tubesII;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URLDecoder;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,8 +17,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Asep Saepudin
  */
-@WebServlet(name = "RegisterServlet", urlPatterns = {"/Register"})
-public class RegisterServlet extends HttpServlet {
+@WebServlet(name = "UpdatePost", urlPatterns = {"/UpdatePost"})
+public class UpdatePostServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,10 +37,10 @@ public class RegisterServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet RegisterServlet</title>");            
+            out.println("<title>Servlet UpdatePostServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet RegisterServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet UpdatePostServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -54,13 +59,20 @@ public class RegisterServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        if (request.getSession().getAttribute("currentUser") == null ||
-                !((User)request.getSession().getAttribute("currentUser")).getRole().equals("Admin")) {
+        String id = request.getParameter("id");
+        
+        if (request.getSession().getAttribute("currentUser") == null) {        
             response.sendRedirect("Login.jsp");
-        } else {            
-            response.sendRedirect("Register.jsp");            
+        } else {                   
+            Post editedPost = PostDAO.getPost(Integer.valueOf(id));
+            if (editedPost != null) {
+                request.getSession().setAttribute("editedPost", editedPost);
+                response.sendRedirect("EditPost.jsp");            
+            } else {
+                response.sendRedirect("Login.jsp");
+            }
         }
-        processRequest(request, response);
+        processRequest(request, response);        
     }
 
     /**
@@ -75,20 +87,24 @@ public class RegisterServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        User user = new User();
-        user.setEmail(request.getParameter("email"));
-        user.setPassword(request.getParameter("password"));
-        user.setName(request.getParameter("name"));
-        user.setRole(request.getParameter("role"));
-        
-        if (UserDAO.register(user)) {
-            request.getSession().setAttribute("registerUser", "User dengan email " + request.getParameter("email") + " berhasil ditambahkan");
-            response.sendRedirect("SuccessfullyAdded.jsp");
-        } else {
-            request.getSession().setAttribute("registerUser", "Email telah digunakan");
-            response.sendRedirect("RegisterFailed.jsp");                
+        try {            
+            Post post = new Post();
+            post.setId(Integer.valueOf(request.getParameter("id")));
+            post.setJudul(request.getParameter("judul"));
+            post.setTanggal(new SimpleDateFormat("MM/dd/yyyy").parse(request.getParameter("tanggal")));
+            post.setKonten(request.getParameter("konten"));
+            post.setStatus(request.getParameter("status"));
+            
+            if (!PostDAO.update(post)) {
+                 request.getSession().setAttribute("UpdatePostStatus", "Post dengan judul \"" + request.getParameter("judul") + "\" gagal di-update");
+            } else {
+                request.getSession().setAttribute("UpdatePostStatus", "Post dengan judul \"" + request.getParameter("judul") + "\" berhasil di-update");
+            }
+            response.sendRedirect("UpdatePostStatus.jsp");
+            processRequest(request, response);
+        } catch (ParseException ex) {
+            Logger.getLogger(AddNewPostServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-        processRequest(request, response);
     }
 
     /**

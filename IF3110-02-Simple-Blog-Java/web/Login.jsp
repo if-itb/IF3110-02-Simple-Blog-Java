@@ -1,7 +1,7 @@
 <%-- 
     Document   : LoginPage
     Created on : Nov 20, 2014, 8:30:01 PM
-    Author     : Asus
+    Author     : Asep Saepudin
 --%>
 
 <%@page import="org.apache.jasper.tagplugins.jstl.ForEach"%>

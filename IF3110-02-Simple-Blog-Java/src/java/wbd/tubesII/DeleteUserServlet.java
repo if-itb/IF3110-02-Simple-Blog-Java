@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Asus
+ * @author Asep Saepudin
  */
 @WebServlet(name = "DeleteUser", urlPatterns = {"/DeleteUser"})
 public class DeleteUserServlet extends HttpServlet {

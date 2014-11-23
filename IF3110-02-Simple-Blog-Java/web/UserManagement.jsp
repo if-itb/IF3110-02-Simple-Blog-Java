@@ -1,7 +1,7 @@
 <%-- 
     Document   : UserManagement
     Created on : Nov 23, 2014, 5:12:43 PM
-    Author     : Asus
+    Author     : Asep Saepudin
 --%>
 
 <%@page import="wbd.tubesII.UserDAO"%>
@@ -23,9 +23,9 @@
                 response.setHeader("Location", "Login.jsp"); 
             }        
             if (!currentUser.getRole().equals("Admin")) {
-                request.getSession().setAttribute("adminOnly", "Psst! Halaman khusus Admin");
+                request.getSession().setAttribute("forbidden", "Psst! Halaman khusus Admin");
                 response.setStatus(response.SC_MOVED_TEMPORARILY);
-                response.setHeader("Location", "AdminOnly.jsp"); 
+                response.setHeader("Location", "Uuuppssss.jsp"); 
             }
         %>
         

@@ -1,7 +1,7 @@
 <%-- 
     Document   : Blog.jsp
     Created on : Nov 23, 2014, 7:21:51 PM
-    Author     : Asus
+    Author     : Asep Saepudin
 --%>
 
 <%@page import="wbd.tubesII.User"%>

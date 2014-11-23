@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Asep Saepudin
  */
-@WebServlet(name = "RegisterServlet", urlPatterns = {"/Register"})
-public class RegisterServlet extends HttpServlet {
+@WebServlet(name = "DeletePost", urlPatterns = {"/DeletePost"})
+public class DeletePostServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,10 +32,10 @@ public class RegisterServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet RegisterServlet</title>");            
+            out.println("<title>Servlet DeletePostServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet RegisterServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet DeletePostServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -53,14 +53,20 @@ public class RegisterServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String id = request.getParameter("id");
         
-        if (request.getSession().getAttribute("currentUser") == null ||
-                !((User)request.getSession().getAttribute("currentUser")).getRole().equals("Admin")) {
+        if (request.getSession().getAttribute("currentUser") == null) {
             response.sendRedirect("Login.jsp");
-        } else {            
-            response.sendRedirect("Register.jsp");            
+        } else {
+            if (!PostDAO.delete(Integer.valueOf(id))) {
+                request.getSession().setAttribute("DeletePostStatus", "Post dengan id " + id + " gagal dihapus");
+                response.sendRedirect("DeletePostStatus.jsp");
+            } else {
+                request.getSession().setAttribute("DeletePostStatus", "Post dengan id" + id + " berhasil dihapus");
+                response.sendRedirect("DeletePostStatus.jsp");
+            }
         }
-        processRequest(request, response);
+        processRequest(request, response);        
     }
 
     /**
@@ -74,20 +80,6 @@ public class RegisterServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        User user = new User();
-        user.setEmail(request.getParameter("email"));
-        user.setPassword(request.getParameter("password"));
-        user.setName(request.getParameter("name"));
-        user.setRole(request.getParameter("role"));
-        
-        if (UserDAO.register(user)) {
-            request.getSession().setAttribute("registerUser", "User dengan email " + request.getParameter("email") + " berhasil ditambahkan");
-            response.sendRedirect("SuccessfullyAdded.jsp");
-        } else {
-            request.getSession().setAttribute("registerUser", "Email telah digunakan");
-            response.sendRedirect("RegisterFailed.jsp");                
-        }
         processRequest(request, response);
     }
 

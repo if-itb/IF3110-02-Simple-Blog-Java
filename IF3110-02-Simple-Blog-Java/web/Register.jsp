@@ -1,7 +1,7 @@
 <%-- 
     Document   : register
     Created on : Nov 20, 2014, 10:35:52 PM
-    Author     : Asus
+    Author     : Asep Saepudin
 --%>
 
 <%@page import="wbd.tubesII.User"%>

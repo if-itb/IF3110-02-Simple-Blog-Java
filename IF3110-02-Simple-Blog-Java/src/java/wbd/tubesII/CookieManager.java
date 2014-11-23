@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Asus
+ * @author Asep Saepudin
  */
 public class CookieManager {
     public static String getCookieValue(HttpServletRequest request, String name) {

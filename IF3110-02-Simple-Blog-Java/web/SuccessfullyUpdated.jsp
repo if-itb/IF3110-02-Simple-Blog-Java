@@ -1,7 +1,7 @@
 <%-- 
     Document   : SuccessfullyUpdated
     Created on : Nov 23, 2014, 7:04:52 PM
-    Author     : Asus
+    Author     : Asep Saepudin
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

@@ -1,13 +1,13 @@
 <%-- 
     Document   : UpdateFailed
     Created on : Nov 23, 2014, 7:05:28 PM
-    Author     : Asus
+    Author     : Asep Saepudin
 --%>
 
 <%-- 
     Document   : registerfailed
     Created on : Nov 20, 2014, 10:52:29 PM
-    Author     : Asus
+    Author     : Asep Saepudin
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

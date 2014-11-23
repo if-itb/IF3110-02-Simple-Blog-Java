@@ -1,16 +1,17 @@
 package wbd.tubesII;
 
-import java.sql.Date;
+import java.util.Date;
 
 /**
  *
- * @author Asus
+ * @author Asep Saepudin
  */
 public class Post {
     private int id;
     private String judul;
     private Date tanggal;
     private String konten;
+    private String status;
 
     public int getId() {
         return id;
@@ -43,4 +44,12 @@ public class Post {
     public void setKonten(String konten) {
         this.konten = konten;
     }        
+    
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 }

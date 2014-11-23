@@ -2,6 +2,7 @@ package wbd.tubesII;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URLDecoder;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,8 +13,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Asep Saepudin
  */
-@WebServlet(name = "RegisterServlet", urlPatterns = {"/Register"})
-public class RegisterServlet extends HttpServlet {
+@WebServlet(name = "PublishPost", urlPatterns = {"/PublishPost"})
+public class PublishPostServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,10 +33,10 @@ public class RegisterServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet RegisterServlet</title>");            
+            out.println("<title>Servlet PublishPostServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet RegisterServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet PublishPostServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -53,12 +54,19 @@ public class RegisterServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String id = request.getParameter("id");
         
         if (request.getSession().getAttribute("currentUser") == null ||
-                !((User)request.getSession().getAttribute("currentUser")).getRole().equals("Admin")) {
+                ((User)request.getSession().getAttribute("currentUser")).getRole().equals("Owner")) {
             response.sendRedirect("Login.jsp");
-        } else {            
-            response.sendRedirect("Register.jsp");            
+        } else {
+            if (!PostDAO.publish(Integer.valueOf(id))) {
+                request.getSession().setAttribute("PublishPostStatus", "Post dengan id " + id + " gagal di-publish");
+                response.sendRedirect("PublishPostStatus.jsp");
+            } else {
+                request.getSession().setAttribute("PublishPostStatus", "Post dengan id" + id + " berhasil di-publis");
+                response.sendRedirect("PublishPostStatus.jsp");
+            }
         }
         processRequest(request, response);
     }
@@ -74,20 +82,6 @@ public class RegisterServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        User user = new User();
-        user.setEmail(request.getParameter("email"));
-        user.setPassword(request.getParameter("password"));
-        user.setName(request.getParameter("name"));
-        user.setRole(request.getParameter("role"));
-        
-        if (UserDAO.register(user)) {
-            request.getSession().setAttribute("registerUser", "User dengan email " + request.getParameter("email") + " berhasil ditambahkan");
-            response.sendRedirect("SuccessfullyAdded.jsp");
-        } else {
-            request.getSession().setAttribute("registerUser", "Email telah digunakan");
-            response.sendRedirect("RegisterFailed.jsp");                
-        }
         processRequest(request, response);
     }
 

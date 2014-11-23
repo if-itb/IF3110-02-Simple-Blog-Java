@@ -1,7 +1,7 @@
 <%-- 
     Document   : logout
     Created on : Nov 20, 2014, 11:14:08 PM
-    Author     : Asus
+    Author     : Asep Saepudin
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

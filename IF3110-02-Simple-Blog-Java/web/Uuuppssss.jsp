@@ -1,7 +1,7 @@
 <%-- 
     Document   : AdminOnly
     Created on : Nov 23, 2014, 5:10:08 PM
-    Author     : Asus
+    Author     : Asep Saepudin
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -20,7 +20,7 @@
         %>
         
         <h1>
-        Error: <%= (String)request.getSession().getAttribute("adminOnly") %>     
+        Uupppss: <%= (String)request.getSession().getAttribute("forbidden") %>     
         </h1>
     </body>
 </html>

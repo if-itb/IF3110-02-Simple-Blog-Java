@@ -2,7 +2,7 @@ package wbd.tubesII;
 
 /**
  *
- * @author Asus
+ * @author Asep Saepudin
  */
 
 import java.sql.Connection;
@@ -315,5 +315,5 @@ public class UserDAO {
             }                        
         }
         return true;
-    }
+    }    
 }
