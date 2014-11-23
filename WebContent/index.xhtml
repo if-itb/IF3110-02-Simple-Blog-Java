@@ -13,12 +13,16 @@
 <h:body>
 	<h1>Simple-Blog</h1>
 	<ul>
-	<ui:repeat value="#{databaseObject.postList}" var="item">
-	<li>Judul: #{item.title}</li>
-	<li>Waktu: #{item.date}</li>
-	<li>Isi: #{item.content}</li>
-	</ui:repeat>
+		<ui:repeat value="#{databaseObject.postList}" var="item">
+			<li>Judul: #{item.title}</li>
+			<li>Waktu: #{item.date}</li>
+			<li>Isi: #{item.content}</li>
+		</ui:repeat>
 	</ul>
+	<h:form>
+		<h:commandButton action="add_post" value="Add Post" />
+	</h:form>
 	
+
 </h:body>
 </html>

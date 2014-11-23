@@ -20,6 +20,9 @@
 		<param-name>javax.faces.STATE_SAVING_METHOD</param-name>
 		<param-value>client</param-value>
 	</context-param>
+	<session-config>
+		<session-timeout>-1</session-timeout>
+	</session-config>
 	<welcome-file-list>
 		<welcome-file>index.jsf</welcome-file>
 		<welcome-file>welcome.jsf</welcome-file>

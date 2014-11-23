@@ -26,7 +26,7 @@ public class DatabaseUtility {
 			while (rs.next()) {
 				if (rs.getString(2).equals(username)
 						&& rs.getString(3).equals(password))
-					result = new UserDetails(rs.getString(4), rs.getString(5));
+					result = new UserDetails(rs.getString(4), rs.getString(5), rs.getInt(1));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
