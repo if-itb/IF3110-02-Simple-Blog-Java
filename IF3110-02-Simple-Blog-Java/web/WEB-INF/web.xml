@@ -19,7 +19,7 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>faces/Login</welcome-file>
+        <welcome-file>faces/PublishedPosts</welcome-file>
     </welcome-file-list>
     <listener>
         <listener-class>

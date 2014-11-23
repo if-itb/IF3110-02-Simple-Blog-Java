@@ -56,7 +56,7 @@ public class UnpublishedPostsServlet extends HttpServlet {
             throws ServletException, IOException {
         if (request.getSession().getAttribute("currentUser") == null ||
                 ((User)request.getSession().getAttribute("currentUser")).getPassword().equals("Owner")) {
-            response.sendRedirect("Login.jsp");
+            response.sendRedirect("PublishedPosts");
         } else {
             ArrayList<Post> unpublishedPosts = PostDAO.getAllUnpublishedPosts();
             request.getSession().setAttribute("allUnpublishedPosts", unpublishedPosts);

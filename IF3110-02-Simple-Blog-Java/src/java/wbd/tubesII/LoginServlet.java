@@ -82,24 +82,9 @@ public class LoginServlet extends HttpServlet {
                 response.sendRedirect("Login.jsp");
             } else {
                 session.setAttribute("currentUser", user);
-                response.sendRedirect("UserLogged.jsp");
+                response.sendRedirect("PublishedPosts");
             }
-            
-//            String emailUser = "";
-//            Cookie[] cookies = request.getCookies();
-//            for (Cookie cookie : cookies) {
-//                if (cookie.getName().equals("wbdahey")) {
-//                    emailUser = cookie.getValue();
-//                    break;
-//                }
-//            }
-            
-//            if (!emailUser.equals("")) {
-//                request.getSession().setAttribute("currentUser", user);
-//                response.sendRedirect("UserLogged.jsp");
-//            } else {
-//                response.sendRedirect("Login.jsp");
-//            }                
+              
             processRequest(request, response);
         } catch (Exception e) {
             e.printStackTrace();
@@ -132,9 +117,11 @@ public class LoginServlet extends HttpServlet {
                 request.getSession().setAttribute("currentUser", user);
 //                this.getServletConfig().getServletContext().setAttribute("currentUser", user);
                         
-                response.sendRedirect("UserLogged.jsp");
+                response.sendRedirect("PublishedPosts");
             } else if (!user.getValid()) {                
-                response.sendRedirect("InvalidLogin.jsp");
+                request.getSession().setAttribute("forbidden", "Username/Password tidak valid");
+                response.setStatus(response.SC_MOVED_TEMPORARILY);
+                response.sendRedirect("Uuuppssss.jsp");
             }
             processRequest(request, response);
         } catch (Exception e) {

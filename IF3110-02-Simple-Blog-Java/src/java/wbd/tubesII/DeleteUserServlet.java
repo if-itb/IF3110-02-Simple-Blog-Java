@@ -60,14 +60,14 @@ public class DeleteUserServlet extends HttpServlet {
         if (request.getSession().getAttribute("currentUser") == null ||
                 !((User)request.getSession().getAttribute("currentUser")).getRole().equals("Admin") ||
                 email.equals("") || email == null) {        
-            response.sendRedirect("Login.jsp");
+            response.sendRedirect("PublishedPosts");
         } else {
             if (!UserDAO.delete(email)) {
                 request.getSession().setAttribute("deleteUser", "User dengan email " + email + " tidak ditemukan");
-                response.sendRedirect("DeletionFailed.jsp");
+                response.sendRedirect("DeletionStatus.jsp");
             } else {
                 request.getSession().setAttribute("deleteUser", "User dengan email " + email + " berhasil dihapus");
-                response.sendRedirect("SuccessfullyDeleted.jsp");
+                response.sendRedirect("DeletionStatus.jsp");
             }
         }
         processRequest(request, response);

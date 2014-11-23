@@ -1,12 +1,6 @@
 <%-- 
-    Document   : DeletePostStatus
-    Created on : Nov 23, 2014, 10:08:40 PM
-    Author     : Asep Saepudin
---%>
-
-<%-- 
-    Document   : AddNewPostStatus
-    Created on : Nov 23, 2014, 8:41:53 PM
+    Document   : registerfailed
+    Created on : Nov 20, 2014, 10:52:29 PM
     Author     : Asep Saepudin
 --%>
 
@@ -18,16 +12,15 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="assets/css/screen.css" />
         <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
-        <title>Simple Blog | Delete Post</title>
-    </head>
-
-        <%            
-            User currentUser = (User)request.getSession().getAttribute("currentUser");
-            if (currentUser == null) {            
+        <title>Simple Blog | User Management</title>
+    </head>    
+        <%
+            if (request.getSession().getAttribute("currentUser") == null
+                    || !((User)request.getSession().getAttribute("currentUser")).getRole().equals("Admin")) {
                 response.setStatus(response.SC_MOVED_TEMPORARILY);
                 response.setHeader("Location", "PublishedPosts"); 
-            }                    
-        %>    
+            }            
+        %>        
 <body class="default">
 <div class="wrapper">
 
@@ -43,8 +36,8 @@
     <header class="art-header">
         <div class="art-header-inner" style="margin-top: 0px; opacity: 1;">
             <time class="art-time">Status</time>
-            <h3 class="art-title"><%= (String)request.getSession().getAttribute("DeletePostStatus") %></h3>
-            <p class="art-subtitle"><a href="PublishedPosts">Continue...</a></p>
+            <h3 class="art-title"><%= (String)request.getSession().getAttribute("registerUser") %></h3>
+            <p class="art-subtitle"><a href="UserManagement">Continue...</a></p>
         </div>
     </header>
 
@@ -71,6 +64,5 @@
 </footer>
 
 </div>
-</body>
+</body>        
 </html>
-

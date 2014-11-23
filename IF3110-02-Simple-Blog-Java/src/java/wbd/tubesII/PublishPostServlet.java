@@ -58,13 +58,13 @@ public class PublishPostServlet extends HttpServlet {
         
         if (request.getSession().getAttribute("currentUser") == null ||
                 ((User)request.getSession().getAttribute("currentUser")).getRole().equals("Owner")) {
-            response.sendRedirect("Login.jsp");
+            response.sendRedirect("PublishedPosts");
         } else {
             if (!PostDAO.publish(Integer.valueOf(id))) {
-                request.getSession().setAttribute("PublishPostStatus", "Post dengan id " + id + " gagal di-publish");
+                request.getSession().setAttribute("PublishPostStatus", "Post (id = " + id + ") tidak berhasil di-publish");
                 response.sendRedirect("PublishPostStatus.jsp");
             } else {
-                request.getSession().setAttribute("PublishPostStatus", "Post dengan id" + id + " berhasil di-publis");
+                request.getSession().setAttribute("PublishPostStatus", "Post (id = " + id + ") berhasil di-publish");
                 response.sendRedirect("PublishPostStatus.jsp");
             }
         }

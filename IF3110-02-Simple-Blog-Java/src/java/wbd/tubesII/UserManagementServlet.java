@@ -57,7 +57,7 @@ public class UserManagementServlet extends HttpServlet {
         
         if (request.getSession().getAttribute("currentUser") == null ||
                 !((User)request.getSession().getAttribute("currentUser")).getRole().equals("Admin")) {
-            response.sendRedirect("Login.jsp");
+            response.sendRedirect("PublishedPosts");
         } else {
             ArrayList<User> users = UserDAO.getAllUsers();
             request.getSession().setAttribute("allUsers", users);

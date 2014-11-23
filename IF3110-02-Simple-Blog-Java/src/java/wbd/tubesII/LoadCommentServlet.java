@@ -51,9 +51,10 @@ public class LoadCommentServlet extends HttpServlet {
             String name = komentar.getName();
             String date = komentar.getTanggal().toString();
             String isiKomentar = komentar.getKomentar();
-            sb.append("Nama: " + name + "<br>");
-            sb.append("Tanggal: " + date + "<br>");
-            sb.append("Komentar: " + isiKomentar + "<br><br>");
+//            sb.append("Nama: " + name + "<br>");
+//            sb.append("Tanggal: " + date + "<br>");
+//            sb.append("Komentar: " + isiKomentar + "<br><br>");
+            sb.append("<li class='art-list-item'><div class='art-list-item-title-and-time'><h2 class='art-list-title'><a href='#'>"+name+"</a></h2><div class='art-list-time'>"+date+"</div></div><p>"+isiKomentar+"</p></li>");
         }        
         response.setContentType("text/html");  
         response.setCharacterEncoding("UTF-8"); 

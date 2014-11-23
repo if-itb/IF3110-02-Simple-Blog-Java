@@ -56,13 +56,13 @@ public class DeletePostServlet extends HttpServlet {
         String id = request.getParameter("id");
         
         if (request.getSession().getAttribute("currentUser") == null) {
-            response.sendRedirect("Login.jsp");
+            response.sendRedirect("PublishedPosts");
         } else {
             if (!PostDAO.delete(Integer.valueOf(id))) {
-                request.getSession().setAttribute("DeletePostStatus", "Post dengan id " + id + " gagal dihapus");
+                request.getSession().setAttribute("DeletePostStatus", "Post (id = " + id + ") tidak berhasil dihapus");
                 response.sendRedirect("DeletePostStatus.jsp");
             } else {
-                request.getSession().setAttribute("DeletePostStatus", "Post dengan id" + id + " berhasil dihapus");
+                request.getSession().setAttribute("DeletePostStatus", "Post (id = " + id + ") berhasil dihapus");
                 response.sendRedirect("DeletePostStatus.jsp");
             }
         }

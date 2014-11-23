@@ -63,7 +63,7 @@ public class LogoutServlet extends HttpServlet {
         
         request.getSession().setAttribute("currentUser", null);        
         
-        response.sendRedirect("Login.jsp");
+        response.sendRedirect("PublishedPosts");
         processRequest(request, response);
     }
 

@@ -10,20 +10,60 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
+        <link rel="stylesheet" type="text/css" href="assets/css/screen.css" />
+        <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
+        <title>Simple Blog | Update Post</title>
+    </head>    
         <%
             User currentUser = (User)request.getSession().getAttribute("currentUser");
             if (currentUser == null) {            
                 response.setStatus(response.SC_MOVED_TEMPORARILY);
-                response.setHeader("Location", "Login.jsp"); 
+                response.setHeader("Location", "PublishedPosts"); 
             }                    
-        %>
-                
-        <h1>Status: <%= (String)request.getSession().getAttribute("UpdatePostStatus") %></h1>
+        %>           
+    <body class="default">
+<div class="wrapper">
+
+<nav class="nav">
+    <a style="border:none;" id="logo" href="UserManagement"><h1>User<span>-</span>Management</h1></a>
+    <ul class="nav-primary">
+        <!-- <li><a href="new_post.html">+ Tambah Post</a></li> -->
+    </ul>
+</nav>
+
+<article class="art simple post">
+    
+    <header class="art-header">
+        <div class="art-header-inner" style="margin-top: 0px; opacity: 1;">
+            <time class="art-time">Status</time>
+            <h3 class="art-title"><%= (String)request.getSession().getAttribute("UpdatePostStatus") %></h3>
+            <p class="art-subtitle"><a href="UnpublishedPosts">Continue...</a></p>
+        </div>
+    </header>
+
+
+</article>
+
+<footer class="footer">
+    <div class="back-to-top"><a href="">Back to top</a></div>
+    <!-- <div class="footer-nav"><p></p></div> -->
+    <div class="psi">&Psi;</div>
+    <aside class="offsite-links">
+        Asisten IF3110 /
+        <a class="rss-link" href="#rss">RSS</a> /
         <br>
-        <a href="UserLogged.jsp">view</a>
-    </body>
+        <a class="twitter-link" href="http://twitter.com/YoGiiSinaga">Yogi</a> /
+        <a class="twitter-link" href="http://twitter.com/sonnylazuardi">Sonny</a> /
+        <a class="twitter-link" href="http://twitter.com/fathanpranaya">Fathan</a> /
+        <br>
+        <a class="twitter-link" href="#">Renusa</a> /
+        <a class="twitter-link" href="#">Kelvin</a> /
+        <a class="twitter-link" href="#">Yanuar</a> /
+        
+    </aside>
+</footer>
+
+</div>
+</body>    
 </html>
 

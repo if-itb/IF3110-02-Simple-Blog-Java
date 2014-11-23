@@ -62,14 +62,14 @@ public class UpdatePostServlet extends HttpServlet {
         String id = request.getParameter("id");
         
         if (request.getSession().getAttribute("currentUser") == null) {        
-            response.sendRedirect("Login.jsp");
+            response.sendRedirect("PublishedPosts");
         } else {                   
             Post editedPost = PostDAO.getPost(Integer.valueOf(id));
             if (editedPost != null) {
                 request.getSession().setAttribute("editedPost", editedPost);
                 response.sendRedirect("EditPost.jsp");            
             } else {
-                response.sendRedirect("Login.jsp");
+                response.sendRedirect("PublishedPosts");
             }
         }
         processRequest(request, response);        

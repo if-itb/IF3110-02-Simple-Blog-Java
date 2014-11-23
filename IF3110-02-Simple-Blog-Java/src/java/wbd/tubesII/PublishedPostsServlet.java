@@ -54,8 +54,7 @@ public class PublishedPostsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        
+              
         ArrayList<Post> publishedPosts = PostDAO.getAllPublishedPosts();
         request.getSession().setAttribute("allPublishedPosts", publishedPosts);
         response.sendRedirect("PublishedPost.jsp");        

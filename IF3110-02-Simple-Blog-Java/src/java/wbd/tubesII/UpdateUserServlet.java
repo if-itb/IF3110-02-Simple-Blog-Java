@@ -60,14 +60,14 @@ public class UpdateUserServlet extends HttpServlet {
         if (request.getSession().getAttribute("currentUser") == null ||
                 !((User)request.getSession().getAttribute("currentUser")).getRole().equals("Admin") ||
                 email.equals("") || email == null) {        
-            response.sendRedirect("Login.jsp");
+            response.sendRedirect("PublishedPosts");
         } else {                   
             User editedUser = UserDAO.getUser(email);
             if (editedUser != null) {
                 request.getSession().setAttribute("editedUser", editedUser);
                 response.sendRedirect("EditUser.jsp");            
             } else {
-                response.sendRedirect("Login.jsp");
+                response.sendRedirect("PublishedPosts");
             }
         }
         processRequest(request, response);
@@ -93,11 +93,11 @@ public class UpdateUserServlet extends HttpServlet {
         user.setRole(request.getParameter("role"));
         
         if (UserDAO.update(user)) {
-            request.getSession().setAttribute("updateUser", "User dengan id " + request.getParameter("id") + " berhasil di-update");
-            response.sendRedirect("SuccessfullyUpdated.jsp");
+            request.getSession().setAttribute("updateUser", "User (id = " + request.getParameter("id") + ") berhasil di-update");
+            response.sendRedirect("UpdateUserStatus.jsp");
         } else {
-            request.getSession().setAttribute("updateUser", "Gagal meng-update user dengan id " + request.getParameter("id"));
-            response.sendRedirect("UpdateFailed.jsp");                
+            request.getSession().setAttribute("updateUser", "User (id = " + request.getParameter("id") + ") tidak berhasil di-update");
+            response.sendRedirect("UpdateUserStatus.jsp");                
         }
         processRequest(request, response);
     }

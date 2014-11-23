@@ -56,7 +56,7 @@ public class RegisterServlet extends HttpServlet {
         
         if (request.getSession().getAttribute("currentUser") == null ||
                 !((User)request.getSession().getAttribute("currentUser")).getRole().equals("Admin")) {
-            response.sendRedirect("Login.jsp");
+            response.sendRedirect("PublishedPosts");
         } else {            
             response.sendRedirect("Register.jsp");            
         }
@@ -83,10 +83,10 @@ public class RegisterServlet extends HttpServlet {
         
         if (UserDAO.register(user)) {
             request.getSession().setAttribute("registerUser", "User dengan email " + request.getParameter("email") + " berhasil ditambahkan");
-            response.sendRedirect("SuccessfullyAdded.jsp");
+            response.sendRedirect("RegistrationStatus.jsp");
         } else {
-            request.getSession().setAttribute("registerUser", "Email telah digunakan");
-            response.sendRedirect("RegisterFailed.jsp");                
+            request.getSession().setAttribute("registerUser", "Email " + request.getParameter("email") + " telah digunakan");
+            response.sendRedirect("RegistrationStatus.jsp");                
         }
         processRequest(request, response);
     }

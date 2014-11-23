@@ -62,7 +62,7 @@ public class AddNewPostServlet extends HttpServlet {
         
         if (request.getSession().getAttribute("currentUser") == null ||
                 ((User)request.getSession().getAttribute("currentUser")).getRole().equals("Editor")) {
-            response.sendRedirect("UserLogged.jsp");
+            response.sendRedirect("PublishedPosts");
         } else {            
             response.sendRedirect("AddNewPost.jsp");
         }
