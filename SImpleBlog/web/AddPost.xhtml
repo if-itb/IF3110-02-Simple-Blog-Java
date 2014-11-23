@@ -36,7 +36,7 @@ and open the template in the editor.
 
             <div id="contact-area">
                 <!--form action="#" method="post">-->
-                <h:form>
+                <h:form id = "Form" onsubmit="return validateform();">
                     <label for="Judul">Title:</label>
                     <input type="text" name="Judul" id="Judul" />
 
@@ -46,7 +46,7 @@ and open the template in the editor.
                     <label for="Konten">Content:</label><br />
                     <textarea name="Konten" rows="20" cols="20" id="Konten"></textarea>
                     
-                    <h:commandButton value="Save" class="submit-button" action="#" />
+                    <h:commandButton value="Save" class="submit-button" action="Post.java"  />
                 </h:form>
             </div>
         </div>
@@ -77,3 +77,7 @@ and open the template in the editor.
 </div>
     </body>
 </html>
+
+<script type="text/javascript" src="confirmdate.js">
+
+</script>
