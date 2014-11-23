@@ -6891,4 +6891,32 @@ button.close {
 		display: none !important;
 	}
 }
+
+.bag-atas{	
+	width: 100%;
+	background-color: green;
+	border-bottom-right-radius: 30px;
+	margin-top: -15px;
+	height: 100px;
+	padding-top: 15px;
+}
+
+.title{
+	color: yellow;	
+}
+
+.submit{
+	margin-top:+20px;
+	margin-left:+15px;
+	margin-bottom:+20px;
+}
+
+.kontainer {
+  padding-right: 15px;
+  padding-left: 15px;
+  border: 5px solid blue;
+  margin-top:+30px;
+  border-radius: 10px;
+}
+
 /*# sourceMappingURL=bootstrap.css.map */
