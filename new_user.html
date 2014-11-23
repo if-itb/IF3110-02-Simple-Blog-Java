@@ -23,8 +23,8 @@
 <meta property="og:site_name" content="Simple Blog">
 
 <link rel="stylesheet" type="text/css" href="assets/css/screen.css" />
+<link rel="stylesheet" type="text/css" href="assets/css/button.css" />
 <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
-
 <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->
@@ -41,22 +41,36 @@
     <a style="border:none;" id="logo" href="index.html"><h1>Simple<span>-</span>Blog</h1></a>
 </nav>
 
-<div id="home">
-    <div class="loginContainer">
-        <div class="blogAbout">
-			<div><span>Welcome</span><br><div>---Sang Penguasa Dunia---</div></div>
-		</div>
-		<div class="login">
-			<form action="" method="POST">
-				<input name="username" placeholder="username" type="text">
-				<input name="password" placeholder="password" type="password"> <br>
-				<input type="checkbox" name="rememberme" value="rememberme" checked> Remember me<br>
-				<p class="button">
-					<input name="submit" type="submit" value="Log in">
-				</p>
-			</form>
-		</div>
-    </div>
+
+<div>
+	<ul class="navManagement">
+		<li><a href="user_management.html"> Home </a> </li>
+		<li><a href="new_user.html" style="color:#F40034"> Create </a></li>
+		<li><a href="read_user.html"> Read </a></li>
+		<li><a href="update_user.html"> Update </a></li>
+		<li><a href="delete_user.html"> Delete </a></li>
+	</ul>
+</div>
+
+<div class="form">
+	<div id="contact-area">
+		<form method="post" action="#">
+			<label for="username">Username:</label>
+			<input type="text" name="username" id="username">
+
+			<label for="password">Password:</label>
+			<input type="text" name="password" id="password">
+			
+			<label for="role">Role:</label>
+			<select name="role" id="role">
+			  <option value="Admin">Admin</option>
+			  <option value="Owner">Owner</option>
+			  <option value="Editor">Editor</option>
+			</select> <br> <br>
+
+			<input type="submit" name="submit" value="Simpan" class="submit-button">
+		</form>
+	</div>
 </div>
 
 <footer class="footer">
