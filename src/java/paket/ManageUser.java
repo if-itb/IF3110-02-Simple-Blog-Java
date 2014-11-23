@@ -69,7 +69,10 @@ public class ManageUser extends HttpServlet {
             ResultSet rSet = stmnt.executeQuery(sqlStr);
             
             out.println("<!DOCTYPE html>");
-            out.println("<html>");
+            out.println("<html xmlns=\"http://www.w3.org/1999/xhtml\"\n" +
+                    "xmlns:h=\"http://xmlns.jcp.org/jsf/html\"\n"+
+                    "xmlns:f=\"http://xmlns.jcp.org/jsf/core\">");
+            out.println("<f:view>");
             out.println("<head>");
             out.println("<script type=\"text/javascript\" src=\"assets/js/validate_delete.js\"></script>");
             out.println("<title>Simple Blog | Manajemen User</title>");            
@@ -77,11 +80,13 @@ public class ManageUser extends HttpServlet {
             out.println("<body>");
             out.println("<div>");
             if (cookies!=null){
-                String role1;
+                String role1 = null;
                 for(Cookie cookie : cookies){
                     if("role".equals(cookie.getName())){
                         role1 = cookie.getValue();
-                        if (role1=="admin"){
+                    }
+                }
+                if ("admin".equals(role1)){
                             out.print("<table class='table table-striped'>");			
                             out.print("<thead>");	
                                     out.print("<tr>");	  
@@ -90,7 +95,7 @@ public class ManageUser extends HttpServlet {
                                             out.print("<th>Role</th>");
                                             out.print("<th>Tindakan</th>");
                                     out.print("<tr>");
-                            out.print("<thead>");	
+                            out.print("</thead>");	
                                 out.print("<tbody>");
 
                         while (rSet.next()){
@@ -107,20 +112,17 @@ public class ManageUser extends HttpServlet {
                             out.print("<tr>\n");
 
                         }
-                                out.print("</tbody>");
-                        out.println("</table>");
-                     
+                            out.print("</tbody>");
                         }
                         else{
                             out.println("<p>Anda harus masuk sebagai admin!</p>");
                         }
-                    }
-                }out.println("<p>Anda harus masuk sebagai admin!</p>");
             }else{
                 out.println("<p>Anda harus masuk sebagai admin!</p>");
             }
              out.println("</div>");
              out.println("</body>");
+             out.println("</f:view>");
              out.println("</html>");
         }catch(Exception ex){
             ex.printStackTrace();
