@@ -4,21 +4,27 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:h="http://xmlns.jcp.org/jsf/html"
-    lang="en">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      lang="en"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         <meta charset="utf-8"> </meta>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"> </meta>
         <meta name="viewport" content="width=device-width, initial-scale=1"> </meta>
         <title>Simple Blog</title>
+        <script src="js/jquery.js"></script>
 
         <!-- Bootstrap -->
         <link href="css/bootstrap.min.css" rel="stylesheet"> </link>
         <link href="http://s3.amazonaws.com/codecademy-content/courses/ltp/css/shift.css" rel="stylesheet"> </link>
         <link rel="stylesheet" href="http://s3.amazonaws.com/codecademy-content/courses/ltp/css/bootstrap.css"> </link>
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Fauna+One|Muli"> </link>
         <link rel="stylesheet" href="css/custom.css"> </link>
+
+        <!-- Script -->
+        <script src="js/javascript.js"></script>
 
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -27,17 +33,65 @@ and open the template in the editor.
             <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
     </h:head>
-    
-    <h:body>
-        <div class="nav">
-            <ul class="nav nav-tabs pull-left">
-                <li><a href="index.xhtml">Simple Blog</a></li>
-            </ul>
 
-            <ul class="nav nav-tabs pull-right">
-                <li><a href="addpost.xhtml">Tambah Post</a></li>
-                <li><a href="about.xhtml">About</a></li>
-            </ul>
+    <h:body onload="#{arrPost.listPost()}">
+        <div id="wrapper">
+            <div id="header">
+                <div class="nav">
+                    <ul class="nav nav-tabs pull-left">
+                        <li><a href="index.xhtml">Simple Blog</a></li>
+                    </ul>
+
+                    <ul class="nav nav-tabs pull-right">
+                        <li><a href="addpost.xhtml">Tambah Post</a></li>
+                        <li><a href="about.xhtml">About</a></li>
+                        <li><a href="#" id="onclicklogin" onclick="LoginAppear();">Login</a></li>
+                    </ul>
+
+                    <!--Login Form -->
+                    <div id="loginform">
+                        <form class="form" action="#" id="login">
+                            <div id="logindiv">
+                                <label>username: </label>
+                                <input type="text" id="username" placeholder="Menori"> </input>
+                                <label>password : </label>
+                                <input type="password" id="password" placeholder="********"> </input>
+                                <input type="button" id="loginbtn" value="Login" onclick="LoginValidate();"> </input>
+                                <input type="button" id="cancel" value="Cancel" onclick="LoginDisappear();"> </input>
+                            </div>
+                        </form>
+                    </div>
+
+                    <form class="navbar-search pull-right col-xs-3">
+                        <input type="text" class="search-query form-control input-md" placeholder="Cari post"> </input>
+                    </form>
+                </div>
+            </div>
+
+            <div id="content">
+                <div class="jumbotron"> 
+                   <div class="container text-center">
+                        <h1>Find an article to read</h1>
+                        <p>Choose from over than 100 articles</p>
+                    </div>
+                </div>
+
+                <div id="summary-posts">
+                    <div id="border-posts"></div>
+                    <ui:repeat value="#{arrPost.post}" var="post">
+                        <div class="text-center" id="summary-tanggal">
+                            #{post.tanggal}<br/>
+                        </div>
+                        <div class="text-center" id="summary-judul">
+                            #{post.judul}<br/>
+                        </div>
+                        <div class="text-center" id="summary-konten">
+                            #{post.konten}<br/>
+                        </div>
+                        <div id="border-posts"></div>
+                    </ui:repeat>
+                </div>
+            </div> 
         </div>
     </h:body>
 </html>

@@ -20,60 +20,86 @@ and open the template in the editor.
         <link rel="stylesheet" href="http://s3.amazonaws.com/codecademy-content/courses/ltp/css/bootstrap.css"> </link>
         <link rel="stylesheet" href="css/custom.css"> </link>
 
-        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-        <!--[if lt IE 9]>
-            <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-            <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-        <![endif]-->
+        <!-- Script -->
+        <script src="js/javascript.js"></script>
     </h:head>
 
     <h:body>
-        <div class="nav">
-            <ul class="nav nav-tabs pull-left">
-                <li><a href="index.xhtml">Simple Blog</a></li>
-            </ul>
+        <div id="wrapper">
+            <div id="header">
+                <div class="nav">
+                    <ul class="nav nav-tabs pull-left">
+                        <li><a href="index.xhtml">Simple Blog</a></li>
+                    </ul>
 
-            <ul class="nav nav-tabs pull-right">
-                <li><a href="addpost.xhtml">Tambah Post</a></li>
-                <li><a href="about.xhtml">About</a></li>
-            </ul>
-        </div>
-        
-        <div id="latar-belakang text-center">
-            <p>
-                Blog ini dibuat untuk memenuhi tugas besar mata kuliah IF 3110 Pengembangan Aplikasi Berbasis Web
-            </p>
-        </div>
-        
-        <div id="learn-more-author">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="thumbnail">
-                            <a href="https://www.facebook.com/ndreysimaputera"><img src="img/Andrey.jpg"> </img></a>
-                        </div>
-                        <p class="text-center"><a href="https://www.facebook.com/ndreysimaputera">13512058 - Andrey Simaputera</a></p>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="thumbnail">
-                            <a href="https://www.facebook.com/henry.menori"><img src="img/Henry.jpg"> </img></a>
-                        </div>
-                        <p class="text-center"><a href="https://www.facebook.com/henry.menori">13512082 - Marcelinus Henry Menori</a></p>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="thumbnail">
-                            <a href="https://www.facebook.com/williamstefanh"><img src="img/William.jpg"> </img></a>
-                        </div>
-                        <p class="text-center"><a href="https://www.facebook.com/williamstefanh">13512098 - William Stefan Hartono</a></p>
+                    <ul class="nav nav-tabs pull-right">
+                        <li><a href="addpost.xhtml">Tambah Post</a></li>
+                        <li><a href="about.xhtml">About</a></li>
+                        <li><a href="#" id="onclicklogin">Login</a></li>
+                    </ul>
+
+                    <!--Login Form -->
+                    <div id="loginform">
+                        <form class="form" action="#" id="login">
+                            <div id="logindiv">
+                                <h3>Login Form</h3>
+                                <label>username: </label>
+                                <input type="text" id="username" placeholder="Owner / Editor / Admin"> </input>
+                                <label>password: </label>
+                                <input type="password" id="password" placeholder="********"> </input>
+                                <input type="button" id="loginbtn" value="Login"> </input>
+                                <input type="button" id="cancel" value="Cancel"> </input>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
-	</div>
+
+            <div id="content">
+                <div class="text-center" id="text-latar-belakang">
+                    <div class="row">
+                        <div class="col-md-2">
+                        </div>
+                        <div class="col-md-8">
+                            <p>
+                                Blog ini dibuat untuk memenuhi tugas besar mata kuliah IF 3110 Pengembangan Aplikasi Berbasis Web 
+                            </p>
+                        </div>
+                        <div class="col-md-2">
+                        </div>
+                    </div>
+                </div>
+
+                <div id="learn-more-author">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="thumbnail">
+                                    <a href="https://www.facebook.com/ndreysimaputera"><img src="img/Andrey.jpg"> </img></a>
+                                </div>
+                                <p class="text-center"><a href="https://www.facebook.com/ndreysimaputera">13512058 - Andrey Simaputera</a></p>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="thumbnail">
+                                    <a href="https://www.facebook.com/henry.menori"><img src="img/Henry.jpg"> </img></a>
+                                </div>
+                                <p class="text-center"><a href="https://www.facebook.com/henry.menori">13512082 - Marcelinus Henry Menori</a></p>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="thumbnail">
+                                    <a href="https://www.facebook.com/williamstefanh"><img src="img/William.jpg"> </img></a>
+                                </div>
+                                <p class="text-center"><a href="https://www.facebook.com/williamstefanh">13512098 - William Stefan Hartono</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
         <!-- Include all compiled plugins (below), or include individual files as needed -->
-        <script src="js/jquery.js"></script>
+        <script src="js/javascript.js"></script>
     </h:body>
 </html>

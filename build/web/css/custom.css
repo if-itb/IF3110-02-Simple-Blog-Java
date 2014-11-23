@@ -1,3 +1,14 @@
+#wrapper {
+    position: absolute;
+    height: 100%;
+    min-height: 100%;
+    width: 100%;
+    top: 0px;
+    left: 0px;
+    background-color: #CCC;
+}
+
+/*header*/
 .nav a {
     color: #5a5a5a;
     font-size: 15px;
@@ -6,22 +17,37 @@
     text-transform: uppercase;
 }
 
-.nav liv {
+.nav li {
     display: inline;
 }
 
 .navbar-search {
     position: absolute;
-    top: 75px;
-    right: 5px;
+    top: 270px;
+    right: 0px;
 }
 
+.container {
+    width: 600px;
+    left: 50%;
+    margin-left: -300px;
+}
+
+#header {
+    height: 80px;
+    width: 100%;
+    background-color: #FFF;
+    position: absolute;
+    left: 0px;
+}
+
+/*index.xhtml*/
 .jumbotron {
-    background-image:url('http://goo.gl/04j7Nn');
-    height: 500px;
+    background-image: url("../img/jumbotron index.png");
+    height: 200px;
     background-repeat: no-repeat;
     background-size: cover;
-    margin-top: 80px;
+    margin-top: 60px;
 }
 
 .jumbotron .container {
@@ -34,13 +60,32 @@
     font-size: 48px;  
     font-family: 'Shift', sans-serif;
     font-weight: bold;
+    margin-top: -75px;
+    text-shadow: 5px 5px 5px #000;
 }
 
 .jumbotron p {
     font-size: 20px;
     color: #fff;
+    text-shadow: 3px 3px 3px #000;
 }
 
+.neighborhood-guides {
+    background-color: #efefef;
+    border-bottom: 1px solid #dbdbdb;
+}
+
+.neighborhood-guides h2 {
+    color: #393c3d;
+    font-size: 24px;
+}
+
+.neighborhood-guides p {
+    font-size: 15px;
+    margin-bottom: 13px;
+}
+
+/*about.xhtml*/
 #latar-belakang p {
     margin-top: 50px;
     margin-left: 200px;
@@ -64,41 +109,19 @@
     margin-top: -15px;
 }
 
-.neighborhood-guides {
-    background-color: #efefef;
-    border-bottom: 1px solid #dbdbdb;
+#text-latar-belakang {
+    color: #5a5a5a;
+    font-size: 30px;
+    font-weight: bold;
+    margin-top: 75px;
 }
 
-.neighborhood-guides h2 {
-    color: #393c3d;
-    font-size: 24px;
-}
-
-.neighborhood-guides p {
-    font-size: 15px;
-    margin-bottom: 13px;
-}
-
-#post-button {
-    
-}
-
-#wrapper {
-    position: absolute;
-    height: 100%;
-    min-height: 100%;
-    width: 100%;
-    top: 0px;
-    left: 0px;
-    background-color: #CCC;
-}
-
-#header {
-    height: 60px;
-    width: 100%;
-    background-color: #FFF;
-    position: absolute;
-    left: 0px;
+/*addpost*/
+#text-tambah-post {
+    color: #5a5a5a;
+    font-size: 30px;
+    font-weight: bold;
+    margin-top: 75px;
 }
 
 #addpost {
@@ -108,11 +131,99 @@
     top: 200px;
 }
 
-#judul textarea,#tanggal textarea {
+#judul textarea, #tanggal textarea {
     resize: none;
     top: 100px;
 }
 
+#konten textarea {
+    height: 150px;
+}
+
 #post-button {
-    
+    margin-left: 79%;
+}
+
+/*login*/
+.form {
+border-radius:2px;
+padding:20px 30px;
+box-shadow:0 0 15px;
+font-size:14px;
+font-weight:bold;
+width:350px;
+margin:20px 250px 0 35px;
+float:left;
+}
+
+input {
+width:50%;
+height:25px;
+border:1px solid #999;
+border-radius:1px;
+}
+
+#logindiv {
+opacity:0.92;
+position: absolute;
+top: 250px;
+left: 400px;
+height: 100%;
+width: 100%;
+display: none;
+}
+
+#login {
+width:200px;
+margin:0px;
+background-color:white;
+font-family: 'Fauna One', serif;
+position: relative;
+border: 5px solid rgb(90, 158, 181);
+left: 50%;
+top: 50%;
+margin-left:-210px;
+margin-top:-158px;
+}
+
+.inline {
+    display: inline-block;
+}
+
+/*Summary Posts*/
+#summary-posts {
+    font-family: 'Shift', sans-serif;   
+    margin-top: 50px;
+    color: #fff;
+}
+
+#summary-tanggal {
+    font-size: 16px;  
+    font-weight: bold;
+    margin-bottom: -10px;
+    text-shadow: 3px 3px 3px #000;
+}
+
+#summary-judul {
+    font-size: 50px;  
+    font-weight: bold;
+    margin-bottom: -7px;
+    text-shadow: 5px 5px 5px #000;
+}
+
+#summary-konten {
+    font-size: 20px;  
+    font-weight: bold;  
+}
+
+#border-posts {
+    border-style: solid;
+    border-color: #101010;
+    border-width: thin;
+    border-radius: 1000px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+    margin-left: -50%;
+    margin-right: -50%;
 }

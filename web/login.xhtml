@@ -20,15 +20,47 @@ and open the template in the editor.
         <link rel="stylesheet" href="http://s3.amazonaws.com/codecademy-content/courses/ltp/css/bootstrap.css"> </link>
         <link rel="stylesheet" href="css/custom.css"> </link>
 
-        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-        <!--[if lt IE 9]>
-            <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-            <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-        <![endif]-->
+        <!-- Script -->
+        <script src="js/javascript.js"></script>
     </h:head>
     
     <h:body>
+        <div id="wrapper">
+            <div id="header">
+                <div class="nav">
+                    <ul class="nav nav-tabs pull-left">
+                        <li><a href="index.xhtml">Simple Blog</a></li>
+                    </ul>
 
+                    <ul class="nav nav-tabs pull-right">
+                        <li><a href="addpost.xhtml">Tambah Post</a></li>
+                        <li><a href="about.xhtml">About</a></li>
+                        <li><a href="#" id="onclicklogin">Login</a></li>
+                    </ul>
+
+                    <!--Login Form -->
+                    <div id="loginform">
+                        <form class="form" action="#" id="login">
+                            <div id="logindiv">
+                                <h3>Login Form</h3>
+                                <label>username: </label>
+                                <input type="text" id="username" placeholder="Owner / Editor / Admin"> </input>
+                                <label>password: </label>
+                                <input type="password" id="password" placeholder="********"> </input>
+                                <input type="button" id="loginbtn" value="Login"> </input>
+                                <input type="button" id="cancel" value="Cancel"> </input>
+                            </div>
+                        </form>
+                    </div>
+
+                    <form class="navbar-search pull-right col-xs-3">
+                        <input type="text" class="search-query form-control input-md" placeholder="Cari post"> </input>
+                    </form>
+                </div>
+            </div>
+            
+            <div id="content">
+            </div>
+        </div>
     </h:body>
 </html>
