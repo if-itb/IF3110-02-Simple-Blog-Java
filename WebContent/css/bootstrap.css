@@ -6910,17 +6910,14 @@ html, body, .container-fluid{
 }
 
 .submit{
-	margin-top: +5%;
-	margin-left: +4%;
+	margin-top: +5%;	
 	margin-bottom: +7%;
 }
 
 .kontainer {
-  padding-right: 1%;
-  padding-left: 1%;
   border: 5px solid blue;
   margin-top: 7%;
-  border-radius: 10px;
+  border-radius: 10px;    
 }
 
 /*# sourceMappingURL=bootstrap.css.map */
