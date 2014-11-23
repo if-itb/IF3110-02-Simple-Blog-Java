@@ -125,11 +125,15 @@ public class User {
             System.out.println("password = " + result.getString(2));
             if(username.equalsIgnoreCase(result.getString(1)) && password.equals(result.getString(2)))
             {
-                koneksi.close();
+                result.close();
+                statement.close();
+//                koneksi.close();
                 return true;
             }
         }
-        koneksi.close();
+        result.close();
+        statement.close();
+//        koneksi.close();
         return false;
     }
     
@@ -159,11 +163,15 @@ public class User {
             System.out.println("password = " + result.getString(2));
             if(username.equalsIgnoreCase(result.getString(1)) && password.equals(result.getString(2)))
             {
-                koneksi.close();
+                result.close();
+                statement.close();
+//                koneksi.close();
                 return true;
             }
         }
-        koneksi.close();
+        result.close();
+        statement.close();
+//        koneksi.close();
         return false;
     }
     
@@ -195,11 +203,15 @@ public class User {
             System.out.println("password = " + result.getString(2));
             if(username.equalsIgnoreCase(result.getString(1)) && password.equals(result.getString(2)))
             {
-                koneksi.close();
+                result.close();
+                statement.close();
+//                koneksi.close();
                 return true;
             }
         }
-        koneksi.close();
+        result.close();
+        statement.close();
+//        koneksi.close();
         return false;
     }
     
@@ -225,7 +237,7 @@ public class User {
             preStat.executeUpdate();
             preStat.close();
         }
-        koneksi.close();
+//        koneksi.close();
     }
     /**
      * Testing untuk user
