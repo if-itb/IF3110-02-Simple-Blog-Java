@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.*;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -50,6 +51,10 @@ public class ManageUser extends HttpServlet {
         Connection conn = null;
         Statement stmnt = null;
         
+        
+	Cookie[] cookies = request.getCookies();
+      // Get an array of Cookies associated with this domain
+        
         try {
             try {
                 Class.forName("com.mysql.jdbc.Driver");
@@ -67,41 +72,56 @@ public class ManageUser extends HttpServlet {
             out.println("<html>");
             out.println("<head>");
             out.println("<script type=\"text/javascript\" src=\"assets/js/validate_delete.js\"></script>");
-            out.println("<title>Servlet NewServlet</title>");            
+            out.println("<title>Simple Blog | Manajemen User</title>");            
             out.println("</head>");
             out.println("<body>");
             out.println("<div>");
-            
-            out.print("<table class='table table-striped'>");			
-		out.print("<thead>");	
-			out.print("<tr>");	  
-				out.print("<th>Nama</th>");
-                                out.print("<th>Email</th>");
-                                out.print("<th>Role</th>");
-                                out.print("<th>Tindakan</th>");
-                        out.print("<tr>");
-		out.print("<thead>");	
-                    out.print("<tbody>");
-                    
-            while (rSet.next()){
-                String usrname = rSet.getString("usrname");
-                String nama_usr = rSet.getString("nama_usr");
-                String email_usr = rSet.getString("email_usr");
-                String role = rSet.getString("role");
-                
-                out.print("<tr>");
-                    out.print("<td>"+nama_usr+"</td>");
-                    out.print("<td>"+email_usr+"</td>");
-                    out.print("<td>"+role+"</td>");
-                    out.print("<td><p><a href=\"javascript:void(0)\" onclick=\"validatedelete("+usrname+")\">Hapus</a></p></td>");
-                out.print("<tr>\n");
-                
+            if (cookies!=null){
+                String role1;
+                for(Cookie cookie : cookies){
+                    if("role".equals(cookie.getName())){
+                        role1 = cookie.getValue();
+                        if (role1=="admin"){
+                            out.print("<table class='table table-striped'>");			
+                            out.print("<thead>");	
+                                    out.print("<tr>");	  
+                                            out.print("<th>Nama</th>");
+                                            out.print("<th>Email</th>");
+                                            out.print("<th>Role</th>");
+                                            out.print("<th>Tindakan</th>");
+                                    out.print("<tr>");
+                            out.print("<thead>");	
+                                out.print("<tbody>");
+
+                        while (rSet.next()){
+                            String usrname = rSet.getString("usrname");
+                            String nama_usr = rSet.getString("nama_usr");
+                            String email_usr = rSet.getString("email_usr");
+                            String role = rSet.getString("role");
+
+                            out.print("<tr>");
+                                out.print("<td>"+nama_usr+"</td>");
+                                out.print("<td>"+email_usr+"</td>");
+                                out.print("<td>"+role+"</td>");
+                                out.print("<td><p><a href=\"DeleteUser?param="+usrname+"\"><img src=\"assets/img/DeleteRed.png\"></a></p></td>");
+                            out.print("<tr>\n");
+
+                        }
+                                out.print("</tbody>");
+                        out.println("</table>");
+                     
+                        }
+                        else{
+                            out.println("<p>Anda harus masuk sebagai admin!</p>");
+                        }
+                    }
+                }out.println("<p>Anda harus masuk sebagai admin!</p>");
+            }else{
+                out.println("<p>Anda harus masuk sebagai admin!</p>");
             }
-                    out.print("</tbody>");
-            out.println("</table>");
-          out.println("</div>");
-          out.println("</body>");
-          out.println("</html>");
+             out.println("</div>");
+             out.println("</body>");
+             out.println("</html>");
         }catch(Exception ex){
             ex.printStackTrace();
             out.println("Unable to connect to database");

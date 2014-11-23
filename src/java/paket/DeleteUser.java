@@ -9,6 +9,7 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -53,12 +54,28 @@ public class DeleteUser extends HttpServlet {
             conn = DriverManager.getConnection(dbURL, uName, pass);
             stmnt = conn.createStatement();
             
-            String sqlStr = "SELECT * FROM `usr`";
-            ResultSet rSet = stmnt.executeQuery(sqlStr);
-            
             String usrname = request.getParameter("param");
-        }catch(Exception ex){
+            String sqlStr = "DELETE FROM `usr` WHERE `usrname`='"+usrname+"'";
+            stmnt.executeUpdate(sqlStr);
             
+            response.sendRedirect("ManageUser");
+        }catch(Exception ex){
+            ex.printStackTrace();
+            out.println("Unable to connect to database");
+            out.print(ex.toString());
+        }finally {
+            out.close();
+            try {
+                // Step 5: Close the Statement and Connection
+                if (stmnt != null) {
+                    stmnt.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
         }
     }
 
