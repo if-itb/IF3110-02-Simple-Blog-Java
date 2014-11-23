@@ -60,9 +60,17 @@ public class ManageUser extends HttpServlet {
             conn = DriverManager.getConnection(dbURL, uName, pass);
             stmnt = conn.createStatement();
             
-            String sqlStr = "SELECT `nama_usr`, `email_usr`, `role` FROM `usr`";
+            String sqlStr = "SELECT `usrname`, `nama_usr`, `email_usr`, `role` FROM `usr`";
             ResultSet rSet = stmnt.executeQuery(sqlStr);
             
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<script type=\"text/javascript\" src=\"assets/js/validate_delete.js\"></script>");
+            out.println("<title>Servlet NewServlet</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<div>");
             
             out.print("<table class='table table-striped'>");			
 		out.print("<thead>");	
@@ -70,11 +78,13 @@ public class ManageUser extends HttpServlet {
 				out.print("<th>Nama</th>");
                                 out.print("<th>Email</th>");
                                 out.print("<th>Role</th>");
+                                out.print("<th>Tindakan</th>");
                         out.print("<tr>");
 		out.print("<thead>");	
                     out.print("<tbody>");
                     
             while (rSet.next()){
+                String usrname = rSet.getString("usrname");
                 String nama_usr = rSet.getString("nama_usr");
                 String email_usr = rSet.getString("email_usr");
                 String role = rSet.getString("role");
@@ -83,10 +93,15 @@ public class ManageUser extends HttpServlet {
                     out.print("<td>"+nama_usr+"</td>");
                     out.print("<td>"+email_usr+"</td>");
                     out.print("<td>"+role+"</td>");
+                    out.print("<td><p><a href=\"javascript:void(0)\" onclick=\"validatedelete("+usrname+")\">Hapus</a></p></td>");
                 out.print("<tr>\n");
                 
             }
                     out.print("</tbody>");
+            out.println("</table>");
+          out.println("</div>");
+          out.println("</body>");
+          out.println("</html>");
         }catch(Exception ex){
             ex.printStackTrace();
             out.println("Unable to connect to database");
