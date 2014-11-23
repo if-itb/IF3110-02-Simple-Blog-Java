@@ -33,10 +33,10 @@ public class Komentar extends Post {
         String HTMLcode = "";
         KoneksiDatabase.setUser("root");
         KoneksiDatabase.setPassword("");
-        KoneksiDatabase.setDatabase("localhost","simpleblogdb");
+        KoneksiDatabase.setDatabase("localhost","blog");
         try (Connection koneksi = KoneksiDatabase.getKoneksi()) {
             Statement statement = koneksi.createStatement();
-            String QueryLoadComment = "SELECT * FROM komentar WHERE ID="+ID+" ORDER BY Waktu ASC";
+            String QueryLoadComment = "SELECT * FROM komentar WHERE idpost="+ID+" ORDER BY Waktu ASC";
             ResultSet result = statement.executeQuery(QueryLoadComment);
             while(result.next()) {
                 Nama = result.getString("Nama");
