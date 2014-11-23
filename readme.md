@@ -2,7 +2,7 @@ Spesifikasi tugas WBD
 =====================
 1. Harus pakai JSF
 2. Autentikasi / Login
-    * login harus bisa memiliki beberapa level role:
+    1. login harus bisa memiliki beberapa level role:
         i. Regular, dengan fitur
             -Dapat melihat post yang sudah di publish
             -dapat memberikan komentar terhadap suatu post yang sudah di publish
@@ -21,7 +21,7 @@ Spesifikasi tugas WBD
             -dapat memberikan komentar terhadap suatu post yang sudah di publish
             -Menambahkan post baru
             -Mengubah status post dari unpublish menjadi published
-    * tetap bisa dipakai tanpa login (sebagai guest), dengan fitur:
+    2. tetap bisa dipakai tanpa login (sebagai guest), dengan fitur:
         * Dapat memberikan komentar terhadap suatu post yang sudah di publish
         * Dapat melihat post yang sudah di publish
     
