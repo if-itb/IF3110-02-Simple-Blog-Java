@@ -22,21 +22,14 @@
 					<td>Judul</td>
 					<td>: <h:inputText value="#{addPost.title}" /></td>
 				</tr>
-				<tr>
-					<td>Tanggal</td>
-					<td>: <h:inputText id="dateInput" value="#{addPost.date}">
-							<f:validator validatorId="biggerDateValidator" />	
-						</h:inputText>
-					</td>
-				</tr>
+
 				<tr>
 					<td>Konten</td>
 					<td>: <h:inputTextarea row = "100" col="200" value="#{addPost.content}" /></td>
 				</tr>
 			</table>
-			<h:commandButton value="Submit" action="#{addPost.addPost}" />
+			<h:commandButton value="Submit" action="#{addPost.execute}" />
 		</h:form>
-		<h:message for="dateInput" style="color:red" />
 	</div>
 </h:body>
 </html>

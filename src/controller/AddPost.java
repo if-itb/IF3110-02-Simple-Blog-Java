@@ -1,20 +1,33 @@
 package controller;
 
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
 
 
 
+
+
+
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 
+import entities.UserData;
 import entities.Post;
-import entities.Util;
 
-@ManagedBean(name = "addPost", eager = true)
+@ManagedBean
 @RequestScoped
 public class AddPost {
+	@ManagedProperty(value="#{userData}")
+	private UserData alpha;
+	
+	public void setAlpha(UserData z) {
+		alpha = z;
+	}
+	
 	private Post post;
 	
 	public AddPost(){
@@ -41,18 +54,22 @@ public class AddPost {
 		return post.getDate();
 	}
 
-	@SuppressWarnings("deprecation")
 	public void setDate(String t) {
-		post.setDate(new Date(t));
+		Date date = new SimpleDateFormat("mm/dd/yy").parse(t, new ParsePosition(0));
+		post.setDate(date);
 	}
 	
-	public void addPost() {
-		if(Util.getUserId() != null){
+	public void execute() {
+		System.out.println("Name:   "+ alpha.getDetails().getName());
+		if(alpha != null){
 			DatabaseUtility dbUtil = DatabaseUtility.getInstance();
 			
 			String query = "INSERT INTO post (id_user, judul, isi, waktu, is_deleted, is_published) "
-					+ "VALUES ("+Util.getUserId()+","+post.getContent()+","
-					+ post.getDate().getTime()+",0,0";
+					+ "VALUES ("+alpha.getDetails().getUserId()+",'"+post.getTitle()+"','"+post.getContent()+"',"
+					+ "'2014-11-23'"+",0,0)";
+			
+			System.out.println(query);
+			
 			dbUtil.execute(query);
 		}
 	}

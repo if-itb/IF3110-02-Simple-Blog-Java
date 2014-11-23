@@ -5,11 +5,10 @@ import java.io.Serializable;
 
 import javax.faces.bean.*;
 import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpSession;
 
 import controller.DatabaseUtility;
 
-@ManagedBean(name = "userData", eager = true)
+@ManagedBean
 @SessionScoped
 public class UserData implements Serializable {
 
@@ -48,19 +47,10 @@ public class UserData implements Serializable {
 		details = dbUtil.findUser(username, password);
 		if (details != null) {
 			loggedIn = true;
-			HttpSession session = Util.getSession();
-			session.setAttribute("username", username);
-			session.setAttribute("userid", details.getUserId());
 			return ("index?faces-redirect=true");
 		}
 
 		return null;
-	}
-	
-	public String logout(){
-		HttpSession session = Util.getSession();
-		session.invalidate();
-		return ("index?faces-redirect=true");
 	}
 
 	public void check() {

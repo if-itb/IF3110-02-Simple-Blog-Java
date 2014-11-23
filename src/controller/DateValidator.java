@@ -1,5 +1,7 @@
 package controller;
 
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.faces.application.FacesMessage;
@@ -20,12 +22,11 @@ public class DateValidator implements Validator {
 		String date = value.toString();
 
 		Date now = new Date();
-		@SuppressWarnings("deprecation")
-		Date input_date = new Date(date);
+		Date input_date = new SimpleDateFormat("mm/dd/yy").parse(date, new ParsePosition(0));
 		
-		Integer compare = now.compareTo(input_date);
+		int compare = now.compareTo(input_date);
 		
-		if(compare==null || compare<0){
+		if(compare<0){
 			FacesMessage msg = new FacesMessage("Date is not valid");
 			msg.setSeverity(FacesMessage.SEVERITY_INFO);
 			throw new ValidatorException(msg);
