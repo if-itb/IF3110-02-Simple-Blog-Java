@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Asus
+ * @author Asep Saepudin
  */
 @WebServlet(name = "ViewPost", urlPatterns = {"/ViewPost"})
 public class ViewPostServlet extends HttpServlet {

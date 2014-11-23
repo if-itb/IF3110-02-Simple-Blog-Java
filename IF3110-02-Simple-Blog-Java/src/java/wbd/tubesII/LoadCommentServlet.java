@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Asus
+ * @author Asep Saepudin
  */
 @WebServlet(name = "LoadComment", urlPatterns = {"/LoadComment"})
 public class LoadCommentServlet extends HttpServlet {

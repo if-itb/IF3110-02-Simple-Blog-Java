@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author Asus
+ * @author Asep Saepudin
  */
 public class CommentDAO {
     private static Connection currentCon = null;

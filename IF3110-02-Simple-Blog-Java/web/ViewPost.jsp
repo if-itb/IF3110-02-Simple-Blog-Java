@@ -1,7 +1,7 @@
 <%-- 
     Document   : ViewPost
     Created on : Nov 23, 2014, 11:27:55 PM
-    Author     : Asus
+    Author     : Asep Saepudin
 --%>
 
 <%@page import="wbd.tubesII.Post"%>

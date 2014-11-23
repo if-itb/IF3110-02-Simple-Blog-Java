@@ -4,7 +4,7 @@ import java.util.Date;
 
 /**
  *
- * @author Asus
+ * @author Asep Saepudin
  */
 public class Comment {
     private int id;
