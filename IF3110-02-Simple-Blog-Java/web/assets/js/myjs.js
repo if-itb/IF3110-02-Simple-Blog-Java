@@ -4,10 +4,10 @@ function validateEmail() {
 	var result = pattern.test(email);   
 	
 	if (!result) {      
-		document.getElementById("email").style["background-color"] = "#ffaaaa";
+		document.getElementById("email").style.backgroundColor = "#ffaaaa";
 		document.getElementById("submitKomentar").disabled = true;
 	} else {
-		document.getElementById("email").style["background-color"] = "#aaffaa";
+		document.getElementById("email").style.backgroundColor = "#aaffaa";
 		document.getElementById("submitKomentar").disabled = false;
 	}
 	return result;
@@ -32,16 +32,18 @@ function sendComment() {
 	xmlhttp.onreadystatechange = function() {
 		if (xmlhttp.readyState==4 && xmlhttp.status==200) {
 			existingComment = document.getElementById("komentar-placeholder").innerHTML;
-			document.getElementById("komentar-placeholder").innerHTML = xmlhttp.responseText + existingComment;
+			document.getElementById("komentar-placeholder").innerHTML = xmlhttp.responseText;
 			
-			document.getElementById("nama").value = '';
-			document.getElementById("email").value = '';
+                        if (!document.getElementById("nama").disabled)
+                            document.getElementById("nama").value = '';
+                        if (!document.getElementById("email").disabled)
+                            document.getElementById("email").value = '';
 			document.getElementById("komentar").value = '';
 		}
 	}
 					
 	var parameters = "idpost=" + idPost + "&nama=" + nama + "&email=" + email + "&komentar=" + komentar;
-	xmlhttp.open("POST", "send_comment.php", true);
+	xmlhttp.open("POST", "SaveComment", true);
 	xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");    
 	xmlhttp.send(parameters);
 }
@@ -64,7 +66,7 @@ function loadComment() {
 	}
 					
 	var parameters = "idpost=" + idPost;
-	xmlhttp.open("GET", "load_comment.php?" + parameters, true);    
+	xmlhttp.open("GET", "LoadComment?" + parameters, true);    
 	xmlhttp.send(null);
 }
 

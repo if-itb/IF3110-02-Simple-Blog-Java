@@ -12,12 +12,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>    
-    <%        
-        if (request.getSession().getAttribute("currentUser") == null) {            
-            response.setStatus(response.SC_MOVED_TEMPORARILY);
-            response.setHeader("Location", "Login.jsp"); 
-        }
-        
+    <%                
         User currentUser = (User)request.getSession().getAttribute("currentUser");
         if (currentUser == null) {            
             response.setStatus(response.SC_MOVED_TEMPORARILY);
