@@ -16,15 +16,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
-    <body>
-        <%
-            User currentUser = (User)request.getSession().getAttribute("currentUser");
-            if (currentUser == null) {            
-                response.setStatus(response.SC_MOVED_TEMPORARILY);
-                response.setHeader("Location", "Login.jsp"); 
-            }            
-        %>
-        
+    <body>        
         <table>
             <tr>
                 <td>Judul</td>
@@ -40,7 +32,7 @@
            for (int i=0; i<publishedPosts.size(); i++) {
         %>
         <tr>
-            <td><%= publishedPosts.get(i).getJudul()%></td>
+            <td><a href="ViewPost?id=<%= publishedPosts.get(i).getId() %>"><%= publishedPosts.get(i).getJudul()%></a></td>
             <td><%= publishedPosts.get(i).getTanggal().toString() %></td>
             <td><%= publishedPosts.get(i).getKonten() %></td>
             <td><a href="UpdatePost?id=<%= publishedPosts.get(i).getId() %>">v</a></td>

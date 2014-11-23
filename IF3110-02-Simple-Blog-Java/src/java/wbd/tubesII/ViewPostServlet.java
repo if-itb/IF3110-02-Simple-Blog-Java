@@ -2,7 +2,6 @@ package wbd.tubesII;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,10 +10,10 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Asep Saepudin
+ * @author Asus
  */
-@WebServlet(name = "PublishedPosts", urlPatterns = {"/PublishedPosts"})
-public class PublishedPostsServlet extends HttpServlet {
+@WebServlet(name = "ViewPost", urlPatterns = {"/ViewPost"})
+public class ViewPostServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,10 +32,10 @@ public class PublishedPostsServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet PublishedPostsServlet</title>");            
+            out.println("<title>Servlet ViewPostServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet PublishedPostsServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ViewPostServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -55,12 +54,20 @@ public class PublishedPostsServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
+        String id = request.getParameter("id");                
         
-        ArrayList<Post> publishedPosts = PostDAO.getAllPublishedPosts();
-        request.getSession().setAttribute("allPublishedPosts", publishedPosts);
-        response.sendRedirect("PublishedPost.jsp");        
-        
-        processRequest(request, response);
+        if (id == null || id.equals("")) {         
+            response.sendRedirect("PublishedPosts");        
+        } else {                   
+            Post post = PostDAO.getPost(Integer.valueOf(id));
+            if (post != null) {
+                request.getSession().setAttribute("post", post);
+                response.sendRedirect("ViewPost.jsp");            
+            } else {                
+                response.sendRedirect("PublishedPosts");
+            }
+        }
+        processRequest(request, response);                        
     }
 
     /**
