@@ -41,30 +41,33 @@
     <a style="border:none;" id="logo" href="index.html"><h1>Simple<span>-</span>Blog</h1></a>
 </nav>
 
+
 <div>
 	<ul class="navManagement">
 		<li><a href="user_management.html"> Home </a> </li>
 		<li><a href="new_user.html"> Create </a></li>
 		<li><a href="read_user.html"> Read </a></li>
 		<li><a href="update_user.html"> Update </a></li>
-		<li><a href="delete_user.html" style="color:#F40034"> Delete </a></li>
-		<li><a href="admin_new_post.html"> Add Post</a></li>
+		<li><a href="delete_user.html"> Delete </a></li>
+		<li><a href="admin_new_post.html" style="color:#F40034"> Add Post</a></li>
 		<li><a href="admin_edit_post.html"> Edit Post</a></li>
 	</ul>
 </div>
 
-<div id="home">
-	<div class="form">
+<div class="form">
 	<div id="contact-area">
-		<form method="post" action="#" onsubmit="return validateDeletion()">
-			<label for="username">Username:</label>
-			<input type="text" name="username" id="username">
-			<br>
-			<input type="submit" name="submit" value="Submit" class="submit-button">
+		<form method="post" action="#">
+			<label for="Judul">Judul:</label>
+			<input type="text" name="Judul" id="Judul">
+
+			<label for="Tanggal">Tanggal:</label>
+			<input type="text" name="Tanggal" id="Tanggal">
+			
+			<label for="Konten">Konten:</label><br>
+			<textarea name="Konten" rows="20" cols="20" id="Konten"></textarea>
+
+			<input type="submit" name="submit" value="Simpan" class="submit-button">
 		</form>
-	</div>
-</div>
-	<div class="userdata">
 	</div>
 </div>
 
@@ -83,6 +86,6 @@
 </footer>
 
 </div>
-<script src="assets/js/validate.js"> </script>
+
 </body>
 </html>
