@@ -12,27 +12,35 @@
 	<f:metadata>
 		<f:event type="preRenderView" listener="#{userData.check}" />
 	</f:metadata>
-	<link href="./css/styles.css" rel="stylesheet" type="text/css" />
+	<link href="./css/bootstrap.css" rel="stylesheet" type="text/css" />
 </h:head>
 
 <h:body>
-	<h1 class="title" id="tes">Simple-Blog</h1>
-	<h2 align="center">Login</h2>
-	<div align="center">
-		<h:form>
-			<table>
-				<tr>
-					<td>Username</td>
-					<td>: <h:inputText value="#{userData.username}" /></td>
-				</tr>
-				<tr>
-					<td>Password</td>
-					<td>: <h:inputSecret value="#{userData.password}" /></td>
-				</tr>
-			</table>
-			<h:commandButton value="Submit" action="#{userData.login}" />
-		</h:form>
-
+	<div class="bag-atas">
+		<h1 class="col-lg-offset-6 col-lg-6 title">Simple-Blog</h1>
+	</div>
+	<div class="kontainer col-lg-offset-6 col-lg-4" >
+		<div class="col-lg-4">
+			<h2>Login</h2>
+		</div>
+		<div>
+			<h:form>
+				<table>
+					<tr>
+						<td class="col-lg-2">Username</td>
+						<td class="col-lg-2">: <h:inputText
+								value="#{userData.username}" /></td>
+					</tr>
+					<tr>
+						<td class="col-lg-2">Password</td>
+						<td class="col-lg-2">: <h:inputSecret
+								value="#{userData.password}" /></td>
+					</tr>
+				</table>
+				<h:commandButton class="col-lg-4 submit" value="Submit"
+					action="#{userData.login}" />
+			</h:form>
+		</div>
 	</div>
 </h:body>
 </html>
