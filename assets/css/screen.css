@@ -859,3 +859,119 @@ label {
   width: 100px;
   padding-top: 5px;
 }
+
+.loginContainer {
+	height : 500px;
+}
+
+.login{
+	position : absolute;
+	top : calc(40% - 75px);
+	left : calc(50% - 50px);
+	height : 150px;
+	width : 350px;
+	padding : 10px;
+	z-index : 2;
+}
+
+.login input[type=text]{
+	width : 250px;
+	height : 30px;
+	background : #ffffff;
+	border : 1px solid rgba(62,62,62,0.6);
+	border-radius : 2px;
+	color : #000000;
+	font-family : 'Exo', sans-serif;
+	font-size : 16px;
+	font-weight : 400;
+	padding : 4px;
+}
+
+.login input[type=password]{
+	width : 250px;
+	height : 30px;
+	background : #ffffff;
+	border : 1px solid rgba(62,62,62,0.6);
+	border-radius : 2px;
+	color : #000000;
+	font-family : 'Exo', sans-serif;
+	font-size : 16px;
+	font-weight : 400;
+	padding : 4px;
+	margin-top : 10px;
+}
+
+.login input[type=submit]{
+	width : 260px;
+	height : 35px;
+	background : #3E3E33;
+	border : 1px solid #fff;
+	cursor : pointer;
+	border-radius : 2px;
+	color : #ffffff;
+	font-family : 'Exo', sans-serif;
+	font-size : 16px;
+	font-weight : 400;
+	padding : 6px;
+	margin-top : 10px;
+}
+
+.login input[type=submit]:hover{
+	opacity : 0.8;
+}
+
+.login input[type=submit]:active{
+	opacity : 0.6;
+}
+
+.login input[type=text]:focus{
+	outline : none;
+	border : 1px solid rgba(255,153,51,0.9);
+}
+
+.login input[type=password]:focus{
+	outline : none;
+	border : 1px solid rgba(255,153,51,0.9);
+}
+
+.login input[type=submit]:focus{
+	outline: none;
+}
+
+.login input[type=checkbox] {
+	margin-left : 120px;
+}
+
+.blogAbout{
+	font-family: "proxima-nova", "helvetica neue", "helvetica", sans-serif;
+	font-weight: 300;
+	font-size: 8px;
+	line-height: 30px;
+	color: #000;
+	position : absolute;
+	top : calc(38% - 35px);
+	left: calc(45% - 255px);
+	z-index : 2;
+}
+
+.blogAbout div{
+	float : left;
+	color : #3E3E33;
+	font-size : 35px;
+	font-weight : 200;
+}
+
+.blogAbout div span{
+	text-transform: uppercase;
+	color : #F40034;
+}
+
+.blogAbout div div{
+	font-family: "proxima-nova", "helvetica neue", "helvetica", sans-serif;
+	font-size : 15px;
+	color : #3E3E33;
+}
+
+.crudContaier {
+	height : 500px;
+}
