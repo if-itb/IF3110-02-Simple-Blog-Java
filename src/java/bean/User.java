@@ -13,6 +13,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.Cookie;
 
 @ManagedBean(name ="user",eager = true)
 @SessionScoped
@@ -23,6 +24,7 @@ public class User implements Serializable
     private String email;
     private String role;
     private List<User> daftar_user;
+    private final CookieBean cookie;
     
     public User() 
     {
@@ -32,6 +34,7 @@ public class User implements Serializable
         role="";
         email="";
         daftar_user = new ArrayList<>();
+        cookie = new CookieBean();
     }
 
     public String getRole() {
@@ -74,6 +77,8 @@ public class User implements Serializable
     public void logout()
     {
         System.out.println("logout");
+        System.out.println("setting cookie");
+        cookie.setCookie("username", username, 0);
         username="";
         email="";
         role="";
@@ -155,10 +160,11 @@ public class User implements Serializable
     public void login()
     {
         System.out.println("Login");
+        System.out.println("Setting cookie");
+        cookie.setCookie("username", username, 86400);
         ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
         try 
-        {
-            context.redirect(context.getRequestContextPath() + "/" + role + ".xhtml");
+        {            context.redirect(context.getRequestContextPath() + "/" + role + ".xhtml");
         } 
         catch (IOException ex) 
         {
@@ -211,5 +217,28 @@ public class User implements Serializable
             output = "<div class=\"alert alert-danger login-alert\">wrong username or password</div>\n";
         }
         return output;
+    }
+    
+    public void checkCookie()
+    {
+        Cookie temp = cookie.getCookie("username");
+        if(temp != null)
+        {
+            if(temp.getValue().length()>0)
+            {
+                fetchUsersFromDB();
+                for(User user : daftar_user)
+                {
+                    if(user.getUsername().equals(temp.getValue()))
+                    {
+                        username = user.getUsername();
+                        password = user.getPassword();
+                        role = user.getRole();
+                        email = user.getEmail();
+                        login();
+                    }
+                }
+            }
+        }
     }
 }
