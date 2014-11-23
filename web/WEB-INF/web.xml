@@ -41,9 +41,13 @@
         <servlet-name>DeleteUser</servlet-name>
         <servlet-class>paket.DeleteUser</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddUser</servlet-name>
+        <servlet-class>paket.AddUser</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
-        <url-pattern>/faces/*</url-pattern>
+        <url-pattern>*.xhtml</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>login</servlet-name>
@@ -61,12 +65,16 @@
         <servlet-name>DeleteUser</servlet-name>
         <url-pattern>/DeleteUser</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddUser</servlet-name>
+        <url-pattern>/AddUser</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>faces/index.xhtml</welcome-file>
+        <welcome-file>index.xhtml</welcome-file>
     </welcome-file-list>
 </web-app>

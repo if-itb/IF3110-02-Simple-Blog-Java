@@ -71,14 +71,17 @@ public class ManageUser extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html xmlns=\"http://www.w3.org/1999/xhtml\"\n" +
                     "xmlns:h=\"http://xmlns.jcp.org/jsf/html\"\n"+
-                    "xmlns:f=\"http://xmlns.jcp.org/jsf/core\">");
+                    "xmlns:f=\"http://xmlns.jcp.org/jsf/core\"\n"+
+                    "xmlns:ui=\"http://java.sun.com/jsf/facelets\">");
             out.println("<f:view>");
             out.println("<head>");
+            out.println("<ui:include src=\"header-script.xhtml\"/>");
             out.println("<script type=\"text/javascript\" src=\"assets/js/validate_delete.js\"></script>");
             out.println("<title>Simple Blog | Manajemen User</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<div>");
+            out.println("<div class=\"wrapper\">");
+            out.println("<ui:include src=\"header.xhtml\"/>");
             if (cookies!=null){
                 String role1 = null;
                 for(Cookie cookie : cookies){
