@@ -6892,13 +6892,17 @@ button.close {
 	}
 }
 
+html, body, .container-fluid{
+	height: 100%;
+}
+
 .bag-atas{	
 	width: 100%;
 	background-color: green;
 	border-bottom-right-radius: 30px;
-	margin-top: -15px;
-	height: 100px;
-	padding-top: 15px;
+	margin-top: -1%;
+	min-height: 15%;
+	padding-top: 1%;
 }
 
 .title{
@@ -6906,16 +6910,16 @@ button.close {
 }
 
 .submit{
-	margin-top:+20px;
-	margin-left:+15px;
-	margin-bottom:+20px;
+	margin-top: +5%;
+	margin-left: +4%;
+	margin-bottom: +7%;
 }
 
 .kontainer {
-  padding-right: 15px;
-  padding-left: 15px;
+  padding-right: 1%;
+  padding-left: 1%;
   border: 5px solid blue;
-  margin-top:+30px;
+  margin-top: 7%;
   border-radius: 10px;
 }
 
