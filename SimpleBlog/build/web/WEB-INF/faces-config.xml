@@ -21,12 +21,12 @@ and open the template in the editor.
         <navigation-case>
             <from-action>#{login_bean.checkValidUser}</from-action>
             <from-outcome>valid</from-outcome>
-            <to-view-id>/login_success.jsp</to-view-id>
+            <to-view-id>/index.jsp</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-action>#{login_bean.checkValidUser}</from-action>
             <from-outcome>invalid</from-outcome>
-            <to-view-id>/login_fail.jsp</to-view-id>
+            <to-view-id>/login.jsp</to-view-id>
         </navigation-case>
     </navigation-rule>
     <navigation-rule>
