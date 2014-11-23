@@ -1,4 +1,4 @@
-package somepackage;
+package entities;
 
 public class UserDetails {
 	private String name, email;

@@ -1,14 +1,15 @@
-package somepackage;
+package entities;
 
 import java.io.IOException;
-import java.io.Serializable;
 
 import javax.faces.bean.*;
 import javax.faces.context.FacesContext;
 
+import controller.DatabaseUtility;
+
 @ManagedBean
 @SessionScoped
-public class UserData implements Serializable {
+public class UserData{
 	private String username, password;
 	private boolean loggedIn = false;
 	private UserDetails details;

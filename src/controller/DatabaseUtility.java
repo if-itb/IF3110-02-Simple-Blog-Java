@@ -1,7 +1,9 @@
-package somepackage;
+package controller;
 
 import java.sql.*;
-import java.util.*;
+
+import constrain.Constant;
+import entities.UserDetails;
 
 public class DatabaseUtility {
 	private static DatabaseUtility instance = new DatabaseUtility();
@@ -14,7 +16,7 @@ public class DatabaseUtility {
 		if (con == null)
 			con = getConnection();
 
-		String stm = "Select * from user";
+		String stm = "SELECT * FROM user";
 		UserDetails result = null;
 		try {
 			pst = con.prepareStatement(stm);
@@ -54,16 +56,16 @@ public class DatabaseUtility {
 	private Connection getConnection() {
 		Connection connection = null;
 
-		String url = "jdbc:mysql://localhost:3306/wbd_db";
-		String user = "WBD_USER";
-		String password = "QKC3zwhJ";
+		String url = Constant.DATABASE_URL;
+		String user = Constant.DATABASE_USER;
+		String password = Constant.DATABASE_PASS;
 
 		try {
 			DriverManager.registerDriver(new com.mysql.jdbc.Driver());
 			connection = DriverManager.getConnection(url, user, password);
-			System.out.println("Connection completed");
+			System.out.println("Database connection completed");
 		} catch (SQLException exception) {
-			System.out.println("Connection FAILEDDDDD!!!!");
+			System.out.println("Database connection fail");
 			System.out.println(exception.getMessage());
 		}
 		return connection;

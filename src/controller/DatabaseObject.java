@@ -1,4 +1,4 @@
-package somepackage;
+package controller;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -6,6 +6,8 @@ import java.sql.Timestamp;
 import java.util.*;
 
 import javax.faces.bean.*;
+
+import entities.Post;
 
 @ManagedBean
 @ApplicationScoped
