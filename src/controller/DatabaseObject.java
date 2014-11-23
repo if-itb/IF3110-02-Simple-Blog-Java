@@ -2,7 +2,6 @@ package controller;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.*;
 
 import javax.faces.bean.*;
@@ -27,8 +26,7 @@ public class DatabaseObject {
 				Post post = new Post();
 				post.setTitle(rs.getString(3));
 				post.setContent(rs.getString(4));
-				Timestamp ts = rs.getTimestamp(5);
-				post.setDate(new java.util.Date(ts.getTime()));
+				post.setDate(rs.getDate(5));
 				result.add(post);
 			}
 		} catch (SQLException e) {

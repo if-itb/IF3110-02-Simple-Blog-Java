@@ -9,7 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import controller.DatabaseUtility;
 
-@ManagedBean(name = "userData", eager = true)
+@ManagedBean
 @SessionScoped
 public class UserData implements Serializable {
 
