@@ -75,7 +75,7 @@ public class login_bean {
         Class.forName("com.mysql.jdbc.Driver");
         con = DriverManager.getConnection("jdbc:mysql://localhost:3306/tubeswbd", "root", "");
         ps = con.createStatement();
-        SQL_Str = "Select * from users";
+        SQL_Str = "Select * from users where username='" +uname+ "'";
         rs = ps.executeQuery(SQL_Str);
         rs.next();
         dbusername = rs.getString(2);
