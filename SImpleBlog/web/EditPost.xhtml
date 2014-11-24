@@ -23,7 +23,7 @@ and open the template in the editor.
         <h:commandLink action="Home" ><h1 style="border:none;" class="logo">Simple<span>-</span>Blog</h1></h:commandLink>
     </h:form>
     <ul class="nav-primary">
-        <li>You are logged in as <u><a href="#">Author.</a></u></li>
+        <li>You are logged in as <u><a href="#">Admin.</a></u></li>
     </ul>
 </nav>
 
@@ -38,20 +38,17 @@ and open the template in the editor.
 
             <div id="contact-area">
                 <h:form id = "Form">
-                    <f:metadata>
-                        <f:viewParam name="PostId" value="#{Editpost.postID}" />
-                    </f:metadata>
-                    <label for="Judul">#{Editpost.post.judul}</label>
-                    <input type="text" name="Judul" id="Judul" required ="true" />
+                    <label for="Judul">Title:</label>
+                    <input type="text" name="Judul" id="Judul" required ="true" value="#{Editpost.post.judul}"/>
                     
-                    <label for="Author">#{Editpost.post.author}</label>
-                    <input type="text" name="Author" id="Author" disabled="true" />
+                    <label for="Author">Author:</label>
+                    <input type="text" name="Author" id="Author" disabled="true" value="#{Editpost.post.author}"/>
 
-                    <label for="Tanggal">#{Editpost.post.tanggal}</label>
-                    <input type="text" name="Tanggal" id="Tanggal" disabled="true"/>
+                    <label for="Tanggal">Date:</label>
+                    <input type="text" name="Tanggal" id="Tanggal" disabled="true" value="#{Editpost.post.tanggal}"/>
                     
-                    <label for="Konten">#{Editpost.post.content}</label><br />
-                    <textarea name="Konten" id="Konten" required="true"></textarea>
+                    <label for="Konten">Content:</label><br />
+                    <textarea name="Konten" id="Konten" required="true">#{Editpost.post.content}</textarea>
                     <h:commandButton onclick = "" type = "submit" value ="Submit"></h:commandButton>
                 </h:form>
             </div>

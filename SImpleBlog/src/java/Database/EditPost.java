@@ -6,6 +6,7 @@
 
 package Database;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -13,6 +14,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -31,9 +34,10 @@ public class EditPost {
         this.PostID = PostID;
     }
     
-    public void Redirect(int PostID){
+    public void Redirect(int PostID) throws IOException{
         setPostId(PostID);
-        
+        ExternalContext extcon = FacesContext.getCurrentInstance().getExternalContext();
+        extcon.redirect("/SImpleBlog/EditPost.xhtml");
     }
     
     private Connection getConnection() throws ClassNotFoundException, SQLException, IllegalAccessException{
