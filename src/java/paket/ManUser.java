@@ -210,6 +210,50 @@ public class ManUser implements Serializable{
         }		
 		return null;
     }
+        
+        public String delAction(User user) {
+	    
+//		User user = new User(this.usrname, this.passwrd, 
+//			this.nama_usr, this.email_usr, this.role);
+//		
+//		users.add(user);
+                Connection conn = null;
+        Statement stmnt = null;
+        
+        try {
+            try {
+                Class.forName("com.mysql.jdbc.Driver");
+            } catch (Exception e) {
+                e.printStackTrace();
+                System.out.println("Unable to load Driver");
+            }
+            conn = DriverManager.getConnection(dbURL, uName, pass);
+            stmnt = conn.createStatement();
+            
+            String sqlStr = "DELETE FROM `usr` WHERE `usrname`='"+usrname+"'";
+            
+           stmnt.executeUpdate(sqlStr);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            System.out.println("Unable to connect to database");
+            System.out.print(ex.toString());
+        }finally {
+            System.out.close();
+            try {
+                // Step 5: Close the Statement and Connection
+                if (stmnt != null) {
+                    stmnt.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }		
+	users.remove(user);	
+        return null;
+    }
 }
     
     
