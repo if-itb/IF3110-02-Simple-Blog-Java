@@ -7,6 +7,7 @@
 package Database;
 
 import Login.Login;
+import java.io.IOException;
 import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -18,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -48,9 +50,11 @@ public class PostingDatabase {
     
     public List<Post> getPost() throws ClassNotFoundException{
         ResultSet rs;
+        Connection con;
         List<Post> records = new ArrayList<>();
         try {
-          Statement stmt = makeConnection().createStatement();
+          con = makeConnection();
+          Statement stmt = con.createStatement();
           String query = "Select * from post where status=\"Published\"";
           rs = stmt.executeQuery(query);
 
@@ -64,6 +68,7 @@ public class PostingDatabase {
               post.setStatus(rs.getString(6));
               records.add(post);
            }
+          con.close();
         } catch (SQLException e) {
            System.err.println(e);
         }
@@ -72,9 +77,11 @@ public class PostingDatabase {
     
     public List<Post> getAuthorPost() throws ClassNotFoundException{
         ResultSet rs;
+        Connection con;
         List<Post> records = new ArrayList<>();
         try {
-          Statement stmt = makeConnection().createStatement();
+          con = makeConnection();
+          Statement stmt = con.createStatement();
           String query = "Select * from post where author=\"chobits\"";
           rs = stmt.executeQuery(query);
 
@@ -88,6 +95,7 @@ public class PostingDatabase {
               post.setStatus(rs.getString(6));
               records.add(post);
            }
+          con.close();
         } catch (SQLException e) {
            System.err.println(e);
         }
@@ -136,35 +144,40 @@ public class PostingDatabase {
         ps.setString(4,Email);
         ps.setString(5,"Owner");
         int i = ps.executeUpdate();
+        con.close();
         return "Home.xhtml";
     }
     
-    public String setLoginOnLoad() throws ClassNotFoundException, SQLException{
-        System.out.println("asdasdasd");
+    public void setLoginOnLoad() throws ClassNotFoundException, SQLException, IOException{
+        ExternalContext extCont = FacesContext.getCurrentInstance().getExternalContext();
         Cookie cUsername = login.getUserCookie();
-//        System.out.println(cUsername.getValue());
         Cookie cPassword = login.getPassCookie();
-//        System.out.println(cPassword.getValue());
+
         if (cUsername!=null && cPassword!=null){
             ResultSet rs;
+            Connection con;
+            con = makeConnection();
             int existUser=0;
-            Statement stmt = makeConnection().createStatement();
+            Statement stmt = con.createStatement();
             String query = "Select COUNT(Username) from user where Username=\""+cUsername.getValue()+"\" and Password=\""+cPassword.getValue()+"\";";
             rs = stmt.executeQuery(query);
 
             while(rs.next()){
                 existUser = rs.getInt(1);
-                System.out.println(existUser);
+                System.out.println("exist user: " + existUser);
             }
             if (existUser>0){
                 System.out.println("masuk");
-                return "Role/Owner.xhtml?faces-redirect=true";
+                extCont.redirect("/SImpleBlog/faces/Role/Owner.xhtml");
             }
             else{
-                return "Home.xhtml";
+                extCont.redirect("/SImpleBlog/faces/Home.xhtml");
             }
+            con.close();
         }
-        return "Home.xhtml";
+        else{
+            extCont.redirect("/SImpleBlog/faces/Home.xhtml");
+        }
     }
     
     public String Login() throws ClassNotFoundException, SQLException{
@@ -174,19 +187,31 @@ public class PostingDatabase {
 
         ResultSet rs;
         int existUser=0;
-        Statement stmt = makeConnection().createStatement();
+        Connection con;
+        con = makeConnection();
+        Statement stmt = con.createStatement();
         String query = "Select COUNT(Username) from user where Username=\""+Username+"\" and Password=\""+Password+"\";";
         rs = stmt.executeQuery(query);
 
         while(rs.next()){
             existUser = rs.getInt(1);
          }
+        
+        con.close();
         if (existUser>0){
             return "Role/Owner.xhtml?faces-redirect=true";
         }
         else{
             return "Home.xhtml";
         }
+    }
+    
+    public void setLogout() throws ClassNotFoundException, SQLException, IOException{
+        ExternalContext extCont = FacesContext.getCurrentInstance().getExternalContext();
+        System.out.println("kepanggil");
+        login.delUserCookie();
+        login.delPassCookie();
+        extCont.redirect("/SImpleBlog/");
     }
     
 }
