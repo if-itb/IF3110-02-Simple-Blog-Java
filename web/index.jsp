@@ -61,7 +61,7 @@
             <div class="posts">
                 <nav class="art-list">
                   <ul class="art-list-body">
-                    <%= listPost.listPosts() %>
+                    <%= listPost.listPublishedPosts() %>
                   </ul>
                 </nav>
             </div>
