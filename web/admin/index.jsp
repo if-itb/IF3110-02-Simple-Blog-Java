@@ -26,11 +26,18 @@
             }
             
         %>
+        
+        <form action="user.jsp" method="POST" id="tombol">
+            <input type="submit" value="User Management">
+        </form>
+        <form action="post_management.jsp" method="POST" id="tombol">
+            <input type="submit" value="Post Management">
+        </form>
+        
         <form action="../LogoutServlet" method="post">
-        <input type="submit" value="Logout" >
-        <br><br>
-        <a href="post_management.jsp"> Post Management </a>
-        <br>
+            <input type="submit" value="Logout" >
+        </form>
+        
         <a href="../index.jsp"> Main Page </a>
     </body>
 </html>
