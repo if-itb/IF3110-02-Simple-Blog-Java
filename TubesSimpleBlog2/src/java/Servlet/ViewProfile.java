@@ -8,6 +8,7 @@ package Servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -32,13 +33,21 @@ public class ViewProfile extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
+        out.print("<link rel=\"stylesheet\" href=\"style.css\" type=\"text/css\" /> "
+                + "<title>User Profile</title>"
+                + "<div class=\"header\">Simple Blog</div>"
+                + "<h1> View Profile</h1>"
+                + "<hr></hr>");
         HttpSession session = request.getSession(false);
         
         try {
         if(session!=null){
-           out.print("Welcome "+session.getAttribute("user") );
+           out.print("<p>Welcome "+session.getAttribute("user") );
+           out.print("<br/> Kamu " + session.getAttribute("role")+"</p>"
+                   + "<div class=\"footer\">rita | cilvia | linda </div>");
         }   else{
         RequestDispatcher rd= request.getRequestDispatcher("Login.xhtml");
         rd.include(request, response);
@@ -46,6 +55,7 @@ public class ViewProfile extends HttpServlet {
            
         }
         finally{}
+     
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

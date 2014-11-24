@@ -1,16 +1,51 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
-    <h:head>
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+        <link rel="stylesheet" href="style.css" type="text/css" />
+        <h:head>
         <title>Simple Blog</title>
-    </h:head>
-    <h:body onload="#{ViewPost.connectDb()}"> 
-        Simple Blog
-        <br/><h:outputText value="#{ViewPost.getJudul()}"></h:outputText>      
-         <br/><h:outputText value="#{ViewPost.getKonten()}"></h:outputText>
-         <br/> <h:outputText value="#{ViewPost.getTanggal()}"></h:outputText>
-        aaa
+    </h:head>        
+        <div class="header">Simple Blog</div>
+        <br/>
+    <h1>View Post </h1>
+
+    <h:body onload="#{Komentar.connectDb()}"> 
+        <hr>  
+      <h2>#{viewPost.getJudul()}</h2>     
+        <h3>Date: <h:outputText value="#{viewPost.getTanggal()}"></h:outputText></h3>
+                <p><h:outputText value="#{viewPost.getKonten()}"></h:outputText></p>
+        </hr> 
+        
+        <h3> Komentar</h3>
+        #{listKomentar.postid}
+        <c:forEach items="#{listKomentar.arrKomentar}" var="komen">
+ <p>#{listKomentar.postid}
+			<br/><h:outputText value="#{komen.commentid}"></h:outputText> 
+			
+                        <br/><h:outputText value="#{komen.nama}"></h:outputText> 
+			<br/><h:outputText value="#{komen.tanggal}"></h:outputText>
+			<br/> <h:outputText value="#{komen.komentar}"></h:outputText>
+                        <hr></hr></p>
+		</c:forEach>
+        <p>           
+            <h:form> Nama: <h:inputText id="input" value="#{komentar.nama}" /></h:form>
+            <h:form>     Email: <h:inputText id="input" value="#{komentar.email}" /></h:form>
+                <h:form> Komentar:   <h:inputText id="input" value="#{komentar.komentar}" /></h:form>
+                <h:form>  <h:commandButton value="Submit" action="#{komentar.addComment}" onclick="return check();"/></h:form>
+	        <h:outputText value="#{komentar.nama}"/>
+                <h:outputText value="#{komentar.komentar}"/>
+</p>
+        
+        
+        <hr></hr>
+        <form action="Login" method="post">
+            Username : <input type = "text" name="uname"/>
+            Password : <input type ="password" name="pass"/>
+            <input type="submit" value="Login"/>
+        </form>
+        <div class="footer">rita | cilvia | linda </div>
     </h:body>
 </html>
 

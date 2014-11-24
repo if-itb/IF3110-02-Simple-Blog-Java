@@ -26,7 +26,7 @@ import javax.faces.event.ComponentSystemEvent;
  *
  * @author ASUS
  */
-@ManagedBean(name = "ViewPost", eager = true)
+@ManagedBean(name = "viewPost", eager = true)
 @SessionScoped
 public class ViewPost {
     public int postid;
@@ -46,7 +46,7 @@ public class ViewPost {
     public Date getTanggal(){
     return tanggal;}
 
-    public void connectDb(){
+    public ViewPost(){
         String url = "jdbc:mysql://localhost:3306/datapost";
 	String driver = "com.mysql.jdbc.Driver";
 	String userName = "root"; 
@@ -70,6 +70,7 @@ public class ViewPost {
                   judul=res.getString("Judul");
                   tanggal = res.getDate("Tanggal");                
                   konten = res.getString("Konten");
+                  postid=res.getInt("PID");
 		  conn.close();
 		  } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException e) {
 		  }

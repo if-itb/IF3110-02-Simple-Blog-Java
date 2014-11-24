@@ -17,6 +17,10 @@
         <servlet-name>ViewProfile</servlet-name>
         <servlet-class>Servlet.ViewProfile</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LoginUser</servlet-name>
+        <servlet-class>Servlet.LoginUser</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>/faces/*</url-pattern>
@@ -28,6 +32,10 @@
     <servlet-mapping>
         <servlet-name>ViewProfile</servlet-name>
         <url-pattern>/ViewProfile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoginUser</servlet-name>
+        <url-pattern>/LoginUser</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

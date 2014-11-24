@@ -8,8 +8,16 @@ package Servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -31,12 +39,78 @@ public class Login extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         String uname= request.getParameter("uname");
         String pass= request.getParameter("pass");
-        try  {
+        Connection conn = null;
+        String url = "jdbc:mysql://localhost:3306/";
+        String dbName = "datapost";
+        String driver = "com.mysql.jdbc.Driver";
+        try {
+            Class.forName(driver).newInstance();
+            conn = DriverManager.getConnection(url+dbName,"root","");
+            String strQuery = "select * from user where username='" + uname + "' and password = '" + pass + "'";
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(strQuery);
+
+            if(rs.next())
+            {
+               String msg = "login Successful";
+               HttpSession session=request.getSession();
+               session.setAttribute("user",uname);
+               session.setAttribute("role",rs.getString("role"));
+                out.print(msg);
+               int i = 0;
+               Cookie[] cookies = request.getCookies();
+               boolean found = false;
+               while(i<cookies.length && !found)  
+               {
+                   if(cookies[i].getName().equalsIgnoreCase("user"))
+                   {
+                        found = true;
+                   }
+                   else
+                   {
+                        i++;
+                   }
+               }
+               if(found)
+               {
+                   cookies[i].setMaxAge(0);
+                   // Menciptakan cookies untuk guest      
+                   Cookie guest = new Cookie("user",uname); 
+                   // Meng - set agar cookie hilang setelah 24 jam
+                   guest.setMaxAge(60*60*2); 
+                   // Menambahkan cookie ke header response
+                   response.addCookie(guest);
+               }
+               else
+               {
+                   // Menciptakan cookies untuk guest      
+                   Cookie guest = new Cookie("user","guest"); 
+                   // Meng - set agar cookie hilang setelah 24 jam
+                   guest.setMaxAge(60*60*2); 
+                   // Menambahkan cookie ke header response
+                   response.addCookie(guest);
+               }
+               
+               String site = new String("ViewProfile");
+               response.setStatus(response.SC_MOVED_TEMPORARILY);
+               response.setHeader("Location", site);
+            }
+            else
+            {
+                String msg = "login unsuccessful";
+                RequestDispatcher rd = request.getRequestDispatcher("Login.xhtml");
+                rd.include (request,response);
+                 out.print(msg);
+            }
+            rs.close();
+            st.close();
+           
+        /*try  {
             if(uname.equalsIgnoreCase("admin")&& pass.equalsIgnoreCase("admin")){
             HttpSession session = request.getSession();
             session.setAttribute("user", uname);
@@ -46,17 +120,7 @@ public class Login extends HttpServlet {
                 RequestDispatcher rd= request.getRequestDispatcher("Login.xhtml");
                 rd.include(request, response);
             }
-            /* TODO output your page here. You may use following sample code. */
-          /*  out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet Login</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet Login at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");*/
-            
+          */         
         }
        finally {} 
     }
@@ -73,7 +137,17 @@ public class Login extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -87,7 +161,17 @@ public class Login extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
