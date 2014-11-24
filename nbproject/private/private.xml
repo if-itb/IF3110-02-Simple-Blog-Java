@@ -4,14 +4,14 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/E:/Kuliahan/Informatika/Tugas/WBD/Simple%20Blog%20JSF/Tubes2WBD/Tubes2WBD/web/index.xhtml</file>
-            <file>file:/E:/Kuliahan/Informatika/Tugas/WBD/Simple%20Blog%20JSF/Tubes2WBD/Tubes2WBD/src/java/Post/PostBean.java</file>
-            <file>file:/E:/Kuliahan/Informatika/Tugas/WBD/Simple%20Blog%20JSF/Tubes2WBD/Tubes2WBD/web/jspUser/view-users.jsp</file>
-            <file>file:/E:/Kuliahan/Informatika/Tugas/WBD/Simple%20Blog%20JSF/Tubes2WBD/Tubes2WBD/src/java/User/User.java</file>
-            <file>file:/E:/Kuliahan/Informatika/Tugas/WBD/Simple%20Blog%20JSF/Tubes2WBD/Tubes2WBD/src/java/Post/Post.java</file>
-            <file>file:/E:/Kuliahan/Informatika/Tugas/WBD/Simple%20Blog%20JSF/Tubes2WBD/Tubes2WBD/src/java/Post/Paket.java</file>
-            <file>file:/E:/Kuliahan/Informatika/Tugas/WBD/Simple%20Blog%20JSF/Tubes2WBD/Tubes2WBD/web/jspUser/add_user.jsp</file>
             <file>file:/E:/Kuliahan/Informatika/Tugas/WBD/Simple%20Blog%20JSF/Tubes2WBD/Tubes2WBD/web/index.jsp</file>
             <file>file:/E:/Kuliahan/Informatika/Tugas/WBD/Simple%20Blog%20JSF/Tubes2WBD/Tubes2WBD/web/WEB-INF/web.xml</file>
+            <file>file:/E:/Kuliahan/Informatika/Tugas/WBD/Simple%20Blog%20JSF/Tubes2WBD/Tubes2WBD/src/java/Post/Post.java</file>
+            <file>file:/E:/Kuliahan/Informatika/Tugas/WBD/Simple%20Blog%20JSF/Tubes2WBD/Tubes2WBD/src/java/Post/Paket.java</file>
+            <file>file:/E:/Kuliahan/Informatika/Tugas/WBD/Simple%20Blog%20JSF/Tubes2WBD/Tubes2WBD/src/java/Post/PostBean.java</file>
+            <file>file:/E:/Kuliahan/Informatika/Tugas/WBD/Simple%20Blog%20JSF/Tubes2WBD/Tubes2WBD/src/java/User/User.java</file>
+            <file>file:/E:/Kuliahan/Informatika/Tugas/WBD/Simple%20Blog%20JSF/Tubes2WBD/Tubes2WBD/src/java/User/userPaket.java</file>
+            <file>file:/E:/Kuliahan/Informatika/Tugas/WBD/Simple%20Blog%20JSF/Tubes2WBD/Tubes2WBD/web/new_post.xhtml</file>
         </group>
     </open-files>
 </project-private>
