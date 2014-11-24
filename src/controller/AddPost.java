@@ -1,14 +1,7 @@
 package controller;
 
-import java.text.ParsePosition;
-import java.text.SimpleDateFormat;
+
 import java.util.Date;
-
-
-
-
-
-
 
 
 import javax.faces.bean.ManagedBean;
@@ -54,23 +47,26 @@ public class AddPost {
 		return post.getDate();
 	}
 
-	public void setDate(String t) {
-		Date date = new SimpleDateFormat("mm/dd/yy").parse(t, new ParsePosition(0));
+	public void setDate(Date date) {
 		post.setDate(date);
+		System.out.println(post.getDate().toString());
 	}
 	
-	public void execute() {
+	public String execute() {
 		System.out.println("Name:   "+ alpha.getDetails().getName());
 		if(alpha != null){
 			DatabaseUtility dbUtil = DatabaseUtility.getInstance();
 			
+			String date = ""+(1900+post.getDate().getYear())+"/"+(post.getDate().getMonth()+1)+"/"+post.getDate().getDate();
+			
 			String query = "INSERT INTO post (id_user, judul, isi, waktu, is_deleted, is_published) "
 					+ "VALUES ("+alpha.getDetails().getUserId()+",'"+post.getTitle()+"','"+post.getContent()+"',"
-					+ "'2014-11-23'"+",0,0)";
+					+ "'"+date+"'"+",0,0)";
 			
 			System.out.println(query);
 			
 			dbUtil.execute(query);
 		}
+		return "index";
 	}
 }
