@@ -30,5 +30,7 @@
         <input type="submit" value="Logout" >
         <br><br>
         <a href="post_management.jsp"> Post Management </a>
+        <br>
+        <a href="../index.jsp"> Main Page </a>
     </body>
 </html>

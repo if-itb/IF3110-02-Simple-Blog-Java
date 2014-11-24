@@ -28,7 +28,7 @@ public class Post {
     
     public void cookieHeaderCheck(CookieHelper c) {
         //prekondisi: cookie sudah pasti ada
-        setUser(c.getUsername());
+        setUser(c.getUsername(),c.getRole());
         cookieOn = true;
     }
     
@@ -44,28 +44,9 @@ public class Post {
         return header;
     }
     
-    public void setUser(String user) {
+    public void setUser(String user, String role) {
         currentUser = user;
-        try {
-            //login database
-            KoneksiDatabase.setUser("root");
-            KoneksiDatabase.setPassword("");
-            KoneksiDatabase.setDatabase("localhost","blog");
-            //statement
-            Connection koneksi = KoneksiDatabase.getKoneksi();
-            Statement statement = koneksi.createStatement();
-            //query
-            String querySelectPost = "SELECT * from user WHERE username='" + user + "'";
-            //execute query
-            ResultSet result = statement.executeQuery(querySelectPost);
-            //tulis hasil query
-            while (result.next()) {
-                currentRole = result.getString("role");
-            }
-        }
-        catch (SQLException ex) {
-            Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        currentRole = role;
     }
     
     /**

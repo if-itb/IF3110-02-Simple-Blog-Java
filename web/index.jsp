@@ -48,9 +48,6 @@
             if(cookie.thereIsCookie()) {
                 listPost.cookieHeaderCheck(cookie);
             }
-            else {
-                response.sendRedirect("../login/index.html");
-            }
         %>
                        
         <div class="wrapper">
