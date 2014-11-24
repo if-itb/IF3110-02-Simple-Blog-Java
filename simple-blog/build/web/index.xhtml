@@ -9,7 +9,24 @@
     <h:body>
         <ui:composition template="mainTemplate.xhtml">
             <ui:define name="content">
-               woi
+               <div class="posts">
+                    <nav class="art-list">
+                      <ul class="art-list-body">
+                            <!-- buat nge load content !-->
+                            <li class='art-list-item'>
+                                <div class='art-list-item-title-and-time'>
+                                        <h2 class='art-list-title'><a href='#'>ini adalah judul</a></h2>
+                                        <div class='art-list-time'>24 November 2014</div>
+                                        <div class='art-list-time'><span style='color:#F40034;'>&#10029;</span> Featured</div>
+                                </div>
+                                    <p>ini adalah paragraph</p>
+                                <p>
+                                    <h:link value="Edit" outcome="edit"/> | <h:link value="Hapus"/>
+                                </p>
+                            </li>
+                      </ul>
+                    </nav>
+                </div>
             </ui:define>
     	</ui:composition>
     </h:body>
