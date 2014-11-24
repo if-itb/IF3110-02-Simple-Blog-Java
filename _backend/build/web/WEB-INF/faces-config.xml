@@ -15,6 +15,11 @@
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
     <managed-bean>
+        <managed-bean-name>listpost</managed-bean-name>
+        <managed-bean-class>com.corejsf.ListPost</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
         <managed-bean-name>comment</managed-bean-name>
         <managed-bean-class>com.corejsf.Comment</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope>
