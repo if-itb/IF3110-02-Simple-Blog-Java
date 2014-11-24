@@ -22,14 +22,61 @@ public class Post {
     private static String tanggalPost;
     private static String kontenPost;
     private static boolean publishStatus;
+    public String currentUser;
+    public String currentPass;
+    public String currentRole;
+    public boolean cookieOn;
     
+    public void cookieHeaderCheck(CookieHelper c) {
+        cookieOn = false;
+        if(c.thereIsCookie()) {
+            setUser(c.getUsername());
+            cookieOn = true;
+        }
+    }
+    
+    public String showMessageHeader() {
+        String header;
+        if (cookieOn) {
+            header = "Welcome " + currentUser + ", your role is " + currentRole;
+        }
+        else {
+            header = "Welcome" + ", please login <a href=\"login/index.html\">here</a>.";
+        }
+        return header;
+    }
+    
+    public void setUser(String user) {
+        currentUser = user;
+        try {
+            //login database
+            KoneksiDatabase.setUser("root");
+            KoneksiDatabase.setPassword("");
+            KoneksiDatabase.setDatabase("localhost","blog");
+            //statement
+            Connection koneksi = KoneksiDatabase.getKoneksi();
+            Statement statement = koneksi.createStatement();
+            //query
+            String querySelectPost = "SELECT * from user WHERE username='" + user + "'";
+            //execute query
+            ResultSet result = statement.executeQuery(querySelectPost);
+            //tulis hasil query
+            while (result.next()) {
+                currentPass = result.getString("password");
+                currentRole = result.getString("role");
+            }
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     
     /**
      * Mengecek apakah pengguna adalah admin
      * @return
      */    
     public boolean isAdmin() {
-        return true;
+        return (currentRole.compareTo("admin") == 0);
     }
     
     /**
@@ -37,7 +84,7 @@ public class Post {
      * @return
      */
     public boolean isEditor() {
-        return true;
+        return (currentRole.compareTo("editor") == 0);
     }
     
     /**
@@ -45,7 +92,7 @@ public class Post {
      * @return
      */
     public boolean isOwner() {
-        return true;
+        return (currentRole.compareTo("owner") == 0);
     }
     
     /**

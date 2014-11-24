@@ -45,16 +45,16 @@
             //instantiasi kelas Post dan pemanggilan dari database
             Post listPost = new Post();
             CookieHelper cookie = new CookieHelper(request.getCookies());
-            //batas inisialisasi dan instantiasi
-            
+            listPost.cookieHeaderCheck(cookie);
         %>
+        
                
         <div class="wrapper">
 
         <nav class="nav">
             <a style="border:none;" id="logo" href="index.html"><h1>Not<span>-</span>a<span>-</span>Simple<span>-</span>Blog</h1></a>
             <ul class="nav-primary">
-                <li>Welcome <% if(cookie.thereIsCookie()) out.print(cookie.getUsername()); %>, your role is Unknown </li>
+                <li><%=listPost.showMessageHeader()%> </li>
                 <li><a href="new_post.html">+ Tambah Post</a></li>
             </ul>
         </nav>
