@@ -7,12 +7,18 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       >
     <h:head>
-    	<h:outputStylesheet library="css" name="table-style.css"  />
+        <ui:include src="header-script.xhtml"/>
+        <h:outputStylesheet library="css" name="screen.css"/>
+        <title>Simple Blog | Manage User</title>
     </h:head>
-    <h:body>
-    	
-    	<h1>JSF 2 dataTable example</h1>
-    	<h:form>
+    <h:body class="default" onload="greet()">
+    <div class="wrapper">
+    <ui:include src="header.xhtml"/>
+      <div class="art-body">
+       <div class="art-body-inner">
+    	<h2>Manage User</h2>
+        <div id="contact-area">
+            <h:form>
             <h:dataTable value="#{manUser.users}" var="o"
     			styleClass="order-table"
     			headerClass="order-table-header"
@@ -57,7 +63,7 @@
     			
     		</h:dataTable>
     		
-    		<h3>Tambah User</h3>
+    		<h6>Tambah User</h6>
     		<table>
     		<tr>
     			<td>Username :</td>
@@ -88,7 +94,13 @@
     		
                 <h:commandButton value="Add" action="#{manUser.addAction}" />
     		
-    	</h:form>
+            </h:form>
+            </div>
+        </div>
+    </div>
+    <ui:include src="footer.xhtml"/>
+    </div>
+    <ui:include src="footer-script.xhtml"/>
     </h:body>
 		
 </html>
