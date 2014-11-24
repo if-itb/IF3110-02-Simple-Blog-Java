@@ -30,6 +30,14 @@ public class User {
     private final String databaseName = "blog";
     
     /**
+     * Konstruktor ini digunakan jika ingin menggunakan fungsi fungsi yang ada
+     * tanpa menginisialisasi usernya
+     */
+    public User()
+    {
+        
+    }
+    /**
      * Membuat user baru untuk keperluan login
      * @param _username Username dari user
      * @param _password Password dari user
@@ -166,6 +174,28 @@ public class User {
         return listUser;
     }
     
+    /**
+     * Fungsi untuk menghapus 1 user dengan username tertentu.
+     * username harus diset terlebih dahulu dengan prosedure user.setUsername("username").
+     * @throws SQLException 
+     */
+    
+    public void deleteUser() throws SQLException
+    {
+        KoneksiDatabase.setUser(userSQL);
+        KoneksiDatabase.setPassword(passSQL);
+        KoneksiDatabase.setDatabase(urlSQL,databaseName);
+        
+        Connection koneksi = KoneksiDatabase.getKoneksi();
+        Statement statement = koneksi.createStatement();
+        String query = "DELETE FROM user WHERE username = '" + username +"'";
+        System.out.println(query);
+        
+        try (PreparedStatement preStat = koneksi.prepareStatement(query)) {
+            preStat.executeUpdate();
+            preStat.close();
+        }
+    }
     /**
      * Fungsi untuk user melakukan login dengan menggunakan username dan password 
      * yang telah di set sebelumnya
@@ -346,9 +376,14 @@ public class User {
                 System.out.println("gagal login");
             }
             
-            User kedua = new User("akhfa5", "akhfa", "namaAkhfa","akhmadfakhoni@gmail.com","editor");
-            kedua.masukDatabase();
-            kedua.getAllUser();
+//            User kedua = new User("akhfa5", "akhfa", "namaAkhfa","akhmadfakhoni@gmail.com","editor");
+//            kedua.masukDatabase();
+//            kedua.getAllUser();
+            
+            //Test delete
+            User usertest = new User();
+            usertest.setUsername("akhfa4");
+            usertest.deleteUser();
             
         } catch (SQLException ex) {
             Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
