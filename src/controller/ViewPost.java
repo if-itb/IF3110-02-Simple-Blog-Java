@@ -2,6 +2,7 @@ package controller;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -40,8 +41,8 @@ public class ViewPost {
 		return post.getContent();
 	}
 
-	public String getDate() {
-		return post.getDate().toString();
+	public Date getDate() {
+		return post.getDate();
 	}
 
 	public int getId() {

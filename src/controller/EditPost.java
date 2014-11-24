@@ -5,29 +5,39 @@ import java.util.Date;
 
 
 
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 
-import entities.UserData;
 import entities.Post;
 
 @ManagedBean
 @RequestScoped
-public class AddPost {
-	@ManagedProperty(value="#{userData}")
-	private UserData alpha;
+public class EditPost {
+
 	
-	public void setAlpha(UserData z) {
-		alpha = z;
-	}
+	@ManagedProperty(value="#{viewPost}")
+	private ViewPost view;
 	
 	private Post post;
 	
-	public AddPost(){
+	public void setView(ViewPost vp){
+		view = vp;
+	}
+	
+	public EditPost(){
 		post = new Post();
 	}
 
+	public int getId(){
+		return post.getId();
+	}
+	
+	public void setId(int id){
+		post.setId(id);
+	}
+	
 	public String getTitle() {
 		return post.getTitle();
 	}
@@ -53,16 +63,26 @@ public class AddPost {
 		System.out.println(post.getDate().toString());
 	}
 	
+	public void initialize(){
+		view = new ViewPost();
+		view.setId(this.post.getId());
+		view.execute();
+		this.setContent(view.getContent());
+		this.setDate(view.getDate());
+		this.setTitle(view.getTitle());
+	}
+	
 	public String execute() {
-		if(alpha != null){
+		if(post!=null){
 			DatabaseUtility dbUtil = DatabaseUtility.getInstance();
 			
 			@SuppressWarnings("deprecation")
 			String date = ""+(1900+post.getDate().getYear())+"/"+(post.getDate().getMonth()+1)+"/"+post.getDate().getDate();
 			
-			String query = "INSERT INTO post (id_user, judul, isi, waktu, is_deleted, is_published) "
-					+ "VALUES ("+alpha.getDetails().getUserId()+",'"+post.getTitle()+"','"+post.getContent()+"',"
-					+ "'"+date+"'"+",0,0)";
+			String query = "UPDATE post SET judul ='"+post.getTitle()+ 
+					"', isi ='"+post.getContent()+"', waktu = '"+date+"' WHERE id = "+ post.getId();
+			
+			System.out.println(query);
 			
 			dbUtil.execute(query);
 		}
