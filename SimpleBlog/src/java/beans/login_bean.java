@@ -25,12 +25,9 @@ public class login_bean {
     private String password;
     private String dbusername;
     private String dbpassword;
+    private String judul;
     private boolean remember;
     String rememberstr;
-    Connection con;
-    Statement ps;
-    ResultSet rs;
-    String SQL_Str;
     
     public login_bean(){
         checkCookie();
@@ -56,6 +53,9 @@ public class login_bean {
     public boolean getRemember(){
         return remember;
     }
+    public String getJudul() {
+        return judul;
+    }
     
     //Setter
     public void setPassword(String password){
@@ -72,6 +72,10 @@ public class login_bean {
     
     //Connect to mysql and get username-password 
     public void dbData(String uname) throws SQLException, ClassNotFoundException{
+        Connection con;
+        Statement ps;
+        ResultSet rs;
+        String SQL_Str;
         Class.forName("com.mysql.jdbc.Driver");
         con = DriverManager.getConnection("jdbc:mysql://localhost:3306/tubeswbd", "root", "");
         ps = con.createStatement();
@@ -80,6 +84,10 @@ public class login_bean {
         rs.next();
         dbusername = rs.getString(2);
         dbpassword = rs.getString(3);
+        SQL_Str = "Select * from post";
+        rs = ps.executeQuery(SQL_Str);
+        rs.next();
+        judul = rs.getString(2);
     }
     
     public String checkValidUser() throws SQLException, ClassNotFoundException{

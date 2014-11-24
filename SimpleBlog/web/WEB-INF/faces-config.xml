@@ -15,13 +15,23 @@ and open the template in the editor.
         <managed-bean-class>beans.login_bean</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope>    
     </managed-bean>
+    <managed-bean>
+        <managed-bean-name>post_bean</managed-bean-name>
+        <managed-bean-class>beans.post_bean</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>    
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>post</managed-bean-name>
+        <managed-bean-class>beans.post</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>    
+    </managed-bean>
     <navigation-rule>
         <description>Login Page</description>
         <from-view-id>/login.jsp</from-view-id>
         <navigation-case>
             <from-action>#{login_bean.checkValidUser}</from-action>
             <from-outcome>valid</from-outcome>
-            <to-view-id>/index.jsp</to-view-id>
+            <to-view-id>/index.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-action>#{login_bean.checkValidUser}</from-action>
