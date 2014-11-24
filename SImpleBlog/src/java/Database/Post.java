@@ -54,7 +54,10 @@ public class Post {
     }
     
     public String getContentPreview(){
-        return Content.substring(0, 200);
+        if(Content.length() > 300)
+            return Content.substring(0, 300);
+        else
+            return Content;
     }
 
     public String getAuthor() {

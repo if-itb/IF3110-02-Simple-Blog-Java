@@ -58,10 +58,10 @@ and open the template in the editor.
                     </div>
                     <p>#{post.contentPreview} &hellip;</p>
                     <p>
-                        <h:form>
+                        <h:form styleClass="editbutton">
                             <h:commandLink value="Edit" action="#{Editpost.Redirect(post.id)}"></h:commandLink>
                         </h:form>
-                        <h:form>
+                        <h:form styleClass="publishbutton">
                             <h:commandLink value="Publish" action="#{Publishpost.publishPost(post.id)}" onclick="return confirm('Are you sure to publish this post?')"></h:commandLink>
                         </h:form>
                     </p>
