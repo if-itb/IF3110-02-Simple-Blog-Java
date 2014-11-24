@@ -42,9 +42,11 @@ and open the template in the editor.
 </nav>
 
 <div id="home">
-    
     <div class="posts">
         <nav class="art-list">
+            <div id="title">
+                Unpublished Posts
+            </div>
           <ul class="art-list-body">
               <c:forEach items="#{Publishpost.unpublishedPost}" var="post">
                 <li class="art-list-item">
@@ -55,7 +57,9 @@ and open the template in the editor.
                     </div>
                     <p>#{post.contentPreview} &hellip;</p>
                     <p>
-                        <a href="#">Edit</a> | <a href="#" action="" onclick="publishPost()">Publish</a>
+                        <a href="#">Edit</a> | <h:form>
+                                                <h:commandLink value="Publish" action="#{Publishpost.publishPost(post.id)}" onclick="return confirm('Are you sure to publish this post?')"></h:commandLink>
+                                               </h:form>
                     </p>
                 </li>
               </c:forEach>
