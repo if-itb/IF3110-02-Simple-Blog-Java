@@ -9,6 +9,7 @@
     <h:body>
         <ui:composition template="mainTemplate.xhtml">
             <ui:define name="content">
+                 #{dbTest.test()}
                <div class="posts">
                     <nav class="art-list">
                       <ul class="art-list-body">
@@ -21,12 +22,13 @@
                                 </div>
                                     <p>ini adalah paragraph</p>
                                 <p>
-                                    <h:link value="Edit" outcome="edit"/> | <h:link value="Hapus"/>
+                                    <h:link value="Edit" /> | <h:link value="Hapus"/>
                                 </p>
                             </li>
                       </ul>
                     </nav>
                 </div>
+               
             </ui:define>
     	</ui:composition>
     </h:body>
