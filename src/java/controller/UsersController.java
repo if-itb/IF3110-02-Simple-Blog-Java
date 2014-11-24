@@ -8,13 +8,16 @@ package controller;
 
 import java.io.IOException;
 import java.io.Serializable;
-import model.database.MySQL;
-import model.User;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import model.User;
+import model.database.MySQL;
 
 /**
  *
@@ -125,8 +128,15 @@ public class UsersController implements Serializable {
 		}
 		
 		if (user != null) {
-			FacesContext.getCurrentInstance().getExternalContext().addResponseCookie("username", user.getUsername(), null);
-			FacesContext.getCurrentInstance().getExternalContext().addResponseCookie("role", user.getRole(), null);
+			FacesContext facesContext = FacesContext.getCurrentInstance();
+			Cookie userCookie = new Cookie("username", user.getUsername());
+			userCookie.setMaxAge(3600);
+			((HttpServletResponse) facesContext.getExternalContext().getResponse()).addCookie(userCookie);
+			Cookie passCokie = new Cookie("role", user.getRole());
+			passCokie.setMaxAge(3600);
+			((HttpServletResponse) facesContext.getExternalContext().getResponse()).addCookie(passCokie);
+			//FacesContext.getCurrentInstance().getExternalContext().addResponseCookie("username", user.getUsername(), null);
+			//FacesContext.getCurrentInstance().getExternalContext().addResponseCookie("role", user.getRole(), null);
 			FacesContext.getCurrentInstance().getExternalContext().redirect("/SimpleBlog/faces/index.xhtml");
 		} else {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Username or password is invalid"));
@@ -134,6 +144,10 @@ public class UsersController implements Serializable {
 	}
 
 	public void logout() throws IOException {
+		HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();  
+        HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+		Cookie[] cookies = request.getCookies();
+		
 		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
 		System.err.println(FacesContext.getCurrentInstance().getExternalContext().getRequestCookieMap().get("username").toString());
 		FacesContext.getCurrentInstance().getExternalContext().redirect("/user/login.xhtml");
