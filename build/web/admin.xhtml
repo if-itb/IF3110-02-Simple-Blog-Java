@@ -34,7 +34,7 @@
             #{post.setQuery_status("published")}
             <ui:repeat value="#{post.getDaftar_post()}" var="posts">
                 <div class="post">
-                    <a href="#" class="title">
+                    <a href="post.xhtml?id=#{posts.id}" class="title" >
                         #{posts.judul}
                     </a>
                     <div class="date">
