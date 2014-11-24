@@ -8,12 +8,14 @@ and open the template in the editor.
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-    <head>
+    <h:head>
         <link type="text/css" rel="stylesheet" href="assets\screen.css"/>
         <title>Simple Blog</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </head>
-    <body class="default">
+
+    </h:head>
+    <h:body class="default">
+        <script type = "text/javascript" src ="assets/confirmdate.js"/>
 <div class="wrapper">
 
 <nav class="nav">
@@ -36,17 +38,17 @@ and open the template in the editor.
 
             <div id="contact-area">
                 <!--form action="#" method="post">-->
-                <h:form id = "Form" onsubmit="return validateform();">
+                <h:form id = "Form" onsubmit="return validateform()">
                     <label for="Judul">Title:</label>
-                    <input type="text" name="Judul" id="Judul" />
+                    <input type="text" name="Judul" id="Judul" placeholder ="Input your title" required ="true" />
 
                     <label for="Tanggal">Date:</label>
-                    <input type="date" name="Tanggal" id="Tanggal" />
+                    <input type="text" name="Tanggal" id="Tanggal" placeholder ="YYYY-MM-DD" required ="true"/>
                     
                     <label for="Konten">Content:</label><br />
-                    <textarea name="Konten" rows="20" cols="20" id="Konten"></textarea>
-                    
-                    <h:commandButton value="Save" class="submit-button" action="Post.java"  />
+                    <textarea name="Konten" id="Konten" placeholder = "Write content here" required = "true"></textarea>
+                    <h:commandButton onclick = "return validateform()" type = "submit" value ="Submit" action="#{Posting.addPost(Judul, Tanggal, Konten, chobits)}"></h:commandButton>
+                    <span id="emailInputValidation">tes</span>
                 </h:form>
             </div>
         </div>
@@ -75,9 +77,6 @@ and open the template in the editor.
 </footer>
 
 </div>
-    </body>
+    </h:body>
 </html>
 
-<script type="text/javascript" src="confirmdate.js">
-
-</script>
