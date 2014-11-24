@@ -13,7 +13,7 @@ and open the template in the editor.
     <head>
         <title>Simple Blog - View Post</title>
         <link type="text/css" rel="stylesheet" href="assets/screen.css"/>
-        <script type="text/javascript" src="assets/js/ajax.js"></script>
+        <script type="text/javascript" src="assets/ajax.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </head>
     <h:body class="default" onload="LoadCommentList(#{Viewpost.postId})">
@@ -47,13 +47,13 @@ and open the template in the editor.
                     <div id="contact-area2">
                         <form method="post" action="#">
                             <label for="Nama">Nama:</label>
-                            <input type="text" name="Nama" id="Nama"/>
+                            <input type="text" name="Nama" id="Nama" required="true"/>
 
                             <label for="Email">Email:</label>
-                            <input type="text" name="Email" id="Email"/>
+                            <input type="text" name="Email" id="Email" required="true"/>
 
                             <label for="Komentar">Komentar:</label><br/>
-                            <textarea name="Komentar" rows="20" cols="20" id="Komentar"></textarea>
+                            <textarea name="Komentar" rows="20" cols="20" id="Komentar" required="true"></textarea>
 
                             <input type="submit" name="submit" value="Kirim" class="submit-button"/>
                         </form>
