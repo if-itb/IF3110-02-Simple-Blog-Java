@@ -6,10 +6,12 @@
 package id.ac.itb.informatika.wbd.jpa.controller;
 
 import id.ac.itb.informatika.wbd.jpa.entities.Post;
+import java.util.List;
 import javax.annotation.Resource;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceUnit;
+import javax.persistence.Query;
 import javax.transaction.UserTransaction;
 
 public class PostJpaController {
@@ -33,5 +35,15 @@ public class PostJpaController {
     
     public void destroy(Long id) {
         
+    }
+
+    public List<Post> getPostList() {
+        EntityManager em = getEntityManager();
+        try {
+            Query q = em.createQuery("select object(o) from Post as o");
+            return q.getResultList();
+        } finally {
+            em.close();
+        }
     }
 }
