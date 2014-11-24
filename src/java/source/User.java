@@ -110,7 +110,7 @@ public class User {
     public boolean successLogin() throws SQLException
     {
         KoneksiDatabase.setUser("root");
-        KoneksiDatabase.setPassword("akhfa");
+        KoneksiDatabase.setPassword("");
         KoneksiDatabase.setDatabase("localhost","blog");
         
         Connection koneksi = KoneksiDatabase.getKoneksi();
@@ -125,11 +125,15 @@ public class User {
             System.out.println("password = " + result.getString(2));
             if(username.equalsIgnoreCase(result.getString(1)) && password.equals(result.getString(2)))
             {
-                
+                result.close();
+                statement.close();
+//                koneksi.close();
                 return true;
             }
         }
-        
+        result.close();
+        statement.close();
+//        koneksi.close();
         return false;
     }
     
@@ -159,10 +163,15 @@ public class User {
             System.out.println("password = " + result.getString(2));
             if(username.equalsIgnoreCase(result.getString(1)) && password.equals(result.getString(2)))
             {
-                
+                result.close();
+                statement.close();
+//                koneksi.close();
                 return true;
             }
         }
+        result.close();
+        statement.close();
+//        koneksi.close();
         return false;
     }
     
@@ -194,11 +203,15 @@ public class User {
             System.out.println("password = " + result.getString(2));
             if(username.equalsIgnoreCase(result.getString(1)) && password.equals(result.getString(2)))
             {
-                
+                result.close();
+                statement.close();
+//                koneksi.close();
                 return true;
             }
         }
-        
+        result.close();
+        statement.close();
+//        koneksi.close();
         return false;
     }
     
@@ -210,7 +223,7 @@ public class User {
     public void masukDatabase() throws SQLException
     {
         KoneksiDatabase.setUser("root");
-        KoneksiDatabase.setPassword("akhfa");
+        KoneksiDatabase.setPassword("");
         KoneksiDatabase.setDatabase("localhost","blog");
         Connection koneksi = KoneksiDatabase.getKoneksi();
         String query = "INSERT INTO user VALUES (?, ?, ?, ?, ?)";
@@ -224,7 +237,7 @@ public class User {
             preStat.executeUpdate();
             preStat.close();
         }
-        
+//        koneksi.close();
     }
     /**
      * Testing untuk user
