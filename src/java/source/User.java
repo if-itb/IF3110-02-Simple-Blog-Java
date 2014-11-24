@@ -174,6 +174,34 @@ public class User {
         return listUser;
     }
     
+        /**
+     * Prosedur untuk mendapatkan 1 user untuk di load ke form update user.
+     * username harus diset terlebih dahulu dengan prosedure user.setUsername("username").
+     * Menghasilkan nama, email, role dari username yang di set.
+     * @throws SQLException 
+     */
+    public void getOneUser() throws SQLException
+    {
+        KoneksiDatabase.setUser(userSQL);
+        KoneksiDatabase.setPassword(passSQL);
+        KoneksiDatabase.setDatabase(urlSQL,databaseName);
+        
+        Connection koneksi = KoneksiDatabase.getKoneksi();
+        Statement statement = koneksi.createStatement();
+        String query = "SELECT nama, email, role FROM user WHERE username = '" + username +"'";
+        System.out.println(query);
+        
+        ResultSet result = statement.executeQuery(query);
+        if(result.next())
+        {
+            this.nama = result.getString("nama");
+            this.email = result.getString("email");
+            this.role = result.getString("role");
+        }
+        result.close();
+        statement.close();
+    }
+    
     /**
      * Fungsi untuk menghapus 1 user dengan username tertentu.
      * username harus diset terlebih dahulu dengan prosedure user.setUsername("username").
@@ -381,9 +409,18 @@ public class User {
 //            kedua.getAllUser();
             
             //Test delete
+//            User usertest = new User();
+//            usertest.setUsername("akhfa4");
+//            usertest.deleteUser();
+            
+            //Test getOneUser
             User usertest = new User();
-            usertest.setUsername("akhfa4");
-            usertest.deleteUser();
+            usertest.setUsername("akhfa5");
+            usertest.getOneUser();
+            System.out.println(usertest.getUsername());
+            System.out.println(usertest.getNama());
+            System.out.println(usertest.getEmail());
+            System.out.println(usertest.getRole());
             
         } catch (SQLException ex) {
             Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
