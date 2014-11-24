@@ -40,14 +40,14 @@ and open the template in the editor.
             </h:form>
         </li>
     </ul>
+    <div id="title">
+        Unpublished Posts
+    </div>
 </nav>
 
 <div id="home">
     <div class="posts">
         <nav class="art-list">
-            <div id="title">
-                Unpublished Posts
-            </div>
           <ul class="art-list-body">
               <c:forEach items="#{Publishpost.unpublishedPost}" var="post">
                 <li class="art-list-item">
