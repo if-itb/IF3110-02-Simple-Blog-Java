@@ -13,7 +13,7 @@
 
 <h:body>
 	<ul>
-	
+
 	</ul>
 	<h1>Simple-Blog</h1>
 	<ul>
@@ -21,15 +21,16 @@
 			<li>Judul: #{item.title}</li>
 			<li>Waktu: #{item.date}</li>
 			<li>Isi: #{item.content}</li>
-			<h:link value="Go to page #{item.id}" action="view_post.jsf?">
+			<h:link value="Go to page #{item.id}" outcome="view_post">
 				<f:param name="post_id" value="#{item.id}" />
 			</h:link>
+
 		</ui:repeat>
 	</ul>
 	<h:form>
 		<h:commandButton action="add_post" value="Add Post" />
 	</h:form>
-	
+
 
 </h:body>
 </html>

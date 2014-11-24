@@ -51,5 +51,9 @@ public class ViewPost {
 	public void setId(int i) {
 		id = i;
 	}
+	
+	public String goToViewPost(){
+		return "view_post?faces-redirect=true";
+	}
 
 }
