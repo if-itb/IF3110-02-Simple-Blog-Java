@@ -6,8 +6,6 @@
 
 package Login;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -45,20 +43,15 @@ public class Login {
         HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
         Cookie userCookie;
         Cookie[] Cookies;
-        int i = 0;
         
         Cookies = request.getCookies();
         if (Cookies!=null && Cookies.length>0){
-            System.out.println(Cookies.length);
             for (Cookie Cookie : Cookies) {
-                System.out.println("usernameeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee masuk" + i);
                 if (Cookie.getName().equals("username")){
-                    System.out.println("usernameeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
+                    System.out.println("user length: " + Cookies.length);
                     userCookie = Cookie;
-                    System.out.println(userCookie.getValue());
                     return userCookie;
                 }
-                i++;
             }
         }
         return null;
@@ -73,12 +66,61 @@ public class Login {
         if (Cookies!=null && Cookies.length>0){
             for (Cookie Cookie : Cookies) {
                 if (Cookie.getName().equals("password")){
+                    System.out.println("password length: " + Cookies.length);
                     passCookie = Cookie;
-                    System.out.println(passCookie.getValue());
                     return passCookie;
                 }
             }
         }
         return null;
     }
+    
+    public void delUserCookie(){
+        HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        Cookie[] Cookies;
+        
+        Cookies = request.getCookies();
+        if (Cookies!=null && Cookies.length>0){
+            for (Cookie Cookie : Cookies) {
+                if (Cookie.getName().equals("username")){
+                    System.out.println("username found!");
+                    Cookie.setValue(null);
+                    Cookie.setPath(request.getContextPath());
+                    Cookie.setMaxAge(0);
+                    HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+                    response.addCookie(Cookie);
+                    System.out.println(Cookie.getMaxAge());
+                }
+            }
+        }
+//        Cookie userCookie = new Cookie("username",null);
+//        userCookie.setMaxAge(0);
+//        HttpServletResponse userResponse = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+//        userResponse.addCookie(userCookie);
+    }
+    
+    public void delPassCookie(){
+        HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        Cookie[] Cookies;
+        
+        Cookies = request.getCookies();
+        if (Cookies!=null && Cookies.length>0){
+            for (Cookie Cookie : Cookies) {
+                if (Cookie.getName().equals("password")){
+                    System.out.println("password found!");
+                    Cookie.setValue(null);
+                    Cookie.setMaxAge(0);
+                    Cookie.setPath(request.getContextPath());
+                    HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+                    response.addCookie(Cookie);
+                    System.out.println(Cookie.getMaxAge());
+                }
+            }
+        }
+//        Cookie passCookie = new Cookie("password",null);
+//        passCookie.setMaxAge(0);
+//        HttpServletResponse userResponse = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+//        userResponse.addCookie(passCookie);
+    }
+    
 }

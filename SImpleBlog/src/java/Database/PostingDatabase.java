@@ -7,17 +7,22 @@
 package Database;
 
 import Login.Login;
+import java.io.IOException;
 import java.io.Serializable;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -48,9 +53,11 @@ public class PostingDatabase {
     
     public List<Post> getPost() throws ClassNotFoundException{
         ResultSet rs;
+        Connection con;
         List<Post> records = new ArrayList<>();
         try {
-          Statement stmt = makeConnection().createStatement();
+          con = makeConnection();
+          Statement stmt = con.createStatement();
           String query = "Select * from post where status=\"Published\"";
           rs = stmt.executeQuery(query);
 
@@ -64,6 +71,7 @@ public class PostingDatabase {
               post.setStatus(rs.getString(6));
               records.add(post);
            }
+          con.close();
         } catch (SQLException e) {
            System.err.println(e);
         }
@@ -72,9 +80,11 @@ public class PostingDatabase {
     
     public List<Post> getAuthorPost() throws ClassNotFoundException{
         ResultSet rs;
+        Connection con;
         List<Post> records = new ArrayList<>();
         try {
-          Statement stmt = makeConnection().createStatement();
+          con = makeConnection();
+          Statement stmt = con.createStatement();
           String query = "Select * from post where author=\"chobits\"";
           rs = stmt.executeQuery(query);
 
@@ -88,17 +98,25 @@ public class PostingDatabase {
               post.setStatus(rs.getString(6));
               records.add(post);
            }
+          con.close();
         } catch (SQLException e) {
            System.err.println(e);
         }
         return records;
    }
    
-    public void addPost() throws ClassNotFoundException, SQLException{
+    public void addPost(String Judul,String Tanggal,String Content,String Author) throws ClassNotFoundException, SQLException, IOException, ParseException{
           ResultSet rs;
           Connection con = makeConnection();
           Statement stmt = con.createStatement();
-          String query = "Select COUNT(Id) from posting";
+          String query = "Select COUNT(Id) from post";
+          SimpleDateFormat format = new SimpleDateFormat("YYYY-MM-DD");
+          System.out.println("PINGGGGg"+Tanggal);
+          System.out.println(Judul);
+          System.out.println("PINGGGGGGGGGGGGGGGGGG");
+          Date parsed;
+          parsed = (Date)format.parse(Tanggal);
+        java.sql.Date sql = new java.sql.Date(parsed.getTime());
           rs = stmt.executeQuery(query);
           PreparedStatement ps;
           int countsumId = 0;
@@ -106,16 +124,17 @@ public class PostingDatabase {
              countsumId = rs.getInt(1);
            }
           System.out.println(countsumId);
-          System.out.println("PINGGG");
-            String query2 = "INSERT INTO `posting` (`Id`,`Judul`, `Tanggal`, `Content`, `Author`, `Status`) VALUES (?,?,?,?,?,?)";
+          System.out.println("PINGGGGGGGGGGGGGGGGGGGGG"+Tanggal);
+            String query2 = "INSERT INTO post (Judul, Tanggal, Content, Author, Status) VALUES (?,?,?,?,?)";
             ps= con.prepareStatement(query2);
-            ps.setInt(1,countsumId+1);
-            ps.setString(2,"Doremi");
-            ps.setString(3,"1-2-3");
-            ps.setString(4,"ini adalah not");
-            ps.setString(5,"Doni");
-            ps.setString(6,"unpublished");
-            int i = ps.executeUpdate();     
+            ps.setString(1,Judul);
+            ps.setDate(2,parsed);
+            ps.setString(3,Content);
+            ps.setString(4,Author);
+            ps.setString(5,"unpublished");
+            int i = ps.executeUpdate();
+            ExternalContext extcon = FacesContext.getCurrentInstance().getExternalContext();
+            extcon.redirect("SimpleBlog/Host.xhtml");
     }
     
     public String addUserOwner() throws ClassNotFoundException, SQLException{
@@ -136,35 +155,40 @@ public class PostingDatabase {
         ps.setString(4,Email);
         ps.setString(5,"Owner");
         int i = ps.executeUpdate();
+        con.close();
         return "Home.xhtml";
     }
     
-    public String setLoginOnLoad() throws ClassNotFoundException, SQLException{
-        System.out.println("asdasdasd");
+    public void setLoginOnLoad() throws ClassNotFoundException, SQLException, IOException{
+        ExternalContext extCont = FacesContext.getCurrentInstance().getExternalContext();
         Cookie cUsername = login.getUserCookie();
-//        System.out.println(cUsername.getValue());
         Cookie cPassword = login.getPassCookie();
-//        System.out.println(cPassword.getValue());
+
         if (cUsername!=null && cPassword!=null){
             ResultSet rs;
+            Connection con;
+            con = makeConnection();
             int existUser=0;
-            Statement stmt = makeConnection().createStatement();
+            Statement stmt = con.createStatement();
             String query = "Select COUNT(Username) from user where Username=\""+cUsername.getValue()+"\" and Password=\""+cPassword.getValue()+"\";";
             rs = stmt.executeQuery(query);
 
             while(rs.next()){
                 existUser = rs.getInt(1);
-                System.out.println(existUser);
+                System.out.println("exist user: " + existUser);
             }
             if (existUser>0){
                 System.out.println("masuk");
-                return "Role/Owner.xhtml?faces-redirect=true";
+                extCont.redirect("/SImpleBlog/faces/Role/Owner.xhtml");
             }
             else{
-                return "Home.xhtml";
+                extCont.redirect("/SImpleBlog/faces/Home.xhtml");
             }
+            con.close();
         }
-        return "Home.xhtml";
+        else{
+            extCont.redirect("/SImpleBlog/faces/Home.xhtml");
+        }
     }
     
     public String Login() throws ClassNotFoundException, SQLException{
@@ -174,19 +198,31 @@ public class PostingDatabase {
 
         ResultSet rs;
         int existUser=0;
-        Statement stmt = makeConnection().createStatement();
+        Connection con;
+        con = makeConnection();
+        Statement stmt = con.createStatement();
         String query = "Select COUNT(Username) from user where Username=\""+Username+"\" and Password=\""+Password+"\";";
         rs = stmt.executeQuery(query);
 
         while(rs.next()){
             existUser = rs.getInt(1);
          }
+        
+        con.close();
         if (existUser>0){
             return "Role/Owner.xhtml?faces-redirect=true";
         }
         else{
             return "Home.xhtml";
         }
+    }
+    
+    public void setLogout() throws ClassNotFoundException, SQLException, IOException{
+        ExternalContext extCont = FacesContext.getCurrentInstance().getExternalContext();
+        System.out.println("kepanggil");
+        login.delUserCookie();
+        login.delPassCookie();
+        extCont.redirect("/SImpleBlog/");
     }
     
 }
