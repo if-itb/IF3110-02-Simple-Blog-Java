@@ -1,6 +1,6 @@
 <%-- 
-    Document   : delete_post
-    Created on : Nov 22, 2014, 9:47:33 PM
+    Document   : trash_post
+    Created on : Nov 24, 2014, 6:10:01 PM
     Author     : Imburden
 --%>
 
@@ -43,6 +43,6 @@
     </head>
     <body class="default">
         <% Post post = new Post(); %>
-        <% post.deletePost(Integer.valueOf(request.getParameter("id"))); %>
+        <% post.trashPost(Integer.valueOf(request.getParameter("id"))); %>
     </body>
 </html>
