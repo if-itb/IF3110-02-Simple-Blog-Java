@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="/WEB-INF/templates/BasicTemplate.xhtml">
+	<ui:define name="title">Simple Blog | Tambah Post</ui:define>
+	<ui:define name="content">
+	    <article class="art simple post">
+		    <h2 class="art-title" style="margin-bottom:100px">-</h2>
+		    <div class="art-body">
+		        <div class="art-body-inner">
+		            <h2>Tambah Post</h2>
+		            <div id="contact-area">
+		                <h:form>
+		                	<label for="Judul">Judul:</label>
+		                    <h:inputText binding="#{judul}"/>
+							
+							<label for="Tanggal">Tanggal:</label>
+		                    <h:inputText binding="#{tanggal}"/>
+							
+							<label for="Konten">Konten:</label><br/>
+		                    <h:inputTextarea rows="20" cols="20" binding="#{konten}"/>
+							
+							<h:commandButton class="submit-button" value="Simpan" action="#{postBean.NewPost(judul.value,tanggal.value,konten.value)}"/>
+						</h:form>
+		            </div>
+		        </div>
+		    </div>
+		</article>
+	</ui:define>
+</ui:composition>
+</html>

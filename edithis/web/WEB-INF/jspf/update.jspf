@@ -1,0 +1,36 @@
+<%-- any content can be specified here e.g.: --%>
+<%@ page pageEncoding="UTF-8" %>
+<%@page import = "java.sql.*" %>
+<%@page import = "java.io.*" %>
+<%@include file= "/WEB-INF/jspf/koneksi.jspf" %>
+<%
+	String user_name	=	 request.getParameter("user_name");
+	String user_username = request.getParameter("user_username");
+	String user_password = request.getParameter("user_password");
+	String user_status = request.getParameter("user_status");
+	String user_email	=	 request.getParameter("user_email");
+	try{
+		if(user_name != null && user_username != null && user_password != null  && user_email != null && user_status != null ){
+			ResultSet result = null;
+			Connection connection = null;
+			PreparedStatement pStatement;
+			String Query = "update users SET nama=?, username=?,password=?,email=? WHERE username = ?";
+			pStatement = connection.prepareStatement(Query);
+			pStatement.setString(1, user_name);
+			pStatement.setString(2, user_username);
+			pStatement.setString(3, user_password);
+			pStatement.setString(4, user_email);
+			pStatement.setString(5, user_username);
+
+			int qExec = pStatement.executeUpdate();
+			if(qExec!=0){
+				out.println("Update berhasil");
+			}
+			result.close();
+			connection.close();
+			pStatement.close();
+		}
+	}catch(Exception e){
+		out.println(e);
+	}
+%>
