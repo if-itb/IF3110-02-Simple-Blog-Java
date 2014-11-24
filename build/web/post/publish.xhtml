@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+	  xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Publish Page</title>
+    </h:head>
+    <h:body>
+		<h:form>
+			<h:dataTable value="#{postsController.allUnpublishedPosts}" var="post">
+				<h:column>
+					<h:inputHidden value="#{post.id}" binding="#{publishpostid}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header" >
+						<h:outputLabel value="Title" />
+					</f:facet>
+					<h:outputText value="#{post.title}" binding="#{publishposttitle}" ></h:outputText>
+				</h:column>
+				<h:column>
+					<f:facet name="header" >
+						<h:outputLabel value="Date" />
+					</f:facet>
+					<h:outputText value="#{post.date}" binding="#{publishpostdate}" ></h:outputText>
+				</h:column>
+				<h:column>
+					<f:facet name="header" >
+						<h:outputLabel value="Content" />
+					</f:facet>
+					<h:outputText value="#{post.content}" binding="#{publishpostcontent}" ></h:outputText>
+				</h:column>
+				<h:column>
+					<h:commandLink value="Edit" action="#{postsController.editPost(publishpostid.value, publishposttitle.value, publishpostdate.value, publishpostcontent.value, false)}" />
+				</h:column>
+				<h:column>
+					<h:commandLink value="Publish" action="#{postsController.updatePost(publishpostid.value, publishposttitle.value, publishpostdate.value, publishpostcontent.value, true)}" ></h:commandLink>
+				</h:column>
+			</h:dataTable>
+		</h:form>
+    </h:body>
+</html>
