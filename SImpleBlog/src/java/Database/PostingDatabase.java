@@ -22,6 +22,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
@@ -33,10 +35,20 @@ import javax.servlet.http.HttpServletRequest;
  * @author Rikysamuel
  */
 @ManagedBean(name="Posting", eager = true)
-@SessionScoped
+@RequestScoped
 public class PostingDatabase {
     
     Login login;
+    @ManagedProperty(value ="#{param.throwedid}")
+    private int id;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
     
     public PostingDatabase(){
         login = new Login();
@@ -135,7 +147,19 @@ public class PostingDatabase {
             ps.setString(5,"unpublished");
             int i = ps.executeUpdate();
             ExternalContext extcon = FacesContext.getCurrentInstance().getExternalContext();
-            extcon.redirect("Home.xhtml");
+            extcon.redirect("Owner.xhtml");
+    }
+
+    public void deletePost() throws ClassNotFoundException, SQLException, IOException, ParseException{
+          System.out.println(id+"PINGGGGGGGGG");
+          Connection con = makeConnection();
+          Statement stmt = con.createStatement();
+          String query = "DELETE from post WHERE ID="+id;
+          int rs;
+          rs = stmt.executeUpdate(query);
+          PreparedStatement ps;
+            ExternalContext extcon = FacesContext.getCurrentInstance().getExternalContext();
+            extcon.redirect("Owner.xhtml");
     }
     
     public String addUserOwner() throws ClassNotFoundException, SQLException{

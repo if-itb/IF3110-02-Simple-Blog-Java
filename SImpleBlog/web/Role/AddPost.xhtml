@@ -9,13 +9,13 @@ and open the template in the editor.
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <link type="text/css" rel="stylesheet" href="assets\screen.css"/>
+        <link type="text/css" rel="stylesheet" href="../assets\screen.css"/>
         <title>Simple Blog</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
     </h:head>
     <h:body class="default">
-        <script type = "text/javascript" src ="assets/confirmdate.js"/>
+        <script type = "text/javascript" src ="../assets/confirmdate.js"/>
 <div class="wrapper">
 
 <nav class="nav">
@@ -48,7 +48,6 @@ and open the template in the editor.
                     <label for="Konten">Content:</label><br />
                     <textarea name="Konten" id="Konten" placeholder = "Write content here" required = "true"></textarea>
                     <h:commandButton onclick = "return validateform()" type = "submit" value ="Submit" action="#{Posting.addPost()}"></h:commandButton>
-                    <span id="emailInputValidation">tes</span>
                 </h:form>
             </div>
         </div>
