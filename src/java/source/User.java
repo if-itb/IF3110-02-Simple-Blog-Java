@@ -204,11 +204,38 @@ public class User {
     }
     
     /**
+     * Fungsi untuk mengupdate user berdasarkan username
+     * Semua attribut yang akan di update harus diset terlebih dahulu menggunakan setter.
+     * @throws SQLException 
+     */
+    public void updateUser() throws SQLException
+    {
+        KoneksiDatabase.setUser(userSQL);
+        KoneksiDatabase.setPassword(passSQL);
+        KoneksiDatabase.setDatabase(urlSQL,databaseName);
+        
+        Connection koneksi = KoneksiDatabase.getKoneksi();
+        Statement statement = koneksi.createStatement();
+        String query = "UPDATE user SET password = ?, "
+                                        + "nama = ?,"
+                                        + "email = ?,"
+                                        + "role = ?"
+                        + "WHERE username = ?";
+        try (PreparedStatement preStat = koneksi.prepareStatement(query)) {
+            preStat.setString(1, password);
+            preStat.setString(2, nama);
+            preStat.setString(3, email);
+            preStat.setString(4, role);
+            preStat.setString(5, username);
+            preStat.executeUpdate();
+        }
+    }
+    
+    /**
      * Fungsi untuk menghapus 1 user dengan username tertentu.
      * username harus diset terlebih dahulu dengan prosedure user.setUsername("username").
      * @throws SQLException 
      */
-    
     public void deleteUser() throws SQLException
     {
         KoneksiDatabase.setUser(userSQL);
@@ -416,8 +443,20 @@ public class User {
             
             //Test getOneUser
             User usertest = new User();
-            usertest.setUsername("akhfa5");
+            usertest.setUsername("akhfa2");
             usertest.getOneUser();
+            System.out.println("Sebelum update user");
+            System.out.println(usertest.getUsername());
+            System.out.println(usertest.getNama());
+            System.out.println(usertest.getPassword());
+            System.out.println(usertest.getEmail());
+            System.out.println(usertest.getRole());
+            
+            //Test updateUser (Test getOneUser harus tetap dijalankan
+            usertest.setNama("namaakhfa2");
+            usertest.setRole("owner");
+            usertest.updateUser();
+            System.out.println("\nSetelah updateUser");
             System.out.println(usertest.getUsername());
             System.out.println(usertest.getNama());
             System.out.println(usertest.getPassword());
