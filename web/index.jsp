@@ -82,7 +82,7 @@
                     // con=DBConnect.GetDBConnect();
 		try 
 		{
-                    String sql=("SELECT title, konten FROM post WHERE status_publish=1");
+                    String sql=("SELECT judul, konten FROM post WHERE status_publish=1");
                     PreparedStatement ps = con.prepareStatement(sql);
                     ResultSet rs = ps.executeQuery(sql);    
                     while (rs.next())
