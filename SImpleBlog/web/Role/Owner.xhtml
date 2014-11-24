@@ -25,7 +25,7 @@ and open the template in the editor.
     <ul class="nav-primary">
         <li>
             <h:form>
-                You are logged in as <u><h:commandLink action="#">#{Posting.activeUser}</h:commandLink></u>
+                You are logged in as <u><h:commandLink action="#" id="authorid" value="#{Posting.activeUser}"></h:commandLink></u>
             </h:form>
         </li>
     </ul>
@@ -38,7 +38,7 @@ and open the template in the editor.
             <h:form>
                 <h:commandLink class="art-list-addpost" action="AddPost?faces-redirect=true" value="+ Add Post">
                 </h:commandLink>
-            </h:form>
+            </h:form><br/>
           <ul class="art-list-body">
               <c:forEach items="#{Posting.authorPost}" var="p">
                 <li class="art-list-item">
@@ -48,9 +48,14 @@ and open the template in the editor.
                         <div class="art-list-time">#{p.tanggal}</div>
                     </div>
                     <p>#{p.content} &hellip;</p>
-                    <p>
-                        <a href="#">Edit</a> | <h:form><h:commandLink onclick = "return confirmChoice()" value ="Hapus" action="#{Posting.deletePost()}"><f:param name ="throwedid" value = "#{p.id}"></f:param></h:commandLink></h:form>
-                    </p>
+                    <p>|
+                        <a href="#">Edit</a>
+                    |</p>
+                    <h:form><p>|
+                        <h:commandLink onclick = "return confirmChoice()" value ="Delete" action="#{Posting.deletePost()}">
+                            <f:param name ="throwedid" value = "#{p.id}"></f:param>
+                        </h:commandLink>|</p>
+                    </h:form>
                 </li>
               </c:forEach>
           </ul>

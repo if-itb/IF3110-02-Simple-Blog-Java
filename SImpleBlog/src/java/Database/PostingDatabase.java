@@ -8,6 +8,7 @@ package Database;
 
 import Login.Login;
 import static com.sun.corba.se.spi.presentation.rmi.StubAdapter.request;
+import com.sun.faces.context.RequestParameterMap;
 import java.io.IOException;
 import java.io.Serializable;
 import java.sql.Connection;
@@ -98,7 +99,8 @@ public class PostingDatabase {
         try {
           con = makeConnection();
           Statement stmt = con.createStatement();
-          String query = "Select * from post where author=\"chobits\"";
+          String query = "Select * from post where (author=\""+login.getUserCookie().getValue()+"\" and status=\"unpublished\") or status=\"published\";";
+          System.out.println("qeuery sekarang: " + query);
           rs = stmt.executeQuery(query);
 
           while(rs.next()){
@@ -143,7 +145,7 @@ public class PostingDatabase {
             ps.setString(1,Judul);
             ps.setDate(2,datesql);
             ps.setString(3,Konten);
-            ps.setString(4,"chobits");
+            ps.setString(4,login.getUserCookie().getValue());
             ps.setString(5,"unpublished");
             int i = ps.executeUpdate();
             ExternalContext extcon = FacesContext.getCurrentInstance().getExternalContext();
@@ -154,7 +156,7 @@ public class PostingDatabase {
           System.out.println(id+"PINGGGGGGGGG");
           Connection con = makeConnection();
           Statement stmt = con.createStatement();
-          String query = "DELETE from post WHERE ID="+id;
+          String query = "Update post Set status=\"deleted\" WHERE ID="+id;
           int rs;
           rs = stmt.executeUpdate(query);
           PreparedStatement ps;

@@ -22,10 +22,6 @@ public class Login {
     }
     
     public void setCookie(String Username, String Password){
-//        HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
-//        String Username = request.getParameter("login_username");
-//        String Password = request.getParameter("login_password");
-        
         Cookie userCookie = new Cookie("username",Username);
         userCookie.setMaxAge(3600*24);
         HttpServletResponse userResponse = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
