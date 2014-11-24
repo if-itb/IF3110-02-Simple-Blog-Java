@@ -8,6 +8,34 @@
         <param-name>javax.faces.CONFIG_FILES</param-name>
         <param-value>/WEB-INF/faces-config.xml</param-value>
     </context-param>
+    <filter>
+        <description>Only for user</description>
+        <filter-name>User Management</filter-name>
+        <filter-class>filters.AdminFilter</filter-class>
+    </filter>
+    <filter>
+        <description>Menambahkan Post Baru. Mengedit post yang sudah di-publish di cek di tempat</description>
+        <filter-name>Owner Filter</filter-name>
+        <filter-class>filters.OwnerFilter</filter-class>
+    </filter>
+    <filter>
+        <description>Melakukan edit terhadap post yang telah ada. Melihat seluruh post yang belum di-publish.
+Mengubah status sebuah Post menjadi publish.</description>
+        <filter-name>Editor Filter</filter-name>
+        <filter-class>filters.EditorFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>User Management</filter-name>
+        <url-pattern>/faces/user/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>Owner Filter</filter-name>
+        <url-pattern>/faces/post/create.*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>Editor Filter</filter-name>
+        <url-pattern>/faces/post/update.*</url-pattern>
+    </filter-mapping>
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>
         <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>

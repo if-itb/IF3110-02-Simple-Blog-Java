@@ -5,6 +5,7 @@
  */
 package controllers;
 
+import filters.EditorFilter;
 import java.io.Serializable;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -17,6 +18,7 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.Filter;
 import javax.servlet.http.*;
 import models.Comment;
 import models.Post;
@@ -84,6 +86,7 @@ public class PostController implements Serializable {
         FacesContext context = FacesContext.getCurrentInstance();
         Map<String, String> requestParam = context.getExternalContext().getRequestParameterMap();
         HttpServletRequest req = (HttpServletRequest) context.getExternalContext().getRequest();
+        //HttpServletResponse res = (HttpServletResponse) context.getExternalContext().getResponse();
         HttpSession session = req.getSession();
         
         post = (Post) session.getAttribute("post");
@@ -120,6 +123,7 @@ public class PostController implements Serializable {
         HttpServletRequest req = (HttpServletRequest) context.getExternalContext().getRequest();
         HttpSession session = req.getSession();
         
+        User userIdentity = (User) session.getAttribute("userIdentity");
         if (requestParam.containsKey("id")) {
             post = (Post) session.getAttribute("post");
             post.load(Integer.parseInt(requestParam.get("id")));

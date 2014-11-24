@@ -80,6 +80,10 @@ public class User implements Serializable {
         this.nama = nama;
     }
 
+    public boolean getIsGuest(){
+        return !isAdmin && !isEditor && !isOwner;
+    }
+    
     public boolean getIsAdmin() {
         return isAdmin;
     }
@@ -145,6 +149,9 @@ public class User implements Serializable {
                 user.setId(result.getInt("id"));
                 user.setEmail(result.getString("email"));
                 user.setNama(result.getString("nama"));
+                user.setIsAdmin(result.getBoolean("is_admin"));
+                user.setIsOwner(result.getBoolean("is_owner"));
+                user.setIsEditor(result.getBoolean("is_editor"));
                 user.setIsLoggedIn(true);
                 request.getSession().setAttribute("userIdentity", user);
                 CookieService.setCookie("email", email, CookieService.DEFAULT_AGE);

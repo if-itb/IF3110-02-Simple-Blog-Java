@@ -96,13 +96,13 @@ public class Post implements Serializable {
             if (this.isNewRecord) {
                 String query
                         = "INSERT IGNORE INTO " + tablename
-                        + "(judul,tanggal,konten,user_id)"
-                        + "VALUES('" + this.getJudul() + "','" + this.getTanggal() + "','" + this.getKonten() + "','" + this.getUserId() + "')";
+                        + "(judul,tanggal,konten,user_id,published)"
+                        + "VALUES('" + this.getJudul() + "','" + this.getTanggal() + "','" + this.getKonten() + "','" + this.getUserId() + "','" + (this.getPublished()?1:0) + "')";
                 System.out.println(query);
                 st.executeUpdate(query);
             } else {
                 String query = "UPDATE " + tablename
-                        + " SET judul='" + this.getJudul() + "',tanggal='" + this.getTanggal() + "',konten='" + this.getKonten() + "',user_id='" + this.getUserId() + "'"
+                        + " SET judul='" + this.getJudul() + "',tanggal='" + this.getTanggal() + "',konten='" + this.getKonten() + "',user_id='" + this.getUserId() + "',published=" +(this.getPublished()?1:0)
                         + " WHERE id=" + this.getId();
                 System.out.println(query);
                 st.executeUpdate(query);
@@ -165,7 +165,7 @@ public class Post implements Serializable {
         this.konten = konten;
     }
 
-    public boolean isPublished() {
+    public boolean getPublished() {
         return published;
     }
 
