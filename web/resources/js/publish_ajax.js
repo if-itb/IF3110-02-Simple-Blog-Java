@@ -17,7 +17,7 @@ function updatePost(id)
 {
     var pos = document.getElementById("posts");
     var xmlhttp = new XMLHttpRequest();
-    xmlhttp.open("GET","publish_post.jsp?id="+id,true);
+    xmlhttp.open("GET","update_publish.jsp?id="+id,true);
     xmlhttp.send();
     xmlhttp.onreadystatechange=function()
     {
