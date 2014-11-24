@@ -899,3 +899,19 @@ label {
   width: 100px;
   padding-top: 5px;
 }
+
+#title{
+    position: absolute;
+    top: 70px;
+    left: 50%;
+    height: 30px;
+    width: 980px;
+    padding-top: 40px;
+    margin-left: -490px; /* Half width of nav */
+    border-bottom: 1px solid #333;
+    z-index: 2;
+    font-family: Helvetica, sans-serif;
+    font-size: 20px;
+    text-align: center;
+    line-height: 30px;
+}
