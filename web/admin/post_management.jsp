@@ -71,9 +71,9 @@
                             <br><br><br>
                             <h2 class="art-list-title">Post Management</h2>
                         </div>
-                        <table id="t01">
+                        
                             <p><%= listPost.listManagementPosts() %></p>
-                        </table> 
+                        
                     </li>
                   </ul>
                 </nav>

@@ -30,7 +30,7 @@
         <meta property="og:image" content="{{! TODO: ADD GRAVATAR URL HERE }}">
         <meta property="og:site_name" content="Simple Blog">
 
-        <link rel="stylesheet" type="text/css" href="assets/css/screen.css" />
+        <link rel="stylesheet" type="text/css" href="../assets/css/screen.css" />
         <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
         
         <!--[if lt IE 9]>

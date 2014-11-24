@@ -45,7 +45,12 @@
             //instantiasi kelas Post dan pemanggilan dari database
             Post listPost = new Post();
             CookieHelper cookie = new CookieHelper(request.getCookies());
-            listPost.cookieHeaderCheck(cookie);
+            if(cookie.thereIsCookie()) {
+                listPost.cookieHeaderCheck(cookie);
+            }
+            else {
+                response.sendRedirect("../login/index.html");
+            }
         %>
                        
         <div class="wrapper">

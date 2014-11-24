@@ -248,92 +248,87 @@ public class Post {
             String queryListPosts = "SELECT * from `post` ORDER by tanggal DESC";
             //execute query
             ResultSet result = statement.executeQuery(queryListPosts);
+            //header tabel
+            toHTML += "<table id=\"t01\"> <tr><th rowspan=\"2\" id=\"column1\">Judul Post</th>\n" +
+                      "<th rowspan=\"2\" id=\"column2\">Tanggal Post</th>\n" +
+                      "<th rowspan=\"2\" id=\"column3\">Konten Post</th>\n" +
+                      "<th rowspan=\"2\" id=\"column4\">Status</th>\n" +
+                      "<th id=\"column5\" colspan=\"4\">Aksi</th>\n" +
+                      "</tr>\n" +
+                      "<th id=\"columnx\">Publish</th>\n" +
+                      "<th id=\"columnx\">Trash</th>\n" +
+                      "<th id=\"columnx\">Delete</th>\n" +
+                      "<th id=\"columnx\">Edit</th>\n" +
+                      "</tr>\n";
             //tulis hasil query
-            if (!result.next()) {
-                //kosong
-                toHTML = "No posts yet.";
-            }
-            else { //ada hasil
-                Date date;
-                result = statement.executeQuery(queryListPosts);
-                //header tabel
-                toHTML += "<tr><th rowspan=\"2\" id=\"column1\">Judul Post</th>\n" +
-                          "<th rowspan=\"2\" id=\"column2\">Tanggal Post</th>\n" +
-                          "<th rowspan=\"2\" id=\"column3\">Konten Post</th>\n" +
-                          "<th rowspan=\"2\" id=\"column4\">Status</th>\n" +
-                          "<th id=\"column5\" colspan=\"4\">Aksi</th>\n" +
-                          "</tr>\n" +
-                          "<th id=\"columnx\">Publish</th>\n" +
-                          "<th id=\"columnx\">Trash</th>\n" +
-                          "<th id=\"columnx\">Delete</th>\n" +
-                          "<th id=\"columnx\">Edit</th>\n" +
-                          "</tr>\n";
-                while (result.next()) { //apabila result masih ada
-                    shortened = false;
-                    //inisialisasi variabel
-                    idPost = result.getInt("id");
-                    judulPost = result.getString("judul");
-                    kontenPost = result.getString("konten");
-                    publishStatus = result.getInt("publishStatus");
-                    if (kontenPost.length() > 50) {
-                        kontenPost = kontenPost.substring(0, 50); //pemotongan teks
-                        shortened = true;
+            Date date;
+            result = statement.executeQuery(queryListPosts);
+            while (result.next()) { //apabila result masih ada
+                shortened = false;
+                //inisialisasi variabel
+                idPost = result.getInt("id");
+                judulPost = result.getString("judul");
+                kontenPost = result.getString("konten");
+                publishStatus = result.getInt("publishStatus");
+                if (kontenPost.length() > 50) {
+                    kontenPost = kontenPost.substring(0, 50); //pemotongan teks
+                    shortened = true;
+                }
+                date = result.getDate("tanggal");
+                //ubah menjadi string
+                tanggalPost = date.toString();
+                //judul, tanggal, konten post
+                toHTML += "<tr>\n" + "<th>" + judulPost + "</th>"
+                                   + "<th>" + tanggalPost + "</th>"
+                                   + "<th>" + kontenPost;
+                if (shortened) //dipotong
+                    toHTML += "... <a href=\"post.jsp?id= " + idPost + "\">Read More</a></th>";
+                else //tidak dipotong
+                    toHTML += "</th>";
+                //status post
+                switch (publishStatus) {
+                    case 0: toHTML += "<th> Unpublished </th>"; break;
+                    case 1: toHTML += "<th> Published </th>"; break;
+                    case 2: toHTML += "<th> Trash </th>"; break;
+                }
+                //aksi berdasarkan role, lalu berdasarkan post
+                if (isAdmin()) {
+                    if (publishStatus == 0) {
+                        toHTML += "<th><a href='../posts/publish_post.jsp?id=" + idPost + "'> X </a></th>" +
+                                  "<th><a href='../posts/trash_post.jsp?id=" + idPost + "'> X </a></th>";
                     }
-                    date = result.getDate("tanggal");
-                    //ubah menjadi string
-                    tanggalPost = date.toString();
-                    //judul, tanggal, konten post
-                    toHTML += "<tr>\n" + "<th>" + judulPost + "</th>"
-                                       + "<th>" + tanggalPost + "</th>"
-                                       + "<th>" + kontenPost;
-                    if (shortened) //dipotong
-                        toHTML += "... <a href=\"post.jsp?id= " + idPost + "\">Read More</a></th>";
-                    else //tidak dipotong
-                        toHTML += "</th>";
-                    //status post
-                    switch (publishStatus) {
-                        case 0: toHTML += "<th> Unpublished </th>"; break;
-                        case 1: toHTML += "<th> Published </th>"; break;
-                        case 2: toHTML += "<th> Trash </th>"; break;
+                    else {
+                        toHTML += "<th></th><th></th>";
                     }
-                    //aksi berdasarkan role, lalu berdasarkan post
-                    if (isAdmin()) {
-                        if (publishStatus == 0) {
-                            toHTML += "<th><a href='../posts/publish_post.jsp?id=" + idPost + "'> X </a></th>" +
-                                      "<th><a href='../posts/trash_post.jsp?id=" + idPost + "'> X </a></th>";
-                        }
-                        else {
-                            toHTML += "<th></th><th></th>";
-                        }
-                        toHTML += "<th><a href='../posts/delete_post.jsp?id=" + idPost + "'> X </a></th>" +
-                                  "<th><a href='../posts/edit_post.jsp?id=" + idPost + "'> X </a></th></tr>";
+                    toHTML += "<th><a href='../posts/delete_post.jsp?id=" + idPost + "'> X </a></th>" +
+                              "<th><a href='../posts/edit_post.jsp?id=" + idPost + "'> X </a></th></tr>";
+                }
+                else if (isEditor()) {
+                    if (publishStatus == 0) {
+                        toHTML += "<th><a href='../posts/publish_post.jsp?id=" + idPost + "'> X </a></th>" +
+                                  "<th></th>";
                     }
-                    else if (isEditor()) {
-                        if (publishStatus == 0) {
-                            toHTML += "<th><a href='../posts/publish_post.jsp?id=" + idPost + "'> X </a></th>" +
-                                      "<th></th>";
-                        }
-                        else {
-                            toHTML += "<th></th><th></th>";
-                        }
-                        toHTML += "<th></th><th><a href='../posts/edit_post.jsp?id=" + idPost + "'> X </a></tr>";
+                    else {
+                        toHTML += "<th></th><th></th>";
+                    }
+                    toHTML += "<th></th><th><a href='../posts/edit_post.jsp?id=" + idPost + "'> X </a></tr>";
+                    toHTML += "<th></th>";
+                }
+                else if (isOwner()) {
+                    if (publishStatus == 0) {
+                        toHTML += "<th></th><th><a href='../posts/trash_post.jsp?id=" + idPost + "'> X </a></tr>";
                         toHTML += "<th></th>";
                     }
-                    else if (isOwner()) {
-                        if (publishStatus == 0) {
-                            toHTML += "<th></th><th><a href='../posts/trash_post.jsp?id=" + idPost + "'> X </a></tr>";
-                            toHTML += "<th></th>";
-                        }
-                        else {
-                            toHTML += "<th></th><th></th>";
-                        }
-                        toHTML += "<th><a href='../posts/delete_post.jsp?id=" + idPost + "'> X </a></tr>";
-                        toHTML += "<th><a href='../posts/edit_post.jsp?id=" + idPost + "'> X </a></tr>";
-                                  
+                    else {
+                        toHTML += "<th></th><th></th>";
                     }
-                    toHTML += "<br>\n<br>";
+                    toHTML += "<th><a href='../posts/delete_post.jsp?id=" + idPost + "'> X </a></tr>";
+                    toHTML += "<th><a href='../posts/edit_post.jsp?id=" + idPost + "'> X </a></tr>";
+
                 }
+                toHTML += "<br>\n<br>";
             }
+            toHTML += "</table>";
         }
         catch (SQLException ex) {
             Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
