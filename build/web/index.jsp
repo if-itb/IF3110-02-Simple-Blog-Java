@@ -93,7 +93,7 @@
                                 + rs.getString("post_id")
                                 + "\">"
                                 + rs.getString("judul")+ "</a></h2> "
-                                + "<div class=\"art-list-time\">15 Juli 2014</div> <div class=\"art-list-time\"><span style=\"color:#F40034;\"></div> <p>");
+                                + "<div class=\"art-list-time\">15 Juli 2014</div></div><p>");
                         String[] words = rs.getString("konten").split(" ");
                         StringBuilder sb = new StringBuilder();
                         for (int i = 0; i < Math.min(30, words.length); i++)

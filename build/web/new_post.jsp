@@ -61,6 +61,11 @@
                     <label for="Tanggal">Tanggal:</label>
                     <input type="text" name="Tanggal" id="Tanggal">
                     
+                    <%
+                        //Ada user id
+                        out.println("<input type=hidden name=User_Id value=\""+"1"+"\">");
+                    %>
+                    
                     <label for="Konten">Konten:</label><br>
                     <textarea name="Konten" rows="20" cols="20" id="Konten"></textarea>
 

@@ -82,7 +82,7 @@
                     // con=DBConnect.GetDBConnect();
 		try 
 		{
-                    String sql=("SELECT * FROM post WHERE status_pubished=0");
+                    String sql=("SELECT * FROM post WHERE status_publish=0");
                     PreparedStatement ps = con.prepareStatement(sql);
                     ResultSet rs = ps.executeQuery(sql);    
                     while (rs.next())
@@ -107,7 +107,7 @@
                         }   
                         String First30WordPost = sb.toString();
                         out.println(First30WordPost);
-                        out.println(" <p> <a href=\"#\">Edit</a> | <a onclick=\"validatedelete()\" href=\"javascript:void(0)\">Hapus</a> </p> </li>");
+                        out.println(" <p> <a href=\"#\">Edit</a> | <a onclick=\"validatedelete()\" href=\"javascript:void(0)\">Hapus</a> | <a onclick=\"validatedelete()\" href=\"javascript:void(0)\">Publish</a> </p> </li>");
                     }
 		}
 		catch (SQLException ex)
