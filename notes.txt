@@ -1,0 +1,44 @@
+cara pake
+-	bikin project namanya SimpleBlog (kalo bisa sama)
+-	connect netbeans sama mysql caranya ke services -> databases -> driver -> mysql connector -> connect using -> terus oke
+-	nyalain database nya di databases tadi
+-	add libraris jdbc mysql caranya add library -> pilih mysql jdbc connector (g juga uda commit .jar nya)
+
+autentikasi / login
+-	login uda dibuat, uda masuk ke cookie
+-	logout uda ada fungsinya, tapi belum bisa delete cookie
+
+list post
+-	sudah beres
+
+add post
+-	validasi tanggal belum diimplementasi
+-	tanggal pake milisecond dari 1970, bentuknya long
+
+publish post
+-	sudah beres
+
+edit post
+-	sudah beres
+
+delete post
+-	sudah beres
+
+view post
+-	sudah beres
+
+komentar
+-	validasi email belum diimplementasi
+-	load list komentar belum pake ajax
+
+manajemen user
+-	sudah beres
+
+bonus
+-	upload gambar belum bisa
+-	wysiwyg untuk form post bleum diimplementasi
+
+catatan tambahan
+-	fitur yang bisa dipake user masih fungsi keseluruhan, belum ada pembagian fitur berdasarkan role user
+-	front end masih dikejakan tutut, belum beres
+-	dataTable kemungkinan bakal diganti sama ui:repeat soalnya lebih bagus
