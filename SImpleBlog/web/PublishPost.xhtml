@@ -39,7 +39,11 @@ and open the template in the editor.
                       <c:forEach items="#{Publishpost.unpublishedPost}" var="post">
                         <li class="art-list-item">
                             <div class="art-list-item-title-and-time">
-                                <h2 class="art-list-title"><a href="post.html">#{post.judul}</a></h2>
+                                <h2 class="art-list-title">
+                                    <h:form>
+                                        <h:commandLink value="#{post.judul}" action="#{Viewpost.Redirect(post.id)}" ></h:commandLink>
+                                    </h:form>
+                                </h2>
                                 <div class="art-list-time">By #{post.author}</div>
                                 <div class="art-list-time">#{post.tanggal}</div>
                             </div>
