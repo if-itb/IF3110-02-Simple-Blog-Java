@@ -212,6 +212,7 @@ public class Post {
                             
                     if (shortened) //dipotong
                         toHTML += "... <a href=\"post.jsp?id= " + idPost + "\">Read More</a><br/>\n";
+                    //tambahan edit post
                     toHTML +=   "</p>\n" +
                     "<p>\n" +
                     "<a href=\"edit_post.jsp?id=" + idPost + "\">Edit</a> | <a href=\"delete_post.jsp?id=" + idPost + "\" onclick=\"javascript:confirmDelete()\">Hapus</a>\n" +
