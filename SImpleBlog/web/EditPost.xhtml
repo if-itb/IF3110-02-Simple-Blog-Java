@@ -49,7 +49,7 @@ and open the template in the editor.
                     
                     <label for="Konten">Content:</label><br />
                     <textarea name="Konten" id="Konten" required="true">#{Editpost.post.content}</textarea>
-                    <h:commandButton onclick = "" type = "submit" value ="Submit"></h:commandButton>
+                    <h:commandButton action="#{Editpost.editPostToDatabase}" type="submit" value ="Submit"></h:commandButton>
                 </h:form>
             </div>
         </div>

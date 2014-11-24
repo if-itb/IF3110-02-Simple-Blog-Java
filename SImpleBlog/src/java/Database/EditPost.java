@@ -16,6 +16,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  *
@@ -80,6 +81,24 @@ public class EditPost {
         return post;
     }
     
-  
-    
+    public void editPostToDatabase() throws ClassNotFoundException, IllegalAccessException, IOException{
+        HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        String Judul = request.getParameter("Judul");
+        String Konten = request.getParameter("Konten");
+        
+        ResultSet result;
+        Post post = new Post();
+        try{
+            Connection conn = getConnection();
+            Statement stmt = conn.createStatement();
+            String query = "Update post set Judul = \"" + Judul + "\", Content = \"" + Konten + "\" where ID = " + PostID + ";";
+            stmt.executeUpdate(query);
+            conn.close();
+            
+        } catch(SQLException e){
+            System.err.println(e);
+        }
+        ExternalContext extcon = FacesContext.getCurrentInstance().getExternalContext();
+        extcon.redirect("/SImpleBlog/PublishPost.xhtml");
+    }    
 }
