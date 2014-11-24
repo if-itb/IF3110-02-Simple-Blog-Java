@@ -56,12 +56,12 @@
                 <li><%=listPost.showMessageHeader()%> </li>
             </ul>
         </nav>
-
+                  
         <div id="home">
             <div class="posts">
                 <nav class="art-list">
                   <ul class="art-list-body">
-                    <%= listPost.listPublishedPosts() %>
+                    <%= listPost.listUnpublishedPosts() %>
                   </ul>
                 </nav>
             </div>

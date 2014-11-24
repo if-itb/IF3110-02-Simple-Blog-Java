@@ -175,7 +175,7 @@ public class Post {
             Connection koneksi = KoneksiDatabase.getKoneksi();
             Statement statement = koneksi.createStatement();
             //query
-            String queryListPosts = "SELECT * from `post` ORDER by tanggal DESC WHERE publishStatus=1";
+            String queryListPosts = "SELECT * from `post` WHERE publishStatus=1 ORDER by tanggal DESC";
             //execute query
             ResultSet result = statement.executeQuery(queryListPosts);
             //tulis hasil query
@@ -245,7 +245,7 @@ public class Post {
             Connection koneksi = KoneksiDatabase.getKoneksi();
             Statement statement = koneksi.createStatement();
             //query
-            String queryListPosts = "SELECT * from `post` ORDER by tanggal DESC WHERE publishStatus=0";
+            String queryListPosts = "SELECT * from `post` WHERE publishStatus=0 ORDER by tanggal DESC";
             //execute query
             ResultSet result = statement.executeQuery(queryListPosts);
             //tulis hasil query
@@ -262,8 +262,8 @@ public class Post {
                     idPost = result.getInt("id");
                     judulPost = result.getString("judul");
                     kontenPost = result.getString("konten");
-                    if (kontenPost.length() > 100) {
-                        kontenPost = kontenPost.substring(0, 100); //pemotongan teks
+                    if (kontenPost.length() > 50) {
+                        kontenPost = kontenPost.substring(0, 50); //pemotongan teks
                         shortened = true;
                     }
                     date = result.getDate("tanggal");
@@ -420,7 +420,7 @@ public class Post {
             Connection koneksi = KoneksiDatabase.getKoneksi();
             Statement statement = koneksi.createStatement();
             //query
-            String queryTrashPost = "UPDATE post SET published=2 WHERE id=" + post_ID;
+            String queryTrashPost = "UPDATE post SET publishStatus=2 WHERE id=" + post_ID;
             //execute query
             statement.executeUpdate(queryTrashPost);
         }
