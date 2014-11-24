@@ -2,18 +2,17 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <h:outputStylesheet library="css" name="bootstrap.css"/>
-        <title>Editor</title>
+        <title>Edit Post</title>
     </h:head>
     <h:body>
+        <h:outputScript name="ajax.js" library="js" target="head"/>
         <nav class="navbar navbar-default" role="navigation">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#{user.role}.xhtml">Holy Grail</a>
-                <ul class="nav navbar-nav navbar-left">
-                    <li><a href="publish_post.xhtml">Publish Post</a></li>
-                </ul>
                 <ul class="nav navbar-nav navbar-right ">
                     <li class="navbar-text">
                         Welcome, <h:outputText value="#{user.username}"/>!
@@ -28,29 +27,30 @@
         </nav>
         
         <div class="list-post container-fluid">
-            #{post.setQuery_status("published")}
-            <ui:repeat value="#{post.getDaftar_post()}" var="posts">
+            <h:panelGroup id="list-post">
+                <ui:repeat value="#{post.editablePost}" var="posts">
                 <div class="post">
-                    <a href="#" class="title">
-                        #{posts.judul}
-                    </a>
-                    <div class="date">
-                        #{posts.tanggal}
-                    </div>
-                    <div class="author">
-                        #{posts.author}
-                    </div>
-                    <div class="content">
-                        #{posts.konten}
-                    </div>
-                    <a href="#" class="option">
-                       [edit]
-                    </a>
-                    <a href="#" class="option">
-                       [delete]
-                    </a>
+                        <a href="#" class="title" id="">
+                            #{posts.judul}
+                        </a>
+                        <div class="date-unpublished">
+                            #{posts.tanggal}
+                        </div>
+                        <div class="author">
+                            #{posts.author}
+                        </div>
+                        <div class="content">
+                            #{posts.konten}
+                        </div>
+                        <h:form>
+                            <h:commandLink value="[edit]" class="option">
+                                <f:param name="id" value="#{posts.id}"/>
+                                <f:ajax execute="#{post.publish()}" render=":list-post" />
+                            </h:commandLink>
+                        </h:form>
                 </div>
-            </ui:repeat>
+                </ui:repeat>
+            </h:panelGroup>
             <a class="back-to-top" href="#">Back to top</a>
         </div>
     </h:body>

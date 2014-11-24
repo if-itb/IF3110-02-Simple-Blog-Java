@@ -79,6 +79,40 @@ public class Post implements Serializable
         fetchPostsFromDB();
         return daftar_post;
     }
+    
+    public List<Post> getEditablePost()
+    {
+        List<Post> daftar_post = new ArrayList<>();
+        try {
+            System.out.println("getEditablePost");
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost/simple_blog_java", "root", "");
+            System.out.println("Connection Created!");
+            String query = "Select * from post where status != 'deleted'";
+            PreparedStatement ps = con.prepareStatement(query);
+            ResultSet result = ps.executeQuery();
+            System.out.println("Query successful");
+            while(result.next())
+            {
+                Post temp = new Post();
+                temp.id = result.getInt("id");
+                temp.judul = result.getString("judul");
+                temp.tanggal = result.getString("tanggal");
+                temp.konten = result.getString("konten");
+                temp.status = result.getString("status");
+                temp.author = result.getString("author");
+                System.out.println(judul);
+                daftar_post.add(temp);
+            }
+            con.close();
+            System.out.println("Connection close");
+        } 
+        catch (ClassNotFoundException | SQLException ex) 
+        {
+            System.out.println(ex.toString());
+        }
+        return daftar_post;
+    }
 
     public void setAuthor(String author) {
         this.author = author;

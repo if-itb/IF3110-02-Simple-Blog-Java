@@ -6360,7 +6360,14 @@ button.close {
 }
 .post .date {
     text-align: center;
-    margin-bottom: 20px;
+    padding-bottom: 5px;
+    font-weight: bold;
+}
+.post .author{
+    text-align: center;
+    
+    padding-bottom: 20px;
+    font-weight: bold;
 }
 .post .option{
     display: block;
@@ -6451,4 +6458,5 @@ button.close {
 .post .date-unpublished {
     text-align: center;
     padding-bottom: 5px;
+    font-weight: bold;
 }
