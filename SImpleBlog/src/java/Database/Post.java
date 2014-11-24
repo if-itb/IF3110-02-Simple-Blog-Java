@@ -54,7 +54,7 @@ public class Post {
     }
     
     public String getContentPreview(){
-        return Content.substring(0, 300);
+        return Content.substring(0, 200);
     }
 
     public String getAuthor() {
