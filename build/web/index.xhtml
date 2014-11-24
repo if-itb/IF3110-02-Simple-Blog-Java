@@ -30,13 +30,13 @@
                 <nav class="nav">
                     <ul class="nav-list">
                         <li class="nav-item">
-                            <p class="pure-button" action="#{NavigationController.gotoLogin}?faces-redirect=true" value="Login">LOGIN</a>
+                            <a class="pure-button" href="#{NavigationController.gotoLogin()}" value="Login">LOGIN</a>
                         </li>
                         <li class="nav-item">
-                            <p class="pure-button" action="#{NavigationController.gotoListPost}" value="List-Post">List Post</a>
+                            <p class="pure-button" onclick="location.href='#{NavigationController.gotoListPost()}'" value="List-Post">List Post</p>
                         </li>
                         <li class="nav-item">
-                            <p class="pure-button" action="#{NavigationController.gotoListUser}" value="List-User">List User</a>
+                            <p class="pure-button" action="#{NavigationController.gotoListUser()}" value="List-User">List User</p>
                         </li>
                     </ul>
                 </nav>

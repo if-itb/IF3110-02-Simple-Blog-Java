@@ -24,14 +24,14 @@ public class NavigationController implements Serializable{
     }
     
     public String gotoLogin() {
-        return "Login";
+        return "Login.xhtml";
     }
     
     public String gotoListUser(){
-        return "List-User";
+        return "List-User.xhtml";
     }
     
     public String gotoListPost() {
-        return "List-Post";
+        return "List-Post.xhtml";
     }
 }
