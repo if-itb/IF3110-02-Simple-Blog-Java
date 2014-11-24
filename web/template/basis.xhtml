@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<head>
+    <meta charset="utf-8"></meta>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+    <meta name="description" content="A layout example that shows off a blog page with a list of posts."></meta>
+
+    <title>Blog &ndash; </title>
+    <link rel="stylesheet" href="css/blog.css"></link>
+    
+    
+    <!--[if lte IE 8]-->
+    <link rel="stylesheet" href="css/blog-old-ie.css"></link>
+    
+    <!--[endif]-->
+    <!--[if gt IE 8]><!-->
+    <link rel="stylesheet" href="css/blog.css"></link>
+    <!--<![endif]-->
+    
+</head>
+<body>
+    <div id="layout" class="pure-g">
+        <div class="sidebar pure-u-1 pure-u-md-1-4">
+            <div class="header">
+                <h1 class="brand-title">Simple Blog</h1>
+                <h2 class="brand-tagline">Blah blah blah, Tubes 2 WBD</h2>
+
+                <nav class="nav">
+                    <ul class="nav-list">
+                        <li class="nav-item">
+                            <a class="pure-button" href="#{NavigationController.gotoLogin()}" value="Login">LOGIN</a>
+                        </li>
+                        <li class="nav-item">
+                            <p class="pure-button" onclick="location.href='#{NavigationController.gotoListPost()}'" value="List-Post">List Post</p>
+                        </li>
+                        <li class="nav-item">
+                            <p class="pure-button" action="#{NavigationController.gotoListUser()}" value="List-User">List User</p>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="content pure-u-1 pure-u-md-3-4">
+            <ui:insert name="content">Main Content </ui:insert>
+        </div>
+    </div>
+</body>
+</html>
+
