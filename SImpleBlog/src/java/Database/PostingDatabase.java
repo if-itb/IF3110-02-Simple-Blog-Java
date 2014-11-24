@@ -188,7 +188,7 @@ public class PostingDatabase {
         ExternalContext extCont = FacesContext.getCurrentInstance().getExternalContext();
         Cookie cUsername = login.getUserCookie();
         Cookie cPassword = login.getPassCookie();
-
+        System.out.println("teeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeesssssssssssssssssssssssssssssssssssss");
         if (cUsername!=null && cPassword!=null){
             ResultSet rs;
             Connection con;
@@ -203,7 +203,6 @@ public class PostingDatabase {
                 System.out.println("exist user: " + existUser);
             }
             if (existUser>0){
-                System.out.println("masuk");
                 extCont.redirect("/SImpleBlog/Role/Owner.xhtml");
             }
             else{
@@ -213,13 +212,14 @@ public class PostingDatabase {
         }
     }
     
-    public String Login() throws ClassNotFoundException, SQLException{
+    public void Login() throws ClassNotFoundException, SQLException, IOException{
+        ExternalContext extContext = FacesContext.getCurrentInstance().getExternalContext();
         HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
         String Username = request.getParameter("login_username");
         String Password = request.getParameter("login_password");
 
         ResultSet rs;
-        int existUser=0;
+        int existUser;
         Connection con;
         con = makeConnection();
         Statement stmt = con.createStatement();
@@ -228,20 +228,36 @@ public class PostingDatabase {
 
         while(rs.next()){
             existUser = rs.getInt(1);
-            login.setCookie();
-         }
-        
-        if (existUser>0){
-            while(rs.next()){
-                login.setCookie();
+            if(existUser>0){
+                login.setCookie(Username, Password);
+                extContext.redirect("/SImpleBlog/Role/Owner.xhtml");
+            } else{
+                extContext.redirect("/SImpleBlog/Home.xhtml");
             }
-            con.close();
-            return "Role/Owner.xhtml?faces-redirect=true";
+            System.out.println("exist user: ada " + existUser);
         }
-        else{
-            con.close();
-            return "Home.xhtml";
-        }
+        con.close();
+    }
+    
+    public String getActiveUser() throws ClassNotFoundException, SQLException{
+        ExternalContext extCont = FacesContext.getCurrentInstance().getExternalContext();
+        Cookie cUsername = login.getUserCookie();
+        System.out.println("value : " + cUsername.getValue());
+        String activeUser = null;
+        
+        ResultSet rs;
+        Connection con;
+        con = makeConnection();
+        Statement stmt = con.createStatement();
+        String query = "Select Name from user where Username=\""+cUsername.getValue()+"\";";
+        System.out.println("query : " + query);
+        rs = stmt.executeQuery(query);
+        System.out.println("execute");
+        while(rs.next()){
+            activeUser = rs.getString("Name");
+         }
+        System.out.println("active User: " + activeUser);
+        return activeUser;
     }
     
     public void setLogout() throws ClassNotFoundException, SQLException, IOException{

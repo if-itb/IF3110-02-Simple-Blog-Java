@@ -452,6 +452,7 @@ div.cover > img {
   letter-spacing: 2px;
   text-transform: uppercase;
   color: #999;
+  float: right;
 }
 
 .art-list-title a {
