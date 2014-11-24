@@ -44,7 +44,13 @@
             //instantiasi kelas Post dan pemanggilan dari database
             Post listPost = new Post();
             CookieHelper cookie = new CookieHelper(request.getCookies());
-            listPost.cookieHeaderCheck(cookie);
+            //apabila tidak ada cookie
+            if(cookie.thereIsCookie()) {
+                listPost.cookieHeaderCheck(cookie);
+            }
+            else {
+                response.sendRedirect("../login/index.html");
+            }
         %>
         <br>
         <div class="wrapper">
@@ -52,7 +58,7 @@
         <nav class="nav">
             <a style="border:none;" id="logo" href="../index.jsp"><h1>Not<span>-</span>a<span>-</span>Simple<span>-</span>Blog</h1></a>
             <ul class="nav-primary">
-                <li><a href="../new_post.html">+ Tambah post</a></li>
+                <li><a href="../new_post.jsp">+ Tambah post</a></li>
             </ul>
         </nav>
                 
@@ -60,11 +66,15 @@
             <div class="posts">
                 <nav class="art-list">
                   <ul class="art-list-body">
-                    <br>
-                    <h1>Post Management</h1>
-                    <table id="t01">
-                        <%= listPost.listManagementPosts() %>
-                    </table> 
+                    <li class="art-list-item">
+                        <div class="art-list-item-title-and-time">
+                            <br><br><br>
+                            <h2 class="art-list-title">Post Management</h2>
+                        </div>
+                        <table id="t01">
+                            <p><%= listPost.listManagementPosts() %></p>
+                        </table> 
+                    </li>
                   </ul>
                 </nav>
             </div>

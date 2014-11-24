@@ -4,6 +4,7 @@
     Author     : Imburden
 --%>
 
+<%@page import="source.CookieHelper"%>
 <%@page import="source.Post"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -40,7 +41,16 @@
     </head>
     <body class = "default">
         <% Post post = new Post(); %>
-        <% post.setAtribut(Integer.valueOf(request.getParameter("id"))); %>
+        <% post.setAtribut(Integer.valueOf(request.getParameter("id")));
+           CookieHelper cookie = new CookieHelper(request.getCookies());
+           //apabila tidak ada cookie
+           if(cookie.thereIsCookie()) {
+               post.cookieHeaderCheck(cookie);
+           }
+           else {
+               response.sendRedirect("../login/index.html");
+           }
+         %>
         
         <div class="wrapper">
 

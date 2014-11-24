@@ -1,10 +1,13 @@
 <%-- 
-    Document   : delete_post
-    Created on : Nov 22, 2014, 8:53:38 PM
+    Document   : new_post
+    Created on : Nov 24, 2014, 10:24:11 PM
     Author     : Imburden
 --%>
 
-<%@page import="source.Post"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+    <%@page import="source.Post"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <% %>
 <!DOCTYPE html>
@@ -39,10 +42,75 @@
             <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
         
-        <title>Redirecting... - Not a Simple Blog</title>
+        <title>New Post - Not a Simple Blog</title>
     </head>
-    <body class="default">
-        <% Post post = new Post(); %>
-        <% post.addPost(request.getParameter("Judul"), request.getParameter("Tanggal"), request.getParameter("Konten")); %>
+    <body class = "default">
+        <div class="wrapper">
+
+        <nav class="nav">
+            <a style="border:none;" id="logo" href="../admin/index.jsp"><h1>Not<span>-</span>a<span>-</span>Simple<span>-</span>Blog</h1></a>
+            <ul class="nav-primary">
+                
+            </ul>
+        </nav>
+
+        <article class="art simple post">
+
+
+            <h2 class="art-title" style="margin-bottom:40px">-</h2>
+
+            <div class="art-body">
+                <div class="art-body-inner">
+                    <h2>Tambah Post</h2>
+
+                    <div id="contact-area">
+                        <form method="post" action="new_post_red.jsp">
+                            <label for="Judul">Judul:</label>
+                            <input type="text" name="Judul" id="Judul">
+
+                            <label for="Tanggal">Tanggal:</label>
+                            <input type="text" name="Tanggal" id="Tanggal">
+
+                            <label for="Konten">Konten:</label><br>
+                            <textarea name="Konten" rows="20" cols="20" id="Konten"></textarea>
+
+                            <input type="submit" name="submit" value="Simpan" class="submit-button">
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </article>
+
+        <footer class="footer">
+            <div class="back-to-top"><a href="">Back to top</a></div>
+            <!-- <div class="footer-nav"><p></p></div> -->
+            <div class="psi">&Psi;</div>
+            <aside class="offsite-links">
+                Tugas Besar 2 IF3110 /
+                <a class="rss-link" href="#rss">RSS</a> /
+                <br>
+                <a class="twitter-link" href="http://www.facebook.com/ajiballinst" target="_blank">Try Ajitiono</a> /
+                <a class="twitter-link" href="http://www.facebook.com/rakhmatullahyogasutrisna" target="_blank">Rakhmatullah Yoga Sutrisna</a> /
+                <a class="twitter-link" href="http://www.facebook.com/akhmadfakhoni" target="_blank">Akhmad Fakhoni Listiyan Dede</a>
+            </aside>
+        </footer>
+
+        </div>
+
+        <script type="text/javascript" src="assets/js/function.js"></script>
+        <script type="text/javascript" src="assets/js/fittext.js"></script>
+        <script type="text/javascript" src="assets/js/app.js"></script>
+        <script type="text/javascript" src="assets/js/respond.min.js"></script>
+        <script type="text/javascript">
+          var ga_ua = '{{! TODO: ADD GOOGLE ANALYTICS UA HERE }}';
+
+          (function(g,h,o,s,t,z){g.GoogleAnalyticsObject=s;g[s]||(g[s]=
+              function(){(g[s].q=g[s].q||[]).push(arguments)});g[s].s=+new Date;
+              t=h.createElement(o);z=h.getElementsByTagName(o)[0];
+              t.src='//www.google-analytics.com/analytics.js';
+              z.parentNode.insertBefore(t,z)}(window,document,'script','ga'));
+              ga('create',ga_ua);ga('send','pageview');
+        </script>
     </body>
 </html>

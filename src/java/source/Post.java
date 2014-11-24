@@ -27,11 +27,9 @@ public class Post {
     public boolean cookieOn;
     
     public void cookieHeaderCheck(CookieHelper c) {
-        cookieOn = false;
-        if(c.thereIsCookie()) {
-            setUser(c.getUsername());
-            cookieOn = true;
-        }
+        //prekondisi: cookie sudah pasti ada
+        setUser(c.getUsername());
+        cookieOn = true;
     }
     
     public String showMessageHeader() {
@@ -247,17 +245,29 @@ public class Post {
             Connection koneksi = KoneksiDatabase.getKoneksi();
             Statement statement = koneksi.createStatement();
             //query
-            String queryListPosts = "SELECT * from `post` WHERE publishStatus=0 ORDER by tanggal DESC";
+            String queryListPosts = "SELECT * from `post` ORDER by tanggal DESC";
             //execute query
             ResultSet result = statement.executeQuery(queryListPosts);
             //tulis hasil query
             if (!result.next()) {
                 //kosong
-                toHTML = "No unpublished posts.";
+                toHTML = "No posts yet.";
             }
             else { //ada hasil
                 Date date;
                 result = statement.executeQuery(queryListPosts);
+                //header tabel
+                toHTML += "<tr><th rowspan=\"2\" id=\"column1\">Judul Post</th>\n" +
+                          "<th rowspan=\"2\" id=\"column2\">Tanggal Post</th>\n" +
+                          "<th rowspan=\"2\" id=\"column3\">Konten Post</th>\n" +
+                          "<th rowspan=\"2\" id=\"column4\">Status</th>\n" +
+                          "<th id=\"column5\" colspan=\"4\">Aksi</th>\n" +
+                          "</tr>\n" +
+                          "<th id=\"columnx\">Publish</th>\n" +
+                          "<th id=\"columnx\">Trash</th>\n" +
+                          "<th id=\"columnx\">Delete</th>\n" +
+                          "<th id=\"columnx\">Edit</th>\n" +
+                          "</tr>\n";
                 while (result.next()) { //apabila result masih ada
                     shortened = false;
                     //inisialisasi variabel
@@ -272,18 +282,6 @@ public class Post {
                     date = result.getDate("tanggal");
                     //ubah menjadi string
                     tanggalPost = date.toString();
-                    //header tabel
-                    toHTML += "<tr><th rowspan=\"2\" id=\"column1\">Judul Post</th>\n" +
-                              "<th rowspan=\"2\" id=\"column2\">Tanggal Post</th>\n" +
-                              "<th rowspan=\"2\" id=\"column3\">Konten Post</th>\n" +
-                              "<th rowspan=\"2\" id=\"column4\">Status</th>\n" +
-                              "<th id=\"column5\" colspan=\"4\">Aksi</th>\n" +
-                              "</tr>\n" +
-                              "<th id=\"columnx\">Publish</th>\n" +
-                              "<th id=\"columnx\">Trash</th>\n" +
-                              "<th id=\"columnx\">Delete</th>\n" +
-                              "<th id=\"columnx\">Edit</th>\n" +
-                              "</tr>\n";
                     //judul, tanggal, konten post
                     toHTML += "<tr>\n" + "<th>" + judulPost + "</th>"
                                        + "<th>" + tanggalPost + "</th>"
@@ -304,6 +302,9 @@ public class Post {
                             toHTML += "<th><a href='../posts/publish_post.jsp?id=" + idPost + "'> X </a></th>" +
                                       "<th><a href='../posts/trash_post.jsp?id=" + idPost + "'> X </a></th>";
                         }
+                        else {
+                            toHTML += "<th></th><th></th>";
+                        }
                         toHTML += "<th><a href='../posts/delete_post.jsp?id=" + idPost + "'> X </a></th>" +
                                   "<th><a href='../posts/edit_post.jsp?id=" + idPost + "'> X </a></th></tr>";
                     }
@@ -312,11 +313,19 @@ public class Post {
                             toHTML += "<th><a href='../posts/publish_post.jsp?id=" + idPost + "'> X </a></th>" +
                                       "<th></th>";
                         }
+                        else {
+                            toHTML += "<th></th><th></th>";
+                        }
                         toHTML += "<th></th><th><a href='../posts/edit_post.jsp?id=" + idPost + "'> X </a></tr>";
+                        toHTML += "<th></th>";
                     }
                     else if (isOwner()) {
                         if (publishStatus == 0) {
                             toHTML += "<th></th><th><a href='../posts/trash_post.jsp?id=" + idPost + "'> X </a></tr>";
+                            toHTML += "<th></th>";
+                        }
+                        else {
+                            toHTML += "<th></th><th></th>";
                         }
                         toHTML += "<th><a href='../posts/delete_post.jsp?id=" + idPost + "'> X </a></tr>";
                         toHTML += "<th><a href='../posts/edit_post.jsp?id=" + idPost + "'> X </a></tr>";
@@ -375,7 +384,7 @@ public class Post {
             Connection koneksi = KoneksiDatabase.getKoneksi();
             Statement statement = koneksi.createStatement();
             //query
-            String queryPublishPost = "UPDATE post SET published=1 WHERE id=" + post_ID;
+            String queryPublishPost = "UPDATE post SET publishStatus=1 WHERE id=" + post_ID;
             //execute query
             statement.executeUpdate(queryPublishPost);
         }
