@@ -7,17 +7,22 @@
 package Database;
 
 import Login.Login;
+import java.io.IOException;
 import java.io.Serializable;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -94,11 +99,18 @@ public class PostingDatabase {
         return records;
    }
    
-    public void addPost() throws ClassNotFoundException, SQLException{
+    public void addPost(String Judul,String Tanggal,String Content,String Author) throws ClassNotFoundException, SQLException, IOException, ParseException{
           ResultSet rs;
           Connection con = makeConnection();
           Statement stmt = con.createStatement();
-          String query = "Select COUNT(Id) from posting";
+          String query = "Select COUNT(Id) from post";
+          SimpleDateFormat format = new SimpleDateFormat("YYYY-MM-DD");
+          System.out.println("PINGGGGg"+Tanggal);
+          System.out.println(Judul);
+          System.out.println("PINGGGGGGGGGGGGGGGGGG");
+          Date parsed;
+          parsed = (Date)format.parse(Tanggal);
+        java.sql.Date sql = new java.sql.Date(parsed.getTime());
           rs = stmt.executeQuery(query);
           PreparedStatement ps;
           int countsumId = 0;
@@ -106,16 +118,17 @@ public class PostingDatabase {
              countsumId = rs.getInt(1);
            }
           System.out.println(countsumId);
-          System.out.println("PINGGG");
-            String query2 = "INSERT INTO `posting` (`Id`,`Judul`, `Tanggal`, `Content`, `Author`, `Status`) VALUES (?,?,?,?,?,?)";
+          System.out.println("PINGGGGGGGGGGGGGGGGGGGGG"+Tanggal);
+            String query2 = "INSERT INTO post (Judul, Tanggal, Content, Author, Status) VALUES (?,?,?,?,?)";
             ps= con.prepareStatement(query2);
-            ps.setInt(1,countsumId+1);
-            ps.setString(2,"Doremi");
-            ps.setString(3,"1-2-3");
-            ps.setString(4,"ini adalah not");
-            ps.setString(5,"Doni");
-            ps.setString(6,"unpublished");
-            int i = ps.executeUpdate();     
+            ps.setString(1,Judul);
+            ps.setDate(2,parsed);
+            ps.setString(3,Content);
+            ps.setString(4,Author);
+            ps.setString(5,"unpublished");
+            int i = ps.executeUpdate();
+            ExternalContext extcon = FacesContext.getCurrentInstance().getExternalContext();
+            extcon.redirect("SimpleBlog/Host.xhtml");
     }
     
     public String addUserOwner() throws ClassNotFoundException, SQLException{
