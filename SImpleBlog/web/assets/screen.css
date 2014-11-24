@@ -255,7 +255,7 @@ div.cover > img {
 }
 /* Header */
 .art-header {
-  height: 900px;
+  height: 564px;
   /* Background image is defined in the post */
   background-position: top center;
   background-attachment: fixed;
@@ -880,7 +880,7 @@ hr.featured-article:after {
   width: 600px;
   margin-top: 25px;
   position: relative;
-  height: 400px;
+  height: 267px;
 }
 
 #contact-area2 input, #contact-area2 textarea {
