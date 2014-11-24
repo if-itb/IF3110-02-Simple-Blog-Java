@@ -74,6 +74,7 @@ public class Post implements Serializable
         return user;
     }
 
+    /* harus di set dulu mau ambil yang statusnya apa */
     public List<Post> getDaftar_post() {
         fetchPostsFromDB();
         return daftar_post;
@@ -150,6 +151,48 @@ public class Post implements Serializable
         this.user = user;
     }
     
+    /* Ambil semua post dari database */
+    public List<Post> getPosts()
+    {
+        System.out.println("Get Posts");
+        List<Post> post = new ArrayList<>();
+        try {
+            Class.forName("com.mysql.jdbc.Driver").newInstance();
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost/simple_blog_java","root","");
+            System.out.println("Connection Created!");
+            String query = "SELECT * FROM `post`";
+            System.out.println("query:" + query);
+            PreparedStatement ps = con.prepareStatement(query);
+            ResultSet result = ps.executeQuery();
+            while(result.next())
+            {
+                Post temp = new Post();
+                temp.id = result.getInt("id");
+                temp.judul = result.getString("judul");
+                temp.author = result.getString("author");
+                temp.tanggal = result.getString("tanggal");
+                temp.konten = result.getString("konten");
+                temp.status = result.getString("status");
+                System.out.println(id);
+                System.out.println(judul);
+                System.out.println(author);
+                System.out.println(tanggal);
+                System.out.println(konten);
+                System.out.println(status);
+                post.add(temp);
+            }
+            System.out.println("Posts sucessfully fetched");
+            con.close();
+            System.out.println("connection closed");
+            
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
+            System.out.println(ex.toString());
+        } catch (Exception ex) {
+            System.out.println(ex.toString());
+        }
+        return post;
+    }
+    
     public void fetchPostsFromDB()
     {
         try {
@@ -162,7 +205,7 @@ public class Post implements Serializable
             {
                 throw new Exception("Query_status has not been declared");
             }
-            String query = "SELECT * FROM `post` WHERE status = " + "'" + query_status + "'";
+            String query = "SELECT * FROM `post` WHERE status = " + "'" + query_status + "' ORDER BY tanggal DESC";
             System.out.println("query:" + query);
             PreparedStatement ps = con.prepareStatement(query);
             ResultSet result = ps.executeQuery();

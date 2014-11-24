@@ -9,6 +9,7 @@
         <title>Edit Post</title>
     </h:head>
     <h:body>
+        #{editpost.autoFill}
         <nav class="navbar navbar-default" role="navigation">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#{user.role}.xhtml">Holy Grail</a>
@@ -29,7 +30,7 @@
             <h1>
                 Edit Post
             </h1>        
-            <h:form class="form-post" onsubmit="return false;">
+            <h:form class="form-post" id="editpost">
                 <div class="row form-element">
                     <div class="col-md-3"/>
                     <div class="col-md-3"><label for="Judul">Title</label></div>
@@ -38,17 +39,17 @@
                 <div class="row form-element">
                     <div class="col-md-3"/>
                     <div class="col-md-3"><label for="Tanggal">Date</label></div>
-                    <div class="col-md-3"><h:inputText a:placeholder="YYYY-MM-DD" requiredMessage="Date is empty" required="true" id="tanggalpost" value="#{editpost.tanggal}"/></div>
+                    <div class="col-md-3"><h:inputText a:placeholder="YYYY-MM-DD" requiredMessage="Date is empty" required="true" id="tanggalpost" value="#{editpost.tanggalString}"/></div>
                 </div>
                 <div class="row form-element">
                     <div class="col-md-3"/>
                     <div class="col-md-3"><label for="Tanggal">Content</label></div>
-                    <div class="col-md-3"><h:inputTextarea required="true" id="kontenpost" value="#{editpost.konten}"></h:inputTextarea></div>
+                    <div class="col-md-3"><h:inputTextarea required="true" id="kontenpost" style="height: 300px" value="#{editpost.konten}"></h:inputTextarea></div>
                 </div>
                 <div class="row">
                     <div class="col-md-3"/>
                     <div class="col-md-3">
-                        <h:commandButton onclick="return ValidateForm()" action="#{editpost.changepost()}" type="submit" class="login-button btn-success" id="login" value="Add Post"/>
+                        <h:commandButton onclick="return ValidateForm();" action="#{editpost.changepost()}" type="submit" class="login-button btn-success" id="login" value="Add Post"/>
                     </div>
                 </div>
             </h:form>

@@ -10,9 +10,9 @@ function DeletePost(id_post)
 
 function ValidateForm()
 {
-	var judul = document.getElementById("form-newpost:judulpost").value;
-	var tanggal = document.getElementById("form-newpost:tanggalpost").value;
-	var konten = document.getElementById("form-newpost:kontenpost").value;
+	var judul = document.getElementById("editpost:judulpost").value;
+	var tanggal = document.getElementById("editpost:tanggalpost").value;
+	var konten = document.getElementById("editpost:kontenpost").value;
 	if ((judul == "") || (tanggal == "") || (konten== ""))
 	{
 		alert("Field tidak boleh ada yang kosong");
