@@ -31,8 +31,3 @@ function validateform() {
         return true;
     }
 }
-
-function test(){
-    
-}
-
