@@ -7,6 +7,7 @@
 package Database;
 
 import Login.Login;
+import static com.sun.corba.se.spi.presentation.rmi.StubAdapter.request;
 import java.io.IOException;
 import java.io.Serializable;
 import java.sql.Connection;
@@ -99,36 +100,36 @@ public class PostingDatabase {
         return records;
    }
    
-    public void addPost(String Judul,String Tanggal,String Content,String Author) throws ClassNotFoundException, SQLException, IOException, ParseException{
-          ResultSet rs;
+    public void addPost() throws ClassNotFoundException, SQLException, IOException, ParseException{
+        HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        String Judul = request.getParameter("Judul");
+        String Tanggal = request.getParameter("Tanggal");
+        String Konten = request.getParameter("Konten");
+        ResultSet rs;
           Connection con = makeConnection();
           Statement stmt = con.createStatement();
           String query = "Select COUNT(Id) from post";
-          SimpleDateFormat format = new SimpleDateFormat("YYYY-MM-DD");
-          System.out.println("PINGGGGg"+Tanggal);
-          System.out.println(Judul);
-          System.out.println("PINGGGGGGGGGGGGGGGGGG");
-          Date parsed;
-          parsed = (Date)format.parse(Tanggal);
-        java.sql.Date sql = new java.sql.Date(parsed.getTime());
+          SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+          java.util.Date parsed = format.parse(Tanggal);
+          System.out.println(parsed);
+          java.sql.Date datesql = new java.sql.Date(parsed.getTime());
+          
           rs = stmt.executeQuery(query);
           PreparedStatement ps;
           int countsumId = 0;
           while(rs.next()){
              countsumId = rs.getInt(1);
            }
-          System.out.println(countsumId);
-          System.out.println("PINGGGGGGGGGGGGGGGGGGGGG"+Tanggal);
             String query2 = "INSERT INTO post (Judul, Tanggal, Content, Author, Status) VALUES (?,?,?,?,?)";
             ps= con.prepareStatement(query2);
             ps.setString(1,Judul);
-            ps.setDate(2,parsed);
-            ps.setString(3,Content);
-            ps.setString(4,Author);
+            ps.setDate(2,datesql);
+            ps.setString(3,Konten);
+            ps.setString(4,"chobits");
             ps.setString(5,"unpublished");
             int i = ps.executeUpdate();
             ExternalContext extcon = FacesContext.getCurrentInstance().getExternalContext();
-            extcon.redirect("SimpleBlog/Host.xhtml");
+            extcon.redirect("Home.xhtml");
     }
     
     public String addUserOwner() throws ClassNotFoundException, SQLException{
