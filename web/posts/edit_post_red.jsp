@@ -1,13 +1,12 @@
 <%-- 
-    Document   : trash_post
-    Created on : Nov 24, 2014, 6:10:01 PM
+    Document   : edit_post_red
+    Created on : Nov 24, 2014, 10:45:00 PM
     Author     : Imburden
 --%>
 
 <%@page import="source.CookieHelper"%>
 <%@page import="source.Post"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
 <!DOCTYPE html>
 <html>
     <head>
@@ -33,7 +32,7 @@
         <meta property="og:image" content="{{! TODO: ADD GRAVATAR URL HERE }}">
         <meta property="og:site_name" content="Simple Blog">
 
-        <link rel="stylesheet" type="text/css" href="assets/css/screen.css" />
+        <link rel="stylesheet" type="text/css" href="../assets/css/screen.css" />
         <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
         
         <!--[if lt IE 9]>
@@ -42,14 +41,14 @@
         
         <title>Redirecting... - Not a Simple Blog</title>
     </head>
-    <body class="default">
+    <body>
         <% CookieHelper cookie = new CookieHelper(request.getCookies());
            //apabila tidak ada cookie
            if(!cookie.thereIsCookie()) {
                response.sendRedirect("../login/index.html");
            }
-         %>
+        %>
         <% Post post = new Post(); %>
-        <% post.publishPost(Integer.valueOf(request.getParameter("id"))); %>
+        <% post.editPost(Integer.valueOf(request.getParameter("id")),request.getParameter("Judul"), request.getParameter("Tanggal"), request.getParameter("Konten")); %>
     </body>
 </html>

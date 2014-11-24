@@ -9,7 +9,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <head>        
+    <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -43,14 +43,14 @@
         <% 
             //instantiasi kelas Post dan pemanggilan dari database
             Post listPost = new Post();
-            CookieHelper cookie = new CookieHelper(request.getCookies());
-            //apabila tidak ada cookie
+            CookieHelper cookie = new CookieHelper(request.getCookies());            
+            //apabila tidak ada cookie            
             if(cookie.thereIsCookie()) {
-                listPost.cookieHeaderCheck(cookie);
-            }
-            else {
-                response.sendRedirect("../login/index.html");
-            }
+               listPost.cookieHeaderCheck(cookie);
+           }
+           else {
+               response.sendRedirect("../login/index.html");
+           }
         %>
         <br>
         <div class="wrapper">
@@ -58,7 +58,7 @@
         <nav class="nav">
             <a style="border:none;" id="logo" href="../index.jsp"><h1>Not<span>-</span>a<span>-</span>Simple<span>-</span>Blog</h1></a>
             <ul class="nav-primary">
-                <li><a href="../new_post.jsp">+ Tambah post</a></li>
+                <li><a href="../posts/new_post.jsp">+ Tambah post</a></li>
             </ul>
         </nav>
                 
@@ -72,7 +72,7 @@
                             <h2 class="art-list-title">Post Management</h2>
                         </div>
                         
-                            <p><%= listPost.listManagementPosts() %></p>
+                            <p><% if(cookie.thereIsCookie()) out.print(listPost.listManagementPosts()); %></p>
                         
                     </li>
                   </ul>

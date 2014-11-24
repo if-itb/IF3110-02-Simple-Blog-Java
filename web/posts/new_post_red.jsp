@@ -4,6 +4,7 @@
     Author     : Imburden
 --%>
 
+<%@page import="source.CookieHelper"%>
 <%@page import="source.Post"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <% %>
@@ -42,6 +43,12 @@
         <title>Redirecting... - Not a Simple Blog</title>
     </head>
     <body class="default">
+        <% CookieHelper cookie = new CookieHelper(request.getCookies());
+           //apabila tidak ada cookie
+           if(!cookie.thereIsCookie()) {
+               response.sendRedirect("../login/index.html");
+           }
+         %>
         <% Post post = new Post(); %>
         <% post.addPost(request.getParameter("Judul"), request.getParameter("Tanggal"), request.getParameter("Konten")); %>
     </body>

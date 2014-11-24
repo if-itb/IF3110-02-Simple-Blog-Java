@@ -249,10 +249,11 @@ public class Post {
             //execute query
             ResultSet result = statement.executeQuery(queryListPosts);
             //header tabel
-            toHTML += "<table id=\"t01\"> <tr><th rowspan=\"2\" id=\"column1\">Judul Post</th>\n" +
-                      "<th rowspan=\"2\" id=\"column2\">Tanggal Post</th>\n" +
-                      "<th rowspan=\"2\" id=\"column3\">Konten Post</th>\n" +
-                      "<th rowspan=\"2\" id=\"column4\">Status</th>\n" +
+            toHTML += "<table id=\"t01\"> <tr>" +
+                      "<th <tr style=\"vertical-align:center\" rowspan=\"2\" id=\"column1\">Judul Post</th>\n" +
+                      "<th <tr style=\"vertical-align:center\" rowspan=\"2\" id=\"column2\">Tanggal Post</th>\n" +
+                      "<th <tr style=\"vertical-align:center\" rowspan=\"2\" id=\"column3\">Konten Post</th>\n" +
+                      "<th <tr style=\"vertical-align:center\" rowspan=\"2\" id=\"column4\">Status</th>\n" +
                       "<th id=\"column5\" colspan=\"4\">Aksi</th>\n" +
                       "</tr>\n" +
                       "<th id=\"columnx\">Publish</th>\n" +

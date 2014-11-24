@@ -71,7 +71,7 @@
                     <h2>Ubah Post</h2>
                     
                     <div id="contact-area">
-                        <form method="post" action="post.jsp?id=<%= Integer.valueOf(request.getParameter("id")) %>">
+                        <form method="post" action="edit_post_red.jsp?id=<%=request.getParameter("id")%>">
                             <label for="Judul">Judul:</label>
                             <input type="text" name="Judul" id="Judul" value="<%= post.getJudul() %>">
 

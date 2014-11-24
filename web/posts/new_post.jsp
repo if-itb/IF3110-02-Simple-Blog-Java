@@ -4,17 +4,12 @@
     Author     : Imburden
 --%>
 
+<%@page import="source.CookieHelper"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
-    <%@page import="source.Post"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<% %>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="refresh" content="0; url=../admin/index.jsp" />
-        
+    <head>        
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -35,7 +30,7 @@
         <meta property="og:image" content="{{! TODO: ADD GRAVATAR URL HERE }}">
         <meta property="og:site_name" content="Simple Blog">
 
-        <link rel="stylesheet" type="text/css" href="assets/css/screen.css" />
+        <link rel="stylesheet" type="text/css" href="../assets/css/screen.css" />
         <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
         
         <!--[if lt IE 9]>
@@ -45,6 +40,12 @@
         <title>New Post - Not a Simple Blog</title>
     </head>
     <body class = "default">
+        <% CookieHelper cookie = new CookieHelper(request.getCookies());
+           //apabila tidak ada cookie
+           if(!cookie.thereIsCookie()) {
+               response.sendRedirect("../login/index.html");
+           }
+         %>
         <div class="wrapper">
 
         <nav class="nav">
