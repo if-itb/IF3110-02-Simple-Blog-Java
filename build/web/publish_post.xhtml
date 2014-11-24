@@ -6,9 +6,10 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <h:outputStylesheet library="css" name="bootstrap.css"/>
+        <h:outputScript library="js" name="publish_ajax.js"/>
         <title>Publish Post</title>
     </h:head>
-    <h:body>
+    <h:body onload="getPost()">
         <h:outputScript name="ajax.js" library="js" target="head"/>
         <nav class="navbar navbar-default" role="navigation">
             <div class="container-fluid">
@@ -26,33 +27,7 @@
             </div>
         </nav>
         
-        <div class="list-post container-fluid">
-            <h:panelGroup id="list-post">
-                #{post.setQuery_status("unpublished")}
-                <ui:repeat value="#{post.getDaftar_post()}" var="posts">
-                <div class="post">
-                        <a href="#" class="title" id="">
-                            #{posts.judul}
-                        </a>
-                        <div class="date-unpublished">
-                            #{posts.tanggal}
-                        </div>
-                        <div class="unpublished">
-                            [unpublished]
-                        </div>
-                        <div class="content">
-                            #{posts.konten}
-                        </div>
-                        <h:form>
-                            <h:commandLink value="[publish]" class="option">
-                                <f:param name="id" value="#{posts.id}"/>
-                                <f:ajax execute="#{post.publish()}" render=":list-post" />
-                            </h:commandLink>
-                        </h:form>
-                </div>
-                </ui:repeat>
-            </h:panelGroup>
-            <a class="back-to-top" href="#">Back to top</a>
+        <div class="list-post container-fluid" id = "posts">
         </div>
     </h:body>
 </html>

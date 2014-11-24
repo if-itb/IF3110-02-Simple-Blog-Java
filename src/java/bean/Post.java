@@ -1,6 +1,5 @@
 package bean;
 
-import java.io.IOException;
 import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -9,15 +8,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
-import javax.faces.context.ExternalContext;
-import javax.faces.context.FacesContext;
-import javax.faces.event.AjaxBehaviorEvent;
-import javax.servlet.http.HttpServletRequest;
 
 @ManagedBean(name = "post", eager=true)
 @RequestScoped
@@ -25,6 +18,9 @@ public class Post implements Serializable
 {
     @ManagedProperty(value = "#{param.id}")
     private int id;
+    
+    @ManagedProperty(value = "#{user}")
+    private User user;
     
     private String judul;
     private String author;
@@ -37,7 +33,6 @@ public class Post implements Serializable
     public Post() 
     {
         System.out.println("Post created");
-        id = 0;
         judul = "";
         author = "";
         tanggal = "";
@@ -75,6 +70,10 @@ public class Post implements Serializable
         return query_status;
     }
 
+    public User getUser() {
+        return user;
+    }
+
     public List<Post> getDaftar_post() {
         fetchPostsFromDB();
         return daftar_post;
@@ -88,7 +87,8 @@ public class Post implements Serializable
             Class.forName("com.mysql.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost/simple_blog_java", "root", "");
             System.out.println("Connection Created!");
-            String query = "Select * from post where status != 'deleted'";
+            String query = "Select * from post where status != 'deleted' and author=\""+user.getUsername()+"\"";
+            System.out.println("Query: " + query);
             PreparedStatement ps = con.prepareStatement(query);
             ResultSet result = ps.executeQuery();
             System.out.println("Query successful");
@@ -144,6 +144,10 @@ public class Post implements Serializable
 
     public void setQuery_status(String query_status) {
         this.query_status = query_status;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
     
     public void fetchPostsFromDB()
