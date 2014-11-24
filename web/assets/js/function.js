@@ -23,7 +23,6 @@ function comment() {
       document.forms["commentForm"]["Nama"].value="";
       document.forms["commentForm"]["Email"].value="";
       document.forms["commentForm"]["Komentar"].value="";
-      loadComment(idPost);
       return false;
     }
     else {
@@ -67,10 +66,10 @@ function loadComment(str) {
   }
   xmlhttp.onreadystatechange=function() {
     if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-      document.getElementById("oldComment").innerHTML=xmlhttp.responseText;
+      document.getElementById("Comment").innerHTML=xmlhttp.responseText;
     }
   }
-  xmlhttp.open("GET","comment.php?var="+str,true);
+  xmlhttp.open("GET","comment.jsp?id="+str,true);
   xmlhttp.send();
 }
 function saveComment(str) {
@@ -86,10 +85,10 @@ function saveComment(str) {
   }
   xmlhttp.onreadystatechange=function() {
     if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-      document.getElementById("newComment").innerHTML=xmlhttp.responseText;
+      document.getElementById("Comment").innerHTML=xmlhttp.responseText;
     }
   }
-  xmlhttp.open("POST","insertcomment.php",true);
+  xmlhttp.open("POST","insertcomment.jsp",true);
   xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
   xmlhttp.send("id="+str+"&nama="+Nama+"&email="+Email+"&komentar="+Komentar);
   //alert(str+" "+Nama+" "+Email+" "+Komentar);
