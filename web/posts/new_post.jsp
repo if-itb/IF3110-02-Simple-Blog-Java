@@ -1,6 +1,6 @@
 <%-- 
-    Document   : trash_post
-    Created on : Nov 24, 2014, 6:10:01 PM
+    Document   : delete_post
+    Created on : Nov 22, 2014, 8:53:38 PM
     Author     : Imburden
 --%>
 
@@ -10,7 +10,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="refresh" content="0; url=index.jsp" />
+        <meta http-equiv="refresh" content="0; url=../admin/index.jsp" />
         
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -43,6 +43,6 @@
     </head>
     <body class="default">
         <% Post post = new Post(); %>
-        <% post.trashPost(Integer.valueOf(request.getParameter("id"))); %>
+        <% post.addPost(request.getParameter("Judul"), request.getParameter("Tanggal"), request.getParameter("Konten")); %>
     </body>
 </html>

@@ -51,17 +51,17 @@
         <div class="wrapper">
 
         <nav class="nav">
-            <a style="border:none;" id="logo" href="index.html"><h1>Not<span>-</span>a<span>-</span>Simple<span>-</span>Blog</h1></a>
+            <a style="border:none;" id="logo" href="index.jsp"><h1>Not<span>-</span>a<span>-</span>Simple<span>-</span>Blog</h1></a>
             <ul class="nav-primary">
                 <li><%=listPost.showMessageHeader()%> </li>
             </ul>
         </nav>
-                  
+
         <div id="home">
             <div class="posts">
                 <nav class="art-list">
                   <ul class="art-list-body">
-                    <%= listPost.listUnpublishedPosts() %>
+                    <%= listPost.listPublishedPosts() %>
                   </ul>
                 </nav>
             </div>

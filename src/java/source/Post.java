@@ -21,7 +21,7 @@ public class Post {
     private static String judulPost;
     private static String tanggalPost;
     private static String kontenPost;
-    private static boolean publishStatus;
+    private static int publishStatus;
     public String currentUser;
     public String currentRole;
     public boolean cookieOn;
@@ -37,10 +37,11 @@ public class Post {
     public String showMessageHeader() {
         String header;
         if (cookieOn) {
-            header = "Welcome " + currentUser + ", your role is " + currentRole;
+            header = "Welcome " + currentUser + ", your role is " + currentRole + 
+                     "<br><a href='admin/index.jsp'><div align=\"right\"><font color=\"blue\">Dashboard</font></div></a>";
         }
         else {
-            header = "Welcome" + ", please login <a href=\"login/index.html\">here</a>.";
+            header = "Welcome guest, please login <a href=\"login/index.html\">here</a>.";
         }
         return header;
     }
@@ -117,7 +118,7 @@ public class Post {
                 judulPost = result.getString("judul");
                 tanggalPost = result.getString("tanggal");
                 kontenPost = result.getString("konten");
-                publishStatus = result.getString("publishStatus").compareTo("0") != 0;
+                publishStatus = result.getInt("publishStatus");
             }
         }
         catch (SQLException ex) {
@@ -192,6 +193,7 @@ public class Post {
                     idPost = result.getInt("id");
                     judulPost = result.getString("judul");
                     kontenPost = result.getString("konten");
+                    publishStatus = result.getInt("publishStatus");
                     if (kontenPost.length() > 100) {
                         kontenPost = kontenPost.substring(0, 100); //pemotongan teks
                         shortened = true;
@@ -232,7 +234,7 @@ public class Post {
         return toHTML;
     }
     
-    public String listUnpublishedPosts() throws SQLException {
+    public String listManagementPosts() throws SQLException {
         //inisialisasi string
         String toHTML = "";
         boolean shortened;
@@ -262,6 +264,7 @@ public class Post {
                     idPost = result.getInt("id");
                     judulPost = result.getString("judul");
                     kontenPost = result.getString("konten");
+                    publishStatus = result.getInt("publishStatus");
                     if (kontenPost.length() > 50) {
                         kontenPost = kontenPost.substring(0, 50); //pemotongan teks
                         shortened = true;
@@ -269,29 +272,57 @@ public class Post {
                     date = result.getDate("tanggal");
                     //ubah menjadi string
                     tanggalPost = date.toString();
-                    toHTML +=    
-                            "<li class=\"art-list-item\">\n" +
-                            "<div class=\"art-list-item-title-and-time\">\n" +
-                            "<h2 class=\"art-list-title\"><a href=\"post.jsp?id=" + idPost + "\"> " + judulPost + " </a>\n" +
-                            "<div class=\"art-list-time\">" + tanggalPost + "</div>\n" +
-                            "<div class=\"art-list-time\"><span style=\"color:#F40034;\">&#10029;</span> Featured</div>\n" +
-                            "</div>\n" +
-                            "<p> " + kontenPost + "\n" + "</p>\n";                            
+                    //header tabel
+                    toHTML += "<tr><th rowspan=\"2\" id=\"column1\">Judul Post</th>\n" +
+                              "<th rowspan=\"2\" id=\"column2\">Tanggal Post</th>\n" +
+                              "<th rowspan=\"2\" id=\"column3\">Konten Post</th>\n" +
+                              "<th rowspan=\"2\" id=\"column4\">Status</th>\n" +
+                              "<th id=\"column5\" colspan=\"4\">Aksi</th>\n" +
+                              "</tr>\n" +
+                              "<th id=\"columnx\">Publish</th>\n" +
+                              "<th id=\"columnx\">Trash</th>\n" +
+                              "<th id=\"columnx\">Delete</th>\n" +
+                              "<th id=\"columnx\">Edit</th>\n" +
+                              "</tr>\n";
+                    //judul, tanggal, konten post
+                    toHTML += "<tr>\n" + "<th>" + judulPost + "</th>"
+                                       + "<th>" + tanggalPost + "</th>"
+                                       + "<th>" + kontenPost;
                     if (shortened) //dipotong
-                        toHTML += "... <a href=\"post.jsp?id= " + idPost + "\">Read More</a><br/>\n";
-                    //edit post: untuk semua kecuali guest
-                    if (isAdmin() || isEditor()) {
-                        toHTML +=  "<p>\n" +
-                        "<a href=\"edit_post.jsp?id=" + idPost + 
-                        "\">Edit</a>";
+                        toHTML += "... <a href=\"post.jsp?id= " + idPost + "\">Read More</a></th>";
+                    else //tidak dipotong
+                        toHTML += "</th>";
+                    //status post
+                    switch (publishStatus) {
+                        case 0: toHTML += "<th> Unpublished </th>"; break;
+                        case 1: toHTML += "<th> Published </th>"; break;
+                        case 2: toHTML += "<th> Trash </th>"; break;
                     }
-                    //trash dan delete post: untuk admin dan owner
-                    if (isAdmin() || isOwner()) {    
-                        toHTML += " | <a href=\"delete_post.jsp?id=" + idPost + 
-                        "\" onclick=\"javascript:confirmDelete()\">Hapus</a>\n" +
-                        " | <a href=\"trash_post.jsp?id=" + idPost + 
-                        "\"> Trash</a>\n" + "</p>\n" + "</li>";
+                    //aksi berdasarkan role, lalu berdasarkan post
+                    if (isAdmin()) {
+                        if (publishStatus == 0) {
+                            toHTML += "<th><a href='../posts/publish_post.jsp?id=" + idPost + "'> X </a></th>" +
+                                      "<th><a href='../posts/trash_post.jsp?id=" + idPost + "'> X </a></th>";
+                        }
+                        toHTML += "<th><a href='../posts/delete_post.jsp?id=" + idPost + "'> X </a></th>" +
+                                  "<th><a href='../posts/edit_post.jsp?id=" + idPost + "'> X </a></th></tr>";
                     }
+                    else if (isEditor()) {
+                        if (publishStatus == 0) {
+                            toHTML += "<th><a href='../posts/publish_post.jsp?id=" + idPost + "'> X </a></th>" +
+                                      "<th></th>";
+                        }
+                        toHTML += "<th></th><th><a href='../posts/edit_post.jsp?id=" + idPost + "'> X </a></tr>";
+                    }
+                    else if (isOwner()) {
+                        if (publishStatus == 0) {
+                            toHTML += "<th></th><th><a href='../posts/trash_post.jsp?id=" + idPost + "'> X </a></tr>";
+                        }
+                        toHTML += "<th><a href='../posts/delete_post.jsp?id=" + idPost + "'> X </a></tr>";
+                        toHTML += "<th><a href='../posts/edit_post.jsp?id=" + idPost + "'> X </a></tr>";
+                                  
+                    }
+                    toHTML += "<br>\n<br>";
                 }
             }
         }

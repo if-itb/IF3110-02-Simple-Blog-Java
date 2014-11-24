@@ -18,7 +18,7 @@
             CookieHelper cookie = new CookieHelper(request.getCookies());
             if(cookie.thereIsCookie())
             {
-                out.println("Welcome " + cookie.getUsername() + "as a "+ cookie.getRole());
+                out.println("Welcome " + cookie.getUsername() + " as an "+ cookie.getRole());
             }
             else
             {
@@ -28,5 +28,7 @@
         %>
         <form action="../LogoutServlet" method="post">
         <input type="submit" value="Logout" >
+        <br><br>
+        <a href="post_management.jsp"> Post Management </a>
     </body>
 </html>

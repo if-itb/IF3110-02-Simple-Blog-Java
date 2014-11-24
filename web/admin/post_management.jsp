@@ -1,14 +1,15 @@
 <%-- 
-    Document   : edit_post
-    Created on : Nov 22, 2014, 10:23:33 PM
+    Document   : post_management
+    Created on : Nov 24, 2014, 8:17:05 PM
     Author     : Imburden
 --%>
 
+<%@page import="source.CookieHelper"%>
 <%@page import="source.Post"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <head>
+    <head>        
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -29,56 +30,46 @@
         <meta property="og:image" content="{{! TODO: ADD GRAVATAR URL HERE }}">
         <meta property="og:site_name" content="Simple Blog">
 
-        <link rel="stylesheet" type="text/css" href="assets/css/screen.css" />
+        <link rel="stylesheet" type="text/css" href="../assets/css/screen_backend.css" />
         <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
         
         <!--[if lt IE 9]>
             <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
         
-        <title>Ubah Post - Not a Simple Blog</title>
+        <title>Post Management - Not a Simple Blog</title>
     </head>
-    <body class = "default">
-        <% Post post = new Post(); %>
-        <% post.setAtribut(Integer.valueOf(request.getParameter("id"))); %>
-        
+    <body class="default">
+        <% 
+            //instantiasi kelas Post dan pemanggilan dari database
+            Post listPost = new Post();
+            CookieHelper cookie = new CookieHelper(request.getCookies());
+            listPost.cookieHeaderCheck(cookie);
+        %>
+        <br>
         <div class="wrapper">
 
         <nav class="nav">
-            <a style="border:none;" id="logo" href="index.jsp"><h1>Not<span>-</span>a<span>-</span>Simple<span>-</span>Blog</h1></a>
+            <a style="border:none;" id="logo" href="../index.jsp"><h1>Not<span>-</span>a<span>-</span>Simple<span>-</span>Blog</h1></a>
             <ul class="nav-primary">
-                <li><a href="new_post.html">+ Tambah Post</a></li>
+                <li><a href="../new_post.html">+ Tambah post</a></li>
             </ul>
         </nav>
-
-        <article class="art simple post">
-
-
-            <h2 class="art-title" style="margin-bottom:40px">-</h2>
-
-            <div class="art-body">
-                <div class="art-body-inner">
-                    <h2>Ubah Post</h2>
-                    
-                    <div id="contact-area">
-                        <form method="post" action="post.jsp?id=<%= Integer.valueOf(request.getParameter("id")) %>">
-                            <label for="Judul">Judul:</label>
-                            <input type="text" name="Judul" id="Judul" value="<%= post.getJudul() %>">
-
-                            <label for="Tanggal">Tanggal:</label>
-                            <input type="text" name="Tanggal" id="Tanggal" value="<%= post.getTanggal() %>">
-
-                            <label for="Konten">Konten:</label><br>
-                            <textarea name="Konten" rows="20" cols="20" id="Konten"><%= post.getKonten() %></textarea>
-
-                            <input type="submit" name="submit" value="Simpan" class="submit-button">
-                        </form>
-                    </div>
-                </div>
+                
+        <div id="home">
+            <div class="posts">
+                <nav class="art-list">
+                  <ul class="art-list-body">
+                    <br>
+                    <h1>Post Management</h1>
+                    <table id="t01">
+                        <%= listPost.listManagementPosts() %>
+                    </table> 
+                  </ul>
+                </nav>
             </div>
-
-        </article>
-
+        </div>
+                    
         <footer class="footer">
             <div class="back-to-top"><a href="">Back to top</a></div>
             <!-- <div class="footer-nav"><p></p></div> -->
