@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="./WEB-INF/templates/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <ui:define name="title">
+        Simple Blog
+    </ui:define>
+
+    <ui:define name="content">
+        <!--
+        <div id="home">
+            <div class="posts">
+                <nav class="art-list">
+                  <ul class="art-list-body">
+                    <?php
+                      if ($result->num_rows > 0) {
+                        while ($row = mysqli_fetch_array($result)) {
+                    ?>
+
+                    <li class="art-list-item">
+                        <div class="art-list-item-title-and-time">
+                            <h2 class="art-list-title"><a href="<?php echo $CONFIG['siteurl'].'/post/detail/'.$row['post_id']; ?>"><?php echo $row['post_title']; ?></a></h2>
+                            <div class="art-list-time"><?php echo dateBeautifier($row['post_date']); ?></div>
+                            <?php if ($row['post_featured']) {
+                              echo '<div class="art-list-time"><span>&#10029;</span> Featured</div>';
+                            }
+                            ?>
+                        </div>
+                        <p><?php echo $row['post_content']; ?></p>
+                        <p>
+                          <?php
+                            $url = $CONFIG['siteurl'].'/post/delete/'.$row['post_id'];
+                            $url = "'".$url."'"
+                          ?>
+                          <a href="<?php echo $CONFIG['siteurl'].'/post/edit/'.$row['post_id']; ?>">Edit</a> | <a href="#" onclick="deleteConfirmationBox(<?php echo $url; ?>)">Hapus</a>
+                        </p>
+                    </li>
+
+                    <?php
+                        }
+                      } else {
+                        echo "Mulai menulis blog sekarang! Tekan tambah post di kanan atas.";
+                      }
+                    ?>
+                  </ul>
+                </nav>
+            </div>
+        </div>
+        -->
+    </ui:define>
+
+</ui:composition>

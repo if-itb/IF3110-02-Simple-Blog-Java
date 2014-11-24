@@ -6,16 +6,14 @@
 
     <h:head>
         <ui:include src="/WEB-INF/templates/head.xhtml"></ui:include>
-        <title><ui:insert name="title">SimpleBlog</ui:insert></title><ui:insert 
+        <title><ui:insert name="title">SimpleBlog</ui:insert></title>
     </h:head>
 
     <h:body class="default">
         <div class="wrapper">
             <ui:include src="/WEB-INF/templates/header.xhtml"></ui:include>
 
-            <div id="content" class="center_content">
-                <ui:insert name="content">Content</ui:insert>
-            </div>
+            <ui:insert name="content">Content</ui:insert>
 
             <ui:include src="/WEB-INF/templates/footer.xhtml"></ui:include>
         </div>
