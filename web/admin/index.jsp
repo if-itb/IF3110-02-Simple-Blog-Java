@@ -27,7 +27,7 @@
             
         %>
         
-        <form action="user.jsp" method="POST" id="tombol">
+        <form action="user_management.jsp" method="POST" id="tombol">
             <input type="submit" value="User Management">
         </form>
         <form action="post_management.jsp" method="POST" id="tombol">
