@@ -36,7 +36,7 @@ manajemen user
 
 bonus
 -	upload gambar belum bisa
--	wysiwyg untuk form post bleum diimplementasi
+-	wysiwyg untuk form post belum diimplementasi
 
 catatan tambahan
 -	fitur yang bisa dipake user masih fungsi keseluruhan, belum ada pembagian fitur berdasarkan role user

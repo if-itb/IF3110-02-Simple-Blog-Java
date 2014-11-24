@@ -127,7 +127,7 @@ public class UsersController implements Serializable {
 		if (user != null) {
 			FacesContext.getCurrentInstance().getExternalContext().addResponseCookie("username", user.getUsername(), null);
 			FacesContext.getCurrentInstance().getExternalContext().addResponseCookie("role", user.getRole(), null);
-			FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/index.xhtml");
+			FacesContext.getCurrentInstance().getExternalContext().redirect("/SimpleBlog/faces/index.xhtml");
 		} else {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Username or password is invalid"));
 		}
