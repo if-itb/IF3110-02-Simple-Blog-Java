@@ -1,3 +1,13 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" import="java.sql.Connection"%>
+<%@ page language="java" import="java.sql.PreparedStatement"%>
+<%@ page language="java" import="java.sql.ResultSet"%>
+<%@ page language="java" import="java.sql.SQLException"%>
+<%@ page language="java" import="java.sql.DriverManager"%>
+<%@ page language="java" import="java.util.*"%>
+<%@ page language="java" import="java.lang.String"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -58,9 +68,44 @@
     <div class="art-body">
         <div class="art-body-inner">
             <hr class="featured-article" />
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis aliquam minus consequuntur amet nulla eius, neque beatae, nostrum possimus, officiis eaque consectetur. Sequi sunt maiores dolore, illum quidem eos explicabo! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam consequuntur consequatur molestiae saepe sed, incidunt sunt inventore minima voluptatum adipisci hic, est ipsa iste. Nobis, aperiam provident quae. Reprehenderit, iste.</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores animi tenetur nam delectus eveniet iste non culpa laborum provident minima numquam excepturi rem commodi, officia accusamus eos voluptates obcaecati. Possimus?</p>
+                <% 
+                    Connection con = null;
+                    try {
+                        //Class.forName("com.mysql.jdbc.Driver");
+                        String url = "jdbc:mysql://localhost:3306/simpleblog_withjava";
+                        String user = "root";
+                        String password = "";
 
+                        DriverManager.registerDriver(new com.mysql.jdbc.Driver());
+
+                        con = DriverManager.getConnection(url, user, password);
+                    }
+                    catch(SQLException ex){
+                    System.out.println(ex);
+                    }
+
+                    // Connection con;
+                    // con=DBConnect.GetDBConnect();
+		try 
+		{
+                    String sql=("SELECT * FROM post WHERE post_id="+request.getParameter("post_id"));
+                    PreparedStatement ps = con.prepareStatement(sql);
+                    ResultSet rs = ps.executeQuery(sql);    
+                    while (rs.next())
+                    {
+                        out.println("<p>"
+                        + rs.getString("konten")
+                        + "</p>");
+                    }
+		}
+		catch (SQLException ex)
+		{
+		    // handle any errors
+		    System.out.println("SQLException: " + ex.getMessage());
+		    System.out.println("SQLState: " + ex.getSQLState());
+		    System.out.println("VendorError: " + ex.getErrorCode());
+		}
+            %>
             <hr />
             
             <h2>Komentar</h2>

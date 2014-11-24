@@ -82,20 +82,24 @@
                     // con=DBConnect.GetDBConnect();
 		try 
 		{
-                    String sql=("SELECT title, konten FROM post WHERE status_publish=1");
+                    String sql=("SELECT * FROM post WHERE status_publish=1");
                     PreparedStatement ps = con.prepareStatement(sql);
                     ResultSet rs = ps.executeQuery(sql);    
                     while (rs.next())
                     {
-                        out.println(" <li class=\"art-list-item\"> <div class=\"art-list-item-title-and-time\"> <h2 class=\"art-list-title\"><a href=\"post.jsp\">"
+                        out.println(" <li class=\"art-list-item\"> <div class=\"art-list-item-title-and-time\"> <h2 class=\"art-list-title\"><a href=\"post.jsp"
+                                + "?"
+                                + "post_id="
+                                + rs.getString("post_id")
+                                + "\">"
                                 + rs.getString("judul")+ "</a></h2> "
-                                + "<div class=\"art-list-time\">15 Juli 2014</div> <div class=\"art-list-time\"><span style=\"color:#F40034;\">&#10029;</span> Featured</div> </div> <p>");
+                                + "<div class=\"art-list-time\">15 Juli 2014</div> <div class=\"art-list-time\"><span style=\"color:#F40034;\"></div> <p>");
                         String[] words = rs.getString("konten").split(" ");
                         StringBuilder sb = new StringBuilder();
                         for (int i = 0; i < Math.min(30, words.length); i++)
                         {
                             sb.append(words[i] + " ");  
-                        }
+                        }   
                         String First30WordPost = sb.toString();
                         out.println(First30WordPost);
                         out.println(" <p> <a href=\"#\">Edit</a> | <a onclick=\"validatedelete()\" href=\"javascript:void(0)\">Hapus</a> </p> </li>");
@@ -156,7 +160,7 @@
       console.log("validatedelete");
       var x;
       if (confirm("Apakah Anda yakin menghapus post ini?") === true) {
-
+          
       } else {
         x = "Cancel";
       }

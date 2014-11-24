@@ -54,7 +54,7 @@
             <h2>Tambah Post</h2>
 
             <div id="contact-area">
-                <form name="PostForm" method="post" onSubmit="return validateDate()" action="#">
+                <form name="PostForm" method="post" onSubmit="return validateDate()" action="AddPostHandling">
                     <label for="Judul">Judul:</label>
                     <input type="text" name="Judul" id="Judul">
 
