@@ -8,7 +8,6 @@
       >
     <h:head>
         <ui:include src="header-script.xhtml"/>
-        <h:outputStylesheet library="css" name="screen.css"/>
         <title>Simple Blog | Manage User</title>
     </h:head>
     <h:body class="default" onload="greet()">
@@ -57,7 +56,7 @@
     				
     				<f:facet name="header">Action</f:facet>
     				
-    				<h:commandLink value="Delete" action="delAction(o)" />
+                                <h:commandLink value="Hapus" action="#{manUser.delAction(o)}" />
     				
     			</h:column>
     			

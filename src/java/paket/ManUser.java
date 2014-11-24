@@ -211,7 +211,7 @@ public class ManUser implements Serializable{
 		return null;
     }
         
-        public String delAction(User user) {
+    public String delAction(User user) {
 	    
 //		User user = new User(this.usrname, this.passwrd, 
 //			this.nama_usr, this.email_usr, this.role);
@@ -230,7 +230,7 @@ public class ManUser implements Serializable{
             conn = DriverManager.getConnection(dbURL, uName, pass);
             stmnt = conn.createStatement();
             
-            String sqlStr = "DELETE FROM `usr` WHERE `usrname`='"+usrname+"'";
+            String sqlStr = "DELETE FROM `usr` WHERE `usrname`='"+user.usrname+"'";
             
            stmnt.executeUpdate(sqlStr);
         } catch (SQLException ex) {
@@ -251,7 +251,7 @@ public class ManUser implements Serializable{
                 ex.printStackTrace();
             }
         }		
-	users.remove(user);	
+//	users.remove(user);	
         return null;
     }
 }

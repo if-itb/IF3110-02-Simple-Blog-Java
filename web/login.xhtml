@@ -1,31 +1,33 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <h:head>
-	<title>Simple Blog | Login</title>
-	<link rel="stylesheet" href="assets/css/style.css" type="text/css" />
-	<link rel="shortcut icon" href="favicon.ico" />
+    <link rel="stylesheet" href="resource/css/login.css"/>
+    <title>Simple Blog | Login</title>
 </h:head>
-<h:body>
-	<div id="content">
-		<div class="section page">
-			<h1>Login</h1>
-			<div class="wrapper">
-				<form class="formreg" name="login" method="post" action="login">
-                                    <label class="labelreg"> Username</label>
-					<input class="inputreg" type="text" name="usrname" id="usrname" />
-					<span id="unameInfo"></span>
-                                        <label class="labelreg"> Password</label>
-					<input class="inputreg" type="password" name="passwrd" id="passwrd" />
-					<span id="passInfo"></span><br />
-					<span id="loginInfo"></span><br />
-					<input class="inputreg2" type="submit" value="Login" id="submit" name="submit"/>
-				</form>
+<h:body class="login login-action-login wp-core-ui  locale-en">
+		
+			<div class="login">
+                            <h1>Login</h1>
+				<form name="loginform" id="loginform" action="login" method="post">
+                                        <p>
+                                                <label for="user_login">Username<br />
+                                                <input type="text" name="usrname" id="user_login" class="input" value="" size="20" /></label>
+                                        </p>
+                                        <p>
+                                                <label for="user_pass">Password<br />
+                                                <input type="password" name="passwrd" id="user_pass" class="input" value="" size="20" /></label>
+                                        </p>
+                                        <p class="submit">
+                                                <input type="submit" name="wp-submit" id="wp-submit" class="button button-primary button-large" value="Log In" />
+                                        </p>
+                                </form>
+                          
 			</div>
-		</div>
-	</div>
 </h:body>
 
 </html>
