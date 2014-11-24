@@ -13,7 +13,8 @@ and open the template in the editor.
         <title>Simple Blog</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </head>
-    <body class="default">
+    <h:body class="default" onload="#{Posting.setLoginOnLoad()}">
+    <!--<body class="default" onload="">-->
 <div class="wrapper">
 
 <nav class="nav">
@@ -73,5 +74,5 @@ and open the template in the editor.
 </footer>
 
 </div>
-    </body>
+    </h:body>
 </html>

@@ -6,6 +6,8 @@
 
 package Database;
 
+import Login.Login;
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -17,6 +19,7 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -26,7 +29,11 @@ import javax.servlet.http.HttpServletRequest;
 @ManagedBean(name="Posting", eager = true)
 @SessionScoped
 public class PostingDatabase {
+    
+    Login login;
+    
     public PostingDatabase(){
+        login = new Login();
     }
     
     public Connection makeConnection() throws ClassNotFoundException, SQLException{
@@ -132,10 +139,39 @@ public class PostingDatabase {
         return "Home.xhtml";
     }
     
+    public String setLoginOnLoad() throws ClassNotFoundException, SQLException{
+        System.out.println("asdasdasd");
+        Cookie cUsername = login.getUserCookie();
+//        System.out.println(cUsername.getValue());
+        Cookie cPassword = login.getPassCookie();
+//        System.out.println(cPassword.getValue());
+        if (cUsername!=null && cPassword!=null){
+            ResultSet rs;
+            int existUser=0;
+            Statement stmt = makeConnection().createStatement();
+            String query = "Select COUNT(Username) from user where Username=\""+cUsername.getValue()+"\" and Password=\""+cPassword.getValue()+"\";";
+            rs = stmt.executeQuery(query);
+
+            while(rs.next()){
+                existUser = rs.getInt(1);
+                System.out.println(existUser);
+            }
+            if (existUser>0){
+                System.out.println("masuk");
+                return "Role/Owner.xhtml?faces-redirect=true";
+            }
+            else{
+                return "Home.xhtml";
+            }
+        }
+        return "Home.xhtml";
+    }
+    
     public String Login() throws ClassNotFoundException, SQLException{
         HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
         String Username = request.getParameter("login_username");
         String Password = request.getParameter("login_password");
+
         ResultSet rs;
         int existUser=0;
         Statement stmt = makeConnection().createStatement();
