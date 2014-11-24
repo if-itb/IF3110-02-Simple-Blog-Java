@@ -5,6 +5,7 @@ import java.util.Date;
 public class Post {
 	private String title, content;
 	private Date date;
+	private int id;
 
 	public String getTitle() {
 		return title;
@@ -28,6 +29,14 @@ public class Post {
 
 	public void setDate(Date t) {
 		date = t;
+	}
+	
+	public int getId(){
+		return id;
+	}
+	
+	public void setId(int i){
+		id = i;
 	}
 
 }

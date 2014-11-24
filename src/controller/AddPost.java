@@ -4,6 +4,7 @@ package controller;
 import java.util.Date;
 
 
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
@@ -57,6 +58,7 @@ public class AddPost {
 		if(alpha != null){
 			DatabaseUtility dbUtil = DatabaseUtility.getInstance();
 			
+			@SuppressWarnings("deprecation")
 			String date = ""+(1900+post.getDate().getYear())+"/"+(post.getDate().getMonth()+1)+"/"+post.getDate().getDate();
 			
 			String query = "INSERT INTO post (id_user, judul, isi, waktu, is_deleted, is_published) "

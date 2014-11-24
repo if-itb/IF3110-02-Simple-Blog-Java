@@ -24,6 +24,7 @@ public class DatabaseObject {
 		try {
 			while (rs.next()) {
 				Post post = new Post();
+				post.setId(rs.getInt(1));
 				post.setTitle(rs.getString(3));
 				post.setContent(rs.getString(4));
 				post.setDate(rs.getDate(5));

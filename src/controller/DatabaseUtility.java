@@ -7,7 +7,7 @@ import entities.UserDetails;
 
 public class DatabaseUtility {
 	private static DatabaseUtility instance = new DatabaseUtility();
-	Connection con;
+	private Connection con;
 
 	public UserDetails findUser(String username, String password) {
 		ResultSet rs = null;
