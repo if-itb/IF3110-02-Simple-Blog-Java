@@ -174,10 +174,10 @@ public class User {
         return listUser;
     }
     
-        /**
+     /**
      * Prosedur untuk mendapatkan 1 user untuk di load ke form update user.
      * username harus diset terlebih dahulu dengan prosedure user.setUsername("username").
-     * Menghasilkan nama, email, role dari username yang di set.
+     * Mengcopy nama, password, email, role dari database ke attribute berdasarkan username yang di set.
      * @throws SQLException 
      */
     public void getOneUser() throws SQLException
@@ -188,13 +188,14 @@ public class User {
         
         Connection koneksi = KoneksiDatabase.getKoneksi();
         Statement statement = koneksi.createStatement();
-        String query = "SELECT nama, email, role FROM user WHERE username = '" + username +"'";
+        String query = "SELECT password, nama, email, role FROM user WHERE username = '" + username +"'";
         System.out.println(query);
         
         ResultSet result = statement.executeQuery(query);
         if(result.next())
         {
             this.nama = result.getString("nama");
+            this.password = result.getString("password");
             this.email = result.getString("email");
             this.role = result.getString("role");
         }
@@ -419,6 +420,7 @@ public class User {
             usertest.getOneUser();
             System.out.println(usertest.getUsername());
             System.out.println(usertest.getNama());
+            System.out.println(usertest.getPassword());
             System.out.println(usertest.getEmail());
             System.out.println(usertest.getRole());
             
