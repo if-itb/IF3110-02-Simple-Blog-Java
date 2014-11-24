@@ -34,6 +34,16 @@ h3 {
     width: 300px;
 }
 
+.logout {
+   text-align: center;
+   color: black;
+}
+
+.logout .pure-button {
+   background: rgb(61, 79, 93) !important;
+   color: white;
+   margin-left: 1000px;
+}
 .sidebar {
     background: rgb(61, 79, 93);
     color: #fff;
@@ -88,6 +98,10 @@ h3 {
 
 .content {
     padding: 2em 1em 0;
+    height: auto !important;
+    height: 100%;
+    min-height: 100%;
+    margin: 0 auto -1px;
 }
 .posts {
     padding-left: 1cm;
@@ -150,6 +164,7 @@ h3 {
 .footer {
     text-align: center;
     padding: 1em 0;
+    height: 1px;
 }
 .footer a {
     color: #ccc;
@@ -214,6 +229,8 @@ h3 {
 .pure-menu.pure-menu-horizontal .pure-menu-heading {
     border: none;
 }
+
+
 
 /*Button*/
 .pure-button {
@@ -298,6 +315,7 @@ h3 {
     .content {
         padding: 2em 3em 0;
         margin-left: 25%;
+        padding-left: 2cm;
     }
 
     .header {
