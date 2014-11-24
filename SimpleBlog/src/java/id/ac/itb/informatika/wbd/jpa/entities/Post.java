@@ -8,14 +8,18 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "posts")
+@NamedQueries({@NamedQuery(name = "Post.findAll", query = "SELECT c FROM Post c"),
+                @NamedQuery(name = "Post.findById", query = "SELECT c FROM Post c WHERE c.id = :id"),
+                @NamedQuery(name = "Post.findByTitle", query = "SELECT c FROM Post c WHERE c.title = :title")})
 public class Post implements Serializable {
-
     private static final long serialVersionUID = 1L;
     
     @Id
@@ -64,7 +68,6 @@ public class Post implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
-    
     
     public String getTitle() {
         return title;
