@@ -25,11 +25,11 @@ import javax.faces.bean.ViewScoped;
  */
 @ManagedBean(name = "Publishpost", eager = true)
 @ViewScoped
-public class PublishPost {
+public class PublishPost {          
     public PublishPost(){
         
     }
-    
+        
     private Connection getConnection() throws ClassNotFoundException, SQLException, IllegalAccessException{
         Connection conn = null;
         try{
@@ -71,7 +71,7 @@ public class PublishPost {
         return UnpublishedPost;
     }
     
-    public String publishPost(int postID) throws ClassNotFoundException, IllegalAccessException{
+    public void publishPost(int postID) throws ClassNotFoundException, IllegalAccessException{
         ResultSet result;
         try {
           Connection conn = getConnection();
@@ -82,7 +82,6 @@ public class PublishPost {
         } catch (SQLException e) {
            System.err.println(e);
         } 
-        return "PublishPost.xhtml?faces-redirect=true";
     }
     
 }
