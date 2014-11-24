@@ -4,6 +4,7 @@
     Author     : ART
 --%>
 
+<%@page import="source.CookieHelper"%>
 <%@page import="source.Post"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -39,11 +40,21 @@
         <title>Not a Simple Blog</title>
     </head>
     <body class="default">
+        
+        <% 
+            //instantiasi kelas Post dan pemanggilan dari database
+            Post listPost = new Post();
+            CookieHelper cookie = new CookieHelper(request.getCookies());
+            //batas inisialisasi dan instantiasi
+            
+        %>
+               
         <div class="wrapper">
 
         <nav class="nav">
             <a style="border:none;" id="logo" href="index.html"><h1>Not<span>-</span>a<span>-</span>Simple<span>-</span>Blog</h1></a>
             <ul class="nav-primary">
+                <li>Welcome <%= cookie.getUsername() %>, your role is Unknown </li>
                 <li><a href="new_post.html">+ Tambah Post</a></li>
             </ul>
         </nav>
@@ -52,8 +63,6 @@
             <div class="posts">
                 <nav class="art-list">
                   <ul class="art-list-body">
-                    <% //instantiasi kelas Post dan pemanggilan dari database
-                        Post listPost = new Post(); %>
                     <%= listPost.listPosts() %>
                   </ul>
                 </nav>

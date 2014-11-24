@@ -14,7 +14,6 @@ import java.util.logging.Logger;
  * @author Try Ajitiono
  */
 public class Post {
-
     /**
      * Atribut-atribut
      */
@@ -23,10 +22,12 @@ public class Post {
     private static String tanggalPost;
     private static String kontenPost;
     private static boolean publishStatus;
+    
+    
     /**
      * Mengecek apakah pengguna adalah admin
      * @return
-     */
+     */    
     public boolean isAdmin() {
         return true;
     }
@@ -196,7 +197,7 @@ public class Post {
             Connection koneksi = KoneksiDatabase.getKoneksi();
             Statement statement = koneksi.createStatement();
             //query
-            String queryAddPost = "INSERT INTO post (judul,konten,tanggal) VALUES ('" + judul + "', '" + konten + "', '" + tanggal + "')";
+            String queryAddPost = "INSERT INTO post (judul,konten,tanggal,publishStatus) VALUES ('" + judul + "', '" + konten + "', '" + tanggal + "', 0)";
             //execute query
             statement.executeUpdate(queryAddPost);
         }
