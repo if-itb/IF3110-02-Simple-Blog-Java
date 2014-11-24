@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -23,6 +24,10 @@ public class User {
     private String nama;
     private String email;
     private String role;
+    private final String userSQL = "root";
+    private final String passSQL = "akhfa";
+    private final String urlSQL = "localhost";
+    private final String databaseName = "blog";
     
     /**
      * Membuat user baru untuk keperluan login
@@ -102,6 +107,46 @@ public class User {
     }
     
     /**
+     * Method untuk me-list semua user yang terdaftar di database
+     * @return
+     * @throws SQLException 
+     */
+    public ArrayList<dataUser> getAllUser() throws SQLException
+    {
+        ArrayList<dataUser> listUser = new ArrayList<>();
+        
+        KoneksiDatabase.setUser(userSQL);
+        KoneksiDatabase.setPassword(passSQL);
+        KoneksiDatabase.setDatabase(urlSQL,databaseName);
+        
+        Connection koneksi = KoneksiDatabase.getKoneksi();
+        Statement statement = koneksi.createStatement();
+        String query = "SELECT username, nama, email, role FROM user";
+        System.out.println(query);
+        
+        ResultSet result = statement.executeQuery(query);
+        while(result.next())
+        {
+            dataUser user = new dataUser();
+            user.username = result.getString("username");
+            user.nama = result.getString("nama");
+            user.email = result.getString("email");
+            user.role = result.getString("role");
+            listUser.add(user);
+        }
+        for (dataUser user:listUser)
+        {
+            System.out.println(user.username);
+            System.out.println(user.nama);
+            System.out.println(user.email);
+            System.out.println(user.role);
+        }
+        result.close();
+        statement.close();
+        return listUser;
+    }
+    
+    /**
      * Fungsi untuk user melakukan login dengan menggunakan username dan password 
      * yang telah di set sebelumnya
      * @return True jika login berhasil, dan false jika gagal
@@ -109,9 +154,9 @@ public class User {
      */
     public boolean successLogin() throws SQLException
     {
-        KoneksiDatabase.setUser("root");
-        KoneksiDatabase.setPassword("");
-        KoneksiDatabase.setDatabase("localhost","blog");
+        KoneksiDatabase.setUser(userSQL);
+        KoneksiDatabase.setPassword(passSQL);
+        KoneksiDatabase.setDatabase(urlSQL,databaseName);
         
         Connection koneksi = KoneksiDatabase.getKoneksi();
         Statement statement = koneksi.createStatement();
@@ -222,8 +267,33 @@ public class User {
      */
     public void masukDatabase() throws SQLException
     {
-        KoneksiDatabase.setUser("root");
-        KoneksiDatabase.setPassword("");
+        KoneksiDatabase.setUser(userSQL);
+        KoneksiDatabase.setPassword(passSQL);
+        KoneksiDatabase.setDatabase(urlSQL,databaseName);
+        Connection koneksi = KoneksiDatabase.getKoneksi();
+        String query = "INSERT INTO user VALUES (?, ?, ?, ?, ?)";
+        try (PreparedStatement preStat = koneksi.prepareStatement(query)) {
+            preStat.setString(1, username);
+            preStat.setString(2, password);
+            preStat.setString(3, nama);
+            preStat.setString(4, email);
+            preStat.setString(5, role);
+            
+            preStat.executeUpdate();
+            preStat.close();
+        }
+//        koneksi.close();
+    }
+    
+    /**
+     * Memasukkan user ke dalam database dengan userdatabase dan passwordDatabase yang custom
+     * User di create terlebih dahulu dengan constructor dengan parameter (username, password, dan role).
+     * @throws SQLException 
+     */
+    public void masukDatabase(String _userDatabase, String _passwordDatabase) throws SQLException
+    {
+        KoneksiDatabase.setUser(_userDatabase);
+        KoneksiDatabase.setPassword(_passwordDatabase);
         KoneksiDatabase.setDatabase("localhost","blog");
         Connection koneksi = KoneksiDatabase.getKoneksi();
         String query = "INSERT INTO user VALUES (?, ?, ?, ?, ?)";
@@ -239,13 +309,14 @@ public class User {
         }
 //        koneksi.close();
     }
+    
     /**
      * Testing untuk user
      * @param args 
      */
     public static void main(String[] args) {
         try {
-            User pertama = new User("akhfa","akhfa");
+            User pertama = new User("akhfa3","akhfa2");
             if(pertama.successLogin())
             {
                 System.out.println("sukses login");
@@ -255,8 +326,9 @@ public class User {
                 System.out.println("gagal login");
             }
             
-            User kedua = new User("akhfa3", "akhfa2", "namaAkhfa","akhmadfakhoni@gmail.com","admin");
+            User kedua = new User("akhfa4", "akhfa", "namaAkhfa","akhmadfakhoni@gmail.com","admin");
             kedua.masukDatabase();
+            kedua.getAllUser();
             
         } catch (SQLException ex) {
             Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
