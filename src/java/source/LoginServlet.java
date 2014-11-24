@@ -44,9 +44,12 @@ public class LoginServlet extends HttpServlet {
         try {
             if(userLogin.successLogin()){
                 Cookie loginCookie = new Cookie("username",username);
+                Cookie roleCookie = new Cookie("role", userLogin.getRole());
                 //setting cookie to expiry in 30 mins
                 loginCookie.setMaxAge(30*60);
+                roleCookie.setMaxAge(30*60);
                 response.addCookie(loginCookie);
+                response.addCookie(roleCookie);
                 response.sendRedirect("admin/index.jsp");
             }else{
                 RequestDispatcher rd = getServletContext().getRequestDispatcher("/login/index.html");

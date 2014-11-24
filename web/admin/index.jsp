@@ -18,7 +18,7 @@
             CookieHelper cookie = new CookieHelper(request.getCookies());
             if(cookie.thereIsCookie())
             {
-                out.println("Welcome " + cookie.getUsername());
+                out.println("Welcome " + cookie.getUsername() + "as a "+ cookie.getRole());
             }
             else
             {

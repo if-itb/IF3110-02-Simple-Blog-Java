@@ -15,7 +15,8 @@ import javax.servlet.http.HttpServlet;
 public class CookieHelper extends HttpServlet{
     private Cookie[] cookies;
     private Cookie foundCookie;
-    private String username;
+    private String username="";
+    private String role="";
     
     public CookieHelper(Cookie [] _cookies)
     {
@@ -35,6 +36,13 @@ public class CookieHelper extends HttpServlet{
                 {
                     foundCookie = cookie;
                     username = cookie.getValue();
+                }
+                else if(cookie.getName().equals("role"))
+                {
+                    role = cookie.getValue();
+                }
+                if(!username.equals("") && !role.equals(""))
+                {
                     return true;
                 }
             }
@@ -51,12 +59,22 @@ public class CookieHelper extends HttpServlet{
     {
         return foundCookie;
     }
+    
     /**
-     * Fungsi untuk mengambil nilai dari cookie jika cookie memang ada
+     * Fungsi untuk mengambil username dari cookie jika cookie memang ada
      * @return Value dari cookie
      */
     public String getUsername()
     {
         return username;
+    }
+    
+    /**
+     * Fungsi untuk mengambil role dari cookie jika cookie memang ada
+     * @return Value dari cookie
+     */
+    public String getRole()
+    {
+        return role;
     }
 }

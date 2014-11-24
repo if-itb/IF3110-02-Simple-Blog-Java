@@ -101,8 +101,28 @@ public class User {
         role = _role;
     }
     
-    public String getRole()
+    public String getRole() throws SQLException
     {
+        if(role == null)
+        {
+            //Load role dari database
+            System.out.println("Masuk if");
+            KoneksiDatabase.setUser(userSQL);
+            KoneksiDatabase.setPassword(passSQL);
+            KoneksiDatabase.setDatabase(urlSQL,databaseName);
+
+            Connection koneksi = KoneksiDatabase.getKoneksi();
+            Statement statement = koneksi.createStatement();
+            String query = "SELECT username, role FROM user WHERE username = '" + username +"'";
+            System.out.println(query);
+            
+            ResultSet result = statement.executeQuery(query);
+            if(result.next())
+            {
+                role = result.getString("role");
+            }
+            System.out.println("role = " + role);
+        }
         return role;
     }
     
@@ -326,7 +346,7 @@ public class User {
                 System.out.println("gagal login");
             }
             
-            User kedua = new User("akhfa4", "akhfa", "namaAkhfa","akhmadfakhoni@gmail.com","admin");
+            User kedua = new User("akhfa5", "akhfa", "namaAkhfa","akhmadfakhoni@gmail.com","editor");
             kedua.masukDatabase();
             kedua.getAllUser();
             
