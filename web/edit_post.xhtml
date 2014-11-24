@@ -5,6 +5,7 @@
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
     <h:head>
         <h:outputStylesheet library="css" name="bootstrap.css"/>
+        <h:outputScript library="js" name="confirm.js"/>
         <title>Edit Post</title>
     </h:head>
     <h:body>
@@ -44,9 +45,10 @@
                     <div class="col-md-3"><label for="Tanggal">Content</label></div>
                     <div class="col-md-3"><h:inputTextarea required="true" id="kontenpost" value="#{editpost.konten}"></h:inputTextarea></div>
                 </div>
-                <div class="row form-element">
-                    <div class="col-md-6">
-                        <input class="btn-success" type="submit" value="Save" id="save"/>
+                <div class="row">
+                    <div class="col-md-3"/>
+                    <div class="col-md-3">
+                        <h:commandButton onclick="return ValidateForm()" action="#{editpost.changepost()}" type="submit" class="login-button btn-success" id="login" value="Add Post"/>
                     </div>
                 </div>
             </h:form>

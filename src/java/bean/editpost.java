@@ -79,6 +79,10 @@ public class editpost
     
     public editpost() 
     {
+    }
+    
+    public void changepost()
+    {
         System.out.println("edit post");
         try
         {

@@ -37,7 +37,6 @@ public class newpost implements Serializable
     private String author;
     private Date tanggal;
     private String konten;
-    @ManagedProperty(value="#{user.role}")
     private String status;
    
     /*
@@ -49,6 +48,7 @@ public class newpost implements Serializable
         judul = "";
         tanggal = null;
         konten = "";
+        status = "unpublished";
     }
 
     public String getAuthor() {
@@ -120,10 +120,9 @@ public class newpost implements Serializable
                 System.out.println("update failure");
             }
             con.close();
-            /*
             judul = "";
             konten = "";
-            tanggal = null; */
+            tanggal = null; 
         } 
         catch (InstantiationException | IllegalAccessException | SQLException | ClassNotFoundException ex) 
         {
