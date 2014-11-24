@@ -8,4 +8,14 @@
         <managed-bean-class>model.UserBean</managed-bean-class>
         <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
+    <managed-bean>
+        <managed-bean-name>post</managed-bean-name>
+        <managed-bean-class>model.Post</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>NavigationController</managed-bean-name>
+        <managed-bean-class>model.NavigationController</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
 </faces-config>
