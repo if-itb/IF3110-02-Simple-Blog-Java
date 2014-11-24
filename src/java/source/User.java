@@ -154,9 +154,9 @@ public class User {
      */
     public boolean successLogin() throws SQLException
     {
-        KoneksiDatabase.setUser("root");
-        KoneksiDatabase.setPassword("");
-        KoneksiDatabase.setDatabase("localhost","blog");
+        KoneksiDatabase.setUser(userSQL);
+        KoneksiDatabase.setPassword(passSQL);
+        KoneksiDatabase.setDatabase(urlSQL,databaseName);
         
         Connection koneksi = KoneksiDatabase.getKoneksi();
         Statement statement = koneksi.createStatement();
@@ -267,8 +267,33 @@ public class User {
      */
     public void masukDatabase() throws SQLException
     {
-        KoneksiDatabase.setUser("root");
-        KoneksiDatabase.setPassword("");
+        KoneksiDatabase.setUser(userSQL);
+        KoneksiDatabase.setPassword(passSQL);
+        KoneksiDatabase.setDatabase(urlSQL,databaseName);
+        Connection koneksi = KoneksiDatabase.getKoneksi();
+        String query = "INSERT INTO user VALUES (?, ?, ?, ?, ?)";
+        try (PreparedStatement preStat = koneksi.prepareStatement(query)) {
+            preStat.setString(1, username);
+            preStat.setString(2, password);
+            preStat.setString(3, nama);
+            preStat.setString(4, email);
+            preStat.setString(5, role);
+            
+            preStat.executeUpdate();
+            preStat.close();
+        }
+//        koneksi.close();
+    }
+    
+    /**
+     * Memasukkan user ke dalam database dengan userdatabase dan passwordDatabase yang custom
+     * User di create terlebih dahulu dengan constructor dengan parameter (username, password, dan role).
+     * @throws SQLException 
+     */
+    public void masukDatabase(String _userDatabase, String _passwordDatabase) throws SQLException
+    {
+        KoneksiDatabase.setUser(_userDatabase);
+        KoneksiDatabase.setPassword(_passwordDatabase);
         KoneksiDatabase.setDatabase("localhost","blog");
         Connection koneksi = KoneksiDatabase.getKoneksi();
         String query = "INSERT INTO user VALUES (?, ?, ?, ?, ?)";
@@ -284,6 +309,7 @@ public class User {
         }
 //        koneksi.close();
     }
+    
     /**
      * Testing untuk user
      * @param args 
