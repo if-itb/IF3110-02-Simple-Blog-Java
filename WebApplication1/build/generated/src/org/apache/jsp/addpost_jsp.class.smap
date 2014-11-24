@@ -1,0 +1,20 @@
+SMAP
+addpost_jsp.java
+JSP
+*S JSP
+*F
++ 0 addpost.jsp
+addpost.jsp
++ 1 koneksi.jspf
+WEB-INF/jspf/koneksi.jspf
+*L
+5,4:51
+1#1:54
+3,7:56
+9:63
+8#0,24:64
+32,38:89
+69,3:127
+72,9:131
+80,4:140
+*E
