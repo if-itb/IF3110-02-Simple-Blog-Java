@@ -10,8 +10,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Calendar;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import services.DBConnector;
 
+@ManagedBean(name="comment",eager=true)
+@SessionScoped
 public class Comment {
     private final String tablename = "comment";
     
@@ -22,6 +26,13 @@ public class Comment {
     private String konten;
     private String email;
     
+    public String add() {
+        if (this.save()){
+            return "comment";
+        } else {
+            return "fail";
+        }
+    }
     public boolean load() {
         try {
             DBConnector dbc = new DBConnector();
@@ -53,13 +64,9 @@ public class Comment {
 
             String query
                     = "INSERT IGNORE INTO " + tablename
-                    + "(post_id,nama,created_at,konten,email)"
-                    + "VALUES('" + this.getPostId() + "','" + this.getNama() + "','"+this.getCreatedAt()+"','"+this.getKonten()+"','"+this.getEmail()+"')";
+                    + "(post_id,nama,konten,email)"
+                    + "VALUES('" + this.getPostId() + "','" + this.getNama() + "','"+this.getKonten()+"','"+this.getEmail()+"')";
             st.executeUpdate(query);
-            query = "UPDATE " + tablename
-                    + "SET post_id='"+this.getPostId()+"',nama='"+this.getNama()+"',created_at='"+this.getCreatedAt()+"',konten='"+this.getKonten()+"',email='"+this.getEmail()+"'"
-                    + "WHERE id="+this.getId();
-            st.executeQuery(query); 
             return true;
         } catch (SQLException e) {
             e.printStackTrace();

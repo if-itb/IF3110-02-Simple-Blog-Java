@@ -18,6 +18,7 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.*;
+import models.Comment;
 import models.Post;
 import models.User;
 import services.CookieService;
@@ -52,24 +53,33 @@ public class PostController implements Serializable {
         }
     }
     
-    public String showView(int id){
-        /*FacesContext context = FacesContext.getCurrentInstance();
+    public String showView(){
+        FacesContext context = FacesContext.getCurrentInstance();
         Map<String, String> requestParam = context.getExternalContext().getRequestParameterMap();
         HttpServletRequest req = (HttpServletRequest) context.getExternalContext().getRequest();
-        
+        HttpSession session = req.getSession();
+        post = (Post) session.getAttribute("post");
+        User userIdentity = (User) session.getAttribute("userIdentity");
+        Comment comment = (Comment) session.getAttribute("comment");
+        if (comment == null){
+            comment = new Comment();
+        }
         if (requestParam.containsKey("id")) {
-            this.post = new Post();
-            this.post.setId(Integer.parseInt(requestParam.get("id")));
-            this.post.delete();
+            int post_id = Integer.parseInt(requestParam.get("id"));
+            post = new Post();
+            post.setId(post_id);
+            post.load(post_id);
+            comment.setPostId(post_id);
+            comment.setNama(userIdentity.getNama());
+            comment.setEmail(userIdentity.getEmail());
+            session.setAttribute("post", post);
+            session.setAttribute("comment",comment);
             return "view";
         } else {
             return "fail";
-        }*/
-        this.post = new Post();
-        this.post.setId(id);
-        this.post.load(id);
-        return "view";
+        }
     }
+    
     public String showCreate() {
         FacesContext context = FacesContext.getCurrentInstance();
         Map<String, String> requestParam = context.getExternalContext().getRequestParameterMap();

@@ -13,9 +13,33 @@
     <h:body>
         <ui:composition template="/layouts/main.xhtml">
             <ui:define name="content">
-                <h1>#{postCtrl.post.judul}</h1>
-                <p>Dibuat pada tanggal #{postCtrl.post.tanggal}</p>
-                <p>#{postCtrl.post.konten}</p>
+
+                <h1>#{post.judul}</h1>
+                <p>Dibuat pada tanggal #{post.tanggal}</p>
+                <p>#{post.konten}</p>
+                
+                <h3>Tambahkan Komentar</h3>
+                <h:form id="form-komentar">
+                    <br/>Nama<br/>
+                    <h:inputText class="form-control" value="#{comment.nama}"></h:inputText>
+                    <br/>Email<br/>
+                    <h:inputText class="form-control" value="#{comment.email}" ></h:inputText>
+                    <h:inputHidden value="#{comment.postId}"></h:inputHidden>
+                    <br/>Konten<br/>
+                    <h:inputTextarea class="form-control" value="#{comment.konten}"></h:inputTextarea>
+                    <br/>
+                    <h:commandButton action="#{comment.add()}" value="Komen!" class="btn btn-primary">
+                        <f:ajax execute="form-komentar" render="panel-komentar"></f:ajax>
+                    </h:commandButton>
+                    <h:panelGroup id="panel-komentar">
+                        <c:forEach var="komen" items="#{post.getComments()}">
+                            <h5>#{komen.email} - #{komen.nama}</h5>
+                            <p>#{komen.createdAt}</p>
+                            <p>#{komen.konten}</p>
+
+                        </c:forEach>
+                    </h:panelGroup>
+                </h:form>
             </ui:define>
         </ui:composition>
 

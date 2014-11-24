@@ -182,7 +182,28 @@ public class Post implements Serializable {
     }
 
     public List<Comment> getComments() {
-        return comments;
+        try {
+            DBConnector dbc = new DBConnector();
+            Statement st = dbc.getCon().createStatement();
+
+            String query = "SELECT * FROM comment WHERE post_id=" + this.id + " ORDER BY created_at";
+            System.out.println(query);
+            ResultSet result = st.executeQuery(query);
+            this.comments = new ArrayList<>();
+            while (result.next()) {
+                Comment comment = new Comment();
+                comment.setId(result.getInt("id"));
+                comment.setEmail(result.getString("email"));
+                comment.setCreatedAt(result.getTimestamp("created_at").toString());
+                comment.setKonten(result.getString("konten"));
+                comment.setNama(result.getString("nama"));
+                comments.add(comment);
+            }
+            return comments;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public void setComments(ArrayList<Comment> comments) {

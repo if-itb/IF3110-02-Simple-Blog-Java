@@ -28,7 +28,7 @@ import services.DBConnector;
 public class User implements Serializable {
 
     private boolean isNewRecord;
-    private boolean loggedIn;
+    private boolean isLoggedIn;
     private int id;
     private String email;
     private String password;
@@ -104,12 +104,12 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public boolean isLoggedIn() {
-        return this.loggedIn;
+    public boolean getIsLoggedIn() {
+        return this.isLoggedIn;
     }
 
     public void setIsLoggedIn(boolean isLoggedIn) {
-        this.loggedIn = isLoggedIn;
+        this.isLoggedIn = isLoggedIn;
     }
 
     public void setIsOwner(boolean isOwner) {
@@ -149,6 +149,7 @@ public class User implements Serializable {
                 request.getSession().setAttribute("userIdentity", user);
                 CookieService.setCookie("email", email, CookieService.DEFAULT_AGE);
                 CookieService.setCookie("password", password, CookieService.DEFAULT_AGE);
+                return "success";
             } else {
                 FacesMessage message = new FacesMessage();
                 message.setDetail("Invalid Username/Password combination");
@@ -156,7 +157,7 @@ public class User implements Serializable {
                 message.setSeverity(FacesMessage.SEVERITY_ERROR);
                 return "fail";
             }
-            return "success";
+            
         } catch (SQLException e) {
             e.printStackTrace();
             return "fail";

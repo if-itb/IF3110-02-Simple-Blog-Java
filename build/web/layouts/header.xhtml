@@ -21,10 +21,10 @@
                                 <h:outputLink value="#{request.contextPath}/faces/post/index.xhtml">Home</h:outputLink>
                             </li>
                             <li>
-                                <c:if test="#{!userIdentity.isLoggedIn()}">
+                                <c:if test="#{!userIdentity.getIsLoggedIn()}">
                                     <h:outputLink value="#{siteCtrl.showLogin()}">Login</h:outputLink>
                                 </c:if>
-                                <c:if test="#{userIdentity.isLoggedIn()}">
+                                <c:if test="#{userIdentity.getIsLoggedIn()}">
                                     <h:outputLink value="#{siteCtrl.doLogout()}">#{userIdentity.nama} (Logout)</h:outputLink>
                                 </c:if>
                             </li>
