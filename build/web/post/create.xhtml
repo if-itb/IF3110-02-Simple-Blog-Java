@@ -7,26 +7,23 @@
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     >
     <h:body>
-        
+
         <ui:composition template="/layouts/main.xhtml">
             <ui:define name="content">
                 <br/><br/>
-                <h1>Manage Post</h1>
+                <h1>Create Post</h1>
                 <h:form>
-                    <c:if test="#{postCtrl.post.id != 0}">
-                        <h:inputHidden value="#{postCtrl.post.id}"></h:inputHidden>
-                    </c:if>
                     Judul
-                    <h:inputText class="form-control" value="#{postCtrl.post.judul}"></h:inputText>
+                    <h:inputText class="form-control" value="#{post.judul}"></h:inputText>
                     <br/>Konten
-                    <h:inputTextarea id="konten" value="#{postCtrl.post.konten}"></h:inputTextarea>
+                    <h:inputTextarea id="konten" value="#{post.konten}"></h:inputTextarea>
                     <br/>Tanggal
-                    <h:inputText class="form-control" value="#{postCtrl.post.tanggal}"></h:inputText>
+                    <h:inputText class="form-control" value="#{post.tanggal}"></h:inputText>
                     <br/>Published
-                    <h:selectBooleanCheckbox value="#{postCtrl.post.published}"></h:selectBooleanCheckbox>
+                    <h:selectBooleanCheckbox value="#{post.published}"></h:selectBooleanCheckbox>
                     <br/>
-                    <h:inputHidden value="#{postCtrl.post.userId}"></h:inputHidden>
-                    <h:commandLink action="#{postCtrl.doSubmit()}" value="Tambah" class="btn btn-primary"></h:commandLink>
+                    <h:inputHidden value="#{post.userId}"></h:inputHidden>
+                    <h:commandLink rendered="#{postCtrl.post.id==0}" action="#{postCtrl.doSubmit()}" value="Tambah" class="btn btn-primary"></h:commandLink>
                 </h:form>
             </ui:define>
         </ui:composition>

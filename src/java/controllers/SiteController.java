@@ -28,7 +28,7 @@ public class SiteController implements Serializable{
     public String showLogin(){
         loginForm = new User();
         HttpServletRequest req = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
-        return req.getContextPath()+"/login.xhtml";
+        return req.getContextPath()+"/faces/login.xhtml";
     }
     
     public String doLogin(){
@@ -71,7 +71,7 @@ public class SiteController implements Serializable{
         userIdentity.setIsLoggedIn(false);
         CookieService.clearCookie("email");
         CookieService.clearCookie("password");
-        return req.getContextPath() + "/login.xhtml";
+        return req.getContextPath() + "/faces/login.xhtml";
     }
 
     public User getLoginForm() {

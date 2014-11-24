@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    >
+    <h:body>
+
+        <ui:composition template="/layouts/main.xhtml">
+            <ui:define name="content">
+                <br/><br/>
+                <h1>Update User</h1>
+                <h:form>
+                    <span style='display:none'>#{user.isNewRecord}</span>
+                    <h:inputHidden value='#{user.id}'></h:inputHidden>
+                    Nama<br/>
+                    <h:inputText class="form-control" value="#{user.nama}"></h:inputText>
+                    Email<br/>
+                    <h:inputText class="form-control" value="#{user.email}"></h:inputText>
+                    <br/>Password
+                    <h:inputSecret class='form-control' value="#{user.password}"></h:inputSecret>
+                    <br/>Admin
+                    <h:selectBooleanCheckbox value="#{user.isAdmin}"></h:selectBooleanCheckbox>
+                    <br/>Editor
+                    <h:selectBooleanCheckbox value="#{user.isEditor}"></h:selectBooleanCheckbox>
+                    <br/>Owner
+                    <h:selectBooleanCheckbox value="#{user.isOwner}"></h:selectBooleanCheckbox>
+                    <h:commandLink action="#{userCtrl.doSubmit()}" value="Ubah" class="btn btn-success"></h:commandLink>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+
+</html>

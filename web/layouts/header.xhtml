@@ -15,7 +15,10 @@
                     <div class="navbar-collapse">
                         <ul class='navbar-nav navbar-right nav'>
                             <li>
-                                <h:outputLink value="#{postCtrl.showIndex()}">Home</h:outputLink>
+                                <h:outputLink value="#{request.contextPath}/faces/user/index.xhtml">Manajemen Pengguna</h:outputLink>
+                            </li>
+                            <li>
+                                <h:outputLink value="#{request.contextPath}/faces/post/index.xhtml">Home</h:outputLink>
                             </li>
                             <li>
                                 <c:if test="#{!userIdentity.isLoggedIn()}">
@@ -31,5 +34,4 @@
             </nav>
         </ui:composition>	
     </h:body>
-
 </html>

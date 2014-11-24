@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    >
+    <head>
+        <title>Simple Blog - User list</title>
+    </head>
+    <h:body>
+        <ui:composition template="/layouts/main.xhtml">
+            <ui:define name="content">
+                <h1>Daftar Pengguna</h1>
+                <h:form>
+                    <h:commandButton action="#{userCtrl.showCreate()}" value="+ Tambah Pengguna" class="btn btn-primary"></h:commandButton>
+                </h:form>
+                <br/>
+                <h:form>
+                    <table class="table table-striped">
+                        <tr>
+                            <th>Nama</th>
+                            <th>Email</th>
+                            <th>Action</th>
+                        </tr>
+                        <c:forEach var="user" items="#{userCtrl.getUsers()}">
+                            <tr>
+                                <div>
+                                    <td>#{user.nama}</td>
+                                    <td>#{user.email}</td>
+                                    <td>
+                                        <h:commandButton action="#{userCtrl.showUpdate()}" value="Update" class="btn btn-success">
+                                            <f:param name="id" value="#{user.id}"></f:param>
+                                        </h:commandButton>&nbsp;
+                                        <h:commandButton action="#{userCtrl.showDelete()}" value="Delete" class='btn btn-danger' onclick="return confirm('Anda ingin menghapus user ini?')">
+                                            <f:param name="id" value="#{user.id}"></f:param>
+                                        </h:commandButton>
+                                    </td>
+
+                                </div>
+                            </tr>
+                        </c:forEach>
+                    </table>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+
+    </h:body>
+
+</html>

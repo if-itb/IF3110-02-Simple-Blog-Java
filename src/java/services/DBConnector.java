@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package services;
 
 import java.sql.Connection;
@@ -19,32 +18,36 @@ public class DBConnector {
     /**
      * Variabel untuk koneksi ke database
      */
-    public java.sql.Connection con;
-    
+    public static java.sql.Connection con;
+
     private static String URL = "jdbc:mysql://localhost:3306/tubes_2_wbd";
     private static String user = "root";
     private static String password = "akuganteng";
-    
+
     public DBConnector() {
         try {
             initConnection();
-        } catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         System.out.println(con == null);
-        
+
     }
+
     /**
      * memulai koneksi ke MySQL. MySQL sudah harus aktif pada port 3306
+     *
      * @throws SQLException
      */
     public void initConnection() throws SQLException {
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-        } catch (ClassNotFoundException e){
-            e.printStackTrace();
+        if (con == null) {
+            try {
+                Class.forName("com.mysql.jdbc.Driver");
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+            con = DriverManager.getConnection(DBConnector.URL, DBConnector.user, DBConnector.password);
         }
-        con = DriverManager.getConnection(DBConnector.URL,DBConnector.user,DBConnector.password);
     }
 
     public Connection getCon() {
@@ -54,6 +57,5 @@ public class DBConnector {
     public void setCon(Connection con) {
         this.con = con;
     }
-    
-    
+
 }

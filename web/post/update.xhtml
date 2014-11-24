@@ -10,9 +10,22 @@
         
         <ui:composition template="/layouts/main.xhtml">
             <ui:define name="content">
-                <br/><br/>
-                <h1>Manage Post</h1>
-                <ui:include src="form.xhtml"></ui:include>
+                <h1>Update Post</h1>
+                <h:form>
+                    <h:inputHidden  value="#{post.id}"></h:inputHidden>
+                    Judul
+                    <h:inputText class="form-control" value="#{post.judul}"></h:inputText>
+                    <br/>Konten
+                    <h:inputTextarea id="konten" value="#{post.konten}"></h:inputTextarea>
+                    <br/>Tanggal
+                    <h:inputText class="form-control" value="#{post.tanggal}"></h:inputText>
+                    <br/>Published
+                    <h:selectBooleanCheckbox value="#{post.published}"></h:selectBooleanCheckbox>
+                    <br/>
+                    <h:inputHidden value="#{post.userId}"></h:inputHidden>
+                    <h:commandLink rendered="#{post.id!=0}" action="#{postCtrl.doSubmit()}" value="Ubah" class="btn btn-primary"></h:commandLink>
+                    <h:commandLink rendered="#{post.id==0}" action="#{postCtrl.doSubmit()}" value="Tambah" class="btn btn-primary"></h:commandLink>
+                </h:form>
             </ui:define>
         </ui:composition>
     </h:body>

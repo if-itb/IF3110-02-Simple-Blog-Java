@@ -13,12 +13,19 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 import services.DBConnector;
 
+@ManagedBean(name = "post")
+@SessionScoped
 public class Post implements Serializable {
 
     private final String tablename = "post";
-
+    private boolean isNewRecord;
     private int id;
     private String judul;
     private String tanggal;
@@ -26,16 +33,24 @@ public class Post implements Serializable {
     private boolean published;
     private int userId;
     private ArrayList<Comment> comments;
+
+    public void clearAttributes(){
+        this.setId(0);
+        this.setJudul(null);
+        this.setTanggal(null);
+        this.setKonten(null);
+        this.setPublished(false);
+    }
     
-    public boolean loadComments(){
+    public boolean loadComments() {
         try {
             DBConnector dbc = new DBConnector();
             Statement st = dbc.getCon().createStatement();
-            
+
             this.comments = new ArrayList<>();
             String query = "SELECT * FROM comment WHERE post_id=" + id;
             ResultSet result = st.executeQuery(query);
-            while (result.next()){
+            while (result.next()) {
                 Comment comment = new Comment();
                 comment.setId(result.getInt("id"));
                 comment.load();
@@ -47,6 +62,7 @@ public class Post implements Serializable {
             return false;
         }
     }
+
     public boolean load(int id) {
         try {
             DBConnector dbc = new DBConnector();
@@ -54,14 +70,14 @@ public class Post implements Serializable {
 
             String query = "SELECT * FROM " + tablename + " WHERE id=" + id + " LIMIT 1";
             ResultSet result = st.executeQuery(query);
-            if (result.next()){
+            if (result.next()) {
                 this.setId(result.getInt("id"));
                 this.setJudul(result.getString("judul"));
                 this.setTanggal(result.getString("tanggal"));
                 this.setKonten(result.getString("konten"));
                 this.setPublished(result.getBoolean("published"));
                 this.setUserId(result.getInt("user_id"));
-                
+
                 return true;
             } else {
                 return false;
@@ -77,17 +93,20 @@ public class Post implements Serializable {
             DBConnector dbc = new DBConnector();
             Statement st = dbc.getCon().createStatement();
 
-            String query
-                    = "INSERT IGNORE INTO " + tablename
-                    + "(judul,tanggal,konten,user_id)"
-                    + "VALUES('" + this.getJudul() + "','" + this.getTanggal() + "','"+this.getKonten()+"','"+this.getUserId()+"')";
-            System.out.println(query);
-            st.executeUpdate(query);
-            query = "UPDATE " + tablename
-                    + " SET judul='"+this.getJudul()+"',tanggal='"+this.getTanggal()+"',konten='"+this.getKonten()+"',user_id='"+this.getUserId()+"'"
-                    + " WHERE id="+this.getId();
-            System.out.println(query);
-            st.executeUpdate(query);
+            if (this.isNewRecord) {
+                String query
+                        = "INSERT IGNORE INTO " + tablename
+                        + "(judul,tanggal,konten,user_id)"
+                        + "VALUES('" + this.getJudul() + "','" + this.getTanggal() + "','" + this.getKonten() + "','" + this.getUserId() + "')";
+                System.out.println(query);
+                st.executeUpdate(query);
+            } else {
+                String query = "UPDATE " + tablename
+                        + " SET judul='" + this.getJudul() + "',tanggal='" + this.getTanggal() + "',konten='" + this.getKonten() + "',user_id='" + this.getUserId() + "'"
+                        + " WHERE id=" + this.getId();
+                System.out.println(query);
+                st.executeUpdate(query);
+            }
             return true;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -96,6 +115,22 @@ public class Post implements Serializable {
             e.printStackTrace();
             return false;
         }
+    }
+
+    public boolean delete() {
+        try {
+            DBConnector dbc = new DBConnector();
+            Statement st = dbc.getCon().createStatement();
+            String query = "DELETE FROM " + tablename
+                    + "  WHERE id=" + this.id;
+            System.out.println(query);
+            st.executeUpdate(query);
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+
     }
 
     public int getId() {
@@ -152,6 +187,21 @@ public class Post implements Serializable {
 
     public void setComments(ArrayList<Comment> comments) {
         this.comments = comments;
+    }
+
+    public String showUpdate() {
+        FacesContext context = FacesContext.getCurrentInstance();
+        Map<String, String> requestParam = context.getExternalContext().getRequestParameterMap();
+        HttpServletRequest req = (HttpServletRequest) context.getExternalContext().getRequest();
+        return req.getContextPath() + "/faces/post/update.xhtml";
+    }
+
+    public boolean getIsNewRecord() {
+        return isNewRecord;
+    }
+
+    public void setIsNewRecord(boolean isNewRecord) {
+        this.isNewRecord = isNewRecord;
     }
 
 }
