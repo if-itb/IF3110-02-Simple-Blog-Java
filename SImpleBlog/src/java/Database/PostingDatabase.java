@@ -145,17 +145,17 @@ public class PostingDatabase {
         String Email = request.getParameter("Email");
         String Password = request.getParameter("Password");
         
-        Connection con = makeConnection();
-        PreparedStatement ps;
-        String query = "INSERT INTO `user` (`Username`,`Password`, `Name`, `email`, `Role`) VALUES (?,?,?,?,?)";
-        ps= con.prepareStatement(query);
-        ps.setString(1,Username);
-        ps.setString(2,Password);
-        ps.setString(3,Name);
-        ps.setString(4,Email);
-        ps.setString(5,"Owner");
-        int i = ps.executeUpdate();
-        con.close();
+        try (Connection con = makeConnection()) {
+            PreparedStatement ps;
+            String query = "INSERT INTO `user` (`Username`,`Password`, `Name`, `email`, `Role`) VALUES (?,?,?,?,?)";
+            ps= con.prepareStatement(query);
+            ps.setString(1,Username);
+            ps.setString(2,Password);
+            ps.setString(3,Name);
+            ps.setString(4,Email);
+            ps.setString(5,"Owner");
+            int i = ps.executeUpdate();
+        }
         return "Home.xhtml";
     }
     
@@ -179,15 +179,12 @@ public class PostingDatabase {
             }
             if (existUser>0){
                 System.out.println("masuk");
-                extCont.redirect("/SImpleBlog/faces/Role/Owner.xhtml");
+                extCont.redirect("/SImpleBlog/Role/Owner.xhtml");
             }
             else{
-                extCont.redirect("/SImpleBlog/faces/Home.xhtml");
+                extCont.redirect("/SImpleBlog/Home.xhtml");
             }
             con.close();
-        }
-        else{
-            extCont.redirect("/SImpleBlog/faces/Home.xhtml");
         }
     }
     
@@ -206,13 +203,18 @@ public class PostingDatabase {
 
         while(rs.next()){
             existUser = rs.getInt(1);
+            login.setCookie();
          }
         
-        con.close();
         if (existUser>0){
+            while(rs.next()){
+                login.setCookie();
+            }
+            con.close();
             return "Role/Owner.xhtml?faces-redirect=true";
         }
         else{
+            con.close();
             return "Home.xhtml";
         }
     }
