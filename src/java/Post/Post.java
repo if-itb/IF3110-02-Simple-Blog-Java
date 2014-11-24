@@ -79,13 +79,13 @@ public class Post {
 		try {
 			Class.forName(Driver).newInstance();
 			conn = DriverManager.getConnection(DbLoc2,DbUser,DbPass);
-			String query = "INSERT INTO `post` (`ID`,`Title`,`Date`,`Content`,`Owner`) VALUES (NULL,?,?,?,?);";
+			String query = "INSERT INTO `post` (`ID`,`Title`,`Date`,`Content`,`Owner`,`Status`) VALUES (NULL,?,?,?,?,'3');";
 			ps=conn.prepareStatement(query);
 			ps.setString(1,Judul);
 			SimpleDateFormat tp= new SimpleDateFormat("y-MM-dd");
 			ps.setString(2,tp.format(Tanggal));
 			ps.setString(3,Konten);
-			ps.setString(4, Owner);
+			ps.setString(4,Owner);
 			if (ps.executeUpdate()==0){
 				throw new Exception("Error adding post");
 			}
@@ -207,7 +207,7 @@ public class Post {
 					res.Tanggal=rs.getDate("Date");
 					res.Konten=rs.getString("Content");
 					res.Owner=rs.getString("Owner");
-					res.id=rs.getInt("ID");
+					res.id=Integer.toString(rs.getInt("ID"));
 					hsl.add(res);
 					res=new Paket();
 				}

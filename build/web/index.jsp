@@ -60,11 +60,7 @@
 			<%
 				PostBean pBean =  new PostBean();
 				for(int i=0;i<pBean.listManyPost().size();i++){
-			%>
-					
-					
-					
-					
+			%>	
 			<li class="art-list-item">
 				<div class="art-list-item-title-and-time">
 					<h2 class="art-list-title"><a href="show_post.php?id=<% out.println(pBean.listManyPost().get(i).getId()); %>"><% out.println(pBean.listManyPost().get(i).getJudul()); %></a></h2>

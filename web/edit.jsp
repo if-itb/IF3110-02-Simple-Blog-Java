@@ -1,6 +1,6 @@
 <%-- 
-    Document   : index
-    Created on : Nov 24, 2014, 4:14:48 PM
+    Document   : edit
+    Created on : Nov 25, 2014, 12:18:41 AM
     Author     : adwisatya
 --%>
 
@@ -9,6 +9,7 @@
 <%@page import = "Post.Post" %>
 <%@page import= "User.User" %>
 <%@page import= "Post.PostBean" %>
+<!DOCTYPE html>
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,46 +41,52 @@
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->
 
-<title>Simple Blog of Bangsatya</title>
+<title>Simple Blog of Bangsatya | Edit Post</title>
+
+
 </head>
 
 <body class="default">
 <div class="wrapper">
 
-<nav class="nav">
-    <a style="border:none;" id="logo" href="index.php"><h1>Simple-Blog<span>-of-</span>Bang-Satya-Ilmi-Ojan</h1></a>
+<nav class="nav" >
+    <a style="border:none;" id="logo" href="index.jsp"><h1>Simple<span>-</span>Blog</h1></a>
     <ul class="nav-primary">
-        <li><a href="new_post.jsp">+ Tambah Post</a></li>
+        <li><a href="new_post.jsp">+ Edit Post</a></li>
     </ul>
 </nav>
 
-<div id="home">
-    <div class="posts">
-        <nav class="art-list">
-          <ul class="art-list-body">
+<article class="art simple post" style="margin-top:50px;">
+        <div class="art-body" style="margin-top:70px">
+        <div class="art-body-inner">
+            <h2>Edit Post</h2>
 			<%
 				PostBean pBean =  new PostBean();
-				for(int i=0;i<pBean.listManyPost().size();i++){
-			%>	
-			<li class="art-list-item">
-				<div class="art-list-item-title-and-time">
-					<h2 class="art-list-title"><a href="show_post.php?id=<% out.println(pBean.listManyPost().get(i).getId()); %>"><% out.println(pBean.listManyPost().get(i).getJudul()); %></a></h2>
-					<div class="art-list-time"><% out.println(pBean.listManyPost().get(i).getTanggal()); %></div>
-					<div class="art-list-owner">Owner:&nbsp;<% out.println(pBean.listManyPost().get(i).getOwner()); %></div>
-				</div>
-				<p><% out.println(pBean.listManyPost().get(i).getKonten()); %></p>
-				<p>
-				  <a href="edit_post.php?id=<% out.println(pBean.listManyPost().get(i).getId()); %>">Edit</a> | <a href="#" onclick="return ConfirmDelete(<% out.println(pBean.listManyPost().get(i).getId()); %>);">Hapus</a>
-				</p>
-				
-			</li>	
-			<%
-				}
+				String id = request.getParameter("id");
+				pBean.ViewPost(Integer.parseInt(id));
+
 			%>
-          </ul>
-        </nav>
+            <div id="contact-area">
+                <form method="post" action="update.php">
+                    <label for="Judul">Judul</label>
+                    <input type="text" name="judul" id="Judul" value="<% out.println(pBean.getJudul()); %>">
+		
+                    <label for="Tanggal">Tanggal:</label>
+                    <input type="text" name="tanggal" id="Tanggal" value="<% out.println(pBean.getTanggal()); %>">
+                    
+                    <label for="Konten">Konten:</label><br>
+                    <textarea name="konten" rows="20" cols="20" id="Konten"><% out.println(pBean.getKonten()); %></textarea>
+					<input type="hidden" name="nomor" value="<% out.println(id); %>">
+                    <input type="submit" name="submit" value="Simpan" class="submit-button" onclick="return cekInputan();">
+                </form>
+            </div>
+			<%
+			
+			%>
+        </div>
     </div>
-</div>
+
+</article>
 
 <footer class="footer">
     <div class="back-to-top"><a href="">Back to top</a></div>
@@ -99,17 +106,19 @@
         
     </aside>
 </footer>
-
 </div>
 <script>
-    function ConfirmDelete(nomor)
-    {
-      var x = confirm("Apakah Anda yakin menghapus post ini?");
-      if (x)
-          return window.location.assign('delete.php?id='+nomor);
-      else
-        return false;
-    }
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth()+1; //January is 0!
+    var yyyy = today.getFullYear();
+    if(dd<10) {
+        dd='0'+dd
+    } 
+    if(mm<10) {
+        mm='0'+mm
+    } 
+    document.getElementById("Tanggal").value= yyyy + "-" + mm + "-" + dd;
 </script>
 
 </body>

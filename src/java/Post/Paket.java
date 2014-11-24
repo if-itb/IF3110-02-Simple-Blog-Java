@@ -22,8 +22,10 @@ public class Paket{
 	public Date Tanggal;
 	public String Konten;
 	public String Owner;
-	public int id;
+	public String id;
 	public boolean valid;
+	public int Status;
+	
 	public String getJudul(){
 		return Judul;
 	}
@@ -37,11 +39,14 @@ public class Paket{
 			return Konten;
 		}
 	}
-	public int getId(){
+	public String getId(){
 		return id;
 	}
 	public String getOwner(){
 		return Owner;
+	}
+	public int getStatus(){
+		return Status;
 	}
 	public String isReadMore(){
 		if (Konten.length()>250){

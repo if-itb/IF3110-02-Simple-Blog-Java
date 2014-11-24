@@ -26,6 +26,7 @@ public class PostBean {
 	private String Owner;
 	private int id;
 	private boolean valid;
+	private int Status;
 	
 	public String getJudul() {
 		if (!valid){
@@ -73,13 +74,13 @@ public class PostBean {
 			e.printStackTrace();
 		}
 	}
-	public String NewPost(String a, String b, String c, String d){
+	public String NewPost(String a, Date b, String c,String d){
 		try {
 			Judul=a;
-			Tanggal=new SimpleDateFormat("dd-MM-yyyy").parse(b);
+			Tanggal=b;
 			Konten=c;
-			Owner = d;
-			Post.NewPost(Judul,Tanggal,Konten, Owner);
+			Owner=d;
+			Post.NewPost(Judul,Tanggal,Konten,Owner);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -150,7 +151,7 @@ public class PostBean {
 			Paket t=new Paket();
 			t.Judul="Invalid Post";
 			t.Konten="<p>Something's went wrong<br><br>Just ignore this for the time being</p>";
-			t.id=0;
+			t.id="0";
 			manypost.add(t);
 			return manypost;
 		}
@@ -165,7 +166,7 @@ public class PostBean {
 			Paket t=new Paket();
 			t.Judul="Invalid Post";
 			t.Konten="<p>Something's went wrong<br><br>Just ignore this for the time being</p>";
-			t.id=0;
+			t.id="0";
 			manypost.add(t);
 			return manypost;
 		}
