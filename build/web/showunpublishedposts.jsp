@@ -82,18 +82,23 @@
                     // con=DBConnect.GetDBConnect();
 		try 
 		{
-                    String sql=("SELECT * FROM post WHERE status_publish=1");
+                    String sql=("SELECT * FROM post WHERE status_pubished=0");
                     PreparedStatement ps = con.prepareStatement(sql);
                     ResultSet rs = ps.executeQuery(sql);    
                     while (rs.next())
                     {
+                        String Publish = new String("Unpublished");
                         out.println(" <li class=\"art-list-item\"> <div class=\"art-list-item-title-and-time\"> <h2 class=\"art-list-title\"><a href=\"post.jsp"
                                 + "?"
                                 + "post_id="
                                 + rs.getString("post_id")
                                 + "\">"
                                 + rs.getString("judul")+ "</a></h2> "
-                                + "<div class=\"art-list-time\">15 Juli 2014</div> <div class=\"art-list-time\"><span style=\"color:#F40034;\"></div> <p>");
+                                + "<div class=\"art-list-time\">15 Juli 2014</div> <div class=\"art-list-time\"><span style=\"color:#F40034;\">"
+                                + "&#10029;</span> "
+                                + Publish
+                                + "</div> "
+                                + "</div> <p>");
                         String[] words = rs.getString("konten").split(" ");
                         StringBuilder sb = new StringBuilder();
                         for (int i = 0; i < Math.min(30, words.length); i++)
