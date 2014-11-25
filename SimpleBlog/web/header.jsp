@@ -94,6 +94,7 @@
             <% if ((role != null) && (role.equals("admin"))) { %><li>/</li><li><a href="restore_post.jsp">Restore Post</a></li><% } %>
             <% if ((role != null) && (role.equals("admin"))) { %><li>/</li><li><a href="list_user.jsp">User</a></li><% } %>
             <% if (email != null) { %><li>/</li><li><a href="logout.jsp">Logout</a></li><% } %>
+            <% if ((email == null) && (role == null) && (nama == null)) { %><li><a href="login.jsp">Login</a></li><% } %>
         </ul> 
     </nav>
 </div>
