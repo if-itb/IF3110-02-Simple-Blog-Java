@@ -8,6 +8,28 @@ function DeletePost()
 	}
         else
                 return false;
+<<<<<<< HEAD
+=======
+}
+
+function ValidateFormNewPost()
+{
+	var judul = document.getElementById("form-newpost:judulpost").value;
+	var tanggal = document.getElementById("form-newpost:tanggalpost").value;
+	var konten = document.getElementById("form-newpost:kontenpost").value;
+	if ((judul == "") || (tanggal == "") || (konten== ""))
+	{
+		alert("Field tidak boleh ada yang kosong");
+		return false;
+	}
+	else if (!ValidateDate(tanggal))
+	{
+		alert("Tanggal yang diinput tidak valid");
+		return false;
+	}
+	else
+		return true;
+>>>>>>> origin/master
 }
 
 function ValidateForm()

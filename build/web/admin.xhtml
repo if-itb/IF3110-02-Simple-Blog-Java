@@ -17,6 +17,7 @@
                 <ul class="nav navbar-nav navbar-left">
                     <li><a href="new_post.xhtml">New Post</a></li>
                     <li><a href="publish_post.xhtml">Publish Post</a></li>
+                    <li><a href="trashbin_post.xhtml">Deleted Post</a></li>
                     <li><a href="userManagement.xhtml">User Management</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right ">
@@ -52,12 +53,9 @@
                         <a href="edit_post.xhtml?id=#{posts.id}" class="option">
                            [edit]
                         </a>
-                        <!-- <a href="#" class="option"> -->
-                        <h:commandLink onclick="return DeletePost()" action="#{deletepost.delete}">
-                            <!-- <f:param name="deleteAction" value="#{posts.id}" /> -->
-                            <f:setPropertyActionListener target="#{deletepost.action}" value="#{posts.id}" />
-                           [delete]
-                        <!-- </a> --> </h:commandLink>
+                        <a onclick="return DeletePost();" href="delete_post.xhtml?id=#{posts.id}" class="option">
+                            [delete]
+                        </a>
                     </div>
                 </ui:repeat>
             </h:form>

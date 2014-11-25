@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
@@ -9,3 +10,37 @@
         </group>
     </open-files>
 </project-private>
+=======
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/xampp/htdocs/IF3110-02-Simple-Blog-Java/web/resources/sql/simple_blog_java.sql</file>
+            <file>file:/C:/xampp/htdocs/IF3110-02-Simple-Blog-Java/web/register.xhtml</file>
+            <file>file:/C:/xampp/htdocs/IF3110-02-Simple-Blog-Java/web/publish_post.xhtml</file>
+            <file>file:/C:/xampp/htdocs/IF3110-02-Simple-Blog-Java/src/java/bean/deletepost.java</file>
+            <file>file:/C:/xampp/htdocs/IF3110-02-Simple-Blog-Java/web/index.xhtml</file>
+            <file>file:/C:/xampp/htdocs/IF3110-02-Simple-Blog-Java/src/java/bean/newpost.java</file>
+            <file>file:/C:/xampp/htdocs/IF3110-02-Simple-Blog-Java/web/update_publish.jsp</file>
+            <file>file:/C:/xampp/htdocs/IF3110-02-Simple-Blog-Java/web/WEB-INF/web.xml</file>
+            <file>file:/C:/xampp/htdocs/IF3110-02-Simple-Blog-Java/src/java/bean/CookieBean.java</file>
+            <file>file:/C:/xampp/htdocs/IF3110-02-Simple-Blog-Java/src/java/bean/User.java</file>
+            <file>file:/C:/xampp/htdocs/IF3110-02-Simple-Blog-Java/web/resources/js/publish_ajax.js</file>
+            <file>file:/C:/xampp/htdocs/IF3110-02-Simple-Blog-Java/web/login.xhtml</file>
+            <file>file:/C:/xampp/htdocs/IF3110-02-Simple-Blog-Java/web/resources/js/validator.js</file>
+            <file>file:/C:/xampp/htdocs/IF3110-02-Simple-Blog-Java/src/java/bean/editpost.java</file>
+            <file>file:/C:/xampp/htdocs/IF3110-02-Simple-Blog-Java/web/add_post.xhtml</file>
+            <file>file:/C:/xampp/htdocs/IF3110-02-Simple-Blog-Java/web/resources/js/confirm.js</file>
+            <file>file:/C:/xampp/htdocs/IF3110-02-Simple-Blog-Java/web/admin.xhtml</file>
+            <file>file:/C:/xampp/htdocs/IF3110-02-Simple-Blog-Java/web/edit_post.xhtml</file>
+            <file>file:/C:/xampp/htdocs/IF3110-02-Simple-Blog-Java/web/new_post.xhtml</file>
+            <file>file:/C:/xampp/htdocs/IF3110-02-Simple-Blog-Java/web/resources/js/utility.js</file>
+            <file>file:/C:/xampp/htdocs/IF3110-02-Simple-Blog-Java/src/java/bean/PostData.java</file>
+            <file>file:/C:/xampp/htdocs/IF3110-02-Simple-Blog-Java/web/resources/js/ajax.js</file>
+            <file>file:/C:/xampp/htdocs/IF3110-02-Simple-Blog-Java/src/java/bean/Post.java</file>
+            <file>file:/C:/xampp/htdocs/IF3110-02-Simple-Blog-Java/web/loadPost.jsp</file>
+        </group>
+    </open-files>
+</project-private>
+>>>>>>> origin/master
