@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:c="http://java.sun.com/jsp/jstl/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+    <h:head>
+        <title>Edit Post</title>
+        <meta name="viewport" content="width=device-width"/>
+    </h:head>
+    <h:body>
+        #{post.copy(dbconnector.selectPost(param['pid']))}
+        <h:form id="inputanpos" onsubmit="return validateForm()">
+            <h:inputText a:placeholder="Judul Pos" id="Judul" value="#{post.judul}"/><br/>
+            <h:inputText a:placeholder="yyyy-mm-dd" id="Tanggal" value="#{post.tanggal}"/><br/>
+            <h:inputTextarea a:placeholder="Konten Pos" id="Konten" value="#{post.konten}"/><br/>
+            <h:commandButton id="update" value="Update" action="#{dbconnector.updatePost(user,post)}"/><br/>
+            <br/>
+        </h:form>
+    </h:body>
+    <script src="#{facesContext.externalContext.requestContextPath}/validator.js" type="text/javascript"></script>
+</html>

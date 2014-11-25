@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:c="http://java.sun.com/jsp/jstl/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+    <h:head>
+        <title>TODO supply a title</title>
+        <meta name="viewport" content="width=device-width"/>
+    </h:head>
+    <h:body>
+        #{dbconnector.verify(user, cookiehandler)}
+        #{post.copy(dbconnector.selectPost(param['pid']))}
+        <h1>#{post.judul}</h1>
+        <h2>#{post.tanggal}</h2>
+        <a href="Published_Posts.xhtml">Back to Published Posts</a>
+        <p><h:outputText value="#{post.konten}" escape="false" /></p>
+        <h:form id="inputankomentar">
+            #{comment.setPost_id(param['pid'])}
+            #{comment.init(user)}
+            <h:inputText a:placeholder="Nama" id="nama" value="#{comment.nama}"/><br/>
+            <h:inputText a:placeholder="Email" id="email" value="#{comment.email}"/><br/>
+            <h:inputTextarea a:placeholder="Komentar" id="komentar" value="#{comment.komentar}"/><br/>
+            <h:commandButton onclick="return validateComment()" id="add" value="Post Comment">
+                <f:ajax execute="inputankomentar" render="komenContainer komentar" listener="#{dbconnector.insertComment(user, comment)}"/>
+            </h:commandButton>
+            <br/>
+            <br/>
+            <h:panelGroup layout="block" id="komenContainer">
+                <ui:repeat var="item" value="#{dbconnector.listComment(post.id_post)}">
+                    <h:outputText value="#{item.nama}" escape="false" /><br/>
+                    <h:outputText value="#{item.email}" escape="false" /><br/>
+                    <h:outputText value="#{item.timestamp}" escape="false" /><br/>
+                    <h:outputText value="#{item.komentar}" escape="false" /><br/>
+                </ui:repeat>
+            </h:panelGroup>
+        </h:form>
+        
+    </h:body>
+    <script src="#{facesContext.externalContext.requestContextPath}/validator.js" type="text/javascript"></script>
+</html>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:c="http://java.sun.com/jsp/jstl/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:head>
+        <title>Home Page</title>
+        <meta name="viewport" content="width=device-width"/>
+    </h:head>
+    <h:body> 
+        <h1>Published Posts</h1>
+        #{dbconnector.verify(user, cookiehandler)}
+        <!--#user.loggedOffRedirectToInd()-->
+        #{postlist.initPostList(dbconnector)}
+        <h:outputText value="#{user.name}, #{user.loggedon}, "/>
+        <br/>
+        <a style="display:#{user.userMgtButton()}" href="User_Management.xhtml">User Management</a><br/>
+        <a style="display:#{user.unPubButton()}" href="Unpublished_Posts.xhtml">Unpublished Posts</a><br/>
+        <a style="display:#{user.addButton()}" href="Add_Post.xhtml">Tambah Pos</a><br/>
+        <a style="display:#{user.logOutButton()}" href="Log_Out.xhtml">LogOut</a><br/>
+        <a style="display:#{user.logInButton()}" href="Login.xhtml">LogIn</a><br/>
+        <ui:repeat var="item" value="#{postlist.getListPos(user)}">
+            <a href="Post.xhtml?pid=#{item.id_post}"><h1>#{item.id_post}. #{item.judul}</h1></a> 
+            <p><h:outputText value="#{item.tanggal}" escape="false" /></p>
+            <p><h:outputText value="#{item.getKontenHTML()}" escape="false" /></p>
+            <!-- Edit Post -->
+            <a style="display:#{item.editButton(user.type)}" href="Edit_Post.xhtml?pid=#{item.id_post}">Edit Post</a>
+            <!-- Delete Post -->
+            <a style="display:#{item.deleteButton(user.type)}" href="" id="del#{item.id_post}" class="deletebutton">Delete</a>
+            <!-- Publish Post -->
+            <a style="display:#{item.publishButton(user.type)}" href="Publish_Post.xhtml?pid=#{item.id_post}">Publish</a>
+        </ui:repeat>
+    </h:body>
+    <script src="#{facesContext.externalContext.requestContextPath}/deletor.js" type="text/javascript"></script>
+</html>

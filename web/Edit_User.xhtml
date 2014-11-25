@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:c="http://java.sun.com/jsp/jstl/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+    <h:head>
+        <title>Edit Post</title>
+        <meta name="viewport" content="width=device-width"/>
+    </h:head>
+    <h:body>
+        <a href="javascript:history.back()">Back</a><br/>
+        #{user.copyToSaved(dbconnector.selectUser(param['uid']))}
+        <h:form>
+            <h:inputText id="username" a:placeholder="#{user.saved.name}" value="#{user.saved.name}"/><br/>
+            <h:inputSecret id="password" value="#{user.saved.password}"/><br/>
+            <h:inputText id="email" value="#{user.saved.email}"/><br/>
+            <h:inputText id="type" value="#{user.saved.type}"/><br/>
+            <h:commandButton id="update" value="Update" action="#{dbconnector.updateUser(user,user.getSaved())}"/><br/>
+            <h:commandButton id="delete" value="Delete" action="#{dbconnector.deleteUser(user,user.getSaved())}"/><br/>
+            <br/>
+        </h:form>
+    </h:body>
+</html>

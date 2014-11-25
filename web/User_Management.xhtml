@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:c="http://java.sun.com/jsp/jstl/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:head>
+        <title>User Management</title>
+        <meta name="viewport" content="width=device-width"/>
+    </h:head>
+    <h:body>
+        <f:event type="preRenderView" listener="#{user.loggedOffRedirectToInd()}" />
+        #{userlist.initUserList(user, dbconnector)}
+        <h1>User Management</h1>
+        <h2>Administrator Only</h2>
+        <a href="Published_Posts.xhtml">Back to Published Posts</a><br/>
+        <ui:repeat var="item" value="#{userlist.getListUser(user)}">
+            <h:outputText value="#{item.name} #{item.email} #{item.type}" escape="false" /><a href="Edit_User.xhtml?uid=#{item.userid}"> Edit</a><br/>
+        </ui:repeat>
+        <a href="Add_User.xhtml">Tambahkan User</a><br/>
+    </h:body>
+</html>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:c="http://java.sun.com/jsp/jstl/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+    <h:head>
+        <title>Add New User</title>
+        <meta name="viewport" content="width=device-width"/>
+    </h:head>
+    <h:body>
+        
+        <a href="javascript:history.back()">Back</a><br/>
+        <h:form>
+            #{user.makeEmptySaved()}
+            <h:inputText id="username" a:placeholder="username" value="#{user.saved.name}"/><br/>
+            <h:inputSecret id="password" a:placeholder="password" value="#{user.saved.password}"/><br/>
+            <h:inputText id="email" a:placeholder="email" value="#{user.saved.email}"/><br/>
+            <h:inputText id="type" a:placeholder="type" value="#{user.saved.type}"/><br/>
+            <h:commandButton id="insert" value="Insert" action="#{dbconnector.insertUser(user,user.saved)}"/><br/>
+            <br/>
+        </h:form>
+    </h:body>
+</html>
