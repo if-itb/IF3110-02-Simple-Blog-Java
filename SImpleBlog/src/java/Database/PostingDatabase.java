@@ -285,7 +285,6 @@ public class PostingDatabase {
     }
     
     public String getUserRole() throws ClassNotFoundException, SQLException{
-        ExternalContext extCont = FacesContext.getCurrentInstance().getExternalContext();
         Cookie cUsername = login.getUserCookie();
         String UserRole = null;
         
@@ -313,7 +312,6 @@ public class PostingDatabase {
     } 
     
     public String getActiveUserEmail() throws ClassNotFoundException, SQLException{
-        ExternalContext extCont = FacesContext.getCurrentInstance().getExternalContext();
         Cookie cUsername = login.getUserCookie();
         String activeUserEmail = null;
         
@@ -327,5 +325,26 @@ public class PostingDatabase {
             activeUserEmail = rs.getString("email");
          }
         return activeUserEmail;
+    }
+    
+    public List<User> getUsers() throws ClassNotFoundException, SQLException{
+        List<User> records = new ArrayList<>();
+        
+        ResultSet rs;
+        Connection con;
+        con = makeConnection();
+        Statement stmt = con.createStatement();
+        String query = "Select * from user where Name<>\""+getActiveUser()+"\";";
+        rs = stmt.executeQuery(query);
+        while(rs.next()){
+              User user = new User();
+              user.setUsername(rs.getString(1));
+              user.setPassword(rs.getString(2));
+              user.setName(rs.getString(3));
+              user.setEmail(rs.getString(4));
+              user.setRole(rs.getString(5));
+              records.add(user);
+        }
+        return records;
     }
 }
