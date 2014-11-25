@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
         <link rel="stylesheet" href="style.css" type="text/css" />
         <h:head>
         <title>Simple Blog</title>
@@ -11,36 +12,42 @@
         <br/>
     <h1>View Post </h1>
 
-    <h:body onload="#{Komentar.connectDb()}"> 
+    <h:body onload="getXmlHttpRequest2(); return false"> 
         <hr>  
-      <h2>#{viewPost.getJudul()}</h2>     
+      <h2>#{viewPost.getJudul()} </h2>     
         <h3>Date: <h:outputText value="#{viewPost.getTanggal()}"></h:outputText></h3>
                 <p><h:outputText value="#{viewPost.getKonten()}"></h:outputText></p>
         </hr> 
         
+        <h3>Beri Komentar</h3>
+        
+        <p>                         <h:form id="formcomment" onsubmit="return validasiEmail()">
+                <h:outputText value="#{komen.nama}" id="kname"></h:outputText>
+                Nama: <h:inputText id="knamee" value="#{komentar.nama}"/>
+                    Email: <h:inputText  id="kemaill" value="#{komentar.email}"  />
+                    Komentar:   <h:inputText id="komens" value="#{komentar.komentar}" />
+                    <h:commandButton value="Submit" action="#{komentar.addComment(13)}" onclick="return check()">
+                        <f:ajax execute="#{komentar.nama}" render="komens"></f:ajax> </h:commandButton>  
+            </h:form>
+            <h:outputText value="#{komentar.tanggal}"/>
+            
+</p><div id="komens">
         <h3> Komentar</h3>
-        #{listKomentar.postid}
+        <h:outputText value="#{listKomentar.postid}" id="idpost"/>
         <c:forEach items="#{listKomentar.arrKomentar}" var="komen">
  <p>#{listKomentar.postid}
-			<br/><h:outputText value="#{komen.commentid}"></h:outputText> 
-			
-                        <br/><h:outputText value="#{komen.nama}"></h:outputText> 
+			<br/><h:outputText value="#{komen.commentid}" id="kcommentid"></h:outputText> 			
+                        <br/><h:outputText value="#{komen.nama}" id="kname"></h:outputText> 
 			<br/><h:outputText value="#{komen.tanggal}"></h:outputText>
 			<br/> <h:outputText value="#{komen.komentar}"></h:outputText>
                         <hr></hr></p>
 		</c:forEach>
-        <p>           
-                <h:form onsubmit="validasiEmail();"> Nama: <h:inputText id="knamee" value="#{komentar.nama}"/>
-                    Email: <h:inputText  id="kemaill" value="#{komentar.email}"  />
-                    Komentar:   <h:inputText id="komens" value="#{komentar.komentar}" />
-                    <h:commandButton value="Submit" action="#{komentar.addComment(13)}" onclick="return check();"/>
-                </h:form>
-            <h:outputText value="#{komentar.tanggal}"/>
-</p>
-
+</div>
+      
         <script type="text/javascript">
 
-function validasiEmail(mail){
+function validasiEmail(){
+var mail= document.formcomment["formcomment:kemaill"].value; 
 if(mail.match(/^[_A-Za-z0-9-]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)*(\.[A-Za-z]+)$/g))
 {return true;}
 else{
@@ -48,14 +55,16 @@ alert ("Salah Email");
 return false;}}
 
 
+
         </script>       
         <hr></hr>
-        <form action="Login" method="post">
+         <form action="Login" method="post">
             Username : <input type = "text" name="uname"/>
             Password : <input type ="password" name="pass"/>
             <input type="submit" value="Login"/>
         </form>
-        <div class="footer">rita | cilvia | linda </div>
+        <div class="footer">
+            rita | cilvia | linda </div>
     </h:body>
 </html>
 

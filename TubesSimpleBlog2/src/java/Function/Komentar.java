@@ -96,7 +96,10 @@ public class Komentar {
 		   st.executeUpdate("insert into komentar (`Nama`,`Email`,`Komentar`,`postid`) value ('tesnama','tesemail','teskomentar',49)");
 		 */  //kalau masukin pake execute update
 		   conn.close();
-		   nama = "afterXcuteQuery";
+                   nama="";
+                   email="";
+                   komentar="";
+                   tanggal="";
 	   } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException e) {
 	   }
 		

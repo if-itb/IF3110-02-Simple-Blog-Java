@@ -66,11 +66,11 @@ public class ViewPost {
 			  System.out.print("Successfully inserted value");*/
                   ResultSet res= st.executeQuery("Select * from posts");
                   
-                  res.next(); 
+                  if(res.next()){ 
                   judul=res.getString("Judul");
                   tanggal = res.getDate("Tanggal");                
                   konten = res.getString("Konten");
-                  postid=res.getInt("PID");
+                  postid=res.getInt("PID");}
 		  conn.close();
 		  } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException e) {
 		  }
