@@ -47,6 +47,7 @@ public class User implements Serializable {
         this.setIsAdmin(false);
         this.setIsOwner(false);
         this.setIsEditor(false);
+        this.setIsLoggedIn(false);
     }
     public boolean getIsNewRecord() {
         return isNewRecord;

@@ -77,10 +77,11 @@ public class SiteController implements Serializable {
         HttpServletRequest req = (HttpServletRequest) context.getExternalContext().getRequest();
 
         User userIdentity = (User) req.getSession().getAttribute("userIdentity");
-        userIdentity.setIsLoggedIn(false);
+        userIdentity.clearAttributes();
+        req.getSession().setAttribute("userIdentity",userIdentity);
         CookieService.clearCookie("email");
         CookieService.clearCookie("password");
-        return req.getContextPath() + "/faces/login.xhtml";
+        return req.getContextPath()+"/faces/post/index.xhtml";
     }
 
     public User getLoginForm() {
