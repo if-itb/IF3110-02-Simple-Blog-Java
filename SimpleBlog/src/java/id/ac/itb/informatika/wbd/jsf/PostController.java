@@ -40,9 +40,9 @@ public class PostController {
     public String newPost() {
         try {
             jpaController.create(postCurrent);
-            //JsfUtil.addSuccessMessage("Customer was successfully created.");
+            JsfUtil.addSuccessMessage("Post sudah berhasil dibuat");
         } catch (Exception e) {
-            //JsfUtil.ensureAddErrorMessage(e, "A persistence error occurred.");
+            JsfUtil.ensureAddErrorMessage(e, "A persistence error occurred.");
             return "post_list";
         }
         return "post_list";

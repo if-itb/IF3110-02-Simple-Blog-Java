@@ -1,6 +1,8 @@
-<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 template="./WEB-INF/templates/template.xhtml"
-                xmlns:h="http://xmlns.jcp.org/jsf/html">
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui">
 
     <ui:define name="title">
         New Post
@@ -17,6 +19,8 @@
 
             <div id="contact-area">
                 <h:form id="NewPost">
+                    
+                    <p:messages/>
                     
                     <h:inputHidden id="EditMode" value="#{postController.postCurrent.id}"/>
                     
