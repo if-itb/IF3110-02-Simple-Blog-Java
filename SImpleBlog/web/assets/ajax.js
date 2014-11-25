@@ -6,13 +6,8 @@
 
 
 function LoadCommentList(PostID){
-    var xmlhttp;
+    var xmlhttp = new XMLHttpRequest();
 
-    if (window.XMLHttpRequest){
-            xmlhttp=new XMLHttpRequest();
-    }else{
-            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-    }
     xmlhttp.onreadystatechange=function(){
             if (xmlhttp.readyState==4 && xmlhttp.status==200){
                     document.getElementById("comment-list").innerHTML=xmlhttp.responseText;
@@ -24,12 +19,8 @@ function LoadCommentList(PostID){
 
 function AddComment(PostID){
     if(IsEmailValid()){
-        var xmlhttp;
-        if (window.XMLHttpRequest){
-                xmlhttp=new XMLHttpRequest();
-        }else{
-                xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-        }
+        var xmlhttp = new XMLHttpRequest();
+        
         xmlhttp.onreadystatechange=function(){
                 if (xmlhttp.readyState==4 && xmlhttp.status==200){
                         document.getElementById("comment-list").innerHTML=xmlhttp.responseText;
@@ -37,6 +28,13 @@ function AddComment(PostID){
         }
         xmlhttp.open("POST","assets/newcomment.jsp?ID=" +PostID + "&Name=" + document.getElementById("Nama").value + "&Email=" + document.getElementById("Email").value + "&Comment=" + document.getElementById("Komentar").value,true);
         xmlhttp.send();	
+        LoadCommentList(PostID);
+        LoadCommentList(PostID);
+        LoadCommentList(PostID);
+        LoadCommentList(PostID);
+        LoadCommentList(PostID);
+        LoadCommentList(PostID);
+        LoadCommentList(PostID);
         return true;
     }else{
         return false;	
@@ -44,12 +42,8 @@ function AddComment(PostID){
 }
 
 function AddCommentLoggedIn(PostID){
-    var xmlhttp;
-    if (window.XMLHttpRequest){
-            xmlhttp=new XMLHttpRequest();
-    }else{
-            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-    }
+    var xmlhttp = new XMLHttpRequest();
+    
     xmlhttp.onreadystatechange=function(){
             if (xmlhttp.readyState==4 && xmlhttp.status==200){
                     document.getElementById("comment-list").innerHTML=xmlhttp.responseText;
