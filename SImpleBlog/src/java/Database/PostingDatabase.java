@@ -295,6 +295,7 @@ public class PostingDatabase {
         while(rs.next()){
             activeUser = rs.getString("Name");
          }
+        con.close();
         return activeUser;
     }
     
@@ -311,6 +312,7 @@ public class PostingDatabase {
         while(rs.next()){
             UserRole = rs.getString("Role");
          }
+        con.close();
         return UserRole;
     }
     
@@ -338,10 +340,11 @@ public class PostingDatabase {
         while(rs.next()){
             activeUserEmail = rs.getString("email");
          }
+        con.close();
         return activeUserEmail;
     }
     
-    public void CheckAdminRole() throws ClassNotFoundException, SQLException, IOException{
+    public void checkAdminRole() throws ClassNotFoundException, SQLException, IOException{
         ExternalContext extCont = FacesContext.getCurrentInstance().getExternalContext();
         System.out.println("ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ");
         if(getLoginState())
@@ -482,6 +485,20 @@ public class PostingDatabase {
               user.setRole(rs.getString(5));
               records.add(user);
         }
+        con.close();
         return records;
     }
+    
+    public String getUsername() throws ClassNotFoundException, SQLException{
+        
+        return null;
+    }
+    
+    public List<User> getUserInfo() throws ClassNotFoundException, SQLException{
+        List<User> record = new ArrayList<>();
+        
+        
+        return null;
+    }
+    
 }
