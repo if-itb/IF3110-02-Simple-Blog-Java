@@ -235,10 +235,11 @@ public class Post {
                       "<th <tr style=\"vertical-align:center\" rowspan=\"2\" id=\"column2\">Tanggal Post</th>\n" +
                       "<th <tr style=\"vertical-align:center\" rowspan=\"2\" id=\"column3\">Konten Post</th>\n" +
                       "<th <tr style=\"vertical-align:center\" rowspan=\"2\" id=\"column4\">Status</th>\n" +
-                      "<th id=\"column5\" colspan=\"4\">Aksi</th>\n" +
+                      "<th id=\"column5\" colspan=\"5\">Aksi</th>\n" +
                       "</tr>\n" +
                       "<th id=\"columnx\">Publish</th>\n" +
                       "<th id=\"columnx\">Trash</th>\n" +
+                      "<th id=\"columnx\">Restore</th>\n" +  
                       "<th id=\"columnx\">Delete</th>\n" +
                       "<th id=\"columnx\">Edit</th>\n" +
                       "</tr>\n";
@@ -271,46 +272,61 @@ public class Post {
                 switch (publishStatus) {
                     case 0: toHTML += "<th> Unpublished </th>"; break;
                     case 1: toHTML += "<th> Published </th>"; break;
-                    case 2: toHTML += "<th> Trash </th>"; break;
+                    case 2: toHTML += "<th> Trashed </th>"; break;
                 }
                 //aksi berdasarkan role, lalu berdasarkan post
                 if (isAdmin()) {
-                    if (publishStatus == 0) {
-                        toHTML += "<th><a href='../posts/publish_post.jsp?id=" + idPost + "'> X </a></th>" +
-                                  "<th><a href='../posts/trash_post.jsp?id=" + idPost + "'> X </a></th>";
+                    if (publishStatus == 0) { //status unpublished
+                        toHTML += "<th><a href='../posts/publish_post.jsp?id=" + idPost + "'> X </a></th>\n" +
+                                  "<th><a href='../posts/trash_post.jsp?id=" + idPost + "'> X </a></th>\n" +
+                                  "<th></th>\n";
                     }
-                    else {
-                        toHTML += "<th></th><th></th>";
+                    else if (publishStatus == 1) { //status published
+                        toHTML += "<th></th>\n" +
+                                  "<th></th>\n" +
+                                  "<th></th>\n";
                     }
-                    toHTML += "<th><a href='../posts/delete_post.jsp?id=" + idPost + "'> X </a></th>" +
-                              "<th><a href='../posts/edit_post.jsp?id=" + idPost + "'> X </a></th></tr>";
+                    else if (publishStatus == 2) { //status trash
+                        toHTML += "<th></th>\n" +
+                                  "<th></th>\n" +
+                                  "<th><a href='../posts/restore_post.jsp?id=" + idPost + "'> X </a></th>\n";
+                    }
+                    toHTML += "<th><a href='../posts/delete_post.jsp?id=" + idPost + "'> X </a></th>\n" +
+                              "<th><a href='../posts/edit_post.jsp?id=" + idPost + "'> X </a></th></tr>\n";
                 }
                 else if (isEditor()) {
-                    if (publishStatus == 0) {
-                        toHTML += "<th><a href='../posts/publish_post.jsp?id=" + idPost + "'> X </a></th>" +
-                                  "<th></th>";
+                    if (publishStatus == 0) { //status unpublished
+                        toHTML += "<th><a href='../posts/publish_post.jsp?id=" + idPost + "'> X </a></th>\n";
                     }
-                    else {
-                        toHTML += "<th></th><th></th>";
+                    else if (publishStatus == 1) { //status published
+                        toHTML += "<th></th>\n";
                     }
-                    toHTML += "<th></th><th><a href='../posts/edit_post.jsp?id=" + idPost + "'> X </a></tr>";
-                    toHTML += "<th></th>";
+                    toHTML +=  "<th></th>\n" +
+                               "<th></th>\n" +
+                               "<th></th>\n<th><a href='../posts/edit_post.jsp?id=" + idPost + "'> X </a></tr>\n" +
+                               "<th></th>\n";
                 }
                 else if (isOwner()) {
-                    if (publishStatus == 0) {
-                        toHTML += "<th></th><th><a href='../posts/trash_post.jsp?id=" + idPost + "'> X </a></tr>";
-                        toHTML += "<th></th>";
+                    if (publishStatus == 0) { //status unpublished
+                        toHTML += "<th><a href='../posts/publish_post.jsp?id=" + idPost + "'> X </a></th>\n" +
+                                  "<th><a href='../posts/trash_post.jsp?id=" + idPost + "'> X </a></th>\n" +
+                                  "<th></th>\n";
                     }
-                    else {
-                        toHTML += "<th></th><th></th>";
+                    else if (publishStatus == 1) { //status published
+                        toHTML += "<th></th>\n" +
+                                  "<th></th>\n" +
+                                  "<th></th>\n";
                     }
-                    toHTML += "<th><a href='../posts/delete_post.jsp?id=" + idPost + "'> X </a></tr>";
-                    toHTML += "<th><a href='../posts/edit_post.jsp?id=" + idPost + "'> X </a></tr>";
-
+                    else if (publishStatus == 2) { //status trash
+                        toHTML += "<th></th>\n" +
+                                  "<th></th>\n" +
+                                  "<th><a href='../posts/restore_post.jsp?id=" + idPost + "'> X </a></th>\n";
+                    }
+                    toHTML += "<th><a href='../posts/delete_post.jsp?id=" + idPost + "'> X </a></tr>\n" +
+                              "<th><a href='../posts/edit_post.jsp?id=" + idPost + "'> X </a></tr>\n";
                 }
-                toHTML += "<br>\n<br>";
             }
-            toHTML += "</table>";
+            toHTML += "</table>\n<br>\n";
         }
         catch (SQLException ex) {
             Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
@@ -440,6 +456,25 @@ public class Post {
             String queryTrashPost = "UPDATE post SET publishStatus=2 WHERE id=" + post_ID;
             //execute query
             statement.executeUpdate(queryTrashPost);
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void restorePost(int post_ID) throws SQLException {
+        try { 
+            //login database
+            KoneksiDatabase.setUser("root");
+            KoneksiDatabase.setPassword("");
+            KoneksiDatabase.setDatabase("localhost","blog");
+            //statement
+            Connection koneksi = KoneksiDatabase.getKoneksi();
+            Statement statement = koneksi.createStatement();
+            //query
+            String queryRestorePost = "UPDATE post SET publishStatus=0 WHERE id=" + post_ID;
+            //execute query
+            statement.executeUpdate(queryRestorePost);
         }
         catch (SQLException ex) {
             Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);

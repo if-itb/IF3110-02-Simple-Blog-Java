@@ -50,6 +50,6 @@
            }
          %>
         <% Post post = new Post(); %>
-        <% post.trashPost(Integer.valueOf(request.getParameter("id"))); %>
+        <% post.restorePost(Integer.valueOf(request.getParameter("id"))); %>
     </body>
 </html>

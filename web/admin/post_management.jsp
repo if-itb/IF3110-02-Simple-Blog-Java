@@ -59,6 +59,8 @@
             <a style="border:none;" id="logo" href="../index.jsp"><h1>Not<span>-</span>a<span>-</span>Simple<span>-</span>Blog</h1></a>
             <ul class="nav-primary">
                 <li><a href="../posts/new_post.jsp">+ Tambah post</a></li>
+                <br>
+                <li><a href="index.jsp"><div align="right"><font color="blue">Dashboard</font></div></a></li>
             </ul>
         </nav>
                 
