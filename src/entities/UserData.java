@@ -40,6 +40,10 @@ public class UserData implements Serializable {
 	public UserDetails getDetails() {
 		return details;
 	}
+	
+	public String getUserHeader() {
+		return ("header.xhtml");
+	}
 
 	public String login() {
 		DatabaseUtility dbUtil = DatabaseUtility.getInstance();
