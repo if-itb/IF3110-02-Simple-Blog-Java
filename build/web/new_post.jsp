@@ -113,6 +113,47 @@
     } 
     document.getElementById("Tanggal").value= yyyy + "-" + mm + "-" + dd;
 </script>
+<script>
 
+function cekInputan(){
+    var judul = document.getElementById('Judul').value;
+    var tanggal = document.getElementById('Tanggal').value;
+    var konten = document.getElementById('Konten').value;
+    var dataString = 'judul='+ judul + '&tanggal=' + tanggal + '&konten=' + konten;
+    
+        if(judul=='' || tanggal =='' || konten =='')
+        {
+            alert('Silahkan lengkapi form yang tersedia');
+			return false;
+        }
+        else
+        {
+            if(bandingkanTangal(tanggal)){
+
+            }else{
+                alert('Tanggal tidak benar. Silahkan masukkan tanggal lain.');
+                return false;
+			}
+		}
+}
+function bandingkanTangal(input){
+    var date1   =   new Date();
+    var date2   =   new Date(input);
+
+	if(date1.getFullYear()>date2.getFullYear()){
+		return false;
+	}else{
+		if(date1.getMonth()>date2.getMonth()){
+			return false;
+		}else{
+			if(date1.getDate()>date2.getDate()){
+				return false;
+			}else{
+				return true;
+			}
+		}
+	}
+}
+</script>
 </body>
 </html>

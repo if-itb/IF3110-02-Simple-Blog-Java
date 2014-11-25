@@ -70,7 +70,7 @@
 							</div>
 							<p><% out.println(pBean.listManyPost().get(i).getKonten()); %></p>
 							<p>
-							  <a href="handler/admPublish.jsp?id=<% out.println(pBean.listManyPost().get(i).getId()); %>">Publish</a> | <a href="#" onclick="return ConfirmDelete(<% out.println(pBean.listManyPost().get(i).getId()); %>);">Hapus</a>
+							  <a href="handler/admPublish.jsp?id=<% out.println(pBean.listManyPost().get(i).getId()); %>">Publish</a> | <a href="edit.jsp?id=<% out.println(pBean.listManyPost().get(i).getId()); %>">Edit</a>
 							</p>
 						</li>	
 			<%
@@ -107,7 +107,7 @@
     {
       var x = confirm("Apakah Anda yakin menghapus post ini?");
       if (x)
-          return window.location.assign('delete.jsp?id='+nomor);
+          return window.location.assign('handler/delPost.jsp?id='+nomor);
       else
         return false;
     }
