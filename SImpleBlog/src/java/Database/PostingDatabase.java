@@ -58,7 +58,7 @@ public class PostingDatabase {
     
     public void toHome() throws IOException{
         ExternalContext extCont = FacesContext.getCurrentInstance().getExternalContext();
-        extCont.redirect("/SImpleBlog/");
+        extCont.redirect("/SImpleBlog/Home.xhtml");
     }
     
     public Connection makeConnection() throws ClassNotFoundException, SQLException{
@@ -154,7 +154,7 @@ public class PostingDatabase {
             ps.setString(5,"unpublished");
             int i = ps.executeUpdate();
             ExternalContext extcon = FacesContext.getCurrentInstance().getExternalContext();
-            extcon.redirect("Owner.xhtml");
+            extcon.redirect("Home.xhtml");
     }
 
     public void deletePost() throws ClassNotFoundException, SQLException, IOException, ParseException{
@@ -165,7 +165,7 @@ public class PostingDatabase {
           rs = stmt.executeUpdate(query);
           PreparedStatement ps;
             ExternalContext extcon = FacesContext.getCurrentInstance().getExternalContext();
-            extcon.redirect("Owner.xhtml");
+            extcon.redirect("Home.xhtml");
     }
     
      public void PublishPost() throws ClassNotFoundException, SQLException, IOException, ParseException{
@@ -176,7 +176,7 @@ public class PostingDatabase {
           rs = stmt.executeUpdate(query);
           PreparedStatement ps;
             ExternalContext extcon = FacesContext.getCurrentInstance().getExternalContext();
-            extcon.redirect("Owner.xhtml");
+            extcon.redirect("Home.xhtml");
     }
     
     public String addUserOwner() throws ClassNotFoundException, SQLException{
@@ -218,17 +218,15 @@ public class PostingDatabase {
                 existUser = rs.getInt(1);
                 System.out.println("exist user: " + existUser);
                 if (existUser>0){
-                    System.out.println("masukkkkk"+getUserRole());
-                    if(getUserRole().equals("Editor") || getUserRole().equals("editor"))
+                    if(getUserRole().equals("Editor"))
                     {
                         extCont.redirect("/SImpleBlog/Role/Editor.xhtml");
-                        System.out.println("PINGGGG1122");
                     }
-                    if(getUserRole().equals("Owner") || getUserRole().equals("owner"))
+                    if(getUserRole().equals("Owner"))
                     {
                         extCont.redirect("/SImpleBlog/Role/Owner.xhtml");
                     }
-                    if(getUserRole().equals("Admin") || getUserRole().equals("admin"))
+                    if(getUserRole().equals("Admin"))
                     {
                         extCont.redirect("/SImpleBlog/Role/Admin.xhtml");
                     }
@@ -242,12 +240,12 @@ public class PostingDatabase {
     }
     
     public void Login() throws ClassNotFoundException, SQLException, IOException{
-        ExternalContext extContext = FacesContext.getCurrentInstance().getExternalContext();
+        ExternalContext extCont = FacesContext.getCurrentInstance().getExternalContext();
         HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
         String Username = request.getParameter("login_username");
         String Password = request.getParameter("login_password");
-
-        ResultSet rs;
+        String UserRole = null;
+        ResultSet rs,rs2;
         int existUser;
         Connection con;
         con = makeConnection();
@@ -258,10 +256,28 @@ public class PostingDatabase {
         while(rs.next()){
             existUser = rs.getInt(1);
             if(existUser>0){
-                login.setCookie(Username, Password);
-                extContext.redirect("/SImpleBlog/Role/Owner.xhtml");
-            } else{
-                extContext.redirect("/SImpleBlog/Home.xhtml");
+                login.setCookie(Username,Password);
+                String query2 = "Select Role from user where Username=\""+Username+"\";";
+                rs2 = stmt.executeQuery(query2);
+                while(rs2.next()){
+                    UserRole = rs2.getString("Role");
+                    System.out.println("PINGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGUsername : "+Username);
+                    if(UserRole.equals("Editor"))
+                        {
+                            extCont.redirect("/SImpleBlog/Role/Editor.xhtml");
+                        }
+                        if(UserRole.equals("Owner"))
+                        {
+                            extCont.redirect("/SImpleBlog/Role/Owner.xhtml");
+                        }
+                        if(UserRole.equals("Admin"))
+                        {
+                            extCont.redirect("/SImpleBlog/Role/Admin.xhtml");
+                        } 
+                    }
+                }
+            else{
+                extCont.redirect("/SImpleBlog/Home.xhtml");
             }
         }
         con.close();
@@ -305,7 +321,7 @@ public class PostingDatabase {
         ExternalContext extCont = FacesContext.getCurrentInstance().getExternalContext();
         login.delUserCookie();
         login.delPassCookie();
-        extCont.redirect("/SImpleBlog/");
+        extCont.redirect("/SImpleBlog/Home.xhtml");
     }
     
     public boolean getLoginState(){
