@@ -1,16 +1,25 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<f:view>
+    <h:head>
+        <title>Login Form</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="template/basis.xhtml">
+            <ui:define name="content">
+                <!-- TODO integrasi dengan datavase -->
+                <h:dataTable value="#{allUserBean.allUser}" var="user">
+                    <h:column>    			    				
+                       #{user.roleName}
+                    </h:column>
+                 </h:dataTable>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</f:view>
 </html>

@@ -12,12 +12,15 @@
     <h:body>
         <ui:composition template="template/basis.xhtml">
             <ui:define name="content">
-                <h2>Hello, your role is #{userBean.roleName}</h2>
                 <h:form id="loginForm">
                     <h:messages style="color:red;margin:8px;" />
-                     <h:inputText id="role" value="#{userBean.role}" />
+                    Username: <h:inputText id="username" value="#{loginBean.username}"></h:inputText>
                     <br />
-                    <h:commandButton id="loginButton" value="Login" action="Login" /> 
+                    Password: <h:inputText id="password" value="#{loginBean.password}" />
+                    <br/>
+                    <h:commandButton id="loginButton" value="Login" 
+                                    action="#{loginBean.login()}" 
+                    />
                     <!--TODO Semuanya diubah-->
                 </h:form>
                 <p> Untuk sementara hanya admin yang bisa akses semua page,

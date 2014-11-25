@@ -18,4 +18,19 @@
         <managed-bean-class>model.NavigationController</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
+    <managed-bean>
+        <managed-bean-name>loginBean</managed-bean-name>
+        <managed-bean-class>model.LoginBean</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+        <managed-property>
+            <property-name>user</property-name>
+            <property-class>model.UserBean</property-class>
+            <value>#{userBean}</value>
+        </managed-property>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>allUserBean</managed-bean-name>
+        <managed-bean-class>model.AllUserBean</managed-bean-class>
+        <managed-bean-scope>application</managed-bean-scope>
+    </managed-bean>
 </faces-config>

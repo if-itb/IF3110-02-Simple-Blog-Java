@@ -18,6 +18,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import model.NavigationController;
 import model.UserBean;
 
 /**
@@ -116,22 +117,23 @@ public class AuthenticationFilter implements Filter {
             HttpServletResponse res = (HttpServletResponse) response;
             HttpSession ses = req.getSession();
             UserBean user;
+            NavigationController nc = new NavigationController();
             user = (UserBean)ses.getAttribute("userBean");
             //  allow user to proccede if url is Login.xhtml or List-Post.xhtml or View-Post.xhtml
             // TODO ganti ini dengan navigation bean kalau navigation bean sudah selesai
             String reqURI = req.getRequestURI();
-            
-            String login = "/Login.xhtml";
-            String listPost = "/List-Post.xhtml";
-            String viewPost = "/View-Post.xhtml";
-            if ( reqURI.indexOf(login) >= 0 
-                    || reqURI.indexOf(listPost) >= 0 
-                    || reqURI.indexOf(viewPost) >= 0  )
+            reqURI = reqURI.substring(reqURI.indexOf("/faces/")+"/faces/".length());
+            if ( reqURI.startsWith(nc.gotoLogin())
+                    || reqURI.startsWith(nc.gotoListPost())
+                    || reqURI.startsWith("css/"))
                    chain.doFilter(request, response);
-            else if (user.getRole() == UserBean.getAdmin())
+            else if ((user.getRole() == UserBean.getOwner())
+                        && (reqURI.startsWith("")
+                        )
+                    )
                 chain.doFilter(request, response);
             else   
-                   res.sendRedirect(req.getContextPath() +"/faces" +"/Login.xhtml");  // Anonymous user. Redirect to login page
+                   res.sendRedirect(req.getContextPath() +"/faces" +nc.gotoLogin());  // Anonymous user. Redirect to login page
         }
         catch(Throwable t) {
             System.out.println( t.getMessage());
