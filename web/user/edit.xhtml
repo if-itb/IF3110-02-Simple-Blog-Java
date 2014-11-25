@@ -4,21 +4,68 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html">
     <h:head>
         <title>Edit Page</title>
+        <link rel="stylesheet" type="text/css" href="../../assets/css/mystyle.css"></link>
     </h:head>
     <h:body>
-		<h:form>
-			<h:messages style="color:red;" />
-			<h:inputHidden value="#{usersController.active_id}" binding="#{edituserid}"></h:inputHidden>
+        
+        <div class="wrapper">
+            <div class="top">
+                <div class="title">
+                    <a href="home.html">SIMPLE<blue>-</blue>BLOG</a>            
+                    <div class="signin">
+                        <hide1><a href="login.html">username</a></hide1>
+                        <hide2><a href="home.html">logout</a></hide2>
+                        <a href="#"><img src="../../assets/img/user1.png" onmouseover="this.src='../../assets/img/user_blue1.png'" onmouseout="this.src='../../assets/img/user1.png'" height="20"></img></a>  
+                    </div>           
+                </div>
+            </div><!--end top-->
+            <hr  margin-right="30%"></hr>
+            <div class="icon">
+                <a href="addpost.html"><img src="../../assets/img/add1.png" onmouseover="this.src='../../assets/img/add2.png'" onmouseout="this.src='../../assets/img/add1.png'" height="30px" title="add new post"></img></a>
+                <a href="home-admin.html"><img src="../../assets/img/restore1.png" onmouseover="this.src='../../assets/img/restore2.png'" onmouseout="this.src='../../assets/img/restore1.png'" height="30px" title="restore post"></img></a>
+                <a href="home-admin.html"><img src="../../assets/img/hide1.png" onmouseover="this.src='../../assets/img/hide2.png'" onmouseout="this.src='../../assets/img/hide1.png'" height="30px" title="show unpublished article"></img></a>
+                <a href="manageuser.html"><img src="../../assets/img/adduser1.png" onmouseover="this.src='../../assets/img/adduser2.png'" onmouseout="this.src='../../assets/img/adduser1.png'" height="30px" title="manage users"></img></a>
+
+            </div>
+            <div class="content">
+                <h:form>
+                    <h:messages style="color:red;" />
+                    <h:inputHidden value="#{usersController.active_id}" binding="#{edituserid}"></h:inputHidden>
 			<h:outputLabel for="username" value="Username " />
-			<h:inputText id="username" value="#{usersController.active_username}" binding="#{editusername}" required="true" requiredMessage="Please enter a username"></h:inputText>
+			
 			<br />
 			<h:outputLabel for="password" value="Password: " />
-			<h:inputSecret id="password" value="#{usersController.active_password}" binding="#{edituserpassword}" required="true" requiredMessage="Please enter a password"></h:inputSecret>
+			
 			<br />
 			<h:outputLabel for="role" value="Role: " />
-			<h:inputTextarea id="role" value="#{usersController.active_role}" binding="#{edituserrole}" required="true" requiredMessage="Please enter a role" />
+			
 			<br />
 			<h:commandButton action="#{usersController.updateUser(edituserid.value, editusername.value, edituserpassword.value, edituserrole.value)}" value="Update" ></h:commandButton>
-		</h:form>
+		
+                <div class="forms">
+                    <blue><b>Edit User</b></blue>
+                    <form action="manageuser.html">
+                        <div class="textfield">
+                            username :&nbsp;<h:inputText id="username" value="#{usersController.active_username}" binding="#{editusername}" required="true" requiredMessage="Please enter a username"></h:inputText><br></br>
+                            password :&nbsp;<h:inputSecret id="password" value="#{usersController.active_password}" binding="#{edituserpassword}" required="true" requiredMessage="Please enter a password"></h:inputSecret><br></br>
+                            role &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:
+                            <h:inputTextarea id="role" value="#{usersController.active_role}" binding="#{edituserrole}" required="true" requiredMessage="Please enter a role" />
+                            <br></br><br></br>
+                        </div>
+                        <input class="button" type="submit" value="Save"></input>
+                    </form>
+                </div>
+
+
+                <div class="clear"></div>
+                </h:form>
+            </div> <!-- end content -->
+<!--
+            <div class="footer">
+                <hr></hr>
+                footer
+            </div>-->
+        </div> <!-- end wrapper -->
+		
     </h:body>
 </html>

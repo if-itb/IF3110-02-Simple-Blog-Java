@@ -4,24 +4,57 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html">
     <h:head>
         <title>Edit Page</title>
+        <link rel="stylesheet" type="text/css" href="../../assets/css/mystyle.css"></link>
     </h:head>
     <h:body>
-		<h:form>
-			<h:messages style="color:red;" />
-			<h:inputHidden value="#{postsController.active_id}" binding="#{editpostid}"></h:inputHidden>
-			<h:outputLabel for="title" value="Title: " />
-			<h:inputText id="title" value="#{postsController.active_title}" binding="#{editposttitle}" required="true" requiredMessage="Please enter a title"></h:inputText>
-			<br />
-			<h:outputLabel for="date" value="Date: " />
-			<h:inputText id="date" value="#{postsController.active_date}" binding="#{editpostdate}" required="true" requiredMessage="Please enter a date"></h:inputText>
-			<br />
-			<h:outputLabel for="content" value="Content: " />
-			<h:inputTextarea id="content" value="#{postsController.active_content}" binding="#{editpostcontent}" required="true" requiredMessage="Please enter a content" />
-			<br />
-			<h:outputLabel for="status" value="Status: " />
-			<h:selectBooleanCheckbox id="status" value="#{postsController.active_status}" binding="#{editpoststatus}" />
-			<br />
-			<h:commandButton action="#{postsController.updatePost(editpostid.value, editposttitle.value, editpostdate.value, editpostcontent.value, editpoststatus.value)}" value="Update" ></h:commandButton>
-		</h:form>
+        <div class="wrapper">
+            <h:form>
+                <h:messages style="color:red;" />
+                <h:inputHidden value="#{postsController.active_id}" binding="#{editpostid}"></h:inputHidden>		
+            <div class="top">
+                <div class="title">
+                    <a href="#">SIMPLE<blue>-</blue>BLOG</a>         
+                    <div class="signin">
+                        <hide1><a href="#">username</a></hide1>
+                        <hide2><a href="#">logout</a></hide2>
+                        <a href="#"><img src="../../assets/img/user1.png" onmouseover="this.src='../../assets/img/user_blue1.png'" onmouseout="this.src='../../assets/img/user1.png'" height="20"></img></a>  
+                    </div>           
+                </div>
+            </div><!--end top-->
+            <hr  margin-right="30%"></hr>
+            <div class="icon">
+                <a href="#"><img src="../../assets/img/add1.png" onmouseover="this.src='../../assets/img/add2.png'" onmouseout="this.src='../../assets/img/add1.png'" height="30px" title="add new post"></img></a>
+                <a href="#"><img src="../../assets/img/restore1.png" onmouseover="this.src='../../assets/img/restore2.png'" onmouseout="this.src='../../assets/img/restore1.png'" height="30px" title="restore post"></img></a>
+                <a href="#"><img src="../../assets/img/hide1.png" onmouseover="this.src='../../assets/img/hide2.png'" onmouseout="this.src='../../assets/img/hide1.png'" height="30px" title="show unpublished article"></img></a>
+                <a href="#"><img src="../../assets/img/adduser1.png" onmouseover="this.src='../../assets/img/adduser2.png'" onmouseout="this.src='../../assets/img/adduser1.png'" height="30px" title="manage users"></img></a>
+            </div>
+            <div class="content">
+                <div class="newpost">
+                    <div class="textfield">
+                        <form>
+                            Judul<br></br><h:inputText id="title" value="#{postsController.active_title}" binding="#{editposttitle}" required="true" requiredMessage="Please enter a title"></h:inputText><br></br>
+                            Tanggal<br></br><h:inputText id="date" value="#{postsController.active_date}" binding="#{editpostdate}" required="true" requiredMessage="Please enter a date"></h:inputText><br></br>
+                            Content<br></br><h:inputTextarea id="content" value="#{postsController.active_content}" binding="#{editpostcontent}" required="true" requiredMessage="Please enter a content"></h:inputTextarea><br></br><br></br>
+                            <h:outputLabel for="status" value="Status: " />
+                            <h:selectBooleanCheckbox id="status" value="#{postsController.active_status}" binding="#{editpoststatus}" />
+                            <br />
+                            <h:commandButton action="#{postsController.updatePost(editpostid.value, editposttitle.value, editpostdate.value, editpostcontent.value, editpoststatus.value)}" value="Update" ></h:commandButton>
+                        </form>
+                    </div>
+
+                </div>
+            <div class="clear">.</div>
+            </div> <!-- end content -->
+
+<!--            <div class="footer">
+                <hr></hr>
+                footer
+            </div>-->
+            </h:form>
+        </div> <!-- end wrapper -->
+        
+        
+        
+		
     </h:body>
 </html>

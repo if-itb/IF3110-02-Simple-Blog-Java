@@ -4,18 +4,44 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html">
     <h:head>
         <title>Login Page</title>
+        <link rel="stylesheet" type="text/css" href="../../assets/css/mystyle.css"></link>
     </h:head>
     <h:body>
-		<h:form>
-			<h:messages style="color:red;" />
-			<h:outputLabel for="username" value="Username: " />
-			<h:inputText id="username" binding="#{username}"  required="true" requiredMessage="Please enter a username" />
-			<br />
-			<h:outputLabel for="password" value="Password: " />
-			<h:inputSecret id="password" binding="#{password}" required="true" requiredMessage="Please enter a password" />
-			<br />
-			<h:commandButton action="#{usersController.login(username.value, password.value)}" value="Login" >
+        <div class="wrapper">
+            <div class="top">
+                <div class="title">
+                    <br></br>
+                    <center><a href="home.html">SIMPLE<blue>-</blue>BLOG</a></center>         
+                </div>
+            </div><!--end top-->
+            <!-- <hr  margin-right="30%"> -->
+            <div class="content">
+                <h:form>
+                <h:messages style="color:red;" />
+			
+			
+		
+                <div class="forms">
+                    <blue><b>LOGIN</b></blue>
+                    <form action="home-admin.html">
+                        <div class="textfield">
+                            username :&nbsp;<h:inputText id="username" binding="#{username}"  required="true" requiredMessage="Please enter a username" />
+<br></br>
+                            password :&nbsp;<h:inputSecret id="password" binding="#{password}" required="true" requiredMessage="Please enter a password" />
+<br></br><br></br>
+                        </div>
+                        <h:commandButton action="#{usersController.login(username.value, password.value)}" value="Login" >
 			</h:commandButton>
-		</h:form>
+                    </form>
+                </div>
+                        </h:form>
+            </div> <!-- end content -->
+
+<!--            <div class="footer">
+                <hr></hr>
+                footer
+            </div>-->
+        </div> <!-- end wrapper -->
+		
     </h:body>
 </html>
