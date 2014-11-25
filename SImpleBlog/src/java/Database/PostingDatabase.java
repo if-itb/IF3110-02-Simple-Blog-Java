@@ -11,6 +11,7 @@ import static com.sun.corba.se.spi.presentation.rmi.StubAdapter.request;
 import com.sun.faces.context.RequestParameterMap;
 import java.io.IOException;
 import java.io.Serializable;
+import static java.lang.System.out;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
@@ -280,4 +281,7 @@ public class PostingDatabase {
         extCont.redirect("/SImpleBlog/");
     }
     
+    public boolean getLoginState(){
+        return(login.getUserCookie() != null);
+    } 
 }
