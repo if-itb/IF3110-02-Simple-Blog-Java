@@ -4,7 +4,8 @@
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 <h:head>
-	<title>Testing UI Insert</title>
+	<title>Common Page</title>
+	<link href="./css/bootstrap.css" rel="stylesheet" type="text/css" />
 </h:head>
 <h:body>
 	<ui:insert name="header">
@@ -12,9 +13,6 @@
 	</ui:insert>
 	<ui:insert name="content">
 		<ui:include src="contents.xhtml" />
-	</ui:insert>
-	<ui:insert name="footer">
-		<ui:include src="footer.xhtml" />
 	</ui:insert>
 </h:body>
 </html>

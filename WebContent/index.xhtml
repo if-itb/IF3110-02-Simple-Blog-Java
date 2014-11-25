@@ -12,25 +12,28 @@
 </h:head>
 
 <h:body>
-	<ul>
+	<ui:composition template="common.xhtml">
 
-	</ul>
-	<h1>Simple-Blog</h1>
-	<ul>
-		<ui:repeat value="#{databaseObject.postList}" var="item">
-			<li>Judul: #{item.title}</li>
-			<li>Waktu: #{item.date}</li>
-			<li>Isi: #{item.content}</li>
-			<h:link value="Go to page #{item.id}" outcome="view_post">
-				<f:param name="post_id" value="#{item.id}" />
-			</h:link>
+		<ui:define name="content">
+			<div class="col-md-8 col-md-offset-2" style="padding-top:100px">
+				<ui:repeat value="#{databaseObject.postList}" var="item">
+					<h2 class="text-center" style="padding-top:20px">
+						<h:link value="#{item.title}" outcome="view_post">
+							<f:param name="post_id" value="#{item.id}" />
+						</h:link>
+					</h2>
+					<h4 class="text-center text-muted">
+						<h:outputText value="#{item.date}" />
+					</h4>
+					<p>
+						<h:outputText value="#{item.content}" />
+					</p>
+					<hr/>
 
-		</ui:repeat>
-	</ul>
-	<h:form>
-		<h:commandButton action="add_post" value="Add Post" />
-	</h:form>
+				</ui:repeat>
+			</div>
+		</ui:define>
 
-
+	</ui:composition>
 </h:body>
 </html>

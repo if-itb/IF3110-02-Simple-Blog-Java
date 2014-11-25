@@ -16,31 +16,32 @@
 </h:head>
 
 <h:body>
-	<div class="bag-atas">
-		<h1 class="col-lg-offset-6 col-lg-6 title">Simple-Blog</h1>
-	</div>
-	<div class="kontainer col-lg-offset-6 col-lg-4">
-		<div class="row">
-			<div class="col-lg-12">
-				<h2>Login</h2>
+	<ui:composition template="common.xhtml">
+		<ui:define name="content">
+			<div class="kontainer col-lg-offset-6 col-lg-4">
+				<div class="row">
+					<div class="col-lg-12">
+						<h2>Login</h2>
+					</div>
+				</div>
+				<h:form>
+					<div class="row">
+						<span class="col-lg-4">Username</span> <span class="col-lg-8">:
+							<h:inputText value="#{userData.username}" />
+						</span>
+					</div>
+					<br />
+					<div class="row">
+						<span class="col-lg-4">Password</span> <span class="col-lg-8">:
+							<h:inputSecret value="#{userData.password}" />
+						</span>
+					</div>
+					<h:commandButton class="submit" value="Submit"
+						action="#{userData.login}" />
+				</h:form>
 			</div>
-		</div>
-		<h:form>
-			<div class="row">
-				<span class="col-lg-4">Username</span> <span class="col-lg-8">:
-					<h:inputText value="#{userData.username}" />
-				</span>
-			</div>
-			<br />			
-			<div class="row">
-				<span class="col-lg-4">Password</span> <span class="col-lg-8">:
-					<h:inputSecret value="#{userData.password}" />
-				</span>
-			</div>
-			<h:commandButton class="submit" value="Submit"
-				action="#{userData.login}" />
-		</h:form>
-	</div>	
+		</ui:define>
 
+	</ui:composition>
 </h:body>
 </html>

@@ -5,14 +5,10 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
-<body>
-	<ui:composition>
-		<div class="bag-atas">
-			<h1 class="col-lg-offset-1 col-lg-6 title">Simple-Blog</h1>
-			<div class="col-lg-offset-3 col-lg-2 allign-right" style="padding:2%">
-				<h:outputText value="#{userData.loginLink}" escape="false" />
-			</div>
-		</div>
-	</ui:composition>
-</body>
+<h:head>
+	<title>Logout</title>
+	<f:metadata>
+		<f:viewAction action="#{userData.logout}"/>
+	</f:metadata>
+</h:head>
 </html>

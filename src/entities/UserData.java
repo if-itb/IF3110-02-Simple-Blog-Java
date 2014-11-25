@@ -64,5 +64,19 @@ public class UserData implements Serializable {
 			}
 		}
 	}
+	
+	public String getLoginLink(){
+		if(!loggedIn){
+			return "<a href=\"login.jsf\"><button type=\"button\" class=\"btn btn-warning\">Login</button> </a>";
+		}else{
+			return "<a href=\"logout.jsf\"><button type=\"button\" class=\"btn btn-warning\">Logout</button> </a>";
+		}
+	}
+	
+	public String logout(){
+
+		loggedIn = false;
+		return "index?faces-redirect=true";
+	}
 
 }

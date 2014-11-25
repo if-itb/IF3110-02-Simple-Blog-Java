@@ -8,17 +8,27 @@
 <h:head>
 	<title>View Post</title>
 	<f:metadata>
-		<f:viewParam name="post_id" value="#{viewPost.id}"/>
-		<f:viewAction action="#{viewPost.execute}"/>
+		<f:viewParam name="post_id" value="#{viewPost.id}" />
+		<f:viewAction action="#{viewPost.execute}" />
 	</f:metadata>
 </h:head>
 
 <h:body>
-	<h1>Simple-Blog</h1>
-
-	<h2>#{viewPost.title}</h2>
-	<h3>#{viewPost.date}</h3>
-	<p>#{viewPost.content}</p>
-
+	<ui:composition template="common.xhtml">
+		<ui:define name="content">
+			<div class="col-md-8 col-md-offset-2">
+				<h2 class="text-center">
+					<h:outputText value="#{viewPost.title}" />
+				</h2>
+				<h4 class="text-center text-muted">
+					<h:outputText value="#{viewPost.date}" />
+				</h4>
+				<p style="padding-top:70px">
+					<h:outputText value="#{viewPost.content}" />
+				</p>
+				<hr />
+			</div>
+		</ui:define>
+	</ui:composition>
 </h:body>
 </html>

@@ -114,4 +114,14 @@ public class EditUser {
 		dbUtil.execute(query);
 	}
 	
+	public void changePassword(){
+		DatabaseUtility dbUtil = DatabaseUtility.getInstance();
+		
+		String query = "UPDATE user SET password = '"+ this.getPassword() +"' WHERE id = " + this.getId();
+
+		System.out.println(query);
+
+		dbUtil.execute(query);
+	}
+	
 }
