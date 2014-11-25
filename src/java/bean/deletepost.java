@@ -12,14 +12,8 @@ import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 import java.util.Map;
-import javax.faces.event.ComponentSystemEvent;
-import javax.faces.bean.SessionScoped;
 import javax.faces.bean. ManagedProperty ;
 import javax.faces.context.FacesContext;
 
@@ -27,14 +21,23 @@ import javax.faces.context.FacesContext;
  *
  * @author Andarias Silvanus
  */
-@ManagedBean(name="deletepost")
-@SessionScoped
+@RequestScoped
+@ManagedBean(name="deletepost",eager = true)
 public class deletepost implements Serializable
 {
     private String judul;
-    @ManagedProperty(value="#{user.author}")
     private String author;
     private String action;
+    @ManagedProperty(value ="#{user}")
+    private User user;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
     
     public deletepost() 
     {
@@ -57,16 +60,13 @@ public class deletepost implements Serializable
         this.judul = judul;
     }
     
-    public String delete()
+    public String getDelete()
     {
         try
         {
-            System.out.println("Masuk map params");
-            /*
+            System.out.println("=============================================================Masuk map params");
             Map<String,String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
             String id_pars = params.get("deleteAction");
-            */
-            String id_pars = action;
             System.out.println("id pars: "+id_pars);
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost/simple_blog_java", "root","");
@@ -74,7 +74,8 @@ public class deletepost implements Serializable
             String query = "UPDATE post SET status='deleted' WHERE (id) = (?)";
             PreparedStatement ps = con.prepareStatement(query);
             ps.setString(1, id_pars);
-            int executeUpdate = ps.executeUpdate();
+            int executeUpdate = 0;
+            //int executeUpdate = ps.executeUpdate();
             if(executeUpdate > 0)
             {
                 System.out.println("update succesful");
@@ -90,7 +91,7 @@ public class deletepost implements Serializable
             System.out.println(ex.toString());
             System.out.println(ex.getMessage());
         }
-        return null;
+        return "owner.xhtml";
     }
 
     public void setAction(String action) {

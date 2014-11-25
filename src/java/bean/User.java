@@ -28,7 +28,6 @@ public class User implements Serializable
     
     public User() 
     {
-        System.out.println("User Created");
         username="";
         password="";
         role="";
@@ -90,7 +89,7 @@ public class User implements Serializable
     
     public String getHome()
     {
-        if(username == "")
+        if("".equals(username))
         {
             return "index";
         }
@@ -100,7 +99,7 @@ public class User implements Serializable
         }
     }
     
-    public String getLogout()
+    public String getUserLogin()
     {
         if("".equals(username))
         {
@@ -195,6 +194,37 @@ public class User implements Serializable
         }
     }
     
+    public List<User> getUserFromDB()
+    {
+        String url = "jdbc:mysql://localhost/simple_blog_java";
+        String username = "root";
+        String password = "";
+        Connection con = null;
+        List<User> records = new ArrayList<>();
+        try 
+        {
+            Class.forName("com.mysql.jdbc.Driver").newInstance();
+            con = DriverManager.getConnection(url, username, password);
+            PreparedStatement query = con.prepareStatement("Select * from user");
+            ResultSet rs = query.executeQuery();
+            while(rs.next())
+            {
+                User temp = new User();
+                temp.setUsername(rs.getString("username"));
+                temp.setEmail(rs.getString("email"));
+                temp.setPassword(rs.getString("password"));
+                temp.setRole(rs.getString("role"));
+                records.add(temp);
+            }
+            con.close();
+        } 
+        catch (SQLException | ClassNotFoundException | InstantiationException | IllegalAccessException ex) 
+        {
+            System.out.println(ex.toString());
+        }
+        return records;
+    }
+    
     public void login()
     {
         System.out.println("Login");
@@ -202,14 +232,15 @@ public class User implements Serializable
         cookie.setCookie("username", username, 86400);
         ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
         try 
-        {            context.redirect(context.getRequestContextPath() + "/" + role + ".xhtml");
+        {            
+            context.redirect(context.getRequestContextPath() + "/" + role + ".xhtml");
         } 
         catch (IOException ex) 
         {
             System.out.println(ex.getMessage());
         }
     }
-    
+
     public String getAvail()
     {
         System.out.println("check Available");

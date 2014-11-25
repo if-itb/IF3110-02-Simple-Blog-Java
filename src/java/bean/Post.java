@@ -32,7 +32,6 @@ public class Post implements Serializable
     
     public Post() 
     {
-        System.out.println("Post created");
         judul = "";
         author = "";
         tanggal = "";
@@ -201,12 +200,7 @@ public class Post implements Serializable
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost/simple_blog_java","root","");
             System.out.println("Connection Created!");
-            if(query_status.length() == 0)
-            {
-                throw new Exception("Query_status has not been declared");
-            }
             String query = "SELECT * FROM `post` WHERE status = " + "'" + query_status + "' ORDER BY tanggal DESC";
-            System.out.println("query:" + query);
             PreparedStatement ps = con.prepareStatement(query);
             ResultSet result = ps.executeQuery();
             while(result.next())
@@ -226,9 +220,7 @@ public class Post implements Serializable
             
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
             System.out.println(ex.toString());
-        } catch (Exception ex) {
-            System.out.println(ex.toString());
-        }
+        } 
     }
     public void printDB()
     {
