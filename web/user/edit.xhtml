@@ -32,13 +32,10 @@
                     <h:messages style="color:red;" />
                     <h:inputHidden value="#{usersController.active_id}" binding="#{edituserid}"></h:inputHidden>
 			<h:outputLabel for="username" value="Username " />
-			
 			<br />
 			<h:outputLabel for="password" value="Password: " />
-			
 			<br />
 			<h:outputLabel for="role" value="Role: " />
-			
 			<br />
 			<h:commandButton action="#{usersController.updateUser(edituserid.value, editusername.value, edituserpassword.value, edituserrole.value)}" value="Update" ></h:commandButton>
 		
