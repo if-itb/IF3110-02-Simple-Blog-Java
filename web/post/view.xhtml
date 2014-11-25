@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+	  xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>View Page</title>
+    </h:head>
+    <h:body>
+		<h:form>
+			<h:inputHidden value="#{postsController.active_id}" binding="#{viewpostid}" ></h:inputHidden>
+			<h:outputLabel for="title" value="Title: " />
+			<h:outputText id="title" value="#{postsController.getPost(viewpostid.value).title}" />
+			<br />
+			<h:outputLabel for="date" value="Date: " />
+			<h:outputText id="date" value="#{postsController.getPost(viewpostid.value).date}" />
+			<br />
+			<h:outputLabel for="content" value="Content: " />
+			<h:outputText id="content" value="#{postsController.getPost(viewpostid.value).content}" />
+		</h:form>
+			
+			<hr />
+		<h:form>
+			<h:messages id="errorMessages" style="color:red;" />
+			<h:outputLabel for="name" value="Name: " />
+			<h:inputText id="name" binding="#{createname}" required="true" requiredMessage="Please enter your name"></h:inputText>
+			<br />
+			<h:outputLabel for="email" value="E-mail: " />
+			<h:inputText id="email" binding="#{createemail}" required="true" requiredMessage="Please enter your e-mail" ></h:inputText>
+			<br />
+			<h:outputLabel for="comment" value="Comment: " />
+			<h:inputTextarea id="comment" binding="#{createcomment}" required="true" requiredMessage="Please enter your comment" ></h:inputTextarea>
+			<br />
+			<h:commandButton id="commentCreate" value="Create" action="#{commentsController.createComment(viewpostid.value, createname.value, createemail.value, createcomment.value)}">
+				<f:ajax execute="@form" render="@form"></f:ajax>
+			</h:commandButton>
+
+			<hr />
+			<h:dataTable id="commentTable" value="#{commentsController.getAllComments(viewpostid.value)}" var="comment">
+				<h:column>
+					<h:inputHidden value="#{comment.id}" binding="#{commentid}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header" >
+						<h:outputLabel value="Name" />
+					</f:facet>
+					<h:outputText value="#{comment.name}" binding="#{commentname}" ></h:outputText>
+				</h:column>
+				<h:column>
+					<f:facet name="header" >
+						<h:outputLabel value="Date" />
+					</f:facet>
+					<h:outputText value="#{comment.date}" binding="#{commentdate}" ></h:outputText>
+				</h:column>
+				<h:column>
+					<f:facet name="header" >
+						<h:outputLabel value="Comment" />
+					</f:facet>
+					<h:outputText value="#{comment.comment}" binding="#{commentcomment}" ></h:outputText>
+				</h:column>
+			</h:dataTable>
+		</h:form>
+    </h:body>
+</html>
