@@ -1,7 +1,8 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-                template="./template.xhtml">
+                template="./template.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html">
     <ui:define name="title"><title>Simple Blog</title></ui:define>
                 <ui:define name="content">
                     <div id="home">
@@ -15,9 +16,9 @@
                     </div>
                 </ui:define>
     <ui:define name="jscript">
-        <script type="text/javascript" src="./resources/js/fittext.js"></script>
-        <script type="text/javascript" src="./resources/js/app.js"></script>
-        <script type="text/javascript" src="./resources/js/respond.min.js"></script>
-        <script type="text/javascript" src="./resources/js/post.js"></script>
+        <h:outputScript library="js" name="./resources/js/fittext.js" />
+        <h:outputScript library="js" name="./resources/js/app.js" />
+        <h:outputScript library="js" name="./resources/js/respond.min.js" />
+        <h:outputScript library="js" name="./resources/js/post.js" />
     </ui:define>
 </ui:composition>
