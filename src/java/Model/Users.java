@@ -51,8 +51,9 @@ public class Users {
                 int idUser = result.getInt("Id_User");
                 String username = result.getString("Username");
                 String password = result.getString("Password");
+                String email = result.getString("Email");
                 String role = result.getString("Role");
-                User user = new User(idUser,username,password);
+                User user = new User(idUser,username,password,email);
                 user.setRole(role);
                 userList.add(user);
             }
@@ -81,7 +82,8 @@ public class Users {
                 int id = result.getInt("Id_User");
                 String username = result.getString("Username");
                 String password = result.getString("Password");
-                User user = new User(id,username,password);
+                String email = result.getString("Email");
+                User user = new User(id,username,password,email);
                 user.setRole(result.getString("Role"));
                 return user;
             }
@@ -116,7 +118,8 @@ public class Users {
         try{
             if (result.next()) {
                 int idUser = result.getInt("Id_User");
-                User user = new User(idUser,username,password);
+                String email = result.getString("Email");
+                User user = new User(idUser,username,password,email);
                 user.setRole(result.getString("Role"));
                 databaseAccess.closeConnection();
                 return user;

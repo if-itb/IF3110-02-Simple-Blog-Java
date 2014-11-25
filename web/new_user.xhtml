@@ -13,7 +13,9 @@ template="/assets/template/template.xhtml">
                         <h:inputText id="username" value="#{createUserBean.user.username}"></h:inputText>
 			<label for="password">Password:</label>
                         <h:inputSecret id="password" value="#{createUserBean.user.password}"></h:inputSecret>
-			
+			<label for="password">Email:</label>
+                        <h:inputSecret id="email" value="#{createUserBean.user.email}"></h:inputSecret>
+                        
 			<label for="role">Role:</label>
 			<h:selectOneMenu value="#{createUserBean.user.role}" id="role">
 			  <f:selectItems value="#{roleList.roles}"/>
