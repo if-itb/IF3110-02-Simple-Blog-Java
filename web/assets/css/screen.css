@@ -31,6 +31,7 @@ body {
   color: #333;
   background-image: url("../img/wallpaperfrontend.jpg");
   background-repeat: no-repeat;
+  background-attachment: fixed;
   background-size: cover;
 }
 
