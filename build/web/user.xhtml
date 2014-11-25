@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:repeat value="#{listUser.user}" var="u">
+            <h:form>
+                <h:outputText value="#{u.username}"></h:outputText><br/>
+                <h:outputText value="#{u.role}"></h:outputText><br/>
+                <h:commandLink action="#{listUser.delete(u.username)}" value="Delete User"></h:commandLink>
+                <h:commandLink value="Edit User">
+                    <f:param name="id" value="#{u.username}"/>
+                </h:commandLink><br/>
+                <br/>
+            </h:form>
+        </ui:repeat>
+        <h:form>
+            <h:commandLink value="Add User"></h:commandLink><br/>
+            <h:commandLink action="index" value="Home"></h:commandLink>
+        </h:form>
+    </h:body>
+</html>

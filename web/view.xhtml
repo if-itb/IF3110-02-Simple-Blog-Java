@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            #{viewPost.run(param['id'])}
+            <h:outputText value="#{viewPost.judul}"></h:outputText><br/>
+            <h:outputText value="#{viewPost.tanggal}"></h:outputText><br/>
+            <h:outputText value="#{viewPost.konten}"></h:outputText><br/>
+            <h:outputText value="#{viewPost.status}"></h:outputText><br/><br/>
+            <ui:repeat value="#{viewPost.komentar}" var="k">
+                <h:outputText value="#{k.komentar}"></h:outputText><br/>
+            </ui:repeat>
+            <h:inputText binding="#{nama}"></h:inputText>
+            <h:inputText binding="#{tanggal}"></h:inputText>
+            <h:inputText binding="#{email}"></h:inputText>
+            <h:inputText binding="#{komentar}"></h:inputText>
+            <h:commandButton action="#{viewPost.addComment(nama.value, tanggal.value, email.value, komentar.value)}" value="Ya!" ></h:commandButton>
+        </h:form>
+    </h:body>
+</html>
