@@ -4,8 +4,9 @@ public class UserDetails {
 	private String name, email, username, password;
 	private int user_id, role;
 
-	public UserDetails() {}
-	
+	public UserDetails() {
+	}
+
 	public UserDetails(String name, String email, int user_id) {
 		this.name = name;
 		this.email = email;
@@ -38,6 +39,29 @@ public class UserDetails {
 
 	public int getRole() {
 		return role;
+	}
+
+	public String getStrRole() {
+		String str;
+		switch (role) {
+		case 10: {
+			str = "Regular";
+			break;
+		}
+		case 20: {
+			str = "Editor";
+			break;
+		}
+		case 30: {
+			str = "Admin";
+			break;
+		}
+		default: {
+			str = "Unknown";
+		}
+		}
+
+		return str;
 	}
 
 	public void setRole(int role) {

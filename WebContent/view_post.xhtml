@@ -29,8 +29,12 @@
 				<hr />
 				<h:form>
 					Nama:  <h:inputText value="#{viewPost.name}" />
-					Email: <h:inputText value="#{viewPost.email}" />
-					Isi:   <h:inputText value="#{viewPost.comment}" />
+					<br />
+					Email: <h:inputText id="email_area" value="#{viewPost.email}" />
+					<br />
+					Isi:   <h:inputTextarea value="#{viewPost.comment}"
+						style="resize:none" rows="3" cols="80" />
+					<br />
 					<h:commandButton value="Add Post" action="#{viewPost.postComment}">
 						<f:ajax execute="@form" render="comments_part" />
 					</h:commandButton>

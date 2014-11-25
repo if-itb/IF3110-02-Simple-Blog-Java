@@ -42,7 +42,7 @@ public class UserData implements Serializable {
 	public UserDetails getDetails() {
 		return details;
 	}
-	
+
 	public String getUserHeader() {
 		return ("header.xhtml");
 	}
@@ -59,52 +59,56 @@ public class UserData implements Serializable {
 		return null;
 	}
 
-	public void check() {
-		if (isLoggedIn()) {
+	public void check(int p, String page) {
+		int now = 1;
+		if (details != null)
+			now <<= (details.getRole() / 10);
+
+		if ((now & p) == 0) {
 			try {
 				FacesContext.getCurrentInstance().getExternalContext()
-						.redirect("index.jsf");
+						.redirect(page);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
 	}
-	
-	public String getLoginLink(){
-		if(!loggedIn){
+
+	public String getLoginLink() {
+		if (!loggedIn) {
 			return "<a href=\"login.jsf\"><button type=\"button\" class=\"btn btn-warning\">Login</button> </a>";
-		}else{
+		} else {
 			return "<a href=\"logout.jsf\"><button type=\"button\" class=\"btn btn-warning\">Logout</button> </a>";
 		}
 	}
-	
-	public String logout(){
+
+	public String logout() {
 
 		loggedIn = false;
 		return "index?faces-redirect=true";
 	}
 
-	public List<NavigationMenu> getUserMenu(){
+	public List<NavigationMenu> getUserMenu() {
 		List<NavigationMenu> result = new ArrayList<NavigationMenu>();
-		if(loggedIn == false){
+		if (loggedIn == false) {
 			return result;
-		}else if(details.getRole() == 10){
-			result.add(new NavigationMenu("Home","index.jsf"));
-			result.add(new NavigationMenu("Add Post","add_post.jsf"));
+		} else if (details.getRole() == 10) {
+			result.add(new NavigationMenu("Home", "index.jsf"));
+			result.add(new NavigationMenu("Add Post", "add_post.jsf"));
 			result.add(new NavigationMenu("My Post", ""));
 			return result;
-		}else if(details.getRole() == 20){
-			result.add(new NavigationMenu("Home","index.jsf"));
+		} else if (details.getRole() == 20) {
+			result.add(new NavigationMenu("Home", "index.jsf"));
 			result.add(new NavigationMenu("Editor Menu", ""));
 			return result;
-		}else if(details.getRole() == 30){
-			result.add(new NavigationMenu("Home","index.jsf"));
-			result.add(new NavigationMenu("Add Post","add_post.jsf"));
-			result.add(new NavigationMenu("Post Manager",""));
-			result.add(new NavigationMenu("User Manager","crud.jsf"));
+		} else if (details.getRole() == 30) {
+			result.add(new NavigationMenu("Home", "index.jsf"));
+			result.add(new NavigationMenu("Add Post", "add_post.jsf"));
+			result.add(new NavigationMenu("Post Manager", ""));
+			result.add(new NavigationMenu("User Manager", "crud.jsf"));
 			return result;
-		}else{
+		} else {
 			return result;
 		}
 	}
