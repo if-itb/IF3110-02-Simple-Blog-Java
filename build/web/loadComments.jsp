@@ -14,7 +14,7 @@ SELECT * from `komentar` where id_post = <%= request.getParameter("id") %>
 <c:forEach var="row"  items="${result.rows}">
     <li class="art-list-item">
         <div class="art-list-item-title-and-time">
-            <h2 class="art-list-title"> <c:out value="${row.nama}"/> </h2>
+            <div class="art-list-title"> <c:out value="${row.nama}"/> </div>
             <div class="art-list-time"> <c:out value="${row.tanggal}"/> </div>
         </div>
         <p> <c:out value="${row.komentar}"/></p>
