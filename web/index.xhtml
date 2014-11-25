@@ -52,10 +52,11 @@
                             <h:commandLink value="#{post.title}" action="#{postsController.viewPost(id.value)}" binding="#{title}" />
                             <!--<a href="post.html"><b>APA ITU SIMPLE BLOG?</b></a>  POTONG JUDUL KALO KEPANJANGAN-->
                         </div>
-                        <div class="post_date">
-                            <h:outputText value="#{post.date}" binding="#{date}" ></h:outputText>
-<!--                            21 November 2014<br></br>-->
-                        </div>
+						<div class="post_date">
+							<h:outputText value="#{post.date}" binding="#{date}" >
+								<f:convertDateTime type="date" dateStyle="long" timeZone="GMT+7"/>
+							</h:outputText>
+						</div>
                     </div>
                     <div class="post_content">
                         <h:outputText value="#{post.content}" binding="#{content}" ></h:outputText>
