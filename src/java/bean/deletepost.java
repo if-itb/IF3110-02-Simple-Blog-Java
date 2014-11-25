@@ -6,6 +6,7 @@
 
 package bean;
 
+import java.io.IOException;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import java.io.Serializable;
@@ -18,23 +19,46 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import javax.enterprise.context.ConversationScoped;
 import javax.faces.event.ComponentSystemEvent;
 import javax.faces.bean.SessionScoped;
 import javax.faces.bean. ManagedProperty ;
+import javax.faces.bean.ViewScoped;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
 /**
  *
  * @author Andarias Silvanus
  */
-@ManagedBean(name="deletepost")
+@ManagedBean(name="deletepost", eager=true)
 @SessionScoped
 public class deletepost implements Serializable
 {
     private String judul;
-    @ManagedProperty(value="#{user.author}")
+    //@ManagedProperty(value="#{user.username}")
     private String author;
     private String action;
+    //@ManagedProperty(value="#{user.role}")
+    private String peran;
+    @ManagedProperty(value="#{user}")
+    private User user;
+
+    public void setPeran(String peran) {
+        this.peran = peran;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public String getPeran() {
+        return peran;
+    }
+
+    public User getUser() {
+        return user;
+    }
     
     public deletepost() 
     {
@@ -57,15 +81,16 @@ public class deletepost implements Serializable
         this.judul = judul;
     }
     
-    public String delete()
+    public void delete()
     {
+        System.out.println("Masuk void delete");
         try
         {
             System.out.println("Masuk map params");
-            /*
+            
             Map<String,String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
-            String id_pars = params.get("deleteAction");
-            */
+            String action = params.get("id");
+        
             String id_pars = action;
             System.out.println("id pars: "+id_pars);
             Class.forName("com.mysql.jdbc.Driver").newInstance();
@@ -90,11 +115,25 @@ public class deletepost implements Serializable
             System.out.println(ex.toString());
             System.out.println(ex.getMessage());
         }
-        return null;
-    }
-
-    public void setAction(String action) {
-        this.action = action;
+        System.out.println("Username: "+user.getUsername()+", Role: "+user.getRole());
+        RedirectPage();
     }
     
+    public void RedirectPage()
+    {
+        ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
+        try 
+        {
+            context.redirect(context.getRequestContextPath() + "/" + user.getRole() + ".xhtml");
+        } 
+        catch (IOException ex) 
+        {
+            System.out.println(ex.getMessage());
+        }
+    }
+    
+    public void setAction(String action) {
+        this.action = action;
+        System.out.println("masuk setAction, action yg diterima= "+action);
+    }
 }
