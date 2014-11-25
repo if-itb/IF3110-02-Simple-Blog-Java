@@ -135,33 +135,52 @@ public class Connector {
         }
     }
     
-    public void setComment(String content, int post_id, String email, int user_id){
+    public String setComment(String content, int post_id, String email, int user_id){
 	Statement st;
+	boolean executed = false;
+	String finalQuery = null;
 	try{
 	    st = connection.createStatement();
 	    String sqlQuery = "";
 	    //contoh query bener 
 	    // INSERT INTO `post`.`post_comment` (`comment-id`, `comment-date`, `comment-content`, `comment-post-id`, `comment-email`, 
 	    //`comment-user-id`) VALUES (NULL, '2014-11-24', 'AAAAAAAAAAAAAAAAEH', '1', 'feli@feli.fel', '1');
+		sqlQuery = "INSERT INTO `post`.`post_comment` (`comment-user-id`,`comment-content`,`comment-email`,`comment-post-id`,`comment-date`) VALUES (";
 	    if (user_id != 0) {
-		sqlQuery = ("INSERT INTO `post`.`post_comment` (`comment-user-id`,`comment-content`,`comment-email`,`comment-post-id`) VALUES (");
-		sqlQuery = sqlQuery + "`" + user_id + "`,"; 
+		sqlQuery = sqlQuery + Integer.toString(user_id) + ","; 
 	    }
 	    else {
-		sqlQuery = ("INSERT INTO `post_comment` (`comment-content`,`comment-email`,`comment-post-id`) VALUES (");
+		sqlQuery = sqlQuery + "null, "; 
 	    }
 	    
-		sqlQuery = sqlQuery + "`" + content + "`,"; 
-		sqlQuery = sqlQuery + "`" + email + "`,"; 
-		sqlQuery = sqlQuery + "`" + post_id + "`)"; 
-		ResultSet rs = st.executeQuery(sqlQuery);
-	    if (rs.next()){}
-	    
+		sqlQuery = sqlQuery + "'" + content.toString() + "', "; 
+		sqlQuery = sqlQuery + "'" + email.toString() + "', "; 
+		sqlQuery = sqlQuery + Integer.toString(post_id) + ", ";
+		sqlQuery = sqlQuery + "CURDATE() );"; 
+		
+		finalQuery = sqlQuery;
+		executed = st.execute(sqlQuery);
+		
+		
+		  
 	} catch (Exception e) {
 	    System.err.println("Gagal insert comment :v ");
 	    System.out.println(e);
 	}
+	return finalQuery;
 	
+    }
+    public boolean testConnection(){
+	Statement st; 
+	try {
+	    st = connection.createStatement();
+	    String sqlQuery = "INSERT INTO `post`.`post_comment` (`comment-id`, `comment-date`, `comment-content`, `comment-post-id`, `comment-email`, `comment-user-id`) VALUES (NULL, '2014-11-25', 'AAAAaaaAAAAAAAAAAAAEH2', '1', 'feli@feli.fel', '1');";
+	    
+	    //ResultSet rs = st.executeQuery(sqlQuery);
+	    return st.execute(sqlQuery);
+	} catch (Exception e) {}
+	
+	return false;
     }
     public void closeConnection(){
         System.out.println("Closing the connection.");
