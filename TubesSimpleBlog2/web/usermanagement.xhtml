@@ -19,10 +19,11 @@ and open the template in the editor.
     </head>
     <body>
 		<div class="header">Simple Blog</div>
-		<h1>User Management</h1>		
+		<h1>User Management</h1>
+		<h:form>
         <c:forEach items="#{userManagement.arrUser}" var="user">
 			<hr></hr>
-			<h:form>
+			
 				<br/><h2> #{user.userID} </h2>  
 			<br/><h:outputText value="#{user.username}"></h:outputText>
 			<br/> <h:outputText value="#{user.role}"></h:outputText>
@@ -32,11 +33,13 @@ and open the template in the editor.
 			<br/><h:commandLink action="#{user.updateUser()}" value="Update">
 				<f:param name="iduser" value="#{user.userID}" />
 			</h:commandLink>
-			</h:form>
+			
 		</c:forEach>
-		
+		<br/><h:commandLink action="#{user.createUser()}" value="Create">
+				<f:param name="iduser" value="#{user.userID}" />
+		</h:commandLink>
+		</h:form>
 		<div class="footer"> rita | cilvia | linda </div>
-		<br/> <h:outputText value="#{navigationController.postId}"></h:outputText>
 		
 	</body>
 </html>
