@@ -35,6 +35,9 @@ public class Post {
     public void setCategory(boolean value){
         category = value;
     }
+    public void setAuthorID(int value){
+        post_author_id = value;
+    }
     public int getPostID(){
         return post_id;
     }
@@ -49,5 +52,8 @@ public class Post {
     }
     public boolean getCategory(){
         return category;
+    }
+    public int getAuthorID(){
+	return post_author_id;
     }
 }

@@ -82,19 +82,20 @@ public class Connector {
     }
     public ArrayList<Post> getPublished(){
         Statement st;
-        ArrayList<Post> listPost = null;
+        ArrayList<Post> listPost = new ArrayList<Post>();
         try {
             st = connection.createStatement();
-            String sql = ("SELECT * FROM post WHERE category = 1 ORDER BY date;");
+            String sql = ("SELECT * FROM `post`.`post_table` WHERE `category` = 'published' ORDER BY `date`;");
             ResultSet rs = st.executeQuery(sql);
-            if(rs.next()) {
+            while (rs.next()) {
                 Post post = new Post();
                 post.setPostID(rs.getInt("post_id"));
                 post.setTitle(rs.getString("title"));
                 post.setDate(rs.getString("date"));
                 post.setContent(rs.getString("content"));
                 post.setCategory(true);
-                listPost.add(post);
+		post.setAuthorID(rs.getInt("post_author_id"));
+		listPost.add(post);
             }
         } catch (SQLException ex) {
             System.err.println("Gagal mengambil data");
@@ -103,10 +104,10 @@ public class Connector {
     }
     public ArrayList<Post> getUnPublished(){
         Statement st;
-        ArrayList<Post> listPost = null;
+        ArrayList<Post> listPost = new ArrayList<Post>();
         try {
             st = connection.createStatement();
-            String sql = ("SELECT * FROM post WHERE category = 0 ORDER BY date;");
+            String sql = ("SELECT * FROM `post`.`post_table` WHERE `category` = 'unpublished' ORDER BY `date`;");
             ResultSet rs = st.executeQuery(sql);
             if(rs.next()) {
                 Post post = new Post();
@@ -135,7 +136,7 @@ public class Connector {
         }
     }
     
-    public String setComment(String content, int post_id, String email, int user_id){
+    public boolean setComment(String content, int post_id, String email, int user_id){
 	Statement st;
 	boolean executed = false;
 	String finalQuery = null;
@@ -143,8 +144,7 @@ public class Connector {
 	    st = connection.createStatement();
 	    String sqlQuery = "";
 	    //contoh query bener 
-	    // INSERT INTO `post`.`post_comment` (`comment-id`, `comment-date`, `comment-content`, `comment-post-id`, `comment-email`, 
-	    //`comment-user-id`) VALUES (NULL, '2014-11-24', 'AAAAAAAAAAAAAAAAEH', '1', 'feli@feli.fel', '1');
+	    // INSERT INTO `post`.`post_comment` (`comment-id`, `comment-date`, `comment-content`, `comment-post-id`, `comment-email`, `comment-user-id`) VALUES (NULL, '2014-11-24', 'AAAAAAAAAAAAAAAAEH', '1', 'feli@feli.fel', '1');
 		sqlQuery = "INSERT INTO `post`.`post_comment` (`comment-user-id`,`comment-content`,`comment-email`,`comment-post-id`,`comment-date`) VALUES (";
 	    if (user_id != 0) {
 		sqlQuery = sqlQuery + Integer.toString(user_id) + ","; 
@@ -158,7 +158,7 @@ public class Connector {
 		sqlQuery = sqlQuery + Integer.toString(post_id) + ", ";
 		sqlQuery = sqlQuery + "CURDATE() );"; 
 		
-		finalQuery = sqlQuery;
+		//finalQuery = sqlQuery;
 		executed = st.execute(sqlQuery);
 		
 		
@@ -167,9 +167,30 @@ public class Connector {
 	    System.err.println("Gagal insert comment :v ");
 	    System.out.println(e);
 	}
-	return finalQuery;
+	return executed;
 	
     }
+    
+    public String getUsernameByID(int user_ID){
+	Statement st;
+	boolean executed = false;
+	String uName = new String();
+	try {
+	    st = connection.createStatement();
+	    String sqlQuery = "SELECT * FROM `post`.`user_data` WHERE `user_id` = " + Integer.toString(user_ID) + ";";
+	    ResultSet rs = st.executeQuery(sqlQuery);
+	    executed = st.execute(sqlQuery);
+	    if (rs == null){
+		uName = "RS null coy!";
+	    }
+	    else 
+		uName = rs.getString("user_name");
+	} catch (Exception e) {}
+	
+	return uName;
+    }
+    
+    
     public boolean testConnection(){
 	Statement st; 
 	try {

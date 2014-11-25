@@ -4,6 +4,8 @@
     Author     : user
 --%>
 
+<%@page import="java.util.ArrayList"%>
+<%@page import="data.Post"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -12,14 +14,34 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <h1>Simple-Blog</h1>
+	
 	<%
 	    data.Connector N = new data.Connector();
 	    //out.println(N.setComment("Ini comment hasil dari javah", 1, "feli-c-s@hotmail.com", 1));
-	    out.println("Test print dari javah");
+	    ArrayList<Post> postlist = new ArrayList<Post>();
+	    postlist = N.getPublished();
+	    if (postlist == null) {
+		out.println("No posts here, move on~");
+	    }
+	    else {
+		out.println("<ul>");
+		for (Post P : postlist){
+		    out.println("<li>");
+		    out.println(P.getTitle());
+		    out.println("<br></br>");
+		    out.println(P.getDate().toString());
+		    out.println(" | By ");
+		    out.println("<br></br>");
+		    out.println(N.getUsernameByID(P.getAuthorID()) );
+		    out.println("<br></br>");
+		    out.println(P.getContent().toString());
+		    out.println("</li>");
+		}
+	    }
+	    out.println("</ul>");
 	 %>
 	    
-	 <h2> KENAPA INI MUNCUL </h2>   
 	 
     </body>
 </html>
