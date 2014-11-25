@@ -112,7 +112,7 @@
                     while (rs.next())
                     {
                         out.println(" <li class=\"art-list-item\"> <div class=\"art-list-item-title-and-time\"> <h2 class=\"art-list-title\"><a href=\"post.jsp?user_id="
-                                + rs.getString("user_id")
+                                + session.getAttribute("user_id")
                                 + "&"
                                 + "post_id="
                                 + rs.getString("post_id")
@@ -127,17 +127,14 @@
                         }
                         String First30WordPost = sb.toString();
                         out.println(First30WordPost);
-                        if (rs.getString("user_id")==session.getAttribute("username"))
-                        {
                         out.println(" <p> <a href=\""
-                                + "edit_post.jsp??role=1&"
-                                + "post_id="
-                                + rs.getString("post_id")
-                                + "&"
-                                + "user_id="
-                                + request.getParameter("user_id")
-                                + "\">Edit</a> | <a onclick=\"validatedelete()\" href=\"javascript:void(0)\">Hapus</a> </p> </li>");
-                        }
+                            + "edit_post.jsp?role=1&"
+                            + "post_id="
+                            + rs.getString("post_id")
+                            + "&"
+                            + "user_id="
+                            + request.getParameter("user_id")
+                            + "\">Edit</a> | <a onclick=\"validatedelete(" + rs.getString("post_id") + ")\" href=\"javascript:void(0)\">Hapus</a> </p> </li>");
                     }
 		}
 		catch (SQLException ex)
@@ -190,15 +187,16 @@
 
 <!-- Vaildate Delete -->
 <script>
-  function validatedelete()
+  function validatedelete(post_id)
   {
       console.log("validatedelete");
-      var x;
-      if (confirm("Apakah Anda yakin menghapus post ini?") === true) {
-
-      } else {
-        x = "Cancel";
-      }
+      var answer = confirm("Apakah Anda yakin menghapus post ini?")
+        if (answer){      
+          document.location= "DeletePostHandling?role=1&post_id="+post_id;
+          alert("Post berhasil dihapus");
+        }else{
+          alert("Post tidak dihapus. Terima kasih.");
+        }
   } 
  </script>
 </body>

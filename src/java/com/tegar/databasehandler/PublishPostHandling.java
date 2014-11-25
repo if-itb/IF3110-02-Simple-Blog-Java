@@ -60,7 +60,7 @@ public class PublishPostHandling extends HttpServlet {
             sql = "UPDATE post SET status_publish=1 WHERE post_id="+request.getParameter("Post_Id");             
             System.out.println(sql);
             stmt.executeUpdate(sql);
-            if ("2".equals(request.getParameter("Role")))
+            if ("Editor".equals(request.getParameter("Role")))
             {
                 String site = new String("http://localhost:8080/IF3110-02-Simple-Blog-Java%202/home-editor.jsp");                
                 response.setStatus(response.SC_MOVED_TEMPORARILY);

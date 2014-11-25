@@ -62,7 +62,7 @@
 <nav class="nav">
     <a style="border:none;" id="logo" href="index.jsp"><h1>Simple<span>-</span>Blog</h1></a>
     <ul class="nav-primary">
-        <li><a href="new_post.jsp">+ Tambah Post</a></li>
+        <li><a href="login.jsp">+ Login</a></li>
     </ul>
 </nav>
 
@@ -99,10 +99,14 @@
                         String Publish = new String("Unpublished");
                         out.println(" <li class=\"art-list-item\"> <div class=\"art-list-item-title-and-time\"> <h2 class=\"art-list-title\"><a href=\"post.jsp"
                                 + "?"
+                                + "role="
+                                + session.getAttribute("role")
+                                + "&"
                                 + "post_id="
                                 + rs.getString("post_id")
                                 + "\">"
-                                + rs.getString("judul")+ "</a></h2> "
+                                + rs.getString("judul")+ ""
+                                + "</a></h2> "
                                 + "<div class=\"art-list-time\">15 Juli 2014</div> <div class=\"art-list-time\"><span style=\"color:#F40034;\">"
                                 + "&#10029;</span> "
                                 + Publish
@@ -116,7 +120,14 @@
                         }   
                         String First30WordPost = sb.toString();
                         out.println(First30WordPost);
-                        out.println(" <p> <a href=\"#\">Edit</a> | <a onclick=\"validatedelete()\" href=\"javascript:void(0)\">Hapus</a> | <a href=\"PublishPostHandling?"+"Role="+request.getParameter("role")+"&Post_Id="+rs.getString("post_id")+"\">Publish</a> </p> </li>");
+                        out.println(" <p> <a href=\""
+                            + "edit_post.jsp??role=2&"
+                            + "post_id="
+                            + rs.getString("post_id")
+                            + "&"
+                            + "user_id="
+                            + request.getParameter("user_id")
+                            + "\">Edit</a> | <a onclick=\"validatedelete(" + rs.getString("post_id") + ")\" href=\"javascript:void(0)\">Hapus</a> | <a href=\"PublishPostHandling?"+"Role="+session.getAttribute("role")+"&Post_Id="+rs.getString("post_id")+"\">Publish</a> </p> </li>");
                     }
 		}
 		catch (SQLException ex)

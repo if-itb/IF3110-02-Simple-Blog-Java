@@ -74,9 +74,10 @@ public class AddPostHandling extends HttpServlet {
                      + request.getParameter("Tanggal")
                      + "\'" 
                      + ")";
-             System.out.println(sql);
+            System.out.println(sql);
             stmt.executeUpdate(sql);
-            if (request.getParameter("Role")=="1")
+            System.out.println("Role "+request.getParameter("Role"));
+            if ("1".equals(request.getParameter("Role")))
             {
                 String site = new String("http://localhost:8080/IF3110-02-Simple-Blog-Java%202/home-owner.jsp");                
                 response.setStatus(response.SC_MOVED_TEMPORARILY);

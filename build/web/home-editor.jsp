@@ -63,7 +63,7 @@
             <h6>
             <%
             String a=session.getAttribute("username").toString();
-            String b=request.getParameter("role").toString();
+            String b=session.getAttribute("role").toString();
             
             out.println("Hello  "+a);
             out.println(", Welcome as  "+b);     
@@ -111,9 +111,6 @@
                                 + "&"
                                 + "post_id="
                                 + rs.getString("post_id")
-                                + "&"
-                                + "user_id="
-                                + request.getParameter("user_id")
                                 + "\">"
                                 + rs.getString("judul")+ "</a></h2> "
                                 + "<div class=\"art-list-time\">15 Juli 2014</div></div><p>");
@@ -126,13 +123,13 @@
                         String First30WordPost = sb.toString();
                         out.println(First30WordPost);
                         out.println(" <p> <a href=\""
-                                + "edit_post.jsp??role=2&"
+                                + "edit_post.jsp?role=2&"
                                 + "post_id="
                                 + rs.getString("post_id")
                                 + "&"
                                 + "user_id="
                                 + request.getParameter("user_id")
-                                + "\">Edit</a> | <a onclick=\"validatedelete()\" href=\"javascript:void(0)\">Hapus</a> </p> </li>");
+                                + "\">Edit</a> | <a onclick=\"validatedelete(" + rs.getString("post_id") + ")\" href=\"javascript:void(0)\">Hapus</a> </p> </li>");
                     }
 		}
 		catch (SQLException ex)
@@ -185,15 +182,16 @@
 
 <!-- Vaildate Delete -->
 <script>
-  function validatedelete()
+  function validatedelete(post_id)
   {
       console.log("validatedelete");
-      var x;
-      if (confirm("Apakah Anda yakin menghapus post ini?") === true) {
-
-      } else {
-        x = "Cancel";
-      }
+      var answer = confirm("Apakah Anda yakin menghapus post ini?")
+        if (answer){      
+          document.location= "DeletePostHandling?role=2&post_id="+post_id;
+          alert("Post berhasil dihapus");
+        }else{
+          alert("Post tidak dihapus. Terima kasih.");
+        }
   } 
  </script>
 </body>

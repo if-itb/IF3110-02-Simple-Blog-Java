@@ -65,15 +65,16 @@ public class EditPostHandling extends HttpServlet {
                      + request.getParameter("Konten")
                      + "\" WHERE post_id="
                      + request.getParameter("Post_Id");
+             System.out.println(sql);
              stmt.executeUpdate(sql);
-            if (request.getParameter("Role")=="1")
+            if ("1".equals(request.getParameter("Role")))
             {
                 String site = new String("http://localhost:8080/IF3110-02-Simple-Blog-Java%202/home-owner.jsp");                
                 response.setStatus(response.SC_MOVED_TEMPORARILY);
                 response.setHeader("Location", site);
 
             }
-            else if (request.getParameter("Role")=="2")
+            else if ("2".equals(request.getParameter("Role")))
             {
                 String site = new String("http://localhost:8080/IF3110-02-Simple-Blog-Java%202/home-editor.jsp");
                 response.setStatus(response.SC_MOVED_TEMPORARILY);
