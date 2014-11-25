@@ -40,6 +40,10 @@ public class UserData implements Serializable {
 	public UserDetails getDetails() {
 		return details;
 	}
+	
+	public String getUserHeader() {
+		return ("header.xhtml");
+	}
 
 	public String login() {
 		DatabaseUtility dbUtil = DatabaseUtility.getInstance();
@@ -51,6 +55,12 @@ public class UserData implements Serializable {
 		}
 
 		return null;
+	}
+	
+	public String logout() {
+		loggedIn = false;
+		details = null;
+		return("");
 	}
 
 	public void check() {
