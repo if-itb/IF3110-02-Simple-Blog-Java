@@ -128,12 +128,21 @@ public class AuthenticationFilter implements Filter {
                     || reqURI.startsWith("css/"))
                    chain.doFilter(request, response);
             else if ((user.getRole() == UserBean.getOwner())
-                        && (reqURI.startsWith("")
+                        && (reqURI.startsWith(nc.gotoEditPost(1))
+                            || reqURI.startsWith(nc.gotoAddPost())
                         )
                     )
                 chain.doFilter(request, response);
-            else   
-                   res.sendRedirect(req.getContextPath() +"/faces" +nc.gotoLogin());  // Anonymous user. Redirect to login page
+            else if ((user.getRole() == UserBean.getEditor())
+                        && (reqURI.startsWith(nc.gotoEditPost(1))
+                            || reqURI.startsWith(nc.gotoUnpublishedPost())
+                        )
+                    )
+                chain.doFilter(request, response);
+            else if (user.getRole() == UserBean.getAdmin())
+                chain.doFilter(request, response);
+            else
+                   res.sendRedirect(req.getContextPath() +"/faces/" +nc.gotoLogin());  // Anonymous user. Redirect to login page
         }
         catch(Throwable t) {
             System.out.println( t.getMessage());

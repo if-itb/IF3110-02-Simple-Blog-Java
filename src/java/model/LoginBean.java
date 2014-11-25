@@ -27,9 +27,9 @@ public class LoginBean {
         NavigationController nb = new NavigationController();
         if (getUsername().equals("budi") && getPassword().equals("kecil")) {
             user.setRole(2);
-            return nb.gotoListPost();
+            return nb.gotoListPost() + "?faces-redirect=true";
         }
-        else return nb.gotoLogin();
+        else return nb.gotoLogin() + "?faces-redirect=true";
         
     }
 
