@@ -8,13 +8,16 @@ package controller;
 
 import java.io.IOException;
 import java.io.Serializable;
-import model.database.MySQL;
-import model.User;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import model.User;
+import model.database.MySQL;
 
 /**
  *
@@ -124,18 +127,40 @@ public class UsersController implements Serializable {
 			}
 		}
 		
-		if (user != null) {
-			FacesContext.getCurrentInstance().getExternalContext().addResponseCookie("username", user.getUsername(), null);
-			FacesContext.getCurrentInstance().getExternalContext().addResponseCookie("role", user.getRole(), null);
-			FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/index.xhtml");
+		if (user != null) { //ada user di database, mulai 
+			Cookie username_cookie = new Cookie("username", user.getUsername());
+			Cookie role_cookie = new Cookie("role",user.getRole());
+			username_cookie.setMaxAge(30*60);
+			username_cookie.setPath("/");
+			role_cookie.setMaxAge(30*60);
+			role_cookie.setPath("/");
+			FacesContext context = FacesContext.getCurrentInstance();
+			HttpServletResponse response = (HttpServletResponse) context.getExternalContext().getResponse();
+			response.addCookie(username_cookie);
+			response.addCookie(role_cookie);
+			response.sendRedirect("/SimpleBlog/faces/index.xhtml");
+			//FacesContext.getCurrentInstance().getExternalContext().redirect("/SimpleBlog/faces/index.xhtml");
 		} else {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Username or password is invalid"));
 		}
 	}
 
 	public void logout() throws IOException {
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		HttpServletRequest request = (HttpServletRequest) facesContext.getExternalContext().getRequest();
+		Cookie username_cookie = new Cookie("username","");
+		Cookie role_cookie = new Cookie("role","");
+		username_cookie.setMaxAge(0);
+		username_cookie.setPath("/");
+		role_cookie.setMaxAge(0);
+		role_cookie.setPath("/");
+		HttpServletResponse response = (HttpServletResponse) facesContext.getExternalContext().getResponse();
+		response.setContentType("text/html");
+		response.addCookie(username_cookie);
+		response.addCookie(role_cookie);
+		
+		FacesContext.getCurrentInstance().getExternalContext().redirect("/SimpleBlog/faces/index.xhtml");
 		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-		System.err.println(FacesContext.getCurrentInstance().getExternalContext().getRequestCookieMap().get("username").toString());
 		FacesContext.getCurrentInstance().getExternalContext().redirect("/user/login.xhtml");
 	}
 	
