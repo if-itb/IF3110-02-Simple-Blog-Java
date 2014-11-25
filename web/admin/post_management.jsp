@@ -86,7 +86,7 @@
             <!-- <div class="footer-nav"><p></p></div> -->
             <div class="psi">&Psi;</div>
             <aside class="offsite-links">
-                Tugas Besar 2 IF3110 /
+                <a class="twitter-link" href="http://github.com/IF3110-II-4/IF3110-02-Simple-Blog-Java" target="_blank">Tugas Besar 2 IF3110</a> /
                 <a class="rss-link" href="#rss">RSS</a> /
                 <br>
                 <a class="twitter-link" href="http://www.facebook.com/ajiballinst" target="_blank">Try Ajitiono</a> /
