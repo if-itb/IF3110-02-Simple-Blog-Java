@@ -31,8 +31,8 @@ public class Komentar extends Post {
     public static String LoadComment(int ID) throws SQLException {
         //login database
         String HTMLcode = "";
-        KoneksiDatabase.setUser("root");
-        KoneksiDatabase.setPassword("");
+        KoneksiDatabase.setUser("root2");
+        KoneksiDatabase.setPassword("akhfa");
         KoneksiDatabase.setDatabase("localhost","blog");
         try (Connection koneksi = KoneksiDatabase.getKoneksi()) {
             Statement statement = koneksi.createStatement();
@@ -60,13 +60,12 @@ public class Komentar extends Post {
      * @param nama
      * @param email
      * @param comment
-     * @param time
      * @throws SQLException 
      */
-    public static void AddComment(String nama, String email, String comment, Timestamp time) throws SQLException {
+    public static void AddComment(String nama, String email, String comment) throws SQLException {
         String InsertQuery;
-        KoneksiDatabase.setUser("root");
-        KoneksiDatabase.setPassword("");
+        KoneksiDatabase.setUser("root2");
+        KoneksiDatabase.setPassword("akhfa");
         KoneksiDatabase.setDatabase("localhost","simpleblogdb");
         try (Connection koneksi = KoneksiDatabase.getKoneksi()) {
             Statement statement = koneksi.createStatement();
