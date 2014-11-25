@@ -298,7 +298,7 @@ public class Post {
                                   "<th></th>\n" +
                                   "<th><a href='../posts/restore_post.jsp?id=" + idPost + "'> X </a></th>\n";
                     }
-                    toHTML += "<th><a href='../posts/delete_post.jsp?id=" + idPost + "'> X </a></th>\n" +
+                    toHTML += "<th><a href='../posts/delete_post.jsp?id=" + idPost + "' onclick='return confirmDelete()'> X </a></th>\n" +
                               "<th><a href='../posts/edit_post.jsp?id=" + idPost + "'> X </a></th></tr>\n";
                 }
                 else if (isEditor()) {
