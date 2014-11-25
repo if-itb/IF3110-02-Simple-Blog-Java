@@ -30,15 +30,25 @@
                         <hr></hr></p>
 		</c:forEach>
         <p>           
-            <h:form> Nama: <h:inputText id="input" value="#{komentar.nama}" /></h:form>
-            <h:form>     Email: <h:inputText id="input" value="#{komentar.email}" /></h:form>
-                <h:form> Komentar:   <h:inputText id="input" value="#{komentar.komentar}" /></h:form>
-                <h:form>  <h:commandButton value="Submit" action="#{komentar.addComment}" onclick="return check();"/></h:form>
-	        <h:outputText value="#{komentar.nama}"/>
-                <h:outputText value="#{komentar.komentar}"/>
+                <h:form onsubmit="validasiEmail();"> Nama: <h:inputText id="knamee" value="#{komentar.nama}"/>
+                    Email: <h:inputText  id="kemaill" value="#{komentar.email}"  />
+                    Komentar:   <h:inputText id="komens" value="#{komentar.komentar}" />
+                    <h:commandButton value="Submit" action="#{komentar.addComment(13)}" onclick="return check();"/>
+                </h:form>
+            <h:outputText value="#{komentar.tanggal}"/>
 </p>
-        
-        
+
+        <script type="text/javascript">
+
+function validasiEmail(mail){
+if(mail.match(/^[_A-Za-z0-9-]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)*(\.[A-Za-z]+)$/g))
+{return true;}
+else{
+alert ("Salah Email");
+return false;}}
+
+
+        </script>       
         <hr></hr>
         <form action="Login" method="post">
             Username : <input type = "text" name="uname"/>
