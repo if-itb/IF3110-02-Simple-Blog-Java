@@ -25,8 +25,21 @@ public class PostJpaController {
         return emf.createEntityManager();
     }
     
-    public void create(Post post) {
+    public void create(Post post) throws Exception {
+        EntityManager em = null;
         
+        try {
+            utx.begin();
+            em = getEntityManager();
+            em.persist(post);
+            utx.commit();
+        } catch (Exception ex) {
+            utx.rollback();
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
     }
     
     public void edit(Post post) {

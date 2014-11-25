@@ -3,12 +3,8 @@ package id.ac.itb.informatika.wbd.jsf;
 import id.ac.itb.informatika.wbd.jpa.controller.PostJpaController;
 import id.ac.itb.informatika.wbd.jpa.entities.Post;
 import java.util.List;
-import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import javax.inject.Named;
 
-@Named
-@SessionScoped
 public class PostController {
 
     public PostController() {
@@ -19,7 +15,7 @@ public class PostController {
     private PostJpaController jpaController = null;
     private List<Post> postList = null;
     
-     public Post getPost() {
+    public Post getPost() {
         if (post == null) {
             //post = (post) JsfUtil.getObjectFromRequestParameter("jsfcrud.currentCustomer", converter, null);
         }
@@ -34,5 +30,17 @@ public class PostController {
             postList = jpaController.getAllPosts();
         }
         return postList;
+    }
+    
+    public String newPost() {
+        try {
+            jpaController.create(post);
+            //JsfUtil.addSuccessMessage("Customer was successfully created.");
+        } catch (Exception e) {
+            //JsfUtil.ensureAddErrorMessage(e, "A persistence error occurred.");
+            return null;
+        }
+        
+        return "postList";
     }
 }
