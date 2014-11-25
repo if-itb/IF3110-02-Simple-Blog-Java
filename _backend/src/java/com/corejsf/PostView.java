@@ -3,25 +3,39 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.corejsf;
-
-import java.sql.*;
-import java.util.*;
-
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
-
-@ManagedBean(name = "listpost")
-@RequestScoped
-
 /**
  *
  * @author Indam Muhammad
  */
-public class ListPost {
-    private ArrayList<Post> posts;
-    public ListPost(){
-        posts = new ArrayList<Post>();
+
+package com.corejsf;
+
+import java.sql.*;
+import java.util.*;
+import java.io.Serializable;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ManagedProperty;
+
+@ManagedBean(name = "postview", eager=true)
+@RequestScoped
+
+public class PostView implements Serializable {
+    private int id;
+    
+    private Post pos;
+    public PostView(){
+        pos = new Post();
+    }
+    public int getId(){
+        return id;
+    }
+    public Post getPos(){
+        return pos;
+    }
+    public void setId(int id){
+        this.id = id;
+        pos.setId(id);
         Connection con = null;
         String url = "jdbc:mysql://localhost:3306/simpleblog";
         String user = "root";
@@ -30,27 +44,26 @@ public class ListPost {
         try {
             Class.forName(driver).newInstance();
             con = DriverManager.getConnection(url, user, password);
-            Statement sm = con.createStatement();
-            ResultSet res = sm.executeQuery("SELECT * FROM post ORDER BY Tanggal DESC");
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM post WHERE id="+id);
+            ResultSet res = ps.executeQuery();
             while(res.next()){
-                Post pos = new Post();
-                pos.setId(res.getInt("id"));
                 pos.setJudul(res.getString("Judul"));
                 pos.setKonten(res.getString("Konten"));
                 pos.setStatus(res.getString("Status"));
                 pos.setTanggal(res.getString("Tanggal"));
-                posts.add(pos);
             }
             con.close();
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
             System.out.println(ex.getMessage());
         }
-        finally{
-        }
     }
-    
-    public ArrayList<Post> getPosts(){
-        return this.posts;
+    public void setPos(Post pos){
+        this.pos = new Post();
+        this.pos.setId(pos.getId());
+        this.pos.setJudul(pos.getJudul());
+        this.pos.setKonten(pos.getKonten());
+        this.pos.setStatus(pos.getStatus());
+        this.pos.setTanggal(pos.getTanggal());
     }
     
 }

@@ -20,6 +20,16 @@
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
     <managed-bean>
+        <managed-bean-name>postview</managed-bean-name>
+        <managed-bean-class>com.corejsf.PostView</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>postedit</managed-bean-name>
+        <managed-bean-class>com.corejsf.PostEdit</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
         <managed-bean-name>comment</managed-bean-name>
         <managed-bean-class>com.corejsf.Comment</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope>

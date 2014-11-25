@@ -45,13 +45,10 @@
             </div>
           </div>
           <div class="post">
-            <div class="post-title text-center"><a href="#">Arina Geulis Sekali</a></div>
-            <div class="post-date text-center"><span class="glyphicon glyphicon-time" aria-hidden="true"></span> 5 Januari 2015 | <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> Unpublished</div>
-            <p class="text-justified">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation test link ullamco laboris...Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et do Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation test link ullamco laboris... Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation test link ullamco laboris... strud exercitation test link ullamco laboris...</p>
-
-            <p class="text-justified">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation test link ullamco laboris...Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et do Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation test link ullamco laboris... Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation test link ullamco laboris... strud exercitation test link ullamco laboris...</p>
-
-            <p class="text-justified">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation test link ullamco laboris...Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et do Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation test link ullamco laboris... Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation test link ullamco laboris... strud exercitation test link ullamco laboris...</p>
+              #{postview.setId(param['id'])}
+              <div class="post-title text-center"><a href="#">#{postview.pos.judul}</a></div>
+              <div class="post-date text-center"><span class="glyphicon glyphicon-time" aria-hidden="true"></span> #{postview.pos.tanggal} | <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> #{postview.pos.status}</div>
+            <p class="text-justified">#{postview.pos.konten}</p>
 
             <div class="post-title">Comments</div>
             <h:form role="form">
@@ -67,7 +64,7 @@
                 <label for="exampleInputPassword1">Comment</label>
                 <h:inputTextarea styleClass="form-control" rows="5" value="#{comment.komentar}" />
               </div>
-              <h:commandButton type="submit" styleClass="btn btn-default" value="Submit" action="" />
+              <h:commandButton type="submit" styleClass="btn btn-default" value="Submit" />
             </h:form>
 
             <div class="row comment">
