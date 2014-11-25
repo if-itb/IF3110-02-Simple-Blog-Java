@@ -283,7 +283,7 @@ public class Post {
                     }
                     else if (publishStatus == 1) { //status published
                         toHTML += "<th></th>\n" +
-                                  "<th></th>\n" +
+                                  "<th><a href='../posts/trash_post.jsp?id=" + idPost + "'> X </a></th>\n" +
                                   "<th></th>\n";
                     }
                     else if (publishStatus == 2) { //status trash
@@ -314,7 +314,7 @@ public class Post {
                     }
                     else if (publishStatus == 1) { //status published
                         toHTML += "<th></th>\n" +
-                                  "<th></th>\n" +
+                                  "<th><a href='../posts/trash_post.jsp?id=" + idPost + "'> X </a></th>\n" +
                                   "<th></th>\n";
                     }
                     else if (publishStatus == 2) { //status trash
