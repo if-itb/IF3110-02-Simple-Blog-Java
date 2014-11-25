@@ -298,3 +298,17 @@ opt{
 	font-family: defaultfont;
 	font-size: 22px;
 }
+
+addposthover{
+	height:30px;
+}
+addposthover:hover {
+	background-image:url('../img/add2.png');
+	height:40px;
+}
+.restorehover{
+	height: 30px;
+}
+.restorehover:hover{
+	background-image: url('../img/restore2.png');
+}

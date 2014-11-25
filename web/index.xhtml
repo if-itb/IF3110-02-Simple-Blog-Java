@@ -22,10 +22,12 @@
             </div><!--end top-->
             <hr  margin-right="30%"></hr>
             <div class="icon">
-                <a href="post/create.xhtml"><img src="resources/img/add1.png" onmouseover="this.src='resources/img/add2.png'" onmouseout="this.src='resources/img/add1.png'" height="30px" title="add new post"></img></a>
-                <a href="#"><img src="resources/img/restore1.png" onmouseover="this.src='resources/img/restore2.png'" onmouseout="this.src='resources/img/restore1.png'" height="30px" title="restore post"></img></a>
-                <a href="#"><img src="resources/img/hide1.png" onmouseover="this.src='resources/img/hide2.png'" onmouseout="this.src='resources/img/hide1.png'" height="30px" title="show unpublished article"></img></a>
-                <a href="#"><img src="resources/img/adduser1.png" onmouseover="this.src='resources/img/adduser2.png'" onmouseout="this.src='resources/img/adduser1.png'" height="30px" title="manage users"></img></a>
+				<h:form>
+					<h:commandLink action="create_post.xhtml"><h:graphicImage name="img/add1.png" height="30px" title="add new post"></h:graphicImage></h:commandLink>
+					<h:commandLink action="restore_post.xhtml"><img src="resources/img/restore1.png" onmouseover="this.src='resources/img/restore2.png'" onmouseout="this.src='resources/img/restore1.png'" height="30px" title="restore post"></img></h:commandLink>
+					<h:commandLink action="publish_post.xhtml"><img src="resources/img/hide1.png" onmouseover="this.src='resources/img/hide2.png'" onmouseout="this.src='resources/img/hide1.png'" height="30px" title="show unpublished article"></img></h:commandLink>
+					<h:commandLink action="view_user.xhtml"><img src="resources/img/adduser1.png" onmouseover="this.src='resources/img/adduser2.png'" onmouseout="this.src='resources/img/adduser1.png'" height="30px" title="manage users"></img></h:commandLink>
+				</h:form>
 
             </div>
             <div class="content">
