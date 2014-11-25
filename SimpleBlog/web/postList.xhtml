@@ -27,7 +27,7 @@
                         
                     </ui:repeat>
                     
-                    <h:outputText value="Mulai menulis blog sekarang! Tekan tambah post di kanan atas" rendered="#{postController.list.count == 0}" />
+                    <h:outputText value="Tidak ada post" rendered="#{postController.postCount == 0}" />
                
                   </ul>
                 </nav>

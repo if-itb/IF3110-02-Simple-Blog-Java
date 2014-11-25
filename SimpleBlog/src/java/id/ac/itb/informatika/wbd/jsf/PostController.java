@@ -9,20 +9,21 @@ public class PostController {
 
     public PostController() {
         FacesContext facesContext = FacesContext.getCurrentInstance();
+        jpaController = (PostJpaController) facesContext.getApplication().getELResolver().getValue(facesContext.getELContext(), null, "postJpa");
     }
     
-    private Post post = null;
-    private PostJpaController jpaController = null;
+    private Post postCurrent = null;
     private List<Post> postList = null;
+    private PostJpaController jpaController = null;
     
-    public Post getPost() {
-        if (post == null) {
+    public Post getPostCurrent() {
+        if (postCurrent == null) {
             //post = (post) JsfUtil.getObjectFromRequestParameter("jsfcrud.currentCustomer", converter, null);
         }
-        if (post == null) {
-            post = new Post();
+        if (postCurrent == null) {
+            postCurrent = new Post();
         }
-        return post;
+        return postCurrent;
     }
     
     public List<Post> getPostList() {
@@ -32,16 +33,18 @@ public class PostController {
         return postList;
     }
     
+     public int getPostCount() {
+        return postList.size();
+    }
+    
     public String newPost() {
         try {
-            jpaController.create(post);
+            jpaController.create(postCurrent);
             //JsfUtil.addSuccessMessage("Customer was successfully created.");
         } catch (Exception e) {
             //JsfUtil.ensureAddErrorMessage(e, "A persistence error occurred.");
-            System.out.println("ERROR");
             return "post_list";
         }
-        System.out.println("SUCCESS");
         return "post_list";
     }
 }

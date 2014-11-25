@@ -18,16 +18,16 @@
             <div id="contact-area">
                 <h:form id="NewPost">
                     
-                    <h:inputHidden id="EditMode" value="#{postController.post.id}"/>
+                    <h:inputHidden id="EditMode" value="#{postController.postCurrent.id}"/>
                     
                     <h:outputLabel for="Judul" value="Judul:" />
-                    <h:inputText id="Judul" value="#{postController.post.title}" label="Judul" title="Judul" required="true" requiredMessage="Judul tidak boleh kosong" />
+                    <h:inputText id="Judul" value="#{postController.postCurrent.title}" label="Judul" title="Judul" required="true" requiredMessage="Judul tidak boleh kosong" />
               
                     <h:outputLabel for="Tanggal" value="Tanggal:" />
-                    <h:inputText id="Tanggal" value="#{postController.post.date}" label="Tanggal" title="Tanggal" required="true" requiredMessage="Tanggal tidak boleh kosong" />
+                    <h:inputText id="Tanggal" value="#{postController.postCurrent.date}" label="Tanggal" title="Tanggal" required="true" requiredMessage="Tanggal tidak boleh kosong" />
 
                     <h:outputLabel for="Konten" value="Konten:" />
-                    <h:inputTextarea id="Konten" value="#{postController.post.content}" label="Konten" title="Konten" rows="20" cols="20" required="true"  requiredMessage="Konten tidak boleh kosong" />
+                    <h:inputTextarea id="Konten" value="#{postController.postCurrent.content}" label="Konten" title="Konten" rows="20" cols="20" required="true"  requiredMessage="Konten tidak boleh kosong" />
                     
                     <h:commandButton type="submit" value="Submit" action="#{postController.newPost}" onclick="return validatePost();" />
 

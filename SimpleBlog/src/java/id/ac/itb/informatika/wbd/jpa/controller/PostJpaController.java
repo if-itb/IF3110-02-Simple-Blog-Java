@@ -6,6 +6,7 @@
 package id.ac.itb.informatika.wbd.jpa.controller;
 
 import id.ac.itb.informatika.wbd.jpa.entities.Post;
+import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Resource;
 import javax.persistence.EntityManager;
@@ -54,7 +55,11 @@ public class PostJpaController {
         EntityManager em = getEntityManager();
         try {
             Query q = em.createQuery("select object(o) from Post as o");
-            return q.getResultList();
+            List<Post> entries = q.getResultList();
+            if (entries == null) {
+                    entries = new ArrayList<Post>();
+            }
+            return entries;
         } finally {
             em.close();
         }
