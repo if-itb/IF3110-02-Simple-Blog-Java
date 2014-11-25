@@ -105,7 +105,7 @@ public class PostingDatabase {
         try {
           con = makeConnection();
           Statement stmt = con.createStatement();
-          String query = "Select * from post where (author=\""+login.getUserCookie().getValue()+"\" and status=\"unpublished\") or status=\"published\";";
+          String query = "Select * from post where (author=\""+login.getUserCookie().getValue()+"\" and status=\"published\";";
           rs = stmt.executeQuery(query);
 
           while(rs.next()){
@@ -153,7 +153,7 @@ public class PostingDatabase {
             ps.setString(5,"unpublished");
             int i = ps.executeUpdate();
             ExternalContext extcon = FacesContext.getCurrentInstance().getExternalContext();
-            extcon.redirect("Home.xhtml");
+            extcon.redirect("/SImpleBlog/Home.xhtml");
     }
 
     public void deletePost() throws ClassNotFoundException, SQLException, IOException, ParseException{
@@ -163,8 +163,8 @@ public class PostingDatabase {
           int rs;
           rs = stmt.executeUpdate(query);
           PreparedStatement ps;
-            ExternalContext extcon = FacesContext.getCurrentInstance().getExternalContext();
-            extcon.redirect("Home.xhtml");
+          ExternalContext extcon = FacesContext.getCurrentInstance().getExternalContext();
+          extcon.redirect("/SImpleBlog/Home.xhtml");
     }
     
      public void PublishPost() throws ClassNotFoundException, SQLException, IOException, ParseException{
@@ -175,7 +175,7 @@ public class PostingDatabase {
           rs = stmt.executeUpdate(query);
           PreparedStatement ps;
             ExternalContext extcon = FacesContext.getCurrentInstance().getExternalContext();
-            extcon.redirect("Home.xhtml");
+            extcon.redirect("/SImpleBlog/Home.xhtml");
     }
     
     public String addUserOwner() throws ClassNotFoundException, SQLException{
@@ -197,7 +197,7 @@ public class PostingDatabase {
             ps.setString(5,"Owner");
             int i = ps.executeUpdate();
         }
-        return "Home.xhtml";
+        return "/SImpleBlog/Home.xhtml";
     }
     
     public void setLoginOnLoad() throws ClassNotFoundException, SQLException, IOException{
@@ -296,6 +296,24 @@ public class PostingDatabase {
             activeUser = rs.getString("Name");
          }
         return activeUser;
+    }
+    
+    public String getActiveUsername() throws ClassNotFoundException, SQLException{
+        ExternalContext extCont = FacesContext.getCurrentInstance().getExternalContext();
+        Cookie cUsername = login.getUserCookie();
+        String activeUsername = null;
+        
+        ResultSet rs;
+        Connection con;
+        con = makeConnection();
+        Statement stmt = con.createStatement();
+        String query = "Select Username from user where Username=\""+cUsername.getValue()+"\";";
+        rs = stmt.executeQuery(query);
+        while(rs.next()){
+            activeUsername = rs.getString("Username");
+         }
+        System.out.println("THISSSSSSS IS SSSSSSS"+activeUsername);
+        return activeUsername;
     }
     
     public String getUserRole() throws ClassNotFoundException, SQLException{
