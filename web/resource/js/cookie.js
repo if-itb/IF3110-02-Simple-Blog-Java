@@ -7,8 +7,11 @@ function greet(){
     var cvalue=getCookie("user");
     if (cvalue!=""){
         document.getElementById("user").innerHTML= "Howdy, " + cvalue;
-        document.getElementById("log_stat").href= "logout";
+        document.getElementById("log_stat").href= "Logout";
         document.getElementById("log_stat").innerHTML= "Logout";
+        if (cvalue!="admin"){
+            document.getElementById("user").innerHTML= "";
+        }
     }else{
         //document.getElementById("user").innerHTML = cvalue;
     }
