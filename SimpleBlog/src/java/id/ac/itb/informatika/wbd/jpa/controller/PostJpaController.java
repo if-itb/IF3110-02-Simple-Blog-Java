@@ -54,7 +54,7 @@ public class PostJpaController {
     public List<Post> getAllPosts() {
         EntityManager em = getEntityManager();
         try {
-            Query q = em.createQuery("select object(o) from Post as o");
+            Query q = em.createQuery("select object(o) from Post as o order by o.date desc");
             List<Post> entries = q.getResultList();
             if (entries == null) {
                     entries = new ArrayList<Post>();
@@ -63,5 +63,9 @@ public class PostJpaController {
         } finally {
             em.close();
         }
+    }
+
+    public Object findPost(Integer id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

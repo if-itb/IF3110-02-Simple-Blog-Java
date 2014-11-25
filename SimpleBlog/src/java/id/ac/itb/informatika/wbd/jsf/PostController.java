@@ -42,6 +42,7 @@ public class PostController {
     public String newPost() {
         try {
             jpaController.create(postCurrent);
+            postCurrent = null;
             JsfUtil.addSuccessMessage("Post sudah berhasil dibuat");
         } catch (Exception e) {
             JsfUtil.ensureAddErrorMessage(e, "A persistence error occurred.");
