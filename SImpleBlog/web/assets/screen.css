@@ -491,6 +491,7 @@ div.cover > img {
   padding: 30px 0 40px;
   overflow: hidden;
   border-top: 1px solid #ccc;
+  z-index: 100;
 }
 .footer,
 .footer a {
@@ -975,13 +976,13 @@ label {
 .editbutton{
     position: relative;
     height: 28px;
-    width: 100px;
+    width: 1px;
 }
 
 .publishbutton{
     position: relative;
     height: 28px;
-    width: 100px;
+    width: 1px;
     left: 38px;
 }
 
