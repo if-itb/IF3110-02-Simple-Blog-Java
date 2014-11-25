@@ -85,7 +85,7 @@ function validatePost() {
     alert("Tanggal Harus Lebih Dari Hari Ini");
     return false;
   }
-
+  
   return true;
 }
 

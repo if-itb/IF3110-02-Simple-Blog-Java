@@ -26,7 +26,7 @@ public class PostController {
     }
     
     public List<Post> getPostList() {
-       if (postList == null) {
+        if (postList == null) {
             postList = jpaController.getAllPosts();
         }
         return postList;
@@ -38,9 +38,10 @@ public class PostController {
             //JsfUtil.addSuccessMessage("Customer was successfully created.");
         } catch (Exception e) {
             //JsfUtil.ensureAddErrorMessage(e, "A persistence error occurred.");
-            return null;
+            System.out.println("ERROR");
+            return "post_list";
         }
-        
-        return "postList";
+        System.out.println("SUCCESS");
+        return "post_list";
     }
 }
