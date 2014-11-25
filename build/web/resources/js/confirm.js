@@ -8,8 +8,6 @@ function DeletePost()
 	}
         else
                 return false;
-<<<<<<< HEAD
-=======
 }
 
 function ValidateFormNewPost()
@@ -29,7 +27,6 @@ function ValidateFormNewPost()
 	}
 	else
 		return true;
->>>>>>> origin/master
 }
 
 function ValidateForm()
