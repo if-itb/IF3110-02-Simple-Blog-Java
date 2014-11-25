@@ -57,11 +57,21 @@ public class PublishPostHandling extends HttpServlet {
              // Execute SQL query
              stmt = conn.createStatement();
              String sql;
-            sql = "UPDATE post SET status_publish="+1+" WHERE "+request.getParameter("Post_Id");             
+            sql = "UPDATE post SET status_publish=1 WHERE post_id="+request.getParameter("Post_Id");             
+            System.out.println(sql);
             stmt.executeUpdate(sql);
-            String site = new String("http://localhost:8080/IF3110-02-Simple-Blog-Java%202/");
-            response.setStatus(response.SC_MOVED_TEMPORARILY);
-            response.setHeader("Location", site);
+            if ("2".equals(request.getParameter("Role")))
+            {
+                String site = new String("http://localhost:8080/IF3110-02-Simple-Blog-Java%202/home-editor.jsp");                
+                response.setStatus(response.SC_MOVED_TEMPORARILY);
+                response.setHeader("Location", site);
+            }
+            else
+            {
+                String site = new String("http://localhost:8080/IF3110-02-Simple-Blog-Java%202/home-admin.jsp");
+                response.setStatus(response.SC_MOVED_TEMPORARILY);
+                response.setHeader("Location", site);
+            }
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(AddPostHandling.class.getName()).log(Level.SEVERE, null, ex);
         } finally {

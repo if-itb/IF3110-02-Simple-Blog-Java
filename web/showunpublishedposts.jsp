@@ -116,7 +116,7 @@
                         }   
                         String First30WordPost = sb.toString();
                         out.println(First30WordPost);
-                        out.println(" <p> <a href=\"#\">Edit</a> | <a onclick=\"validatedelete()\" href=\"javascript:void(0)\">Hapus</a> | <a href=\"PublishPostHandling?Post_Id="+rs.getString("post_id")+"\">Publish</a> </p> </li>");
+                        out.println(" <p> <a href=\"#\">Edit</a> | <a onclick=\"validatedelete()\" href=\"javascript:void(0)\">Hapus</a> | <a href=\"PublishPostHandling?"+"Role="+request.getParameter("role")+"&Post_Id="+rs.getString("post_id")+"\">Publish</a> </p> </li>");
                     }
 		}
 		catch (SQLException ex)

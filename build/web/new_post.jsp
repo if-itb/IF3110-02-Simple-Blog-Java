@@ -72,6 +72,8 @@
                         System.out.println(request.getParameter("User_Id"));
                         //Ada user id
                         out.println("<input type=hidden name=User_Id value=\""+request.getParameter("User_Id")+"\">");
+                        out.println("<input type=hidden name=Role value=\""+request.getParameter("role")+"\">");
+
                     %>
                     
                     <label for="Konten">Konten:</label><br>

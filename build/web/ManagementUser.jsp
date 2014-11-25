@@ -25,6 +25,7 @@
                         <td>Name</td>
                         <td>Password</td>
                         <td>Role</td>
+                        <td>Email</td>
                         <td>Update</td>
                         <td>Delete</td>
                     </tr>
@@ -49,24 +50,30 @@
                 // Retrieve password and role
 		try 
 		{
-                    String sql=("SELECT nama, password, role FROM user");
+                    String sql=("SELECT user_id, nama, password, role, email FROM user");
                     PreparedStatement ps = con.prepareStatement(sql);
-                    ResultSet rs = ps.executeQuery(sql);    
+                    ResultSet rs = ps.executeQuery(sql);
+                    
                     while (rs.next()){
                         String x = rs.getString("nama");
                         String y = rs.getString("password");
+                        String email = rs.getString("email");
                         int z = rs.getInt("role");
+                        int user_id = rs.getInt("user_id"); 
                     %>
                     
                     <tr>
                         <td><% out.println(x); %></td>
                         <td><% out.println(y); %></td>
                         <td><% out.println(z); %></td>
-                        <td> <form action = "home.jsp" method ="post"> <input type="submit" value="Submit">  </form></td>
-                        <td> <form action = "home.jsp" method ="post"> <input type="submit" value="Submit">  </form></td>
+                        <td><% out.println(email); %></td>
+                        
+                        <td> <form type ="button" action = "UpdateForm.jsp?user_id=<%=user_id%>" method ="post"> <button type="submit" value="Submit"> Update </button></form></td>
+                        <td> <form type ="button" action = "delete.jsp?user_id=<%=user_id%>" method ="post"> <button type="submit" value="Submit"> Delete </button></form></td>
                     </tr>
                     
                     <%
+                   
                     }
             
                     rs.close();
@@ -85,6 +92,16 @@
 		}                
         %>    
         <br>
+        <form type ="button" action = "AddForm.jsp" method ="post"> <button type="submit" value="Submit"> Add User </button></form>
+        <br>
+        <br>
         <a href="home-admin.jsp">Back to main page</a>
+        <script>
+            function delete(){
+                <%
+                    
+                %>
+            }
+        </script>
     </body> 
 </html>

@@ -87,9 +87,7 @@
                     ResultSet rs = ps.executeQuery(sql);    
                     while (rs.next())
                     {
-                        out.println(" <li class=\"art-list-item\"> <div class=\"art-list-item-title-and-time\"> <h2 class=\"art-list-title\"><a href=\"post.jsp"
-                                + "?"
-                                + "post_id="
+                        out.println(" <li class=\"art-list-item\"> <div class=\"art-list-item-title-and-time\"> <h2 class=\"art-list-title\"><a href=\"PostGuest.jsp?post_id="
                                 + rs.getString("post_id")
                                 + "\">"
                                 + rs.getString("judul")+ "</a></h2> "
@@ -101,7 +99,7 @@
                             sb.append(words[i] + " ");  
                         }   
                         String First30WordPost = sb.toString();
-                        out.println(First30WordPost);                        
+                        out.println(First30WordPost);
                     }
 		}
 		catch (SQLException ex)
@@ -154,16 +152,15 @@
 
 <!-- Vaildate Delete -->
 <script>
-  function validatedelete(post_id)
+  function validatedelete()
   {
       console.log("validatedelete");
-      var answer = confirm("Apakah Anda yakin menghapus post ini?")
-        if (answer){      
-          document.location= "DeletePostHandling?post_id="+post_id;
-          alert("Post berhasil dihapus");
-        }else{
-          alert("Post tidak dihapus. Terima kasih.");
-        }
+      var x;
+      if (confirm("Apakah Anda yakin menghapus post ini?") === true) {
+          
+      } else {
+        x = "Cancel";
+      }
   } 
  </script>
 </body>

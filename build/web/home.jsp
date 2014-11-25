@@ -106,7 +106,9 @@
                     ResultSet rs = ps.executeQuery(sql);    
                     while (rs.next())
                     {
-                        out.println(" <li class=\"art-list-item\"> <div class=\"art-list-item-title-and-time\"> <h2 class=\"art-list-title\"><a href=\"post.jsp\">"
+                        out.println(" <li class=\"art-list-item\"> <div class=\"art-list-item-title-and-time\"> <h2 class=\"art-list-title\"><a href=\"post.jsp?post_id="
+                                + rs.getString("post_id")
+                                + "\">"
                                 + rs.getString("judul")+ "</a></h2> "
                                 + "<div class=\"art-list-time\">15 Juli 2014</div> <div class=\"art-list-time\"><span style=\"color:#F40034;\">&#10029;</span> Featured</div> </div> <p>");
                         String[] words = rs.getString("konten").split(" ");

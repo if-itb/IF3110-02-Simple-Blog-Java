@@ -87,7 +87,7 @@
 <nav class="nav">
     <a style="border:none;" id="logo" href="index.jsp"><h1>Simple<span>-</span>Blog</h1></a>
     <ul class="nav-primary">
-        <li><a href="new_post.jsp">+ Tambah Post</a></li>
+        <li><a href="login.jsp">Log In</a></li>
     </ul>
 </nav>
 
@@ -186,36 +186,15 @@
 
             <div id="contact-area">
                 <form method="post" action="AddCommentHandling">
-                    <input type="hidden" name="user_id" value="<%out.print(request.getParameter("user_id"));%>">
+                    <input type="hidden" name="user_id" value="">
                     <input type="hidden" name="post_id" value="<%out.print(request.getParameter("post_id"));%>">
+
+                    <label for="Nama">Nama:</label>
+                    <input type="text" name="Nama" id="Nama">
+        
+                    <label for="Email">Email:</label>
+                    <input type="text" name="Email" id="Email" onchange="validateEmail()">
                     
-                <% 
-		try 
-		{
-                    String sql="SELECT * FROM user WHERE user_id="+request.getParameter("user_id");
-                    PreparedStatement ps = con.prepareStatement(sql);
-                    ResultSet rs = ps.executeQuery(sql);    
-                    while (rs.next())
-                    {
-                        out.println("<label for=\"Nama\">Nama:</label>");
-                        out.println("<input type=\"text\" name=\"Nama\" id=\"Nama\" value=\""
-                                + rs.getString("nama")
-                                + "\">");        
-                        out.println("<label for=\"Email\">Email:</label>");
-                        out.println("<input type=\"text\" name=\"Email\" id=\"Email\" onchange=\"validateEmail()\" value=\""
-                                + rs.getString("email")
-                                + "\">");                    
-                    }
-		}
-		catch (SQLException ex)
-		{
-		    // handle any errors
-		    System.out.println("SQLException: " + ex.getMessage());
-		    System.out.println("SQLState: " + ex.getSQLState());
-		    System.out.println("VendorError: " + ex.getErrorCode());
-		}
-                                    
-            %>
                     <label for="Komentar">Komentar:</label><br>
                     <textarea name="Komentar" rows="20" cols="20" id="Komentar"></textarea>
 

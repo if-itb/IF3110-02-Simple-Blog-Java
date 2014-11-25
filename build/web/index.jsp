@@ -87,9 +87,7 @@
                     ResultSet rs = ps.executeQuery(sql);    
                     while (rs.next())
                     {
-                        out.println(" <li class=\"art-list-item\"> <div class=\"art-list-item-title-and-time\"> <h2 class=\"art-list-title\"><a href=\"post.jsp"
-                                + "?"
-                                + "post_id="
+                        out.println(" <li class=\"art-list-item\"> <div class=\"art-list-item-title-and-time\"> <h2 class=\"art-list-title\"><a href=\"PostGuest.jsp?post_id="
                                 + rs.getString("post_id")
                                 + "\">"
                                 + rs.getString("judul")+ "</a></h2> "
@@ -102,7 +100,6 @@
                         }   
                         String First30WordPost = sb.toString();
                         out.println(First30WordPost);
-                        
                     }
 		}
 		catch (SQLException ex)

@@ -66,7 +66,6 @@
             
             out.println("Hello  "+a);
             out.println(", Welcome as  "+b);
-            
             %>
             
         </h6> </li>
@@ -74,6 +73,7 @@
             out.println("<li><a href=\"new_post.jsp?"
                     + "User_Id="
                     + session.getAttribute("user_id")
+                    + "&role=1"
                     + "\">+ Add Post</a></li>");        
         %>
         <li><a href="logout.jsp">Logout</a></li>
@@ -111,11 +111,14 @@
                     ResultSet rs = ps.executeQuery(sql);    
                     while (rs.next())
                     {
-                        out.println(" <li class=\"art-list-item\"> <div class=\"art-list-item-title-and-time\"> <h2 class=\"art-list-title\"><a href=\"post.jsp\">"
+                        out.println(" <li class=\"art-list-item\"> <div class=\"art-list-item-title-and-time\"> <h2 class=\"art-list-title\"><a href=\"post.jsp?user_id="
+                                + rs.getString("user_id")
+                                + "&"
+                                + "post_id="
+                                + rs.getString("post_id")
+                                + "\">"
                                 + rs.getString("judul")+ "</a></h2> "
-                                + "<div class=\"art-list-time\">15 Juli 2014</div> <div class=\"art-list-time\"><span style=\"color:#F40034;\">&#10029;</span> By "
-                                + rs.getString("nama")
-                                + "</div> </div> <p>");
+                                + "<div class=\"art-list-time\">15 Juli 2014</div></div><p>");
                         String[] words = rs.getString("konten").split(" ");
                         StringBuilder sb = new StringBuilder();
                         for (int i = 0; i < Math.min(30, words.length); i++)
@@ -126,7 +129,14 @@
                         out.println(First30WordPost);
                         if (rs.getString("user_id")==session.getAttribute("username"))
                         {
-                            out.println(" <p> <a href=\"#\">Edit</a> | <a onclick=\"validatedelete()\" href=\"javascript:void(0)\">Hapus</a> </p> </li>");                        
+                        out.println(" <p> <a href=\""
+                                + "edit_post.jsp??role=1&"
+                                + "post_id="
+                                + rs.getString("post_id")
+                                + "&"
+                                + "user_id="
+                                + request.getParameter("user_id")
+                                + "\">Edit</a> | <a onclick=\"validatedelete()\" href=\"javascript:void(0)\">Hapus</a> </p> </li>");
                         }
                     }
 		}

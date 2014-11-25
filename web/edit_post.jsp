@@ -70,7 +70,8 @@
                     <label for="Judul">Judul:</label>
                     <%
                             Connection con = null;
-                            try {
+                            try 
+                            {
                                 //Class.forName("com.mysql.jdbc.Driver");
                                 String url = "jdbc:mysql://localhost:3306/simpleblog_withjava";
                                 String user = "root";
@@ -97,9 +98,9 @@
                                 out.println("<label for=\"Tanggal\">Tanggal:</label>");                                
                                 out.println("<input type=\"date\" name=\"Tanggal\" id=\"Tanggal\" value="+rs.getDate("tanggal")+">");
                                 out.println("<label for=\"Konten\">Konten:</label><br>");
-                                out.println("<input type=hidden name=Post_Id value=\""+rs.getString("post_id")+"\">");
+                                out.println("<input type=hidden name=Post_Id value=\""+request.getParameter("Post_Id")+"\">");
+                                out.println("<input type=hidden name=Role value=\""+request.getParameter("role")+"\">");
                                 out.println("<textarea name=\"Konten\" rows=\"20\" cols=\"20\" id=\"Konten\">"+rs.getString("konten")+"</textarea>");                                
-
                             }
                         }
                         catch (SQLException ex)

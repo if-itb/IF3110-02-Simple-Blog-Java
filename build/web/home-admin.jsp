@@ -70,6 +70,14 @@
             %>
             
         </h6> </li>
+                <%
+            out.println("<li><a href=\"new_post.jsp?"
+                    + "User_Id="
+                    + session.getAttribute("user_id")
+                    + "&role=3"
+                    + "\">+ Add Post</a></li>");        
+        %>
+        <li><a href="showunpublishedposts.jsp?role=3">Editor</a></li>
         <li><a href="ManagementUser.jsp">User Management</a></li>
         <li><a href="logout.jsp">Logout</a></li>
     </ul>
@@ -101,14 +109,19 @@
                     // con=DBConnect.GetDBConnect();
 		try 
 		{
-                    String sql=("SELECT judul, konten FROM post WHERE status_publish=1");
+                    String sql=("SELECT * FROM post WHERE status_publish=1");
                     PreparedStatement ps = con.prepareStatement(sql);
                     ResultSet rs = ps.executeQuery(sql);    
                     while (rs.next())
                     {
-                        out.println(" <li class=\"art-list-item\"> <div class=\"art-list-item-title-and-time\"> <h2 class=\"art-list-title\"><a href=\"post.jsp\">"
+                        out.println(" <li class=\"art-list-item\"> <div class=\"art-list-item-title-and-time\"> <h2 class=\"art-list-title\"><a href=\"post.jsp?user_id="
+                                + rs.getString("user_id")
+                                + "&"
+                                + "post_id="
+                                + rs.getString("post_id")
+                                + "\">"
                                 + rs.getString("judul")+ "</a></h2> "
-                                + "<div class=\"art-list-time\">15 Juli 2014</div> <div class=\"art-list-time\"><span style=\"color:#F40034;\">&#10029;</span> Featured</div> </div> <p>");
+                                + "<div class=\"art-list-time\">15 Juli 2014</div></div><p>");
                         String[] words = rs.getString("konten").split(" ");
                         StringBuilder sb = new StringBuilder();
                         for (int i = 0; i < Math.min(30, words.length); i++)
@@ -117,8 +130,14 @@
                         }
                         String First30WordPost = sb.toString();
                         out.println(First30WordPost);
-                        out.println(" <p> <a href=\"#\">Edit</a> | <a onclick=\"validatedelete()\" href=\"javascript:void(0)\">Hapus</a> </p> </li>");
-                    }
+                        out.println(" <p> <a href=\""
+                                + "edit_post.jsp??role=3&"
+                                + "post_id="
+                                + rs.getString("post_id")
+                                + "&"
+                                + "user_id="
+                                + request.getParameter("user_id")
+                                + "\">Edit</a> | <a onclick=\"validatedelete()\" href=\"javascript:void(0)\">Hapus</a> </p> </li>");                    }
 		}
 		catch (SQLException ex)
 		{
