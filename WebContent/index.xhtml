@@ -8,16 +8,16 @@
       or sample-file-no-form.xhtml. Don't copy and rename THIS file, because
       this file has too many extraneous things in it. -->
 <h:head>
-	<title>JSF 2.2: Blank Starting-Point Project</title>
+	<title>Home</title>
 </h:head>
 
 <h:body>
 	<ui:composition template="common.xhtml">
-
+		<ui:define name="title">Home</ui:define>
 		<ui:define name="content">
-			<div class="col-md-8 col-md-offset-2" style="padding-top:100px">
+			<div class="col-md-8 col-md-offset-2" style="padding-top: 100px">
 				<ui:repeat value="#{databaseObject.postList}" var="item">
-					<h2 class="text-center" style="padding-top:20px">
+					<h2 class="text-center" style="padding-top: 20px">
 						<h:link value="#{item.title}" outcome="view_post">
 							<f:param name="post_id" value="#{item.id}" />
 						</h:link>
@@ -28,7 +28,7 @@
 					<p>
 						<h:outputText value="#{item.content}" />
 					</p>
-					<hr/>
+					<hr />
 
 				</ui:repeat>
 			</div>
