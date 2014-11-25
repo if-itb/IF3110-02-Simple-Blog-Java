@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author toshibapc
+ * @author tegar
  */
 @WebServlet(name = "PublishPostHandling", urlPatterns = {"/PublishPostHandling"})
 public class PublishPostHandling extends HttpServlet {
@@ -57,23 +57,7 @@ public class PublishPostHandling extends HttpServlet {
              // Execute SQL query
              stmt = conn.createStatement();
              String sql;
-             sql = "INSERT INTO post (konten, user_id, status_publish, judul, tanggal) VALUES ("
-                     + "\'"
-                     + request.getParameter("Konten")
-                     + "\'"
-                     + ","
-                     + request.getParameter("User_Id")
-                     + ","
-                     + "0" //status_publish
-                     + ","
-                     + "\'"
-                     + request.getParameter("Judul")
-                     + "\'" 
-                     + ","
-                     + "\'"
-                     + request.getParameter("Tanggal")
-                     + "\'" 
-                     + ")";
+            sql = "UPDATE post SET status_publish="+1+" WHERE "+request.getParameter("Post_Id");             
             stmt.executeUpdate(sql);
             String site = new String("http://localhost:8080/IF3110-02-Simple-Blog-Java%202/");
             response.setStatus(response.SC_MOVED_TEMPORARILY);

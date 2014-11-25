@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author toshibapc
+ * @author tegar
  */
 public class AddPostHandling extends HttpServlet {
 
@@ -74,6 +74,7 @@ public class AddPostHandling extends HttpServlet {
                      + request.getParameter("Tanggal")
                      + "\'" 
                      + ")";
+             System.out.println(sql);
             stmt.executeUpdate(sql);
             String site = new String("http://localhost:8080/IF3110-02-Simple-Blog-Java%202/");
             response.setStatus(response.SC_MOVED_TEMPORARILY);

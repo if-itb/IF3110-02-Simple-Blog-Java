@@ -53,7 +53,7 @@
 <nav class="nav">
     <a style="border:none;" id="logo" href="index.jsp"><h1>Simple<span>-</span>Blog</h1></a>
     <ul class="nav-primary">
-        <li><a href="new_post.jsp">+ Tambah Post</a></li>
+        <li><a href="login.jsp">Log In</a></li>
     </ul>
 </nav>
 
@@ -64,7 +64,8 @@
             <!--Showing post from database-->
                 <% 
                     Connection con = null;
-                    try {
+                    try 
+                    {
                         //Class.forName("com.mysql.jdbc.Driver");
                         String url = "jdbc:mysql://localhost:3306/simpleblog_withjava";
                         String user = "root";
@@ -77,12 +78,11 @@
                     catch(SQLException ex){
                     System.out.println(ex);
                     }
-
                     // Connection con;
                     // con=DBConnect.GetDBConnect();
 		try 
 		{
-                    String sql=("SELECT * FROM post WHERE status_publish=1");
+                    String sql=("SELECT * FROM post WHERE status_publish=1 ORDER BY tanggal DESC");
                     PreparedStatement ps = con.prepareStatement(sql);
                     ResultSet rs = ps.executeQuery(sql);    
                     while (rs.next())
@@ -102,7 +102,7 @@
                         }   
                         String First30WordPost = sb.toString();
                         out.println(First30WordPost);
-                        out.println(" <p> <a href=\"#\">Edit</a> | <a onclick=\"validatedelete()\" href=\"javascript:void(0)\">Hapus</a> </p> </li>");
+                        
                     }
 		}
 		catch (SQLException ex)

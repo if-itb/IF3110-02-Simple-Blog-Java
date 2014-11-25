@@ -1,3 +1,15 @@
+<%-- 
+    Document   : edit_post
+    Created on : Nov 24, 2014, 2:10:26 PM
+    Author     : tegar
+--%>
+
+
+<%@page import="java.sql.Connection"%>
+<%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="java.sql.SQLException"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -54,16 +66,50 @@
             <h2>Edit Post</h2>
 
             <div id="contact-area">
-                <form name="PostForm" method="post" onSubmit="return validateDate()" action="#">
+                <form name="PostForm" method="post" onSubmit="return validateDate()" action="EditPostHandling">
                     <label for="Judul">Judul:</label>
-                    <input type="text" name="Judul" id="Judul">
+                    <%
+                            Connection con = null;
+                            try {
+                                //Class.forName("com.mysql.jdbc.Driver");
+                                String url = "jdbc:mysql://localhost:3306/simpleblog_withjava";
+                                String user = "root";
+                                String password = "";
 
-                    <label for="Tanggal">Tanggal:</label>
-                    <input type="text" name="Tanggal" id="Tanggal">
-                    
-                    <label for="Konten">Konten:</label><br>
-                    <textarea name="Konten" rows="20" cols="20" id="Konten"></textarea>
+                                DriverManager.registerDriver(new com.mysql.jdbc.Driver());
 
+                                con = DriverManager.getConnection(url, user, password);
+                            }
+                            catch(SQLException ex){
+                            System.out.println(ex);
+                            }
+
+                            // Connection con;
+                            // con=DBConnect.GetDBConnect();
+                        try 
+                        {
+                            String sql="SELECT * FROM post WHERE post_id="+request.getParameter("Post_Id");
+                            PreparedStatement ps = con.prepareStatement(sql);
+                            ResultSet rs = ps.executeQuery(sql);    
+                            while (rs.next())
+                            {
+                                out.println("<input type=\"text\" name=\"Judul\" id=\"Judul\" value=\""+rs.getString("judul")+"\">");
+                                out.println("<label for=\"Tanggal\">Tanggal:</label>");                                
+                                out.println("<input type=\"date\" name=\"Tanggal\" id=\"Tanggal\" value="+rs.getDate("tanggal")+">");
+                                out.println("<label for=\"Konten\">Konten:</label><br>");
+                                out.println("<input type=hidden name=Post_Id value=\""+rs.getString("post_id")+"\">");
+                                out.println("<textarea name=\"Konten\" rows=\"20\" cols=\"20\" id=\"Konten\">"+rs.getString("konten")+"</textarea>");                                
+
+                            }
+                        }
+                        catch (SQLException ex)
+                        {
+                            // handle any errors
+                            System.out.println("SQLException: " + ex.getMessage());
+                            System.out.println("SQLState: " + ex.getSQLState());
+                            System.out.println("VendorError: " + ex.getErrorCode());
+                        }
+                    %>
                     <input type="submit" name="submit" value="Simpan" class="submit-button">
                 </form>
             </div>
@@ -96,16 +142,6 @@
 <script type="text/javascript" src="assets/js/fittext.js"></script>
 <script type="text/javascript" src="assets/js/app.js"></script>
 <script type="text/javascript" src="assets/js/respond.min.js"></script>
-<script type="text/javascript">
-  var ga_ua = '{{! TODO: ADD GOOGLE ANALYTICS UA HERE }}';
-
-  (function(g,h,o,s,t,z){g.GoogleAnalyticsObject=s;g[s]||(g[s]=
-      function(){(g[s].q=g[s].q||[]).push(arguments)});g[s].s=+new Date;
-      t=h.createElement(o);z=h.getElementsByTagName(o)[0];
-      t.src='//www.google-analytics.com/analytics.js';
-      z.parentNode.insertBefore(t,z)}(window,document,'script','ga'));
-      ga('create',ga_ua);ga('send','pageview');
-</script>
 
 <!-- Date Validation using JS -->
 <script>

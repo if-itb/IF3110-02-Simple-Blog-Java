@@ -1,3 +1,12 @@
+<%-- 
+    Document   : showunpublishedposts
+    Created on : Nov 24, 2014, 2:10:26 PM
+    Author     : tegar
+--%>
+
+
+
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ page language="java" import="java.sql.Connection"%>
@@ -107,7 +116,7 @@
                         }   
                         String First30WordPost = sb.toString();
                         out.println(First30WordPost);
-                        out.println(" <p> <a href=\"#\">Edit</a> | <a onclick=\"validatedelete()\" href=\"javascript:void(0)\">Hapus</a> | <a onclick=\"validatedelete()\" href=\"javascript:void(0)\">Publish</a> </p> </li>");
+                        out.println(" <p> <a href=\"#\">Edit</a> | <a onclick=\"validatedelete()\" href=\"javascript:void(0)\">Hapus</a> | <a href=\"PublishPostHandling?Post_Id="+rs.getString("post_id")+"\">Publish</a> </p> </li>");
                     }
 		}
 		catch (SQLException ex)
@@ -147,16 +156,6 @@
 <script type="text/javascript" src="assets/js/fittext.js"></script>
 <script type="text/javascript" src="assets/js/app.js"></script>
 <script type="text/javascript" src="assets/js/respond.min.js"></script>
-<script type="text/javascript">
-  var ga_ua = '{{! TODO: ADD GOOGLE ANALYTICS UA HERE }}';
-
-  (function(g,h,o,s,t,z){g.GoogleAnalyticsObject=s;g[s]||(g[s]=
-      function(){(g[s].q=g[s].q||[]).push(arguments)});g[s].s=+new Date;
-      t=h.createElement(o);z=h.getElementsByTagName(o)[0];
-      t.src='//www.google-analytics.com/analytics.js';
-      z.parentNode.insertBefore(t,z)}(window,document,'script','ga'));
-      ga('create',ga_ua);ga('send','pageview');
-</script>
 
 <!-- Vaildate Delete -->
 <script>
