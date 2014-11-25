@@ -39,7 +39,12 @@ public class Post {
                      "<br><a href='admin/index.jsp'><div align=\"right\"><font color=\"blue\">Dashboard</font></div></a>";
         }
         else {
-            header = "Welcome guest, please login <a href=\"login/index.html\">here</a>.";
+            header =
+"        <form action=\"LoginServlet\" method=\"POST\">\n" +
+"            <input type=\"text\" name=\"username\" placeholder=\"username\"/>\n" +
+"            <input type=\"password\" name=\"password\" placeholder=\"password\"/>\n" +
+"            <input type=\"submit\" value=\"Login\"/>\n" +
+"        </form>";
         }
         return header;
     }
