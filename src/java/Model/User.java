@@ -6,15 +6,25 @@
 
 package Model;
 
+import Database.DatabaseAccess;
+import java.util.ArrayList;
+import java.util.Arrays;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+
 /**
  *
  * @author user
  */
+
+@ManagedBean
+@SessionScoped
 public class User {
     private int id;
     private String username;
     private String pass;
-    private enum role {owner, editor, admin, guest};
+    private enum Role {owner, editor, admin, guest};
+    private Role role; 
     
     public User () {}
     
@@ -34,7 +44,7 @@ public class User {
         this.username = username;
     }
     
-    public void setPass(String pass) {
+    public void setPassword(String pass) {
         this.pass = pass;
     }
     
@@ -43,18 +53,37 @@ public class User {
         return this.id;
     }
     
-    public int getUsername(){
-        return this.id;
+    public String getUsername(){
+        return username;
     }
     
-    public int getPass(){
-        return this.id;
+    public String getPassword(){
+        return this.pass;
     }
     
-    
-    
-    
-    
+    public void setRole(String newRole) {
+        if (newRole.equals("owner")) {
+            role = Role.owner;
+        } else if (newRole.equals("admin")) {
+            role = Role.admin;
+        } else if (newRole.equals("editor")) {
+            role = Role.editor;
+        } else {
+            role = Role.guest;
+        }
+    }
+
+    public String getRole() {
+        if (role==Role.owner) {
+            return "owner";
+        } else if (role==Role.admin) {
+            return "admin";
+        } else if (role==Role.editor) {
+            return "editor";
+        } else {
+            return "guest";
+        }
+    }
 }
     
 
