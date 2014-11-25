@@ -2,7 +2,8 @@
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 template="./WEB-INF/templates/template.xhtml"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
-                xmlns:p="http://primefaces.org/ui">
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <ui:define name="title">
         New Post
@@ -28,7 +29,9 @@
                     <h:inputText id="Judul" value="#{postController.postCurrent.title}" label="Judul" title="Judul" required="true" requiredMessage="Judul tidak boleh kosong" />
               
                     <h:outputLabel for="Tanggal" value="Tanggal:" />
-                    <h:inputText id="Tanggal" value="#{postController.postCurrent.date}" label="Tanggal" title="Tanggal" required="true" requiredMessage="Tanggal tidak boleh kosong" />
+                    <h:inputText id="Tanggal" value="#{postController.postCurrent.date}" label="Tanggal" title="Tanggal" required="true" requiredMessage="Tanggal tidak boleh kosong">
+                        <f:convertDateTime pattern="dd-MM-yyyy" />
+                    </h:inputText>
 
                     <h:outputLabel for="Konten" value="Konten:" />
                     <h:inputTextarea id="Konten" value="#{postController.postCurrent.content}" label="Konten" title="Konten" rows="20" cols="20" required="true"  requiredMessage="Konten tidak boleh kosong" />

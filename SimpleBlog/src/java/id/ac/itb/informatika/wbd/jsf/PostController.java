@@ -10,15 +10,17 @@ public class PostController {
     public PostController() {
         FacesContext facesContext = FacesContext.getCurrentInstance();
         jpaController = (PostJpaController) facesContext.getApplication().getELResolver().getValue(facesContext.getELContext(), null, "postJpa");
+        converter = new PostConverter();
     }
     
     private Post postCurrent = null;
     private List<Post> postList = null;
     private PostJpaController jpaController = null;
+    private PostConverter converter = null;
     
     public Post getPostCurrent() {
         if (postCurrent == null) {
-            //post = (post) JsfUtil.getObjectFromRequestParameter("jsfcrud.currentCustomer", converter, null);
+            postCurrent = (Post) JsfUtil.getObjectFromRequestParameter("jsfcrud.currentPost", converter, null);
         }
         if (postCurrent == null) {
             postCurrent = new Post();
