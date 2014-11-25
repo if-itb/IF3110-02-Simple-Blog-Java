@@ -18,18 +18,18 @@
             <ui:define name="content">
                 <br/><br/>
                 <h1>Create Post</h1>
-                <h:form>
+                <h:form id="editPost">
                     Judul
                     <h:inputText class="form-control" value="#{post.judul}"></h:inputText>
                     <br/>Konten
                     <h:inputTextarea id="konten" value="#{post.konten}"></h:inputTextarea>
                     <br/>Tanggal
-                    <h:inputText class="form-control" value="#{post.tanggal}"></h:inputText>
+                    <h:inputText id="date" class="form-control" value="#{post.tanggal}"></h:inputText>
                     <br/>Published
                     <h:selectBooleanCheckbox value="#{post.published}"></h:selectBooleanCheckbox>
                     <br/>
                     <h:inputHidden value="#{post.userId}"></h:inputHidden>
-                    <h:commandLink rendered="#{postCtrl.post.id==0}" action="#{postCtrl.doSubmit()}" value="Tambah" class="btn btn-primary"></h:commandLink>
+                    <h:commandLink onclick="return DateValidator();" rendered="#{postCtrl.post.id==0}" action="#{postCtrl.doSubmit()}" value="Tambah" class="btn btn-primary"></h:commandLink>
                 </h:form>
             </ui:define>
         </ui:composition>

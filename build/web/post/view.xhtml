@@ -25,12 +25,13 @@
                     <br/>Nama<br/>
                     <h:inputText class="form-control" value="#{comment.nama}"></h:inputText>
                     <br/>Email<br/>
-                    <h:inputText class="form-control" value="#{comment.email}" ></h:inputText>
+                    <h:inputText id="email" class="form-control" value="#{comment.email}" >
+                    </h:inputText>
                     <h:inputHidden value="#{comment.postId}"></h:inputHidden>
                     <br/>Konten<br/>
                     <h:inputTextarea class="form-control" value="#{comment.konten}"></h:inputTextarea>
                     <br/>
-                    <h:commandButton action="#{comment.add()}" value="Komen!" class="btn btn-primary">
+                    <h:commandButton type="submit" onclick="return validateEmail();" action="#{comment.add()}" value="Komen!" class="btn btn-primary">
                         <f:ajax execute="form-komentar" render="panel-komentar"></f:ajax>
                     </h:commandButton>
                     <h:panelGroup id="panel-komentar">
