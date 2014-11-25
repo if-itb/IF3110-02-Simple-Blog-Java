@@ -39,11 +39,12 @@ public class Post {
                      "<br><a href='admin/index.jsp'><div align=\"right\"><font color=\"blue\">Dashboard</font></div></a>";
         }
         else {
-            header = "<form action=\"LoginServlet\" method=\"POST\">\n" +
-                     "<input type=\"text\" name=\"username\" placeholder=\"username\"/>\n" +
-                     "<input type=\"password\" name=\"password\" placeholder=\"password\"/>\n" +
-                     "<input type=\"submit\" value=\"Login\"/>\n" +
-                     "</form>";
+            header =
+"        <form action=\"LoginServlet\" method=\"POST\">\n" +
+"            <input type=\"text\" name=\"username\" placeholder=\"username\"/>\n" +
+"            <input type=\"password\" name=\"password\" placeholder=\"password\"/>\n" +
+"            <input type=\"submit\" value=\"Login\"/>\n" +
+"        </form>";
         }
         return header;
     }
@@ -146,7 +147,7 @@ public class Post {
      * @return toHTML yang akan ditulis di HTML
      * @throws java.sql.SQLException
      */
-    	public String listPublishedPosts() throws SQLException {
+    public String listPublishedPosts() throws SQLException {
         //inisialisasi string
         String toHTML = "";
         boolean shortened;
@@ -195,19 +196,17 @@ public class Post {
                     if (shortened) //dipotong
                         toHTML += "... <a href=\"post.jsp?id= " + idPost + "\">Read More</a><br/>\n";
                     //edit post: untuk semua kecuali guest
-                    if (cookieOn) {
-                        if (isAdmin() || isEditor() || isOwner()) {
-                            toHTML +=  "<p>\n" +
-                            "<a href=\"edit_post.jsp?id=" + idPost + 
-                            "\">Edit</a>";
-                        }
-                        //delete post: untuk admin dan owner
-                        if (isAdmin() || isOwner()) {    
-                            toHTML += " | <a href=\"delete_post.jsp?id=" + idPost + 
-                            "\" onclick=\"javascript:confirmDelete()\">Hapus</a>\n" +
-                            "</p>\n" +
-                            "</li>";
-                        }
+                    if (isAdmin() || isEditor() || isOwner()) {
+                        toHTML +=  "<p>\n" +
+                        "<a href=\"edit_post.jsp?id=" + idPost + 
+                        "\">Edit</a>";
+                    }
+                    //delete post: untuk admin dan owner
+                    if (isAdmin() || isOwner()) {    
+                        toHTML += " | <a href=\"delete_post.jsp?id=" + idPost + 
+                        "\" onclick=\"javascript:confirmDelete()\">Hapus</a>\n" +
+                        "</p>\n" +
+                        "</li>";
                     }
                 }
             }
