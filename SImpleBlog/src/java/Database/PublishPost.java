@@ -71,6 +71,32 @@ public class PublishPost {
         return UnpublishedPost;
     }
     
+    public List<Post> getpublishedPost() throws ClassNotFoundException, IllegalAccessException{
+        ResultSet result;
+        List<Post> publishedPost = new ArrayList<>();
+        try {
+          Connection conn = getConnection();
+          Statement stmt = conn.createStatement();
+          String query = "Select * from post where Status = \"published\"";
+          result = stmt.executeQuery(query);
+
+          while(result.next()){
+              Post post = new Post();
+              post.setId(result.getInt(1));
+              post.setJudul(result.getString(2));
+              post.setTanggal(result.getString(3));
+              post.setContent(result.getString(4));
+              post.setAuthor(result.getString(5));
+              post.setStatus(result.getString(6));
+              publishedPost.add(post);
+           }
+          conn.close();
+        } catch (SQLException e) {
+           System.err.println(e);
+        }
+        return publishedPost;
+    }
+    
     public void publishPost(int postID) throws ClassNotFoundException, IllegalAccessException{
         ResultSet result;
         try {

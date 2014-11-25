@@ -99,6 +99,6 @@ public class EditPost {
             System.err.println(e);
         }
         ExternalContext extcon = FacesContext.getCurrentInstance().getExternalContext();
-        extcon.redirect("/SImpleBlog/PublishPost.xhtml");
+        extcon.redirect("/SImpleBlog/Home.xhtml");
     }    
 }
