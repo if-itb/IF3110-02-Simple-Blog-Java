@@ -33,6 +33,10 @@
         <servlet-name>publish_post</servlet-name>
         <servlet-class>servlet.publish_post</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>restore_post</servlet-name>
+        <servlet-class>servlet.restore_post</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>/faces/*</url-pattern>
@@ -60,6 +64,10 @@
     <servlet-mapping>
         <servlet-name>publish_post</servlet-name>
         <url-pattern>/faces/publish_post</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>restore_post</servlet-name>
+        <url-pattern>/faces/restore_post</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -21,8 +21,9 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author A46CB
  */
-public class delete_post extends HttpServlet {
+public class restore_post extends HttpServlet {
 
+  
     private String databaseURL, username, password;
 
     @Override
@@ -69,7 +70,7 @@ public class delete_post extends HttpServlet {
 
             // Step 3: Execute a SQL SELECT query
 //            String sqlStr = "DELETE FROM post WHERE id='"+id+"'";
-            String sqlStr = "UPDATE post SET is_deleted='yes' WHERE id='"+id+"'";
+            String sqlStr = "UPDATE post SET is_deleted='no' WHERE id='"+id+"'";
             
             try {
             stmt.executeUpdate(sqlStr); // Send the query to the server
@@ -77,7 +78,7 @@ public class delete_post extends HttpServlet {
                 out.print(ex.toString());
             }
       
-            response.sendRedirect("faces/index.jsp");
+            response.sendRedirect("restore_post.jsp");
             
         } catch (SQLException ex) {
             ex.printStackTrace();

@@ -91,6 +91,7 @@
         <ul class="nav-primary">
             <li><a href="new_post.jsp">Tambah Post</a></li>
             <% if ((role != null) && ((role.equals("admin")) || (role.equals("editor")))) { %><li>/</li><li><a href="publish_post.jsp">Publish Post</a></li><% } %>
+            <% if ((role != null) && (role.equals("admin"))) { %><li>/</li><li><a href="restore_post.jsp">Restore Post</a></li><% } %>
             <% if ((role != null) && (role.equals("admin"))) { %><li>/</li><li><a href="list_user.jsp">User</a></li><% } %>
             <% if (email != null) { %><li>/</li><li><a href="logout.jsp">Logout</a></li><% } %>
         </ul> 

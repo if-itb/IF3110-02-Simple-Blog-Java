@@ -64,7 +64,7 @@ public class model_post {
         List<Post> posts = new ArrayList<Post>();
         try {
             stmt = conn.createStatement();
-            String sqlStr = "SELECT * FROM post WHERE status = 'published' ORDER BY tanggal DESC";
+            String sqlStr = "SELECT * FROM post WHERE status = 'published' AND is_deleted='no' ORDER BY tanggal DESC";
             ResultSet rset = stmt.executeQuery(sqlStr); 
             while (rset.next()) {
                 Post post = new Post();
@@ -89,6 +89,30 @@ public class model_post {
         try {
             stmt = conn.createStatement();
             String sqlStr = "SELECT * FROM post WHERE status='unpublished' ORDER BY tanggal DESC";
+            ResultSet rset = stmt.executeQuery(sqlStr); 
+            while (rset.next()) {
+                Post post = new Post();
+                post.setId(rset.getInt("id"));
+                post.setJudul(rset.getString("judul"));
+                post.setKonten(rset.getString("konten"));
+                post.setTanggal(rset.getDate("tanggal"));
+            
+                posts.add(post);  
+            }
+                 
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            output2 = output2 + ex.toString();
+        } 
+        return posts;
+    }
+    
+    public List<Post> getAllDeletedPosts() {
+        Statement stmt = null;
+        List<Post> posts = new ArrayList<Post>();
+        try {
+            stmt = conn.createStatement();
+            String sqlStr = "SELECT * FROM post WHERE is_deleted='yes' ORDER BY tanggal DESC";
             ResultSet rset = stmt.executeQuery(sqlStr); 
             while (rset.next()) {
                 Post post = new Post();

@@ -30,7 +30,7 @@ public class publishPostBean {
         return listUnpublishedPosts;
     }
     
-    public void setListPosts(List<Post> listUnpublishedPosts) {
+    public void setListUnpublishedPosts(List<Post> listUnpublishedPosts) {
         this.listUnpublishedPosts = listUnpublishedPosts;
     }
 }
