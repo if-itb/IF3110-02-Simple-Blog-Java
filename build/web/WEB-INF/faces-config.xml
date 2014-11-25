@@ -38,4 +38,9 @@
         <managed-bean-class>model.AllUserBean</managed-bean-class>
         <managed-bean-scope>application</managed-bean-scope>
     </managed-bean>
+    <managed-bean>
+        <managed-bean-name>komentar</managed-bean-name>
+        <managed-bean-class>model.Komentar</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
 </faces-config>
