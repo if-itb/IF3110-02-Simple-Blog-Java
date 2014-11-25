@@ -48,7 +48,7 @@
 
                     out.println("<input type='text' placeholder='Role' name='role'/>");
 
-                    out.println("<input type='submit' id='submit' value='Add Now'>");
+                    out.println("<input type='submit' id='submit' name='addButton' value='Add Now'>");
                 }
                 else
                 {
@@ -67,7 +67,7 @@
 
                     out.println("<input type='text' value='"+user.getRole()+"' name='role'/>");
 
-                    out.println("<input type='submit' id='submit' value='Edit Now'>");
+                    out.println("<input type='submit' id='submit' name='editButton' value='Edit Now'>");
                 }
                 
             %>
