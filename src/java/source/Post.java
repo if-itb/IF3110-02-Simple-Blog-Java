@@ -191,17 +191,19 @@ public class Post {
                     if (shortened) //dipotong
                         toHTML += "... <a href=\"post.jsp?id= " + idPost + "\">Read More</a><br/>\n";
                     //edit post: untuk semua kecuali guest
-                    if (isAdmin() || isEditor() || isOwner()) {
-                        toHTML +=  "<p>\n" +
-                        "<a href=\"edit_post.jsp?id=" + idPost + 
-                        "\">Edit</a>";
-                    }
-                    //delete post: untuk admin dan owner
-                    if (isAdmin() || isOwner()) {    
-                        toHTML += " | <a href=\"delete_post.jsp?id=" + idPost + 
-                        "\" onclick=\"javascript:confirmDelete()\">Hapus</a>\n" +
-                        "</p>\n" +
-                        "</li>";
+                    if (cookieOn) {
+                        if (isAdmin() || isEditor() || isOwner()) {
+                            toHTML +=  "<p>\n" +
+                            "<a href=\"edit_post.jsp?id=" + idPost + 
+                            "\">Edit</a>";
+                        }
+                        //delete post: untuk admin dan owner
+                        if (isAdmin() || isOwner()) {    
+                            toHTML += " | <a href=\"delete_post.jsp?id=" + idPost + 
+                            "\" onclick=\"javascript:confirmDelete()\">Hapus</a>\n" +
+                            "</p>\n" +
+                            "</li>";
+                        }
                     }
                 }
             }

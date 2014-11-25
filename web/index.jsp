@@ -55,7 +55,7 @@
         <nav class="nav">
             <a style="border:none;" id="logo" href="index.jsp"><h1>Not<span>-</span>a<span>-</span>Simple<span>-</span>Blog</h1></a>
             <ul class="nav-primary">
-                <li><%=listPost.showMessageHeader()%> </li>
+                <li><%= listPost.showMessageHeader() %> </li>
             </ul>
         </nav>
 

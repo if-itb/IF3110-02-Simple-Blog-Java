@@ -24,7 +24,7 @@ public class User {
     private String nama;
     private String email;
     private String role;
-    private final String userSQL = "root";
+    private final String userSQL = "root2";
     private final String passSQL = "akhfa";
     private final String urlSQL = "localhost";
     private final String databaseName = "blog";
