@@ -15,6 +15,7 @@ and open the template in the editor.
     </head>   
     <h:body class="default">
         <script type = "text/javascript" src ="../assets/confirmdate.js"/>
+        <script type = "text/javascript" src ="../assets/confirmvalidation.js"/>
         <div class="wrapper">
             <nav class="nav">
                 <h:form>
@@ -65,7 +66,9 @@ and open the template in the editor.
                             <h:outputText value="Operation"/>
                         </f:facet>
                         <h:form>
-                            <u><h:commandLink value="Update" action="#" id="update"/></u> |
+                            <u><h:commandLink value="Update" action="#" id="update" >
+                                <f:param name ="throwediduser" value = "#{u.username}"></f:param>
+                            </h:commandLink></u> |
                             <u><h:commandLink value="Delete" action="#"/></u>
                         </h:form>
                     </h:column>
@@ -94,20 +97,20 @@ and open the template in the editor.
                 <!--form action="#" method="post">-->
                 <h:form>
                     <label for="Name">Name:</label>
-                    <input type="text" name="Name" id="CreateName" required="required"/>
+                    <input type="text" name="CreateName" id="CreateName" required="required"/>
 
                     <label for="Username">Username:</label>
-                    <input type="text" name="Username" id="CreateUsername" required="required"/>
+                    <input type="text" name="CreateUsername" id="CreateUsername" required="required"/>
 
                     <label for="Email">Email:</label>
-                    <input type="text" name="Email" id="CreateEmail" required="required"/>
+                    <input type="text" name="CreateEmail" id="CreateEmail" required="required"/>
 
                     <label for="Password">Password:</label>
-                    <input type="password" name="Password" id="CreatePassword" required="required"/>
+                    <input type="password" name="CreatePassword" id="CreatePassword" required="required"/>
                     
                     <label for="Role">Role:</label>
                     <h:form>
-                        <h:selectOneMenu id="Role">
+                        <h:selectOneMenu id="Role" value="#{Posting.selectedItem}">
                             <f:selectItem itemValue="Owner" id="CreateOwner"/>
                             <f:selectItem itemValue="Editor" id="CreateEditor"/>
                             <f:selectItem itemValue="Admin" id="CreateAdmin"/>
@@ -115,7 +118,9 @@ and open the template in the editor.
                     </h:form>
                     
                     <br/><br/>
-                    <h:commandButton value="Register" class="submit-button" action="#{Posting.addUserOwner}" />
+                    <h:form>
+                        <h:commandButton type="submit" value="Register" class="submit-button" onclick = "confirmPublish()" action ="#{Posting.InsertNewUser()}" />
+                    </h:form>
                 </h:form>
                 </div>
                 

@@ -41,15 +41,36 @@ import javax.servlet.http.HttpServletRequest;
 public class PostingDatabase {
     
     Login login;
+    String SelectedItem;
+    
     @ManagedProperty(value ="#{param.throwedid}")
     private int id;
+    
+    @ManagedProperty(value="#{param.throwediduser}")
+    private String username;
 
+    public String getSelectedItem() {
+        return SelectedItem;
+    }
+
+    public void setSelectedItem(String SelectedItem) {
+        this.SelectedItem = SelectedItem;
+    }
+    
     public int getId() {
         return id;
     }
 
     public void setId(int id) {
         this.id = id;
+    }
+    
+    public String getUsername(){
+        return username;
+    }
+    
+    public void setUsername(String username){
+        this.username = username;
     }
     
     public PostingDatabase(){
@@ -507,16 +528,19 @@ public class PostingDatabase {
         return records;
     }
     
-    public String getUsername() throws ClassNotFoundException, SQLException{
-        
-        return null;
-    }
-    
-    public List<User> getUserInfo() throws ClassNotFoundException, SQLException{
-        List<User> record = new ArrayList<>();
-        
-        
-        return null;
+    public void InsertNewUser(){
+        System.out.println("oiiiiii");
+        HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        String Name = request.getParameter("CreateName");
+        String Username = request.getParameter("CreateUsername");
+        String Email = request.getParameter("CreateEmail");
+        String Password = request.getParameter("CreatePassword");
+        String Role = SelectedItem;
+        System.out.println(Name);
+        System.out.println(Username);
+        System.out.println(Email);
+        System.out.println(Password);
+        System.out.println(Role);
     }
     
 }
