@@ -7,7 +7,6 @@ package managedbean;
 import entities.User;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
-import model.model_post;
 import model.model_user;
 
 /**
@@ -25,8 +24,6 @@ public class editUserBean {
         editedUser = modelUser.getUser(id);
     }
     
-
-    
     public User getEditedUser() {
         return this.editedUser;
     }
@@ -36,7 +33,7 @@ public class editUserBean {
     }
     
     public String updateUser() {
-       int id = modelUser.updateUser(editedUser);
+       int id = modelUser.updateUser(this.editedUser);
        return "user.jsp?id="+id+"&faces-redirect=true";
     }
 }

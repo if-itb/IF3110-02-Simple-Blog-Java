@@ -147,13 +147,14 @@ a:hover {
 /*  Nav
 ================================================== */
 .nav {
-  position: absolute;
+/*  position: absolute;*/
   top: 0;
   left: 50%;
-  height: 70px;
-  padding-top: 40px;
+/*  height: 70px;*/
+/*  padding-top: 40px;*/
   margin-left: -490px; /* Half width of nav */
   border-bottom: 1px solid #333;
+  border-top: 1px solid #333;
   z-index: 2;
 }
 .nav.fixed {
@@ -163,7 +164,8 @@ a:hover {
   float: left;
 }
 .nav-primary {
-  float: right;
+/*  float: right;*/
+text-align: center;
 }
 .nav-primary li {
   display: inline-block;

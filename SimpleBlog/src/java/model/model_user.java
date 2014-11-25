@@ -140,7 +140,7 @@ public class model_user {
            
             stmt = conn.createStatement();
 //            String sqlStr = "INSERT INTO post (judul, tanggal, konten) VALUES ('" + post.getJudul() + "','" + tanggalPost + "','" + post.getKonten() + "')";
-            String sqlStr = "UPDATE post SET email='"+user.getEmail()+"', password='"+user.getPassword()+"', nama='"+user.getNama()+"', role='"+user.getRole()+"' WHERE id='"+user.getId()+"'";
+            String sqlStr = "UPDATE user SET email='"+user.getEmail()+"', password='"+user.getPassword()+"', nama='"+user.getNama()+"', role='"+user.getRole()+"' WHERE id='"+user.getId()+"'";
             out = sqlStr;
             stmt.executeUpdate(sqlStr);
             

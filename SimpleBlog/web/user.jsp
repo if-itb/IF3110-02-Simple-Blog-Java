@@ -23,7 +23,7 @@
 
     <article class="art simple post">
 
-        <header class="art-header" style="height:200px;">
+        <header class="art-header" style="height:80px;">
             <div class="art-header-inner" style="margin-top: 0px; opacity: 1;">
                 <time class="art-time"></time>
                 <h2 class="art-title"></h2>

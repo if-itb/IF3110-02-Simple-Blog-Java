@@ -1,0 +1,43 @@
+#logoblog {
+margin-bottom: 30px;
+text-align: center;
+}
+
+.headerblog {
+background-color: orange;
+padding-top: 30px;
+padding-bottom: 30px;
+}
+
+.art-list {
+padding: 0 0 0;
+}
+
+.art-list-item-title-and-time {
+width: 100%;
+}
+
+h2 {
+    padding-bottom: 0;
+}
+
+.art-list-item p {
+width: 100%;
+float: left;
+ margin-left: 0; 
+margin-bottom: 15px;
+font-size: 16px;
+line-height: 24px;
+}
+
+#logoblog a:hover {
+    text-decoration: none;
+}
+
+footer {
+background-color: orange;
+}
+
+.art-header {
+    height: 400px;
+}

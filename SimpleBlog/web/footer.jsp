@@ -4,7 +4,8 @@
     Author     : A46CB
 --%>
 
-<footer class="footer">
+<footer>
+    <div class="footer">
     <div class="back-to-top"><a href="">Back to top</a></div>
     <!-- <div class="footer-nav"><p></p></div> -->
     <div class="psi">&Psi;</div>
@@ -21,6 +22,7 @@
         <a class="twitter-link" href="#">Yanuar</a> /
         
     </aside>
+    </div>
 </footer>
 
 </div>

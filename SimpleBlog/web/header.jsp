@@ -68,6 +68,7 @@
 
 <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="assets/css/screen.css" />
+<link rel="stylesheet" type="text/css" href="assets/css/custom.css" />
 <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
 
 <!--[if lt IE 9]>
@@ -81,13 +82,17 @@
 
 <body class="default">
 <div class="wrapper">
-
-<nav class="nav">
-    <a style="border:none;" id="logo" href="index.jsp"><h1>Simple<span>-</span>Blog</h1></a>
-    <ul class="nav-primary">
-        <li><a href="new_post.jsp">+ Tambah Post</a></li>
-        <% if ((role != null) && ((role.equals("admin")) || (role.equals("editor")))) { %><li><a href="publish_post.jsp">+ Publish Post</a></li><% } %>
-        <% if ((role != null) && (role.equals("admin"))) { %><li><a href="list_user.jsp">+ User</a></li><% } %>
-        <% if (email != null) { %><li><a href="logout.jsp">+ Logout</a></li><% } %>
-    </ul> 
-</nav>
+<div class="headerblog">
+    <div id="logoblog">
+    <a style="border:none;"href="index.jsp"><h1>Simple<span>-</span>Blog</h1></a>
+    <!--<h1>Simple<span>-</span>Blog</h1>-->
+    </div>
+    <nav class="nav">
+        <ul class="nav-primary">
+            <li><a href="new_post.jsp">Tambah Post</a></li>
+            <% if ((role != null) && ((role.equals("admin")) || (role.equals("editor")))) { %><li>/</li><li><a href="publish_post.jsp">Publish Post</a></li><% } %>
+            <% if ((role != null) && (role.equals("admin"))) { %><li>/</li><li><a href="list_user.jsp">User</a></li><% } %>
+            <% if (email != null) { %><li>/</li><li><a href="logout.jsp">Logout</a></li><% } %>
+        </ul> 
+    </nav>
+</div>

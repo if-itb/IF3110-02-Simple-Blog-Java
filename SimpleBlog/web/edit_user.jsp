@@ -22,7 +22,7 @@
 } %>
 
   <article class="art simple post">
-        <h2 class="art-title" style="margin-bottom:40px">-</h2>
+        <h2 class="art-title" style="margin-bottom:70px"></h2>
         <div class="art-body">
             <div class="art-body-inner">
                 <h2>Edit User</h2>
@@ -35,8 +35,8 @@
                          <h:inputText id="Password" value="#{editUserBean.editedUser.password}" />
                          <h:outputLabel value="Nama:" for="Nama" />
                          <h:inputText id="Nama" value="#{editUserBean.editedUser.nama}" />
-                         <h:outputLabel value="Konten:" for="Konten" />
-                         <h:selectOneMenu value="#{editUserBean.editedUser.role}">
+                         <h:outputLabel value="Role:" for="Role" />
+                         <h:selectOneMenu id="Role" value="#{editUserBean.editedUser.role}">
                                 <f:selectItem itemValue="admin" itemLabel="Admin" />
                                 <f:selectItem itemValue="editor" itemLabel="Editor" />
                                 <f:selectItem itemValue="owner" itemLabel="Owner" />
