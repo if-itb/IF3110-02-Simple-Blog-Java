@@ -36,12 +36,15 @@ public class PostController implements Serializable {
     private ArrayList<Post> posts;
 
     public PostController() {
-        post = new Post();
         HttpServletRequest req = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
-
+        HttpSession session = req.getSession();
+        User userIdentity = (User) session.getAttribute("userIdentity");
+        if (userIdentity == null || userIdentity.getIsGuest()){
+            CookieService.loginWithCookies();
+        }
 //int page = Integer.parseInt(req.getParameter("page"));
-        int page = 1;
-        this.loadPosts((page - 1) * POSTS_PER_PAGE);
+        //int page = 1;
+        //this.loadPosts((page - 1) * POSTS_PER_PAGE);
     }
 
     public String doSubmit() {

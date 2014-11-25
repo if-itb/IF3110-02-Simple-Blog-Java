@@ -9,10 +9,13 @@ import javax.faces.context.FacesContext;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import models.User;
 
 public class CookieService {
+
     public final static int DEFAULT_AGE = 20; //20 deitk
-    
+
     public static void setCookie(String name, String value, int expiry) {
         FacesContext facesContext = FacesContext.getCurrentInstance();
 
@@ -59,11 +62,34 @@ public class CookieService {
         }
         return null;
     }
-    
-    public static void clearCookie(String name){
+
+    public static void clearCookie(String name) {
         Cookie cookie = CookieService.getCookie(name);
-        if (cookie != null){
+        if (cookie != null) {
             cookie.setMaxAge(0);
         }
+    }
+
+    public static boolean loginWithCookies() {
+        HttpServletRequest req = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        HttpSession session = req.getSession();
+        User userIdentity = (User) session.getAttribute("userIdentity");
+        if (userIdentity == null || userIdentity.getIsGuest()) {
+            userIdentity = new User();
+        }
+        Cookie emailCookie = CookieService.getCookie("email");
+        Cookie passwordCookie = CookieService.getCookie("password");
+
+        if (emailCookie == null || passwordCookie == null) {
+            return false;
+        } else {
+            String email = emailCookie.toString();
+            String password = passwordCookie.toString();
+            userIdentity.setEmail(email);
+            userIdentity.setPassword(password);
+            userIdentity.login();
+            return true;
+        }
+
     }
 }

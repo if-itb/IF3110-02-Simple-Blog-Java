@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import models.Post;
 import models.User;
+import services.CookieService;
 import services.DBConnector;
 
 /*
@@ -20,12 +21,23 @@ import services.DBConnector;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-@ManagedBean(name="userCtrl")
+@ManagedBean(name = "userCtrl")
 @SessionScoped
 public class UserController {
-    @ManagedProperty(value="#{user}")
+
+    @ManagedProperty(value = "#{user}")
     private User user;
     private ArrayList<User> users;
+
+    public UserController() {
+        
+        HttpServletRequest req = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        HttpSession session = req.getSession();
+        User userIdentity = (User) session.getAttribute("userIdentity");
+        if (userIdentity == null || userIdentity.getIsGuest()) {
+            CookieService.loginWithCookies();
+        }
+    }
 
     public String showCreate() {
         FacesContext context = FacesContext.getCurrentInstance();
@@ -34,7 +46,7 @@ public class UserController {
         User user = (User) session.getAttribute("user");
         user.clearAttributes();
         user.setIsNewRecord(true);
-        session.setAttribute("user",user);
+        session.setAttribute("user", user);
         return "create";
     }
 
@@ -48,13 +60,13 @@ public class UserController {
             User user = (User) session.getAttribute("user");
             user.load(Integer.parseInt(requestParam.get("id")));
             user.setIsNewRecord(false);
-            session.setAttribute("user",user);
+            session.setAttribute("user", user);
             return "update";
         } else {
             return "fail";
         }
     }
-    
+
     public String showDelete() {
         FacesContext context = FacesContext.getCurrentInstance();
         Map<String, String> requestParam = context.getExternalContext().getRequestParameterMap();
@@ -70,15 +82,15 @@ public class UserController {
             return "fail";
         }
     }
-    
+
     public String doSubmit() {
         FacesContext context = FacesContext.getCurrentInstance();
         Map<String, String> requestParam = context.getExternalContext().getRequestParameterMap();
         HttpServletRequest req = (HttpServletRequest) context.getExternalContext().getRequest();
         HttpSession session = req.getSession();
-        
+
         user = (User) session.getAttribute("user");
-        if (user != null && user.save()){
+        if (user != null && user.save()) {
             return "success";
         } else {
             return "fail";
@@ -119,7 +131,5 @@ public class UserController {
     public void setUsers(ArrayList<User> users) {
         this.users = users;
     }
-    
-    
 
 }

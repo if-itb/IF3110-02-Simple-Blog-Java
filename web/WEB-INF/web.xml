@@ -24,6 +24,11 @@ Mengubah status sebuah Post menjadi publish.</description>
         <filter-name>Editor Filter</filter-name>
         <filter-class>filters.EditorFilter</filter-class>
     </filter>
+    <filter>
+        <description>semua url masukin sini</description>
+        <filter-name>Login With Cookies Filter</filter-name>
+        <filter-class>filters.LoginWithCookiesFilter</filter-class>
+    </filter>
     <filter-mapping>
         <filter-name>User Management</filter-name>
         <url-pattern>/faces/user/*</url-pattern>
@@ -51,6 +56,6 @@ Mengubah status sebuah Post menjadi publish.</description>
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>faces/login.xhtml</welcome-file>
+        <welcome-file>faces/post/index.xhtml</welcome-file>
     </welcome-file-list>
 </web-app>

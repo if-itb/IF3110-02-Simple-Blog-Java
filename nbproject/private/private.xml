@@ -3,13 +3,27 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/E:/tugas/if3110/wbd/src/java/services/CookieService.java</file>
-            <file>file:/E:/tugas/if3110/wbd/web/META-INF/context.xml</file>
-            <file>file:/E:/tugas/if3110/wbd/web/WEB-INF/web.xml</file>
-            <file>file:/E:/tugas/if3110/wbd/web/WEB-INF/beans.xml</file>
-            <file>file:/E:/tugas/if3110/wbd/web/index.xhtml</file>
-            <file>file:/E:/tugas/if3110/wbd/src/java/models/User.java</file>
-            <file>file:/E:/tugas/if3110/wbd/src/java/services/DBConnector.java</file>
+            <file>file:/E:/tugas/if3110/tubes-2/web/post/view.xhtml</file>
+            <file>file:/E:/tugas/if3110/tubes-2/web/WEB-INF/faces-config.xml</file>
+            <file>file:/E:/tugas/if3110/tubes-2/web/errors/403.xhtml</file>
+            <file>file:/E:/tugas/if3110/tubes-2/web/post/update.xhtml</file>
+            <file>file:/E:/tugas/if3110/tubes-2/web/post/create.xhtml</file>
+            <file>file:/E:/tugas/if3110/tubes-2/web/login.xhtml</file>
+            <file>file:/E:/tugas/if3110/tubes-2/src/java/models/Comment.java</file>
+            <file>file:/E:/tugas/if3110/tubes-2/src/java/controllers/PostController.java</file>
+            <file>file:/E:/tugas/if3110/tubes-2/web/post/index.xhtml</file>
+            <file>file:/E:/tugas/if3110/tubes-2/src/java/models/Post.java</file>
+            <file>file:/E:/tugas/if3110/tubes-2/src/java/models/User.java</file>
+            <file>file:/E:/tugas/if3110/tubes-2/src/java/controllers/SiteController.java</file>
+            <file>file:/E:/tugas/if3110/tubes-2/src/java/services/CookieService.java</file>
+            <file>file:/E:/tugas/if3110/tubes-2/src/java/filters/OwnerFilter.java</file>
+            <file>file:/E:/tugas/if3110/tubes-2/web/layouts/header.xhtml</file>
+            <file>file:/E:/tugas/if3110/tubes-2/src/java/services/DBConnector.java</file>
+            <file>file:/E:/tugas/if3110/tubes-2/src/java/filters/AuthenticationFilter.java</file>
+            <file>file:/E:/tugas/if3110/tubes-2/src/java/filters/EditorFilter.java</file>
+            <file>file:/E:/tugas/if3110/tubes-2/src/java/filters/AdminFilter.java</file>
+            <file>file:/E:/tugas/if3110/tubes-2/test/models/PostTest.java</file>
+            <file>file:/E:/tugas/if3110/tubes-2/web/layouts/main.xhtml</file>
         </group>
     </open-files>
 </project-private>

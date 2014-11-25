@@ -27,7 +27,7 @@ public class EditorFilter implements Filter {
         HttpServletResponse res = (HttpServletResponse) response;
 
         User userIdentity = (User) req.getSession().getAttribute("userIdentity");
-        if (!userIdentity.getIsEditor()) {
+        if (userIdentity == null || !userIdentity.getIsEditor()) {
             Filter adminFilter = new AdminFilter();
             adminFilter.doFilter(request, response,chain);
         } else {

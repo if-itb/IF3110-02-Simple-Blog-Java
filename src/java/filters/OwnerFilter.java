@@ -27,7 +27,7 @@ public class OwnerFilter implements Filter {
         HttpServletResponse res = (HttpServletResponse) response;
 
         User userIdentity = (User) req.getSession().getAttribute("userIdentity");
-        if (!userIdentity.getIsOwner()) {
+        if (userIdentity == null || !userIdentity.getIsOwner()) {
             Filter adminFilter = new AdminFilter();
             adminFilter.doFilter(request, response,chain);
         } else {

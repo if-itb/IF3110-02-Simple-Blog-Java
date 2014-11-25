@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package controllers;
 
 import java.io.Serializable;
@@ -18,21 +17,31 @@ import models.User;
 import services.CookieService;
 import services.DBConnector;
 
-@ManagedBean(name="siteCtrl")
+@ManagedBean(name = "siteCtrl")
 @SessionScoped
-public class SiteController implements Serializable{
+public class SiteController implements Serializable {
+
     private final String SUCCESS = "success";
     private final String FAIL = "fail";
     private User loginForm;
     
-    public String showLogin(){
+    public SiteController() {
+        HttpServletRequest req = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        HttpSession session = req.getSession();
+        User userIdentity = (User) session.getAttribute("userIdentity");
+        if (userIdentity == null || userIdentity.getIsGuest()) {
+            CookieService.loginWithCookies();
+        }
+    }
+
+    public String showLogin() {
         loginForm = new User();
         HttpServletRequest req = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
-        return req.getContextPath()+"/faces/login.xhtml";
+        return req.getContextPath() + "/faces/login.xhtml";
     }
-    
-    public String doLogin(){
-        FacesContext context =  FacesContext.getCurrentInstance();
+
+    public String doLogin() {
+        FacesContext context = FacesContext.getCurrentInstance();
         HttpServletRequest req = (HttpServletRequest) context.getExternalContext().getRequest();
         //Map<String, Object> sessionMap =  context.getExternalContext().getSessionMap();
         User userIdentity = (User) req.getSession().getAttribute("userIdentity");
@@ -43,16 +52,16 @@ public class SiteController implements Serializable{
             String query = "SELECT * FROM user WHERE email='" + loginForm.getEmail() + "' AND password=SHA1('" + loginForm.getPassword() + "')";
             System.out.println(query);
             ResultSet result = st.executeQuery(query);
-            
+
             //if exist
             if (result.next()) {
                 userIdentity.setId(result.getInt("id"));
                 userIdentity.setEmail(result.getString("email"));
                 userIdentity.setNama(result.getString("nama"));
                 userIdentity.setIsLoggedIn(true);
-                CookieService.setCookie("email",userIdentity.getEmail(),CookieService.DEFAULT_AGE);
-                CookieService.setCookie("password",userIdentity.getPassword(),CookieService.DEFAULT_AGE);
-                req.getSession().setAttribute("userIdentity",userIdentity);
+                CookieService.setCookie("email", userIdentity.getEmail(), CookieService.DEFAULT_AGE);
+                CookieService.setCookie("password", userIdentity.getPassword(), CookieService.DEFAULT_AGE);
+                req.getSession().setAttribute("userIdentity", userIdentity);
                 return SUCCESS;
             } else {
                 return FAIL;
@@ -62,11 +71,11 @@ public class SiteController implements Serializable{
             return FAIL;
         }
     }
-    
-    public String doLogout(){
-        FacesContext context =  FacesContext.getCurrentInstance();
+
+    public String doLogout() {
+        FacesContext context = FacesContext.getCurrentInstance();
         HttpServletRequest req = (HttpServletRequest) context.getExternalContext().getRequest();
-        
+
         User userIdentity = (User) req.getSession().getAttribute("userIdentity");
         userIdentity.setIsLoggedIn(false);
         CookieService.clearCookie("email");
@@ -81,6 +90,5 @@ public class SiteController implements Serializable{
     public void setLoginForm(User loginForm) {
         this.loginForm = loginForm;
     }
-    
-    
+
 }

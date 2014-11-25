@@ -27,7 +27,7 @@ public class AdminFilter implements Filter{
         HttpServletResponse res = (HttpServletResponse) response;
 
         User userIdentity = (User) req.getSession().getAttribute("userIdentity");
-        if (!userIdentity.getIsAdmin()) {
+        if (userIdentity == null || !userIdentity.getIsAdmin()) {
             res.sendError(403,"Anda tidak berhak mengakses halaman ini");
         } else {
             chain.doFilter(request,response);
