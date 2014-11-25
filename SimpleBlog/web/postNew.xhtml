@@ -16,22 +16,20 @@
             <h2>Tambah Post</h2>
 
             <div id="contact-area">
-                <h:form>
+                <h:form id="NewPost">
                     
                     <h:inputHidden id="EditMode" value="#{postController.post.id}"/>
                     
-                    <label for="Judul">Judul:</label>
-                    <h:inputText id="Judul" value="#{postController.post.title}" title="CustomerId" required="true" requiredMessage="Judul harus diisi" />
+                    <h:outputLabel for="Judul" value="Judul:" />
+                    <h:inputText id="Judul" value="#{postController.post.title}" label="Judul" title="Judul" required="true" requiredMessage="Judul tidak boleh kosong" />
               
-                    <label for="Tanggal">Tanggal:</label>
-                    <h:inputText id="Tanggal" value="#{postController.post.date}" />
+                    <h:outputLabel for="Tanggal" value="Tanggal:" />
+                    <h:inputText id="Tanggal" value="#{postController.post.date}" label="Tanggal" title="Tanggal" required="true" requiredMessage="Tanggal tidak boleh kosong" />
 
-                    <label for="Konten">Konten:</label>
-                    <h:inputTextarea id="Konten" rows="20" cols="20" value="#{postController.post.content}" />
-
-                    <h:commandLink action="#{postController.new}" onclick="validatePost(Judul, Tanggal, Konten))"> 
-                        <h:outputText value="Submit"></h:outputText>
-                    </h:commandLink>
+                    <h:outputLabel for="Konten" value="Konten:" />
+                    <h:inputTextarea id="Konten" value="#{postController.post.content}" label="Konten" title="Konten" rows="20" cols="20" required="true"  requiredMessage="Konten tidak boleh kosong" />
+                    
+                    <h:commandButton type="submit" value="Submit" action="#{postController.new}" onclick="return validatePost();" />
 
                 </h:form>
             </div>

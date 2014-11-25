@@ -44,31 +44,36 @@ function loadComment(url) {
   xmlhttp.send();
 }
 
-function validatePost(post) {
-  if (isBlank(post.Judul.value)) {
+function validatePost() {
+  console.log("validatePost is called");
+  judul = document.getElementById("NewPost:Judul");
+  tanggal = document.getElementById("NewPost:Tanggal");
+  konten = document.getElementById("NewPost:Konten");
+    
+  if (isBlank(judul.value)) {
     alert("Judul Tidak Boleh Kosong");
     return false;
   }
 
-  if (isBlank(post.Tanggal.value)) {
+  if (isBlank(tanggal.value)) {
     alert("Tanggal Tidak Boleh Kosong");
     return false;
   }
 
-  if (isBlank(post.Konten.value)) {
+  if (isBlank(konten.value)) {
     alert("Konten Tidak Boleh Kosong");
     return false;
   } 
 
   var regex = /^(\d{1,2})-(\d{1,2})-(\d{4})$/
-  if (!regex.test(post.Tanggal.value)) {
-    alert("Format Tanggal Tidak Valid");
+  if (!regex.test(tanggal.value)) {
+    alert("Format Tanggal Harus dd-mm-yyyy");
     return false;
   }
 
-  var dd = post.Tanggal.value.split("-")[0];
-  var mm = post.Tanggal.value.split("-")[1];
-  var yy = post.Tanggal.value.split("-")[2];
+  var dd = tanggal.value.split("-")[0];
+  var mm = tanggal.value.split("-")[1];
+  var yy = tanggal.value.split("-")[2];
   var date = new Date(yy, mm - 1, dd);
   if ((date.getDate() != dd) || (date.getMonth() + 1 != mm) || (date.getFullYear() != yy)) {
     alert("Angka Yang Dimasukkan Bukanlah Tanggal");
