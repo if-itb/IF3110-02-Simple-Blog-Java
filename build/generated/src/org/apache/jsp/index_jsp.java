@@ -90,7 +90,7 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("<div class=\"wrapper\">\n");
       out.write("\n");
       out.write("<nav class=\"nav\">\n");
-      out.write("    <a style=\"border:none;\" id=\"logo\" href=\"index.php\"><h1>Simple-Blog<span>-of-</span>Bangsatya</h1></a>\n");
+      out.write("    <a style=\"border:none;\" id=\"logo\" href=\"index.php\"><h1>Simple-Blog<span>-of-</span>Bang-Satya-Ilmi-Ojan</h1></a>\n");
       out.write("    <ul class=\"nav-primary\">\n");
       out.write("        <li><a href=\"new_post.jsp\">+ Tambah Post</a></li>\n");
       out.write("    </ul>\n");
@@ -105,11 +105,7 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
 				PostBean pBean =  new PostBean();
 				for(int i=0;i<pBean.listManyPost().size();i++){
 			
-      out.write("\n");
-      out.write("\t\t\t\t\t\n");
-      out.write("\t\t\t\t\t\n");
-      out.write("\t\t\t\t\t\n");
-      out.write("\t\t\t\t\t\n");
+      out.write("\t\n");
       out.write("\t\t\t<li class=\"art-list-item\">\n");
       out.write("\t\t\t\t<div class=\"art-list-item-title-and-time\">\n");
       out.write("\t\t\t\t\t<h2 class=\"art-list-title\"><a href=\"show_post.php?id=");
@@ -120,6 +116,9 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("</a></h2>\n");
       out.write("\t\t\t\t\t<div class=\"art-list-time\">");
  out.println(pBean.listManyPost().get(i).getTanggal()); 
+      out.write("</div>\n");
+      out.write("\t\t\t\t\t<div class=\"art-list-owner\">Owner:&nbsp;");
+ out.println(pBean.listManyPost().get(i).getOwner()); 
       out.write("</div>\n");
       out.write("\t\t\t\t</div>\n");
       out.write("\t\t\t\t<p>");
@@ -132,6 +131,7 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
  out.println(pBean.listManyPost().get(i).getId()); 
       out.write(");\">Hapus</a>\n");
       out.write("\t\t\t\t</p>\n");
+      out.write("\t\t\t\t\n");
       out.write("\t\t\t</li>\t\n");
       out.write("\t\t\t");
 
