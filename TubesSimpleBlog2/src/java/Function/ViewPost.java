@@ -28,7 +28,7 @@ import javax.faces.event.ComponentSystemEvent;
  * @author ASUS
  */
 @ManagedBean(name = "viewPost", eager = true)
-@ViewScoped
+@SessionScoped
 public class ViewPost{
 //	@ManagedProperty(value="#{param.idpost}")
     private int postId;
@@ -38,7 +38,7 @@ public class ViewPost{
     private Date tanggal;
 	
 	public void showPage(int id){
-		postId = id;
+		//postId = id;
 		System.out.println("viewpost="+id);
 		String url = "jdbc:mysql://localhost:3306/datapost";
 		String driver = "com.mysql.jdbc.Driver";
@@ -59,6 +59,9 @@ public class ViewPost{
 			conn.close();
 			} catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException e) {
 			}
+		 
+		// ListKomentar listKomen = new ListKomentar();
+		// listKomen.showPage(id);
 	}
 	
     public int getPostId(){

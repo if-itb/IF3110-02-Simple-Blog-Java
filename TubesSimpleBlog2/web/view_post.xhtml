@@ -8,28 +8,33 @@ and open the template in the editor.
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
 	  xmlns:f="http://xmlns.jcp.org/jsf/core"
-	  xmlns:c="http://java.sun.com/jsp/jstl/core">
+	  xmlns:c="http://java.sun.com/jsp/jstl/core"
+	  xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
-        <title>TODO supply a title</title>
+        <title>View Post</title>
         <meta name="viewport" content="width=device-width"/>
     </h:head>
+	div id="header">Simple Blog </div>
     <h:body> 
-		VIEW POST
+		<h1>VIEW POST</h1>
+		<hr/>
 		#{viewPost.showPage(param['idpost'])}
 		#{listKomentar.showPage(param['idpost'])}
 		<br/><h:outputText value="#{viewPost.postId}"></h:outputText> 
-        <br/><h:outputText value="#{viewPost.judul}"></h:outputText>      
-         <br/><h:outputText value="#{viewPost.konten}"></h:outputText>
+        <br/><h2> value="#{viewPost.judul}"</h2>      
+		<br/><h:outputText><p>#{viewPost.konten}</p></h:outputText>
+		
          <br/> <h:outputText value="#{viewPost.tanggal}"></h:outputText>
 		 
 		 <c:forEach items="#{listKomentar.arrKomentar}" var="komen">
+			 <h:form>
 			<br/><h:outputText value="#{komen.commentid}"></h:outputText> 
             <br/><h:outputText value="#{komen.nama}"></h:outputText> 
 			<br/><h:outputText value="#{komen.tanggal}"></h:outputText>
-			<br/> <h:outputText value="#{komen.komentar}"></h:outputText>
+			<br/><h:outputText value="#{komen.komentar}"></h:outputText>
                         <hr></hr>
+			</h:form>
 		</c:forEach>
-		 #{komentar.clear()}
 		<p>           
             <h:form> 
 				Nama: <h:inputText id="kname" value="#{komentar.nama}" />

@@ -5,15 +5,19 @@
 	  xmlns:ui="http://java.sun.com/jsf/facelets"
 	  xmlns:c="http://java.sun.com/jsp/jstl/core"
 	  xmlns:f="http://xmlns.jcp.org/jsf/core">
+	<link rel="stylesheet" href="style.css" type="text/css" />
+
     <h:head>
         <title>Simple Blog</title>
     </h:head>
     <!--h:body onload="#{ViewPost.connectDb()}"--> 
     <h:body>
-	    Simple Blog
-		
-		<c:forEach items="#{listPost.arrPostPublished}" var="pos">
-			<h:form>
+		<div class="header"> Simple Blog </div>
+		<hr></hr>
+		<h2> List Post </h2>
+		<p>
+		<c:forEach items="#{listPost.arrPostPublished}" var="pos">			
+			<h:form>				
 			<br/><h:outputText value="#{pos.IDPost}"></h:outputText> 
 			<br/><h:commandLink action="view_post" value="#{pos.title}">
 				<f:param name="idpost" value="#{pos.IDPost}" />
@@ -23,15 +27,17 @@
 			<br/><h:commandLink action="#{post.deletePost()}" value="Delete" onclick="return confirm('Apakah Anda yakin menghapus post ini?');">
 				<f:param name="idpost" value="#{pos.IDPost}" />
 			</h:commandLink>
-			</h:form>
-			<br/>=+=+=+=+=+=+=+=+=+=+=+=+=+
+				</h:form>
+			<hr/>
 		</c:forEach>
+		</p>
 		<h:form>
 		
-		<br/><h:commandLink action="usermanagement" value="User Management">
+		<br/>
+		<h:commandLink action="usermanagement" value="User Management">
 		</h:commandLink> 
 		</h:form>
-		
+		<div class="footer">rita | cilvia | linda </div>		
     </h:body>
 </html>
 

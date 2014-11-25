@@ -44,7 +44,7 @@ public class ListPost {
 				pos = new Post();
 				pos.setIDPost(res.getInt("PID"));
 				pos.setTitle(res.getString("Judul"));
-				pos.setDate(res.getString("Tanggal"));                
+				pos.setDate(res.getDate("Tanggal"));                
 				pos.setContent(res.getString("Konten"));                
 				pos.setStatus(res.getString("Status"));
 				if (pos.getStatus().equals("published")){
