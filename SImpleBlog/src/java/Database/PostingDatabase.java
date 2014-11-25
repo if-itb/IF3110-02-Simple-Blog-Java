@@ -7,13 +7,8 @@
 package Database;
 
 import Login.Login;
-import static com.sun.corba.se.spi.presentation.rmi.StubAdapter.request;
-import com.sun.faces.context.RequestParameterMap;
 import java.io.IOException;
-import java.io.Serializable;
-import static java.lang.System.out;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -26,7 +21,6 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
-import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.Cookie;
@@ -183,12 +177,11 @@ public class PostingDatabase {
           String query = "Update post Set status=\"deleted\" WHERE ID="+id;
           int rs;
           rs = stmt.executeUpdate(query);
-          PreparedStatement ps;
           ExternalContext extcon = FacesContext.getCurrentInstance().getExternalContext();
           extcon.redirect("/SImpleBlog/Home.xhtml");
     }
     
-     public void PublishPost() throws ClassNotFoundException, SQLException, IOException, ParseException{
+    public void PublishPost() throws ClassNotFoundException, SQLException, IOException, ParseException{
           Connection con = makeConnection();
           Statement stmt = con.createStatement();
           String query = "Update post Set status=\"published\" WHERE ID="+id;
@@ -334,7 +327,6 @@ public class PostingDatabase {
         while(rs.next()){
             activeUsername = rs.getString("Username");
          }
-        System.out.println("THISSSSSSS IS SSSSSSS"+activeUsername);
         return activeUsername;
     }
     
@@ -385,7 +377,6 @@ public class PostingDatabase {
     
     public void checkAdminRole() throws ClassNotFoundException, SQLException, IOException{
         ExternalContext extCont = FacesContext.getCurrentInstance().getExternalContext();
-        System.out.println("ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ");
         if(getLoginState())
         {
             Cookie cUsername = login.getUserCookie();
@@ -528,19 +519,36 @@ public class PostingDatabase {
         return records;
     }
     
-    public void InsertNewUser(){
-        System.out.println("oiiiiii");
+    public void setInsertNewUser() throws ClassNotFoundException, SQLException{
         HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
-        String Name = request.getParameter("CreateName");
-        String Username = request.getParameter("CreateUsername");
-        String Email = request.getParameter("CreateEmail");
-        String Password = request.getParameter("CreatePassword");
+        String Name = request.getParameter("Name");
+        String Username = request.getParameter("Username");
+        String Email = request.getParameter("Email");
+        String Password = request.getParameter("Password");
         String Role = SelectedItem;
-        System.out.println(Name);
-        System.out.println(Username);
-        System.out.println(Email);
-        System.out.println(Password);
-        System.out.println(Role);
+        
+        try (Connection con = makeConnection()) {
+            PreparedStatement ps;
+            String query = "INSERT INTO `user` (`Username`,`Password`, `Name`, `email`, `Role`) VALUES (?,?,?,?,?)";
+            ps= con.prepareStatement(query);
+            ps.setString(1,Username);
+            ps.setString(2,Password);
+            ps.setString(3,Name);
+            ps.setString(4,Email);
+            ps.setString(5,Role);
+            int i = ps.executeUpdate();
+        }
+    }
+    
+    public void setDeleteUser() throws ClassNotFoundException, SQLException{
+        System.out.println("username si huang: " + username);
+        Connection con = makeConnection();
+        Statement stmt = con.createStatement();
+        String query = "Delete from user where username=\"" + username + "\";";
+        System.out.println("query : " + query);
+        int rs;
+        rs = stmt.executeUpdate(query);
+        PreparedStatement ps;
     }
     
 }

@@ -69,7 +69,9 @@ and open the template in the editor.
                             <u><h:commandLink value="Update" action="#" id="update" >
                                 <f:param name ="throwediduser" value = "#{u.username}"></f:param>
                             </h:commandLink></u> |
-                            <u><h:commandLink value="Delete" action="#"/></u>
+                            <u><h:commandLink value="Delete" action="#{Posting.setDeleteUser()}">
+                                <f:param name ="throwediduser" value = "#{u.username}"></f:param>
+                            </h:commandLink></u>
                         </h:form>
                     </h:column>
                 </h:dataTable>
@@ -95,32 +97,28 @@ and open the template in the editor.
                 <p class="home"><b>Create New User</b></p>
                 <div id="contact-area2">
                 <!--form action="#" method="post">-->
-                <h:form>
+               <h:form>
                     <label for="Name">Name:</label>
-                    <input type="text" name="CreateName" id="CreateName" required="required"/>
+                    <input type="text" name="Name" id="Name" required="required"/>
 
                     <label for="Username">Username:</label>
-                    <input type="text" name="CreateUsername" id="CreateUsername" required="required"/>
+                    <input type="text" name="Username" id="Username" required="required"/>
 
                     <label for="Email">Email:</label>
-                    <input type="text" name="CreateEmail" id="CreateEmail" required="required"/>
+                    <input type="text" name="Email" id="Email" required="required"/>
 
                     <label for="Password">Password:</label>
-                    <input type="password" name="CreatePassword" id="CreatePassword" required="required"/>
-                    
+                    <input type="password" name="Password" id="Password" required="required"/>
+
                     <label for="Role">Role:</label>
-                    <h:form>
-                        <h:selectOneMenu id="Role" value="#{Posting.selectedItem}">
-                            <f:selectItem itemValue="Owner" id="CreateOwner"/>
-                            <f:selectItem itemValue="Editor" id="CreateEditor"/>
-                            <f:selectItem itemValue="Admin" id="CreateAdmin"/>
-                        </h:selectOneMenu>
-                    </h:form>
+                    <h:selectOneMenu id="Role" value="#{Posting.selectedItem}">
+                        <f:selectItem itemValue="Owner" id="CreateOwner"/>
+                        <f:selectItem itemValue="Editor" id="CreateEditor"/>
+                        <f:selectItem itemValue="Admin" id="CreateAdmin"/>
+                    </h:selectOneMenu>
                     
                     <br/><br/>
-                    <h:form>
-                        <h:commandButton type="submit" value="Register" class="submit-button" onclick = "confirmPublish()" action ="#{Posting.InsertNewUser()}" />
-                    </h:form>
+                    <h:commandButton value="Register" class="submit-button" action="#{Posting.setInsertNewUser()}" />
                 </h:form>
                 </div>
                 
