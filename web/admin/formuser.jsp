@@ -68,10 +68,11 @@
                     out.println("<input type='text' value='"+user.getRole()+"' name='role'/>");
 
                     out.println("<input type='submit' id='submit' name='editButton' value='Edit Now'>");
-                }
-                out.println("<form action='../ButtonControllerServlet' method='POST'>"
+                    
+                    out.println("<form action='../ButtonControllerServlet' method='POST'>"
                                         + "<input type='submit' id='submit' name='delUser' value='Delete User'>"
                                     + "</form>");
+                }                
             %>
         </div>
 
