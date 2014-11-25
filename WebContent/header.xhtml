@@ -1,13 +1,16 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
-	<ui:composition>
-		<ul>
+<ui:composition>
+	<ul>
 		<li>List Post</li>
 		<li>Add Post</li>
 		<li>Delete Post</li>
-		<li>Logout</li>
-		</ul>
-	</ui:composition>
+		<li>Username: #{userData.details.username}</li>
+		<li><h:commandLink action="#{userData.logout}"
+				value="Logout" /></li>
+	</ul>
+</ui:composition>
 </html>

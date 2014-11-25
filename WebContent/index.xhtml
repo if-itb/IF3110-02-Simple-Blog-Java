@@ -12,9 +12,9 @@
 </h:head>
 
 <h:body>
-	<ul>
-
-	</ul>
+	<ui:insert name="header">
+		<ui:include src="header.xhtml" />
+	</ui:insert>
 	<h1>Simple-Blog</h1>
 	<ul>
 		<ui:repeat value="#{databaseObject.postList}" var="item">
