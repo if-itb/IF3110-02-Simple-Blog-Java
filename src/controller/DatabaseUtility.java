@@ -25,8 +25,12 @@ public class DatabaseUtility {
 
 			while (rs.next()) {
 				if (rs.getString(2).equals(username)
-						&& rs.getString(3).equals(password))
+						&& rs.getString(3).equals(password)) {
 					result = new UserDetails(rs.getString(4), rs.getString(5), rs.getInt(1));
+					result.setRole(rs.getInt(6));
+					result.setPassword(rs.getString(3));
+					result.setUsername(rs.getString(2));
+				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

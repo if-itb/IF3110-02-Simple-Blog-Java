@@ -2,6 +2,8 @@ package entities;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.faces.bean.*;
 import javax.faces.context.FacesContext;
@@ -56,12 +58,6 @@ public class UserData implements Serializable {
 
 		return null;
 	}
-	
-	public String logout() {
-		loggedIn = false;
-		details = null;
-		return("");
-	}
 
 	public void check() {
 		if (isLoggedIn()) {
@@ -89,4 +85,27 @@ public class UserData implements Serializable {
 		return "index?faces-redirect=true";
 	}
 
+	public List<NavigationMenu> getUserMenu(){
+		List<NavigationMenu> result = new ArrayList<NavigationMenu>();
+		if(loggedIn == false){
+			return result;
+		}else if(details.getRole() == 10){
+			result.add(new NavigationMenu("Home","index.jsf"));
+			result.add(new NavigationMenu("Add Post","add_post.jsf"));
+			result.add(new NavigationMenu("My Post", ""));
+			return result;
+		}else if(details.getRole() == 20){
+			result.add(new NavigationMenu("Home","index.jsf"));
+			result.add(new NavigationMenu("Editor Menu", ""));
+			return result;
+		}else if(details.getRole() == 30){
+			result.add(new NavigationMenu("Home","index.jsf"));
+			result.add(new NavigationMenu("Add Post","add_post.jsf"));
+			result.add(new NavigationMenu("Post Manager",""));
+			result.add(new NavigationMenu("User Manager","crud.jsf"));
+			return result;
+		}else{
+			return result;
+		}
+	}
 }
