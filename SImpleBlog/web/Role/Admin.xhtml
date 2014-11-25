@@ -68,14 +68,16 @@ and open the template in the editor.
                         <div class="art-list-time">#{p.tanggal}</div>
                     </div>
                     <p> #{p.content}&hellip;</p>
-                    <p>|
-                        <a href="#">Edit</a>
-                    |</p>
-                    <h:form><p>|
-                        <h:commandLink onclick = "return confirmChoice()" value ="Delete" action="#{Posting.deletePost()}">
-                            <f:param name ="throwedid" value = "#{p.id}"></f:param>
-                        </h:commandLink>|</p>
-                    </h:form>
+                    <p>
+                        <h:form styleClass="editbutton">
+                            <h:commandLink value="Edit|" action="#{Editpost.Redirect(p.id)}"></h:commandLink>
+                        </h:form>
+                        <h:form styleClass="publishbutton">
+                            <h:commandLink onclick = "return confirmDelete()" value ="Delete" action="#{Posting.deletePost()}">
+                                <f:param name ="throwedid" value = "#{p.id}"></f:param>
+                            </h:commandLink>
+                        </h:form>
+                    </p>
                 </li>
               </c:forEach>
           </ul>
