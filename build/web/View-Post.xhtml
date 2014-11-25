@@ -18,24 +18,43 @@ and open the template in the editor.
             <ui:define name="content">
                 <section class="post">
                     <header class="post-header">
-                        <time class="post-meta">#{ListPost.fetchPost().date}</time>
-                        <h2 class="post-title">#{ListPost.fetchPost().judul}</h2>
+                        <h2 class="post-title">#{Post.fetchPost(param['id']).judul}</h2>
 
                         <p class="post-meta">
-                            By #{ListPost.fetchPost().author} 
+                            By #{Post.fetchPost(param['id']).author}
+                            | <time>#{Post.fetchPost(param['id']).date}</time>
                         </p>
                     </header>
 
                     <div class="post-description">
                         <p>
-                            #{ListPost.fetchPost().judul}
+                            #{Post.fetchPost(param['id']).konten}
                         </p>
                           
                     </div>
                 </section>
                 <h1 class="content-subhead">Komentar</h1>
                 <section class="komentar">
-                    
+                    <form class="pure-form" method="post" id="comment_form">
+                        <label for="Nama">Nama:</label>
+                        <input type="text" name="Nama" id="Nama"/>
+                        <br/> <br/>
+                        <label for="Email">Email:</label>
+                        <input type="text" name="Email" id="Email"/>
+                        <br/> <br/>
+                        <label for="Komentar">Komentar:</label><br/>
+                        <textarea name="Komentar" rows="10" cols="50" id="Komentar"></textarea>
+                         <br/> <br/>
+                        <input type="submit" name="submit" value="submit" class="pure-button"/>
+                    </form>
+                    <ul class="komentar-list">
+                        <li>
+                            <p class="Nama">#{komentar.tanggal} | #{komentar.nama}</p>
+                                <br/>
+                            <p class="post-meta">
+                            </p>
+                        </li>
+                    </ul>
                 </section>
             </ui:define>
         </ui:composition>>

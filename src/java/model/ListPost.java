@@ -24,29 +24,34 @@ import javax.faces.bean.RequestScoped;
 @RequestScoped
 public class ListPost {
     
-    ArrayList<Post> listPost;
-    ArrayList<Post> unpublishedPost;
+    ArrayList<Post> listPost= new ArrayList<Post>();
+    ArrayList<Post> unpublishedPost = new ArrayList<Post>();
     /**
      * Creates a new instance of ListPost
      * @return Post
      * @throws java.sql.SQLException
      */
-    public Post fetchPost() throws SQLException {
+    
+    public ArrayList<Post> fetchPublishedPost() throws SQLException {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/simple_blog_2", "root", "");
             Statement sta = conn.createStatement();
-            String Sql = "select * from entries";
+            String Sql = "select * from entries where PUBLISHED=true";
             ResultSet rs = sta.executeQuery(Sql);
-            rs.next();
-            Post p = new Post();
-            p.setJudul(rs.getString(2));
-            p.setDate(rs.getString(3));
-            p.setKonten(rs.getString(4));
-            p.setPID(rs.getInt(1));
-            p.setAuthor(rs.getString(6));
-            p.setPublished(rs.getBoolean(5));
-            return p;
+            while(rs.next()) {
+                Post p = new Post();
+                p.setJudul(rs.getString(2));
+                p.setDate(rs.getString(3));
+                p.setKonten(rs.getString(4));
+                p.setPID(rs.getInt(1));
+                p.setAuthor(rs.getString(6));
+                p.setPublished(rs.getBoolean(5));
+                listPost.add(p);
+                System.out.println("fdfsf");
+            }
+            conn.close();
+            return listPost;
         } catch (ClassNotFoundException ex) {
             if (1==1)throw new SQLException("ggal");
             Logger.getLogger(ListPost.class.getName()).log(Level.SEVERE, null, ex);
@@ -54,12 +59,30 @@ public class ListPost {
         }
     }
     
-    public ArrayList<Post> fetchPublishedPost() {
-        return listPost;
-    }
-    
-    public ArrayList<Post> fetchUnpublishPost(){
-        return unpublishedPost;
+    public ArrayList<Post> fetchUnpublishPost() throws SQLException{
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/simple_blog_2", "root", "");
+            Statement sta = conn.createStatement();
+            String Sql = "select * from entries where PUBLISHED=false";
+            ResultSet rs = sta.executeQuery(Sql);
+            while(rs.next()) {
+                Post p = new Post();
+                p.setJudul(rs.getString(2));
+                p.setDate(rs.getString(3));
+                p.setKonten(rs.getString(4));
+                p.setPID(rs.getInt(1));
+                p.setAuthor(rs.getString(6));
+                p.setPublished(rs.getBoolean(5));
+                listPost.add(p);
+            }
+            conn.close();
+            return listPost;
+        } catch (ClassNotFoundException ex) {
+            if (1==1)throw new SQLException("ggal");
+            Logger.getLogger(ListPost.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
     }
     
     
