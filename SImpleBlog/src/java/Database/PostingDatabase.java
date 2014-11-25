@@ -230,7 +230,7 @@ public class PostingDatabase {
                     }
                     if(getUserRole().equals("Admin") || getUserRole().equals("admin"))
                     {
-                        extCont.redirect("/SImpleBlog/Role/Owner.xhtml"); // <<<<<<<Ini diganti jadi admin.xhtml nanti
+                        extCont.redirect("/SImpleBlog/Role/Admin.xhtml");
                     }
                 }
                 else{
