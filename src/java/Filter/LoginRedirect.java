@@ -32,7 +32,7 @@ public class LoginRedirect implements Filter{
         String isLogin = (String) req.getSession().getAttribute("isLogin");
         if ((isLogin!=null) && (isLogin.equals("yes"))) {
             HttpServletResponse res = (HttpServletResponse) response;
-            res.sendRedirect("/WebApplication1/index.jsf");
+            res.sendRedirect("/Simple-Blog/owner_home.jsf");
         }
         else {
             chain.doFilter(request,response);

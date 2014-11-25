@@ -36,7 +36,7 @@ public class LoginFilter implements Filter{
         }
         else {
             HttpServletResponse res = (HttpServletResponse)response;
-            res.sendRedirect("/WebApplication1/login.jsf");
+            res.sendRedirect("/Simple-Blog/login.jsf");
         }
     }
 

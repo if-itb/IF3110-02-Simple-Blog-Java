@@ -1,6 +1,8 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+<h:head>
 
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -32,9 +34,9 @@
 <title>Simple Blog</title>
 
 
-</head>
+</h:head>
 
-<body class="default">
+<h:body class="default">
 <div class="wrapper">
 
 <nav class="nav">
@@ -57,22 +59,19 @@
 
 <div class="form">
 	<div id="contact-area">
-		<form method="post" action="#">
+		<h:form>
 			<label for="username">Username:</label>
-			<input type="text" name="username" id="username"/>
-
+                        <h:inputText id="username" value="#{createUserBean.user.username}"></h:inputText>
 			<label for="password">Password:</label>
-			<input type="text" name="password" id="password"/>
+                        <h:inputSecret id="password" value="#{createUserBean.user.password}"></h:inputSecret>
 			
 			<label for="role">Role:</label>
-			<select name="role" id="role">
-			  <option value="Admin">Admin</option>
-			  <option value="Owner">Owner</option>
-			  <option value="Editor">Editor</option>
-			</select> <br/> <br/>
+			<h:selectOneMenu value="#{createUserBean.user.role}" id="role">
+			  <f:selectItems value="#{roleList.roles}"/>
+			</h:selectOneMenu> <br/> <br/>
 
-			<input type="submit" name="submit" value="Simpan" class="submit-button"/>
-		</form>
+                        <h:commandButton value="Add User" action="#{createUserBean.createUser}" class="submit-button"></h:commandButton>
+		</h:form>
 	</div>
 </div>
 
@@ -90,5 +89,5 @@
 
 </div>
 
-</body>
+</h:body>
 </html>

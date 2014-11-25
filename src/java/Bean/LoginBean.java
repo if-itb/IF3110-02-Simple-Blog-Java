@@ -1,9 +1,12 @@
 package Bean;
 
 
+import Model.User;
+import Model.Users;
 import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
@@ -18,10 +21,21 @@ import javax.servlet.http.HttpSession;
  * @author kevinyu
  */
 @ManagedBean
-@SessionScoped
-public class LoginBean implements Serializable{
+@RequestScoped
+public class LoginBean {
     private String username;
     private String password;
+    
+    @ManagedProperty(value="#{user}")
+    private User user;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public String getPassword() {
         return password;
@@ -41,13 +55,23 @@ public class LoginBean implements Serializable{
     
     public String doNavigation() {
         boolean isExist = true;
+        User new_user;
+        new_user = Users.getInstance().validateUser(username,password);
+        isExist = new_user!=null;
+        
+        user.setId(new_user.getId());
+        user.setPassword(new_user.getPassword());
+        user.setRole(new_user.getRole());
+        user.setUsername(new_user.getUsername());
+        
+        
         if (isExist){
             HttpSession session = (HttpSession)FacesContext.getCurrentInstance().getExternalContext().getSession(true);
             session.setAttribute("isLogin","yes");
-            return "index?faces-redirect=true";
+            return "owner_home?faces-redirect=true";
         }
         else {
-            return "login";
+            return "login?faces-redirect=true";
         }
     }
     
