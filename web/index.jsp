@@ -101,8 +101,7 @@
                             sb.append(words[i] + " ");  
                         }   
                         String First30WordPost = sb.toString();
-                        out.println(First30WordPost);
-                        
+                        out.println(First30WordPost);                        
                     }
 		}
 		catch (SQLException ex)
@@ -155,15 +154,16 @@
 
 <!-- Vaildate Delete -->
 <script>
-  function validatedelete()
+  function validatedelete(post_id)
   {
       console.log("validatedelete");
-      var x;
-      if (confirm("Apakah Anda yakin menghapus post ini?") === true) {
-          
-      } else {
-        x = "Cancel";
-      }
+      var answer = confirm("Apakah Anda yakin menghapus post ini?")
+        if (answer){      
+          document.location= "DeletePostHandling?post_id="+post_id;
+          alert("Post berhasil dihapus");
+        }else{
+          alert("Post tidak dihapus. Terima kasih.");
+        }
   } 
  </script>
 </body>

@@ -120,15 +120,17 @@
             <h2>Komentar</h2>
 
             <div id="contact-area">
-                <form method="post" action="#">
+                <form method="post" action="loadkomentar">
+                    <input type="hidden" name="id" post_id="post_id" value=" <%= request.getParameter("post_id")%> ">
+                    
                     <label for="Nama">Nama:</label>
                     <input type="text" name="Nama" id="Nama">
         
                     <label for="Email">Email:</label>
-                    <input type="text" name="Email" id="Email">
+                    <input type="text" name="Email" id="Email" onchange="validateEmail()">
                     
                     <label for="Komentar">Komentar:</label><br>
-                    <textarea name="Komentar" rows="20" cols="20" id="Komentar"></textarea>
+                    <textarea name="Komentar" rows="20" cols="20" id="Komentar" disabled></textarea>
 
                     <input type="submit" name="submit" value="Kirim" class="submit-button">
                 </form>
@@ -180,6 +182,57 @@
 <script type="text/javascript" src="assets/js/fittext.js"></script>
 <script type="text/javascript" src="assets/js/app.js"></script>
 <script type="text/javascript" src="assets/js/respond.min.js"></script>
+
+<!-- Vaildate Email -->
+<script>
+function validateEmail(){ 
+	console.log("validate email"); 
+	var email = document.getElementById('Email').value;
+	var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;  
+	if (email.match(mailformat)){  
+		document.getElementById('Komentar').disabled = false;  
+	}  
+	else{  
+		alert("You have entered an invalid email address!");  
+		document.getElementById('Komentar').disabled = true;  
+	}  
+}  
+</script>
+
+<script>
+    function loadkomentar(){
+	var xmlhttp;
+	console.log("load komentar");
+
+	if (window.XMLHttpRequest)
+	  {// code for IE7+, Firefox, Chrome, Opera, Safari
+	  	xmlhttp=new XMLHttpRequest();
+	  }
+	else
+	  {// code for IE6, IE5
+	  	xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	  }
+	xmlhttp.onreadystatechange=function()
+	  {
+	  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+	    {
+	   		document.getElementById("komen").innerHTML=xmlhttp.responseText;
+
+	    }
+	  }
+	xmlhttp.open("POST","AddCommentHandling",true);
+		console.log("oper komentar ke servlet");
+	xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+	var post_id=document.getElementById('post_id').value; 
+	var Nama=document.getElementById('Nama').value;	
+	var Email=document.getElementById('Email').value;
+	var Komentar=document.getElementById('Komentar').value;
+		console.log(oper value variabel);
+	xmlhttp.send("post_id="+post_id+"&Nama="+Nama+"&Email="+Email+"&Komentar="+Komentar+"");
+		console.log("kutil3 ketupat");
+
+}
+</script>
 
 </body>
 </html>
