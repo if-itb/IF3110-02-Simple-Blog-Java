@@ -126,13 +126,37 @@ public class Connector {
         Statement st;
         try {
             st = connection.createStatement();
-            String sql = ("I * FROM post WHERE Category = 0 ORDER BY date;");
+            String sql = ("SELECT * FROM post WHERE Category = 0 ORDER BY date;");
             ResultSet rs = st.executeQuery(sql);
             if(rs.next()) {
             }
         } catch (SQLException ex) {
             System.err.println("Gagal mengambil data");
         }
+    }
+    
+    public void setComment(String content, int post_id, String email, int user_id){
+	Statement st;
+	try{
+	    st = connection.createStatement();
+	    String sqlQuery = "";
+	    if (user_id != 0) {
+		sqlQuery = ("INSERT INTO `post_comment` `comment-user-id` `comment-content` `comment-email` `comment-post-id` VALUES ");
+		sqlQuery = sqlQuery + "`" + user_id + "`"; 
+	    }
+	    else {
+		sqlQuery = ("INSERT INTO `post_comment` `comment-content` `comment-email` `comment-post-id` VALUES ");
+	    }
+	    
+		sqlQuery = sqlQuery + "`" + content + "`"; 
+		sqlQuery = sqlQuery + "`" + email + "`"; 
+		sqlQuery = sqlQuery + "`" + post_id + "`"; 
+	    ResultSet rs = st.executeQuery(sqlQuery);
+	    if (rs.next()){}
+	} catch (Exception e) {
+	    System.err.println("Gagal insert comment :v ");
+	    System.out.println(e);
+	}
     }
     public void closeConnection(){
         System.out.println("Closing the connection.");
