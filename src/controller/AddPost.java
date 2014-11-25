@@ -60,8 +60,11 @@ public class AddPost {
 			@SuppressWarnings("deprecation")
 			String date = ""+(1900+post.getDate().getYear())+"/"+(post.getDate().getMonth()+1)+"/"+post.getDate().getDate();
 			
+			String inTitle = DatabaseUtility.forHTML(post.getTitle());
+			String inContent = DatabaseUtility.forHTML(post.getContent());
+			
 			String query = "INSERT INTO post (id_user, judul, isi, waktu, is_deleted, is_published) "
-					+ "VALUES ("+alpha.getDetails().getUserId()+",'"+post.getTitle()+"','"+post.getContent()+"',"
+					+ "VALUES ("+alpha.getDetails().getUserId()+",'"+ inTitle +"','"+ inContent +"',"
 					+ "'"+date+"'"+",0,0)";
 			
 			dbUtil.execute(query);
