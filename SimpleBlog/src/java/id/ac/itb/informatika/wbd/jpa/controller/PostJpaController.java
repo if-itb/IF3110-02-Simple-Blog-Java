@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package id.ac.itb.informatika.wbd.jpa.controller;
 
 import id.ac.itb.informatika.wbd.jpa.entities.Post;
@@ -27,11 +22,10 @@ public class PostJpaController {
     }
     
     public void create(Post post) throws Exception {
-        EntityManager em = null;
+        EntityManager em = getEntityManager();
         
         try {
             utx.begin();
-            em = getEntityManager();
             em.persist(post);
             utx.commit();
         } catch (Exception ex) {
@@ -43,8 +37,22 @@ public class PostJpaController {
         }
     }
     
-    public void edit(Post post) {
+    public void edit(Post post) throws Exception {
+        EntityManager em = getEntityManager();
         
+        try {
+            utx.begin();
+            //Post persistentPost = em.find(Post.class, post.getId());
+            em.joinTransaction();
+            post = em.merge(post);
+            utx.commit();
+        } catch (Exception ex) {
+            utx.rollback();
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
     }
     
     public void destroy(Long id) {

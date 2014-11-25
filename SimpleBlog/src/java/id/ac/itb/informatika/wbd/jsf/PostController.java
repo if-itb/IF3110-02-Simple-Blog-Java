@@ -50,12 +50,12 @@ public class PostController {
         String currentPostString = JsfUtil.getRequestParameter("jsfcrud.currentPost");
 	
         try {
-            if (currentPostString == null) {
+            if (postCurrent.getId() == null) {
                 jpaController.create(postCurrent);
                 JsfUtil.addSuccessMessage("Post sudah berhasil dibuat");
             } else {
                 jpaController.edit(postCurrent);
-                JsfUtil.addSuccessMessage("Post sudah berhasil diedit " + currentPostString);
+                JsfUtil.addSuccessMessage("Post sudah berhasil diedit ");
             }
         } catch (Exception e) {
             JsfUtil.ensureAddErrorMessage(e, "A persistence error occurred.");

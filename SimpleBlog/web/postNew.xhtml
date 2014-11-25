@@ -6,7 +6,7 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <ui:define name="title">
-        New Post
+        New/Edit Post
     </ui:define>
 
     <ui:define name="content">
@@ -16,7 +16,7 @@
 
         <div class="art-body">
           <div class="art-body-inner">
-            <h2>Tambah Post</h2>
+            <h2><h:outputText value="#{postController.postCurrent.id != null ? 'Edit' : 'Tambah'}" /> Post</h2>
 
             <div id="contact-area">
                 <h:form id="NewPost">
