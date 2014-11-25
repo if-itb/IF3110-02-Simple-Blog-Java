@@ -115,3 +115,4 @@ Todo
     * Melihat all post dengan bisa edit semua
     * bisa restore post
 1. Implementasi cookies supaya session lebih lama
+2. Ubah validator menjadi javascript
