@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 23, 2014 at 09:26 AM
+-- Generation Time: Nov 25, 2014 at 05:04 AM
 -- Server version: 5.6.16
 -- PHP Version: 5.5.11
 
@@ -23,22 +23,6 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `komentar`
---
-
-CREATE TABLE IF NOT EXISTS `komentar` (
-  `Id_Komentar` int(10) NOT NULL AUTO_INCREMENT,
-  `Nama` varchar(40) NOT NULL,
-  `Tanggal` date NOT NULL,
-  `Komentar` text NOT NULL,
-  `Id_Post` int(10) NOT NULL,
-  `Id_User` int(10) NOT NULL,
-  PRIMARY KEY (`Id_Komentar`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `post`
 --
 
@@ -48,21 +32,9 @@ CREATE TABLE IF NOT EXISTS `post` (
   `Tanggal` date NOT NULL,
   `Konten` text NOT NULL,
   `Id_User` int(10) NOT NULL,
+  `Published` tinyint(1) NOT NULL DEFAULT '0',
+  `Deleted` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`Id_Post`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `user`
---
-
-CREATE TABLE IF NOT EXISTS `user` (
-  `Id_User` int(10) NOT NULL AUTO_INCREMENT,
-  `Username` varchar(40) NOT NULL,
-  `Password` varchar(20) NOT NULL,
-  `Role` varchar(10) NOT NULL,
-  PRIMARY KEY (`Id_User`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
