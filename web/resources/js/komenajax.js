@@ -1,43 +1,31 @@
-function submitcomment() {
-	if(emailvalidator()) {
-		comment_add();
-		load_comment();
-		document.getElementById("Nama").value = "";
-		document.getElementById("Email").value = "";
-		document.getElementById("Komentar").value = "";
+function submitcomment(id) {
+	if(emailValidatorKomen()) {
+		comment_add(id);
+		load_comment(id);
+		document.getElementById("nama").value = "";
+		document.getElementById("email").value = "";
+		document.getElementById("komentar").value = "";
 	} 
 	return false;
 }
 
-function initAjax(){
-	var initAjax;
-	if (window.XMLHttpRequest) {
-		initAjax = new XMLHttpRequest();
-	} else {
-		initAjax = new ActiveXObject("Microsoft.XMLHTTP");
-	}
-	return initAjax;
-}
-
-function comment_add() {
-	var ajax = initAjax();
-	if(ajax) {
-		var Nama = document.getElementById("Nama").value;
-		var Email = document.getElementById("Email").value;
-		var Komentar = document.getElementById("Komentar").value;
-		var id = document.getElementById("id").value;
-			ajax.onreadystatechange = function()
+function comment_add(id) {
+                var Nama = document.getElementById("nama").value;
+		var Email = document.getElementById("email").value;
+		var Komentar = document.getElementById("komentar").value;
+        var xmlhttp = new XMLHttpRequest();
+                xmlhttp.open("GET","postComment.jsp?id="+id+"&Nama="+Nama+"&Email="+Email+"&Komentar="+Komentar,true);
+		xmlhttp.send();
+			xmlhttp.onreadystatechange = function()
 			{
-				if(ajax.readyState == 4 && ajax.status == 200)
+				if(xmlhttp.readyState == 4 && xmlhttp.status == 200)
 				{
-					load_comment();
+					load_comment(id);
 				}
 			};
-		ajax.open("GET","comment_processor.php?mode=add&id="+id+"&Nama="+Nama+"&Email="+Email+"&Komentar="+Komentar,true);
-		ajax.send();
+		
 
 	}
-}
 
 function load_comment(id) {
     var pos = document.getElementById("comments");
@@ -53,14 +41,26 @@ function load_comment(id) {
     };
 }	
 
-function emailvalidator() {
-	var email = document.getElementById("Email").value;
-	var at = email.indexOf("@");
-	var dot = email.lastIndexOf(".");
-	if (at< 1 || dot<at+2 || dot+2>=email.length) {
-	alert("Email tidak valid!");
-	return false;
-	}
-	return true;
+function emailValidatorKomen()
+{
+    email = document.getElementById("email").value;
+    if(email.length > 0)
+    {
+        var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        var result = re.test(email);
+        var ganti = document.getElementById("ganti-error-message");
+        if(!result)
+        {
+            ganti.innerHTML= '<div class="alert alert-danger">wrong email format</div>';
+        }
+        else
+        {
+            ganti.innerHTML = "";
+        }
+        return result;
+    }
+    else
+    {
+        return false;
+    }
 }
-

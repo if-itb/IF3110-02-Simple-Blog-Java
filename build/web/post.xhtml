@@ -52,6 +52,7 @@
                     <div class="col-md-3"/>
                     <div class="col-md-3"><label for="Email">Email</label></div>
                     <div class="col-md-3"><input required="true" id="email" name="email" type="text"></input></div>
+                    <div class="col-md-3" id="ganti-error-message"></div>
                 </div>
                 <div class="row form-element">
                     <div class="col-md-3"/>
@@ -60,7 +61,7 @@
                 </div>
                 <div class="row form-element">
                     <div class="col-md-6"> 
-                         <input class="btn-success" type="submit" value="Save" id="save"/>
+                        <input class="btn-success" type="submit" value="Save" id="save" onclick="submitcomment(#{postdata.id})"/>
                     </div>
                 </div>
             </form>
