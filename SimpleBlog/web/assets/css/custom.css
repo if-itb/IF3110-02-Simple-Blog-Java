@@ -41,3 +41,11 @@ background-color: orange;
 .art-header {
     height: 400px;
 }
+
+#home {
+    min-height: 320px;
+}
+
+.footer, .footer a {
+    color: white;
+}

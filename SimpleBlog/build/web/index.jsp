@@ -19,7 +19,9 @@
     "http://www.w3.org/TR/html4/loose.dtd">
 
 <f:view>
-<jsp:include page="header.jsp"/>
+<jsp:include page="header.jsp"> 
+<jsp:param name="pageTitle" value="Simple Blog | Home - List of Posts"/> 
+</jsp:include>
 
     <div id="home">
         <div class="posts">

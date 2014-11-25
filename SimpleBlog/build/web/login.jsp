@@ -15,7 +15,9 @@
     "http://www.w3.org/TR/html4/loose.dtd">
 
 <f:view>
-<jsp:include page="header.jsp"/>
+<jsp:include page="header.jsp"> 
+<jsp:param name="pageTitle" value="Simple Blog | Login"/> 
+</jsp:include>
 
 <% if ((session.getAttribute("email") != null) || (session.getAttribute("nama") != null) || (session.getAttribute("role") != null)) {
     response.sendRedirect("index.jsp");

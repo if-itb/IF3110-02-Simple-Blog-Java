@@ -15,7 +15,9 @@
     "http://www.w3.org/TR/html4/loose.dtd">
 
 <f:view>
-<jsp:include page="header.jsp"/>
+<jsp:include page="header.jsp"> 
+<jsp:param name="pageTitle" value="Simple Blog | Edit User"/> 
+</jsp:include>
 
 <% if (!((session.getAttribute("role") != null) && (session.getAttribute("role").equals("admin")))) {
     response.sendRedirect("index.jsp");

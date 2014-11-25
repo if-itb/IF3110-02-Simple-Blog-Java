@@ -15,7 +15,9 @@
     "http://www.w3.org/TR/html4/loose.dtd">
 
 <f:view>
-<jsp:include page="header.jsp"/>
+<jsp:include page="header.jsp"> 
+<jsp:param name="pageTitle" value="Simple Blog | Add New User"/> 
+</jsp:include>
 
 <% if (!((session.getAttribute("role") != null) && (session.getAttribute("role").equals("admin")))) {
     response.sendRedirect("index.jsp");
@@ -35,8 +37,8 @@
                          <h:inputText id="Password" value="#{newUserBean.newUser.password}" />
                          <h:outputLabel value="Nama:" for="Nama" />
                          <h:inputText id="Nama" value="#{newUserBean.newUser.nama}" />
-                         <h:outputLabel value="Konten:" for="Konten" />
-                         <h:selectOneMenu value="#{newUserBean.newUser.role}">
+                         <h:outputLabel value="Role:" for="Role" />
+                         <h:selectOneMenu id="Role" value="#{newUserBean.newUser.role}">
                                 <f:selectItem itemValue="admin" itemLabel="Admin" />
                                 <f:selectItem itemValue="editor" itemLabel="Editor" />
                                 <f:selectItem itemValue="owner" itemLabel="Owner" />
