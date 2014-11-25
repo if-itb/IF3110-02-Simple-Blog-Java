@@ -48,6 +48,20 @@ public class User implements Serializable
     public String getUsername() {
         return username;
     }
+    
+    public String getGreeting()
+    {
+        System.out.println("Get Greetings");
+        if("".equals(username))
+        {
+            System.out.println("NULL");
+            return null;
+        }
+        else
+        {
+            return "Welcome, "+username+"!";
+        }
+    }
 
     public void setPassword(String password) {
         this.password = password;
@@ -72,6 +86,30 @@ public class User implements Serializable
     public List<User> getDaftar_user() {
         fetchUsersFromDB();
         return daftar_user;
+    }
+    
+    public String getHome()
+    {
+        if(username == "")
+        {
+            return "index";
+        }
+        else
+        {
+            return role;
+        }
+    }
+    
+    public String getLogout()
+    {
+        if("".equals(username))
+        {
+            return "false";
+        }
+        else
+        {
+            return "true";
+        }
     }
     
     public void logout()

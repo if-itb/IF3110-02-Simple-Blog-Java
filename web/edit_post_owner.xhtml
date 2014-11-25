@@ -42,12 +42,9 @@
                         <div class="content">
                             #{posts.konten}
                         </div>
-                        <h:form>
-                            <h:commandLink value="[edit]" class="option">
-                                <f:param name="id" value="#{posts.id}"/>
-                                <f:ajax execute="#{post.publish()}" render=":list-post" />
-                            </h:commandLink>
-                        </h:form>
+                        <a href="edit_post.xhtml?id=#{posts.id}" class="option">
+                            [edit]
+                        </a>
                 </div>
                 </ui:repeat>
             </h:panelGroup>

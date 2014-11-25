@@ -10,14 +10,14 @@
     <h:body>
         <nav class="navbar navbar-default" role="navigation">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#{user.role}.xhtml">Holy Grail</a>
+                <a class="navbar-brand" href="#{user.home}.xhtml">Holy Grail</a>
                 <ul class="nav navbar-nav navbar-right ">
                     <li class="navbar-text">
-                        Welcome, <h:outputText value="#{user.username}"/>!
+                        <h:outputText value="#{user.greeting}"/>
                     </li>
                     <li>
                         <h:form>
-                            <h:commandLink class="logout" value="Logout" action="#{user.logout()}"/>
+                            <h:commandLink class="logout" value="Logout" action="#{user.logout()}" rendered="#{user.logout}"/>
                         </h:form>
                     </li>
                 </ul>

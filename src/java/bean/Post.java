@@ -88,7 +88,7 @@ public class Post implements Serializable
             Class.forName("com.mysql.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost/simple_blog_java", "root", "");
             System.out.println("Connection Created!");
-            String query = "Select * from post where status != 'deleted' and author=\""+user.getUsername()+"\"";
+            String query = "Select * from post where status != 'deleted' and author=\""+user.getUsername()+"\" order by tanggal desc";
             System.out.println("Query: " + query);
             PreparedStatement ps = con.prepareStatement(query);
             ResultSet result = ps.executeQuery();

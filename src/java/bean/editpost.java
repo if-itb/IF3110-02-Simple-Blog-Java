@@ -165,6 +165,13 @@ public class editpost implements Serializable
         {
             System.out.println(ex.toString());
         }
-        return user.getRole()+".xhtml";
+        if(user.getRole().equals("owner"))
+        {
+            return "edit_post_owner.xhtml";
+        }
+        else
+        {
+            return user.getRole()+".xhtml";
+        }
     }
 }
