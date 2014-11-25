@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 <head>
 
 <meta charset="utf-8"/>
@@ -54,10 +57,25 @@
 		<li><a href="admin_list_post.xhtml"> List Post</a></li>
 	</ul>
 </div>
-
-<div class="form">
-	
-</div>
+    
+<h:panelGroup layout="block" class="form">
+	<h:panelGroup layout="block" id="contact-area">
+		<h:form>
+			<h:outputLabel for="Judul">Judul:</h:outputLabel>
+                        <h:inputText value="#{editPostBean.post.title}" id="Judul"></h:inputText>
+                        
+			<h:outputLabel for="Tanggal">Tanggal:</h:outputLabel>
+			<h:inputText value="#{editPostBean.post.timeString}" id="Tanggal"/>
+                        
+			<h:outputLabel for="Konten">Konten:</h:outputLabel><br/>
+                        <h:inputTextarea value="#{editPostBean.post.text}" rows="20" cols="20" id="Konten"></h:inputTextarea>
+                        
+                        <h:commandButton action="#{editPostBean.editPost}" class="submit-button">
+                            <f:param name="postId" value="#{editPostBean.post.id}"/>
+                        </h:commandButton>
+		</h:form>
+	</h:panelGroup>
+</h:panelGroup>
 
 <footer class="footer">
     <div class="back-to-top"><a href="">Back to top</a></div>
