@@ -5,8 +5,7 @@ cara pake
 -	add libraris jdbc mysql caranya add library -> pilih mysql jdbc connector (g juga uda commit .jar nya)
 
 autentikasi / login
--	login uda dibuat, uda masuk ke cookie
--	logout uda ada fungsinya, tapi belum bisa delete cookie
+-	sudah beres
 
 list post
 -	sudah beres
