@@ -39,12 +39,12 @@ public class Post {
                      "<br><a href='admin/index.jsp'><div align=\"right\"><font color=\"blue\">Dashboard</font></div></a>";
         }
         else {
-            header =
-"        <form action=\"LoginServlet\" method=\"POST\">\n" +
-"            <input type=\"text\" name=\"username\" placeholder=\"username\"/>\n" +
-"            <input type=\"password\" name=\"password\" placeholder=\"password\"/>\n" +
-"            <input type=\"submit\" value=\"Login\"/>\n" +
-"        </form>";
+            header = "Welcome guest, please login below.<br>\n" +
+        "           <form action=\"LoginServlet\" method=\"POST\">\n" +
+        "            <input type=\"text\" name=\"username\" placeholder=\"username\"/>\n" +
+        "            <input type=\"password\" name=\"password\" placeholder=\"password\"/>\n" +
+        "            <input type=\"submit\" value=\"Login\"/>\n" +
+        "           </form>";
         }
         return header;
     }
@@ -194,17 +194,17 @@ public class Post {
                             "</div>\n" +
                             "<p> " + kontenPost + "\n" + "</p>\n";                            
                     if (shortened) //dipotong
-                        toHTML += "... <a href=\"post.jsp?id= " + idPost + "\">Read More</a><br/>\n";
+                        toHTML += "... <a href=\"posts/post.jsp?id= " + idPost + "\">Read More</a><br/>\n";
                     //edit post: untuk semua kecuali guest
                     if (cookieOn) {
                         if (isAdmin() || isEditor() || isOwner()) {
                             toHTML +=  "<p>\n" +
-                            "<a href=\"edit_post.jsp?id=" + idPost + 
+                            "<a href=\"posts/edit_post.jsp?id=" + idPost + 
                             "\">Edit</a>";
                         }
                         //delete post: untuk admin dan owner
                         if (isAdmin() || isOwner()) {    
-                            toHTML += " | <a href=\"delete_post.jsp?id=" + idPost + 
+                            toHTML += " | <a href=\"posts/delete_post.jsp?id=" + idPost + 
                             "\" onclick='return confirmDelete()'>Hapus</a>\n" +
                             "</p>\n" +
                             "</li>";
