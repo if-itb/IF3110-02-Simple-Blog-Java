@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      >
+    <h:head>
+        <ui:include src="header-script.xhtml"/>
+        <title>Simple Blog | Manage User</title>
+    </h:head>
+    <h:body class="default" onload="greet()">
+    <div class="wrapper">
+    <ui:include src="header.xhtml"/>
+
+<article class="art simple post">
+    
+    
+    <h2 class="art-title" style="margin-bottom:40px">-</h2>
+
+    <div class="art-body">
+        <div class="art-body-inner">
+            <h2>Tambah Post</h2>
+            
+            <div id="contact-area">
+                <h:form >
+                <table>
+                    <tr>
+                        <td>Judul</td>
+                        <td><h:inputText id="judul"/></td>
+                    </tr>
+                    <tr>    
+                        <td>Tanggal</td>
+                        <td><h:inputText id="tanggal" /></td>
+                    </tr>
+                    <tr>
+                        <td>Konten</td>
+                        <td><h:inputTextarea id="konten" /></td>
+                    </tr>
+                </table>
+                    <h:commandButton value="Simpan" type="submit" action="#{addPost.processRequest(request, response)}"/>
+                </h:form>
+            </div>
+        </div>
+    </div>
+
+</article>
+
+<ui:include src="footer.xhtml"/>
+    </div>
+    <ui:include src="footer-script.xhtml"/>
+    </h:body>
+		
+</html>
