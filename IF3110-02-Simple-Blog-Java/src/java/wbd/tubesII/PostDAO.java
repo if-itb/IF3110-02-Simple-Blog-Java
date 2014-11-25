@@ -202,4 +202,31 @@ public class PostDAO {
         }
         return true;
     }
+    
+    public static boolean softDelete (int id) {
+        PreparedStatement statement = null;
+        try {
+            currentCon = ConnectionManager.getConnection();
+            statement = currentCon.prepareStatement("UPDATE `post` SET `status`='Deleted' WHERE id=" + id);
+            statement.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
+    public static boolean unDelete (int id) {
+        PreparedStatement statement = null;
+        try {
+            currentCon = ConnectionManager.getConnection();
+            statement = currentCon.prepareStatement("UPDATE `post` SET `status`='Unpublished' WHERE id=" + id);
+            statement.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+    
 }
