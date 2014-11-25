@@ -47,6 +47,11 @@ and open the template in the editor.
                         <div class="art-list-time">By #{p.author}</div>
                         <div class="art-list-time">#{p.tanggal}</div>
                         <div class="art-list-time">#{p.status}</div>
+                        <h:form rendered="#{Posting.userRole == 'Owner'}">
+                            <h:commandButton onclick = "return confirmPublish()" value ="Publish" action="#{Posting.PublishPost()}">
+                                <f:param name ="throwedid" value = "#{p.id}"></f:param>
+                            </h:commandButton>
+                        </h:form>
                     </div>
                     <p>#{p.content} &hellip;</p>
                     <p>|
