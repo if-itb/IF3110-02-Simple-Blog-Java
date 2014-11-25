@@ -4,6 +4,7 @@
     Author     : Imburden
 --%>
 
+<%@page import="source.Post"%>
 <%@page import="source.CookieHelper"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
@@ -40,49 +41,56 @@
         <title>New Post - Not a Simple Blog</title>
     </head>
     <body class = "default">
-        <% CookieHelper cookie = new CookieHelper(request.getCookies());
-           //apabila tidak ada cookie
-           if(!cookie.thereIsCookie()) {
+        <% 
+            //instantiasi kelas Post dan pemanggilan dari database
+            Post listPost = new Post();
+            CookieHelper cookie = new CookieHelper(request.getCookies());            
+            //apabila tidak ada cookie            
+            if(cookie.thereIsCookie()) {
+               listPost.cookieHeaderCheck(cookie);
+           }
+           else {
                response.sendRedirect("../login/index.html");
            }
-         %>
+        %>
+        <br>
         <div class="wrapper">
 
         <nav class="nav">
-            <a style="border:none;" id="logo" href="../admin/index.jsp"><h1>Not<span>-</span>a<span>-</span>Simple<span>-</span>Blog</h1></a>
+            <a style="border:none;" id="logo" href="../index.jsp"><h1>Not<span>-</span>a<span>-</span>Simple<span>-</span>Blog</h1></a>
             <ul class="nav-primary">
-                
+                <li>
+                    <%= listPost.showManagementHeader() %>
+                </li>
             </ul>
         </nav>
+                
+        <div id="home">
+            <div class="posts">
+                <nav class="art-list">
+                  <ul class="art-list-body">
+                    <li class="art-list-item">
+                        <div align="center"> <b>Tambah Post</b> </div>
+                        <div  align="center" id="contact-area">
+                            <center><form name="Post" method="post" action="new_post_red.jsp">
+                                <label for="Judul">Judul:</label>
+                                <input type="text" name="Judul" id="Judul" aria-required="true" required="">
 
-        <article class="art simple post">
+                                <label for="Tanggal">Tanggal:</label>
+                                <input type="date" name="Tanggal" value="" class="ss-q-date" dir="auto" id="Tanggal" aria-required="true" required="return IsValidDate()">
 
+                                <label for="Konten">Konten:</label><br>
+                                <textarea name="Konten" rows="20" cols="20" id="Konten" aria-required="true" required=""></textarea>
 
-            <h2 class="art-title" style="margin-bottom:40px">-</h2>
-
-            <div class="art-body">
-                <div class="art-body-inner">
-                    <h2>Tambah Post</h2>
-
-                    <div id="contact-area">
-                        <form name="Post" method="post" action="new_post_red.jsp">
-                            <label for="Judul">Judul:</label>
-                            <input type="text" name="Judul" id="Judul" aria-required="true" required="">
-
-                            <label for="Tanggal">Tanggal:</label>
-                            <input type="date" name="Tanggal" value="" class="ss-q-date" dir="auto" id="Tanggal" aria-required="true" required="return IsValidDate()">
-
-                            <label for="Konten">Konten:</label><br>
-                            <textarea name="Konten" rows="20" cols="20" id="Konten" aria-required="true" required=""></textarea>
-
-                            <input type="submit" name="submit" value="Simpan" class="submit-button" onclick="return IsValidDate()">
-                        </form>
-                    </div>
-                </div>
+                                <input type="submit" name="submit" value="Simpan" class="submit-button" onclick="return IsValidDate()">
+                                </form></center>
+                        </div>
+                    </li>
+                  </ul>
+                </nav>
             </div>
-
-        </article>
-
+        </div>
+                    
         <footer class="footer">
             <div class="back-to-top"><a href="">Back to top</a></div>
             <!-- <div class="footer-nav"><p></p></div> -->

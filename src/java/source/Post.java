@@ -36,7 +36,30 @@ public class Post {
         String header;
         if (cookieOn) {
             header = "Welcome " + currentUser + ", your role is " + currentRole + 
-                     "<br><a href='admin/index.jsp'><div align=\"right\"><font color=\"blue\">Dashboard</font></div></a>";
+                     "<li> <form action=\"../LogoutServlet\" method=\"post\">\n" +
+                     "<input type=\"submit\" value=\"Logout\" >\n" +
+                     "</form> </li>" +
+                     "<a href=\"/IF3110-02-Simple-Blog-Java/admin/index.jsp\"><div align=\"right\"><li><font color=\"blue\">Dashboard</font></li></div></a>";
+        }
+        else {
+            header = "Welcome guest, please login below.<br>\n" +
+        "           <form action=\"LoginServlet\" method=\"POST\">\n" +
+        "            <input type=\"text\" name=\"username\" placeholder=\"username\"/>\n" +
+        "            <input type=\"password\" name=\"password\" placeholder=\"password\"/>\n" +
+        "            <input type=\"submit\" value=\"Login\"/>\n" +
+        "           </form>";
+        }
+        return header;
+    }
+    
+    public String showManagementHeader() {
+        String header;
+        if (cookieOn) {
+            header = "Welcome " + currentUser + ", your role is " + currentRole + 
+                     "<li> <form action=\"../LogoutServlet\" method=\"post\">\n" +
+                     "<input type=\"submit\" value=\"Logout\" >\n" +
+                     "</form></li>" +
+                     "<br><a href=\"/IF3110-02-Simple-Blog-Java/admin/index.jsp\"><div align=\"right\"><li><font color=\"blue\">Dashboard</font></li></div></a>";
         }
         else {
             header = "Welcome guest, please login below.<br>\n" +

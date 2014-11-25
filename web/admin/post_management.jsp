@@ -58,9 +58,9 @@
         <nav class="nav">
             <a style="border:none;" id="logo" href="../index.jsp"><h1>Not<span>-</span>a<span>-</span>Simple<span>-</span>Blog</h1></a>
             <ul class="nav-primary">
-                <li><a href="../posts/new_post.jsp">+ Tambah post</a></li>
-                <br>
-                <li><a href="index.jsp"><div align="right"><font color="blue">Dashboard</font></div></a></li>
+                <li>
+                    <%= listPost.showManagementHeader() %>
+                </li>
             </ul>
         </nav>
                 
@@ -70,7 +70,7 @@
                   <ul class="art-list-body">
                     <li class="art-list-item">
                         <div class="art-list-item-title-and-time">
-                            <h2 class="art-list-title">Post Management</h2>
+                            <b>Post Management</b> - <a href="../posts/new_post.jsp"><font color=blue">Add Post</font></a>
                         </div>
                         
                             <p><% if(cookie.thereIsCookie()) out.print(listPost.listManagementPosts()); %></p>

@@ -4,6 +4,7 @@
     Author     : akhfa
 --%>
 
+<%@page import="source.Post"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="source.User"%>
 <%@page import="source.CookieHelper"%>
@@ -39,14 +40,27 @@
         
         <title>Dashboard - Not a Simple Blog</title>
     </head>
-    <body class="default">        
+    <body class="default">    
+        <%  
+            Post listPost = new Post();
+            CookieHelper cookie = new CookieHelper(request.getCookies());
+            if(cookie.thereIsCookie()) {
+                listPost.cookieHeaderCheck(cookie);
+            }
+            else {
+                response.sendRedirect("../login/index.html");
+            }  
+        %>
+        
         <br>
         <div class="wrapper">
             
             <nav class="nav">
-                <a style="border:none;" id="logo" href="index.jsp"><h1>Not<span>-</span>a<span>-</span>Simple<span>-</span>Blog</h1></a>
+                <a style="border:none;" id="logo" href="../index.jsp"><h1>Not<span>-</span>a<span>-</span>Simple<span>-</span>Blog</h1></a>
                 <ul class="nav-primary">
-                    
+                    <li>
+                        <%= listPost.showManagementHeader() %>
+                    </li>
                 </ul>
             </nav>
             
@@ -54,32 +68,17 @@
                 <div class="posts">
                     <nav class="art-list">
                       <ul class="art-list-body">
-                        <%  
-                            CookieHelper cookie = new CookieHelper(request.getCookies());
-                            if(cookie.thereIsCookie()) {
-                                out.println("Welcome " + cookie.getUsername() + " as an "+ cookie.getRole());
-                            }
-                            else {
-                                response.sendRedirect("../login/index.html");
-                            }  
-                        %>
                         <form action="user_management.jsp" method="POST" id="tombol">
                             <input type="submit" value="User Management">
                         </form>
                         <form action="post_management.jsp" method="POST" id="tombol">
                             <input type="submit" value="Post Management">
                         </form>
-
-                        <form action="../LogoutServlet" method="post">
-                            <input type="submit" value="Logout" >
-                        </form>
-
-                        <a href="../index.jsp"> Main Page </a>
                       </ul>
                     </nav>
                 </div>
             </div>
-
+            <br>
             <footer class="footer">
                 <div class="back-to-top"><a href="">Back to top</a></div>
                 <!-- <div class="footer-nav"><p></p></div> -->
