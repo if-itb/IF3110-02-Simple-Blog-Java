@@ -14,17 +14,19 @@
 
     <h:body>
 
-        <div id="top">
+        <!--<div id="top">-->
+        <div class="wrapper">
             <ui:insert name="top">
-                    <div class="wrapper">
+                    
 
                     <nav class="nav">
-                        <a style="border:none;" id="logo" href="index.php"><h1>Kevhn's<span>-</span>Blog</h1></a>
+                        <a style="border:none;" id="logo" href="index.xhtml"><h1>Simple<span>-</span>Blog</h1></a>
 
                     </nav>
-                    </div>
+                    
             </ui:insert>
         </div>
+        <!--</div>-->
         <div>
             <div id="left">
                 <ui:insert name="left">Left</ui:insert>
@@ -33,9 +35,21 @@
                 <ui:insert name="content">Content</ui:insert>
             </div>
         </div>
-        <div id="bottom">
-            <ui:insert name="bottom">Bottom</ui:insert>
-        </div>
+        <!--<div id="bottom">-->
+        <footer class="footer">
+            <ui:insert name="bottom">
+                    <div class="back-to-top"><a href="">Back to top</a></div>
+                    <!-- <div class="footer-nav"><p></p></div> -->
+                    <div class="psi">&Psi;</div>
+                    <aside class="offsite-links">
+                        Kevin Maulana <br></br>
+                        Steve Immanuel Harnadi <br></br>
+                        Jonathan Sudibya <br></br>
+                    </aside>
+                
+            </ui:insert>
+        </footer>
+        <!--</div>-->
 
     </h:body>
 
