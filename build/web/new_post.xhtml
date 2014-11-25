@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./template.xhtml">
+
+    <ui:define name="content">
+    <article class="art simple post">
+    
+    
+    <h2 class="art-title" style="margin-bottom:40px">-</h2>
+
+    <div class="art-body">
+        <div class="art-body-inner">
+            <h2 style="text-align:center">Tambah Post</h2>
+                <div id="contact-area">
+                        <form method="post" action="insert_database.php" onsubmit="return Validation()">
+                            <label for="Judul">Judul:</label>
+                            <input type="text" name="Judul" id="Judul" required="" value=""></input>
+
+                            <label for="Tanggal">Tanggal:</label>
+                            <input type="text" name="Tanggal" id="Tanggal" required="" placeholder="format: dd-mm-yyyy"></input>
+                            <div id="errormsg"></div>
+
+                            <label for="Konten"><br></br>Konten:</label><br></br>
+                            <textarea name="Konten" rows="20" cols="20" id="Konten" required=""></textarea>
+
+                            <input type="submit" name="submit" value="Simpan" class="submit-button"></input>
+                        </form>
+                    </div>
+        </div>
+    </div>
+    </article>
+    </ui:define>
+
+</ui:composition>
