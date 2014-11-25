@@ -23,12 +23,34 @@
 				<h4 class="text-center text-muted">
 					<h:outputText value="#{viewPost.date}" />
 				</h4>
-				<p style="padding-top:70px">
+				<p style="padding-top: 70px">
 					<h:outputText value="#{viewPost.content}" />
 				</p>
 				<hr />
+				<h:form>
+					Nama:  <h:inputText value="#{viewPost.name}" />
+					Email: <h:inputText value="#{viewPost.email}" />
+					Isi:   <h:inputText value="#{viewPost.comment}" />
+					<h:commandButton value="Add Post" action="#{viewPost.postComment}">
+						<f:ajax execute="@form" render="comments_part" />
+					</h:commandButton>
+					<h:panelGroup id="comments_part">
+						<ui:repeat value="#{viewPost.comments}" var="comment">
+							<ul>
+								<li>#{comment.name}</li>
+								<li>#{comment.email}</li>
+								<li>#{comment.time}</li>
+								<li>#{comment.content}</li>
+							</ul>
+						</ui:repeat>
+					</h:panelGroup>
+				</h:form>
 			</div>
+			<br />
 		</ui:define>
 	</ui:composition>
+
+
+
 </h:body>
 </html>
