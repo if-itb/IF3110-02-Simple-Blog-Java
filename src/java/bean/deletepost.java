@@ -94,8 +94,7 @@ public class deletepost implements Serializable
             String query = "UPDATE post SET status='deleted' WHERE (id) = (?)";
             PreparedStatement ps = con.prepareStatement(query);
             ps.setString(1, id_pars);
-            int executeUpdate = 0;
-            //int executeUpdate = ps.executeUpdate();
+            int executeUpdate = ps.executeUpdate();
             if(executeUpdate > 0)
             {
                 System.out.println("update succesful");
