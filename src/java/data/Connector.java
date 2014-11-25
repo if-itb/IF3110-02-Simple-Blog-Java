@@ -16,7 +16,7 @@ import java.util.*;
  */
 public class Connector {
     private Connection connection;
-    Connector(){
+    public Connector(){
         try {
             System.out.println("Loading driver...");
             Class.forName("com.mysql.jdbc.Driver");
@@ -140,23 +140,28 @@ public class Connector {
 	try{
 	    st = connection.createStatement();
 	    String sqlQuery = "";
+	    //contoh query bener 
+	    // INSERT INTO `post`.`post_comment` (`comment-id`, `comment-date`, `comment-content`, `comment-post-id`, `comment-email`, 
+	    //`comment-user-id`) VALUES (NULL, '2014-11-24', 'AAAAAAAAAAAAAAAAEH', '1', 'feli@feli.fel', '1');
 	    if (user_id != 0) {
-		sqlQuery = ("INSERT INTO `post_comment` `comment-user-id` `comment-content` `comment-email` `comment-post-id` VALUES ");
-		sqlQuery = sqlQuery + "`" + user_id + "`"; 
+		sqlQuery = ("INSERT INTO `post`.`post_comment` (`comment-user-id`,`comment-content`,`comment-email`,`comment-post-id`) VALUES (");
+		sqlQuery = sqlQuery + "`" + user_id + "`,"; 
 	    }
 	    else {
-		sqlQuery = ("INSERT INTO `post_comment` `comment-content` `comment-email` `comment-post-id` VALUES ");
+		sqlQuery = ("INSERT INTO `post_comment` (`comment-content`,`comment-email`,`comment-post-id`) VALUES (");
 	    }
 	    
-		sqlQuery = sqlQuery + "`" + content + "`"; 
-		sqlQuery = sqlQuery + "`" + email + "`"; 
-		sqlQuery = sqlQuery + "`" + post_id + "`"; 
-	    ResultSet rs = st.executeQuery(sqlQuery);
+		sqlQuery = sqlQuery + "`" + content + "`,"; 
+		sqlQuery = sqlQuery + "`" + email + "`,"; 
+		sqlQuery = sqlQuery + "`" + post_id + "`)"; 
+		ResultSet rs = st.executeQuery(sqlQuery);
 	    if (rs.next()){}
+	    
 	} catch (Exception e) {
 	    System.err.println("Gagal insert comment :v ");
 	    System.out.println(e);
 	}
+	
     }
     public void closeConnection(){
         System.out.println("Closing the connection.");

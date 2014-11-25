@@ -13,5 +13,13 @@
     </head>
     <body>
         <h1>Hello World!</h1>
+	<%
+	    data.Connector N = new data.Connector();
+	    N.setComment("Ini comment hasil dari javah", 1, "feli-c-s@hotmail.com", 1);
+	    System.out.println("Test print dari javah");
+	    
+	    %>
+	    
+	 <h2> KENAPA INI MUNCUL </h2>   
     </body>
 </html>
