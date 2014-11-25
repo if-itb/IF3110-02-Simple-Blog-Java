@@ -63,11 +63,11 @@
 			<%
 				PostBean pBean =  new PostBean();
 				String id = request.getParameter("id");
-				pBean.ViewPost(Integer.parseInt(id));
+				pBean.ViewPost(id);
 
 			%>
             <div id="contact-area">
-                <form method="post" action="update.php">
+                <form method="post" action="handler/updatePost.jsp">
                     <label for="Judul">Judul</label>
                     <input type="text" name="judul" id="Judul" value="<% out.println(pBean.getJudul()); %>">
 		
@@ -76,8 +76,8 @@
                     
                     <label for="Konten">Konten:</label><br>
                     <textarea name="konten" rows="20" cols="20" id="Konten"><% out.println(pBean.getKonten()); %></textarea>
-					<input type="hidden" name="nomor" value="<% out.println(id); %>">
-                    <input type="submit" name="submit" value="Simpan" class="submit-button" onclick="return cekInputan();">
+					<input type="hidden" name="ID" id="ID" value="<% out.println(id); %>">
+                    <input type="submit" name="submit" value="Simpan" class="submit-button" onclick="">
                 </form>
             </div>
 			<%

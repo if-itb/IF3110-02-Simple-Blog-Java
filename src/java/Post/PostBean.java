@@ -24,7 +24,7 @@ public class PostBean {
 	private Date Tanggal;
 	private String Konten;
 	private String Owner;
-	private int id;
+	private String id;
 	private boolean valid;
 	private int Status;
 	
@@ -55,10 +55,10 @@ public class PostBean {
 	public void setKonten(String konten) {
 		Konten = konten;
 	}
-	public int getId() {
+	public String getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(String id) {
 		ViewPost(id);
 		this.id = id;
 	}
@@ -86,7 +86,7 @@ public class PostBean {
 		}
 		return "index.xhtml?faces-redirect=true";
 	}
-	public void ViewPost(int id){
+	public void ViewPost(String id){
 		try {
 			Paket tp=Post.ViewPost(id);
 			valid=tp.valid;
@@ -105,7 +105,7 @@ public class PostBean {
 	public String DisplayContent(){
 		return Konten.replaceAll("\n","<br/>");
 	}
-	public String EditPost(int id, String a, String b, String c){
+	public String EditPost(String id, String a, String b, String c){
 		try {
 			Judul=a;
 			Tanggal=new SimpleDateFormat("dd MMMM yyyy").parse(b);
@@ -116,7 +116,7 @@ public class PostBean {
 		}
 		return "post.xhtml?faces-redirect=true&amp;includeViewParams=true";
 	}
-	public void DeletePost(int id){
+	public void DeletePost(String id){
 		try {
 			Post.DeletePost(id);
 		} catch (Exception e) {

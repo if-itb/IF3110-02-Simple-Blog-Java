@@ -52,9 +52,9 @@
 <body class="default">
 <div class="wrapper">
 <nav class="nav">
-    <a style="border:none;" id="logo" href="index.php"><h1>Simple<span>-</span>Blog</h1></a>
+    <a style="border:none;" id="logo" href="index.jsp"><h1>Simple<span>-</span>Blog</h1></a>
     <ul class="nav-primary">
-        <li><a href="new_post.html">+ Tambah Post</a></li>
+        <li><a href="new_post.jsp">+ Tambah Post</a></li>
     </ul>
 </nav>
 
@@ -89,7 +89,7 @@
 						</tr>
 						<tr>
 							<td colspan="2">
-							  <a href="edit_post.jsp?id='<% out.println(pBean.getId()); %>'">Edit</a> | <a href="delete.jsp?id='<% out.println(pBean.getId()); %>'">Hapus</a>
+							  <a href="edit_post.jsp?id=<% out.println(pBean.getId()); %>">Edit</a> | <a href="delete.jsp?id=<% out.println(pBean.getId()); %>">Hapus</a>
 							</td>
 						</tr>
 						<tr>
@@ -141,7 +141,7 @@
 						Class.forName(Driver).newInstance();
 						conn = DriverManager.getConnection(DbLoc2,DbUser,DbPass);
 						st=conn.createStatement();
-						rs=st.executeQuery("SELECT * FROM comment WHERE ID ='"+request.getParameter("id")+"';");
+						rs=st.executeQuery("SELECT * FROM comment WHERE Parent ='"+request.getParameter("id")+"';");
 						while(rs.next()){
 							out.println("<div id=\"unit-komentar\" align=\"center\">");
 							out.println(rs.getString("Name")+"<br>");
@@ -209,7 +209,7 @@ function PostKomentar(){
 		return;
 	}	
 	var url	=	"post_komentar.jsp";
-    var param="id="+isiid+"&Name="+isinama+"&Email="+isiemail+"&Content="+isipesan;
+    var param="ID="+isiid+"&Name="+isinama+"&Email="+isiemail+"&Content="+isipesan;
 	document.getElementById("terbaru").innerHTML = "Sedang memproses komentar";
 	var message = "<div id=unit-komentar align=center><br>" + isinama + "<br>" + isitanggal + "<br>" + isipesan + "<hr></div>";
 	document.getElementById("terbaru").innerHTML = message;

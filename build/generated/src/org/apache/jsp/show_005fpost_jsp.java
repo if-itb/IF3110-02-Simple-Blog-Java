@@ -6,7 +6,14 @@ import javax.servlet.jsp.*;
 import User.userPaket;
 import Post.Post;
 import User.User;
+import Komentar.Komentar;
 import Post.PostBean;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.sql.*;
+import java.util.ArrayList;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 
 public final class show_005fpost_jsp extends org.apache.jasper.runtime.HttpJspBase
     implements org.apache.jasper.runtime.JspSourceDependent {
@@ -45,6 +52,13 @@ public final class show_005fpost_jsp extends org.apache.jasper.runtime.HttpJspBa
       _jspx_out = out;
       _jspx_resourceInjector = (org.glassfish.jsp.api.ResourceInjector) application.getAttribute("com.sun.appserv.jsp.resource.injector");
 
+      out.write("\n");
+      out.write("\n");
+      out.write("\n");
+      out.write("\n");
+      out.write("\n");
+      out.write("\n");
+      out.write("\n");
       out.write("\n");
       out.write("\n");
       out.write("\n");
@@ -100,9 +114,10 @@ public final class show_005fpost_jsp extends org.apache.jasper.runtime.HttpJspBa
       out.write("          <ul class=\"art-list-body\">\n");
       out.write("\t\t\t");
 
+				Date date = new Date();
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 				PostBean pBean =  new PostBean();
 				pBean.ViewPost(Integer.parseInt(request.getParameter("id")));
-				
 			
       out.write("\n");
       out.write("\t\t\t\t\t<center>\n");
@@ -152,10 +167,12 @@ public final class show_005fpost_jsp extends org.apache.jasper.runtime.HttpJspBa
       out.write("\t\t\t\t\t\t\t\t\t\tEmail <input type=\"text\" id=\"pEmail\" name=\"email\" ><br/>\n");
       out.write("\t\t\t\t\t\t\t\t\t\tPesan<br/>\n");
       out.write("\t\t\t\t\t\t\t\t\t\t\t<textarea id=\"pPesan\" name=\"pesan\" cols=\"84\" rows=\"5\"></textarea><br/>\n");
-      out.write("\t\t\t\t\t\t\t\t\t\t<input type=\"hidden\" id=\"pTanggal\" name=\"tanggal\" value=\"'.date(\"Y-m-d\").'\">\n");
-      out.write("\t\t\t\t\t\t\t\t\t\t<input type=\"hidden\" id=\"pId\" name=\"id\" value=\"'");
+      out.write("\t\t\t\t\t\t\t\t\t\t\t<input type=\"hidden\" id=\"pTanggal\" name=\"tanggal\" value=\"");
+ out.println(sdf.format(date)); 
+      out.write("\">\n");
+      out.write("\t\t\t\t\t\t\t\t\t\t<input type=\"hidden\" id=\"pId\" name=\"id\" value=\"");
  out.println(pBean.getId()); 
-      out.write("'\">\n");
+      out.write("\">\n");
       out.write("\t\t\t\t\t\t\t\t\t\t<input type=\"button\" name=\"postKomentar\" value=\"Post Komentar\" onclick=\"return cekEmail();\">\n");
       out.write("\t\t\t\t\t\t\t\t\t</form>\n");
       out.write("\t\t\t\t\t\t\t\t</div>\n");
@@ -165,7 +182,7 @@ public final class show_005fpost_jsp extends org.apache.jasper.runtime.HttpJspBa
       out.write("\n");
       out.write("\t\t\t\t</center>\n");
       out.write("\t\t\t\t<div id=\"terbaru\" align=\"center\">\n");
-      out.write("\n");
+      out.write("\t\t\t\t\t\n");
       out.write("\t\t\t\t</div>\n");
       out.write("\t\t\t\t<hr/>\n");
       out.write("\t\t\t\t<!-- bagian komentar -->\n");
@@ -175,6 +192,44 @@ public final class show_005fpost_jsp extends org.apache.jasper.runtime.HttpJspBa
       out.write("\t\t\t\t\t\t</br>\n");
       out.write("\t\t\t\t\t\t<hr/>\n");
       out.write("\t\t\t\t\t</div>\n");
+      out.write("\t\t\t");
+ 
+					String Driver = "com.mysql.jdbc.Driver";
+					String DbUser = "root";
+					String DbPass = "";
+					String DbName = "Tubes2WBD";
+					String DbLoc1 = "jdbc:mysql://localhost:3306/";
+					String DbLoc2 = DbLoc1+DbName;
+					Connection conn = null;
+					Statement st = null;
+					ResultSet rs = null;
+
+					try {
+						Class.forName(Driver).newInstance();
+						conn = DriverManager.getConnection(DbLoc2,DbUser,DbPass);
+						st=conn.createStatement();
+						rs=st.executeQuery("SELECT * FROM comment WHERE Parent ='"+request.getParameter("id")+"';");
+						while(rs.next()){
+							out.println("<div id=\"unit-komentar\" align=\"center\">");
+							out.println(rs.getString("Name")+"<br>");
+							out.println(rs.getString("Time")+"<br>");
+							out.println(rs.getString("Content")+"<br>");
+							out.println("<hr>");
+							out.println("</div>");			
+						}
+					} catch(Exception e){
+						throw e;
+					} finally{
+						try {
+							rs.close();
+							st.close();
+							conn.close();
+						} catch (SQLException e) {
+							throw e;
+						}
+					}					
+				
+      out.write("\n");
       out.write("          </ul>\n");
       out.write("        </nav>\n");
       out.write("    </div>\n");

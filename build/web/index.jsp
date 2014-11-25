@@ -47,7 +47,7 @@
 <div class="wrapper">
 
 <nav class="nav">
-    <a style="border:none;" id="logo" href="index.php"><h1>Simple-Blog<span>-of-</span>Bang-Satya-Ilmi-Ojan</h1></a>
+    <a style="border:none;" id="logo" href="index.jsp"><h1>Simple-Blog<span>-of-</span>Bang-Satya-Ilmi-Ojan</h1></a>
     <ul class="nav-primary">
         <li><a href="new_post.jsp">+ Tambah Post</a></li>
     </ul>
@@ -63,13 +63,13 @@
 			%>	
 			<li class="art-list-item">
 				<div class="art-list-item-title-and-time">
-					<h2 class="art-list-title"><a href="show_post.php?id=<% out.println(pBean.listManyPost().get(i).getId()); %>"><% out.println(pBean.listManyPost().get(i).getJudul()); %></a></h2>
+					<h2 class="art-list-title"><a href="show_post.jsp?id=<% out.println(pBean.listManyPost().get(i).getId()); %>"><% out.println(pBean.listManyPost().get(i).getJudul()); %></a></h2>
 					<div class="art-list-time"><% out.println(pBean.listManyPost().get(i).getTanggal()); %></div>
 					<div class="art-list-owner">Owner:&nbsp;<% out.println(pBean.listManyPost().get(i).getOwner()); %></div>
 				</div>
 				<p><% out.println(pBean.listManyPost().get(i).getKonten()); %></p>
 				<p>
-				  <a href="edit_post.php?id=<% out.println(pBean.listManyPost().get(i).getId()); %>">Edit</a> | <a href="#" onclick="return ConfirmDelete(<% out.println(pBean.listManyPost().get(i).getId()); %>);">Hapus</a>
+				  <a href="edit.jsp?id=<% out.println(pBean.listManyPost().get(i).getId()); %>">Edit</a> | <a href="#" onclick="return ConfirmDelete(<% out.println(pBean.listManyPost().get(i).getId()); %>);">Hapus</a>
 				</p>
 				
 			</li>	
@@ -106,7 +106,7 @@
     {
       var x = confirm("Apakah Anda yakin menghapus post ini?");
       if (x)
-          return window.location.assign('delete.php?id='+nomor);
+          return window.location.assign('delete.jsp?id='+nomor);
       else
         return false;
     }

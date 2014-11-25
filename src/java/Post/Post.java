@@ -101,7 +101,7 @@ public class Post {
 		}
 	}
 	
-	public static Paket ViewPost(int id) throws Exception{
+	public static Paket ViewPost(String id) throws Exception{
 		Connection conn = null;
 		Statement st = null;
 		ResultSet rs = null;
@@ -136,19 +136,18 @@ public class Post {
 		}
 	}
 	
-	public static void EditPost(int id, String Judul, Date Tanggal, String Konten) throws Exception{
+	public static void EditPost(String id, String Judul, Date Tanggal, String Konten) throws Exception{
 		Connection conn = null;
 		PreparedStatement ps = null;
 		try {
 			Class.forName(Driver).newInstance();
 			conn = DriverManager.getConnection(DbLoc2,DbUser,DbPass);
-			String query = "UPDATE `post` SET `Title`=?,`Date`=?,`Content`=? WHERE `post`.`ID`=?;";
+			String query = "UPDATE `post` SET `Title`=?,`Date`=?,`Content`=? WHERE ID='"+id+"';";
 			ps=conn.prepareStatement(query);
 			ps.setString(1,Judul);
 			SimpleDateFormat tp= new SimpleDateFormat("y-MM-dd");
 			ps.setString(2,tp.format(Tanggal));
 			ps.setString(3,Konten);
-			ps.setInt(4,id);
 			if (ps.executeUpdate()==0){
 				throw new Exception("Error editing post");
 			}
@@ -164,7 +163,7 @@ public class Post {
 		}
 	}
 	
-	public static void DeletePost(int id) throws Exception{
+	public static void DeletePost(String id) throws Exception{
 		Connection conn = null;
 		PreparedStatement ps = null;
 		try {
@@ -172,7 +171,7 @@ public class Post {
 			conn = DriverManager.getConnection(DbLoc2,DbUser,DbPass);
 			String query = "DELETE FROM `post` WHERE `post`.`ID`=?;";
 			ps=conn.prepareStatement(query);
-			ps.setInt(1,id);
+			ps.setString(1,id);
 			if (ps.executeUpdate()==0){
 				throw new Exception("Error deleting post");
 			}

@@ -6,8 +6,8 @@
 <%@page import= "Komentar.Komentar" %>
 
 <%
-	String Parent	=	"1";
-	String Name = "dasdsadas";
+	String Parent	=	request.getParameter("ID");
+	String Name = request.getParameter("Name");
 	String Email =  request.getParameter("Email");
 	String Content = request.getParameter("Content");
 	

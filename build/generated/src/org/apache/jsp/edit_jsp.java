@@ -107,12 +107,12 @@ public final class edit_jsp extends org.apache.jasper.runtime.HttpJspBase
 
 				PostBean pBean =  new PostBean();
 				String id = request.getParameter("id");
-				pBean.ViewPost(Integer.parseInt(id));
+				pBean.ViewPost(id);
 
 			
       out.write("\n");
       out.write("            <div id=\"contact-area\">\n");
-      out.write("                <form method=\"post\" action=\"update.php\">\n");
+      out.write("                <form method=\"post\" action=\"handler/updatePost.jsp\">\n");
       out.write("                    <label for=\"Judul\">Judul</label>\n");
       out.write("                    <input type=\"text\" name=\"judul\" id=\"Judul\" value=\"");
  out.println(pBean.getJudul()); 
@@ -130,7 +130,7 @@ public final class edit_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\t\t\t\t\t<input type=\"hidden\" name=\"nomor\" value=\"");
  out.println(id); 
       out.write("\">\n");
-      out.write("                    <input type=\"submit\" name=\"submit\" value=\"Simpan\" class=\"submit-button\" onclick=\"return cekInputan();\">\n");
+      out.write("                    <input type=\"submit\" name=\"submit\" value=\"Simpan\" class=\"submit-button\" onclick=\"\">\n");
       out.write("                </form>\n");
       out.write("            </div>\n");
       out.write("\t\t\t");
