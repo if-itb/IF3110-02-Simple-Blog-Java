@@ -3,9 +3,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <h:outputStylesheet library="css" name="bootstrap.css"/>
+        <h:outputScript library="js" name="confirm.js" />
         <title>Admin</title>
     </h:head>
     <h:body>
@@ -32,28 +34,33 @@
         
         <div class="list-post container-fluid">
             #{post.setQuery_status("published")}
-            <ui:repeat value="#{post.getDaftar_post()}" var="posts">
-                <div class="post">
-                    <a href="post.xhtml?id=#{posts.id}" class="title" >
-                        #{posts.judul}
-                    </a>
-                    <div class="date">
-                        #{posts.tanggal}
+            <h:form>
+                <ui:repeat value="#{post.getDaftar_post()}" var="posts">
+                    <div class="post">
+                        <a href="post.xhtml?id=#{posts.id}" class="title" >
+                            #{posts.judul}
+                        </a>
+                        <div class="date">
+                            #{posts.tanggal}
+                        </div>
+                        <div class="author">
+                            #{posts.author}
+                        </div>
+                        <div class="content">
+                            #{posts.konten}
+                        </div>
+                        <a href="edit_post.xhtml?id=#{posts.id}" class="option">
+                           [edit]
+                        </a>
+                        <!-- <a href="#" class="option"> -->
+                        <h:commandLink onclick="return DeletePost()" action="#{deletepost.delete}">
+                            <!-- <f:param name="deleteAction" value="#{posts.id}" /> -->
+                            <f:setPropertyActionListener target="#{deletepost.action}" value="#{posts.id}" />
+                           [delete]
+                        <!-- </a> --> </h:commandLink>
                     </div>
-                    <div class="author">
-                        #{posts.author}
-                    </div>
-                    <div class="content">
-                        #{posts.konten}
-                    </div>
-                    <a href="edit_post.xhtml?id=#{posts.id}" class="option">
-                       [edit]
-                    </a>
-                    <a href="#" class="option">
-                       [delete]
-                    </a>
-                </div>
-            </ui:repeat>
+                </ui:repeat>
+            </h:form>
         </div>
     </h:body>
 </html>
