@@ -86,8 +86,8 @@ public class Post {
     public void setAtribut(int post_ID) throws SQLException {
         try {
             //login database
-            KoneksiDatabase.setUser("root");
-            KoneksiDatabase.setPassword("");
+            KoneksiDatabase.setUser("root2");
+            KoneksiDatabase.setPassword("akhfa");
             KoneksiDatabase.setDatabase("localhost","blog");
             //statement
             Connection koneksi = KoneksiDatabase.getKoneksi();
@@ -153,8 +153,8 @@ public class Post {
         boolean shortened;
         try {
             //login database
-            KoneksiDatabase.setUser("root");
-            KoneksiDatabase.setPassword("");
+            KoneksiDatabase.setUser("root2");
+            KoneksiDatabase.setPassword("akhfa");
             KoneksiDatabase.setDatabase("localhost","blog");
             //statement
             Connection koneksi = KoneksiDatabase.getKoneksi();
@@ -196,17 +196,19 @@ public class Post {
                     if (shortened) //dipotong
                         toHTML += "... <a href=\"post.jsp?id= " + idPost + "\">Read More</a><br/>\n";
                     //edit post: untuk semua kecuali guest
-                    if (isAdmin() || isEditor() || isOwner()) {
-                        toHTML +=  "<p>\n" +
-                        "<a href=\"edit_post.jsp?id=" + idPost + 
-                        "\">Edit</a>";
-                    }
-                    //delete post: untuk admin dan owner
-                    if (isAdmin() || isOwner()) {    
-                        toHTML += " | <a href=\"delete_post.jsp?id=" + idPost + 
-                        "\" onclick=\"javascript:confirmDelete()\">Hapus</a>\n" +
-                        "</p>\n" +
-                        "</li>";
+                    if (cookieOn) {
+                        if (isAdmin() || isEditor() || isOwner()) {
+                            toHTML +=  "<p>\n" +
+                            "<a href=\"edit_post.jsp?id=" + idPost + 
+                            "\">Edit</a>";
+                        }
+                        //delete post: untuk admin dan owner
+                        if (isAdmin() || isOwner()) {    
+                            toHTML += " | <a href=\"delete_post.jsp?id=" + idPost + 
+                            "\" onclick=\"javascript:confirmDelete()\">Hapus</a>\n" +
+                            "</p>\n" +
+                            "</li>";
+                        }
                     }
                 }
             }
@@ -224,8 +226,8 @@ public class Post {
         boolean shortened;
         try {
             //login database
-            KoneksiDatabase.setUser("root");
-            KoneksiDatabase.setPassword("");
+            KoneksiDatabase.setUser("root2");
+            KoneksiDatabase.setPassword("akhfa");
             KoneksiDatabase.setDatabase("localhost","blog");
             //statement
             Connection koneksi = KoneksiDatabase.getKoneksi();
@@ -233,7 +235,7 @@ public class Post {
             //query
             String queryListPosts = "SELECT * from `post` ORDER by tanggal DESC";
             //execute query
-            ResultSet result = statement.executeQuery(queryListPosts);
+            ResultSet result = null;
             //header tabel
             toHTML += "<table id=\"t01\"> <tr>" +
                       "<th <tr style=\"vertical-align:center\" rowspan=\"2\" id=\"column1\">Judul Post</th>\n" +
@@ -350,8 +352,8 @@ public class Post {
     public void addPost(String judul, String tanggal, String konten) throws SQLException {
         try { 
             //login database
-            KoneksiDatabase.setUser("root");
-            KoneksiDatabase.setPassword("");
+            KoneksiDatabase.setUser("root2");
+            KoneksiDatabase.setPassword("akhfa");
             KoneksiDatabase.setDatabase("localhost","blog");
             //statement
             Connection koneksi = KoneksiDatabase.getKoneksi();
@@ -375,8 +377,8 @@ public class Post {
     public void publishPost(int post_ID) throws SQLException {
         try { 
             //login database
-            KoneksiDatabase.setUser("root");
-            KoneksiDatabase.setPassword("");
+            KoneksiDatabase.setUser("root2");
+            KoneksiDatabase.setPassword("akhfa");
             KoneksiDatabase.setDatabase("localhost","blog");
             //statement
             Connection koneksi = KoneksiDatabase.getKoneksi();
@@ -402,8 +404,8 @@ public class Post {
     public void editPost(int post_ID, String judul, String tanggal, String konten) throws SQLException {
         try {
             //login database
-            KoneksiDatabase.setUser("root");
-            KoneksiDatabase.setPassword("");
+            KoneksiDatabase.setUser("root2");
+            KoneksiDatabase.setPassword("akhfa");
             KoneksiDatabase.setDatabase("localhost","blog");
             //statement
             Connection koneksi = KoneksiDatabase.getKoneksi(); 
@@ -430,8 +432,8 @@ public class Post {
     public void deletePost(int post_ID) throws SQLException {
         try { 
             //login database
-            KoneksiDatabase.setUser("root");
-            KoneksiDatabase.setPassword("");
+            KoneksiDatabase.setUser("root2");
+            KoneksiDatabase.setPassword("akhfa");
             KoneksiDatabase.setDatabase("localhost","blog");
             //statement
             Connection koneksi = KoneksiDatabase.getKoneksi();
@@ -451,8 +453,8 @@ public class Post {
     public void trashPost(int post_ID) throws SQLException {
         try { 
             //login database
-            KoneksiDatabase.setUser("root");
-            KoneksiDatabase.setPassword("");
+            KoneksiDatabase.setUser("root2");
+            KoneksiDatabase.setPassword("akhfa");
             KoneksiDatabase.setDatabase("localhost","blog");
             //statement
             Connection koneksi = KoneksiDatabase.getKoneksi();
@@ -470,8 +472,8 @@ public class Post {
     public void restorePost(int post_ID) throws SQLException {
         try { 
             //login database
-            KoneksiDatabase.setUser("root");
-            KoneksiDatabase.setPassword("");
+            KoneksiDatabase.setUser("root2");
+            KoneksiDatabase.setPassword("akhfa");
             KoneksiDatabase.setDatabase("localhost","blog");
             //statement
             Connection koneksi = KoneksiDatabase.getKoneksi();
