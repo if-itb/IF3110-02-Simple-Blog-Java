@@ -56,12 +56,6 @@ public class UserData implements Serializable {
 
 		return null;
 	}
-	
-	public String logout() {
-		loggedIn = false;
-		details = null;
-		return("");
-	}
 
 	public void check() {
 		if (isLoggedIn()) {
