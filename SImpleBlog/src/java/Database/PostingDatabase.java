@@ -55,6 +55,11 @@ public class PostingDatabase {
         login = new Login();
     }
     
+    public void toHome() throws IOException{
+        ExternalContext extCont = FacesContext.getCurrentInstance().getExternalContext();
+        extCont.redirect("/SImpleBlog/");
+    }
+    
     public Connection makeConnection() throws ClassNotFoundException, SQLException{
         Connection con;
         Class.forName("com.mysql.jdbc.Driver");
@@ -205,7 +210,7 @@ public class PostingDatabase {
                 System.out.println("exist user: " + existUser);
             }
             if (existUser>0){
-                extCont.redirect("/SImpleBlog/Role/Owner.xhtml");
+                extCont.redirect("/SImpleBlog/Role/Admin.xhtml");
             }
             else{
                 extCont.redirect("/SImpleBlog/Home.xhtml");
