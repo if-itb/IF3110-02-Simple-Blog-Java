@@ -9,12 +9,11 @@
         <!--<h:outputStylesheet name="./css/default.css"/>-->
         <h:outputStylesheet name="./css/cssLayout.css"/>
         <h:outputStylesheet name="./css/screen.css"/>
-        <title>Facelets Template</title>
+        <title>Simple Blog</title>
     </h:head>
 
     <h:body>
 
-        <!--<div id="top">-->
         <div class="wrapper">
             <ui:insert name="top">
                     
@@ -24,22 +23,21 @@
 
                     </nav>
                     
+                <div id="login_status"></div>
+                    
             </ui:insert>
         </div>
-        <!--</div>-->
         <div>
             <div id="left">
-                <ui:insert name="left">Left</ui:insert>
+                <ui:insert name="left"></ui:insert>
             </div>
             <div id="content" class="left_content">
-                <ui:insert name="content">Content</ui:insert>
+                <ui:insert name="content"></ui:insert>
             </div>
         </div>
-        <!--<div id="bottom">-->
         <footer class="footer">
             <ui:insert name="bottom">
                     <div class="back-to-top"><a href="">Back to top</a></div>
-                    <!-- <div class="footer-nav"><p></p></div> -->
                     <div class="psi">&Psi;</div>
                     <aside class="offsite-links">
                         Kevin Maulana <br></br>
@@ -49,7 +47,6 @@
                 
             </ui:insert>
         </footer>
-        <!--</div>-->
 
     </h:body>
 
