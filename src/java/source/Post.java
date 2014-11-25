@@ -36,7 +36,7 @@ public class Post {
         String header;
         if (cookieOn) {
             header = "Welcome " + currentUser + ", your role is " + currentRole + 
-                     "<li> <form action=\"../LogoutServlet\" method=\"post\">\n" +
+                     "<li> <form action=\"/IF3110-02-Simple-Blog-Java/LogoutServlet\" method=\"post\">\n" +
                      "<input type=\"submit\" value=\"Logout\" >\n" +
                      "</form> </li>" +
                      "<a href=\"/IF3110-02-Simple-Blog-Java/admin/index.jsp\"><div align=\"right\"><li><font color=\"blue\">Dashboard</font></li></div></a>";
@@ -56,7 +56,7 @@ public class Post {
         String header;
         if (cookieOn) {
             header = "Welcome " + currentUser + ", your role is " + currentRole + 
-                     "<li> <form action=\"../LogoutServlet\" method=\"post\">\n" +
+                     "<li> <form action=\"/IF3110-02-Simple-Blog-Java/LogoutServlet\" method=\"post\">\n" +
                      "<input type=\"submit\" value=\"Logout\" >\n" +
                      "</form></li>" +
                      "<br><a href=\"/IF3110-02-Simple-Blog-Java/admin/index.jsp\"><div align=\"right\"><li><font color=\"blue\">Dashboard</font></li></div></a>";
