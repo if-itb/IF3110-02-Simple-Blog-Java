@@ -4,6 +4,7 @@ import id.ac.itb.informatika.wbd.jpa.controller.PostJpaController;
 import id.ac.itb.informatika.wbd.jpa.entities.Post;
 import java.util.List;
 import javax.faces.context.FacesContext;
+import javax.faces.convert.Converter;
 
 public class PostController {
 
@@ -35,8 +36,12 @@ public class PostController {
         return postList;
     }
     
-     public int getPostCount() {
+    public int getPostCount() {
         return postList.size();
+    }
+    
+    public Converter getConverter() {
+        return converter;
     }
     
     public String newPost() {
@@ -46,8 +51,8 @@ public class PostController {
             JsfUtil.addSuccessMessage("Post sudah berhasil dibuat");
         } catch (Exception e) {
             JsfUtil.ensureAddErrorMessage(e, "A persistence error occurred.");
-            return "post_list";
+            return null;
         }
-        return "post_list";
+        return "post_list?faces-redirect=true";
     }
 }

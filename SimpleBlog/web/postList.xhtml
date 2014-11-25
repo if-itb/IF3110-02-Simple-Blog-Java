@@ -2,7 +2,8 @@
                 xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
-                xmlns:p="http://primefaces.org/ui">
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <ui:define name="title">
         Simple Blog
@@ -20,12 +21,20 @@
                       
                     <li class="art-list-item">
                         <div class="art-list-item-title-and-time">
-                            <h2 class="art-list-title"><h:link outcome="postDetail" value="#{post.title}"></h:link></h2>
+                            <h2 class="art-list-title">
+                                <h:link outcome="postDetail" value="#{post.title}">
+                                    <f:param name="jsfcrud.currentPost" value="#{jsfcrud_class['id.ac.itb.informatika.wbd.jsf.JsfUtil'].jsfcrud_method['getAsConvertedString'][post][postController.converter].jsfcrud_invoke}"/>
+                                </h:link>
+                            </h2>
                             <div class="art-list-time"><h:outputText value="#{post.date}" /></div>
                         </div>
                         <p><h:outputText value="#{post.content}" /></p>
                         <p>
-                          <h:link outcome="postEdit">Edit</h:link> | <a href="#" onclick="deleteConfirmationBox(#{post.id})">Hapus</a>
+                            <h:link outcome="postNew" value="Edit">
+                                <f:param name="jsfcrud.currentPost" value="#{jsfcrud_class['id.ac.itb.informatika.wbd.jsf.JsfUtil'].jsfcrud_method['getAsConvertedString'][post][postController.converter].jsfcrud_invoke}"/>
+                            </h:link>
+                            |
+                          <a href="#" onclick="deleteConfirmationBox(#{post.id})">Hapus</a>
                         </p>
                     </li>
                         

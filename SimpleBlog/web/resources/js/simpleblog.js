@@ -1,11 +1,11 @@
 function deleteConfirmationBox(url) {
-	var confirm = window.confirm("Apakah Anda yakin menghapus post ini?");
+    var confirm = window.confirm("Apakah Anda yakin menghapus post ini?");
 	
-  if (confirm) {
-		window.location = url;
-	} else {
-		return false;
-	}
+    if (confirm) {
+        window.location = url;
+    } else {
+        return false;
+    }
 }
 
 function addComment(url, comment, postId) {

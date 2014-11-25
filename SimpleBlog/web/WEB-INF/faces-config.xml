@@ -4,6 +4,10 @@
               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
               xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
     
+    <application>
+        <el-resolver>id.ac.itb.informatika.wbd.jsf.JsfCrudELResolver</el-resolver>
+    </application>
+    
     <managed-bean>
         <managed-bean-name>postController</managed-bean-name>
         <managed-bean-class>id.ac.itb.informatika.wbd.jsf.PostController</managed-bean-class>
