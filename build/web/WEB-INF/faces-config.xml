@@ -9,7 +9,7 @@
         <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
     <managed-bean>
-        <managed-bean-name>post</managed-bean-name>
+        <managed-bean-name>Post</managed-bean-name>
         <managed-bean-class>model.Post</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
@@ -19,6 +19,9 @@
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
     <managed-bean>
+        <managed-bean-name>ListPost</managed-bean-name>
+        <managed-bean-class>model.ListPost</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
         <managed-bean-name>loginBean</managed-bean-name>
         <managed-bean-class>model.LoginBean</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope>
