@@ -15,32 +15,40 @@ import java.util.ArrayList;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 
 /**
  *
  * @author ASUS
  */
 @ManagedBean(name = "listKomentar", eager = true)
-@SessionScoped
+@ViewScoped
 public class ListKomentar {
     private ArrayList<Komentar> arrKomentar;
-    @ManagedProperty(value="#{viewPost.postid}")
     private int postid;
-    
-  
-    public ListKomentar(){
-        arrKomentar = new ArrayList<>();
-      String url = "jdbc:mysql://localhost:3306/datapost";
-	String driver = "com.mysql.jdbc.Driver";
-	String userName = "root"; 
-	String password = "";
-	 try {
-		  Class.forName(driver).newInstance();
-		  Connection conn = DriverManager.getConnection(url,userName,password);
-		  Statement st = conn.createStatement();
-                  ResultSet res= st.executeQuery("Select * from komentar where postid="+postid);
-                  //kalau masukin pake execute update
-              	Komentar komen = null;
+   
+    public ArrayList<Komentar> getArrKomentar(){
+		return arrKomentar;
+	}
+	public void setArrKomentar(ArrayList<Komentar> a){
+		this.arrKomentar = a;
+	}
+	
+	public void showPage(int id){
+		postid = id;
+		System.out.println("listkomentar="+id);
+		arrKomentar = new ArrayList<>();
+		String url = "jdbc:mysql://localhost:3306/datapost";
+		String driver = "com.mysql.jdbc.Driver";
+		String userName = "root"; 
+		String password = "";
+		try {
+			 Class.forName(driver).newInstance();
+			 Connection conn = DriverManager.getConnection(url,userName,password);
+			 Statement st = conn.createStatement();
+			ResultSet res= st.executeQuery("Select * from komentar where postid="+id);
+
+			Komentar komen = null;
 			while(res.next()){ 
 				komen = new Komentar();
 				komen.setCommentid(res.getInt("commentid"));
@@ -48,16 +56,16 @@ public class ListKomentar {
 				komen.setEmail(res.getString("Email"));                
 				komen.setKomentar(res.getString("Komentar"));                
 				komen.setTanggal(res.getString("Tanggal"));
-                                arrKomentar.add(komen);
+				arrKomentar.add(komen);
 			}
-                  conn.close();
-		  } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException e) {
-		  }}
-    	public ArrayList<Komentar> getArrKomentar(){
-		return arrKomentar;
+			conn.close();
+		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException e) {
+		}
 	}
-          public int getPostid(){
+	
+    public int getPostid(){
     return postid;}
     public void setPostid(int p){
     this.postid=p;}
 }
+

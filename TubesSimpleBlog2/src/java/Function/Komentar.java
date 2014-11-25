@@ -7,33 +7,39 @@
 package Function;
 
 import java.sql.Connection;
+import java.sql.Timestamp;
+import java.sql.PreparedStatement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Timestamp;
 import java.util.Date;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
-
+import javax.faces.bean.ViewScoped;
 
 /**
  *
  * @author ASUS
  */
 @ManagedBean(name = "komentar", eager = true)
-@SessionScoped
+@ViewScoped
 public class Komentar {
-    int commentid;   
+    @ManagedProperty(value="#{listKomentar.postid}")
+	int pid; 
+	int commentid;
     String nama;
     String email;
     String komentar;
     String tanggal;
-    private static final DateFormat dateFormat = new SimpleDateFormat ("yyyy/mm/dd");
-            
+	
+	public int getPid(){
+		return pid;
+	}
+	
     public int getCommentid(){
     return commentid;}
     
@@ -52,6 +58,9 @@ public class Komentar {
     public void setCommentid(int x){
     this.commentid=x;}
     
+	public void setPid(int p){
+		this.pid = p;
+	}
     public void setNama(String n){
     this.nama=n;}
     
@@ -63,18 +72,14 @@ public class Komentar {
     
     public void setTanggal(String d){
     this.tanggal=d;}
-    
-    public void coba(){
-	tanggal = komentar + " " + nama + " " + email;}
-    
-    public void addComment(int pid){
-     String url = "jdbc:mysql://localhost:3306/datapost";
+
+	public void addComment(){
+		String url = "jdbc:mysql://localhost:3306/datapost";
 	   String driver = "com.mysql.jdbc.Driver";
 	   String userName = "root"; 
 	   String password = "";
 		try {
 		   Class.forName(driver).newInstance();
-		//   Class.forName(driver);
 		   Connection conn = DriverManager.getConnection(url,userName,password);
 		   
 		   Date today = new Date();
@@ -87,20 +92,15 @@ public class Komentar {
 		   preparedStatement.setInt(4,pid);
 		   preparedStatement.setTimestamp(5, date);
 		   preparedStatement.executeUpdate();
-		   
-		   
-		 /*  Statement st = conn.createStatement();
-		   java.util.Date today = new java.util.Date();
-		   tanggal= dateFormat.format(today.getTime());
-		  // st.executeUpdate("insert into komentar (`Nama`,`Email`,`Komentar`,`postid`) value ('"+this.nama+"','"+this.email+"','"+this.komentar+"',29)");
-		   st.executeUpdate("insert into komentar (`Nama`,`Email`,`Komentar`,`postid`) value ('tesnama','tesemail','teskomentar',49)");
-		 */  //kalau masukin pake execute update
 		   conn.close();
-		   nama = "afterXcuteQuery";
 	   } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException e) {
 	   }
-		
-
-       
     }
+	
+	public void clear(){
+		nama = "";
+		email = "";
+		komentar = "";
+		tanggal = "";
+	}
 }
