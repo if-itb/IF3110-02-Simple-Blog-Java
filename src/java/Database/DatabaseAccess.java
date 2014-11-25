@@ -25,7 +25,7 @@ public class DatabaseAccess {
 	private DatabaseAccess() {
 
 		this.jdbcDriver = "com.mysql.jdbc.Driver";
-		this.DB_URL = "jdbc:mysql://localhost/EMP";
+		this.DB_URL = "jdbc:mysql://localhost/simple_blog";
 
 		this.USER = "root";
 		this.PASS = "";
@@ -88,6 +88,7 @@ public class DatabaseAccess {
 	}
 
 	public void executeUpdateQuery(String query) {
+                System.out.println(query);
 		ResultSet resultSet = null;
 		try {
 			this.statement.executeUpdate(query);
@@ -118,6 +119,7 @@ public class DatabaseAccess {
 			}
 		}
 		query.append(";");
+                System.out.println(query);
 		this.statement.executeUpdate(query.toString());
 	}
 
@@ -128,6 +130,7 @@ public class DatabaseAccess {
 			query += " WHERE " + condition;
 		}
 		query += ";";
+                System.out.println(query);
 		this.statement.executeUpdate(query);
 	}
 
@@ -169,7 +172,11 @@ public class DatabaseAccess {
 				query.append(",");
 			}
 		}
-		query.append(" WHERE " + condition);
+                if (condition!=null){
+                    query.append(" WHERE " + condition);
+                }
+                query.append(";");
+                System.out.println(query);
 		this.statement.executeUpdate(query.toString());
 	}
 }
