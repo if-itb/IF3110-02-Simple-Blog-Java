@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      >
+    <h:head>
+        <ui:include src="header-script.xhtml"/>
+        <title>Simple Blog | View Post</title>
+    </h:head>
+    <h:body class="default" onload="greet()">
+    <div class="wrapper">
+    <ui:include src="header.xhtml"/>
+    <h:body>
+        <article class="art simple post">
+    
+        <header class="art-header">
+            <div class="art-header-inner" style="margin-top: 0px; opacity: 1;">
+                <time class="art-time">#{post.tanggal_post}</time>
+                <h2 class="art-title">#{post.judul}</h2>
+                <p class="art-subtitle"></p>
+            </div>
+        </header>
+        <div class="art-body"/>
+        <div class="art-body-inner">
+            <hr class="featured-article" />
+            #{post.konten}
+            <hr />
+        <h2>Komentar</h2>
+        <div id="contact-area">
+                <h:form>
+                    <label for="Nama">Nama:</label>
+                    <h:inputText id="Nama" value="#{comment.nama}"/>
+                    
+                    <label for="Email">Email:</label>
+                    <h:inputText id="Email" value="#{comment.email}" />
+                    
+                    <label for="Komentar">Komentar:</label><br>
+                    <textarea name="Komentar" rows="20" cols="20" id="Komentar"></textarea>
+
+                    <h:commandButton value="Kirim" class="submit-button">
+                         <f:ajax execute="Nama" render="outputNama" />
+                         <f:ajax execute="Email" render="outputEmail" />
+                         <f:ajax execute="Komentar" render="outputKomen" />
+                    </h:commandButton>
+                     <h:outputText id="outputNama"
+                                   value="#{comment.nama !=null ?
+                                            comment.nama : ''}"
+                     />
+                     <h:outputText id="outputEmail"
+                                   value="#{comment.email !=null ?
+                                            comment.email : ''}"
+                     />
+                     <h:outputText id="outputKomen"
+                                   value="#{comment.isi !=null ?
+                                            comment.isi : ''}"
+                     />
+                </h:form>
+            </div>
+            
+    <ui:include src="footer.xhtml"/>
+    </div>
+    <ui:include src="footer-script.xhtml"/>
+    </h:body>
+</html>
