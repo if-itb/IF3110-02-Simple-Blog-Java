@@ -320,7 +320,7 @@ public class Post {
                     else if (publishStatus == 2) { //status trash
                         toHTML += "<th></th>\n" +
                                   "<th></th>\n" +
-                                  "<th><a href='../posts/restore_post.jsp?id=" + idPost + "'> X </a></th>\n";
+                                  "<th></th>\n";
                     }
                     toHTML += "<th><a href='../posts/delete_post.jsp?id=" + idPost + "'> X </a></tr>\n" +
                               "<th><a href='../posts/edit_post.jsp?id=" + idPost + "'> X </a></tr>\n";
