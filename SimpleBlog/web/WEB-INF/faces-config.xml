@@ -32,4 +32,10 @@
             <to-view-id>postNew.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
+    <navigation-rule>
+        <navigation-case>
+            <from-outcome>post_edit</from-outcome>
+            <to-view-id>postEdit.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
 </faces-config>

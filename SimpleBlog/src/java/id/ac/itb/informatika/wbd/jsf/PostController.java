@@ -3,6 +3,7 @@ package id.ac.itb.informatika.wbd.jsf;
 import id.ac.itb.informatika.wbd.jpa.controller.PostJpaController;
 import id.ac.itb.informatika.wbd.jpa.entities.Post;
 import java.util.List;
+import java.util.Map;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 
@@ -45,14 +46,23 @@ public class PostController {
     }
     
     public String newPost() {
+        String postString = converter.getAsString(FacesContext.getCurrentInstance(), null, postCurrent);
+        String currentPostString = JsfUtil.getRequestParameter("jsfcrud.currentPost");
+	
         try {
-            jpaController.create(postCurrent);
-            postCurrent = null;
-            JsfUtil.addSuccessMessage("Post sudah berhasil dibuat");
+            if (currentPostString == null) {
+                jpaController.create(postCurrent);
+                JsfUtil.addSuccessMessage("Post sudah berhasil dibuat");
+            } else {
+                jpaController.edit(postCurrent);
+                JsfUtil.addSuccessMessage("Post sudah berhasil diedit " + currentPostString);
+            }
         } catch (Exception e) {
             JsfUtil.ensureAddErrorMessage(e, "A persistence error occurred.");
             return null;
         }
-        return "post_list?faces-redirect=true";
+        return "post_list";
+        
     }
+
 }

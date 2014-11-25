@@ -12,7 +12,7 @@ public class PostConverter implements Converter {
         if (string == null || string.length() == 0) {
             return null;
         }
-        Integer id = new Integer(string);
+        Long id = new Long(string);
         PostJpaController controller = (PostJpaController) facesContext.getApplication().getELResolver().getValue(facesContext.getELContext(), null, "postJpa");
         return controller.findPost(id);
     }

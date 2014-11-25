@@ -12,7 +12,7 @@
           <header class="art-header">
             <div class="art-header-inner">
               <time class="art-time">#{postController.postCurrent.date}</time>
-              <h2 class="art-title">#{postController.postCurrent.title}></h2>
+              <h2 class="art-title">#{postController.postCurrent.title}</h2>
               <p class="art-subtitle"></p>
             </div>
           </header>
@@ -28,15 +28,15 @@
               <div id="contact-area">
                 <form method="post" action="" onsubmit="addComment(null, this, #{postController.postCurrent.id}); return false">
                   <label for="Nama">Nama:</label>
-                  <input type="text" name="Nama" id="Nama">
+                  <input type="text" name="Nama" id="Nama" />
 
                   <label for="Email">Email:</label>
-                  <input type="text" name="Email" id="Email">
+                  <input type="text" name="Email" id="Email" />
 
-                  <label for="Komentar">Komentar:</label><br>
+                  <label for="Komentar">Komentar:</label><br />
                   <textarea name="Komentar" rows="20" cols="20" id="Komentar"></textarea>
 
-                  <input type="submit" name="submit" value="Kirim" class="submit-button">
+                  <input type="submit" name="submit" value="Kirim" class="submit-button" />
                 </form>
               </div>
 

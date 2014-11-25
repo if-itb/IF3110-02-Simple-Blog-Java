@@ -23,7 +23,7 @@
                     
                     <p:messages/>
                     
-                    <h:inputHidden id="EditMode" value="#{postController.postCurrent.id}"/>
+                    <h:inputHidden id="Id" value="#{postController.postCurrent.id}"/>
                     
                     <h:outputLabel for="Judul" value="Judul:" />
                     <h:inputText id="Judul" value="#{postController.postCurrent.title}" label="Judul" title="Judul" required="true" requiredMessage="Judul tidak boleh kosong" />
@@ -36,7 +36,9 @@
                     <h:outputLabel for="Konten" value="Konten:" />
                     <h:inputTextarea id="Konten" value="#{postController.postCurrent.content}" label="Konten" title="Konten" rows="20" cols="20" required="true"  requiredMessage="Konten tidak boleh kosong" />
                     
-                    <h:commandButton type="submit" value="Submit" action="#{postController.newPost}" onclick="return validatePost();" />
+                    <h:commandButton type="submit" value="Submit" action="#{postController.newPost}" onclick="return validatePost();">
+                        <f:param name="jsfcrud.currentPost" value="#{jsfcrud_class['id.ac.itb.informatika.wbd.jsf.JsfUtil'].jsfcrud_method['getAsConvertedString'][post][postController.converter].jsfcrud_invoke}"/>
+                    </h:commandButton>
 
                 </h:form>
             </div>

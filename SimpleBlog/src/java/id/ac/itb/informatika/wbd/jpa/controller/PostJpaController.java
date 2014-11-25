@@ -65,7 +65,12 @@ public class PostJpaController {
         }
     }
 
-    public Object findPost(Integer id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Post findPost(Long id) {
+        EntityManager em = getEntityManager();
+        try {
+            return em.find(Post.class, id);
+        } finally {
+            em.close();
+        }
     }
 }
