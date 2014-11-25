@@ -1,34 +1,22 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:f="http://java.sun.com/jsf/core"
-    xmlns:h="http://java.sun.com/jsf/html"
-    xmlns:ui="http://java.sun.com/jsf/facelets">
-
-<h:head>
-    <link rel="stylesheet" href="resource/css/login.css"/>
-    <title>Simple Blog | Login</title>
-</h:head>
-<h:body class="login login-action-login wp-core-ui  locale-en">
-		
-			<div class="login">
-                            <h1>Login</h1>
-				<form name="loginform" id="loginform" action="login" method="post">
-                                        <p>
-                                                <label for="user_login">Username<br />
-                                                <input type="text" name="usrname" id="user_login" class="input" value="" size="20" /></label>
-                                        </p>
-                                        <p>
-                                                <label for="user_pass">Password<br />
-                                                <input type="password" name="passwrd" id="user_pass" class="input" value="" size="20" /></label>
-                                        </p>
-                                        <p class="submit">
-                                                <input type="submit" name="wp-submit" id="wp-submit" class="button button-primary button-large" value="Log In" />
-                                        </p>
-                                </form>
-                          
-			</div>
-</h:body>
-
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title>Login</title>
+    </h:head>
+    <h:body>
+        <div>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel for="usrname">Username</h:outputLabel>
+                    <h:inputText id="usrname" value="#{login.usrname}"/>
+                    <h:outputLabel for="passwrd">Password</h:outputLabel>
+                    <h:inputSecret id="passwrd" value="#{login.passwrd}"/>
+                </h:panelGrid>
+                <h:commandButton value="Login" action="#{login.login}"/>
+            </h:form>
+        </div>
+    </h:body>
 </html>
 

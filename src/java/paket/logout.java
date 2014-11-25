@@ -62,7 +62,7 @@ public class logout extends HttpServlet {
         session.invalidate();
         
         out.print("Bye...");
-        response.sendRedirect("index.xhtml");
+        response.sendRedirect("index");
         out.close();
     }
 
