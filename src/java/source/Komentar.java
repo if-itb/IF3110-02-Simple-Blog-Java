@@ -57,19 +57,20 @@ public class Komentar extends Post {
     }
     /**
      * 
+     * @param PostID
      * @param nama
      * @param email
      * @param comment
      * @throws SQLException 
      */
-    public static void AddComment(String nama, String email, String comment) throws SQLException {
+    public static void AddComment(int PostID, String nama, String email, String comment) throws SQLException {
         String InsertQuery;
         KoneksiDatabase.setUser("root2");
         KoneksiDatabase.setPassword("akhfa");
         KoneksiDatabase.setDatabase("localhost","simpleblogdb");
         try (Connection koneksi = KoneksiDatabase.getKoneksi()) {
             Statement statement = koneksi.createStatement();
-            InsertQuery = "INSERT INTO komentar (ID, Nama, Email, Komentar) VALUES ('" + Post.idPost + "', '" + nama + "', '" + email + "', '" + comment + "')";
+            InsertQuery = "INSERT INTO komentar (ID, Nama, Email, Komentar) VALUES ('" + PostID + "', '" + nama + "', '" + email + "', '" + comment + "')";
             statement.executeUpdate(InsertQuery);
             koneksi.close();
         }

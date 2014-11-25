@@ -18,7 +18,7 @@ function comment() {
   }
   else {
     if (validateEmail()){
-      var idPost = document.getElementById('id').value;
+      var idPost = document.getElementById('PostId').value;
       saveComment(idPost);
       loadComment(idPost);
       document.forms["commentForm"]["Nama"].value="";
@@ -70,7 +70,7 @@ function loadComment(str) {
       document.getElementById("Comment").innerHTML=xmlhttp.responseText;
     }
   }
-  xmlhttp.open("GET","comment.jsp?id="+str,true);
+  xmlhttp.open("GET","/CommentServlet?id="+str,true);
   xmlhttp.send();
 }
 function saveComment(str) {
@@ -89,7 +89,7 @@ function saveComment(str) {
       document.getElementById("Comment").innerHTML=xmlhttp.responseText;
     }
   }
-  xmlhttp.open("POST","insertcomment.jsp",true);
+  xmlhttp.open("POST","/CommentServlet",true);
   xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
   xmlhttp.send("id="+str+"&nama="+Nama+"&email="+Email+"&komentar="+Komentar);
   //alert(str+" "+Nama+" "+Email+" "+Komentar);

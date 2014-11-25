@@ -41,8 +41,8 @@
         <![endif]-->
         <%
             Post post = new Post();
-            post.setAtribut(Integer.valueOf(request.getParameter("id")));
             int ID = Integer.valueOf(request.getParameter("id"));            
+            post.setAtribut(ID);
         %>
         <title>Not a Simple Blog | <%= post.getJudul() %> </title>
     </head>
@@ -87,8 +87,8 @@
                         <label for="Komentar">Komentar:</label><br>
                         <textarea name="Komentar" rows="20" cols="20" id="Komentar"></textarea>
 
-                        <input name="id" id="id" type="hidden" value="<%= ID %>">
-                        <input type="submit" name="submit" value="Kirim" class="submit-button">
+                        <input name="PostId" id="PostId" type="hidden" value="<%= ID %>">
+                        <input type="submit" name="submit" value="Kirim" class="submit-button" onclick="return validateEmail()">
                     </form>
                 </div>
                 <ul class="art-list-body">
