@@ -377,7 +377,7 @@ public class User {
         KoneksiDatabase.setPassword(passSQL);
         KoneksiDatabase.setDatabase(urlSQL,databaseName);
         Connection koneksi = KoneksiDatabase.getKoneksi();
-        String query = "INSERT INTO user VALUES (?, ?, ?, ?, ?)";
+        String query = "INSERT INTO user (username,password,nama,email,role) VALUES (?, ?, ?, ?, ?)";
         try (PreparedStatement preStat = koneksi.prepareStatement(query)) {
             preStat.setString(1, username);
             preStat.setString(2, password);
@@ -402,7 +402,7 @@ public class User {
         KoneksiDatabase.setPassword(_passwordDatabase);
         KoneksiDatabase.setDatabase("localhost","blog");
         Connection koneksi = KoneksiDatabase.getKoneksi();
-        String query = "INSERT INTO user VALUES (?, ?, ?, ?, ?)";
+        String query = "INSERT INTO user (username,password,nama,email,role) VALUES (?, ?, ?, ?, ?)";
         try (PreparedStatement preStat = koneksi.prepareStatement(query)) {
             preStat.setString(1, username);
             preStat.setString(2, password);
