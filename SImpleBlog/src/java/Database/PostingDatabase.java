@@ -136,7 +136,6 @@ public class PostingDatabase {
           String query = "Select COUNT(Id) from post";
           SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
           java.util.Date parsed = format.parse(Tanggal);
-          System.out.println(parsed);
           java.sql.Date datesql = new java.sql.Date(parsed.getTime());
           
           rs = stmt.executeQuery(query);
@@ -216,7 +215,6 @@ public class PostingDatabase {
             rs = stmt.executeQuery(query);  
             while(rs.next()){
                 existUser = rs.getInt(1);
-                System.out.println("exist user: " + existUser);
                 if (existUser>0){
                     if(getUserRole().equals("Editor"))
                     {
@@ -237,6 +235,7 @@ public class PostingDatabase {
             }
             con.close();
         }
+        
     }
     
     public void Login() throws ClassNotFoundException, SQLException, IOException{
@@ -261,7 +260,6 @@ public class PostingDatabase {
                 rs2 = stmt.executeQuery(query2);
                 while(rs2.next()){
                     UserRole = rs2.getString("Role");
-                    System.out.println("PINGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGUsername : "+Username);
                     if(UserRole.equals("Editor"))
                         {
                             extCont.redirect("/SImpleBlog/Role/Editor.xhtml");
@@ -343,5 +341,129 @@ public class PostingDatabase {
             activeUserEmail = rs.getString("email");
          }
         return activeUserEmail;
+    }
+    
+    public void CheckAdminRole() throws ClassNotFoundException, SQLException, IOException{
+        ExternalContext extCont = FacesContext.getCurrentInstance().getExternalContext();
+        System.out.println("ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ");
+        if(getLoginState())
+        {
+            Cookie cUsername = login.getUserCookie();
+            Cookie cPassword = login.getPassCookie();
+            if (cUsername!=null && cPassword!=null){
+                ResultSet rs,rs2;
+                Connection con;
+                con = makeConnection();
+                int existUser=0;
+                String UserRole = null;
+                Statement stmt = con.createStatement();
+                String query = "Select COUNT(Username) from user where Username=\""+cUsername.getValue()+"\" and Password=\""+cPassword.getValue()+"\";";
+                rs = stmt.executeQuery(query);  
+                while(rs.next()){
+                    existUser = rs.getInt(1);
+                    if (existUser>0){
+                        if(!getUserRole().equals("Admin"))
+                        {
+                            extCont.redirect("/SImpleBlog/Home.xhtml");
+                        }
+                    }
+                    else{
+                        extCont.redirect("/SImpleBlog/Home.xhtml");
+                    }
+                }
+                con.close();
+            }
+            else
+            {
+                extCont.redirect("/SImpleBlog/Home.xhtml");
+            }
+        }
+        else
+        {
+            extCont.redirect("/SImpleBlog/Home.xhtml");
+        }
+        
+    }
+    
+    public void CheckEditorRole() throws ClassNotFoundException, SQLException, IOException{
+        ExternalContext extCont = FacesContext.getCurrentInstance().getExternalContext();
+        if(getLoginState())
+        {
+            Cookie cUsername = login.getUserCookie();
+            Cookie cPassword = login.getPassCookie();
+            if (cUsername!=null && cPassword!=null){
+                ResultSet rs,rs2;
+                Connection con;
+                con = makeConnection();
+                int existUser=0;
+                String UserRole = null;
+                Statement stmt = con.createStatement();
+                String query = "Select COUNT(Username) from user where Username=\""+cUsername.getValue()+"\" and Password=\""+cPassword.getValue()+"\";";
+                rs = stmt.executeQuery(query);  
+                while(rs.next()){
+                    existUser = rs.getInt(1);
+                    if (existUser>0){
+                        if(!getUserRole().equals("Editor"))
+                        {
+                            extCont.redirect("/SImpleBlog/Home.xhtml");
+                        }
+                    }
+                    else{
+                        extCont.redirect("/SImpleBlog/Home.xhtml");
+                    }
+                }
+                con.close();
+            }
+            else
+            {
+                extCont.redirect("/SImpleBlog/Home.xhtml");
+            }
+        }
+        else
+        {
+            extCont.redirect("/SImpleBlog/Home.xhtml");
+        }
+        
+    }
+    
+    public void CheckOwnerRole() throws ClassNotFoundException, SQLException, IOException{
+        ExternalContext extCont = FacesContext.getCurrentInstance().getExternalContext();
+        if(getLoginState())
+        {
+            Cookie cUsername = login.getUserCookie();
+            Cookie cPassword = login.getPassCookie();
+            if (cUsername!=null && cPassword!=null){
+                ResultSet rs,rs2;
+                Connection con;
+                con = makeConnection();
+                int existUser=0;
+                String UserRole = null;
+                Statement stmt = con.createStatement();
+                String query = "Select COUNT(Username) from user where Username=\""+cUsername.getValue()+"\" and Password=\""+cPassword.getValue()+"\";";
+                rs = stmt.executeQuery(query);  
+                while(rs.next()){
+                    existUser = rs.getInt(1);
+                    if (existUser>0){
+                        if(!getUserRole().equals("Owner"))
+                        {
+                            extCont.redirect("/SImpleBlog/Home.xhtml");
+                        }
+                    }
+                    else{
+                        extCont.redirect("/SImpleBlog/Home.xhtml");
+                    }
+                }
+                con.close();
+            }
+            else
+            {
+                extCont.redirect("/SImpleBlog/Home.xhtml");
+            }
+        }
+        else
+        {
+            extCont.redirect("/SImpleBlog/Home.xhtml");
+        }
+        
     }
 }
