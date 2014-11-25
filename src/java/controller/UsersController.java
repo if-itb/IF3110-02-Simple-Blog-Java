@@ -166,7 +166,6 @@ public class UsersController implements Serializable {
 			
 			response.addCookie(userCookie);
 			response.addCookie(roleCookie);
-
 			FacesContext.getCurrentInstance().getExternalContext().redirect("/SimpleBlog/faces/index.xhtml");
 		} else {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Username or password is invalid"));
@@ -200,6 +199,10 @@ public class UsersController implements Serializable {
 		//response.addCookie(roleCookie);
 		
 		FacesContext.getCurrentInstance().getExternalContext().redirect("/SimpleBlog/faces/index.xhtml");
+		
+		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+		System.err.println(FacesContext.getCurrentInstance().getExternalContext().getRequestCookieMap().get("username").toString());
+		FacesContext.getCurrentInstance().getExternalContext().redirect("/user/login.xhtml");
 	}
 	
 }
