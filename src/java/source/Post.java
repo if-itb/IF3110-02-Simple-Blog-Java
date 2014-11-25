@@ -22,20 +22,35 @@ public class Post {
     private static String tanggalPost;
     private static String kontenPost;
     private static int publishStatus;
-    public String currentUser;
-    public String currentRole;
-    public boolean cookieOn;
+    private boolean cookieOn;
+    private User user;
     
+    /**
+     * Konstruktor Post, gunanya untuk membuat objek user
+     */
+    public Post() {
+        user = new User();
+    }
+    
+    /**
+     * melakukan set username berdasarkan cookie
+     * @param c
+     */
     public void cookieHeaderCheck(CookieHelper c) {
         //prekondisi: cookie sudah pasti ada
-        setUser(c.getUsername(),c.getRole());
+        user.setUsername(c.getUsername());
         cookieOn = true;
     }
     
-    public String showMessageHeader() {
+    /**
+     * Menambahkan header message pada halaman utama blog
+     * @return header tulisan yang dikembalikan ke halaman utama
+     * @throws SQLException
+     */
+    public String showMessageHeader() throws SQLException {
         String header;
         if (cookieOn) {
-            header = "Welcome " + currentUser + ", your role is " + currentRole + 
+            header = "Welcome " + user.getUsername() + ", your role is " + user.getRole() + 
                      "<li> <form action=\"/IF3110-02-Simple-Blog-Java/LogoutServlet\" method=\"post\">\n" +
                      "<input type=\"submit\" value=\"Logout\" >\n" +
                      "</form> </li>" +
@@ -52,10 +67,15 @@ public class Post {
         return header;
     }
     
-    public String showManagementHeader() {
+    /**
+     * Menambahkan header message pada halaman manajemen blog
+     * @return header tulisan yang dikembalikan ke halaman utama
+     * @throws SQLException
+     */
+    public String showManagementHeader() throws SQLException {
         String header;
         if (cookieOn) {
-            header = "Welcome " + currentUser + ", your role is " + currentRole + 
+            header = "Welcome " + user.getUsername() + ", your role is " + user.getRole() + 
                      "<li> <form action=\"/IF3110-02-Simple-Blog-Java/LogoutServlet\" method=\"post\">\n" +
                      "<input type=\"submit\" value=\"Logout\" >\n" +
                      "</form></li>" +
@@ -72,33 +92,28 @@ public class Post {
         return header;
     }
     
-    public void setUser(String user, String role) {
-        currentUser = user;
-        currentRole = role;
-    }
-    
     /**
      * Mengecek apakah pengguna adalah admin
-     * @return
+     * @return 1 apabila admin, 0 bila bukan
      */    
     public boolean isAdmin() {
-        return (currentRole.compareTo("admin") == 0);
+        return (user.getUsername().compareTo("admin") == 0);
     }
     
     /**
      * Mengecek apakah pengguna adalah editor
-     * @return
+     * @return 1 apabila admin, 0 bila bukan
      */
     public boolean isEditor() {
-        return (currentRole.compareTo("editor") == 0);
+        return (user.getUsername().compareTo("editor") == 0);
     }
     
     /**
      * Mengecek apakah pengguna adalah owner
-     * @return
+     * @return 1 apabila admin, 0 bila bukan
      */
     public boolean isOwner() {
-        return (currentRole.compareTo("owner") == 0);
+        return (user.getUsername().compareTo("owner") == 0);
     }
     
     /**
@@ -243,6 +258,11 @@ public class Post {
         return toHTML;
     }
     
+    /**
+     *
+     * @return
+     * @throws SQLException
+     */
     public String listManagementPosts() throws SQLException {
         //inisialisasi string
         String toHTML = "";
@@ -473,6 +493,11 @@ public class Post {
         }
     }
     
+    /**
+     * Membuang post secara soft (soft delete)
+     * @param post_ID id post
+     * @throws SQLException
+     */
     public void trashPost(int post_ID) throws SQLException {
         try { 
             //login database
@@ -492,6 +517,11 @@ public class Post {
         }
     }
     
+    /**
+     * Mengembalikan post dari trash ke unpublished
+     * @param post_ID id post
+     * @throws SQLException
+     */
     public void restorePost(int post_ID) throws SQLException {
         try { 
             //login database
