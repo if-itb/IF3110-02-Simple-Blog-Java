@@ -3,7 +3,7 @@
 
 /* Reset & Basics (Inspired by E. Meyers)
 ================================================== */
-html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, address, cite, code, em, img, small, strong, ol, ul, li, fieldset, form, label, legend, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, embed, figure, figcaption, footer, header, hgroup, menu, nav, section, summary, time, audio, video {
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, address, cite, code, em, img, small, strong, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, embed, figure, figcaption, footer, header, hgroup, menu, nav, section, summary, time, audio, video {
   margin: 0;
   padding: 0;
   border: 0;
@@ -382,16 +382,17 @@ div.cover > img {
 /*  List of Articles
 ================================================== */
 .art-list {
-  padding: 0px 0 0;
+  padding: 120px 0 0;
 }
 .art-list-body {
   position: relative;
   overflow: hidden;
 }
 .art-list-item {
-  padding: 10px 0;
+  padding: 40px 0;
   list-style: none;
   overflow: hidden;
+  border-bottom: 1px solid #ccc;
 }
 .art-list-item:last-child {
   border-bottom: none;

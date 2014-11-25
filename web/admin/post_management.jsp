@@ -70,7 +70,6 @@
                   <ul class="art-list-body">
                     <li class="art-list-item">
                         <div class="art-list-item-title-and-time">
-                            <br><br><br>
                             <h2 class="art-list-title">Post Management</h2>
                         </div>
                         
