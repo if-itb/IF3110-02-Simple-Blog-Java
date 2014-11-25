@@ -3,7 +3,6 @@ package id.ac.itb.informatika.wbd.jsf;
 import id.ac.itb.informatika.wbd.jpa.controller.PostJpaController;
 import id.ac.itb.informatika.wbd.jpa.entities.Post;
 import java.util.List;
-import java.util.Map;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 
@@ -64,5 +63,20 @@ public class PostController {
         return "post_list";
         
     }
+    
+    public String deletePost(Post post) {
+        String idAsString = JsfUtil.getRequestParameter("jsfcrud.currentPost");
+        Long id = new Long(idAsString);
+        
+        try {
+            jpaController.destroy(post.getId());
+            JsfUtil.addSuccessMessage("Post berhasil dihapus" + post.getId());
+        } catch (Exception e) {
+            JsfUtil.ensureAddErrorMessage(e, "A persistence error occurred.");
+            return null;
+        }
+        return "post_list";
+    }
+
 
 }

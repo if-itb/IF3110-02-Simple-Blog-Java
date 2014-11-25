@@ -30,11 +30,19 @@
                         </div>
                         <p><h:outputText value="#{post.content}" /></p>
                         <p>
+                            <h:form>
                             <h:link outcome="postNew" value="Edit">
                                 <f:param name="jsfcrud.currentPost" value="#{jsfcrud_class['id.ac.itb.informatika.wbd.jsf.JsfUtil'].jsfcrud_method['getAsConvertedString'][post][postController.converter].jsfcrud_invoke}"/>
                             </h:link>
                             |
-                          <a href="#" onclick="deleteConfirmationBox(#{post.id})">Hapus</a>
+                            <h:commandLink value="Hapus" onclick="PF(#{post.id}).show(); return false;" />
+                            <p:confirmDialog message="Yakin akan menghapus?" header="Hapus post" severity="alert" widgetVar="#{post.id}">
+                                <p:commandButton value="Ya" actionListener="#{postController.deletePost(post)}" oncomplete="PF('#{post.id}').hide()" ajax="false">
+                                    <f:param name="jsfcrud.currentPost" value="#{jsfcrud_class['id.ac.itb.informatika.wbd.jsf.JsfUtil'].jsfcrud_method['getAsConvertedString'][post][postController.converter].jsfcrud_invoke}"/>
+                                </p:commandButton>    
+                                <p:commandButton value="Tidak" onclick="PF('cd').hide();" type="button" />
+                            </p:confirmDialog>
+                            </h:form>
                         </p>
                     </li>
                         

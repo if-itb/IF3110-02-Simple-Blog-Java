@@ -55,8 +55,26 @@ public class PostJpaController {
         }
     }
     
-    public void destroy(Long id) {
-        
+    public void destroy(Long id) throws Exception  {
+        EntityManager em = getEntityManager();
+        try {
+            utx.begin();
+            //em.joinTransaction();
+            
+            //Post post = em.find(Post.class, id);
+            //em.remove(post);
+            Query query = em.createQuery(
+                "DELETE FROM posts c WHERE c.id = :p");
+            int deletedCount = query.setParameter("p", id).executeUpdate();
+            utx.commit();
+        } catch (Exception ex) {
+            utx.rollback();
+            //throw ex;
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
     }
 
     public List<Post> getAllPosts() {
