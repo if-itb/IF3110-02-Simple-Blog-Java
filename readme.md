@@ -101,3 +101,17 @@ Bonus
 1. Soft Delete
 1. WYSIWYG untuk Form Post
 1. Tampilan
+
+Todo
+====
+1. daftar post milik sendiri (reguler)
+    * lihat, edit, delete post sendiri
+    * delete ada konfirmasi
+1. Editor
+    * bisa melihat unpublished post
+    * bisa edit dan publish
+1. Admin
+    * Edit data user
+    * Melihat all post dengan bisa edit semua
+    * bisa restore post
+1. Implementasi cookies supaya session lebih lama
