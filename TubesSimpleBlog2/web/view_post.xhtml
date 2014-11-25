@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+	  xmlns:f="http://xmlns.jcp.org/jsf/core"
+	  xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <h:head>
+        <title>TODO supply a title</title>
+        <meta name="viewport" content="width=device-width"/>
+    </h:head>
+    <h:body> 
+		VIEW POST
+		#{viewPost.showPage(param['idpost'])}
+		#{listKomentar.showPage(param['idpost'])}
+		<br/><h:outputText value="#{viewPost.postId}"></h:outputText> 
+        <br/><h:outputText value="#{viewPost.judul}"></h:outputText>      
+         <br/><h:outputText value="#{viewPost.konten}"></h:outputText>
+         <br/> <h:outputText value="#{viewPost.tanggal}"></h:outputText>
+		 
+		 <c:forEach items="#{listKomentar.arrKomentar}" var="komen">
+			<br/><h:outputText value="#{komen.commentid}"></h:outputText> 
+            <br/><h:outputText value="#{komen.nama}"></h:outputText> 
+			<br/><h:outputText value="#{komen.tanggal}"></h:outputText>
+			<br/> <h:outputText value="#{komen.komentar}"></h:outputText>
+                        <hr></hr>
+		</c:forEach>
+		 #{komentar.clear()}
+		<p>           
+            <h:form> 
+				Nama: <h:inputText id="kname" value="#{komentar.nama}" />
+				Email: <h:inputText id="kemail" value="#{komentar.email}" />
+				Komentar: <h:inputText id="komens" value="#{komentar.komentar}" />
+              <h:commandButton value="Submit" action="#{komentar.addComment()}" onclick="return check();"/>
+			</h:form>
+		</p>
+    </h:body>
+</html>

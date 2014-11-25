@@ -7,6 +7,8 @@
         <link rel="stylesheet" href="style.css" type="text/css" />
         <h:head>
         <title>Simple Blog</title>
+
+		
     </h:head>        
         <div class="header">Simple Blog</div>
         <br/>
@@ -18,7 +20,7 @@
         <h3>Date: <h:outputText value="#{viewPost.getTanggal()}"></h:outputText></h3>
                 <p><h:outputText value="#{viewPost.getKonten()}"></h:outputText></p>
         </hr> 
-        
+        #{listKomentar.showPage(viewPost.postid)}
         <h3>Beri Komentar</h3>
         
         <p>                         <h:form id="formcomment" onsubmit="return validasiEmail()">
@@ -41,7 +43,9 @@
 			<br/><h:outputText value="#{komen.tanggal}"></h:outputText>
 			<br/> <h:outputText value="#{komen.komentar}"></h:outputText>
                         <hr></hr></p>
+
 		</c:forEach>
+
 </div>
       
         <script type="text/javascript">
@@ -65,6 +69,7 @@ return false;}}
         </form>
         <div class="footer">
             rita | cilvia | linda </div>
+
     </h:body>
 </html>
 
