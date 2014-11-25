@@ -73,15 +73,15 @@
                     <div id="contact-area">
                         <form method="post" action="edit_post_red.jsp?id=<%=request.getParameter("id")%>">
                             <label for="Judul">Judul:</label>
-                            <input type="text" name="Judul" id="Judul" value="<%= post.getJudul() %>">
+                            <input type="text" name="Judul" id="Judul" value="<%= post.getJudul() %>" aria-required="true" required="">
 
                             <label for="Tanggal">Tanggal:</label>
-                            <input type="text" name="Tanggal" id="Tanggal" value="<%= post.getTanggal() %>">
+                            <input type="text" name="Tanggal" id="Tanggal" value="<%= post.getTanggal() %>" aria-required="true" required="return IsValidDate()">
 
                             <label for="Konten">Konten:</label><br>
-                            <textarea name="Konten" rows="20" cols="20" id="Konten"><%= post.getKonten() %></textarea>
+                            <textarea name="Konten" rows="20" cols="20" id="Konten" aria-required="true" required=""><%= post.getKonten() %></textarea>
 
-                            <input type="submit" name="submit" value="Simpan" class="submit-button">
+                            <input type="submit" name="submit" value="Simpan" class="submit-button" onclick="return IsValidDate()">
                         </form>
                     </div>
                 </div>
@@ -105,10 +105,10 @@
 
         </div>
 
-        <script type="text/javascript" src="assets/js/function.js"></script>
-        <script type="text/javascript" src="assets/js/fittext.js"></script>
-        <script type="text/javascript" src="assets/js/app.js"></script>
-        <script type="text/javascript" src="assets/js/respond.min.js"></script>
+        <script type="text/javascript" src="../assets/js/function.js"></script>
+        <script type="text/javascript" src="../assets/js/fittext.js"></script>
+        <script type="text/javascript" src="../assets/js/app.js"></script>
+        <script type="text/javascript" src="../assets/js/respond.min.js"></script>
         <script type="text/javascript">
           var ga_ua = '{{! TODO: ADD GOOGLE ANALYTICS UA HERE }}';
 
