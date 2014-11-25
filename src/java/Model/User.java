@@ -23,17 +23,19 @@ public class User {
     private int id;
     private String username;
     private String pass;
+    private String email;
     private String role;
     
     public User () {
         this.role = "guest";
     }
     
-    public User(int id, String username, String pass)
+    public User(int id, String username, String pass, String email)
     {
         this.id = id;
         this.username = username;
         this.pass = pass; 
+        this.email = email;
     }
     
     /* Setter */
@@ -49,6 +51,10 @@ public class User {
         this.pass = pass;
     }
     
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    
     /* Getter */
     public int getId(){
         return this.id;
@@ -60,6 +66,10 @@ public class User {
     
     public String getPassword(){
         return this.pass;
+    }
+    
+     public String getEmail(){
+        return this.email;
     }
     
     public void setRole(String newRole) {
