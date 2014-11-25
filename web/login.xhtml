@@ -1,6 +1,9 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:f="http://xmlns.jcp.org/jsf/core"
+xmlns:h="http://xmlns.jcp.org/jsf/html">
+<h:head>
 
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -16,14 +19,13 @@
 <meta name="twitter:creator" content="Simple Blog"/>
 <meta name="twitter:image:src" content="{{! TODO: ADD GRAVATAR URL HERE }}"/>
 
-<meta property="og:type" content="article"/>
-<meta property="og:title" content="Simple Blog"/>
-<meta property="og:description" content="Deskripsi Blog"/>
-<meta property="og:image" content="{{! TODO: ADD GRAVATAR URL HERE }}"/>
-<meta property="og:site_name" content="Simple Blog"/>
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Simple Blog" />
+<meta property="og:description" content="Deskripsi Blog" />
+<meta property="og:image" content="{{! TODO: ADD GRAVATAR URL HERE }}" />
+<meta property="og:site_name" content="Simple Blog" />
 
 <link rel="stylesheet" type="text/css" href="assets/css/screen.css" />
-<link rel="stylesheet" type="text/css" href="assets/css/button.css" />
 <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico"/>
 
 <!--[if lt IE 9]>
@@ -33,9 +35,9 @@
 <title>Simple Blog</title>
 
 
-</head>
+</h:head>
 
-<body class="default">
+<h:body class="default">
 <div class="wrapper">
 
 <nav class="nav">
@@ -48,14 +50,14 @@
 			<div><span>Welcome</span><br/><div>---Sang Penguasa Dunia---</div></div>
 		</div>
 		<div class="login">
-			<form action="" method="POST">
-				<input name="username" placeholder="username" type="text"/>
-				<input name="password" placeholder="password" type="password"/> <br/>
-				<input type="checkbox" name="rememberme" value="rememberme" checked="checked"> Remember me </input><br/>
+			<h:form>
+                                <h:inputText value="#{loginBean.username}"></h:inputText><br/>
+                                <h:inputSecret value="#{loginBean.password}"></h:inputSecret><br/>
+				<input type="checkbox" name="rememberme" value="rememberme" checked="checked"/> Remember me<br/>
 				<p class="button">
-					<input name="submit" type="submit" value="Log in"/>
+                                    <h:commandButton value="Login" action="#{loginBean.doNavigation}"></h:commandButton>
 				</p>
-			</form>
+			</h:form>
 		</div>
     </div>
 </div>
@@ -63,15 +65,18 @@
 <footer class="footer">
     <div class="back-to-top"><a href="">Back to top</a></div>
     <!-- <div class="footer-nav"><p></p></div> -->
+    <div class="psi">Psi;</div>
     <aside class="offsite-links">
         PenguasaDunia /
         <br/>
 		<a class="twitter-link" href="#">Kevin 13512010</a> /
         <a class="twitter-link" href="#">Wira 13512015</a> /
         <a class="twitter-link" href="#">Melvin 13512085</a> /
+        
     </aside>
 </footer>
 
 </div>
-</body>
+
+</h:body>
 </html>
