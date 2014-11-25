@@ -1,15 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Model;
 
 import Security.MD5;
 
 /**
- *
+ * Representation of User
  * @author Luthfi Hamid Masykuri
+ * @modified Riva Syafri Rachmatullah
  */
 public class User {
     private String username;
@@ -18,15 +14,24 @@ public class User {
     private String name;
     private String email;
     
-    public User()
-    {
+    /**
+     * Create guest user
+     */
+    public User() {
         username = "";
         password = "";
         role = "";
     }
     
-    public User(String username,String password,String role,String name,String email)
-    {
+    /**
+     * Create instance of user with its information
+     * @param username username of user
+     * @param password password of user
+     * @param role role of user
+     * @param name name of user
+     * @param email email of user
+     */
+    public User(String username,String password,String role,String name,String email) {
         this.username = username;
         this.password = MD5.getMD5(password);
         this.role = role;
@@ -34,53 +39,83 @@ public class User {
         this.email = email;
     }
     
-    public String getUsername()
-    {
+    /**
+     * Get the username of an user
+     * @return username of user
+     */
+    public String getUsername() {
         return username;
     }
     
-    public String getPassword()
-    {
+    /**
+     * Get the password of an user
+     * @return password of user
+     */
+    public String getPassword() {
         return password;
     }
     
-    public String getRole()
-    {
+    /**
+     * Get the role of an user
+     * @return role of user
+     */
+    public String getRole() {
         return role;
     }
     
-    public String getName()
-    {
+    /**
+     * Get the name of an user
+     * @return name of user
+     */
+    public String getName() {
         return name;
     }
     
-    public String getEmail()
-    {
+    /**
+     * Get the email of an user
+     * @return email of user
+     */
+    public String getEmail() {
         return email;
     }
     
-    public void setUsername(String username)
-    {
+    /**
+     * Set the new username of an user
+     * @param username the new username
+     */
+    public void setUsername(String username) {
         this.username = username;
     }
     
-    public void setPassword(String password)
-    {
+    /**
+     * Set the new password of an user
+     * @param password the new password
+     */
+    public void setPassword(String password) {
         this.password = MD5.getMD5(password);
     }
     
-    public void setRole(String role)
-    {
+    /**
+     * Set the new role of an user
+     * @param role the new role
+     */
+    public void setRole(String role) {
         this.role = role;
     }
     
-    public void setName(String name)
-    {
+    /**
+     * Set the new name of an user
+     * @param name the new name
+     */
+    public void setName(String name) {
         this.name = name;
     }
     
-    public void setEmail(String email)
-    {
+    /**
+     * Set the new email of an user
+     * @param email the new email
+     */
+    public void setEmail(String email) {
         this.role = email;
     }
 }

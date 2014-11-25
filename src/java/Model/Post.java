@@ -1,15 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Model;
 
 import java.sql.Date;
 
 /**
- *
+ * Representation of Post
  * @author Luthfi Hamid Masykuri
+ * @modified Riva Syafri Rachmatullah 
  */
 public class Post {
     private int id;
@@ -18,8 +14,15 @@ public class Post {
     private String content;
     private User author;
     
-    public Post(int id,String title,Date date,String content,User author)
-    {
+    /**
+     * Create new instance of post
+     * @param id id of post
+     * @param title title of post
+     * @param date date of post
+     * @param content content of post
+     * @param author author of post
+     */
+    public Post(int id,String title,Date date,String content,User author) {
         this.id = id;
         this.title = title;
         this.date = date;
@@ -27,48 +30,75 @@ public class Post {
         this.author = author;
     }
     
-    public int getID()
-    {
+    /**
+     * Get the id of post
+     * @return id of post
+     */
+    public int getID() {
         return id;
     }
     
-    public String getTitle()
-    {
+    /**
+     * Get the title of post
+     * @return title of post
+     */
+    public String getTitle() {
         return title;
     }
     
-    public Date getDate()
-    {
+    /**
+     * Get the date of post
+     * @return date of post
+     */
+    public Date getDate() {
         return date;
     }
     
-    public String getContent()
-    {
+    /**
+     * Get the content of post
+     * @return content of post
+     */
+    public String getContent() {
         return content;
     }
     
-    public User getAuthor()
-    {
+    /**
+     * Get the author of post
+     * @return author of post
+     */
+    public User getAuthor() {
         return author;
     }
     
-    public void setTitle(String title)
-    {
+    /**
+     * Set the new title of post
+     * @param title new title
+     */
+    public void setTitle(String title) {
         this.title = title;
     }
     
-    public void setDate(Date date)
-    {
+    /**
+     * Set the new date of post
+     * @param date new date
+     */
+    public void setDate(Date date) {
         this.date = date;
     }
     
-    public void setContent(String content)
-    {
+    /**
+     * Set the new content of post
+     * @param content new content
+     */
+    public void setContent(String content) {
         this.content = content;
     }
     
-    public void setAuthor(User author)
-    {
+    /**
+     * Set the new author of post
+     * @param author new author
+     */
+    public void setAuthor(User author) {
         this.author = author;
     }
     
