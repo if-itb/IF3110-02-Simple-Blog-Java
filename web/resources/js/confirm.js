@@ -1,11 +1,13 @@
-function DeletePost(id_post)
+function DeletePost()
 {
 	var conf = confirm("Apakah Anda yakin menghapus post ini?");
 	if(conf)
 	{
 		//window.location.href= 'deletePost.php?id=' + id_post;
-                
+                return true;
 	}
+        else
+                return false;
 }
 
 function ValidateForm()

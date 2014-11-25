@@ -17,9 +17,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import javax.faces.event.ComponentSystemEvent;
 import javax.faces.bean.SessionScoped;
 import javax.faces.bean. ManagedProperty ;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -27,11 +29,12 @@ import javax.faces.bean. ManagedProperty ;
  */
 @ManagedBean(name="deletepost")
 @SessionScoped
-public class deletepost 
+public class deletepost implements Serializable
 {
     private String judul;
     @ManagedProperty(value="#{user.author}")
     private String author;
+    private String action;
     
     public deletepost() 
     {
@@ -54,17 +57,23 @@ public class deletepost
         this.judul = judul;
     }
     
-    public void delete()
+    public String delete()
     {
         try
         {
+            System.out.println("Masuk map params");
+            /*
+            Map<String,String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+            String id_pars = params.get("deleteAction");
+            */
+            String id_pars = action;
+            System.out.println("id pars: "+id_pars);
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost/simple_blog_java", "root","");
             System.out.println("connected to database!");
-            String query = "DELETE FROM post WHERE (judul, author) = (?,?)";
+            String query = "UPDATE post SET status='deleted' WHERE (id) = (?)";
             PreparedStatement ps = con.prepareStatement(query);
-            ps.setString(2, judul);
-            ps.setString(3, author);
+            ps.setString(1, id_pars);
             int executeUpdate = ps.executeUpdate();
             if(executeUpdate > 0)
             {
@@ -81,5 +90,11 @@ public class deletepost
             System.out.println(ex.toString());
             System.out.println(ex.getMessage());
         }
+        return null;
     }
+
+    public void setAction(String action) {
+        this.action = action;
+    }
+    
 }
