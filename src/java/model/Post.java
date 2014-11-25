@@ -109,4 +109,9 @@ public class Post {
     public void setPID(int PID) {
         this.PID = PID;
     }
+    
+    public void tambahPost()
+    {
+        
+    }
 }
