@@ -59,8 +59,7 @@ public class AddPostBean {
         } catch (SQLException ex) {
             Logger.getLogger(AddPostBean.class.getName()).log(Level.SEVERE, null, ex);
         }
-        Posts.getInstance().addPost(post);
-        Posts.getInstance().savePost();
+        Posts.getInstance().insertPostDB(post);
         try {
             dbManager.closeConnection();
             System.out.println("Berhasil menutup koneksi");

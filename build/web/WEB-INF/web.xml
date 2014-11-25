@@ -12,14 +12,83 @@
    </init-param>
     </filter>
     
+    <filter>
+        <filter-name>adminRedirect</filter-name>
+        <filter-class>
+            Filter.FilterAdmin
+        </filter-class>
+        <init-param>
+	  <param-name>test-param</param-name>
+	  <param-value>Initialization Paramter</param-value>
+   </init-param>
+    </filter>
+    
+    <filter>
+        <filter-name>guestRedirect</filter-name>
+        <filter-class>
+            Filter.FilterGuest
+        </filter-class>
+        <init-param>
+	  <param-name>test-param</param-name>
+	  <param-value>Initialization Paramter</param-value>
+   </init-param>
+    </filter>
+    
+    <filter>
+        <filter-name>adminownerRedirect</filter-name>
+        <filter-class>
+            Filter.FilterAdminOwner
+        </filter-class>
+        <init-param>
+	  <param-name>test-param</param-name>
+	  <param-value>Initialization Paramter</param-value>
+   </init-param>
+    </filter>
+    
     <filter-mapping>
         <filter-name>loginRedirect</filter-name>
         <url-pattern>/login.jsf</url-pattern>
     </filter-mapping>
     
     <filter-mapping>
+        <filter-name>adminRedirect</filter-name>
+        <url-pattern>/new_user.jsf</url-pattern>
+        <url-pattern>/read_user.jsf</url-pattern>
+    </filter-mapping>
+    
+    <filter-mapping>
+        <filter-name>guestRedirect</filter-name>
+        <url-pattern>/user_management.jsf</url-pattern>
+        <url-pattern>/new_user.jsf</url-pattern>
+        <url-pattern>/read_user.jsf</url-pattern>
+        <url-pattern>/new_post.jsf</url-pattern>
+        <url-pattern>/edit_post.jsf</url-pattern>
+        <url-pattern>/list_post.jsf</url-pattern>
+    </filter-mapping>
+    
+    <filter-mapping>
+        <filter-name>adminownerRedirect</filter-name>
+        <url-pattern>/new_post.jsf</url-pattern>
+    </filter-mapping>
+    
+    <filter-mapping>
         <filter-name>loginRedirect</filter-name>
         <servlet-name>LoginRedirect</servlet-name>
+    </filter-mapping>
+    
+    <filter-mapping>
+        <filter-name>adminRedirect</filter-name>
+        <servlet-name>adminRedirect</servlet-name>
+    </filter-mapping>
+    
+    <filter-mapping>
+        <filter-name>guestRedirect</filter-name>
+        <servlet-name>guestRedirect</servlet-name>
+    </filter-mapping>
+    
+    <filter-mapping>
+        <filter-name>adminownerRedirect</filter-name>
+        <servlet-name>adminownerRedirect</servlet-name>
     </filter-mapping>
     
     <context-param>

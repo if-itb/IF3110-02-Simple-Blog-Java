@@ -18,7 +18,7 @@
 			<h:outputLabel for="Konten">Konten:</h:outputLabel><br/>
                         <h:inputTextarea value="#{editPostBean.post.text}" rows="20" cols="20" id="Konten"></h:inputTextarea>
                         
-                        <h:commandButton action="#{editPostBean.editPost}" class="submit-button" value="submit">
+                        <h:commandButton onclick="return validateForm()" action="#{editPostBean.editPost}" class="submit-button" value="submit">
                             <f:param name="postId" value="#{editPostBean.post.id}"/>
                         </h:commandButton>
 		</h:form>

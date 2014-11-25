@@ -25,7 +25,9 @@ public class User {
     private String pass;
     private String role;
     
-    public User () {}
+    public User () {
+        this.role = "guest";
+    }
     
     public User(int id, String username, String pass)
     {

@@ -129,7 +129,7 @@ public class Posts {
     }
     
      
-    private void insertPostDB(Post p) {
+    public void insertPostDB(Post p) {
         DatabaseAccess databaseAccess = DatabaseAccess.getInstance();
         String idUser = "" + p.getId() +"";
         ArrayList<String> columns = new ArrayList<String>(Arrays.asList("Judul","Tanggal","Konten","Id_User"));

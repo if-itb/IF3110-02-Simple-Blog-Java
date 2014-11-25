@@ -53,7 +53,7 @@ public class DeletePostBean {
             Logger.getLogger(UsersTest.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        return "index.jsf?faces-redirect=true";
+        return "user_management.jsf?faces-redirect=true";
     }
     
 }
