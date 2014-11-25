@@ -34,15 +34,20 @@ h3 {
     width: 300px;
 }
 
-.logout {
-   text-align: center;
-   color: black;
+.upper-menu {
+    margin-left: 700px;
+    height: 80px;
 }
 
-.logout .pure-button {
+.upper-menu .pure-button {
    background: rgb(61, 79, 93) !important;
    color: white;
-   margin-left: 1000px;
+   margin-left: 10px;
+}
+
+.upper-menu .img-role {
+    border-radius: 20px;
+    margin-left: 10px;
 }
 .sidebar {
     background: rgb(61, 79, 93);
@@ -71,11 +76,13 @@ h3 {
     *display: inline;
     zoom: 1;
 }
+.nav-item img {
+    display: block;
+}
 .nav-item a {
     background: transparent;
     border: 2px solid rgb(176, 202, 219);
     color: #fff;
-    margin-top: 1em;
     letter-spacing: 0.05em;
     text-transform: uppercase;
     font-size: 85%;
@@ -98,10 +105,9 @@ h3 {
 
 .content {
     padding: 2em 1em 0;
-    height: auto !important;
-    height: 100%;
+    height: auto;
     min-height: 100%;
-    margin: 0 auto -1px;
+    margin: 0 auto -50px;
 }
 .posts {
     padding-left: 1cm;
@@ -138,18 +144,18 @@ h3 {
     background: #999;
     font-size: 80%;
 }
-    .post-category-design {
-        background: #5aba59;
-    }
-    .post-category-pure {
-        background: #4d85d1;
-    }
-    .post-category-yui {
-        background: #8156a7;
-    }
-    .post-category-js {
-        background: #df2d4f;
-    }
+.post-category-design {
+    background: #5aba59;
+}
+.post-category-pure {
+    background: #4d85d1;
+}
+.post-category-yui {
+    background: #8156a7;
+}
+.post-category-js {
+    background: #df2d4f;
+}
 
 .post-images {
     margin: 1em 0;
@@ -164,7 +170,7 @@ h3 {
 .footer {
     text-align: center;
     padding: 1em 0;
-    height: 1px;
+    height: 50px;
 }
 .footer a {
     color: #ccc;
@@ -182,6 +188,7 @@ h3 {
     *display: inline;
     zoom: 1;
     vertical-align: middle;
+    margin-left: 20px;
 }
 
 /* Submenus should still be display: block; */
@@ -207,9 +214,9 @@ h3 {
 
 /* Submenus should be horizontal separator again */
 .pure-menu-horizontal li li.pure-menu-separator {
-	height: 1px;
-	width: auto;
-	margin: 7px 2px;
+    height: 1px;
+    width: auto;
+    margin: 7px 2px;
 }
 
 
@@ -217,6 +224,9 @@ h3 {
 /*TODO: Remove this lint rule override after a refactor of this code.*/
 
 /* MAIN MENU STYLING */
+.pure-menu-horizontal{
+    margin-left: 300px;
+}
 
 .pure-menu.pure-menu-open,
 .pure-menu.pure-menu-horizontal li .pure-menu-children {

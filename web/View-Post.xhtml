@@ -4,7 +4,10 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
-<html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 <f:view>
     <h:head>
         <title>Post title</title>
@@ -12,7 +15,27 @@ and open the template in the editor.
     <h:body>
         <ui:composition template="template/basis.xhtml">
             <ui:define name="content">
-                
+                <section class="post">
+                    <header class="post-header">
+                       
+                        <h2 class="post-title">#{ListPost.fetchPost().judul}</h2>
+
+                        <p class="post-meta">
+                            By <a class="post-author" href="#">Eric Ferraiuolo</a> under <a class="post-category post-category-js" href="#">JavaScript</a>
+                        </p>
+                    </header>
+
+                    <div class="post-description">
+                        <p>
+                            #{ListPost.fetchPost().konten}
+                        </p>
+                          
+                    </div>
+                </section>
+                <h1 class="content-subhead">Komentar</h1>
+                <section class="komentar">
+                    
+                </section>
             </ui:define>
         </ui:composition>>
     </h:body>

@@ -18,4 +18,9 @@
         <managed-bean-class>model.NavigationController</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
+    <managed-bean>
+        <managed-bean-name>ListPost</managed-bean-name>
+        <managed-bean-class>model.ListPost</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
 </faces-config>

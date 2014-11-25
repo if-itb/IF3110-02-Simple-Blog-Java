@@ -23,29 +23,31 @@
 </head>
 <body>
     <div id="layout" class="pure-g">
-        <div class="logout">
-            <a class="pure-button" href="#{NavigationController.gotoLogin()}" value="Logout">LOGOUT</a>
+        <div class="upper-menu">
+            <nav class="nav">
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a class="pure-button" href="#{NavigationController.gotoAddPost()}" value="Add Post">New Post</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="pure-button" href="#{NavigationController.gotoListPost()}" value="List-Post">List Post</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="pure-button" href="#{NavigationController.gotoListUser()}" value="List-User">List User</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="pure-button" href="#{NavigationController.gotoLogin()}" value="Logout">LOGOUT</a>
+                    </li>
+                    <li class="nav-item">
+                        <img class="img-role" alt="Eric Ferraiuolo&#x27;s avatar" height="48" width="48" src="img/common/ericf-avatar.png"></img>
+                    </li>
+                </ul>
+                </nav>
         </div>
         <div class="sidebar">
             <div class="header">
                 <h1 class="brand-title">Simple Blog</h1>
                 <h2 class="brand-tagline">Blah blah blah, Tubes 2 WBD</h2>
-
-                <nav class="nav">
-                    <ul class="nav-list">
-                        <li class="nav-item">
-                            <a class="pure-button" href="#{NavigationController.gotoAddPost()}" value="Add Post">New Post</a>
-                        </li>
-                        <br></br>
-                        <li class="nav-item">
-                            <a class="pure-button" href="#{NavigationController.gotoListPost()}" value="List-Post">List Post</a>
-                        </li>
-                        <br></br>
-                        <li class="nav-item">
-                            <a class="pure-button" href="#{NavigationController.gotoListUser()}" value="List-User">List User</a>
-                        </li>
-                    </ul>
-                </nav>
             </div>
         </div>
         <div class="content">
