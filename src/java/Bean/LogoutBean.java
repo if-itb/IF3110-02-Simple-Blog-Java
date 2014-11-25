@@ -20,6 +20,6 @@ public class LogoutBean {
     
     public String logout(){
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-        return "index.jsf?faces-indirect=true";
+        return "index.jsf?faces-redirect=true";
     }
 }
