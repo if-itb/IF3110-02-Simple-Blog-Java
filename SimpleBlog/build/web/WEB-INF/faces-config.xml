@@ -13,17 +13,17 @@ and open the template in the editor.
     <managed-bean>
         <managed-bean-name>login_bean</managed-bean-name>
         <managed-bean-class>beans.login_bean</managed-bean-class>
-        <managed-bean-scope>request</managed-bean-scope>    
+        <managed-bean-scope>application</managed-bean-scope>    
     </managed-bean>
     <managed-bean>
         <managed-bean-name>post_bean</managed-bean-name>
         <managed-bean-class>beans.post_bean</managed-bean-class>
-        <managed-bean-scope>request</managed-bean-scope>    
+        <managed-bean-scope>application</managed-bean-scope>    
     </managed-bean>
     <managed-bean>
-        <managed-bean-name>post</managed-bean-name>
-        <managed-bean-class>beans.post</managed-bean-class>
-        <managed-bean-scope>request</managed-bean-scope>    
+        <managed-bean-name>Post</managed-bean-name>
+        <managed-bean-class>beans.Post</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>    
     </managed-bean>
     <navigation-rule>
         <description>Login Page</description>
@@ -51,6 +51,27 @@ and open the template in the editor.
             <from-action>#{login_bean.checkValidUser}</from-action>
             <from-outcome>invalid</from-outcome>
             <to-view-id>/login_fail.jsp</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <navigation-case>
+            <from-action>#{Post.setDBP(item.id_post)}</from-action>
+            <from-outcome>post</from-outcome>
+            <to-view-id>/post.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-action>#{Post.setDBE(item.id_post)}</from-action>
+            <from-outcome>edit</from-outcome>
+            <to-view-id>/edit_post.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <description>Edit Page</description>
+        <from-view-id>/edit_post.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>#{Post.editPost()}</from-action>
+            <from-outcome>edit</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
     <application>

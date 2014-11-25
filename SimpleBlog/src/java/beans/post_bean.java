@@ -19,36 +19,7 @@ import java.util.List;
  * @author asus
  */
 public class post_bean {
-    private String judul;
-    private String tanggal;
-    private String konten;
-    private String status;
     private List<Post> items;
-    
-    public String getJudul() {
-        return judul;
-    }
-    public String getKonten() {
-        return konten;
-    }
-    public String getTanggal() {
-        return tanggal;
-    }
-    public String getStatus() {
-        return status;
-    }
-    public void setJudul(String judul1) {
-        judul = judul1;
-    }
-    public void setKonten(String konten1) {
-        konten = konten1;
-    }
-    public void setTanggal(String tanggal1) {
-        tanggal = tanggal1;
-    }
-    public void setStatus(String status1) {
-        status = status1;
-    }
     
     public List<Post> dbData() throws SQLException, ClassNotFoundException{
         Connection con;
@@ -63,12 +34,14 @@ public class post_bean {
         List<Post> list = new ArrayList<>();
         while(rs.next()) {
             Post p = new Post();
+            p.setId_post(rs.getInt(1));
             p.setJudul(rs.getString(2));
             p.setTanggal(rs.getString(3));
             p.setKonten(rs.getString(4));
             p.setStatus(rs.getBoolean(5));
             list.add(p);
         }
+        con.close();
         return list;
     }
     

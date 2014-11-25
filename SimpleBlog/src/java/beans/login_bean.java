@@ -23,9 +23,10 @@ import javax.servlet.http.HttpServletResponse;
 public class login_bean {
     private String username;
     private String password;
+    private String role;
     private String dbusername;
     private String dbpassword;
-    private String judul;
+    private String dbrole;
     private boolean remember;
     String rememberstr;
     
@@ -53,8 +54,8 @@ public class login_bean {
     public boolean getRemember(){
         return remember;
     }
-    public String getJudul() {
-        return judul;
+    public String getRole(){
+        return role;
     }
     
     //Setter
@@ -84,16 +85,16 @@ public class login_bean {
         rs.next();
         dbusername = rs.getString(2);
         dbpassword = rs.getString(3);
-        SQL_Str = "Select * from post";
-        rs = ps.executeQuery(SQL_Str);
-        rs.next();
-        judul = rs.getString(2);
+        dbrole = rs.getString(4);
+        con.close();
     }
     
     public String checkValidUser() throws SQLException, ClassNotFoundException{
         dbData(username);
         if(username.equalsIgnoreCase(dbusername)){
             if(password.equals(dbpassword)){
+                role = dbrole;
+                
                 FacesContext facesContext = FacesContext.getCurrentInstance();
                 
                 //Save the username and password in a cookie

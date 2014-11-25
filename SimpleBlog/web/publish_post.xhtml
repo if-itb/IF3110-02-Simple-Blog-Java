@@ -6,7 +6,7 @@ and open the template in the editor.
 -->
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-  xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:h="http://java.sun.com/jsf/html"
   xmlns:c="http://java.sun.com/jsp/jstl/core"
   xmlns:fn="http://java.sun.com/jsp/jstl/functions">
     <head>
@@ -27,14 +27,6 @@ and open the template in the editor.
 
         <nav class="nav">
             <a style="border:none;" id="logo" href="index.xhtml"><h1>Simple<span>-</span>Blog</h1></a>
-            <ul class="nav-primary">
-                <c:if test="${(login_bean.role == 'admin') || (login_bean.role == 'owner')}" >
-                    <li><h:link value="+ Tambah Post" outcome="new_post" /></li>
-                </c:if>
-                <c:if test="${(login_bean.role == 'admin') || (login_bean.role == 'editor')}" >
-                    <li><h:link value="Publish Post" outcome="publish_post" /></li>
-                </c:if>
-            </ul>
         </nav>
 
         <div id="home">
@@ -43,13 +35,11 @@ and open the template in the editor.
                   <ul class="art-list-body">
                       
                     <c:forEach var="item" items="#{post_bean.dbData()}">  
-                        <c:if test="#{item.status}">
-                            
+                        <c:if test="#{!item.status}">
+                            <div>#{publish_bean.setId(item.id_post)}</div>
                         <li class="art-list-item">
                             <div class="art-list-item-title-and-time">
-                                <h:form>
-                                <h2 class="art-list-title"><h:commandLink value="#{item.judul}" action="#{Post.setDBP(item.id_post)}" /></h2>
-                                </h:form>
+                                <h2 class="art-list-title"><a href="#"></a>#{item.judul}</h2>
                                 <div class="art-list-time">#{item.tanggal}</div>
                             </div>
                             <c:set var="string1" value="#{item.konten}"/>
@@ -93,8 +83,8 @@ and open the template in the editor.
 
         </div>
         <script type="text/javascript">
-        function konfirmDelete() {
-          if(confirm("Apakah Anda yakin menghapus pos ini?")) {
+        function konfirmPublish() {
+          if(confirm("Apakah Anda ingin mem-publish pos ini?")) {
           }
         }
         </script>

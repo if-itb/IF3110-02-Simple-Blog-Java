@@ -2,17 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/D:/SimpleBlog/src/java/beans/post_bean.java</file>
-            <file>file:/D:/SimpleBlog/web/login_success.jsp</file>
-            <file>file:/D:/SimpleBlog/web/login.jsp</file>
-            <file>file:/D:/SimpleBlog/web/WEB-INF/faces-config.xml</file>
-            <file>file:/D:/SimpleBlog/web/index.xhtml</file>
-            <file>file:/D:/SimpleBlog/src/java/beans/Post.java</file>
-            <file>file:/D:/SimpleBlog/web/index.jsp</file>
-            <file>file:/D:/SimpleBlog/web/WEB-INF/web.xml</file>
-            <file>file:/D:/SimpleBlog/src/java/beans/login_bean.java</file>
-            <file>file:/D:/SimpleBlog/web/new_post.jsp</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

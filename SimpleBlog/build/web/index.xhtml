@@ -6,6 +6,7 @@ and open the template in the editor.
 -->
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:h="http://java.sun.com/jsf/html"
   xmlns:c="http://java.sun.com/jsp/jstl/core"
   xmlns:fn="http://java.sun.com/jsp/jstl/functions">
     <head>
@@ -25,9 +26,14 @@ and open the template in the editor.
         <div class="wrapper">
 
         <nav class="nav">
-            <a style="border:none;" id="logo" href="index.jsp"><h1>Simple<span>-</span>Blog</h1></a>
+            <a style="border:none;" id="logo" href="index.xhtml"><h1>Simple<span>-</span>Blog</h1></a>
             <ul class="nav-primary">
-                <li><a href="new_post.jsp">+ Tambah Post</a></li>
+                <c:if test="${(login_bean.role == 'admin') || (login_bean.role == 'owner')}" >
+                    <li><h:link value="+ Tambah Post" outcome="new_post" /></li>
+                </c:if>
+                <c:if test="${(login_bean.role == 'admin') || (login_bean.role == 'editor')}" >
+                    <li><h:link value="Publish Post" outcome="publish_post" /></li>
+                </c:if>
             </ul>
         </nav>
 
@@ -38,19 +44,25 @@ and open the template in the editor.
                       
                     <c:forEach var="item" items="#{post_bean.dbData()}">  
                         <c:if test="#{item.status}">
+                            
                         <li class="art-list-item">
                             <div class="art-list-item-title-and-time">
-                                <h2 class="art-list-title"><a href="#"></a>#{item.judul}</h2>
+                                <h:form>
+                                <h2 class="art-list-title"><h:commandLink value="#{item.judul}" action="#{Post.setDBP(item.id_post)}" /></h2>
+                                </h:form>
                                 <div class="art-list-time">#{item.tanggal}</div>
-                                <div class="art-list-time"><span style="color:#F40034;">&#10029;</span> Featured</div>
                             </div>
                             <c:set var="string1" value="#{item.konten}"/>
                             <c:set var="string2" value="${fn:substring(string1, 0, 225)}" />
                             <p>${fn:substring(string1, 0, 225)} ...</p>
+                            <h:form>
                             <p>
-                              <a href="#">Edit</a> |
+                                <c:if test="${(login_bean.role == 'admin') || (login_bean.role == 'owner')}" >
+                              <h:commandLink value="Edit" action="#{Post.setDBE(item.id_post)}" /> |
+                                </c:if>
                                <a href="javascript:konfirmDelete()">Hapus</a>
                             </p>
+                            </h:form>
                         </li>
                         </c:if>
                     </c:forEach>
