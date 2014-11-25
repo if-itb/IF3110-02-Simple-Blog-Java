@@ -66,7 +66,7 @@
 				Date date = new Date();
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 				PostBean pBean =  new PostBean();
-				pBean.ViewPost(Integer.parseInt(request.getParameter("id")));
+				pBean.ViewPost(request.getParameter("id"));
 			%>
 					<center>
 					<table border=1 style="align:center" >
@@ -89,7 +89,7 @@
 						</tr>
 						<tr>
 							<td colspan="2">
-							  <a href="edit_post.jsp?id=<% out.println(pBean.getId()); %>">Edit</a> | <a href="delete.jsp?id=<% out.println(pBean.getId()); %>">Hapus</a>
+							  <a href="edit.jsp?id=<% out.println(pBean.getId()); %>">Edit</a> | <a href="handler/delPost.jsp?id=<% out.println(pBean.getId()); %>">Hapus</a>
 							</td>
 						</tr>
 						<tr>

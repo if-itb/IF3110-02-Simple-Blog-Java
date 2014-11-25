@@ -161,6 +161,7 @@ public class Post {
 				throw e;
 			}
 		}
+		
 	}
 	
 	public static void DeletePost(String id) throws Exception{
@@ -169,9 +170,8 @@ public class Post {
 		try {
 			Class.forName(Driver).newInstance();
 			conn = DriverManager.getConnection(DbLoc2,DbUser,DbPass);
-			String query = "DELETE FROM `post` WHERE `post`.`ID`=?;";
+			String query = "DELETE FROM `post` WHERE ID='"+id+"';";
 			ps=conn.prepareStatement(query);
-			ps.setString(1,id);
 			if (ps.executeUpdate()==0){
 				throw new Exception("Error deleting post");
 			}

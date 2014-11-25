@@ -20,4 +20,6 @@
 	String Status	=	 request.getParameter("status");
 	PostBean pBean	=	 new PostBean();
 	Post.NewPost(Judul,date,Konten,Owner);
+	response.setStatus(response.SC_MOVED_TEMPORARILY);
+	response.setHeader("Location", "../index.jsp");
 %>

@@ -102,9 +102,9 @@ public final class show_005fpost_jsp extends org.apache.jasper.runtime.HttpJspBa
       out.write("<body class=\"default\">\n");
       out.write("<div class=\"wrapper\">\n");
       out.write("<nav class=\"nav\">\n");
-      out.write("    <a style=\"border:none;\" id=\"logo\" href=\"index.php\"><h1>Simple<span>-</span>Blog</h1></a>\n");
+      out.write("    <a style=\"border:none;\" id=\"logo\" href=\"index.jsp\"><h1>Simple<span>-</span>Blog</h1></a>\n");
       out.write("    <ul class=\"nav-primary\">\n");
-      out.write("        <li><a href=\"new_post.html\">+ Tambah Post</a></li>\n");
+      out.write("        <li><a href=\"new_post.jsp\">+ Tambah Post</a></li>\n");
       out.write("    </ul>\n");
       out.write("</nav>\n");
       out.write("\n");
@@ -117,7 +117,7 @@ public final class show_005fpost_jsp extends org.apache.jasper.runtime.HttpJspBa
 				Date date = new Date();
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 				PostBean pBean =  new PostBean();
-				pBean.ViewPost(Integer.parseInt(request.getParameter("id")));
+				pBean.ViewPost(request.getParameter("id"));
 			
       out.write("\n");
       out.write("\t\t\t\t\t<center>\n");
@@ -147,11 +147,11 @@ public final class show_005fpost_jsp extends org.apache.jasper.runtime.HttpJspBa
       out.write("\t\t\t\t\t\t</tr>\n");
       out.write("\t\t\t\t\t\t<tr>\n");
       out.write("\t\t\t\t\t\t\t<td colspan=\"2\">\n");
-      out.write("\t\t\t\t\t\t\t  <a href=\"edit_post.jsp?id='");
+      out.write("\t\t\t\t\t\t\t  <a href=\"edit_post.jsp?id=");
  out.println(pBean.getId()); 
-      out.write("'\">Edit</a> | <a href=\"delete.jsp?id='");
+      out.write("\">Edit</a> | <a href=\"delete.jsp?id=");
  out.println(pBean.getId()); 
-      out.write("'\">Hapus</a>\n");
+      out.write("\">Hapus</a>\n");
       out.write("\t\t\t\t\t\t\t</td>\n");
       out.write("\t\t\t\t\t\t</tr>\n");
       out.write("\t\t\t\t\t\t<tr>\n");
@@ -277,7 +277,7 @@ public final class show_005fpost_jsp extends org.apache.jasper.runtime.HttpJspBa
       out.write("\t\treturn;\n");
       out.write("\t}\t\n");
       out.write("\tvar url\t=\t\"post_komentar.jsp\";\n");
-      out.write("    var param=\"id=\"+isiid+\"&Name=\"+isinama+\"&Email=\"+isiemail+\"&Content=\"+isipesan;\n");
+      out.write("    var param=\"ID=\"+isiid+\"&Name=\"+isinama+\"&Email=\"+isiemail+\"&Content=\"+isipesan;\n");
       out.write("\tdocument.getElementById(\"terbaru\").innerHTML = \"Sedang memproses komentar\";\n");
       out.write("\tvar message = \"<div id=unit-komentar align=center><br>\" + isinama + \"<br>\" + isitanggal + \"<br>\" + isipesan + \"<hr></div>\";\n");
       out.write("\tdocument.getElementById(\"terbaru\").innerHTML = message;\n");
