@@ -284,4 +284,21 @@ public class PostingDatabase {
     public boolean getLoginState(){
         return(login.getUserCookie() != null);
     } 
+    
+    public String getActiveUserEmail() throws ClassNotFoundException, SQLException{
+        ExternalContext extCont = FacesContext.getCurrentInstance().getExternalContext();
+        Cookie cUsername = login.getUserCookie();
+        String activeUserEmail = null;
+        
+        ResultSet rs;
+        Connection con;
+        con = makeConnection();
+        Statement stmt = con.createStatement();
+        String query = "Select email from user where Username=\""+cUsername.getValue()+"\";";
+        rs = stmt.executeQuery(query);
+        while(rs.next()){
+            activeUserEmail = rs.getString("email");
+         }
+        return activeUserEmail;
+    }
 }

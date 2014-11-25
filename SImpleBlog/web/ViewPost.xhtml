@@ -48,7 +48,7 @@ and open the template in the editor.
                         <form method="post" action="#">
                             <h:form rendered="#{Posting.loginState == true}">
                                 <label for="Nama">Nama:</label>
-                                <input type="text" name="Nama" id="Nama" required="true" disabled="true"/>
+                                <input type="text" name="Nama" id="Nama" required="true" disabled="true" value="#{Posting.activeUser}"/>
                             </h:form>
                             <h:form rendered="#{Posting.loginState == false}">
                                 <label for="Nama">Nama:</label>
@@ -56,7 +56,7 @@ and open the template in the editor.
                             </h:form>
                             <h:form rendered="#{Posting.loginState == true}">
                                 <label for="Email">Email:</label>
-                                <input type="text" name="Email" id="Email" required="true" disabled="true"/>
+                                <input type="text" name="Email" id="Email" required="true" disabled="true" value="#{Posting.activeUserEmail}"/>
                             </h:form>
                             <h:form rendered="#{Posting.loginState == false}">
                                 <label for="Email">Email:</label>
