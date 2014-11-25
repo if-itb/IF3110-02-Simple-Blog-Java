@@ -188,7 +188,7 @@ public class Post {
                     toHTML +=    
                             "<li class=\"art-list-item\">\n" +
                             "<div class=\"art-list-item-title-and-time\">\n" +
-                            "<h2 class=\"art-list-title\"><a href=\"post.jsp?id=" + idPost + "\"> " + judulPost + " </a>\n" +
+                            "<h2 class=\"art-list-title\"><a href=\"posts/post.jsp?id=" + idPost + "\"> " + judulPost + " </a>\n" +
                             "<div class=\"art-list-time\">" + tanggalPost + "</div>\n" +
                             "<div class=\"art-list-time\"><span style=\"color:#F40034;\">&#10029;</span> Featured</div>\n" +
                             "</div>\n" +
@@ -270,7 +270,7 @@ public class Post {
                                    + "<th>" + tanggalPost + "</th>"
                                    + "<th>" + kontenPost;
                 if (shortened) //dipotong
-                    toHTML += "... <a href=\"post.jsp?id= " + idPost + "\">Read More</a></th>";
+                    toHTML += "... <a href=\"posts/post.jsp?id= " + idPost + "\">Read More</a></th>";
                 else //tidak dipotong
                     toHTML += "</th>";
                 //status post
