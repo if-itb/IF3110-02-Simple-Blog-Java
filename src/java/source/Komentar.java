@@ -67,7 +67,7 @@ public class Komentar extends Post {
         String InsertQuery;
         KoneksiDatabase.setUser("root2");
         KoneksiDatabase.setPassword("akhfa");
-        KoneksiDatabase.setDatabase("localhost","simpleblogdb");
+        KoneksiDatabase.setDatabase("localhost","blog");
         try (Connection koneksi = KoneksiDatabase.getKoneksi()) {
             Statement statement = koneksi.createStatement();
             InsertQuery = "INSERT INTO komentar (ID, Nama, Email, Komentar) VALUES ('" + PostID + "', '" + nama + "', '" + email + "', '" + comment + "')";
