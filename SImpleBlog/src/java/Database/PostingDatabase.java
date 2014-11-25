@@ -153,10 +153,20 @@ public class PostingDatabase {
     }
 
     public void deletePost() throws ClassNotFoundException, SQLException, IOException, ParseException{
-          System.out.println(id+"PINGGGGGGGGG");
           Connection con = makeConnection();
           Statement stmt = con.createStatement();
           String query = "Update post Set status=\"deleted\" WHERE ID="+id;
+          int rs;
+          rs = stmt.executeUpdate(query);
+          PreparedStatement ps;
+            ExternalContext extcon = FacesContext.getCurrentInstance().getExternalContext();
+            extcon.redirect("Owner.xhtml");
+    }
+    
+     public void PublishPost() throws ClassNotFoundException, SQLException, IOException, ParseException{
+          Connection con = makeConnection();
+          Statement stmt = con.createStatement();
+          String query = "Update post Set status=\"published\" WHERE ID="+id;
           int rs;
           rs = stmt.executeUpdate(query);
           PreparedStatement ps;
