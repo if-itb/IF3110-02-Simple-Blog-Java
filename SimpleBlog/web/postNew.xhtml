@@ -1,5 +1,6 @@
 <ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-                template="./WEB-INF/templates/template.xhtml">
+                template="./WEB-INF/templates/template.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html">
 
     <ui:define name="title">
         New Post
@@ -15,22 +16,24 @@
             <h2>Tambah Post</h2>
 
             <div id="contact-area">
-              <form method="post" action="" onsubmit="return validatePost(this)">
-                  <!--
-                <input type="hidden" name="id" id="id" value="<?php echo isset($data) ? $data['post_id'] : '' ?>" id="EditMode">
+                <h:form>
+                    
+                    <h:inputHidden id="EditMode" value="#{postController.post.id}"/>
+                    
+                    <label for="Judul">Judul:</label>
+                    <h:inputText id="Judul" value="#{postController.post.title}" title="CustomerId" required="true" requiredMessage="Judul harus diisi" />
+              
+                    <label for="Tanggal">Tanggal:</label>
+                    <h:inputText id="Tanggal" value="#{postController.post.date}" />
 
-                <label for="Judul">Judul:</label>
-                <input type="text" name="Judul" id="Judul" value="<?php echo isset($data) ? $data['post_title'] : ''; ?>">
+                    <label for="Konten">Konten:</label>
+                    <h:inputTextarea id="Konten" rows="20" cols="20" value="#{postController.post.content}" />
 
-                <label for="Tanggal">Tanggal:</label>
-                <input type="text" name="Tanggal" id="Tanggal" placeholder="dd-mm-yyyy" value="<?php echo isset($data) ? dateValidifier($data['post_date']) : ''; ?>">
+                    <h:commandLink action="#{postController.new}" onclick="validatePost(Judul, Tanggal, Konten))"> 
+                        <h:outputText value="Submit"></h:outputText>
+                    </h:commandLink>
 
-                <label for="Konten">Konten:</label><br>
-                <textarea name="Konten" rows="20" cols="20" id="Konten"><?php echo isset($data) ? $data['post_content'] : ''; ?></textarea>
-                 
-                <input type="submit" name="submit" value="Simpan" class="submit-button">
-                   -->
-              </form>
+                </h:form>
             </div>
           </div>
         </div>

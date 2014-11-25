@@ -19,9 +19,19 @@ public class PostController {
     private PostJpaController jpaController = null;
     private List<Post> postList = null;
     
+     public Post getPost() {
+        if (post == null) {
+            //post = (post) JsfUtil.getObjectFromRequestParameter("jsfcrud.currentCustomer", converter, null);
+        }
+        if (post == null) {
+            post = new Post();
+        }
+        return post;
+    }
+    
     public List<Post> getPostList() {
        if (postList == null) {
-            postList = jpaController.getPostList();
+            postList = jpaController.getAllPosts();
         }
         return postList;
     }

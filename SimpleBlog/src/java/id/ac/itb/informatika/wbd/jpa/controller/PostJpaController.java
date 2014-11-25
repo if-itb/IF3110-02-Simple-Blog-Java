@@ -37,7 +37,7 @@ public class PostJpaController {
         
     }
 
-    public List<Post> getPostList() {
+    public List<Post> getAllPosts() {
         EntityManager em = getEntityManager();
         try {
             Query q = em.createQuery("select object(o) from Post as o");
