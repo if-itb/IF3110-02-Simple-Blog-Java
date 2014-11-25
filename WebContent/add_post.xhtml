@@ -13,29 +13,34 @@
 </h:head>
 
 <h:body>
-	<h1 class="title" id="tes">Simple-Blog</h1>
-	<h2 align="center">Login</h2>
-	<div align="center">
-		<h:form>
-			<table>
-				<tr>
-					<td>Judul</td>
-					<td>: <h:inputText value="#{addPost.title}" /></td>
-				</tr>
-				<tr>
-					<td>Tanggal</td>
-					<td>: <h:inputText id="dateInput" value="#{addPost.date}" converter="dateConverter" converterMessage="Format tanggal dalam bentuk yyyy-MM-dd dan lebih besar dari hari ini"/>
-					</td>
-				</tr>
-				<tr>
-					<td>Konten</td>
-					<td>: <h:inputTextarea row="100" col="200"
-							value="#{addPost.content}" /></td>
-				</tr>
-			</table>
-			<h:commandButton value="Submit" action="#{addPost.execute}" />
-		</h:form>
-		<h:message for="dateInput" style="color:red" />
-	</div>
+	<ui:composition template="common.xhtml">
+		<ui:define name="content">
+			<h2 align="center">Login</h2>
+			<div align="center">
+				<h:form>
+					<table>
+						<tr>
+							<td>Judul</td>
+							<td>: <h:inputText value="#{addPost.title}" /></td>
+						</tr>
+						<tr>
+							<td>Tanggal</td>
+							<td>: <h:inputText id="dateInput" value="#{addPost.date}"
+									converter="dateConverter"
+									converterMessage="Format tanggal dalam bentuk yyyy-MM-dd dan lebih besar dari hari ini" />
+							</td>
+						</tr>
+						<tr>
+							<td>Konten</td>
+							<td>: <h:inputTextarea row="100" col="200"
+									value="#{addPost.content}" /></td>
+						</tr>
+					</table>
+					<h:commandButton value="Submit" action="#{addPost.execute}" />
+				</h:form>
+				<h:message for="dateInput" style="color:red" />
+			</div>
+		</ui:define>
+	</ui:composition>
 </h:body>
 </html>
