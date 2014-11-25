@@ -67,7 +67,7 @@ and open the template in the editor.
                             <label for="Komentar">Komentar:</label><br/>
                             <textarea name="Komentar" rows="20" cols="20" id="Komentar" required="true"></textarea>
                             
-                            <h:commandButton type="submit" value="Kirim" class="submit-button"></h:commandButton>
+                            <h:commandButton type="submit" value="Kirim" class="submit-button" action="#{Viewpost.Redirect(Viewpost.postId)}"></h:commandButton>
                         </h:form>
                     </div>
 
@@ -84,8 +84,11 @@ and open the template in the editor.
             </div>
             <!-- <div class="footer-nav"><p></p></div> -->
             <div class="psi">
-                <h:form>
-                    <h:commandLink action="#{Posting.addPost}" value="Logout" />
+                <h:form rendered="#{Posting.loginState == true}">
+                    <h:commandLink action="#{Posting.setLogout()}" value="Logout" />
+                </h:form>
+                <h:form rendered="#{Posting.loginState == false}">
+                    -
                 </h:form>
             </div>
             <aside class="offsite-links"> Tubes IF3110 /
@@ -93,7 +96,7 @@ and open the template in the editor.
                 <br/>
                 <a class="twitter-link" href="#">Mario Filino</a> /
                 <a class="twitter-link" href="#">Rikysamuel</a> /
-                <a class="twitter-link" href="#">Qin Shi Huang, Bi Xia</a> /
+                <a class="twitter-link" href="#">Kevin</a> /
                 <br/>
 
             </aside>

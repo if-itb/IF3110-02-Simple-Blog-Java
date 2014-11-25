@@ -491,6 +491,7 @@ div.cover > img {
   padding: 30px 0 40px;
   overflow: hidden;
   border-top: 1px solid #ccc;
+  z-index: 100;
 }
 .footer,
 .footer a {

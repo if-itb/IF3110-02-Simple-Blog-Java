@@ -35,12 +35,20 @@ and open the template in the editor.
     
     <div class="posts">
         <nav class="art-list">
-            <h:form>
-                <h:commandLink class="art-list-addpost" action="AddPost?faces-redirect=true" value="+ Add Post">
-                </h:commandLink>
-            </h:form><br/>
+            <div class="table">
+                <ul id="adminoption">
+                    <li>
+                        <h:form>
+                            <h:commandLink class="art-list-addpost" action="AddPost?faces-redirect=true" value="+ Add Post">
+                            </h:commandLink>
+                        </h:form>
+                    </li>
+                </ul>
+            </div>
+            <br/>
+            <hr/>
           <ul class="art-list-body">
-              <c:forEach items="#{Posting.authorPost}" var="p">
+              <c:forEach items="#{Publishpost.publishedPost}" var="p">
                 <li class="art-list-item">
                     <div class="art-list-item-title-and-time">
                         <h2 class="art-list-title">
@@ -50,20 +58,13 @@ and open the template in the editor.
                         </h2>
                         <div class="art-list-time">By #{p.author}</div>
                         <div class="art-list-time">#{p.tanggal}</div>
-                        <div class="art-list-time">#{p.status}</div>
                     </div>
-                    <p>#{p.contentPreview} &hellip;</p>
+                    <p> #{p.contentPreview}&hellip;</p>
                     <p>
-                        <h:form styleClass="editbutton">
-                            <h:commandLink value="Edit|" action="#{Editpost.Redirect(p.id)}"></h:commandLink>
-                        </h:form>
-                        <h:form styleClass="publishbutton">
-                            <h:commandLink onclick = "return confirmDelete()" value ="Delete" action="#{Posting.deletePost()}">
-                                <f:param name ="throwedid" value = "#{p.id}"></f:param>
-                            </h:commandLink>
+                        <h:form styleClass="editbutton" rendered="#{Posting.activeUsername == p.author}">
+                            <h:commandLink value="Edit" action="#{Editpost.Redirect(p.id)}"></h:commandLink>
                         </h:form>
                     </p>
-                    
                 </li>
               </c:forEach>
           </ul>
@@ -85,7 +86,7 @@ and open the template in the editor.
         <br/>
         <a class="twitter-link" href="#">Mario Filino</a> /
         <a class="twitter-link" href="#">Rikysamuel</a> /
-        <a class="twitter-link" href="#">Qin Shi Huang, Bi Xia</a> /
+        <a class="twitter-link" href="#">Kevin</a> /
         <br/>
         
     </aside>
