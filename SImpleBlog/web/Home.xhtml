@@ -41,11 +41,15 @@ and open the template in the editor.
               <c:forEach items="#{Posting.post}" var="p">
                 <li class="art-list-item">
                     <div class="art-list-item-title-and-time">
-                        <h2 class="art-list-title"><a href="post.html">#{p.judul}</a></h2>
+                        <h2 class="art-list-title">
+                            <h:form>
+                                <h:commandLink value="#{p.judul}" action="#{Viewpost.Redirect(p.id)}" ></h:commandLink>
+                            </h:form>
+                        </h2>
                         <div class="art-list-time">By #{p.author}</div>
                         <div class="art-list-time">#{p.tanggal}</div>
                     </div>
-                    <p>#{p.content} &hellip;</p>
+                    <p>#{p.contentPreview} &hellip;</p>
                 </li>
               </c:forEach>
           </ul>
