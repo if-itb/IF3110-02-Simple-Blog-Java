@@ -11,6 +11,7 @@ import static com.sun.corba.se.spi.presentation.rmi.StubAdapter.request;
 import com.sun.faces.context.RequestParameterMap;
 import java.io.IOException;
 import java.io.Serializable;
+import static java.lang.System.out;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
@@ -53,6 +54,11 @@ public class PostingDatabase {
     
     public PostingDatabase(){
         login = new Login();
+    }
+    
+    public void toHome() throws IOException{
+        ExternalContext extCont = FacesContext.getCurrentInstance().getExternalContext();
+        extCont.redirect("/SImpleBlog/");
     }
     
     public Connection makeConnection() throws ClassNotFoundException, SQLException{
@@ -231,7 +237,6 @@ public class PostingDatabase {
                     extCont.redirect("/SImpleBlog/Home.xhtml");
                 }
             }
-            
             con.close();
         }
     }
@@ -303,4 +308,24 @@ public class PostingDatabase {
         extCont.redirect("/SImpleBlog/");
     }
     
+    public boolean getLoginState(){
+        return(login.getUserCookie() != null);
+    } 
+    
+    public String getActiveUserEmail() throws ClassNotFoundException, SQLException{
+        ExternalContext extCont = FacesContext.getCurrentInstance().getExternalContext();
+        Cookie cUsername = login.getUserCookie();
+        String activeUserEmail = null;
+        
+        ResultSet rs;
+        Connection con;
+        con = makeConnection();
+        Statement stmt = con.createStatement();
+        String query = "Select email from user where Username=\""+cUsername.getValue()+"\";";
+        rs = stmt.executeQuery(query);
+        while(rs.next()){
+            activeUserEmail = rs.getString("email");
+         }
+        return activeUserEmail;
+    }
 }

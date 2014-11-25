@@ -32,6 +32,20 @@ body {
   background: #fff;
 }
 
+.table {
+  margin: 0 auto;
+}
+
+ul#adminoption {
+  min-width: 696px;
+  list-style: none;
+  padding-top: 20px;
+}
+
+ul#adminoption li {
+  display: inline;
+}
+
 
 /* Typography
 ================================================== */
@@ -968,5 +982,5 @@ label {
     position: relative;
     height: 28px;
     width: 100px;
-    left: 63px;
+    left: 38px;
 }
