@@ -72,14 +72,36 @@ public class Post {
 			}
 		}
 	}
-	
+	public static void publish(String id) throws Exception{
+		Connection conn = null;
+		PreparedStatement ps = null;
+		try {
+			Class.forName(Driver).newInstance();
+			conn = DriverManager.getConnection(DbLoc2,DbUser,DbPass);
+			String query = "UPDATE `post` SET `Status`=? WHERE ID='"+id+"';";
+			ps=conn.prepareStatement(query);
+			ps.setString(1,"1");
+			if (ps.executeUpdate()==0){
+				throw new Exception("Error publish post");
+			}
+		} catch(Exception e){
+			throw e;
+		} finally{
+			try {
+				ps.close();
+				conn.close();
+			} catch (SQLException e) {
+				throw e;
+			}
+		}
+	}
 	public static void NewPost(String Judul, Date Tanggal, String Konten,String Owner) throws Exception{
 		Connection conn = null;
 		PreparedStatement ps = null;
 		try {
 			Class.forName(Driver).newInstance();
 			conn = DriverManager.getConnection(DbLoc2,DbUser,DbPass);
-			String query = "INSERT INTO `post` (`ID`,`Title`,`Date`,`Content`,`Owner`,`Status`) VALUES (NULL,?,?,?,?,'3');";
+			String query = "INSERT INTO `post` (`ID`,`Title`,`Date`,`Content`,`Owner`,`Status`) VALUES (NULL,?,?,?,?,'0');";
 			ps=conn.prepareStatement(query);
 			ps.setString(1,Judul);
 			SimpleDateFormat tp= new SimpleDateFormat("y-MM-dd");
@@ -118,6 +140,7 @@ public class Post {
 					res.Tanggal=rs.getDate("Date");
 					res.Konten=rs.getString("Content");
 					res.Owner=rs.getString("Owner");
+					res.Status=rs.getInt("Status");
 				}
 			} else {
 				res.valid=false;
@@ -207,6 +230,7 @@ public class Post {
 					res.Konten=rs.getString("Content");
 					res.Owner=rs.getString("Owner");
 					res.id=Integer.toString(rs.getInt("ID"));
+					res.Status = rs.getInt("Status");
 					hsl.add(res);
 					res=new Paket();
 				}

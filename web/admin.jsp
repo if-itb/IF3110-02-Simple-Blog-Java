@@ -1,10 +1,10 @@
 <%-- 
-    Document   : index
+    Document   : adm post
     Created on : Nov 24, 2014, 4:14:48 PM
     Author     : adwisatya
 --%>
 
-<%@page import="User.userPaket"%>
+<%@page import= "User.userPaket"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import = "Post.Post" %>
 <%@page import= "User.User" %>
@@ -60,20 +60,19 @@
 			<%
 				PostBean pBean =  new PostBean();
 				for(int i=0;i<pBean.listManyPost().size();i++){
-					if(pBean.listManyPost().get(i).getStatus() != 0){
+					if(pBean.listManyPost().get(i).getStatus() == 0){
 			%>	
-			<li class="art-list-item">
-				<div class="art-list-item-title-and-time">
-					<h2 class="art-list-title"><a href="show_post.jsp?id=<% out.println(pBean.listManyPost().get(i).getId()); %>"><% out.println(pBean.listManyPost().get(i).getJudul()); %></a></h2>
-					<div class="art-list-time"><% out.println(pBean.listManyPost().get(i).getTanggal()); %></div>
-					<div class="art-list-owner">Owner:&nbsp;<% out.println(pBean.listManyPost().get(i).getOwner()); %></div>
-				</div>
-				<p><% out.println(pBean.listManyPost().get(i).getKonten()); %></p>
-				<p>
-				  <a href="edit.jsp?id=<% out.println(pBean.listManyPost().get(i).getId()); %>">Edit</a> | <a href="#" onclick="return ConfirmDelete(<% out.println(pBean.listManyPost().get(i).getId()); %>);">Hapus</a>
-				</p>
-				
-			</li>	
+						<li class="art-list-item">
+							<div class="art-list-item-title-and-time">
+								<h2 class="art-list-title"><a href="show_post.jsp?id=<% out.println(pBean.listManyPost().get(i).getId()); %>"><% out.println(pBean.listManyPost().get(i).getJudul()); %></a></h2>
+								<div class="art-list-time"><% out.println(pBean.listManyPost().get(i).getTanggal()); %></div>
+								<div class="art-list-owner">Owner:&nbsp;<% out.println(pBean.listManyPost().get(i).getOwner()); %></div>
+							</div>
+							<p><% out.println(pBean.listManyPost().get(i).getKonten()); %></p>
+							<p>
+							  <a href="handler/admPublish.jsp?id=<% out.println(pBean.listManyPost().get(i).getId()); %>">Publish</a> | <a href="#" onclick="return ConfirmDelete(<% out.println(pBean.listManyPost().get(i).getId()); %>);">Hapus</a>
+							</p>
+						</li>	
 			<%
 					}
 				}

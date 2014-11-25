@@ -60,6 +60,7 @@
 			<%
 				PostBean pBean =  new PostBean();
 				for(int i=0;i<pBean.listManyPost().size();i++){
+					if(pBean.listManyPost().get(i).getStatus() != 0){
 			%>	
 			<li class="art-list-item">
 				<div class="art-list-item-title-and-time">
@@ -74,6 +75,7 @@
 				
 			</li>	
 			<%
+					}
 				}
 			%>
           </ul>
