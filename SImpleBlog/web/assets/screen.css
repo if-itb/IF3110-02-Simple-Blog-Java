@@ -975,13 +975,13 @@ label {
 .editbutton{
     position: relative;
     height: 28px;
-    width: 100px;
+    width: 1px;
 }
 
 .publishbutton{
     position: relative;
     height: 28px;
-    width: 100px;
+    width: 1px;
     left: 38px;
 }
 
