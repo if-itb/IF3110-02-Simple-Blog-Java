@@ -57,18 +57,16 @@ public class LoginBean {
         boolean isExist = true;
         User new_user;
         new_user = Users.getInstance().validateUser(username,password);
-        isExist = new_user!=null;
-        
-        user.setId(new_user.getId());
-        user.setPassword(new_user.getPassword());
-        user.setRole(new_user.getRole());
-        user.setUsername(new_user.getUsername());
-        
+        isExist = new_user!=null;  
         
         if (isExist){
+            user.setId(new_user.getId());
+            user.setPassword(new_user.getPassword());
+            user.setRole(new_user.getRole());
+            user.setUsername(new_user.getUsername());
             HttpSession session = (HttpSession)FacesContext.getCurrentInstance().getExternalContext().getSession(true);
             session.setAttribute("isLogin","yes");
-            return "owner_home?faces-redirect=true";
+            return "user_management?faces-redirect=true";
         }
         else {
             return "login?faces-redirect=true";

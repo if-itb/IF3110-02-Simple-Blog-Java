@@ -28,8 +28,6 @@ public class Post {
     private String text;
     private Timestamp timestamp;
     private Vector<Comment> comments;
-    private boolean isPublished;
-    private boolean isDeleted;
     
     public Post() {}
     

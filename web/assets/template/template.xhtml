@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:h="http://xmlns.jcp.org/jsf/html"
+xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<h:head>
+<title>
+	 Penguasa Dunia 
+</title>
+
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="description" content="Deskripsi Blog"/>
+<meta name="author" content="Judul Blog"/>
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:site" content="omfgitsasalmon"/>
+<meta name="twitter:title" content="Simple Blog"/>
+<meta name="twitter:description" content="Deskripsi Blog"/>
+<meta name="twitter:creator" content="Simple Blog"/>
+<meta name="twitter:image:src" content="{{! TODO: ADD GRAVATAR URL HERE }}"/>
+
+<meta property="og:type" content="article"/>
+<meta property="og:title" content="Simple Blog"/>
+<meta property="og:description" content="Deskripsi Blog"/>
+<meta property="og:image" content="{{! TODO: ADD GRAVATAR URL HERE }}"/>
+<meta property="og:site_name" content="Simple Blog"/>
+
+<link rel="stylesheet" type="text/css" href="assets/css/screen.css" />
+<link rel="stylesheet" type="text/css" href="assets/css/button.css" />
+<link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico"/>
+
+</h:head>
+<h:body class="default">
+
+<div class="wrapper">
+
+<nav class="nav">
+    <a style="border:none;" id="logo" href="#"><h1>Simple<span>-</span>Blog</h1></a>
+    <ul class="nav-primary">
+        <li id="logout"><h:form><h:commandLink value="Logout" action="#{logoutBean.logout}"></h:commandLink></h:form></li>
+    </ul>
+</nav>
+
+<div>
+    <ui:fragment rendered="#{!(user.role=='guest')}">
+	<ul class="navManagement">
+		<li><a href="user_management.jsf" id="user_management"> Home </a> </li>
+                <ui:fragment rendered="#{user.role=='admin'}">
+                    <li><a href="new_user.jsf" id="new_user"> Create </a></li>
+                    <li><a href="read_user.jsf" id="read_user"> User Management </a></li>
+                </ui:fragment>
+                <ui:fragment rendered="#{user.role=='admin' || user.role=='editor'}">
+                    <li><a href="new_post.jsf" id="new_post"> Add Post</a></li>
+                </ui:fragment>
+		<li><a href="edit_post.jsf" id="edit_post"> Edit Post</a></li>
+                <li><a href="list_post.jsf" id="list_post"> List Post</a></li>
+        </ul>
+    </ui:fragment>
+</div>
+
+<ui:insert name="content">Default content</ui:insert>
+
+<footer class="footer">
+    <div class="back-to-top"><a href="">Back to top</a></div>
+    <!-- <div class="footer-nav"><p></p></div> -->
+    <aside class="offsite-links">
+        PenguasaDunia /
+        <br/>
+		<a class="twitter-link" href="#">Kevin 13512010</a> /
+        <a class="twitter-link" href="#">Wira 13512015</a> /
+        <a class="twitter-link" href="#">Melvin 13512085</a> /
+    </aside>
+</footer>
+
+</div>
+</h:body>
+    <script>
+        var str= document.URL;
+        if (str.indexOf("user_management") > -1) {
+            document.getElementById("user_management").style.color="#F40034";
+        }
+        else if (str.indexOf("new_user") > -1) {
+            document.getElementById("new_user").style.color="#F40034";
+        }
+        else if (str.indexOf("read_user") > -1) {
+            document.getElementById("read_user").style.color="#F40034";
+        }
+        else if (str.indexOf("new_post") > -1) {
+            document.getElementById("new_post").style.color="#F40034";
+        }
+        else if (str.indexOf("edit_post") > -1) {
+            document.getElementById("edit_post").style.color="#F40034";
+        }
+        else if (str.indexOf("list_post") > -1) {
+            document.getElementById("list_post").style.color="#F40034";
+        }
+    </script>
+</html>
+

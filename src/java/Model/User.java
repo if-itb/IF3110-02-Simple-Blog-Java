@@ -23,8 +23,7 @@ public class User {
     private int id;
     private String username;
     private String pass;
-    private enum Role {owner, editor, admin, guest};
-    private Role role; 
+    private String role;
     
     public User () {}
     
@@ -62,27 +61,11 @@ public class User {
     }
     
     public void setRole(String newRole) {
-        if (newRole.equals("owner")) {
-            role = Role.owner;
-        } else if (newRole.equals("admin")) {
-            role = Role.admin;
-        } else if (newRole.equals("editor")) {
-            role = Role.editor;
-        } else {
-            role = Role.guest;
-        }
+        role = newRole;
     }
 
     public String getRole() {
-        if (role==Role.owner) {
-            return "owner";
-        } else if (role==Role.admin) {
-            return "admin";
-        } else if (role==Role.editor) {
-            return "editor";
-        } else {
-            return "guest";
-        }
+        return role;
     }
 }
     
