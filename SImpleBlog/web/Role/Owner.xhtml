@@ -46,13 +46,19 @@ and open the template in the editor.
                         <h2 class="art-list-title"><a href="post.html">#{p.judul}</a></h2>
                         <div class="art-list-time">By #{p.author}</div>
                         <div class="art-list-time">#{p.tanggal}</div>
+                        <div class="art-list-time">#{p.status}</div>
+                        <h:form rendered="#{p.status == 'unpublished'}">
+                            <h:commandButton onclick = "return confirmPublish()" value ="Publish" action="#{Posting.PublishPost()}">
+                                <f:param name ="throwedid" value = "#{p.id}"></f:param>
+                            </h:commandButton>
+                        </h:form>
                     </div>
                     <p>#{p.content} &hellip;</p>
                     <p>|
                         <a href="#">Edit</a>
                     |</p>
                     <h:form><p>|
-                        <h:commandLink onclick = "return confirmChoice()" value ="Delete" action="#{Posting.deletePost()}">
+                        <h:commandLink onclick = "return confirmDelete()" value ="Delete" action="#{Posting.deletePost()}">
                             <f:param name ="throwedid" value = "#{p.id}"></f:param>
                         </h:commandLink>|</p>
                     </h:form>

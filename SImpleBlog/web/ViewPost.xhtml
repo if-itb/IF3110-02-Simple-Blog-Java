@@ -11,7 +11,7 @@ and open the template in the editor.
       xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <head>
-        <title>Simple Blog - View Post</title>
+        <title>#{Viewpost.post.judul}</title>
         <link type="text/css" rel="stylesheet" href="assets/screen.css"/>
         <script type="text/javascript" src="assets/ajax.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -46,11 +46,22 @@ and open the template in the editor.
 
                     <div id="contact-area2">
                         <form method="post" action="#">
-                            <label for="Nama">Nama:</label>
-                            <input type="text" name="Nama" id="Nama" required="true"/>
-
-                            <label for="Email">Email:</label>
-                            <input type="text" name="Email" id="Email" required="true"/>
+                            <h:form rendered="#{Posting.loginState == true}">
+                                <label for="Nama">Nama:</label>
+                                <input type="text" name="Nama" id="Nama" required="true" disabled="true" value="#{Posting.activeUser}"/>
+                            </h:form>
+                            <h:form rendered="#{Posting.loginState == false}">
+                                <label for="Nama">Nama:</label>
+                                <input type="text" name="Nama" id="Nama" required="true"/>
+                            </h:form>
+                            <h:form rendered="#{Posting.loginState == true}">
+                                <label for="Email">Email:</label>
+                                <input type="text" name="Email" id="Email" required="true" disabled="true" value="#{Posting.activeUserEmail}"/>
+                            </h:form>
+                            <h:form rendered="#{Posting.loginState == false}">
+                                <label for="Email">Email:</label>
+                                <input type="text" name="Email" id="Email" required="true"/>
+                            </h:form>
 
                             <label for="Komentar">Komentar:</label><br/>
                             <textarea name="Komentar" rows="20" cols="20" id="Komentar" required="true"></textarea>

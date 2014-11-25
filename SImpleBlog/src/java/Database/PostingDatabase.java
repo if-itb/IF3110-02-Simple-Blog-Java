@@ -11,6 +11,7 @@ import static com.sun.corba.se.spi.presentation.rmi.StubAdapter.request;
 import com.sun.faces.context.RequestParameterMap;
 import java.io.IOException;
 import java.io.Serializable;
+import static java.lang.System.out;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
@@ -158,10 +159,20 @@ public class PostingDatabase {
     }
 
     public void deletePost() throws ClassNotFoundException, SQLException, IOException, ParseException{
-          System.out.println(id+"PINGGGGGGGGG");
           Connection con = makeConnection();
           Statement stmt = con.createStatement();
           String query = "Update post Set status=\"deleted\" WHERE ID="+id;
+          int rs;
+          rs = stmt.executeUpdate(query);
+          PreparedStatement ps;
+            ExternalContext extcon = FacesContext.getCurrentInstance().getExternalContext();
+            extcon.redirect("Owner.xhtml");
+    }
+    
+     public void PublishPost() throws ClassNotFoundException, SQLException, IOException, ParseException{
+          Connection con = makeConnection();
+          Statement stmt = con.createStatement();
+          String query = "Update post Set status=\"published\" WHERE ID="+id;
           int rs;
           rs = stmt.executeUpdate(query);
           PreparedStatement ps;
@@ -275,4 +286,24 @@ public class PostingDatabase {
         extCont.redirect("/SImpleBlog/");
     }
     
+    public boolean getLoginState(){
+        return(login.getUserCookie() != null);
+    } 
+    
+    public String getActiveUserEmail() throws ClassNotFoundException, SQLException{
+        ExternalContext extCont = FacesContext.getCurrentInstance().getExternalContext();
+        Cookie cUsername = login.getUserCookie();
+        String activeUserEmail = null;
+        
+        ResultSet rs;
+        Connection con;
+        con = makeConnection();
+        Statement stmt = con.createStatement();
+        String query = "Select email from user where Username=\""+cUsername.getValue()+"\";";
+        rs = stmt.executeQuery(query);
+        while(rs.next()){
+            activeUserEmail = rs.getString("email");
+         }
+        return activeUserEmail;
+    }
 }

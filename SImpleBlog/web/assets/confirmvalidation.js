@@ -5,7 +5,16 @@
  */
 
 
-function confirmChoice() {
+function confirmPublish() {
+    var x;
+    if (confirm("Do you want publish this post?") == true) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function confirmDelete() {
     var x;
     if (confirm("Do you really want to delete this post?") == true) {
         return true;
