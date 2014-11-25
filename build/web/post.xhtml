@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./template.xhtml">
+    <ui:define name="title"><title>Simple Blog - <!-- Insert post title here --></title></ui:define>
+    <ui:define name="content">
+        <article class="art simple post">
+    
+    <header class="art-header">
+        <div class="art-header-inner" style="margin-top: 0px; opacity: 1;">
+            <time class="art-time"><!-- <?php echo $date->format('l\, j F Y'); ?> Ganti dengan tanggal --></time>
+            <h2 class="art-title"><!-- <?php echo $result['title']; ?> Ganti dengan page title --></h2>
+            <p class="art-subtitle"></p>
+        </div>
+    </header>
+
+    <div class="art-body">
+        <div class="art-body-inner" style="padding-top: 0px;">
+            <p><!-- <?php echo nl2br($result['content']); ?> Ganti dengan konten --></p>
+
+            
+            <h2>Komentar</h2>
+
+            <div id="contact-area">
+                <form method="post" action="addcomment.php" name="form_comment" id="form_comment" onsubmit="return false">
+                    <input type="hidden" name="pid" value="1"  id="pid"></input>
+				<!--value="<?php echo $id; ?>" Page id -->
+                    <label for="nama">Nama:</label>
+                    <input type="text" name="nama" id="nama" required=""></input>
+        
+                    <label for="email">Email:</label>
+                    <input type="text" name="email" id="email" required=""></input>
+                    <div id='errormsg'></div>
+                    
+                    <label for="komentar"><br></br>Komentar:</label><br></br>
+                    <textarea name="komentar" rows="20" cols="20" id="komentar" required=""></textarea>
+
+                    <input type="submit" name="submit" value="Kirim" class="submit-button" onclick="validatecomment()"></input>
+                </form>
+            </div>
+			<ul class="art-list-body">
+				
+				<div id="ajaxcontent">
+				<!-- List komentar -->
+				</div>
+				
+            </ul>
+        </div>
+    </div>
+
+</article>
+    </ui:define>
+    <ui:define name="jscript">
+        <script type="text/javascript" src="./resources/js/fittext.js"></script>
+        <script type="text/javascript" src="./resources/js/app.js"></script>
+        <script type="text/javascript" src="./resources/js/respond.min.js"></script>
+        <script type="text/javascript" src="./resources/js/getdatabase.js"></script>
+    </ui:define>
+
+</ui:composition>

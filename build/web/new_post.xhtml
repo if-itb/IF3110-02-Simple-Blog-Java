@@ -2,6 +2,7 @@
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 template="./template.xhtml">
+    <ui:define name="title"><title>Simple Blog - New Post</title></ui:define>
 
     <ui:define name="content">
     <article class="art simple post">
@@ -30,6 +31,12 @@
         </div>
     </div>
     </article>
+    </ui:define>
+    <ui:define name="jscript">
+        <script type="text/javascript" src="./resources/js/fittext.js"></script>
+        <script type="text/javascript" src="./assets/js/app.js"></script>
+        <script type="text/javascript" src="./assets/js/respond.min.js"></script>
+        <script type="text/javascript" src="./assets/js/formValidation.js"></script>
     </ui:define>
 
 </ui:composition>
