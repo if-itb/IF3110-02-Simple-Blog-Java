@@ -225,4 +225,8 @@ public class Post implements Serializable {
         this.isNewRecord = isNewRecord;
     }
 
+    boolean isPublished() {
+        return this.published;
+    }
+
 }
