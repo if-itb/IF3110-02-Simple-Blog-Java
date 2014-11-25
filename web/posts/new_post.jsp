@@ -67,13 +67,13 @@
                     <div id="contact-area">
                         <form name="Post" method="post" action="new_post_red.jsp">
                             <label for="Judul">Judul:</label>
-                            <input type="text" name="Judul" id="Judul">
+                            <input type="text" name="Judul" id="Judul" aria-required="true" required="">
 
                             <label for="Tanggal">Tanggal:</label>
                             <input type="date" name="Tanggal" value="" class="ss-q-date" dir="auto" id="Tanggal" aria-required="true" required="return IsValidDate()">
 
                             <label for="Konten">Konten:</label><br>
-                            <textarea name="Konten" rows="20" cols="20" id="Konten"></textarea>
+                            <textarea name="Konten" rows="20" cols="20" id="Konten" aria-required="true" required=""></textarea>
 
                             <input type="submit" name="submit" value="Simpan" class="submit-button" onclick="return IsValidDate()">
                         </form>
