@@ -64,11 +64,7 @@
                 <br></br><hr></hr>
  <ui:repeat id="commentTable" value="#{commentsController.getAllComments(viewpostid.value)}" var="comment">
             <div class="komentarbox">
-               
-
-                                <h:inputHidden value="#{comment.id}" binding="#{commentid}" />
-                                
-			
+				<h:inputHidden value="#{comment.id}" binding="#{commentid}" />
                 <div class="komentarattr">
                     <div class="komentarname">
                         <b><h:outputText value="#{comment.name}" binding="#{commentname}" ></h:outputText></b>
