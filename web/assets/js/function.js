@@ -20,6 +20,7 @@ function comment() {
     if (validateEmail()){
       var idPost = document.getElementById('id').value;
       saveComment(idPost);
+      loadComment(idPost);
       document.forms["commentForm"]["Nama"].value="";
       document.forms["commentForm"]["Email"].value="";
       document.forms["commentForm"]["Komentar"].value="";

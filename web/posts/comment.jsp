@@ -11,16 +11,9 @@
 <%@page import="java.sql.Statement"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>comment</title>
-    </head>
-    <body>
+
         <%
             int IdPost = Integer.valueOf(request.getParameter("id"));
             System.out.println(IdPost);
             out.println(Komentar.LoadComment(IdPost));
         %>
-    </body>
-</html>

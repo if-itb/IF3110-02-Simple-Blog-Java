@@ -4,14 +4,14 @@
     Author     : Rakhmatullah Yoga S
 --%>
 
+<%@page import="source.Komentar"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>insertcomment</title>
-    </head>
-    <body>
-        
-    </body>
-</html>
+<%
+    int idPost = Integer.parseInt(request.getParameter("id"));
+    String nama = request.getParameter("nama");
+    String email = request.getParameter("email");
+    String komentar = request.getParameter("komentar");
+    String sqlQuery = "INSERT INTO komentar (ID, Nama, Email, Komentar) VALUES ('"+ idPost + "', '" + nama + "', '" + email + "', '" + komentar + "')";
+    Komentar.AddComment(nama, email, komentar);
+%>
