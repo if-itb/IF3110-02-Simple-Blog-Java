@@ -205,7 +205,7 @@ public class Post {
                         //delete post: untuk admin dan owner
                         if (isAdmin() || isOwner()) {    
                             toHTML += " | <a href=\"delete_post.jsp?id=" + idPost + 
-                            "\" onclick=\"javascript:confirmDelete()\">Hapus</a>\n" +
+                            "\" onclick='return confirmDelete()'>Hapus</a>\n" +
                             "</p>\n" +
                             "</li>";
                         }
