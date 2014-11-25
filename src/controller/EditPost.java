@@ -6,6 +6,7 @@ import java.util.Date;
 
 
 
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
@@ -79,8 +80,11 @@ public class EditPost {
 			@SuppressWarnings("deprecation")
 			String date = ""+(1900+post.getDate().getYear())+"/"+(post.getDate().getMonth()+1)+"/"+post.getDate().getDate();
 			
-			String query = "UPDATE post SET judul ='"+post.getTitle()+ 
-					"', isi ='"+post.getContent()+"', waktu = '"+date+"' WHERE id = "+ post.getId();
+			String inTitle = DatabaseUtility.forHTML(post.getTitle());
+			String inContent = DatabaseUtility.forHTML(post.getContent());
+			
+			String query = "UPDATE post SET judul ='"+ inTitle+ 
+					"', isi ='"+ inContent +"', waktu = '"+date+"' WHERE id = "+ post.getId();
 			
 			System.out.println(query);
 			
