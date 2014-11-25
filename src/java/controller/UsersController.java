@@ -129,14 +129,44 @@ public class UsersController implements Serializable {
 		
 		if (user != null) {
 			FacesContext facesContext = FacesContext.getCurrentInstance();
-			Cookie userCookie = new Cookie("username", user.getUsername());
+			HttpServletRequest request = (HttpServletRequest) facesContext.getExternalContext().getRequest();
+			HttpServletResponse response = (HttpServletResponse) facesContext.getExternalContext().getResponse();
+			Cookie userCookie = null, roleCookie = null;
+			
+			Cookie[] cookies = request.getCookies();
+			if (cookies != null && cookies.length > 0) {
+				for (int i=0; i<cookies.length; ++i) {
+					switch (cookies[i].getName()) {
+						case "username":
+							userCookie = cookies[i];
+							break;
+						case "role":
+							roleCookie = cookies[i];
+							break;
+					}
+				}
+			}
+			
+			if (userCookie != null) {
+				userCookie.setValue(user.getUsername());
+			} else {
+				userCookie = new Cookie("username", user.getUsername());
+				userCookie.setPath(request.getContextPath());
+			}
+			
+			if (roleCookie != null) {
+				roleCookie.setValue(user.getRole());
+			} else {
+				roleCookie = new Cookie("role", user.getUsername());
+				roleCookie.setPath(request.getContextPath());
+			}
+
 			userCookie.setMaxAge(3600);
-			((HttpServletResponse) facesContext.getExternalContext().getResponse()).addCookie(userCookie);
-			Cookie passCokie = new Cookie("role", user.getRole());
-			passCokie.setMaxAge(3600);
-			((HttpServletResponse) facesContext.getExternalContext().getResponse()).addCookie(passCokie);
-			//FacesContext.getCurrentInstance().getExternalContext().addResponseCookie("username", user.getUsername(), null);
-			//FacesContext.getCurrentInstance().getExternalContext().addResponseCookie("role", user.getRole(), null);
+			roleCookie.setMaxAge(3600);
+			
+			response.addCookie(userCookie);
+			response.addCookie(roleCookie);
+
 			FacesContext.getCurrentInstance().getExternalContext().redirect("/SimpleBlog/faces/index.xhtml");
 		} else {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Username or password is invalid"));
@@ -144,13 +174,32 @@ public class UsersController implements Serializable {
 	}
 
 	public void logout() throws IOException {
-		HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();  
-        HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		HttpServletRequest request = (HttpServletRequest) facesContext.getExternalContext().getRequest();
+		HttpServletResponse response = (HttpServletResponse) facesContext.getExternalContext().getResponse();
+		Cookie userCookie = null, roleCookie = null;
+
 		Cookie[] cookies = request.getCookies();
+		if (cookies != null && cookies.length > 0) {
+			for (int i=0; i<cookies.length; ++i) {
+				switch (cookies[i].getName()) {
+					case "username":
+						userCookie = cookies[i];
+						break;
+					case "role":
+						roleCookie = cookies[i];
+						break;
+				}
+			}
+		}
+
+		userCookie.setMaxAge(0);
+		roleCookie.setMaxAge(0);
+
+		//response.addCookie(userCookie);
+		//response.addCookie(roleCookie);
 		
-		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-		System.err.println(FacesContext.getCurrentInstance().getExternalContext().getRequestCookieMap().get("username").toString());
-		FacesContext.getCurrentInstance().getExternalContext().redirect("/user/login.xhtml");
+		FacesContext.getCurrentInstance().getExternalContext().redirect("/SimpleBlog/faces/index.xhtml");
 	}
 	
 }
