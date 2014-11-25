@@ -11,35 +11,43 @@ package data;
  * @author user
  */
 public class Post {
-    private String judul;
-    private String tanggal;
-    private String konten;
-    private boolean published;
+    private int post_id;
+    private String title;
+    private String date;
+    private String content;
+    private boolean category;
+    private int post_author_id;
     Post(){
-        published = false;
+        
     }
-    public void setJudul(String value){
-        judul = value;
+    public void setPostID(int value){
+        post_id = value;
     }
-    public void setTanggal(String value){
-        tanggal = value;
+    public void setTitle(String value){
+        title = value;
     }
-    public void setKonten(String value){
-        konten = value;
+    public void setDate(String value){
+        date = value;
     }
-    public void setKategori(boolean value){
-        published = value;
+    public void setContent(String value){
+        content = value;
     }
-    public String getJudul(){
-        return judul;
+    public void setCategory(boolean value){
+        category = value;
     }
-    public String getTanggal(){
-        return tanggal;
+    public int getPostID(){
+        return post_id;
     }
-    public String getKonten(){
-        return konten;
+    public String getTitle(){
+        return title;
     }
-    public boolean getPublished(){
-        return published;
+    public String getDate(){
+        return date;
+    }
+    public String getContent(){
+        return content;
+    }
+    public boolean getCategory(){
+        return category;
     }
 }
