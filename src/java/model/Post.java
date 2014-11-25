@@ -18,6 +18,9 @@ public class Post {
     private String Judul;
     private String Konten;
     private String Date;
+    private String Author;
+    private boolean Published;
+    private int PID;
     
     public Post() {
         
@@ -64,8 +67,46 @@ public class Post {
     public void setDate(String Date) {
         this.Date = Date;
     }
-    
-    
-    
-    
+
+    /**
+     * @return the Author
+     */
+    public String getAuthor() {
+        return Author;
+    }
+
+    /**
+     * @param Author the Author to set
+     */
+    public void setAuthor(String Author) {
+        this.Author = Author;
+    }
+
+    /**
+     * @return the Published
+     */
+    public boolean isPublished() {
+        return Published;
+    }
+
+    /**
+     * @param Published the Published to set
+     */
+    public void setPublished(boolean Published) {
+        this.Published = Published;
+    }
+
+    /**
+     * @return the PID
+     */
+    public int getPID() {
+        return PID;
+    }
+
+    /**
+     * @param PID the PID to set
+     */
+    public void setPID(int PID) {
+        this.PID = PID;
+    }
 }

@@ -50,4 +50,8 @@ public class NavigationController implements Serializable{
     public String gotoViewPost(int post_id) {
         return "View-Post.xhtml";
     }
+    
+    public String gotoUnpublishedPost() {
+        return "List-Unpublished-Post.xhml";
+    }
 }

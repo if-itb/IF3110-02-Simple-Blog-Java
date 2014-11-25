@@ -35,8 +35,9 @@ h3 {
 }
 
 .upper-menu {
-    margin-left: 700px;
+    margin-left: 600px;
     height: 80px;
+    font-size: 14px;
 }
 
 .upper-menu .pure-button {
