@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 21 Nov 2014 pada 07.38
+-- Generation Time: 25 Nov 2014 pada 10.46
 -- Versi Server: 5.5.36
 -- PHP Version: 5.4.25
 
@@ -31,9 +31,18 @@ CREATE TABLE IF NOT EXISTS `entries` (
   `JUDUL` text NOT NULL,
   `TANGGAL` date NOT NULL,
   `KONTEN` text NOT NULL,
+  `PUBLISHED` tinyint(1) NOT NULL,
+  `AUTHOR` text NOT NULL,
   PRIMARY KEY (`PID`),
   UNIQUE KEY `PID` (`PID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data untuk tabel `entries`
+--
+
+INSERT INTO `entries` (`PID`, `JUDUL`, `TANGGAL`, `KONTEN`, `PUBLISHED`, `AUTHOR`) VALUES
+(1, 'Everything You Need to Know About Grunt', '2014-11-25', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.', 1, 'blah blah');
 
 -- --------------------------------------------------------
 
@@ -59,12 +68,11 @@ CREATE TABLE IF NOT EXISTS `komentar` (
 --
 
 CREATE TABLE IF NOT EXISTS `user` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
   `USERNAME` varchar(20) NOT NULL,
   `PASSWORD` varchar(20) NOT NULL,
-  `ROLE` text NOT NULL,
-  PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  `ROLE` varchar(10) NOT NULL,
+  PRIMARY KEY (`USERNAME`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
