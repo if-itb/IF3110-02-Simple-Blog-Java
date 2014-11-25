@@ -4,6 +4,7 @@
     Author     : akhfa
 --%>
 
+<%@page import="source.Post"%>
 <%@page import="source.dataUser"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="source.User"%>
@@ -43,7 +44,29 @@
         <title>User Management - Not a Simple Blog</title>
     </head>
     <body class="default">
-        <div id="home">
+        <%  
+            Post listPost = new Post();
+            CookieHelper cookie = new CookieHelper(request.getCookies());
+            if(cookie.thereIsCookie()) {
+                listPost.cookieHeaderCheck(cookie);
+            }
+            else {
+                response.sendRedirect("../login/index.html");
+            }
+        %>
+        
+        <div class="wrapper">
+            
+            <nav class="nav">
+                <a style="border:none;" id="logo" href="../index.jsp"><h1>Not<span>-</span>a<span>-</span>Simple<span>-</span>Blog</h1></a>
+                <ul class="nav-primary">
+                    <li>
+                        <%= listPost.showManagementHeader() %>
+                    </li>
+                </ul>
+            </nav>
+            
+            <div id="home">
             <div class="posts">
                 <nav class="art-list">
                   <ul class="art-list-body">
@@ -52,77 +75,73 @@
                             <br><br><br>
                             <h2 class="art-list-title">User Management</h2>
                         </div>
-                        
-                            <p>
-        <%  
-            CookieHelper cookie = new CookieHelper(request.getCookies());
-            if(cookie.thereIsCookie())
-            {
-                if(cookie.getRole().equals("admin"))
-                {
-                    out.println("Welcome " + cookie.getUsername() + " as an "+ cookie.getRole());
-                    User user = new User();
-                    ArrayList<dataUser> listUser = user.getAllUser();
-                    out.println("<table style='width:100%' id=\"t01\">");
-                    %>
-                    <tr>
-                      <th <tr style=\"vertical-align:center\" rowspan=\"2\" id=\"column1\">Username</th>
-                      <th <tr style=\"vertical-align:center\" rowspan=\"2\" id=\"column2\">Nama</th>
-                      <th <tr style=\"vertical-align:center\" rowspan=\"2\" id=\"column3\">Email</th>
-                      <th <tr style=\"vertical-align:center\" rowspan=\"2\" id=\"column4\">Role</th>
-                    </tr>
-                    <%
-                    for(dataUser oneuser:listUser)
-                    {
-                        out.println("<tr>");
-                        out.println("<td><a href='formuser.jsp?id=" + oneuser.username + "'>"+ oneuser.username+"<a></td>");
-                        out.println("<td>" + oneuser.nama + "</td>");
-                        out.println("<td>" + oneuser.email + "</td>");
-                        out.println("<td>" + oneuser.role + "</td>");
-                        out.println("<tr>");
-                    }
-                    out.println("</table>");
-                    out.println("<form action='formuser.jsp?id=|add|' method='POST'>"
-                                        + "<input type='submit' value='Add New User'>"
-                                    + "</form>");
-                }
-                else
-                {
-                    RequestDispatcher rd = getServletContext().getRequestDispatcher("/login/index.html");
-                    PrintWriter output= response.getWriter();
-                    output.println("<font color=red>Untuk melakukan user management, perlu akses admin.</font>"
-                            + "<form action='../LogoutServlet' method='post'>"
-                            + "<input type='submit' value='Logout'>"
-                            + "</form>");
-                    rd.include(request, response);
-                }
-            }
-            else
-            {
-                response.sendRedirect("../login/index.html");
-            }
-            
-        %></p>
-                        
-                    </li>
-                  </ul>
-                </nav>
-            </div>
-        </div>
-    <footer class="footer">
-            <div class="back-to-top"><a href="">Back to top</a></div>
-            <!-- <div class="footer-nav"><p></p></div> -->
-            <div class="psi">&Psi;</div>
-            <aside class="offsite-links">
-                Tugas Besar 2 IF3110 /
-                <a class="rss-link" href="#rss">RSS</a> /
-                <br>
-                <a class="twitter-link" href="http://www.facebook.com/ajiballinst" target="_blank">Try Ajitiono</a> /
-                <a class="twitter-link" href="http://www.facebook.com/rakhmatullahyogasutrisna" target="_blank">Rakhmatullah Yoga Sutrisna</a> /
-                <a class="twitter-link" href="http://www.facebook.com/akhmadfakhoni" target="_blank">Akhmad Fakhoni Listiyan Dede</a>
-            </aside>
-        </footer>
+                        <p>
+                        <%  
+                            if(cookie.thereIsCookie())
+                            {
+                                if(cookie.getRole().equals("admin"))
+                                {
+                                    User user = new User();
+                                    ArrayList<dataUser> listUser = user.getAllUser();
+                                    out.println("<table style='width:100%' id=\"t01\">");
+                                    %>
+                                    <tr>
+                                      <th <tr style=\"vertical-align:center\" rowspan=\"2\" id=\"column1\">Username</th>
+                                      <th <tr style=\"vertical-align:center\" rowspan=\"2\" id=\"column2\">Nama</th>
+                                      <th <tr style=\"vertical-align:center\" rowspan=\"2\" id=\"column3\">Email</th>
+                                      <th <tr style=\"vertical-align:center\" rowspan=\"2\" id=\"column4\">Role</th>
+                                    </tr>
+                                    <%
+                                    for(dataUser oneuser:listUser)
+                                    {
+                                        out.println("<tr>");
+                                        out.println("<td><a href='formuser.jsp?id=" + oneuser.username + "'>"+ oneuser.username+"<a></td>");
+                                        out.println("<td>" + oneuser.nama + "</td>");
+                                        out.println("<td>" + oneuser.email + "</td>");
+                                        out.println("<td>" + oneuser.role + "</td>");
+                                        out.println("<tr>");
+                                    }
+                                    out.println("</table>");
+                                    out.println("<form action='formuser.jsp?id=|add|' method='POST'>"
+                                                        + "<input type='submit' value='Add New User'>"
+                                                    + "</form>");
+                                }
+                                else
+                                {
+                                    RequestDispatcher rd = getServletContext().getRequestDispatcher("/login/index.html");
+                                    PrintWriter output= response.getWriter();
+                                    output.println("<font color=red>Untuk melakukan user management, perlu akses admin.</font>"
+                                            + "<form action='../LogoutServlet' method='post'>"
+                                            + "<input type='submit' value='Logout'>"
+                                            + "</form>");
+                                    rd.include(request, response);
+                                }
+                            }
+                            else
+                            {
+                                response.sendRedirect("../login/index.html");
+                            }
 
+                        %></p>
+                        </li>
+                      </ul>
+                    </nav>
+                </div>
+            </div>
+            <br>
+            <footer class="footer">
+                <div class="back-to-top"><a href="">Back to top</a></div>
+                <!-- <div class="footer-nav"><p></p></div> -->
+                <div class="psi">&Psi;</div>
+                <aside class="offsite-links">
+                    Tugas Besar 2 IF3110 /
+                    <a class="rss-link" href="#rss">RSS</a> /
+                    <br>
+                    <a class="twitter-link" href="http://www.facebook.com/ajiballinst" target="_blank">Try Ajitiono</a> /
+                    <a class="twitter-link" href="http://www.facebook.com/rakhmatullahyogasutrisna" target="_blank">Rakhmatullah Yoga Sutrisna</a> /
+                    <a class="twitter-link" href="http://www.facebook.com/akhmadfakhoni" target="_blank">Akhmad Fakhoni Listiyan Dede</a>
+                </aside>
+            </footer>
         </div>
 
         <script type="text/javascript" src="../assets/js/function.js"></script>
