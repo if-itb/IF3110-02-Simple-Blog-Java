@@ -13,22 +13,24 @@
     <h:body>
         <ui:composition template="/layouts/main.xhtml">
             <ui:define name="content">
-                <h1>Daftar Post</h1>
-                <h:form>
-                    <h:commandButton action="#{postCtrl.showCreate()}" value="+ Tambah Post" class="btn btn-primary"></h:commandButton>
-                </h:form>
                 <div class="row">
                     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                        <h:form style="float:right;">
+                            <h:commandButton action="#{postCtrl.showCreate()}" value="+ Tambah Post" class="btn btn-primary"></h:commandButton>
+                        </h:form>
                         <c:forEach var="post" items="#{postCtrl.getPosts()}">
                             <c:if test="#{!userIdentity.getIsGuest() or post.published}">
                                 <h:form>
                                     <div class="post-preview">
+                                        <div style="float:right;">
+                                            <c:if test="#{!post.published}"><h4><span class="label label-warning">Unpublished</span></h4></c:if>
+                                        </div>
                                         <h:commandLink class='post-title' action="#{postCtrl.showView()}">
                                             <f:param name="id" value="#{post.id}" />
                                             <h2 class='post-title'>#{post.judul}</h2>
                                             <h3 class='post-subtitle'>#{post.konten}</h3>
                                         </h:commandLink>
-                                        <p class="post-meta">Posted on #{post.tanggal} <c:if test="#{!post.published}">(Unpublished) </c:if> </p>
+                                        <p class="post-meta">Posted on #{post.tanggal}</p>
                                         <h:commandButton action="#{postCtrl.showUpdate()}" value="Update" class="btn btn-success" rendered="#{(userIdentity.isAdmin) or (userIdentity.isEditor)}">
                                             <f:param name="id" value="#{post.id}" />
                                         </h:commandButton>&nbsp;
