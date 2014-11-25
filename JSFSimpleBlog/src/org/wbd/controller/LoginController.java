@@ -5,18 +5,27 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Cookie;
 import java.util.Map;
 
+import org.wbd.model.User;
+
 public class LoginController {
 	public static final String USER_NAME = "username";
 	public static final String PASSWORD = "password";
 	public static final String ROLE = "role";
 	//TODO : add attributes
+	private User login;
 	
 	public LoginController() {
 		//TODO : initialize attributes
+		login = new User();
 	}
 	
 	public String doLogin() {
-		//TODO : code to do login
+		//TODO : get user data from database using helper
+		//TODO : validate user
+		//create cookies
+		addCookie(USER_NAME, login.getUsername());
+		addCookie(PASSWORD, login.getPassword());
+		addCookie(ROLE, login.getRole());
 		return "success";
 	}
 	
