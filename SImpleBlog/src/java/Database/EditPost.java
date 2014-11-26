@@ -49,9 +49,8 @@ public class EditPost {
             String user = "root";
             String password = "";
             conn =  DriverManager.getConnection(url, user, password);
-            System.out.println("CONNECTED");
         }catch(ClassNotFoundException | InstantiationException e){
-            e.printStackTrace();
+            System.err.println(e);
         }
         return conn;
     }
@@ -60,19 +59,19 @@ public class EditPost {
         ResultSet result;
         Post post = new Post();
         try{
-            Connection conn = getConnection();
-            Statement stmt = conn.createStatement();
-            String query = "Select * From post where ID = " + PostID + ";";
-            result = stmt.executeQuery(query);
-            while(result.next()){
-              post.setId(result.getInt(1));
-              post.setJudul(result.getString(2));
-              post.setTanggal(result.getString(3));
-              post.setContent(result.getString(4));
-              post.setAuthor(result.getString(5));
-              post.setStatus(result.getString(6));
+            try (Connection conn = getConnection()) {
+                Statement stmt = conn.createStatement();
+                String query = "Select * From post where ID = " + PostID + ";";
+                result = stmt.executeQuery(query);
+                while(result.next()){
+                    post.setId(result.getInt(1));
+                    post.setJudul(result.getString(2));
+                    post.setTanggal(result.getString(3));
+                    post.setContent(result.getString(4));
+                    post.setAuthor(result.getString(5));
+                    post.setStatus(result.getString(6));
+                }
             }
-            conn.close();
             
         } catch(SQLException e){
             System.err.println(e);
@@ -89,11 +88,11 @@ public class EditPost {
         ResultSet result;
         Post post = new Post();
         try{
-            Connection conn = getConnection();
-            Statement stmt = conn.createStatement();
-            String query = "Update post set Judul = \"" + Judul + "\", Content = \"" + Konten + "\" where ID = " + PostID + ";";
-            stmt.executeUpdate(query);
-            conn.close();
+            try (Connection conn = getConnection()) {
+                Statement stmt = conn.createStatement();
+                String query = "Update post set Judul = \"" + Judul + "\", Content = \"" + Konten + "\" where ID = " + PostID + ";";
+                stmt.executeUpdate(query);
+            }
             
         } catch(SQLException e){
             System.err.println(e);

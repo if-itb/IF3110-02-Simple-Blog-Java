@@ -28,7 +28,7 @@ and open the template in the editor.
                 </li>
             </ul>
             <div id="title">
-                Unpublished Posts
+                Deleted Post(s)
             </div>
         </nav>
 
@@ -36,7 +36,7 @@ and open the template in the editor.
             <div class="posts">
                 <nav class="art-list">
                   <ul class="art-list-body">
-                      <c:forEach items="#{Publishpost.unpublishedPost}" var="post">
+                      <c:forEach items="#{Posting.deletedPosts}" var="post">
                         <li class="art-list-item">
                             <div class="art-list-item-title-and-time">
                                 <h2 class="art-list-title">
@@ -49,11 +49,11 @@ and open the template in the editor.
                             </div>
                             <p>#{post.contentPreview} &hellip;</p>
                             <p>
-                                <h:form styleClass="editbutton">
-                                    <h:commandLink value="Edit|" action="#{Editpost.Redirect(post.id)}"></h:commandLink>
+                                <h:form styleClass="restorebutton">
+                                    <h:commandLink value="Restore|" action="#{Posting.setRestorePost(post.id)}"></h:commandLink>
                                 </h:form>
-                                <h:form styleClass="publishbutton">
-                                    <h:commandLink value="Publish" action="#{Publishpost.publishPost(post.id)}" onclick="return confirm('Are you sure to publish this post?')"></h:commandLink>
+                                <h:form styleClass="deletebutton">
+                                    <h:commandLink value="Delete" action="#{Posting.setRealDeletePost(post.id)}" onclick="return confirm('Are you sure to delete this post?')"></h:commandLink>
                                 </h:form>
                             </p>
                         </li>

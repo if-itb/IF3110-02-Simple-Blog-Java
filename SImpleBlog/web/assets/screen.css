@@ -996,6 +996,19 @@ label {
     left: 38px;
 }
 
+.restorebutton{
+    position: relative;
+    height: 28px;
+    width: 1px;
+}
+
+.deletebutton{
+    position: relative;
+    height: 28px;
+    width: 1px;
+    left: 63px;
+}
+
 #customers {
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
     width: 100%;
