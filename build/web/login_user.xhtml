@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title>Login Page</title>
+	<h:outputStylesheet library="css" name="mystyle.css"></h:outputStylesheet>
+    </h:head>
+    <h:body>
+        <div class="wrapper">
+            <div class="top">
+                <h:form>
+                <div class="title">
+                    <br></br>
+                    <h:commandLink action="index">SIMPLE<blue>-</blue>BLOG</h:commandLink>         
+                </div>
+                </h:form>
+            </div><!--end top-->
+            <hr  margin-right="30%"> </hr>
+            <div class="content">
+                <h:form>
+                <h:messages style="color:red;" />		
+                <div class="forms">
+                    <blue><b>LOGIN</b></blue> <br></br><br></br>
+                    <form action="home-admin.html">
+                        <div class="textfield">
+                            username :&nbsp;<h:inputText id="username" binding="#{username}"  required="true" requiredMessage="Please enter a username" />
+                            <br></br>
+                            password :&nbsp;<h:inputSecret id="password" binding="#{password}" required="true" requiredMessage="Please enter a password" />
+                            <br></br><br></br>
+                        </div>
+                        <h:commandButton action="#{usersController.login(username.value, password.value)}" value="Login" >
+			</h:commandButton>
+                    </form>
+                </div>
+                </h:form>
+            </div> <!-- end content -->
+
+<!--            <div class="footer">
+                <hr></hr>
+                footer
+            </div>-->
+        </div> <!-- end wrapper --> 
+    </h:body>
+</html>
