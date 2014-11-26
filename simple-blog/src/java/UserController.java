@@ -116,6 +116,7 @@ public class UserController implements Serializable{
     }
     
     public String actionLogin(){
+        System.out.println("action login called");
         getUser();
         if(showEditHapus()){
             cookie.setCookie("username", username, 86400);
@@ -140,26 +141,43 @@ public class UserController implements Serializable{
     }
     
     public boolean isUsernamePasswordExist(){
-        if (cookie.getCookie("username") == null 
-               && cookie.getCookie("password") == null){
+        if ((cookie.getCookie("username") == null && cookie.getCookie("password") == null)
+                && user.getRole().equals("guest")){
             System.out.println("return false cookie validasi");
-           return false;
+            return false;
         }
-        System.out.println("set cookie in validasi");
-        setUsername(cookie.getCookie("username").getValue());
-        setPassword(cookie.getCookie("password").getValue());
-        getUser();
-        return true;
+        else if((cookie.getCookie("username") == null && cookie.getCookie("password") == null)
+                && !user.getRole().equals("guest")){
+            return true;
+        }
+        else if((cookie.getCookie("username") != null && cookie.getCookie("password") != null)
+                && user.getRole().equals("guest")){
+            System.out.println("set cookie in validasi");
+            setUsername(cookie.getCookie("username").getValue());
+            System.out.println(cookie.getCookie("username").getValue());
+            setPassword(cookie.getCookie("password").getValue());
+            System.out.println(cookie.getCookie("password").getValue());
+            getUser();
+            if(showEditHapus()){
+                return true;
+            }
+            else return false;
+        }
+        else {
+            return true;
+        }
     }
     
-    public String logout(){
-        cookie.setCookie("username", null, 0);
-        cookie.setCookie("password", null, 0);
+    public String actionLogout(){
+        cookie.setCookie("username", "", 0);
+        cookie.setCookie("password", "", 0);
         User tmp = new User();
         user = tmp;
         setUsername("");
         setPassword("");
         System.out.println("cookie dihapus");
+        System.out.println("username time left = "+cookie.getCookie("username").getMaxAge());
+        System.out.println("password time left = "+cookie.getCookie("password").getMaxAge());
         return "";
     }
 }

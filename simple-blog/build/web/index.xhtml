@@ -14,20 +14,7 @@
                 <nav class ="nav">
                     <h:link style="border:none;" id="logo" outcome="index"><h1>Simple<span>-</span>Blog</h1></h:link>
                     <ul class="nav-primary">
-                        <c:if test="#{!userController.isUsernamePasswordExist()}">
-                            <h:form>
-                                <label>User Name</label>
-                                <h:inputText  value="#{userController.username}"/>
-                                <label>Password</label>
-                                <h:inputSecret value="#{userController.password}" />
-                                <h:commandButton value="login" action="#{userController.actionLogin()}"/>
-                            </h:form>
-                        </c:if>
-                        <c:if test="#{userController.isUsernamePasswordExist()}">
-                            <h:form>
-                                <h:commandButton value="logout" action="#{userController.logout()}" />
-                            </h:form>
-                        </c:if>
+                        <ui:include src="navigationBar.xhtml"/>
                     </ul>
                 </nav>
             </ui:define>
