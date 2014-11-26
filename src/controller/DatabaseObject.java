@@ -49,41 +49,6 @@ public class DatabaseObject {
 
 	/**
 	 * 
-	 * @param id_user
-	 * @return posts of id_user
-	 */
-	public List<Post> getPostList(int id_user) {
-		List<Post> result = new ArrayList<>();
-
-		Connection con = DatabaseUtility.getInstance().getLiveConnection();
-
-		ResultSet rs;
-		try {
-			PreparedStatement pstmt = con.prepareStatement(idPostQuery);
-			pstmt.setInt(1, id_user);
-			pstmt.execute();
-			rs = pstmt.getResultSet();
-
-			while (rs.next()) {
-				Post post = new Post();
-				post.setId(rs.getInt(1));
-				post.setTitle(rs.getString(3));
-				post.setContent(rs.getString(4));
-				post.setDate(rs.getDate(5));
-				result.add(post);
-			}
-
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			System.out.println("Error in getPostList(id_user)");
-			e.printStackTrace();
-		}
-
-		return result;
-	}
-
-	/**
-	 * 
 	 * @return users in database
 	 */
 	public List<UserDetails> getUserList() {

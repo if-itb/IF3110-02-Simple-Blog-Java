@@ -24,7 +24,7 @@ public class ViewPost {
 	public String postComment() {
 		DatabaseUtility dbUtil = DatabaseUtility.getInstance();
 		Date date = new Date(System.currentTimeMillis());
-		String newstring = new SimpleDateFormat("yyyy/MM/dd").format(date);
+		String newstring = new SimpleDateFormat("yyyy-MM-dd").format(date);
 
 		ResultSet rs = dbUtil
 				.execute("INSERT INTO `comment`(`id_post`, `isi`, `waktu`, `name`, `email`) VALUES ("
