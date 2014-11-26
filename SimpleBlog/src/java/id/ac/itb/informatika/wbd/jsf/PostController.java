@@ -71,7 +71,7 @@ public class PostController {
         
         try {
             jpaController.destroy(post.getId());
-            JsfUtil.addSuccessMessage("Post berhasil dihapus";
+            JsfUtil.addSuccessMessage("Post berhasil dihapus");
         } catch (Exception e) {
             JsfUtil.ensureAddErrorMessage(e, "A persistence error occurred.");
             return null;

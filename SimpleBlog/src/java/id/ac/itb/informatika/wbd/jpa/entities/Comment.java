@@ -2,74 +2,68 @@ package id.ac.itb.informatika.wbd.jpa.entities;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name = "posts")
-@NamedQueries({@NamedQuery(name = "Post.findAll", query = "SELECT c FROM Post c"),
-                @NamedQuery(name = "Post.findById", query = "SELECT c FROM Post c WHERE c.id = :id"),
-                @NamedQuery(name = "Post.findByTitle", query = "SELECT c FROM Post c WHERE c.title = :title")})
-public class Post implements Serializable {
+@Table(name = "comments")
+@NamedQueries({@NamedQuery(name = "Comment.findAll", query = "SELECT c FROM Comment c"),
+                @NamedQuery(name = "Comment.findById", query = "SELECT c FROM Comment c WHERE c.od = :id"),
+                @NamedQuery(name = "Comment.findByPost", query = "SELECT c FROM Comment c WHERE c.post = :post")})
+public class Comment implements Serializable {
     private static final long serialVersionUID = 1L;
     
     @Id
     @Basic(optional = false)
-    @Column(name = "post_id")
+    @Column(name = "comment_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "post_title")
-    private String title;
+    @Column(name = "post_id")
+    @ManyToOne
+    private String post;
     
-    @Column(name = "post_date")
+    @Column(name = "comment_author")
+    private String name;
+    
+    @Column(name = "comment_author_email")
+    private String email;
+    
+    @Column(name = "comment_author_ip")
+    private String ip;
+    
+    @Column(name = "comment_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date date;
     
-    @Column(name = "post_content")
+    @Column(name = "comment_content")
     private String content;
     
     @Column(name = "post_featured")
     private Boolean featured;
-
-    @Column(name = "post_published")
-    private Boolean published;
     
-    @Column(name = "post_modified")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date modified;
-    
-    @OneToMany(mappedBy = "post") // mappedBy indicates that this side is the 
-   // inverse side, and that the mapping is defined by the attribute parentOrder 
-   // at the other side of the association.
-    private Set<Comment> comments;
-    
-    public Post() {
+    public Comment() {
     }
 
-    public Post(Long id) {
+    public Comment(Long id) {
         this.id = id;
     }
 
-    public Post(Long id, String title, Date date, String content) {
+    public Comment(Long id, Date date, String content) {
         this.id = id;
-        this.title = title;
         this.date = date;
         this.content = content;
         this.featured = false;
-        this.published = false;
-        this.modified = date;
     }
     
     public Long getId() {
@@ -78,14 +72,6 @@ public class Post implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-    
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
 
     public Date getDate() {
@@ -112,20 +98,36 @@ public class Post implements Serializable {
         this.featured = featured;
     }
 
-    public Boolean getPublished() {
-        return published;
+    public String getPost() {
+        return post;
     }
 
-    public void setPublished(Boolean published) {
-        this.published = published;
+    public void setPost(String post) {
+        this.post = post;
     }
 
-    public Date getModified() {
-        return modified;
+    public String getName() {
+        return name;
     }
 
-    public void setModified(Date modified) {
-        this.modified = modified;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getIp() {
+        return ip;
+    }
+
+    public void setIp(String ip) {
+        this.ip = ip;
     }
 
     @Override
@@ -138,10 +140,10 @@ public class Post implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Post)) {
+        if (!(object instanceof Comment)) {
             return false;
         }
-        Post other = (Post) object;
+        Comment other = (Comment) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
