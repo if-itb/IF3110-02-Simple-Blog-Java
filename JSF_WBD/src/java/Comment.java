@@ -25,15 +25,46 @@ public class Comment {
     
     public Comment() {
     }
-    int getCid(){return Cid;}
-    int getPid(){return Pid;}
-    String getName(){return Nama;}
-    String getEmail(){return Email;}
-    String Ccontent(){return Konten;}
-    void setCid(int i){Cid=i;}
-    void setPid(int i){Pid=i;}
-    void getName(String s){Nama=s;}
-    void getEmail(String s){Email=s;}
-    void Ccontent(String s){Konten=s;}
+
+    public void setCid(int Cid) {
+        this.Cid = Cid;
+    }
+
+    public void setPid(int Pid) {
+        this.Pid = Pid;
+    }
+
+    public void setNama(String Nama) {
+        this.Nama = Nama;
+    }
+
+    public void setEmail(String Email) {
+        this.Email = Email;
+    }
+
+    public void setKonten(String Konten) {
+        this.Konten = Konten;
+    }
+
+    public int getCid() {
+        return Cid;
+    }
+
+    public int getPid() {
+        return Pid;
+    }
+
+    public String getNama() {
+        return Nama;
+    }
+
+    public String getEmail() {
+        return Email;
+    }
+
+    public String getKonten() {
+        return Konten;
+    }
+    
     
 }

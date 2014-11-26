@@ -44,7 +44,9 @@
                           <ui:repeat var="o" value="#{manager.unPublishedPosts}" varStatus="status">
                              <li class="art-list-item">
                                  <div class="art-list-item-title-and-time">
-                                     <h2 class="art-list-title"><a href="view_post.xhtml">#{o.judul}</a></h2>
+                                     <h:form>
+                                         <h2 class="art-list-title"><h:commandLink action="#{tempPostView.viewPost(o.pid)}">#{o.judul}</h:commandLink></h2>
+                                     </h:form>
                                      <div class="art-list-time">#{o.tanggal.toString()}</div>
                                      <div class="art-list-time"><span style="color:#F40034;">&#10029;</span> Featured</div>
                                  </div>
