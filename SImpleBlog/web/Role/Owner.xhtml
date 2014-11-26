@@ -62,7 +62,12 @@ and open the template in the editor.
                     <p> #{p.contentPreview}&hellip;</p>
                     <p>
                         <h:form styleClass="editbutton" rendered="#{Posting.activeUsername == p.author}">
-                            <h:commandLink value="Edit" action="#{Editpost.Redirect(p.id)}"></h:commandLink>
+                            <h:commandLink value="Edit|" action="#{Editpost.Redirect(p.id)}"></h:commandLink>
+                        </h:form>
+                        <h:form styleClass="publishbutton" rendered="#{Posting.activeUsername == p.author}">
+                            <h:commandLink onclick = "return confirmDelete()" value ="Delete" action="#{Posting.deletePost()}">
+                                <f:param name ="throwedid" value = "#{p.id}"></f:param>
+                            </h:commandLink>
                         </h:form>
                     </p>
                 </li>
