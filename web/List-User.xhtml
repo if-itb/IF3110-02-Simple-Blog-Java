@@ -47,7 +47,7 @@
                                 <h:message styleClass="error_message" id="email_message" for="email" />
                                 <br/>
                                 <h:commandButton value="EDIT">
-                                    <f:ajax render="@form error_message user_table" listener="#{editUserBean.edit()}" execute="@form"></f:ajax>
+                                    <f:ajax render="@form error_message user_table_wrapper" listener="#{editUserBean.edit()}" execute="@form"></f:ajax>
                                 </h:commandButton>
                             </fieldset>
                         </h:form>
@@ -83,7 +83,7 @@
                                 <h:message styleClass="error_message" id="email_message" for="email" />
                                 <br/>
                                 <h:commandButton value="ADD">
-                                    <f:ajax render="@form error_message user_table" listener="#{addUserBean.add()}" execute="@form"></f:ajax>
+                                    <f:ajax render="@form error_message user_table_wrapper" listener="#{addUserBean.add()}" execute="@form"></f:ajax>
                                 </h:commandButton>
                             </fieldset>
                         </h:form>
