@@ -16,6 +16,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 
@@ -23,13 +24,24 @@ import javax.faces.bean.ViewScoped;
  *
  * @author Anggi
  */
+@ManagedBean(name = "user", eager = true)
+@ViewScoped
 public class User {
+//	@ManagedProperty(value="#{param.iduser}")
 	private int uidToDelete;
+	private int uidToUpdate;
 	private String username;
 	private String password;
 	private String role;
 	private int userID;
 	
+	public void showStatus(){
+		System.out.println("username="+username);
+		System.out.println("role="+role);
+	}
+	public int getUidToUpdate(){
+		return uidToUpdate;
+	}
 	public int getUidToDelete(){
 		return uidToDelete;
 	}
@@ -60,21 +72,44 @@ public class User {
 	public void setUidToDelete(int id){
 		this.uidToDelete = id;
 	}
-	
-	public void updateUser(){
-	
+	public void setUidToUpdate(int id){
+		this.uidToUpdate = id;
 	}
-	public String deleteUser(){
+	
+	public String updateUser(){
 		String url = "jdbc:mysql://localhost:3306/datapost";
 	   String driver = "com.mysql.jdbc.Driver";
 	   String userName = "root"; 
-	   String password = "";
+	   String passWord = "";
 		try {
 		   Class.forName(driver).newInstance();
-		   Connection conn = DriverManager.getConnection(url,userName,password);
+		   Connection conn = DriverManager.getConnection(url,userName,passWord);
+		   String insertToDB = "update user set username = ?, password = ?, role = ? where username_id = ?";
+		   PreparedStatement preparedStatement = conn.prepareStatement(insertToDB);
+		   System.out.println(this.username+" "+this.password+" "+this.role+" "+this.userID);
+		   preparedStatement.setString(1, this.username);
+		   preparedStatement.setString(2, this.password);
+		   preparedStatement.setString(3, this.role);
+		   preparedStatement.setInt(4, userID);
+		   preparedStatement.executeUpdate();
+		   conn.close();
+	   } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException e) {
+	   }
+	   return "usermanagement?faces-redirect=true";
+	}
+	
+	public String deleteUser(int id){
+		System.out.println("id to delete="+uidToDelete);
+		String url = "jdbc:mysql://localhost:3306/datapost";
+	   String driver = "com.mysql.jdbc.Driver";
+	   String userName = "root"; 
+	   String pass = "";
+		try {
+		   Class.forName(driver).newInstance();
+		   Connection conn = DriverManager.getConnection(url,userName,pass);
 		   String insertToDB = "delete from user where username_id = ?";
 		   PreparedStatement preparedStatement = conn.prepareStatement(insertToDB);
-		   preparedStatement.setInt(1,uidToDelete);
+		   preparedStatement.setInt(1,id);
 		   preparedStatement.executeUpdate();
 		   conn.close();
 		  // FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
@@ -86,10 +121,10 @@ public class User {
 		String url = "jdbc:mysql://localhost:3306/datapost";
 	   String driver = "com.mysql.jdbc.Driver";
 	   String userName = "root"; 
-	   String password = "";
+	   String pass = "";
 		try {
 		   Class.forName(driver).newInstance();
-		   Connection conn = DriverManager.getConnection(url,userName,password);
+		   Connection conn = DriverManager.getConnection(url,userName,pass);
 		   String insertToDB = "insert into user (`username`, `password`, `role`) value (?,?,?)";
 		   PreparedStatement preparedStatement = conn.prepareStatement(insertToDB);
 		   preparedStatement.setString(1, this.username);
@@ -100,5 +135,25 @@ public class User {
 	   } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException e) {
 	   }
 	   return "usermanagement?faces-redirect=true";
+	}
+	public void showUser(int id){
+		String url = "jdbc:mysql://localhost:3306/datapost";
+		String driver = "com.mysql.jdbc.Driver";
+		String userName = "root"; 
+		String pass = "";
+		 try {
+			Class.forName(driver).newInstance();
+			Connection conn = DriverManager.getConnection(url,userName,pass);
+			Statement st = conn.createStatement();
+			ResultSet res= st.executeQuery("Select * from user where username_id = "+id);
+
+			if(res.next()){
+				username=res.getString("username");
+				role = res.getString("role");
+				userID = id;
+			}
+			conn.close();
+			} catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException e) {
+			}
 	}
 }

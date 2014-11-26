@@ -10,39 +10,43 @@
     <h:head>
         <title>Simple Blog</title>
     </h:head>
-    <!--h:body onload="#{ViewPost.connectDb()}"--> 
     <h:body>
 		<div class="header"> Simple Blog </div>
-		<hr></hr>
+                        <div id="nav"> User Management | See Unpublished | Add Post | Logout   </div>
+		<div id="main">
+                    
 		<h2> List Post </h2>
-                <h:form>
-                <br/><h:commandLink action="unpublished_post" value="List of unpublished post">
+                    <hr></hr>
+		<p><br/><h:commandLink action="add_post" value="Add">
 		</h:commandLink>
-		<br/><h:commandLink action="add_post" value="Add">
-		</h:commandLink>
-                <p>
-		<c:forEach items="#{listPost.arrPostPublished}" var="pos">							
+		<c:forEach items="#{listPost.arrPostPublished}" var="pos">			
+			<h:form>				
 			<br/><h:outputText value="#{pos.IDPost}"></h:outputText> 
 			<br/><h:commandLink action="view_post" value="#{pos.title}">
 				<f:param name="idpost" value="#{pos.IDPost}" />
 			</h:commandLink>      
 			<br/><h:outputText value="#{pos.date}"></h:outputText>
 			<br/> <h:outputText value="#{pos.content}"></h:outputText>
-                        <br/><h:commandLink action="#{post.deletePost(post.IDPost)}" value="Delete" onclick="return confirm('Apakah Anda yakin menghapus post ini?');">
-				
+			<br/><h:commandLink action="#{post.deletePost()}" value="Delete" onclick="return confirm('Apakah Anda yakin menghapus post ini?');">
+				<f:param name="idpost" value="#{pos.IDPost}" />
 			</h:commandLink>
                         <br/><h:commandLink action="edit_post" value="Edit">
 				<f:param name="idpost" value="#{pos.IDPost}" />
-			</h:commandLink>	
-			<hr/>
+			</h:commandLink>
+                        <div class ="hr"><hr/></div>
+			</h:form>
 		</c:forEach>
-		</p>
-			
+                </p></div>
+		 <div id="nav">
+         <form action="Login" method="post">
+             <br/>Username : <input type = "text" name="uname"/>
+             <br/>Password : <input type ="password" name="pass"/>
+             <br/><input type="submit" value="Login"/>
+         </form></div>
 		<br/>
-		<h:commandLink action="usermanagement" value="User Management">
-		</h:commandLink> 
+		<h:form>
+		<h:commandLink action="usermanagement" value="User Management"></h:commandLink> 
 		</h:form>
-		<div class="footer">rita | cilvia | linda </div>		
+		<div id="footer">rita | cilvia | linda </div>		
     </h:body>
 </html>
-
