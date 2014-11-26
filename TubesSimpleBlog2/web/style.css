@@ -61,12 +61,11 @@ text-align: right;
 clear:both;
 }
 hr{
-    margin-left:30px;
-    width:900px;    
+    width:800px;
+    margin-left:10px;
 }
 
 p{
-    margin-left:30px;
 }
 
     #wrap {
@@ -90,5 +89,12 @@ width:150px;
 text-align:center;
 }
 
+div.hr {
+}
 
+div.hr hr {
+  width:430px;
+ opacity: 0.5;
+ margin-left:120px;
+}
     

@@ -4,26 +4,40 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
+       
+       
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
 	  xmlns:ui="http://java.sun.com/jsf/facelets"
 	  xmlns:c="http://java.sun.com/jsp/jstl/core"
 	  xmlns:f="http://xmlns.jcp.org/jsf/core">
+<link rel="stylesheet" href="style.css" type="text/css" />
     <head>
         <title>User Management</title>
         <meta name="viewport" content="width=device-width"/>
     </head>
     <body>
-		User Management
+		<div class="header">Simple Blog</div>
+		<h1>User Management</h1>
+		<h:form>
         <c:forEach items="#{userManagement.arrUser}" var="user">
-			<h:form>
-			<br/><h:outputText value="#{user.userID}"></h:outputText>      
-			<br/><h:outputText value="#{user.password}"></h:outputText>
+			<hr></hr>
+			
+				<br/><h2> #{user.userID} </h2>  
+			<br/><h:outputText value="#{user.username}"></h:outputText>
 			<br/> <h:outputText value="#{user.role}"></h:outputText>
-			</h:form>
-			<br/>=+=+=+=+=+=+=+=+=+=+=+=+=+
+			<br/><h:commandLink action="#{user.deleteUser(user.userID)}" value="Delete"></h:commandLink>
+			<br/><h:commandLink action="updateuser" value="Update">
+				<f:param name="iduser" value="#{user.userID}" />
+			</h:commandLink>
+			
 		</c:forEach>
-		<br/> <h:outputText value="#{navigationController.postId}"></h:outputText>
-    </body>
+		<br/><br/>
+                <hr/>
+                <h3><h:commandLink action="createuser" value="Create"></h:commandLink></h3>
+		</h:form>
+		<div id="footer"> rita | cilvia | linda </div>
+		
+	</body>
 </html>

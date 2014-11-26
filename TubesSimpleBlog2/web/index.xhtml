@@ -1,61 +1,63 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-    <html xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:h="http://xmlns.jcp.org/jsf/html"
-    xmlns:ui="http://java.sun.com/jsf/facelets"
-    xmlns:c="http://java.sun.com/jsp/jstl/core"
-    xmlns:f="http://xmlns.jcp.org/jsf/core">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:c="http://java.sun.com/jsp/jstl/core"
+	  xmlns:f="http://xmlns.jcp.org/jsf/core">
+	<link rel="stylesheet" href="style.css" type="text/css" />
+
     <h:head>
         <title>Simple Blog</title>
     </h:head>
-
     <h:body>
-    Simple Blog
-    <c:forEach items="#{listPost.arrPostPublished}" var="pos">
-        <h:form>
-            <br/><h:outputText value="#{pos.IDPost}"></h:outputText>
-            <br/><h:commandLink action="view_post" value="#{pos.title}">
-                <f:param name="idpost" value="#{pos.IDPost}" />
-            </h:commandLink>
-            <br/><h:outputText value="#{pos.date}"></h:outputText>
-            <br/> <h:outputText value="#{pos.content}"></h:outputText>
-            <br/><h:commandLink action="#{post.deletePost()}" value="Delete" onclick="return confirm('Apakah Anda yakin menghapus post ini?');">
-                <f:param name="idpost" value="#{pos.IDPost}" />
-            </h:commandLink>
-        </h:form>
-        <br/>=+=+=+=+=+=+=+=+=+=+=+=+=+
-    </c:forEach>
-    
-    <h:form>
-            <br/><h:outputText value="#{pos.IDPost}"></h:outputText>
-            <br/><h:commandLink action="view_post" value="#{pos.title}">
-                <f:param name="idpost" value="#{pos.IDPost}" />
-            </h:commandLink>
-            <br/><h:outputText value="#{pos.date}"></h:outputText>
-            <br/> <h:outputText value="#{pos.content}"></h:outputText>
-            <br/><h:commandLink action="#{post.deletePost()}" value="Delete" onclick="return confirm('Apakah Anda yakin menghapus post ini?');">
-                <f:param name="idpost" value="#{pos.IDPost}" />
-            </h:commandLink>
-    </h:form>
-    
-    <h:form>
-    <br/><h:commandLink action="usermanagement" value="User Management">
-    </h:commandLink>
-    </h:form>
-          <h:form>
-    	
-    		<h:inputText id="name" value="#{komentar.nama}"></h:inputText>
-    		<h:inputText id="email" value="#{komentar.email}"></h:inputText>
-                <h:inputText id="koment" value="#{komentar.komentar}"></h:inputText>  
-                <h:commandButton value="Add my comment">
-    			 <f:ajax execute="name" render="output" />
-                          <f:ajax execute="email" render="output2" />
-                          <f:ajax execute="koment" render="output3" />
-    		</h:commandButton>  		
-    		<h2><h:outputText id="output" value="#{komentar.nama}" /></h2>
-                <h:outputText id="output2" value="#{komentar.email}" /><br/>
-                <h:outputText id="output3" value="#{komentar.komentar}" />
-    		
-    	</h:form>
+		<div class="header"> Simple Blog </div>
+                        <div id="nav"> User Management | See Unpublished | Add Post | Logout   </div>
+		<div id="main">
+                    
+		<h2> List Post </h2>
+                    <hr></hr>
+		<p>
+		<h:form>
+		#{user.showStatus()}
+		<!--<br/><h:outputText value="#{param['thisuser']}"></h:outputText> 
+		<br/><h:outputText value="#{param['thisrole']}"></h:outputText>-->
+		<br/><h:commandLink action="index" value="Rita Admin">
+			#{user.setUsername("rita")}
+			#{user.setUsername("admin")}
+		</h:commandLink>
+		<br/><h:commandLink action="index" value="Misae Owner">
+			#{user.setUsername("misae")}
+			#{user.setUsername("owner")}
+		</h:commandLink>
+		<br/>Halo	<h:outputText value="#{user.username}"></h:outputText> 
+		<br/>Kamu <h:outputText value="#{user.role}"></h:outputText>
+		</h:form>
+		<c:forEach items="#{listPost.arrPostPublished}" var="pos">			
+			<h:form>				
+			<br/><h:outputText value="#{pos.IDPost}"></h:outputText> 
+			<br/><h:commandLink action="view_post" value="#{pos.title}">
+				<f:param name="idpost" value="#{pos.IDPost}" />
+			</h:commandLink>      
+			<br/><h:outputText value="#{pos.date}"></h:outputText>
+			<br/> <h:outputText value="#{pos.content}"></h:outputText>
+			<br/><h:commandLink action="#{post.deletePost()}" value="Delete" onclick="return confirm('Apakah Anda yakin menghapus post ini?');">
+				<f:param name="idpost" value="#{pos.IDPost}" />
+			</h:commandLink>
+                        <div class ="hr"><hr/></div>
+			</h:form>
+		</c:forEach>
+                </p></div>
+		 <div id="nav">
+         <form action="Login" method="post">
+             <br/>Username : <input type = "text" name="uname"/>
+             <br/>Password : <input type ="password" name="pass"/>
+             <br/><input type="submit" value="Login"/>
+         </form></div>
+		<br/>
+		<h:form>
+		<h:commandLink action="usermanagement" value="User Management"></h:commandLink> 
+		</h:form>
+		<div id="footer">rita | cilvia | linda </div>		
     </h:body>
 </html>
