@@ -5,6 +5,9 @@
  */
 package model;
 
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+
 /**
  *
  * @author calvin-pc
@@ -26,8 +29,10 @@ public class LoginBean {
         // TODO  Sinkronisasi dengan database
         NavigationController nb = new NavigationController();
         UserBean finded = DAO.DAOFactory.getInstance("javabase.jdbc").getUserDAO().find(username);
-        if (!finded.getPassword().equals(password) || finded == null) {
-            return nb.gotoLogin() + "?faces-redirect=true";
+        if (finded == null || !finded.getPassword().equals(password)) {
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage("Username atau Password salah"));
+            return nb.gotoLogin() ;
         }
         else {
             user.setUsername(finded.getUsername());
