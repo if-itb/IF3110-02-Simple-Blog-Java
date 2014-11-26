@@ -112,6 +112,12 @@
                     </h:column>
                     <h:column>
                         <f:facet name="header">
+                            <h:outputText value="Email" />
+                        </f:facet>
+                        <h:outputText value="#{user.email}" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
                             <h:outputText value="Edit" />
                         </f:facet>
                         <h:commandButton value="edit #{user.username}">
@@ -123,11 +129,14 @@
                         <f:facet name="header">
                             <h:outputText value="Delete" />
                         </f:facet>
-                        <h:outputText value="#{user.roleName}" />
+                        <h:commandButton value="delete #{user.username}">
+                            <f:ajax listener="#{deleteUserBean.delete(user.username)}" render="user_table">
+                            </f:ajax>
+                        </h:commandButton>
                     </h:column>
                 </h:dataTable>
             </ui:define>
-        </ui:composition>>
+        </ui:composition>
     </h:body>
 </f:view>
 </html>
