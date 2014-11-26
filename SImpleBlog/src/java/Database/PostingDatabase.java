@@ -7,13 +7,8 @@
 package Database;
 
 import Login.Login;
-import static com.sun.corba.se.spi.presentation.rmi.StubAdapter.request;
-import com.sun.faces.context.RequestParameterMap;
 import java.io.IOException;
-import java.io.Serializable;
-import static java.lang.System.out;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -26,7 +21,6 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
-import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.Cookie;
@@ -41,15 +35,36 @@ import javax.servlet.http.HttpServletRequest;
 public class PostingDatabase {
     
     Login login;
+    String SelectedItem;
+    
     @ManagedProperty(value ="#{param.throwedid}")
     private int id;
+    
+    @ManagedProperty(value="#{param.throwediduser}")
+    private String username;
 
+    public String getSelectedItem() {
+        return SelectedItem;
+    }
+
+    public void setSelectedItem(String SelectedItem) {
+        this.SelectedItem = SelectedItem;
+    }
+    
     public int getId() {
         return id;
     }
 
     public void setId(int id) {
         this.id = id;
+    }
+    
+    public String getUsername(){
+        return username;
+    }
+    
+    public void setUsername(String username){
+        this.username = username;
     }
     
     public PostingDatabase(){
@@ -162,12 +177,11 @@ public class PostingDatabase {
           String query = "Update post Set status=\"deleted\" WHERE ID="+id;
           int rs;
           rs = stmt.executeUpdate(query);
-          PreparedStatement ps;
           ExternalContext extcon = FacesContext.getCurrentInstance().getExternalContext();
           extcon.redirect("/SImpleBlog/Home.xhtml");
     }
     
-     public void PublishPost() throws ClassNotFoundException, SQLException, IOException, ParseException{
+    public void PublishPost() throws ClassNotFoundException, SQLException, IOException, ParseException{
           Connection con = makeConnection();
           Statement stmt = con.createStatement();
           String query = "Update post Set status=\"published\" WHERE ID="+id;
@@ -273,6 +287,7 @@ public class PostingDatabase {
         while(rs.next()){
             activeUser = rs.getString("Name");
          }
+        con.close();
         return activeUser;
     }
     
@@ -290,7 +305,6 @@ public class PostingDatabase {
         while(rs.next()){
             activeUsername = rs.getString("Username");
          }
-        System.out.println("THISSSSSSS IS SSSSSSS"+activeUsername);
         return activeUsername;
     }
     
@@ -307,6 +321,7 @@ public class PostingDatabase {
         while(rs.next()){
             UserRole = rs.getString("Role");
          }
+        con.close();
         return UserRole;
     }
     
@@ -334,12 +349,12 @@ public class PostingDatabase {
         while(rs.next()){
             activeUserEmail = rs.getString("email");
          }
+        con.close();
         return activeUserEmail;
     }
     
-    public void CheckAdminRole() throws ClassNotFoundException, SQLException, IOException{
+    public void checkAdminRole() throws ClassNotFoundException, SQLException, IOException{
         ExternalContext extCont = FacesContext.getCurrentInstance().getExternalContext();
-        System.out.println("ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ");
         if(getLoginState())
         {
             Cookie cUsername = login.getUserCookie();
@@ -478,6 +493,40 @@ public class PostingDatabase {
               user.setRole(rs.getString(5));
               records.add(user);
         }
+        con.close();
         return records;
     }
+    
+    public void setInsertNewUser() throws ClassNotFoundException, SQLException{
+        HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        String Name = request.getParameter("Name");
+        String Username = request.getParameter("Username");
+        String Email = request.getParameter("Email");
+        String Password = request.getParameter("Password");
+        String Role = SelectedItem;
+        
+        try (Connection con = makeConnection()) {
+            PreparedStatement ps;
+            String query = "INSERT INTO `user` (`Username`,`Password`, `Name`, `email`, `Role`) VALUES (?,?,?,?,?)";
+            ps= con.prepareStatement(query);
+            ps.setString(1,Username);
+            ps.setString(2,Password);
+            ps.setString(3,Name);
+            ps.setString(4,Email);
+            ps.setString(5,Role);
+            int i = ps.executeUpdate();
+        }
+    }
+    
+    public void setDeleteUser() throws ClassNotFoundException, SQLException{
+        System.out.println("username si huang: " + username);
+        Connection con = makeConnection();
+        Statement stmt = con.createStatement();
+        String query = "Delete from user where username=\"" + username + "\";";
+        System.out.println("query : " + query);
+        int rs;
+        rs = stmt.executeUpdate(query);
+        PreparedStatement ps;
+    }
+    
 }
