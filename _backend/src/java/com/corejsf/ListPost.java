@@ -50,7 +50,7 @@ public class ListPost {
     }
     
     public ArrayList<Post> getPosts(){
-        return posts;
+        return this.posts;
     }
     
 }
