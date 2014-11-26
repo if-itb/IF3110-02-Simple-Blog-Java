@@ -54,4 +54,16 @@ public class NavigationController implements Serializable{
     public String gotoViewPost(int post_id) {
         return "View-Post.xhtml?id=" + post_id;
     }
+    
+    public String gotoEditPost() {
+        return "Edit-Post.xhtml";
+    }
+    
+    public String gotoDeletePost() {
+        return "Delete-Post.xhtml";
+    }
+    
+    public String gotoViewPost() {
+        return "View-Post.xhtml";
+    }
 }

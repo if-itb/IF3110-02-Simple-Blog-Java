@@ -125,16 +125,17 @@ public class AuthenticationFilter implements Filter {
             reqURI = reqURI.substring(reqURI.indexOf("/faces/")+"/faces/".length());
             if ( reqURI.startsWith(nc.gotoLogin())
                     || reqURI.startsWith(nc.gotoListPost())
-                    || reqURI.startsWith("css/"))
+                    || reqURI.startsWith("css/")
+                    || reqURI.startsWith(nc.gotoViewPost()))
                    chain.doFilter(request, response);
             else if ((user.getRole() == UserBean.getOwner())
-                        && (reqURI.startsWith(nc.gotoEditPost(1))
+                        && (reqURI.startsWith(nc.gotoEditPost())
                             || reqURI.startsWith(nc.gotoAddPost())
                         )
                     )
                 chain.doFilter(request, response);
             else if ((user.getRole() == UserBean.getEditor())
-                        && (reqURI.startsWith(nc.gotoEditPost(1))
+                        && (reqURI.startsWith(nc.gotoEditPost())
                             || reqURI.startsWith(nc.gotoUnpublishedPost())
                         )
                     )
