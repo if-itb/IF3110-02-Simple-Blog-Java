@@ -13,6 +13,7 @@ and open the template in the editor.
     <h:head>
         <title>Home Page</title>
         <meta name="viewport" content="width=device-width"/>
+        <link rel ="stylesheet" type="text/css" href="#{facesContext.externalContext.requestContextPath}/resources/style.css" />
     </h:head>
     <h:body> 
         <h1>Unpublished Posts</h1>
@@ -38,5 +39,5 @@ and open the template in the editor.
             <a style="display:#{item.publishButton(user.type)}" href="Publish_Post.xhtml?pid=#{item.id_post}">Publish</a>
         </ui:repeat>
     </h:body> 
-    <script src="#{facesContext.externalContext.requestContextPath}/deletor.js" type="text/javascript"></script>
+    <script src="#{facesContext.externalContext.requestContextPath}/resources/js/deletor.js" type="text/javascript"></script>
 </html>

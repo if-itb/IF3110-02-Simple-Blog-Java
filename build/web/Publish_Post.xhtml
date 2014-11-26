@@ -8,13 +8,16 @@
     <h:head>
         <title>Publish Post</title>
         <meta name="viewport" content="width=device-width"/>
+        <link rel ="stylesheet" type="text/css" href="#{facesContext.externalContext.requestContextPath}/resources/style.css" />
     </h:head>
     <h:body>
+        
         #{post.copy(dbconnector.selectPost(param['pid']))}
         <h:form>
             <h:outputText value="Publish pos ini?" /><br />
             <h:commandButton id="add" value="Publish" action="#{dbconnector.publishPost(user,post)}"/><br/>
             <br/>
         </h:form>
+
     </h:body>
 </html>
