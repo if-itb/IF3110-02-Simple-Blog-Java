@@ -34,7 +34,12 @@ public class EditUserBean {
     }
     
     public void edit() {
-        // TODO sambungi ke database
-        
+        DAO.UserDAO DB = DAO.DAOFactory.getInstance("javabase.jdbc").getUserDAO();
+        if (DB.find(edited.getUsername()) == null) {
+            // TODO sambungin dengan error message
+        }
+        else {
+            DB.update(edited);
+        }
     }
 }

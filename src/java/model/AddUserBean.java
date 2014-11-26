@@ -34,6 +34,12 @@ public class AddUserBean {
     }
     
     public void add() {
-        // TODO Sambungin ke database
+        DAO.UserDAO DB = DAO.DAOFactory.getInstance("javabase.jdbc").getUserDAO();
+        if (DB.find(user.getUsername()) != null) {
+            // TODO sambungin dengan error message
+        }
+        else {
+            DB.create(user);
+        }
     }
 }
