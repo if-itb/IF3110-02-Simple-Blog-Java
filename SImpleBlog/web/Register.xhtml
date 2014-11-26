@@ -9,8 +9,9 @@ and open the template in the editor.
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <head>
-        <link type="text/css" rel="stylesheet" href="assets\screen.css"/>
         <title>Owner's Simple Blog</title>
+        <link type="text/css" rel="stylesheet" href="assets/screen.css"/>
+        <script type="text/javascript" src="assets/ajax.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </head>
     <h:body class="default">
@@ -32,23 +33,24 @@ and open the template in the editor.
 
                         <div id="contact-area">
                             <!--form action="#" method="post">-->
-                            <h:form>
+                            <h:form id="Form" onsubmit="return IsEmailValidForRegistry()">
+                                <h:message for="Username" class="usernameAlert"/>
                                 <label for="Name">Name:</label>
-                                <input type="text" name="Name" id="Name" required="required"/>
+                                <h:inputText id="Name" label="Name"/>
 
                                 <label for="Username">Username:</label>
-                                <input type="text" name="Username" id="Username" required="required"/>
+                                <h:inputText id="Username" label="Username">
+                                    <f:validator validatorId="RegisterValidator" />
+                                </h:inputText>
 
                                 <label for="Email">Email:</label>
-                                <input type="text" name="Email" id="Email" required="required"/>
+                                <h:inputText id="Email" label="Email" class="Email"/>
                                 
                                 <label for="Password">Password:</label>
-                                <input type="password" name="Password" id="Password" required="required"/>
+                                <h:inputSecret id="Password" label="Password"/>
 
-<!--                                <label for="Re-Password">Retype:</label>
-                                <input type="password" name="Re-Password" id="Re-Password" required="required"/>-->
                                 <br/><br/>
-                                <h:commandButton value="Register" class="submit-button" action="#{Posting.addUserOwner}" />
+                                <h:commandButton type="submit" value="Register" class="submit-button" action="#{UserRegistry.addUserOwner()}"/>
                             </h:form>
                         </div>
                     </div>

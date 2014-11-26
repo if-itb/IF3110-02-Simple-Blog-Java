@@ -177,29 +177,7 @@ public class PostingDatabase {
             ExternalContext extcon = FacesContext.getCurrentInstance().getExternalContext();
             extcon.redirect("/SImpleBlog/Home.xhtml");
     }
-    
-    public String addUserOwner() throws ClassNotFoundException, SQLException{
-        
-        HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
-        String Name = request.getParameter("Name");
-        String Username = request.getParameter("Username");
-        String Email = request.getParameter("Email");
-        String Password = request.getParameter("Password");
-        
-        try (Connection con = makeConnection()) {
-            PreparedStatement ps;
-            String query = "INSERT INTO `user` (`Username`,`Password`, `Name`, `email`, `Role`) VALUES (?,?,?,?,?)";
-            ps= con.prepareStatement(query);
-            ps.setString(1,Username);
-            ps.setString(2,Password);
-            ps.setString(3,Name);
-            ps.setString(4,Email);
-            ps.setString(5,"Owner");
-            int i = ps.executeUpdate();
-        }
-        return "/SImpleBlog/Home.xhtml";
-    }
-    
+       
     public void setLoginOnLoad() throws ClassNotFoundException, SQLException, IOException{
         ExternalContext extCont = FacesContext.getCurrentInstance().getExternalContext();
         Cookie cUsername = login.getUserCookie();

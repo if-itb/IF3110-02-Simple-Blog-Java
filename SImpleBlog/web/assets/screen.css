@@ -120,7 +120,7 @@ cite {
   }
 
 span{
-  color: #F40034 !important;
+    color: red !important;
   }
  
 /* Teaser
@@ -889,6 +889,7 @@ hr.featured-article:after {
   position: relative;
   float: right;
   height: 400px;
+  text-align: center;
 }
 
 #contact-area2 {
@@ -1010,4 +1011,15 @@ label {
 #customers tr.alt td {
     color: #000000;
     background-color: #EAF2D3;
+}
+
+#checkusername{
+    color: #F40034;
+    font-size: 18px;
+}
+
+.usernameAlert{
+    position: absolute;
+    top: -39px;
+    font-size: 17px;
 }
