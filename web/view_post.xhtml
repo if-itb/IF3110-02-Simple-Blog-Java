@@ -8,7 +8,6 @@
         <title>View Page</title>
 		<h:outputStylesheet library="css" name="mystyle.css"></h:outputStylesheet>
     </h:head>
-	
     <h:body>
         <div class="wrapper">
 			<div class="top">
@@ -32,7 +31,9 @@
 						<h:outputText id="title" value="#{postsController.getPost(viewpostid.value).title}" /><br></br>
 					</div>
 					<div class="tanggalpost">
-						<h:outputText id="date" value="#{postsController.getPost(viewpostid.value).date}" />
+						<h:outputText id="date" value="#{postsController.getPost(viewpostid.value).date}">
+							<f:convertDateTime type="date" dateStyle="long" timeZone="GMT+7"/>
+						</h:outputText>
 					</div>
 					<div class="isipost">
 						<h:outputText id="content" value="#{postsController.getPost(viewpostid.value).content}" />
@@ -71,7 +72,9 @@
 										<b><h:outputText value="#{comment.name}" binding="#{commentname}" ></h:outputText></b>
 									</div>
 									<div class="komentartime">
-										<h:outputText value="#{comment.date}" binding="#{commentdate}" ></h:outputText>
+										<h:outputText value="#{comment.date}" binding="#{commentdate}" >
+											<f:convertDateTime type="date" dateStyle="long" timeZone="GMT+7"/>
+										</h:outputText>
 									</div>
 								</div>
 								
