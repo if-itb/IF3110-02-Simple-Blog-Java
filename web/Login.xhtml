@@ -12,18 +12,28 @@
     <h:body>
         <ui:composition template="template/basis.xhtml">
             <ui:define name="content">
-                <h:form id="loginForm">
-                    <h2>#{userBean.roleName}</h2>
-                    Username: <h:inputText id="username" value="#{loginBean.username}">
-                        <f:validator validatorId="usernameValidator" for="username"/>
-                                </h:inputText>
-                    <h:message for="username" style="color:red" />
-                    <br />
-                    Password: <h:inputText id="password" value="#{loginBean.password}" />
-                    <br/>
-                    <h:commandButton id="loginButton" value="Login" 
-                                    action="#{loginBean.login()}" 
-                    />
+                <h:form id="loginForm" styleClass="pure-form">
+                    <fieldset>
+                        <legend>Login</legend>
+                        <label>Username</label>
+                        <br />
+                        <h:inputText id="username" value="#{loginBean.username}">
+                            <f:validator validatorId="usernameValidator" for="username"/>
+                        </h:inputText>
+                        <h:message for="username" style="color:red" />
+                        <br />
+                        <label>Password</label>
+                        <br />
+                        <h:inputText id="password" value="#{loginBean.password}">
+                            <f:validator validatorId="passwordValidator" for="password"/>
+                        </h:inputText>
+                        <h:message for="password" style="color:red" />
+                        <br/>
+                        <h:commandButton id="loginButton" value="Login" 
+                                        action="#{loginBean.login()}" 
+                        />
+                    </fieldset>
+                    <h:messages globalOnly="true"></h:messages>
                 </h:form>
                 <p> Untuk sementara hanya admin yang bisa akses semua page,
                     role number admin = 2 </p>
