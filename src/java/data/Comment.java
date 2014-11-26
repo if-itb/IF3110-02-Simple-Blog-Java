@@ -11,9 +11,9 @@ package data;
  * @author user
  */
 public class Comment {
-    private int comment_id; // sets by SQL
-    private String comment_date; // sets by connector.java
-    private String comment_content; 
+    private int comment_id;
+    private String comment_date;
+    private String comment_content;
     private int comment_post_id;
     private String comment_email;
     private int comment_user_id;
