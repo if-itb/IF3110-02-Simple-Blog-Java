@@ -1,7 +1,6 @@
 package controller;
 
 import javax.faces.bean.ManagedBean;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -17,7 +16,8 @@ public class EditUser {
 	private String user_password;
 	private String user_name;
 	private String user_email;
-	private int user_role;
+	private String user_strRole;
+	private int user_role;	
 
 	public int getId() {
 		return user_id;
@@ -35,6 +35,14 @@ public class EditUser {
 		user_username = username;
 	}
 
+	public void setStrRole(String str) {
+		user_strRole = str;
+	}
+
+	public String getStrRole() {
+		return user_strRole;
+	}
+	
 	public String getPassword() {
 		return user_password;
 	}
@@ -65,6 +73,12 @@ public class EditUser {
 
 	public void setRole(int role) {
 		user_role = role;
+	}
+	
+	public void StrtoIntRole() {
+		if (this.user_strRole=="Regular") user_role=10;
+		else if (this.user_strRole=="Editor") user_role=20;
+		else if (this.user_strRole=="Admin") user_role=30;
 	}
 
 	public void addUser() {
@@ -141,44 +155,47 @@ public class EditUser {
 		dbUtil.execute(query);
 	}
 	
-	public void updateUser(int i) {
-		DatabaseUtility dbUtil = DatabaseUtility.getInstance();
-		String un="select * from user where id = " + i;
-		ResultSet rs = dbUtil.execute(un);
-		try {
-			String username_temp= rs.getString(2);
-			String password_temp= rs.getString(3);
-			String query = "UPDATE user SET username = '"
-					+ username_temp
-					+ "', set password = '"	
-					+ password_temp
-					+"', set nama ='"
-					+ this.getName()
-					+"', set email ='"
-					+ this.getEmail()
-					+"', set role = "
-					+this.getRole()
-					+ "WHERE id = " + i;
-			System.out.println(query);
-			dbUtil.execute(query);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			System.err.println(e);
-			System.exit(30);			
-		}				
+	public void Initialize(){
 		
-		/*String query = "INSERT INTO user (username, password, nama, email, role) "
-				+ "VALUES ('"
+	}
+	
+	/*public String execute() {
+		if(post!=null){
+			DatabaseUtility dbUtil = DatabaseUtility.getInstance();
+			
+			@SuppressWarnings("deprecation")
+			String date = ""+(1900+post.getDate().getYear())+"/"+(post.getDate().getMonth()+1)+"/"+post.getDate().getDate();
+			
+			String inTitle = DatabaseUtility.forHTML(post.getTitle());
+			String inContent = DatabaseUtility.forHTML(post.getContent());
+			
+			String query = "UPDATE post SET judul ='"+ inTitle+ 
+					"', isi ='"+ inContent +"', waktu = '"+date+"' WHERE id = "+ post.getId();
+			
+			System.out.println(query);
+			
+			dbUtil.execute(query);
+		}
+		return "index";
+	}
+	*/
+	
+	public String updateUser(){
+		DatabaseUtility dbUtil = DatabaseUtility.getInstance();
+		String query = "UPDATE user SET username = '"
 				+ this.getUsername()
-				+ "','"
+				+ "', password = '"	
 				+ this.getPassword()
-				+ "','"
+				+"', nama ='"
 				+ this.getName()
-				+ "',"
-				+ "'"
+				+"', email ='"
 				+ this.getEmail()
-				+ "'"
-				+ "," + this.getRole() + ")";*/
+				+"', role = "
+				+this.getRole()
+				+ " WHERE id = " + this.getId();
+		System.out.println(query);
+		dbUtil.execute(query);
+		return "index";
 	}
 	
 }
