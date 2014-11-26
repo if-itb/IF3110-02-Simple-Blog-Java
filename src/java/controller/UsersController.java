@@ -70,6 +70,15 @@ public class UsersController implements Serializable {
 		this.active_role = active_role;
 	}
 
+	public String getUsername() {
+		String userCookie = getCookie("username");
+		if (userCookie != null) {
+			return userCookie;
+		}
+		
+		return "guest";
+	}
+	
 	public boolean isAdmin() {
 		String roleCookie = getCookie("role");
 		if (roleCookie != null) {
@@ -95,6 +104,11 @@ public class UsersController implements Serializable {
 		}
 		
 		return false;
+	}
+	
+	public boolean isLogin() {
+		String roleCookie = getCookie("role");
+		return roleCookie != null;
 	}
 	
 	public void createUser(String username, String password, String role) throws IOException {

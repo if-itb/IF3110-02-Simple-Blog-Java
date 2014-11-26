@@ -5,48 +5,46 @@
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
         <title>Edit Page</title>
-	<h:outputStylesheet library="css" name="mystyle.css"></h:outputStylesheet>
+		<h:outputStylesheet library="css" name="mystyle.css"></h:outputStylesheet>
     </h:head>
+	
     <h:body>        
         <div class="wrapper">
             <div class="top">
-                <h:form>
-                <div class="title">                    
-                    <h:commandLink action="index">SIMPLE<blue>-</blue>BLOG</h:commandLink> 
-                    <div class="signin">
-                        <hide1><a href="#">username</a></hide1>
-                        <hide2><h:commandLink action="index">logout</h:commandLink></hide2>                        
-                        <h:commandLink action="index"><h:graphicImage name="img/user1.png" height="30px"></h:graphicImage></h:commandLink>   
-                    </div>           
+                <div class="title">      
+					<h:form>              
+						<h:commandLink action="index">SIMPLE<blue>-</blue>BLOG</h:commandLink>
+						<div class="signin">
+							<hide1><h:outputText value="#{usersController.username}"></h:outputText></hide1>
+							<hide2><h:commandLink action="#{usersController.logout()}" rendered="#{usersController.login}">logout</h:commandLink></hide2>
+							<hide2><h:commandLink action="login_user" rendered="#{!usersController.login}">login</h:commandLink></hide2>
+							<h:graphicImage name="img/user1.png" height="30px"></h:graphicImage>
+						</div>
+					</h:form>     
                 </div>
-                </h:form>
             </div><!--end top-->
             <hr  margin-right="30%"></hr>
             
             <div class="content">
                 <h:form>
-                <h:messages style="color:red;" />
-                <h:inputHidden value="#{usersController.active_id}" binding="#{edituserid}"></h:inputHidden>
-                <div class="forms">
-                    <blue><b>Edit User</b></blue> <br></br><br></br>
-                    <form action="manageuser.html">
-                        <div class="textfield">
-                            username :&nbsp;<h:inputText id="username" value="#{usersController.active_username}" binding="#{editusername}" required="true" requiredMessage="Please enter a username"></h:inputText><br></br>
-                            password :&nbsp;<h:inputSecret id="password" value="#{usersController.active_password}" binding="#{edituserpassword}" required="true" requiredMessage="Please enter a password"></h:inputSecret><br></br>
-                            role &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:
-                            <h:inputTextarea id="role" value="#{usersController.active_role}" binding="#{edituserrole}" required="true" requiredMessage="Please enter a role" />
-                            <br></br><br></br>
-                        </div>
-                        <h:commandButton action="#{usersController.updateUser(edituserid.value, editusername.value, edituserpassword.value, edituserrole.value)}" value="Update" ></h:commandButton>
-                    </form>
-                </div>
+					<h:messages style="color:red;" />
+					<h:inputHidden value="#{usersController.active_id}" binding="#{edituserid}"></h:inputHidden>
+					<div class="forms">
+						<blue><b>Edit User</b></blue>
+						<br /><br />
+						<div class="textfield">
+							username : <h:inputText id="username" value="#{usersController.active_username}" binding="#{editusername}" required="true" requiredMessage="Please enter a username"></h:inputText>
+							<br /><br />
+							password : <h:inputSecret id="password" value="#{usersController.active_password}" binding="#{edituserpassword}" required="true" requiredMessage="Please enter a password"></h:inputSecret>
+							<br /><br />
+							role : <h:inputText id="role" value="#{usersController.active_role}" binding="#{edituserrole}" required="true" requiredMessage="Please enter a role" />
+							<br /><br />
+							<h:commandButton action="#{usersController.updateUser(edituserid.value, editusername.value, edituserpassword.value, edituserrole.value)}" value="Update" ></h:commandButton>
+						</div>
+					</div>
                 </h:form>
-            </div> <!-- end content -->
-<!--
-            <div class="footer">
-                <hr></hr>
-                footer
-            </div>-->
+            </div>
+			
         </div> <!-- end wrapper -->		
     </h:body>
 </html>

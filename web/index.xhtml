@@ -14,11 +14,12 @@
             <div class="top">
                 <div class="title">
 					<h:form>
-						<h:commandLink action="index">SIMPLE<blue>-</blue>BLOG</h:commandLink>                    
+						<h:commandLink action="index">SIMPLE<blue>-</blue>BLOG</h:commandLink>
 						<div class="signin">
-							<hide1><a href="#">username</a></hide1>
-							<hide2><h:commandLink action="index">logout</h:commandLink></hide2>                      
-							<h:commandLink action="index"><h:graphicImage name="img/user1.png" height="30px"></h:graphicImage></h:commandLink>
+							<hide1><h:outputText value="#{usersController.username}"></h:outputText></hide1>
+							<hide2><h:commandLink action="#{usersController.logout()}" rendered="#{usersController.login}">logout</h:commandLink></hide2>
+							<hide2><h:commandLink action="login_user" rendered="#{!usersController.login}">login</h:commandLink></hide2>
+							<h:graphicImage name="img/user1.png" height="30px"></h:graphicImage>
 						</div>
 					</h:form>
                 </div>
@@ -26,10 +27,10 @@
             <hr  margin-right="30%" />
             <div class="icon">
                 <h:form>
-                    <h:commandLink action="create_post" rendered="#{usersController.isOwner() || usersController.isAdmin()}"><h:graphicImage name="img/add1.png" height="30px" title="add new post"></h:graphicImage></h:commandLink>
-                    <h:commandLink action="restore_post"><h:graphicImage name="img/restore1.png" height="30px" title="restore post"></h:graphicImage></h:commandLink>
-                    <h:commandLink action="publish_post"><h:graphicImage name="img/hide1.png" height="30px" title="unpublished post"></h:graphicImage></h:commandLink>
-                    <h:commandLink action="view_user"><h:graphicImage name="img/adduser1.png" height="30px" title="manage users"></h:graphicImage></h:commandLink>
+                    <h:commandLink action="create_post" rendered="#{usersController.owner || usersController.admin}"><h:graphicImage name="img/add1.png" height="30px" title="add new post"></h:graphicImage></h:commandLink>
+                    <h:commandLink action="restore_post" rendered="#{usersController.admin}"><h:graphicImage name="img/restore1.png" height="30px" title="restore post"></h:graphicImage></h:commandLink>
+                    <h:commandLink action="publish_post" rendered="#{usersController.editor || usersController.admin}"><h:graphicImage name="img/hide1.png" height="30px" title="unpublished post"></h:graphicImage></h:commandLink>
+                    <h:commandLink action="view_user" rendered="#{usersController.admin}"><h:graphicImage name="img/adduser1.png" height="30px" title="manage users"></h:graphicImage></h:commandLink>
                 </h:form>
             </div>
             <div class="content">
@@ -63,13 +64,6 @@
                 <div class="clear"></div>
             </div>
 			
-			<!-- end content -->
-			<div class="footer">
-                <hr />
-				Chrestella Stephanie <blue>-</blue> 13512005<br />
-				Christ Angga Saputra <blue>-</blue> 13512019<br />
-				Willy <blue>-</blue> 13512065<br />
-            </div>
         </div>
 		<!-- end wrapper -->
     </h:body>
