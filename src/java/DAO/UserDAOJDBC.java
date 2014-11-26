@@ -26,22 +26,16 @@ public class UserDAOJDBC implements UserDAO {
     
     // Constants ----------------------------------------------------------------------------------
 
-    private static final String SQL_FIND_BY_ID =
-        "SELECT id, email, firstname, lastname, birthdate FROM User WHERE id = ?";
-    private static final String SQL_FIND_BY_EMAIL_AND_PASSWORD =
-        "SELECT id, email, firstname, lastname, birthdate FROM User WHERE email = ? AND password = MD5(?)";
-    private static final String SQL_LIST_ORDER_BY_ID =
-        "SELECT id, email, firstname, lastname, birthdate FROM User ORDER BY id";
+    private static final String SQL_FIND_BY_NAME =
+        "SELECT * FROM user WHERE username = ?";
+    private static final String SQL_LIST_ORDER_BY_NAME=
+        "SELECT * FROM User ORDER BY username";
     private static final String SQL_INSERT =
-        "INSERT INTO User (email, password, firstname, lastname, birthdate) VALUES (?, MD5(?), ?, ?, ?)";
+        "INSERT INTO User (username, password, role, email) VALUES (?, ?, ?, ?)";
     private static final String SQL_UPDATE =
-        "UPDATE User SET email = ?, firstname = ?, lastname = ?, birthdate = ? WHERE id = ?";
+        "UPDATE User SET password = ?, role = ?, email =? WHERE username = ?";
     private static final String SQL_DELETE =
-        "DELETE FROM User WHERE id = ?";
-    private static final String SQL_EXIST_EMAIL =
-        "SELECT id FROM User WHERE email = ?";
-    private static final String SQL_CHANGE_PASSWORD =
-        "UPDATE User SET password = MD5(?) WHERE id = ?";
+        "DELETE FROM User WHERE username = ?";
 
     // Vars ---------------------------------------------------------------------------------------
 
@@ -61,13 +55,8 @@ public class UserDAOJDBC implements UserDAO {
     // Actions ------------------------------------------------------------------------------------
 
     @Override
-    public UserBean find(Long id) throws DAOException {
-        return find(SQL_FIND_BY_ID, id);
-    }
-
-    @Override
-    public UserBean find(String email, String password) throws DAOException {
-        return find(SQL_FIND_BY_EMAIL_AND_PASSWORD, email, password);
+    public UserBean find(String username) throws DAOException {
+        return find(SQL_FIND_BY_NAME, username);
     }
 
     /**
@@ -87,6 +76,7 @@ public class UserDAOJDBC implements UserDAO {
             connection = daoFactory.getConnection();
             preparedStatement = prepareStatement(connection, sql, false, values);
             resultSet = preparedStatement.executeQuery();
+            
             if (resultSet.next()) {
                 user = map(resultSet);
             }
@@ -108,7 +98,7 @@ public class UserDAOJDBC implements UserDAO {
 
         try {
             connection = daoFactory.getConnection();
-            preparedStatement = connection.prepareStatement(SQL_LIST_ORDER_BY_ID);
+            preparedStatement = connection.prepareStatement(SQL_LIST_ORDER_BY_NAME);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 users.add(map(resultSet));
@@ -124,16 +114,15 @@ public class UserDAOJDBC implements UserDAO {
 
     @Override
     public void create(UserBean user) throws IllegalArgumentException, DAOException {
-        if (user.getId() != null) {
+        if (user.getUsername()!= null) {
             throw new IllegalArgumentException("User is already created, the user ID is not null.");
         }
 
         Object[] values = {
-            user.getEmail(),
+            user.getUsername(),
             user.getPassword(),
-            user.getFirstname(),
-            user.getLastname(),
-            toSqlDate(user.getBirthdate())
+            user.getRole(),
+            user.getEmail()
         };
 
         Connection connection = null;
@@ -147,12 +136,6 @@ public class UserDAOJDBC implements UserDAO {
             if (affectedRows == 0) {
                 throw new DAOException("Creating user failed, no rows affected.");
             }
-            generatedKeys = preparedStatement.getGeneratedKeys();
-            if (generatedKeys.next()) {
-                user.setId(generatedKeys.getLong(1));
-            } else {
-                throw new DAOException("Creating user failed, no generated key obtained.");
-            }
         } catch (SQLException e) {
             throw new DAOException(e);
         } finally {
@@ -162,16 +145,15 @@ public class UserDAOJDBC implements UserDAO {
 
     @Override
     public void update(UserBean user) throws DAOException {
-        if (user.getId() == null) {
+        if (user.getUsername() == null) {
             throw new IllegalArgumentException("User is not created yet, the user ID is null.");
         }
 
         Object[] values = {
+            user.getPassword(),
+            user.getRole(),
             user.getEmail(),
-            user.getFirstname(),
-            user.getLastname(),
-            toSqlDate(user.getBirthdate()),
-            user.getId()
+            user.getUsername()
         };
 
         Connection connection = null;
@@ -192,9 +174,9 @@ public class UserDAOJDBC implements UserDAO {
     }
 
     @Override
-    public void delete(User user) throws DAOException {
+    public void delete(UserBean user) throws DAOException {
         Object[] values = { 
-            user.getId()
+            user.getUsername()
         };
 
         Connection connection = null;
@@ -207,60 +189,7 @@ public class UserDAOJDBC implements UserDAO {
             if (affectedRows == 0) {
                 throw new DAOException("Deleting user failed, no rows affected.");
             } else {
-                user.setId(null);
-            }
-        } catch (SQLException e) {
-            throw new DAOException(e);
-        } finally {
-            close(connection, preparedStatement);
-        }
-    }
-
-    @Override
-    public boolean existEmail(String email) throws DAOException {
-        Object[] values = { 
-            email
-        };
-
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
-        boolean exist = false;
-
-        try {
-            connection = daoFactory.getConnection();
-            preparedStatement = prepareStatement(connection, SQL_EXIST_EMAIL, false, values);
-            resultSet = preparedStatement.executeQuery();
-            exist = resultSet.next();
-        } catch (SQLException e) {
-            throw new DAOException(e);
-        } finally {
-            close(connection, preparedStatement, resultSet);
-        }
-
-        return exist;
-    }
-
-    @Override
-    public void changePassword(User user) throws DAOException {
-        if (user.getId() == null) {
-            throw new IllegalArgumentException("User is not created yet, the user ID is null.");
-        }
-
-        Object[] values = {
-            user.getPassword(),
-            user.getId()
-        };
-
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
-
-        try {
-            connection = daoFactory.getConnection();
-            preparedStatement = prepareStatement(connection, SQL_CHANGE_PASSWORD, false, values);
-            int affectedRows = preparedStatement.executeUpdate();
-            if (affectedRows == 0) {
-                throw new DAOException("Changing password failed, no rows affected.");
+                user = null;
             }
         } catch (SQLException e) {
             throw new DAOException(e);
@@ -278,12 +207,11 @@ public class UserDAOJDBC implements UserDAO {
      * @throws SQLException If something fails at database level.
      */
     private static UserBean map(ResultSet resultSet) throws SQLException {
-        User user = new User();
-        user.setId(resultSet.getLong("id"));
+        UserBean user = new UserBean();
+        user.setUsername(resultSet.getString("username"));
+        user.setPassword(resultSet.getString("password"));
         user.setEmail(resultSet.getString("email"));
-        user.setFirstname(resultSet.getString("firstname"));
-        user.setLastname(resultSet.getString("lastname"));
-        user.setBirthdate(resultSet.getDate("birthdate"));
+        user.setRole(resultSet.getInt("role"));
         return user;
     }
 }
