@@ -3,10 +3,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html">
     <h:head>
+        <link rel="stylesheet" type="text/css" href="resource/css/style.css" />
         <title>Login</title>
     </h:head>
     <h:body>
-        <div>
+        <div class="login-card">
             <h:form>
                 <h:panelGrid columns="2">
                     <h:outputLabel for="usrname">Username</h:outputLabel>
@@ -14,7 +15,7 @@
                     <h:outputLabel for="passwrd">Password</h:outputLabel>
                     <h:inputSecret id="passwrd" value="#{login.passwrd}"/>
                 </h:panelGrid>
-                <h:commandButton value="Login" action="#{login.login}"/>
+                <h:commandButton value="Login" class="login login-submit" action="#{login.login}"/>
             </h:form>
         </div>
     </h:body>
