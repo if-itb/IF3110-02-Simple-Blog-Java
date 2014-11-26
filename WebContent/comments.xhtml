@@ -19,7 +19,7 @@
 		Nama:  <h:inputText value="#{viewPost.name}" />
 		Email: <h:inputText value="#{viewPost.email}" />
 		Isi:   <h:inputText value="#{viewPost.comment}" />
-		<h:commandButton value="Add Post" action="#{viewPost.postComment}">
+		<h:commandButton value="Add Comments" action="#{viewPost.postComment}">
 			<f:ajax execute="@form" render="comments_part" />
 		</h:commandButton>
 		<h:panelGroup id="comments_part">

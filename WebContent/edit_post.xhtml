@@ -14,31 +14,37 @@
 </h:head>
 
 <h:body>
-	<h1 class="title" id="tes">Simple-Blog</h1>
-	<h2 align="center">Login</h2>
-	<div align="center">
-		<h:form>
-			<table>
-				<tr>
-					<td>Judul</td>
-					<td>: <h:inputText value="#{editPost.title}" /></td>
-				</tr>
-				<tr>
-					<td>Tanggal</td>
-					<td>: <h:inputText id="dateInput" value="#{editPost.date}"
-							converter="dateConverter"
-							converterMessage="Format tanggal dalam bentuk yyyy-MM-dd dan lebih besar dari hari ini" />
-					</td>
-				</tr>
-				<tr>
-					<td>Konten</td>
-					<td>: <h:inputTextarea row="100" col="200"
-							value="#{editPost.content}" /></td>
-				</tr>
-			</table>
-			<h:commandButton value="Submit" action="#{editPost.execute}" />
-		</h:form>
-		<h:message for="dateInput" style="color:red" />
-	</div>
+	<ui:composition template="common.xhtml">
+		<ui:define name="content">
+			<div class="col-lg-offset-4 col-lg-4"
+				style="border: 5px solid blue; margin-top: 5%; border-radius: 10px;">
+				<h2 align="center">Edit Post</h2>
+				<div align="center">
+					<h:form>
+						<div class="row">
+							<span class="col-lg-2">Judul</span> <span class="col-lg-10">: <h:inputText
+									value="#{editPost.title}" /></span>
+						</div>
+						<br />
+						<div class="row">
+							<span class="col-lg-2">Tanggal</span> <span class="col-lg-10">: <h:inputText id="dateInput"
+									value="#{editPost.date}" converter="dateConverter"
+									converterMessage="Format tanggal dalam bentuk yyyy-MM-dd dan lebih besar dari hari ini" />
+							</span>
+						</div>
+						<br />
+						<div class="row">
+							<span class="col-lg-2">Konten</span> <span class="col-lg-10">: <h:inputTextarea rows="5"
+									cols="22" style="resize:none;" value="#{editPost.content}" /></span>
+						</div>
+						<h:commandButton class="kumpul" value="Submit"
+							action="#{editPost.execute}" />
+					</h:form>
+					<h:message for="dateInput" style="color:red" />
+				</div>
+			</div>
+		</ui:define>
+	</ui:composition>
 </h:body>
 </html>
+
