@@ -37,12 +37,13 @@ public class CookieHelper {
             cookie.setValue(value);
         } else {
             cookie = new Cookie(name, value);
-            cookie.setPath(request.getContextPath());
+            //cookie.setPath(request.getContextPath());
         }
 
         cookie.setMaxAge(expiry);
 
         HttpServletResponse response = (HttpServletResponse) facesContext.getExternalContext().getResponse();
+        response.setContentType("text/html");
         response.addCookie(cookie);
     }
 

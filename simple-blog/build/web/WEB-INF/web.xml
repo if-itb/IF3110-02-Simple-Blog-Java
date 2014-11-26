@@ -20,6 +20,7 @@
     </session-config>
     <welcome-file-list>
         <welcome-file>faces/index.xhtml</welcome-file>
+        <welcome-file>faces/navigationBar.xhtml</welcome-file>
     </welcome-file-list>
     <resource-ref>
 	<description>MySQL Datasource example</description>
