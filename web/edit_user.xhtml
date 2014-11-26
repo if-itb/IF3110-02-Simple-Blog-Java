@@ -34,7 +34,7 @@
                             username :&nbsp;<h:inputText id="username" value="#{usersController.active_username}" binding="#{editusername}" required="true" requiredMessage="Please enter a username"></h:inputText><br></br>
                             password :&nbsp;<h:inputSecret id="password" value="#{usersController.active_password}" binding="#{edituserpassword}" required="true" requiredMessage="Please enter a password"></h:inputSecret><br></br>
                             role &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:
-                            <h:inputTextarea id="role" value="#{usersController.active_role}" binding="#{edituserrole}" required="true" requiredMessage="Please enter a role" />
+                            <!--<h:inputTextarea id="role" value="#{usersController.active_role}" binding="#{edituserrole}" required="true" requiredMessage="Please enter a role" />-->
                             <br></br><br></br>
                         </div>
                         <h:commandButton action="#{usersController.updateUser(edituserid.value, editusername.value, edituserpassword.value, edituserrole.value)}" value="Update" ></h:commandButton>
@@ -42,11 +42,6 @@
                 </div>
                 </h:form>
             </div> <!-- end content -->
-<!--
-            <div class="footer">
-                <hr></hr>
-                footer
-            </div>-->
         </div> <!-- end wrapper -->		
     </h:body>
 </html>

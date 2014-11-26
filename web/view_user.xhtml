@@ -25,31 +25,27 @@
             <hr  margin-right="30%"></hr>
             <div class="content">
                 <h:form>
-                    <h:commandLink value="Create" action="/user/create.xhtml" />  
                     <h:outputLabel value=" " />
-                    <ui:repeat value="#{usersController.allUsers}" var="user">
-                    <h:inputHidden value="#{user.id}" binding="#{userid}" />	
+                   	
                 <div class="adduser">
                     <a href="create_user.xhtml">+ add user</a>
                 </div>
                 <div class="manageuser">       
                     <div class="listname">
                         <ul>
+							 <ui:repeat value="#{usersController.allUsers}" var="user">
+                    <h:inputHidden value="#{user.id}" binding="#{userid}" />	
                             <li><role><h:outputText value="#{user.role}" binding="#{userrole}" ></h:outputText></role>
                                 <h:outputText value="#{user.username}" binding="#{username}" ></h:outputText> 
                                 &nbsp; &nbsp; &nbsp; 
-                                <!--||--> 
-<!--                                pass: <h:outputText value="#{user.password}" binding="#{userpassword}" ></h:outputText> 
-                                &nbsp; &nbsp; &nbsp; ||-->
-                                <!--<a href="edituser.html"><img src="resources/img/edit1.png" onmouseover="this.src='../../assets/img/edit2.png'" onmouseout="this.src='../../assets/img/edit1.png'" height="17px"/></a>--> 
-                                <h:commandLink action="#{usersController.editUser(userid.value, username.value, userpassword.value, userrole.value)}"> <h:graphicImage name="img/edit1.png" height="17px" title="add new post"></h:graphicImage></h:commandLink>
-                                <!--<a href="#"><img src="../../assets/img/delete1.png" onmouseover="this.src='../../assets/img/delete2.png'" onmouseout="this.src='../../assets/img/delete1.png'" height="17px"></img></a>-->
+                                <h:commandLink action="#{usersController.editUser(userid.value, username.value, userpassword.value, userrole.value)}"> <h:graphicImage name="img/edit1.png" height="17px" title="edit user"></h:graphicImage></h:commandLink>
                                 &nbsp;
-                                <h:commandLink onclick="return confirm('Are you sure you want to delete this user?');" action="#{usersController.deleteUser(userid.value)}"><h:graphicImage name="img/delete1.png" height="17px" title="add new post"></h:graphicImage></h:commandLink></li>
+                                <h:commandLink onclick="return confirm('Are you sure you want to delete this user?');" action="#{usersController.deleteUser(userid.value)}"><h:graphicImage name="img/delete1.png" height="17px" title="delete user"></h:graphicImage></h:commandLink></li>
+								</ui:repeat>
                         </ul>
                     </div>
                 </div>
-                </ui:repeat>
+                
 		</h:form>
             </div> <!-- end content -->
 
