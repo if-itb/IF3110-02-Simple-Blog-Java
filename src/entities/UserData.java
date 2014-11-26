@@ -122,7 +122,7 @@ public class UserData implements Serializable {
 		}
 	}
 	
-	public void logoutCookie(){
+	private void logoutCookie(){
 		FacesContext fc = FacesContext.getCurrentInstance();
 
 		Cookie cookieUser = new Cookie("username", null);
@@ -137,7 +137,7 @@ public class UserData implements Serializable {
 		servletResponse.addCookie(cookiePassword);
 	}
 	
-	public void loginCookie(){
+	private void loginCookie(){
 		FacesContext fc = FacesContext.getCurrentInstance();
 		
 		Cookie cookieUser = new Cookie("username", username);
