@@ -225,7 +225,7 @@ div.cover > img {
 }
 /* Header */
 .art-header {
-  height: 900px;
+  height: 600px;
   /* Background image is defined in the post */
   background-position: top center;
   background-attachment: fixed;
@@ -233,8 +233,8 @@ div.cover > img {
 }
 /* Contains the time, title and subtitle for an article */
 .art-header-inner {
-  position: fixed;
-  top: 300px;
+  position: absolute;
+  top: 200px;
   left: 50%;
   margin-left: -490px;
 }
@@ -273,7 +273,7 @@ div.cover > img {
 
 /* Body */
 .art-body {
-  position: relative;
+  
   width: 100%;
   background: #fff;
   z-index: 100;

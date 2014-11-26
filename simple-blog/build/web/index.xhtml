@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Simple Blog</title>
     </h:head>
@@ -35,20 +36,26 @@
                     <nav class="art-list">
                       <ul class="art-list-body">
                             <!-- buat nge load content !-->
-                            <li class='art-list-item'>
-                                <div class='art-list-item-title-and-time'>
-                                        <h2 class='art-list-title'><a href='#'>ini adalah judul</a></h2>
-                                        <div class='art-list-time'>24 November 2014</div>
+                            <ui:repeat var="post" value="#{postController.postList}">
+                                <li class='art-list-item'>
+                                    <div class='art-list-item-title-and-time'>
+                                        <h2 class='art-list-title'>
+                                            <h:link value="#{post.title}" outcome="viewPost">
+                                                <f:param name="id" value="#{post.id}"/>
+                                            </h:link>
+                                        </h2>
+                                        <div class='art-list-time'>#{post.date}</div>
                                         <div class='art-list-time'><span style='color:#F40034;'>&#10029;</span> Featured</div>
-                                </div>
-                                <p>ini adalah paragraph</p>
-                               
-                                <c:if test="#{userController.showEditHapus()}">
-                                <p>
-                                    <h:link value="Edit"/> | <h:link value="Hapus"/>
-                                </p>
-                                </c:if>
-                            </li>
+                                    </div>
+                                    <p>#{post.content}</p>
+
+                                    <c:if test="#{userController.showEditHapus()}">
+                                    <p>
+                                        <h:link value="Edit"/> | <h:link value="Hapus"/>
+                                    </p>
+                                    </c:if>
+                                </li>
+                            </ui:repeat>
                       </ul>
                     </nav>
                 </div>

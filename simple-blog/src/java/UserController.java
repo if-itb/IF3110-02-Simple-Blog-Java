@@ -140,8 +140,8 @@ public class UserController implements Serializable{
     }
     
     public boolean isUsernamePasswordExist(){
-        if (cookie.getCookie("username").getMaxAge() == 0 
-               && cookie.getCookie("password").getMaxAge() == 0){
+        if (cookie.getCookie("username") == null 
+               && cookie.getCookie("password") == null){
             System.out.println("return false cookie validasi");
            return false;
         }
