@@ -44,7 +44,6 @@ public class DatabaseObject {
 		return result;
 	}
 
-
 	/**
 	 * 
 	 * @return users in database
