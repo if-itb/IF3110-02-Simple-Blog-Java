@@ -5,6 +5,7 @@
  */
 package model;
 
+import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader;
 import java.util.ArrayList;
 
 /**
@@ -18,13 +19,7 @@ public class AllUserBean {
      * Creates a new instance of AllUserBean
      */
     public AllUserBean() {
-        UserBean X = new UserBean(); X.setRole(UserBean.getAdmin()); X.setUsername("A");
-        UserBean Y = new UserBean(); Y.setRole(UserBean.getEditor()); Y.setUsername("B");
-        UserBean Z = new UserBean(); Z.setRole(UserBean.getOwner()); Z.setUsername("C");
-        allUser = new ArrayList<UserBean> ();
-        allUser.add(X);
-        allUser.add(Y);
-        allUser.add(Z);
+        allUser = new ArrayList<UserBean> (DAO.DAOFactory.getInstance("javabase.jdbc").getUserDAO().list());
     }
 
     /**
@@ -43,6 +38,7 @@ public class AllUserBean {
     
     public void refresh() {
         //TODO database connection here
+        allUser = new ArrayList<UserBean> (DAO.DAOFactory.getInstance("javabase.jdbc").getUserDAO().list());
     }
     
 }
