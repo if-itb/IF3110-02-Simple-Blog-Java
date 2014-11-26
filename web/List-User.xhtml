@@ -90,6 +90,7 @@
                     </div>
                 </div>
                 <h1 class="content-subhead">List User</h1>
+                <h:form id="user_table_wrapper">
                 <h:dataTable value="#{allUserBean.allUser}" var="user"
                              id="user_table">
                     <h:column>
@@ -129,12 +130,13 @@
                         <f:facet name="header">
                             <h:outputText value="Delete" />
                         </f:facet>
-                        <h:commandButton value="delete #{user.username}">
-                            <f:ajax listener="#{deleteUserBean.delete(user.username)}" render="user_table">
+                        <h:commandButton action="#{deleteUserBean.delete(user.username)}" value="delete #{user.username}">
+                            <f:ajax immediate="true" render="user_table_wrapper">
                             </f:ajax>
                         </h:commandButton>
                     </h:column>
                 </h:dataTable>
+                </h:form>
             </ui:define>
         </ui:composition>
     </h:body>
