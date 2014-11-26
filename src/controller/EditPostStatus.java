@@ -12,7 +12,7 @@ public class EditPostStatus {
 	public void delete(int temp_id) {
 		DatabaseUtility dbUtil = DatabaseUtility.getInstance();
 
-		String query = "UPDATE post SET id_deleted = 1 WHERE id = "
+		String query = "UPDATE post SET is_deleted = 1 WHERE id = "
 				+ temp_id;
 
 		System.out.println(query);
