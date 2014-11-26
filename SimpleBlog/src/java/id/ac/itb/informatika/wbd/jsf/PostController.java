@@ -60,6 +60,7 @@ public class PostController {
             JsfUtil.ensureAddErrorMessage(e, "A persistence error occurred.");
             return null;
         }
+        postList = jpaController.getAllPosts();
         return "post_list";
         
     }
@@ -70,11 +71,12 @@ public class PostController {
         
         try {
             jpaController.destroy(post.getId());
-            JsfUtil.addSuccessMessage("Post berhasil dihapus" + post.getId());
+            JsfUtil.addSuccessMessage("Post berhasil dihapus";
         } catch (Exception e) {
             JsfUtil.ensureAddErrorMessage(e, "A persistence error occurred.");
             return null;
         }
+        postList = jpaController.getAllPosts();
         return "post_list";
     }
 

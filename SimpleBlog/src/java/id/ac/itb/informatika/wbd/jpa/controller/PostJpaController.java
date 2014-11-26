@@ -1,11 +1,13 @@
 package id.ac.itb.informatika.wbd.jpa.controller;
 
 import id.ac.itb.informatika.wbd.jpa.entities.Post;
+import id.ac.itb.informatika.wbd.jsf.JsfUtil;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Resource;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityNotFoundException;
 import javax.persistence.PersistenceUnit;
 import javax.persistence.Query;
 import javax.transaction.UserTransaction;
@@ -22,10 +24,11 @@ public class PostJpaController {
     }
     
     public void create(Post post) throws Exception {
-        EntityManager em = getEntityManager();
+        EntityManager em = null;
         
         try {
             utx.begin();
+            em = getEntityManager();
             em.persist(post);
             utx.commit();
         } catch (Exception ex) {
@@ -56,16 +59,23 @@ public class PostJpaController {
     }
     
     public void destroy(Long id) throws Exception  {
-        EntityManager em = getEntityManager();
+        EntityManager em = null;
         try {
             utx.begin();
+            em = getEntityManager();
             //em.joinTransaction();
+             Post post = null;
+            try {
+                post = em.getReference(Post.class, id);
+                post.getId();
+            } catch (EntityNotFoundException e) {
+                JsfUtil.ensureAddErrorMessage(e, "A persistence error occurred.");
+            }
             
-            //Post post = em.find(Post.class, id);
-            //em.remove(post);
-            Query query = em.createQuery(
-                "DELETE FROM posts c WHERE c.id = :p");
-            int deletedCount = query.setParameter("p", id).executeUpdate();
+            //post = em.find(Post.class, id);
+            em.remove(post);
+            //Query query = em.createQuery("DELETE FROM posts c WHERE c.id = :p");
+            //int deletedCount = query.setParameter("p", id).executeUpdate();
             utx.commit();
         } catch (Exception ex) {
             utx.rollback();
