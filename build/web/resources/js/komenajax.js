@@ -13,8 +13,10 @@ function comment_add(id) {
                 var Nama = document.getElementById("nama").value;
 		var Email = document.getElementById("email").value;
 		var Komentar = document.getElementById("komentar").value;
+                var dt = new Date();
+                var str = dt.toYMD();
         var xmlhttp = new XMLHttpRequest();
-                xmlhttp.open("GET","postComment.jsp?id="+id+"&Nama="+Nama+"&Email="+Email+"&Komentar="+Komentar,true);
+                xmlhttp.open("GET","postComment.jsp?id="+id+"&Nama="+Nama+"&Email="+Email+"&Komentar="+Komentar+"&Date="+str,true);
 		xmlhttp.send();
 			xmlhttp.onreadystatechange = function()
 			{
@@ -64,3 +66,20 @@ function emailValidatorKomen()
         return false;
     }
 }
+
+(function() {
+    Date.prototype.toYMD = Date_toYMD;
+    function Date_toYMD() {
+        var year, month, day;
+        year = String(this.getFullYear());
+        month = String(this.getMonth() + 1);
+        if (month.length == 1) {
+            month = "0" + month;
+        }
+        day = String(this.getDate());
+        if (day.length == 1) {
+            day = "0" + day;
+        }
+        return year + "-" + month + "-" + day;
+    }
+})();

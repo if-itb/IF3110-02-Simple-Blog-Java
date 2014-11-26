@@ -8,5 +8,5 @@
      user="root"  password=""/>
 
 <sql:update dataSource="${connection}" var="result">
-INSERT INTO `simple_blog_java`.`komentar` (`id`, `id_post`, `nama`, `email`, `komentar`, `tanggal`) VALUES (NULL, '<%= request.getParameter("id") %>', '<%= request.getParameter("Nama") %>', '<%= request.getParameter("Email") %>', '<%= request.getParameter("Komentar") %>', '2014-11-25')
+INSERT INTO `simple_blog_java`.`komentar` (`id`, `id_post`, `nama`, `email`, `komentar`, `tanggal`) VALUES (NULL, '<%= request.getParameter("id") %>', '<%= request.getParameter("Nama") %>', '<%= request.getParameter("Email") %>', '<%= request.getParameter("Komentar") %>', '<%= request.getParameter("Date") %>')
 </sql:update>
