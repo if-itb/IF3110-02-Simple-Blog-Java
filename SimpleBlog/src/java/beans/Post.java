@@ -22,6 +22,10 @@ public class Post {
     String tanggal;
     String konten;
     boolean status;
+    Connection con;
+    Statement ps;
+    ResultSet rs;
+    String SQL_Str;
 
     public int getId_post() {
         return id_post;
@@ -63,10 +67,6 @@ public class Post {
         this.status = status;
     }
     public String setDBP(int id) throws ClassNotFoundException, SQLException {
-        Connection con;
-        Statement ps;
-        ResultSet rs;
-        String SQL_Str;
         Class.forName("com.mysql.jdbc.Driver");
         con = DriverManager.getConnection("jdbc:mysql://localhost:3306/tubeswbd", "root", "");
         ps = con.createStatement();
@@ -83,10 +83,6 @@ public class Post {
     }
     
     public String setDBE(int id) throws ClassNotFoundException, SQLException {
-        Connection con;
-        Statement ps;
-        ResultSet rs;
-        String SQL_Str;
         Class.forName("com.mysql.jdbc.Driver");
         con = DriverManager.getConnection("jdbc:mysql://localhost:3306/tubeswbd", "root", "");
         ps = con.createStatement();
@@ -108,29 +104,32 @@ public class Post {
         konten = "";
     }
     
-    public void insertPost() throws ClassNotFoundException, SQLException {
-        Connection con;
-        Statement ps;
-        String SQL_Str;
+    public String insertPost() throws ClassNotFoundException, SQLException {
         Class.forName("com.mysql.jdbc.Driver");
         con = DriverManager.getConnection("jdbc:mysql://localhost:3306/tubeswbd", "root", "");
         ps = con.createStatement();
         SQL_Str = "INSERT INTO post(judul, tanggal, konten, status) VALUES ('"+judul+"','"+tanggal+"','"+konten+"',false)";
         ps.executeUpdate(SQL_Str);
         con.close();
+        return "insert";
     }
     
     public String editPost() throws ClassNotFoundException, SQLException {
-        Connection con;
-        Statement ps;
-        String SQL_Str;
         Class.forName("com.mysql.jdbc.Driver");
         con = DriverManager.getConnection("jdbc:mysql://localhost:3306/tubeswbd", "root", "");
         ps = con.createStatement();
         SQL_Str = "UPDATE post SET judul='"+judul+"', tanggal='"+tanggal+"',konten='"+konten+"' WHERE id_post=" + id_post;
         ps.executeUpdate(SQL_Str);
         con.close();
-        
         return "edit";
+    }
+    
+    public void hapusPost(int id) throws ClassNotFoundException, SQLException {
+        Class.forName("com.mysql.jdbc.Driver");
+        con = DriverManager.getConnection("jdbc:mysql://localhost:3306/tubeswbd", "root", "");
+        ps = con.createStatement();
+        SQL_Str = "DELETE FROM post WHERE id_post=" + id;
+        ps.executeUpdate(SQL_Str);
+        con.close();
     }
 }

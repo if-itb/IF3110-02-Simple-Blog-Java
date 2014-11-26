@@ -29,6 +29,10 @@ public class login_bean {
     private String dbrole;
     private boolean remember;
     String rememberstr;
+    Connection con;
+    Statement ps;
+    ResultSet rs;
+    String SQL_Str;
     
     public login_bean(){
         checkCookie();
@@ -70,13 +74,12 @@ public class login_bean {
     public void setRemember(boolean remember){
         this.remember = remember;
     }
+    public void setRole(String role) {
+        this.role = role;
+    }
     
     //Connect to mysql and get username-password 
     public void dbData(String uname) throws SQLException, ClassNotFoundException{
-        Connection con;
-        Statement ps;
-        ResultSet rs;
-        String SQL_Str;
         Class.forName("com.mysql.jdbc.Driver");
         con = DriverManager.getConnection("jdbc:mysql://localhost:3306/tubeswbd", "root", "");
         ps = con.createStatement();
@@ -100,6 +103,7 @@ public class login_bean {
                 //Save the username and password in a cookie
                 Cookie usercookie = new Cookie("usercookie", username);
                 Cookie passcookie = new Cookie("passcookie", password);
+                Cookie rolecookie = new Cookie("rolecookie", role);
                 
                 //Check if checkbox remember me is checked
                 if(remember == false){
@@ -114,10 +118,12 @@ public class login_bean {
                 //Set cookie's age to 1 day = 86400 s
                 usercookie.setMaxAge(86400);
                 passcookie.setMaxAge(86400);
+                rolecookie.setMaxAge(86400);
                 
                 //Add the cookies to response
                 ((HttpServletResponse) facesContext.getExternalContext().getResponse()).addCookie(usercookie);
                 ((HttpServletResponse) facesContext.getExternalContext().getResponse()).addCookie(passcookie);
+                ((HttpServletResponse) facesContext.getExternalContext().getResponse()).addCookie(rolecookie);
                 ((HttpServletResponse) facesContext.getExternalContext().getResponse()).addCookie(remembercookie);
                 
                 return "valid";
@@ -127,6 +133,11 @@ public class login_bean {
         } else {
             return "invalid";
         }
+    }
+    
+    public String setGuestRole() {
+        role = "guest";
+        return "guest";
     }
     
     public void checkCookie(){
@@ -139,6 +150,8 @@ public class login_bean {
                 if (cookiename.equals("usercookie")){
                     username = cookies[i].getValue();
                 } else if(cookiename.equals("passcookie")){
+                    password = cookies[i].getValue();
+                } else if(cookiename.equals("rolecookie")){
                     password = cookies[i].getValue();
                 } else if(cookiename.equals("remembercookie")){
                     rememberstr = cookies[i].getValue();

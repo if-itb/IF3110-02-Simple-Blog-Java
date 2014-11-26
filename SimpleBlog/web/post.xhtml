@@ -92,10 +92,6 @@ and open the template in the editor.
 
                 <ul class="art-list-body">
                 <div id="proses"></div>
-                <?php
-                    $query_komen = mysql_query("SELECT `kom-id`, `nama`, `waktu`, `email`, `komentar` FROM `data-kom` WHERE `post-id`=$id ORDER BY `kom-id` DESC");
-                    while ($data_kom=mysql_fetch_array($query_komen)) {
-                ?>
                     <li class="art-list-item">
                         <div class="art-list-item-title-and-time">
                             <h2 class="art-list-title"><a href="mailto:"><?php echo $data_kom['nama']; ?></a></h2>

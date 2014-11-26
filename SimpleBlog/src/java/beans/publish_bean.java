@@ -22,6 +22,9 @@ import javax.faces.bean.SessionScoped;
 @SessionScoped
 public class publish_bean {
     int id;
+    Connection con;
+    Statement ps;
+    String SQL_Str;
     /**
      * Creates a new instance of publish_bean
      */
@@ -30,15 +33,14 @@ public class publish_bean {
     public void setId(int id) {
         this.id = id;
     }
-    public void changeStatus() throws ClassNotFoundException, SQLException {
-        Connection con;
-        Statement ps;
-        String SQL_Str;
+    public String changeStatus(int id) throws ClassNotFoundException, SQLException {
         Class.forName("com.mysql.jdbc.Driver");
         con = DriverManager.getConnection("jdbc:mysql://localhost:3306/tubeswbd", "root", "");
         ps = con.createStatement();
         SQL_Str = "UPDATE post SET status=true WHERE id_post=" + id;
         ps.executeUpdate(SQL_Str);
         con.close();
+        
+        return "publish";
     }
 }

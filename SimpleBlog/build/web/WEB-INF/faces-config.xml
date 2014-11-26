@@ -13,12 +13,12 @@ and open the template in the editor.
     <managed-bean>
         <managed-bean-name>login_bean</managed-bean-name>
         <managed-bean-class>beans.login_bean</managed-bean-class>
-        <managed-bean-scope>application</managed-bean-scope>    
+        <managed-bean-scope>session</managed-bean-scope>    
     </managed-bean>
     <managed-bean>
         <managed-bean-name>post_bean</managed-bean-name>
         <managed-bean-class>beans.post_bean</managed-bean-class>
-        <managed-bean-scope>application</managed-bean-scope>    
+        <managed-bean-scope>session</managed-bean-scope>    
     </managed-bean>
     <managed-bean>
         <managed-bean-name>Post</managed-bean-name>
@@ -71,6 +71,23 @@ and open the template in the editor.
         <navigation-case>
             <from-action>#{Post.editPost()}</from-action>
             <from-outcome>edit</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <description>Insert Page</description>
+        <from-view-id>/new_post.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>#{Post.insertPost()}</from-action>
+            <from-outcome>insert</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <description>Publish Page</description>
+        <from-view-id>/publish_post.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>#{publish_bean.changeStatus(item.id_post)}</from-action>
             <to-view-id>/index.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>

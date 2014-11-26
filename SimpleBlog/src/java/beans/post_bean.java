@@ -20,12 +20,12 @@ import java.util.List;
  */
 public class post_bean {
     private List<Post> items;
+    Connection con;
+    Statement ps;
+    ResultSet rs;
+    String SQL_Str;
     
     public List<Post> dbData() throws SQLException, ClassNotFoundException{
-        Connection con;
-        Statement ps;
-        ResultSet rs;
-        String SQL_Str;
         Class.forName("com.mysql.jdbc.Driver");
         con = DriverManager.getConnection("jdbc:mysql://localhost:3306/tubeswbd", "root", "");
         ps = con.createStatement();

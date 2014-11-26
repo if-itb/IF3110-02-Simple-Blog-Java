@@ -67,17 +67,18 @@ and open the template in the editor.
             <div class="art-body-inner">
                 <h2>Tambah Post</h2>
                 <div id="contact-area">
-                    <h:form id="formPost">
+                    <h:form id="formPost"  >
                         <label for="Judul">Judul:</label>
                         <h:inputText value="#{Post.judul}" id="Judul"/>
 
                         <label for="Tanggal">Tanggal:</label>
-                        <h:inputText value="#{Post.tanggal}" id="Tanggal" p:placeholder="dd-mm-yyyy"></h:inputText>
+                        <input type="text" name="Tanggal" id="Tanggal" value="#{Post.tanggal}" placeholder="dd-mm-yyyy"/>
+                        <!-- <h:inputText value="{Post.tanggal}" id="Tanggal" p:placeholder="dd-mm-yyyy"></h:inputText> -->
                         
                         <label for="Konten">Konten:</label><br/>
                         <h:inputTextarea value="#{Post.konten}" rows="20" cols="20" id="Konten"></h:inputTextarea>
 
-                        <h:commandButton action="#{Post.insertPost()}" value="Simpan" class="submit-button" onclick="return validasiTanggal(document.formPost.Tanggal)"/>  
+                        <h:commandButton onclick="return validasiTanggal(document.getElementById('Tanggal'))" action="#{Post.insertPost()}" value="Simpan" class="submit-button" />  
 
                     </h:form>
                 </div>
@@ -106,7 +107,7 @@ and open the template in the editor.
     </footer>
 
     </div>
-    <script language="javascript" type="text/javascript">
+    <script type="text/javascript">
     function cek(inputText) {
     }
     function validasiTanggal(inputText) {

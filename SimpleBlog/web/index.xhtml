@@ -22,6 +22,7 @@ and open the template in the editor.
         <title>Simple Blog</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </head>
+    <div>#{login_bean.checkCookie()}</div>
     <body class="default">
         <div class="wrapper">
 
@@ -33,6 +34,9 @@ and open the template in the editor.
                 </c:if>
                 <c:if test="${(login_bean.role == 'admin') || (login_bean.role == 'editor')}" >
                     <li><h:link value="Publish Post" outcome="publish_post" /></li>
+                </c:if>
+                <c:if test="${(login_bean.role == null)}" >
+                    <li><h:link value="Login" outcome="login.jsp" /></li>
                 </c:if>
             </ul>
         </nav>
@@ -60,7 +64,8 @@ and open the template in the editor.
                                 <c:if test="${(login_bean.role == 'admin') || (login_bean.role == 'owner')}" >
                               <h:commandLink value="Edit" action="#{Post.setDBE(item.id_post)}" /> |
                                 </c:if>
-                               <a href="javascript:konfirmDelete()">Hapus</a>
+                               <h:commandLink value="Hapus" onclick="javascript:konfirmDelete()" action="#{Post.hapusPost(item.id_post)}" />
+                               <!-- <a href="javascript:konfirmDelete()">Hapus</a> -->
                             </p>
                             </h:form>
                         </li>
@@ -95,6 +100,9 @@ and open the template in the editor.
         <script type="text/javascript">
         function konfirmDelete() {
           if(confirm("Apakah Anda yakin menghapus pos ini?")) {
+              return true;
+          } else {
+              return false;
           }
         }
         </script>
