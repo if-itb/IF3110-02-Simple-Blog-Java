@@ -71,7 +71,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 INSERT INTO `user` (`USERNAME`, `PASSWORD`, `ROLE`, `EMAIL`) VALUES
-('budi', 'kecil', '2', 'budi@kecil.co.id');
+('budi', 'kuyup_hujan', '2', 'budi@kecil.co.id');
 --
 -- Indexes for dumped tables
 --
