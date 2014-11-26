@@ -39,19 +39,19 @@ public class NavigationController implements Serializable{
         return "Add-Post.xhtml";
     }
     
+    public String gotoUnpublishedPost() {
+        return "List-Unpublish-Post.xhtml";
+    }
+    
     public String gotoEditPost(int post_id) {
-        return "Edit-Post.xhtml";
+        return "Edit-Post.xhtml?id=" + post_id;
     }
     
     public String gotoDeletePost(int post_id) {
-        return "Delete-Post.xhtml";
+        return "Delete-Post.xhtml?id=" + post_id;
     }
     
     public String gotoViewPost(int post_id) {
-        return "View-Post.xhtml";
-    }
-    
-    public String gotoUnpublishedPost() {
-        return "List-Unpublished-Post.xhml";
+        return "View-Post.xhtml?id=" + post_id;
     }
 }

@@ -6,6 +6,15 @@
 
 package model;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.faces.bean.ManagedProperty;
+
 /**
  *
  * @author Afik
@@ -20,6 +29,7 @@ public class Post {
     private String Date;
     private String Author;
     private boolean Published;
+    @ManagedProperty(value="#{id}")
     private int PID;
     
     public Post() {
@@ -109,4 +119,42 @@ public class Post {
     public void setPID(int PID) {
         this.PID = PID;
     }
+    public Post fetchPost(int id) throws SQLException {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/simple_blog_2", "root", "");
+            Statement sta = conn.createStatement();
+            String Sql = "select * from entries where PID="+id;
+            System.out.println("dsda");
+            ResultSet rs = sta.executeQuery(Sql);
+            rs.next();
+            this.setJudul(rs.getString(2));
+            this.setDate(rs.getString(3));
+            this.setKonten(rs.getString(4));
+            this.setPID(rs.getInt(1));
+            this.setAuthor(rs.getString(6));
+            this.setPublished(rs.getBoolean(5));
+            conn.close();
+            return this;
+        } catch (ClassNotFoundException ex) {
+            if (1==1)throw new SQLException("ggal");
+            Logger.getLogger(ListPost.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+//    
+//    public String gotoEditPost(int post_id) {
+//        PID = post_id;
+//        return "Edit-Post.xhtml";
+//    }
+//    
+//    public String gotoDeletePost(int post_id) {
+//        PID = post_id;
+//        return "Delete-Post.xhtml";
+//    }
+//    
+//    public String gotoViewPost(int post_id) {
+//        PID = post_id;
+//        return "View-Post.xhtml";
+//    }
 }

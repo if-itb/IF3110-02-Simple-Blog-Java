@@ -4,5 +4,7 @@
             "context": "a"
         }
     },
-    "elements": {}
+    "elements": {
+        "h:head": {}
+    }
 }

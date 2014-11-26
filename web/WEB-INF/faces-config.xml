@@ -52,4 +52,8 @@
         <validator-id>usernameValidator</validator-id>       
         <validator-class>validator.UsernameValidator</validator-class>
     </validator>
-</faces-config>
+    <managed-bean>
+        <managed-bean-name>komentar</managed-bean-name>
+        <managed-bean-class>model.Komentar</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
