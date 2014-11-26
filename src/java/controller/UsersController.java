@@ -70,6 +70,33 @@ public class UsersController implements Serializable {
 		this.active_role = active_role;
 	}
 
+	public boolean isAdmin() {
+		String roleCookie = getCookie("role");
+		if (roleCookie != null) {
+			return roleCookie.equals("admin");
+		}
+		
+		return false;
+	}
+	
+	public boolean isEditor() {
+		String roleCookie = getCookie("role");
+		if (roleCookie != null) {
+			return roleCookie.equals("editor");
+		}
+		
+		return false;
+	}
+	
+	public boolean isOwner() {
+		String roleCookie = getCookie("role");
+		if (roleCookie != null) {
+			return roleCookie.equals("owner");
+		}
+		
+		return false;
+	}
+	
 	public void createUser(String username, String password, String role) throws IOException {
 		MySQL mysql = new MySQL();
 		
@@ -138,8 +165,7 @@ public class UsersController implements Serializable {
 			HttpServletResponse response = (HttpServletResponse) context.getExternalContext().getResponse();
 			response.addCookie(username_cookie);
 			response.addCookie(role_cookie);
-			response.sendRedirect("/SimpleBlog/faces/index.xhtml");
-			//FacesContext.getCurrentInstance().getExternalContext().redirect("/SimpleBlog/faces/index.xhtml");
+			response.sendRedirect("index.xhtml");
 		} else {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Username or password is invalid"));
 		}
@@ -159,15 +185,26 @@ public class UsersController implements Serializable {
 		response.addCookie(username_cookie);
 		response.addCookie(role_cookie);
 		
-		FacesContext.getCurrentInstance().getExternalContext().redirect("/SimpleBlog/faces/index.xhtml");
 		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-		FacesContext.getCurrentInstance().getExternalContext().redirect("/login_user.xhtml");
+		FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
 	}
-	
+
+	public String getCookie(String role) {
+	    FacesContext facesContext = FacesContext.getCurrentInstance();
+		HttpServletRequest request = (HttpServletRequest) facesContext.getExternalContext().getRequest();
+		Cookie cookie = null;
+
+		Cookie[] userCookies = request.getCookies();
+		if (userCookies != null && userCookies.length > 0 ) {
+			for (int i = 0; i < userCookies.length; i++) {
+				if (userCookies[i].getName().equals(role)) {
+					cookie = userCookies[i];
+					return cookie.getValue();
+				}
+			}
+		}
+
+		return null;
+	}
+
 }
-/*
-reading cookie
-Map<String, Object> requestCookieMap = FacesContext.getCurrentInstance()
-   .getExternalContext()
-   .getRequestCookieMap();
-*/

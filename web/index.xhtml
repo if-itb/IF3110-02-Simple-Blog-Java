@@ -12,8 +12,8 @@
     <h:body>
         <div class="wrapper">
             <div class="top">
-                <div class="title">     
-					<h:form>               
+                <div class="title">
+					<h:form>
 						<h:commandLink action="index">SIMPLE<blue>-</blue>BLOG</h:commandLink>                    
 						<div class="signin">
 							<hide1><a href="#">username</a></hide1>
@@ -26,7 +26,7 @@
             <hr  margin-right="30%" />
             <div class="icon">
                 <h:form>
-                    <h:commandLink action="create_post"><h:graphicImage name="img/add1.png" height="30px" title="add new post"></h:graphicImage></h:commandLink>
+                    <h:commandLink action="create_post" rendered="#{usersController.isOwner() || usersController.isAdmin()}"><h:graphicImage name="img/add1.png" height="30px" title="add new post"></h:graphicImage></h:commandLink>
                     <h:commandLink action="restore_post"><h:graphicImage name="img/restore1.png" height="30px" title="restore post"></h:graphicImage></h:commandLink>
                     <h:commandLink action="publish_post"><h:graphicImage name="img/hide1.png" height="30px" title="unpublished post"></h:graphicImage></h:commandLink>
                     <h:commandLink action="view_user"><h:graphicImage name="img/adduser1.png" height="30px" title="manage users"></h:graphicImage></h:commandLink>
