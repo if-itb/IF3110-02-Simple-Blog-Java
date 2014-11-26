@@ -27,7 +27,7 @@ view post
 -	sudah beres
 
 komentar
--	validasi email belum diimplementasi
+-	validasi email belum diimplementasi -> uda
 -	load list komentar belum pake ajax
 
 manajemen user

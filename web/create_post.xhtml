@@ -1,60 +1,68 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+	  xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Create Page</title>
 		<h:outputStylesheet library="css" name="mystyle.css"></h:outputStylesheet>
+		<h:outputScript library="js" name="tinymce/tinymce.min.js"></h:outputScript>
+			<script type="text/javascript">
+				tinyMCE.init({
+//					mode : "textareas",
+					theme : "simple",
+				});
+			</script>
     </h:head>
     <h:body>        
         <div class="wrapper">
             <h:form>
                <h:messages style="color:red;" />		
-            <div class="top">
-                <div class="title">
-                    <a href="home.html">SIMPLE<blue>-</blue>BLOG</a>         
-                    <div class="signin">
-                        <hide1><a href="#">username</a></hide1>
-                        <hide2><a href="#">logout</a></hide2> 
-                        <a href="#"><img src="../../resources/img/user1.png" onmouseover="this.src='../../resources/img/user_blue1.png'" onmouseout="this.src='../../resources/img/user1.png'" height="20"></img></a>  
-                    </div>           
-                </div>
-            </div><!--end top-->
-            <hr  margin-right="30%"></hr>
-            <div class="icon">
-                <h:commandLink action="create_post.xhtml"><img src="resources/img/add1.png" onmouseover="this.src='resources/img/add2.png'" onmouseout="this.src='resources/img/add1.png'" height="30px" title="add new post"></img></h:commandLink>
-                <a href="home-admin.html"><img src="resources/img/restore1.png" onmouseover="this.src='resources/img/restore2.png'" onmouseout="this.src='resources/img/restore1.png'" height="30px" title="restore post"></img></a>
-                <a href="home-admin.html"><img src="resources/img/hide1.png" onmouseover="this.src='resources/img/hide2.png'" onmouseout="this.src='resources/img/hide1.png'" height="30px" title="show unpublished article"></img></a>
-                <a href="manageuser.html"><img src="resources/img/adduser1.png" onmouseover="this.src='resources/img/adduser2.png'" onmouseout="this.src='resources/img/adduser1.png'" height="30px" title="manage users"></img></a>
-            </div>
-            <div class="content">
-                <div class="newpost">
-                    <div class="textfield">
-                        <form>
-                            Judul<br></br><h:inputText id="title" binding="#{createposttitle}" required="true" requiredMessage="Please enter a title"></h:inputText>
-			<br />
-                            Tanggal<br></br><h:inputText id="date" binding="#{createpostdate}" required="true" requiredMessage="Please enter a date" ></h:inputText>
-			<br />
-                            Content<br></br><h:inputTextarea id="content" binding="#{createpostcontent}" required="true" requiredMessage="Please enter a content" ></h:inputTextarea>
-			<br />
+				<div class="top">
+					<div class="title">
+						<a href="home.html">SIMPLE<blue>-</blue>BLOG</a>         
+						<div class="signin">
+							<hide1><a href="#">username</a></hide1>
+							<hide2><a href="#">logout</a></hide2> 
+							<a href="#"><img src="../../resources/img/user1.png" onmouseover="this.src='../../resources/img/user_blue1.png'" onmouseout="this.src='../../resources/img/user1.png'" height="20"></img></a>  
+						</div>           
+					</div>
+				</div><!--end top-->
+				<hr  margin-right="30%"></hr>
+				<div class="icon">
+					<h:commandLink action="create_post.xhtml"><img src="resources/img/add1.png" onmouseover="this.src='resources/img/add2.png'" onmouseout="this.src='resources/img/add1.png'" height="30px" title="add new post"></img></h:commandLink>
+					<a href="home-admin.html"><img src="resources/img/restore1.png" onmouseover="this.src='resources/img/restore2.png'" onmouseout="this.src='resources/img/restore1.png'" height="30px" title="restore post"></img></a>
+					<a href="home-admin.html"><img src="resources/img/hide1.png" onmouseover="this.src='resources/img/hide2.png'" onmouseout="this.src='resources/img/hide1.png'" height="30px" title="show unpublished article"></img></a>
+					<a href="manageuser.html"><img src="resources/img/adduser1.png" onmouseover="this.src='resources/img/adduser2.png'" onmouseout="this.src='resources/img/adduser1.png'" height="30px" title="manage users"></img></a>
+				</div>
+				<div class="content">
+					<div class="newpost">
+						<div class="textfield">
+							<form>
+								Judul
+								<br />
+								<h:inputText id="title" binding="#{createposttitle}" required="true" requiredMessage="Please enter a title"></h:inputText>
+								<br />
+								Tanggal
+								<br />
+								<h:inputText id="date" binding="#{createpostdate}" required="true" requiredMessage="Please enter a date" >
+									<!--<f:validator validatorId="validator.dateRangeValidator" />-->
+								</h:inputText>
+								<br />
+								Content
+								<br/>
+								<h:inputTextarea styleClass="tinymce" rows="15" cols="120" style="width: 100%" id="content" binding="#{createpostcontent}" required="true" requiredMessage="Please enter a content" >
+								</h:inputTextarea>
+								<!--<h:inputTextarea id="myTextArea" rows="10" cols="50" style="width: 100%"></h:inputTextarea>-->
+								<br />
 
-                            <h:commandButton action="#{postsController.createPost(createposttitle.value, createpostdate.value, createpostcontent.value)}" value="Create" ></h:commandButton>
-                        </form>
-                    </div>
+								<h:commandButton action="#{postsController.createPost(createposttitle.value, createpostdate.value, createpostcontent.value)}" value="Create" ></h:commandButton>
+							</form>
+						</div>
 
-                </div>
-            <div class="clear">.</div>
-            </div> <!-- end content -->
-<!--
-            <div class="footer">
-                <hr></hr>
-                footer
-            </div>-->
+					</div>
+				</div> <!-- end content -->
             </h:form>
-        </div>
-        
-        
-        
-		
+        </div>        		
     </h:body>
 </html>
