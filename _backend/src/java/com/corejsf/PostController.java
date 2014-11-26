@@ -65,6 +65,24 @@ public class PostController {
         }
     }
     
+    public void addMember (String email, String name, String password, String role){
+        try{
+            Connection con = getConnection();
+            String query = "INSERT INTO member (Email, Name, Password, Role) "
+                    + "VALUES (?, ?, ?, ?)";
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setString(1, email);            
+            ps.setString(2, name);
+            ps.setString(3, password);
+            ps.setString(4, role);        
+            ps.executeUpdate();
+            FacesContext.getCurrentInstance().getExternalContext().redirect("user.xhtml");
+            con.close();
+        } catch (IOException | SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+    
     public void deletePost(int id){
         try{
             Connection con = getConnection();

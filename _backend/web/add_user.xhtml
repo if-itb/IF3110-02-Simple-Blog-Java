@@ -12,13 +12,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />	
         <h:outputStylesheet name="bootstrap/css/bootstrap.css" />
         <h:outputStylesheet name="bootstrap/css/custom.css" />
-        <title>Simple Blog | Users' Database</title>
+        <title>Simple Blog | Add Member</title>
     </h:head>
     
     <h:body>
         <div class="container-fluid">
       
-        <h:form><div class="row" id="header">
+      <h:form><div class="row" id="header">
           <div class="row">
             <div class="col-md-6 col-xs-6 col-sm-6 col-lg-6">
               <p class="header-logo resize"><a href="index.xhtml">Simple Blog</a></p>
@@ -62,53 +62,45 @@
               </div>
         </div></h:form>
 
-        <div class="row">
+      <div class="row">
 
         <div class="col-md-10 col-md-offset-1">
           <div class="edit"></div>
-          
           <div class="post">
-              <div class="post-title">
-                  Users' Database
+            <div class="post-title">Add User</div>
+            <h:form role="form">
+              <div class="form-group">
+                <label for="exampleInputEmail1">Email</label>
+                <h:inputText styleClass="form-control" binding="#{email}" />
               </div>
-              <div class="table-responsive"><h:form>
-                  <h:dataTable styleClass="table table-striped table-condensed" value="#{listmember.members}" var="user">
-                    <h:column>    				
-                        <f:facet name="header">Email</f:facet>
-                        <h:outputText value="#{members.email}" />
-                    </h:column>
-                    <h:column>    				
-                        <f:facet name="header">Name</f:facet>    				
-                        <h:outputText value="#{members.name}" />
-                    </h:column>
-                    <h:column>    				
-                        <f:facet name="header">Password</f:facet>    				
-                        <h:outputText value="#{members.password}" />
-                    </h:column>
-                    <h:column>    				
-                        <f:facet name="header">Role</f:facet>    				
-                        <h:outputText value="#{members.role}" />
-                    </h:column>
-                    <h:column>    				
-                        <f:facet name="header">Edit | Delete</f:facet>    				
-                        <a href="#">Edit</a> | <a href="#">Delete</a>
-                    </h:column>
-                  </h:dataTable>
-              </h:form></div>
-              
-              <a href="add_user.xhtml">+ Add User</a>
+              <div class="form-group">
+                <label for="exampleInputPassword1">Name</label>
+                <h:inputText styleClass="form-control" binding="#{name}" />
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1">Password</label>
+                <h:inputText styleClass="form-control" binding="#{password}" />
+              </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Role</label>
+                    <h:inputText styleClass="form-control" binding="#{role}" />
+                </div>
+                <h:commandButton type="submit" styleClass="btn btn-default" value="Submit" action="#{postController.addMember(email.value, name.value, password.value, role.value)}"/>
+            </h:form>
+
+
           </div>
         </div>
 
       </div>
 
-        <div class="row" id="footer">
-          <div class="footer-text">
-            <p class="text-right">IF3110 Pengembangan Aplikasi Berbasis Web</p>
-            <p class="text-right">Arina Listyarini Dwiastuti (13512006) | Gifari Kautsar (13512020) | Indam Muhammad (13512026)</p>
-          </div>
+      <div class="row" id="footer">
+        <div class="footer-text">
+          <p class="text-right">IF3110 Pengembangan Aplikasi Berbasis Web</p>
+          <p class="text-right">Arina Listyarini Dwiastuti (13512006) | Gifari Kautsar (13512020) | Indam Muhammad (13512026)</p>
         </div>
       </div>
+    </div>
         <h:outputScript name="bootstrap/js/custom.js" />
         <h:outputScript name="bootstrap/js/bootstrap.min.js" />
     </h:body>
