@@ -67,7 +67,7 @@
             <hr />
             
             <h2>Komentar</h2>
-            <h:form>
+            <h:form id='komentarform'>
                  <div id="contact-area">
                     <label for="Nama">Nama:</label>
                     <h:inputText value="#{addCommentBean.name}" id="Nama"></h:inputText>
@@ -124,34 +124,34 @@
     //<![CDATA[
         function validateComment() {
         /* check comment form */
-            var x = document.getElementById("j_idt20:Nama").value;
-            var y = document.getElementById("j_idt20:Email").value;
-            var z = document.getElementById("j_idt20:Komentar").value;
+            var x = document.getElementById("komentarform:Nama").value;
+            var y = document.getElementById("komentarform:Email").value;
+            var z = document.getElementById("komentarform:Komentar").value;
             var val = true;
             var errMessage = "";
             if (x==="") {
                     val = false;
                     errMessage += " Name must be filled!";
-                    document.getElementById("j_idt20:Nama").style.borderColor="#FF0000";
+                    document.getElementById("komentarform:Nama").style.borderColor="#FF0000";
             }
             if (y==="") {
                     val = false;
                     errMessage += " Email must be filled!";
-                    document.getElementById("j_idt20:Email").style.borderColor="#FF0000";
+                    document.getElementById("komentarform:Email").style.borderColor="#FF0000";
             }
             else { //validate email format
                     var pattern = /^(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$/;
                     if (!pattern.test(y)) {
                             val = false;
                             errMessage += " Wrong email format!";
-                            document.getElementById("j_idt20:Email").style.borderColor="#FF0000";
+                            document.getElementById("komentarform:Email").style.borderColor="#FF0000";
                     }
                     //else no change
             }
             if (z==="") {
                     val = false;
                     errMessage += " Comment must be filled!";
-                    document.getElementById("j_idt20:Komentar").style.borderColor="#FF0000";
+                    document.getElementById("komentarform:Komentar").style.borderColor="#FF0000";
             }
             if (!val) {
                     alert(errMessage);
