@@ -75,19 +75,19 @@
                   <h:dataTable styleClass="table table-striped table-condensed" value="#{listmember.members}" var="user">
                     <h:column>    				
                         <f:facet name="header">Email</f:facet>
-                        <h:outputText value="#{members.email}" />
+                        <h:outputText value="#{user.email}" />
                     </h:column>
                     <h:column>    				
                         <f:facet name="header">Name</f:facet>    				
-                        <h:outputText value="#{members.name}" />
+                        <h:outputText value="#{user.name}" />
                     </h:column>
                     <h:column>    				
                         <f:facet name="header">Password</f:facet>    				
-                        <h:outputText value="#{members.password}" />
+                        <h:outputText value="#{user.password}" />
                     </h:column>
                     <h:column>    				
                         <f:facet name="header">Role</f:facet>    				
-                        <h:outputText value="#{members.role}" />
+                        <h:outputText value="#{user.role}" />
                     </h:column>
                     <h:column>    				
                         <f:facet name="header">Edit | Delete</f:facet>    				

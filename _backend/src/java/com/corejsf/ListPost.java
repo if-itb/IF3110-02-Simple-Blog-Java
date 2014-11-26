@@ -38,7 +38,7 @@ public class ListPost {
                 pos.setJudul(res.getString("Judul"));
                 pos.setKonten(res.getString("Konten"));
                 pos.setStatus(res.getString("Status"));
-                pos.setTanggal(res.getString("Tanggal"));
+                pos.setTanggal("0000-00-00");
                 posts.add(pos);
             }
             con.close();

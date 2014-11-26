@@ -1,8 +1,5 @@
 function loginValidation(){
-    var email = document.form1["form1:Email"];
-    var password = document.form1["form1:Password"];
-    alert(email);
-    if((email.length == 0) && (password.length == 0)){
+    if((document.form1["form1:Email"].value == "") || (document.form1["form1:Password"].value == "")){
         alert("Form masih kosong");
         return false;
     }
