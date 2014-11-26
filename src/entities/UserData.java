@@ -103,19 +103,19 @@ public class UserData implements Serializable {
 		if (loggedIn == false) {
 			return result;
 		} else if (details.getRole() == 10) {
-			result.add(new NavigationMenu("Home", "index.jsf"));
-			result.add(new NavigationMenu("Add Post", "add_post.jsf"));
-			result.add(new NavigationMenu("My Post", ""));
+			result.add(new NavigationMenu(Constant.MENU_HOME_NAME, Constant.MENU_HOME_URL));
+			result.add(new NavigationMenu(Constant.MENU_ADDPOST_NAME, Constant.MENU_ADDPOST_URL));
+			result.add(new NavigationMenu(Constant.MENU_MYPOST_NAME, Constant.MENU_MYPOST_URL));
 			return result;
 		} else if (details.getRole() == 20) {
-			result.add(new NavigationMenu("Home", "index.jsf"));
-			result.add(new NavigationMenu("Editor Menu", ""));
+			result.add(new NavigationMenu(Constant.MENU_HOME_NAME, Constant.MENU_HOME_URL));
+			result.add(new NavigationMenu(Constant.MENU_EDITOR_NAME, Constant.MENU_EDITOR_URL));
 			return result;
 		} else if (details.getRole() == 30) {
-			result.add(new NavigationMenu("Home", "index.jsf"));
-			result.add(new NavigationMenu("Add Post", "add_post.jsf"));
-			result.add(new NavigationMenu("Post Manager", ""));
-			result.add(new NavigationMenu("User Manager", "crud.jsf"));
+			result.add(new NavigationMenu(Constant.MENU_HOME_NAME, Constant.MENU_HOME_URL));
+			result.add(new NavigationMenu(Constant.MENU_ADDPOST_NAME, Constant.MENU_ADDPOST_URL));
+			result.add(new NavigationMenu(Constant.MENU_POSTMANAGER_NAME, Constant.MENU_POSTMANAGER_URL));
+			result.add(new NavigationMenu(Constant.MENU_USERMANAGER_NAME, Constant.MENU_USERMANAGER_URL));
 			return result;
 		} else {
 			return result;
