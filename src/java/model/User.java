@@ -13,6 +13,7 @@ package model;
 public class User {
 
 	private int id;
+	private String email;
 	private String username;
 	private String password;
 	private String role;
@@ -29,6 +30,14 @@ public class User {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getUsername() {
@@ -57,6 +66,6 @@ public class User {
 	
 	@Override
 	public String toString() {
-		return String.valueOf(id) + " " + username + " " + password + " " + role;
+		return String.valueOf(id) + " " + email + " " + username + " " + password + " " + role;
 	}
 }

@@ -17,7 +17,7 @@
 					<h:form>
 						<h:commandLink action="index">SIMPLE<blue>-</blue>BLOG</h:commandLink>
 						<div class="signin">
-							<hide1><h:outputText value="#{usersController.username}"></h:outputText></hide1>
+							<hide1><h:outputText value="#{usersController.loginUsername}"></h:outputText></hide1>
 							<hide2><h:commandLink action="#{usersController.logout()}" rendered="#{usersController.login}">logout</h:commandLink></hide2>
 							<hide2><h:commandLink action="login_user" rendered="#{!usersController.login}">login</h:commandLink></hide2>
 							<h:graphicImage name="img/user1.png" height="30px"></h:graphicImage>
