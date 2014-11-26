@@ -443,7 +443,7 @@ public class MySQL {
 		List<Comment> comments = new ArrayList<>();
 
 		try {
-			preparedStatement = connect.prepareStatement("SELECT id, name, email, comment, deleted_at, created_at FROM " + TABLE_COMMENT + " WHERE post_id = " + post_id + "ORDER BY created_at DESC");
+			preparedStatement = connect.prepareStatement("SELECT id, name, email, comment, deleted_at, created_at FROM " + TABLE_COMMENT + " WHERE post_id = " + post_id + " ORDER BY created_at DESC");
 			resultSet = preparedStatement.executeQuery();
 
 			while (resultSet.next()) {
