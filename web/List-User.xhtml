@@ -35,8 +35,9 @@
                         <h:message styleClass="error_message" id="username_message" for="username" />
                         Password : <h:inputText value="#{addUserBean.user.password}"></h:inputText>
                         Role     : <h:inputText value="#{addUserBean.user.role}"></h:inputText>
+                        Email    : <h:inputText value="#{addUserBean.user.email}"></h:inputText>
                         <h:commandButton value="ADD">
-                            <f:ajax render="user_table username_message" listener="#{addUserBean.add()}" execute="username"></f:ajax>
+                            <f:ajax render="user_table username_message" listener="#{addUserBean.add()}" execute="add_user"></f:ajax>
                         </h:commandButton>
                     </h:form>
                 </div>
