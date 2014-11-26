@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -18,7 +19,7 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "comments")
 @NamedQueries({@NamedQuery(name = "Comment.findAll", query = "SELECT c FROM Comment c"),
-                @NamedQuery(name = "Comment.findById", query = "SELECT c FROM Comment c WHERE c.od = :id"),
+                @NamedQuery(name = "Comment.findById", query = "SELECT c FROM Comment c WHERE c.id = :id"),
                 @NamedQuery(name = "Comment.findByPost", query = "SELECT c FROM Comment c WHERE c.post = :post")})
 public class Comment implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -29,9 +30,9 @@ public class Comment implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "post_id")
+    @JoinColumn(name = "post_id")
     @ManyToOne
-    private String post;
+    private Post post;
     
     @Column(name = "comment_author")
     private String name;
@@ -98,11 +99,11 @@ public class Comment implements Serializable {
         this.featured = featured;
     }
 
-    public String getPost() {
+    public Post getPost() {
         return post;
     }
 
-    public void setPost(String post) {
+    public void setPost(Post post) {
         this.post = post;
     }
 

@@ -1,13 +1,3 @@
-function deleteConfirmationBox(url) {
-    var confirm = window.confirm("Apakah Anda yakin menghapus post ini?");
-	
-    if (confirm) {
-        window.location = url;
-    } else {
-        return false;
-    }
-}
-
 function addComment(url, comment, postId) {
   if (!validateComment(comment)) {
     return false;
@@ -89,24 +79,29 @@ function validatePost() {
   return true;
 }
 
-function validateComment(comment) {
-  if (isBlank(comment.Nama.value)) {
+function validateComment() {
+      console.log("validateComment is called");
+  nama = document.getElementById("NewComment:Nama");
+  tanggal = document.getElementById("NewComment:Email");
+  konten = document.getElementById("NewComment:Komentar");
+  
+  if (isBlank(nama.value)) {
     alert("Nama Tidak Boleh Kosong");
     return false;
   }
 
-  if (isBlank(comment.Email.value)) {
+  if (isBlank(email.value)) {
     alert("Nama Tidak Boleh Kosong");
     return false;
   }
 
-  if (isBlank(comment.Komentar.value)) {
+  if (isBlank(komentar.value)) {
     alert("Komentar Tidak Boleh Kosong");
     return false;
   } 
 
   var regex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  if (!regex.test(comment.Email.value)) {
+  if (!regex.test(email.value)) {
     alert("Email Yang Dimasukkan Tidak Valid");
     return false;
   } 

@@ -1,5 +1,7 @@
 <ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-                template="./WEB-INF/templates/template.xhtml">
+                template="./WEB-INF/templates/template.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui">
 
     <ui:define name="title">
         Title
@@ -26,22 +28,31 @@
               <h2>Komentar</h2>
 
               <div id="contact-area">
-                <form method="post" action="" onsubmit="addComment(null, this, #{postController.postCurrent.id}); return false">
-                  <label for="Nama">Nama:</label>
-                  <input type="text" name="Nama" id="Nama" />
+                <h:form id="NewComment">       
+                    <h:outputLabel for="Nama" value="Nama:" />
+                    <h:inputText id="Nama" value="#{commentController.commentCurrent.name}" label="Nama" title="Nama" required="true" requiredMessage="Nama tidak boleh kosong" />
+                    
+                    <h:outputLabel for="Email" value="Email" />
+                    <h:inputText id="Email" value="#{commentController.commentCurrent.name}" label="Email" title="Email" required="true" requiredMessage="Email tidak boleh kosong" />
+                    
+                    <h:outputLabel for="Komentar" value="Komentar" />
+                    <h:inputTextarea id="Komentar" value="#{postController.postCurrent.content}" label="Komentar" title="Komentar" rows="20" cols="20" required="true"  requiredMessage="Komentar tidak boleh kosong" />
 
-                  <label for="Email">Email:</label>
-                  <input type="text" name="Email" id="Email" />
+                    <h:commandButton type="submit" value="Kirim" class="submit-button" onclick="validateComment(); return false">
+                    </h:commandButton>
+                    
+                    <h:commandButton value="Load Komentar" class="submit-button">
+                        <p:ajax update="comments" listener="#{commentController.loadComment}"/>
+                    </h:commandButton>
+                    
+                    <ul class="art-list-body" >
+                        <h:outputText id="comments" value="#{commentController.commentList}"/>
+                     </ul>
 
-                  <label for="Komentar">Komentar:</label><br />
-                  <textarea name="Komentar" rows="20" cols="20" id="Komentar"></textarea>
-
-                  <input type="submit" name="submit" value="Kirim" class="submit-button" />
-                </form>
+                    
+                </h:form>
               </div>
-
-              <ul class="art-list-body" id="comments">
-              </ul>
+              
 
             </div>
           </div>

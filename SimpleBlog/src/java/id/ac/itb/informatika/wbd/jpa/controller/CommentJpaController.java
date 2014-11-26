@@ -24,7 +24,7 @@ public class CommentJpaController {
         return emf.createEntityManager();
     }
     
-    public void create(Comment comment) throws Exception {
+    public void create(Comment comment, Long postId) throws Exception {
         EntityManager em = null;
         
         try {

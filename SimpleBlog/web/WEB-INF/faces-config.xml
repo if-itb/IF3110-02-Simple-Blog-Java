@@ -19,6 +19,11 @@
         <managed-bean-class>id.ac.itb.informatika.wbd.jpa.controller.PostJpaController</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
+    <managed-bean>
+        <managed-bean-name>commentJpa</managed-bean-name>
+        <managed-bean-class>id.ac.itb.informatika.wbd.jpa.controller.CommentJpaController</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
     
     <navigation-rule>
         <navigation-case>
