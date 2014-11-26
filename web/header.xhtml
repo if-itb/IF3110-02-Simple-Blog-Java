@@ -9,10 +9,11 @@
 <nav class="nav">
     <a style="border:none;" id="logo" href="index.xhtml"><h1>Simple<span>-</span>Blog</h1></a>
     <ul class="nav-primary">
-        <li id="user">Howdy, Guest</li>
-        <li><a href="new_post.xhtml">+ Tambah Post</a></li>
-        <li><h:link id="log_stat" value="Login" outcome="login"></h:link></li>
-        <li><h:link value="Manage User" outcome="ManageUser"></h:link></li>
+        <li><h:outputText rendered="#{cookieCheck.loggedIn}" value="Howdy, #{cookieCheck.UName}"></h:outputText></li>
+        <li><h:link rendered="#{cookieCheck.loggedIn}" value="+ Tambah Post" outcome="new_post"></h:link></li>
+        <li><h:link rendered="#{!cookieCheck.loggedIn}" value="Login" outcome="login"></h:link></li>
+        <li><h:form><h:commandLink rendered="#{cookieCheck.loggedIn}" value="Logout" action="#{logout.Logout()}"></h:commandLink></h:form></li>
+        <li><h:link rendered="#{cookieCheck.admin}" value="Manage User" outcome="ManageUser"></h:link></li>
     </ul>
 </nav>
 

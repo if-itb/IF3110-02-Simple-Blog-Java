@@ -18,4 +18,9 @@
         <managed-bean-class>paket.Logout</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
+    <managed-bean>
+        <managed-bean-name>cookieCheck</managed-bean-name>
+        <managed-bean-class>paket.CookieCheck</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
 </faces-config>
