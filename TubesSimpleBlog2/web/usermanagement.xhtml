@@ -27,17 +27,13 @@ and open the template in the editor.
 				<br/><h2> #{user.userID} </h2>  
 			<br/><h:outputText value="#{user.username}"></h:outputText>
 			<br/> <h:outputText value="#{user.role}"></h:outputText>
-			<br/><h:commandLink action="#{user.deleteUser()}" value="Delete">
-				<f:param name="iduser" value="#{user.userID}" />
-			</h:commandLink>
-			<br/><h:commandLink action="#{user.updateUser()}" value="Update">
+			<br/><h:commandLink action="#{user.deleteUser(user.userID)}" value="Delete"></h:commandLink>
+			<br/><h:commandLink action="updateuser" value="Update">
 				<f:param name="iduser" value="#{user.userID}" />
 			</h:commandLink>
 			
 		</c:forEach>
-		<br/><h:commandLink action="#{user.createUser()}" value="Create">
-				<f:param name="iduser" value="#{user.userID}" />
-		</h:commandLink>
+		<br/><h:commandLink action="createuser" value="Create"></h:commandLink>
 		</h:form>
 		<div class="footer"> rita | cilvia | linda </div>
 		
