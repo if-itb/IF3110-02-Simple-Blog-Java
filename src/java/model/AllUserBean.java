@@ -19,13 +19,13 @@ public class AllUserBean {
      * Creates a new instance of AllUserBean
      */
     public AllUserBean() {
-        allUser = new ArrayList<UserBean> (DAO.DAOFactory.getInstance("javabase.jdbc").getUserDAO().list());
     }
 
     /**
      * @return the allUser
      */
     public ArrayList <UserBean> getAllUser() {
+        allUser = new ArrayList<UserBean> (DAO.DAOFactory.getInstance("javabase.jdbc").getUserDAO().list());
         return allUser;
     }
 
@@ -34,11 +34,6 @@ public class AllUserBean {
      */
     public void setAllUser(ArrayList <UserBean> allUser) {
         this.allUser = allUser;
-    }
-    
-    public void refresh() {
-        //TODO database connection here
-        allUser = new ArrayList<UserBean> (DAO.DAOFactory.getInstance("javabase.jdbc").getUserDAO().list());
     }
     
 }
