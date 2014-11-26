@@ -12,13 +12,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />	
         <h:outputStylesheet name="bootstrap/css/bootstrap.css" />
         <h:outputStylesheet name="bootstrap/css/custom.css" />
-        <title>Simple Blog | Edit Post</title>
+        <title>Simple Blog | Sign In</title>
     </h:head>
     
     <h:body>
         <div class="container-fluid">
       
-      <h:form><div class="row" id="header">
+        <h:form><div class="row" id="header">
           <div class="row">
             <div class="col-md-6 col-xs-6 col-sm-6 col-lg-6">
               <p class="header-logo resize"><a href="index.xhtml">Simple Blog</a></p>
@@ -62,63 +62,42 @@
               </div>
         </div></h:form>
 
-      <div class="row">
+        <div class="row">
 
-        <div class="col-md-10 col-md-offset-1">
+        <div class="col-md-4 col-md-offset-4">
           <div class="edit"></div>
-          <div class="post">
-            <div class="post-title">Edit Post</div>
-            <h:form role="form">              
-              #{postedit.execute(param['id'])}
-              <div class="form-group">
-                <label for="exampleInputEmail1">Title</label>
-                <h:inputText styleClass="form-control" value="#{postedit.pos.judul}" />
-              </div>
-              <div class="form-group">
-                <label for="exampleInputPassword1">Date</label>
-                <h:inputText styleClass="form-control" value="#{postedit.pos.tanggal}" />
-              </div>
-              <div class="form-group">
-                <label for="exampleInputPassword1">Content</label>
-                <h:inputTextarea styleClass="form-control" rows="5" value="#{postedit.pos.konten}" />
-              </div>
-              <div class="form-group">
-<<<<<<< HEAD
-                 <label for="exampleInputPassword1">Status</label> 
-                 <h:selectOneRadio value="#{postedit.pos.status}" styleClass="inlineRadioButtons" >
-                     <label><f:selectItem itemValue="published" itemLabel="Publish" /></label>
-                     <label><f:selectItem itemValue="unpublished" itemLabel="Unpublish" /></label>
-                 </h:selectOneRadio>	
-=======
-                 <c:choose>
-                    <c:when test="${cookie.cRole.value eq 'Admin'}">
-                        <label for="exampleInputPassword1">Status</label> 
-                        <h:selectOneRadio value="#{post.status}" styleClass="inlineRadioButtons">
-                            <label><f:selectItem itemValue="publish" itemLabel="Publish" /></label>
-                            <label><f:selectItem itemValue="unpublished" itemLabel="Unpublish" /></label>
-                        </h:selectOneRadio>
-                    </c:when>
-                    <c:otherwise>
-                    </c:otherwise>
-                </c:choose>	
->>>>>>> 5cec5b02e25dc9b925df4d6adc1b51369c2a5b14
-              </div>
-                <h:commandButton type="submit" styleClass="btn btn-default" value="Submit" action="#{postedit.edit()}" />
-            </h:form>
+            <div class="login">
+                <h:form styleClass="form-horizontal" role="form" id="form1" onsubmit="return loginValidation();">
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+                        <div class="col-sm-10">
+                          <h:inputText styleClass="form-control" value="#{login.email}" id="Email" />
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-2 control-label">Password</label>
+                        <div class="col-sm-9 col-xs-9 pull-right">
+                          <h:inputSecret styleClass="form-control" value="#{login.password}" id="Password" />
+                        </div>
+                    </div>
+                    
+                    <h:commandButton type="submit" styleClass="btn btn-lg btn-block read-more center-block" value="Sign In" action="#{login.startLogin}" />
+                </h:form>
+            </div>
+        </div>
 
+      </div>
+
+        <div class="row" id="footer">
+          <div class="footer-text">
+            <p class="text-right">IF3110 Pengembangan Aplikasi Berbasis Web</p>
+            <p class="text-right">Arina Listyarini Dwiastuti (13512006) | Gifari Kautsar (13512020) | Indam Muhammad (13512026)</p>
           </div>
         </div>
-
       </div>
-
-      <div class="row" id="footer">
-        <div class="footer-text">
-          <p class="text-right">IF3110 Pengembangan Aplikasi Berbasis Web</p>
-          <p class="text-right">Arina Listyarini Dwiastuti (13512006) | Gifari Kautsar (13512020) | Indam Muhammad (13512026)</p>
-        </div>
-      </div>
-    </div>
-        <h:outputScript name="bootstrap/js/custom.js" />
+        
         <h:outputScript name="bootstrap/js/bootstrap.min.js" />
+        <h:outputScript name="bootstrap/js/custom.js" />
     </h:body>
 </html>

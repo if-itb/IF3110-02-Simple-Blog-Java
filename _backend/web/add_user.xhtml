@@ -12,7 +12,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />	
         <h:outputStylesheet name="bootstrap/css/bootstrap.css" />
         <h:outputStylesheet name="bootstrap/css/custom.css" />
-        <title>Simple Blog | Edit Post</title>
+        <title>Simple Blog | Add Member</title>
     </h:head>
     
     <h:body>
@@ -67,44 +67,27 @@
         <div class="col-md-10 col-md-offset-1">
           <div class="edit"></div>
           <div class="post">
-            <div class="post-title">Edit Post</div>
-            <h:form role="form">              
-              #{postedit.execute(param['id'])}
+            <div class="post-title">Add User</div>
+            <h:form role="form">
               <div class="form-group">
-                <label for="exampleInputEmail1">Title</label>
-                <h:inputText styleClass="form-control" value="#{postedit.pos.judul}" />
+                <label for="exampleInputEmail1">Email</label>
+                <h:inputText styleClass="form-control" binding="#{email}" />
               </div>
               <div class="form-group">
-                <label for="exampleInputPassword1">Date</label>
-                <h:inputText styleClass="form-control" value="#{postedit.pos.tanggal}" />
+                <label for="exampleInputPassword1">Name</label>
+                <h:inputText styleClass="form-control" binding="#{name}" />
               </div>
               <div class="form-group">
-                <label for="exampleInputPassword1">Content</label>
-                <h:inputTextarea styleClass="form-control" rows="5" value="#{postedit.pos.konten}" />
+                <label for="exampleInputPassword1">Password</label>
+                <h:inputText styleClass="form-control" binding="#{password}" />
               </div>
-              <div class="form-group">
-<<<<<<< HEAD
-                 <label for="exampleInputPassword1">Status</label> 
-                 <h:selectOneRadio value="#{postedit.pos.status}" styleClass="inlineRadioButtons" >
-                     <label><f:selectItem itemValue="published" itemLabel="Publish" /></label>
-                     <label><f:selectItem itemValue="unpublished" itemLabel="Unpublish" /></label>
-                 </h:selectOneRadio>	
-=======
-                 <c:choose>
-                    <c:when test="${cookie.cRole.value eq 'Admin'}">
-                        <label for="exampleInputPassword1">Status</label> 
-                        <h:selectOneRadio value="#{post.status}" styleClass="inlineRadioButtons">
-                            <label><f:selectItem itemValue="publish" itemLabel="Publish" /></label>
-                            <label><f:selectItem itemValue="unpublished" itemLabel="Unpublish" /></label>
-                        </h:selectOneRadio>
-                    </c:when>
-                    <c:otherwise>
-                    </c:otherwise>
-                </c:choose>	
->>>>>>> 5cec5b02e25dc9b925df4d6adc1b51369c2a5b14
-              </div>
-                <h:commandButton type="submit" styleClass="btn btn-default" value="Submit" action="#{postedit.edit()}" />
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Role</label>
+                    <h:inputText styleClass="form-control" binding="#{role}" />
+                </div>
+                <h:commandButton type="submit" styleClass="btn btn-default" value="Submit" action="#{postController.addMember(email.value, name.value, password.value, role.value)}"/>
             </h:form>
+
 
           </div>
         </div>

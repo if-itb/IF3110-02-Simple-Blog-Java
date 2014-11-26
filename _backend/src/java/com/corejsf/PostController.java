@@ -67,8 +67,30 @@ public class PostController {
         }
     }
     
+<<<<<<< HEAD
     public String deletePost(int id){
         System.out.println("MASUK "+id);
+=======
+    public void addMember (String email, String name, String password, String role){
+        try{
+            Connection con = getConnection();
+            String query = "INSERT INTO member (Email, Name, Password, Role) "
+                    + "VALUES (?, ?, ?, ?)";
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setString(1, email);            
+            ps.setString(2, name);
+            ps.setString(3, password);
+            ps.setString(4, role);        
+            ps.executeUpdate();
+            FacesContext.getCurrentInstance().getExternalContext().redirect("user.xhtml");
+            con.close();
+        } catch (IOException | SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+    
+    public void deletePost(int id){
+>>>>>>> 5cec5b02e25dc9b925df4d6adc1b51369c2a5b14
         try{
             Connection con = getConnection();
             PreparedStatement ps = con.prepareStatement("DELETE FROM post WHERE id=?");
