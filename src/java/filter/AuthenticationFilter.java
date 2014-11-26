@@ -123,11 +123,13 @@ public class AuthenticationFilter implements Filter {
             // TODO ganti ini dengan navigation bean kalau navigation bean sudah selesai
             String reqURI = req.getRequestURI();
             reqURI = reqURI.substring(reqURI.indexOf("/faces/")+"/faces/".length());
-            if ( reqURI.startsWith(nc.gotoLogin())
+            if (reqURI.startsWith(nc.gotoLogin())
                     || reqURI.startsWith(nc.gotoListPost())
                     || reqURI.startsWith("css/")
                     || reqURI.startsWith(nc.gotoViewPost()))
                    chain.doFilter(request, response);
+            else if (user==null)
+                res.sendRedirect(req.getContextPath() +"/faces/" +nc.gotoLogin());  // Anonymous user. Redirect to login page
             else if ((user.getRole() == UserBean.getOwner())
                         && (reqURI.startsWith(nc.gotoEditPost())
                             || reqURI.startsWith(nc.gotoAddPost())
@@ -142,8 +144,9 @@ public class AuthenticationFilter implements Filter {
                 chain.doFilter(request, response);
             else if (user.getRole() == UserBean.getAdmin())
                 chain.doFilter(request, response);
-            else
+            else {
                    res.sendRedirect(req.getContextPath() +"/faces/" +nc.gotoLogin());  // Anonymous user. Redirect to login page
+            }
         }
         catch(Throwable t) {
             System.out.println( t.getMessage());
