@@ -119,13 +119,6 @@ public class Post {
     public void setPID(int PID) {
         this.PID = PID;
     }
-    
-<<<<<<< HEAD
-    public void tambahPost()
-    {
-        
-    }
-=======
     public Post fetchPost(int id) throws SQLException {
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -164,5 +157,4 @@ public class Post {
 //        PID = post_id;
 //        return "View-Post.xhtml";
 //    }
->>>>>>> f187f1fdca6e243f3f36a82f6c730f6af75181fc
 }

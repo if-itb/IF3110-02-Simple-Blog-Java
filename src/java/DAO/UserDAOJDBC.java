@@ -61,12 +61,12 @@ public class UserDAOJDBC implements UserDAO {
     // Actions ------------------------------------------------------------------------------------
 
     @Override
-    public User find(Long id) throws DAOException {
+    public UserBean find(Long id) throws DAOException {
         return find(SQL_FIND_BY_ID, id);
     }
 
     @Override
-    public User find(String email, String password) throws DAOException {
+    public UserBean find(String email, String password) throws DAOException {
         return find(SQL_FIND_BY_EMAIL_AND_PASSWORD, email, password);
     }
 
@@ -77,11 +77,11 @@ public class UserDAOJDBC implements UserDAO {
      * @return The user from the database matching the given SQL query with the given values.
      * @throws DAOException If something fails at database level.
      */
-    private User find(String sql, Object... values) throws DAOException {
+    private UserBean find(String sql, Object... values) throws DAOException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        User user = null;
+        UserBean user = null;
 
         try {
             connection = daoFactory.getConnection();
@@ -100,11 +100,11 @@ public class UserDAOJDBC implements UserDAO {
     }
 
     @Override
-    public List<User> list() throws DAOException {
+    public List<UserBean> list() throws DAOException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        List<User> users = new ArrayList<User>();
+        List<UserBean> users = new ArrayList<UserBean>();
 
         try {
             connection = daoFactory.getConnection();
@@ -123,7 +123,7 @@ public class UserDAOJDBC implements UserDAO {
     }
 
     @Override
-    public void create(User user) throws IllegalArgumentException, DAOException {
+    public void create(UserBean user) throws IllegalArgumentException, DAOException {
         if (user.getId() != null) {
             throw new IllegalArgumentException("User is already created, the user ID is not null.");
         }
@@ -161,7 +161,7 @@ public class UserDAOJDBC implements UserDAO {
     }
 
     @Override
-    public void update(User user) throws DAOException {
+    public void update(UserBean user) throws DAOException {
         if (user.getId() == null) {
             throw new IllegalArgumentException("User is not created yet, the user ID is null.");
         }
@@ -277,7 +277,7 @@ public class UserDAOJDBC implements UserDAO {
      * @return The mapped User from the current row of the given ResultSet.
      * @throws SQLException If something fails at database level.
      */
-    private static User map(ResultSet resultSet) throws SQLException {
+    private static UserBean map(ResultSet resultSet) throws SQLException {
         User user = new User();
         user.setId(resultSet.getLong("id"));
         user.setEmail(resultSet.getString("email"));

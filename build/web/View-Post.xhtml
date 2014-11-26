@@ -18,38 +18,23 @@ and open the template in the editor.
             <ui:define name="content">
                 <section class="post">
                     <header class="post-header">
-<<<<<<< HEAD
-                        <time class="post-meta">#{ListPost.fetchPost().date}</time>
-                        <h2 class="post-title">#{ListPost.fetchPost().judul}</h2>
-
-                        <p class="post-meta">
-                            By #{ListPost.fetchPost().author} 
-=======
                         <h2 class="post-title">#{Post.fetchPost(param['id']).judul}</h2>
 
                         <p class="post-meta">
                             By #{Post.fetchPost(param['id']).author}
                             | <time>#{Post.fetchPost(param['id']).date}</time>
->>>>>>> origin/master
                         </p>
                     </header>
 
                     <div class="post-description">
                         <p>
-<<<<<<< HEAD
-                            #{ListPost.fetchPost().judul}
-=======
                             #{Post.fetchPost(param['id']).konten}
->>>>>>> origin/master
                         </p>
                           
                     </div>
                 </section>
                 <h1 class="content-subhead">Komentar</h1>
                 <section class="komentar">
-<<<<<<< HEAD
-                    
-=======
                     <form class="pure-form" method="post" id="comment_form">
                         <label for="Nama">Nama:</label>
                         <input type="text" name="Nama" id="Nama"/>
@@ -70,7 +55,6 @@ and open the template in the editor.
                             </p>
                         </li>
                     </ul>
->>>>>>> origin/master
                 </section>
             </ui:define>
         </ui:composition>>
