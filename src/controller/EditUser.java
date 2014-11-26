@@ -1,7 +1,13 @@
 package controller;
 
 import javax.faces.bean.ManagedBean;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import javax.faces.bean.RequestScoped;
+
+import entities.Post;
 
 @ManagedBean
 @RequestScoped
@@ -133,6 +139,46 @@ public class EditUser {
 		System.out.println(query);
 
 		dbUtil.execute(query);
+	}
+	
+	public void updateUser(int i) {
+		DatabaseUtility dbUtil = DatabaseUtility.getInstance();
+		String un="select * from user where id = " + i;
+		ResultSet rs = dbUtil.execute(un);
+		try {
+			String username_temp= rs.getString(2);
+			String password_temp= rs.getString(3);
+			String query = "UPDATE user SET username = '"
+					+ username_temp
+					+ "', set password = '"	
+					+ password_temp
+					+"', set nama ='"
+					+ this.getName()
+					+"', set email ='"
+					+ this.getEmail()
+					+"', set role = "
+					+this.getRole()
+					+ "WHERE id = " + i;
+			System.out.println(query);
+			dbUtil.execute(query);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.err.println(e);
+			System.exit(30);			
+		}				
+		
+		/*String query = "INSERT INTO user (username, password, nama, email, role) "
+				+ "VALUES ('"
+				+ this.getUsername()
+				+ "','"
+				+ this.getPassword()
+				+ "','"
+				+ this.getName()
+				+ "',"
+				+ "'"
+				+ this.getEmail()
+				+ "'"
+				+ "," + this.getRole() + ")";*/
 	}
 	
 }

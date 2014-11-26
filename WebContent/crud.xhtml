@@ -44,8 +44,11 @@
 								<h:commandButton value="Delete"
 									action="#{editUser.deleteUser(user.userId)}" />
 							</h:form></td>
+						<td><h:form>
+								<h:commandButton value="Edit"
+									action="#{editUser.updateUser(user.userId)}" />
+							</h:form></td>
 
-						<td><button type="button">Edit</button></td>
 					</tr>
 				</ui:repeat>
 				<tr>
@@ -60,7 +63,7 @@
 								<f:selectItem itemLabel="Editor" itemValue="20" />
 								<f:selectItem itemLabel="Admin" itemValue="30" />
 							</h:selectOneMenu></td>
-						<td><h:commandButton value="Add" action="#{editUser.addUser}" /></td>						
+						<td><h:commandButton value="Add" action="#{editUser.addUser}" /></td>
 					</h:form>
 				</tr>
 			</table>
