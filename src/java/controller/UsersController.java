@@ -74,7 +74,7 @@ public class UsersController implements Serializable {
 		MySQL mysql = new MySQL();
 		
 		mysql.createUser(username, password, role);
-		FacesContext.getCurrentInstance().getExternalContext().redirect("/SimpleBlog/faces/user/index.xhtml");
+		FacesContext.getCurrentInstance().getExternalContext().redirect("/SimpleBlog/faces/view_user.xhtml");
 	}
 
 	public User getUser(int id) {
@@ -93,7 +93,7 @@ public class UsersController implements Serializable {
 		MySQL mysql = new MySQL();
 		
 		mysql.updateUser(id, username, password, role);
-		FacesContext.getCurrentInstance().getExternalContext().redirect("/SimpleBlog/faces/user/index.xhtml");
+		FacesContext.getCurrentInstance().getExternalContext().redirect("/SimpleBlog/faces/view_user.xhtml");
 	}
 
 	public void deleteUser(int id) {
@@ -104,7 +104,7 @@ public class UsersController implements Serializable {
 
 	public void viewUser(int id) throws IOException {
 		active_id = id;
-		FacesContext.getCurrentInstance().getExternalContext().redirect("/SimpleBlog/faces/user/view.xhtml");
+		FacesContext.getCurrentInstance().getExternalContext().redirect("/SimpleBlog/faces/view_user.xhtml");
 	}
 	
 	public void editUser(int id, String username, String password, String role) throws IOException {
@@ -112,7 +112,7 @@ public class UsersController implements Serializable {
 		active_username = username;
 		active_password = password;
 		active_role = role;
-		FacesContext.getCurrentInstance().getExternalContext().redirect("/SimpleBlog/faces/user/edit.xhtml");
+		FacesContext.getCurrentInstance().getExternalContext().redirect("/SimpleBlog/faces/edit_user.xhtml");
 	}
 	
 	public void login(String username, String password) throws IOException {
@@ -161,7 +161,7 @@ public class UsersController implements Serializable {
 		
 		FacesContext.getCurrentInstance().getExternalContext().redirect("/SimpleBlog/faces/index.xhtml");
 		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-		FacesContext.getCurrentInstance().getExternalContext().redirect("/user/login.xhtml");
+		FacesContext.getCurrentInstance().getExternalContext().redirect("/login_user.xhtml");
 	}
 	
 }

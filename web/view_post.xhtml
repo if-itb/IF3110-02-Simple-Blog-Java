@@ -6,39 +6,36 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         <title>View Page</title>
-		<h:outputStylesheet name="../../assets/css/mystyle.css" />
+		<h:outputStylesheet library="css" name="mystyle.css"></h:outputStylesheet>
     </h:head>
     <h:body>
         <div class="wrapper">
 			<div class="top">
-				<div class="title">
-					<a href="home.html">SIMPLE<blue>-</blue>BLOG</a>            
-					<div class="signin">
-						<hide1><a href="#">username</a></hide1>
-						<hide2><a href="#">logout</a></hide2>
-						<a href="#"><img src="../../assets/img/user1.png" onmouseover="this.src='../../assets/img/user_blue1.png'" onmouseout="this.src='../../assets/img/user1.png'" height="20"></img></a>  
-					</div>           
-				</div>
+				<h:form>
+					<div class="title">           
+					<h:commandLink action="index">SIMPLE<blue>-</blue>BLOG</h:commandLink>            
+						<div class="signin">
+							<hide1><a href="#">username</a></hide1>
+							<hide2><h:commandLink action="index">logout</h:commandLink></hide2>
+							<h:commandLink action="index"><h:graphicImage name="img/user1.png" height="30px"></h:graphicImage></h:commandLink>  
+						</div>           
+					</div>
+				</h:form>
 			</div><!--end top-->
-			<hr  margin-right="30%"></hr>
-			<div class="icon">
-				<a href="#"><img src="../../assets/img/add1.png" onmouseover="this.src='../../assets/img/add2.png'" onmouseout="this.src='../../assets/img/add1.png'" height="30px" title="add new post"></img></a>
-				<a href="#"><img src="../../assets/img/restore1.png" onmouseover="this.src='../../assets/img/restore2.png'" onmouseout="this.src='../../assets/img/restore1.png'" height="30px" title="restore post"></img></a>
-				<a href="#"><img src="../../assets/img/hide1.png" onmouseover="this.src='../../assets/img/hide2.png'" onmouseout="this.src='../../assets/img/hide1.png'" height="30px" title="show unpublished article"></img></a>
-				<a href="#"><img src="../../assets/img/adduser1.png" onmouseover="this.src='../../assets/img/adduser2.png'" onmouseout="this.src='../../assets/img/adduser1.png'" height="30px" title="manage users"></img></a>
-			</div>
+			<hr margin-right="30%"></hr>
+            
 			<div class="content">
 				<h:form>
 					<h:inputHidden value="#{postsController.active_id}" binding="#{viewpostid}" ></h:inputHidden>     	
 					<div class="judulpost">
 						<h:outputText id="title" value="#{postsController.getPost(viewpostid.value).title}" /><br></br>
-					   <h:outputText id="date" value="#{postsController.getPost(viewpostid.value).date}" />
+					</div>
+					<div class="tanggalpost">
+						<h:outputText id="date" value="#{postsController.getPost(viewpostid.value).date}" />
 					</div>
 					<div class="isipost">
 						<h:outputText id="content" value="#{postsController.getPost(viewpostid.value).content}" />
-						<br/>
-						<br/>
-						<br/>
+						<br></br><br></br><br></br>
 						<hr></hr>
 						<div class="h1komentar">
 							COMMENTS
@@ -48,26 +45,20 @@
 							<form method="post" action="#">
 								<div class="textfield">
 									<h:outputLabel for="name" value="Name: " />
-									<br></br>
-									<h:inputText id="name" binding="#{createname}" required="true" requiredMessage="Please enter your name"></h:inputText>
-									<br></br>
+									<br></br><h:inputText id="name" binding="#{createname}" required="true" requiredMessage="Please enter your name"></h:inputText>
+										<br></br>
 									<h:outputLabel for="email" value="E-mail: " />
-									<br></br>
-									<h:inputText id="email" binding="#{createemail}" required="true" requiredMessage="Please enter your e-mail" validatorMessage="email tidak valid">
-										<!--<f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$"/>-->
-									</h:inputText>
-									<br></br>
-									<h:outputLabel for="comment" value="Comment: " />
-									<br></br>
-									<h:inputTextarea id="comment" binding="#{createcomment}" required="true" requiredMessage="Please enter your comment" ></h:inputTextarea>
+									<br></br><h:inputText id="email" binding="#{createemail}" required="true" requiredMessage="Please enter your e-mail" ></h:inputText>
+										<br></br>
+										<h:outputLabel for="comment" value="Comment: " /><br></br>
+									<h:inputTextarea id="comment" binding="#{createcomment}" required="true" requiredMessage="Please enter your comment" rows="6" cols="50"></h:inputTextarea>
 								</div>
-								<h:commandButton id="commentCreate" onclick="return validateEmail()" value="Create" action="#{commentsController.createComment(viewpostid.value, createname.value, createemail.value, createcomment.value)}">
+								<h:commandButton onclick="return validateEmail()" id="commentCreate" value="Create" action="#{commentsController.createComment(viewpostid.value, createname.value, createemail.value, createcomment.value)}">
 									<f:ajax execute="@form" render="@form"></f:ajax>
-								</h:commandButton>
+							</h:commandButton>
 							</form>
 						</div>
-						<br/>
-						<hr/>
+						<br></br><hr></hr>
 						<ui:repeat id="commentTable" value="#{commentsController.getAllComments(viewpostid.value)}" var="comment">
 							<div class="komentarbox">
 								<h:inputHidden value="#{comment.id}" binding="#{commentid}" />
@@ -76,9 +67,7 @@
 										<b><h:outputText value="#{comment.name}" binding="#{commentname}" ></h:outputText></b>
 									</div>
 									<div class="komentartime">
-										<h:outputText value="#{comment.date}" binding="#{commentdate}" >
-											<f:convertDateTime type="date" dateStyle="long" timeZone="GMT+7"/>
-										</h:outputText>
+										<h:outputText value="#{comment.date}" binding="#{commentdate}" ></h:outputText>
 									</div>
 								</div>
 								<div class="komentarcontent">
@@ -86,13 +75,12 @@
 								</div>
 							</div>
 						</ui:repeat>
-					</div>
-					<div class="clear"></div>
-				</h:form>
-			</div> <!-- end content -->
-		</div> <!-- end wrapper -->
-		<hr />
-		<script type="text/javascript">
+       </div> 
+        </h:form>
+    </div> <!-- end content -->
+
+</div> <!-- end wrapper -->
+				<script type="text/javascript">
 			function validateEmail() {
 				console.log('ok');
 				var x = document.getElementById('j_idt7:email');

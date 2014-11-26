@@ -54,6 +54,7 @@ body{
 .icon{
 	text-align: right;
 	margin-right:5%;
+        z-index: 2;
 }
 .content{
 	min-height: 100%;
@@ -90,6 +91,7 @@ hide1{
 	padding-bottom: 1%;
 	text-align: center;
 	border-radius: 4%;
+        z-index:-1; 
 }
 hide2{
 	display: none;
@@ -98,6 +100,7 @@ hide2{
 	text-align: center;
 	border-radius: 4%;
 	color:#71D2F0;
+        z-index: -1;
 }
 .signin:hover > hide1{
 	display: none;
@@ -157,7 +160,7 @@ opt{
 	padding-bottom: 2%;
 	font-family: defaultfont;
 	text-align: center;
-	font-size: 30px;
+	font-size: 20px;
 	border: ridge;
 	border-radius: 5%;
 }
@@ -247,12 +250,20 @@ opt{
 	font-family: defaultfont;
 	font-size: 65px;
 	padding-top: 3%;
-	padding-bottom: 4%;
+	padding-bottom: 2%;
 }
 .isipost{
 	font-family: post_content;
 	width: 80%;
 	margin-left:10%;
+}
+.tanggalpost{
+    text-align: center;
+	margin-left: 10%; 
+	width: 80%;
+	font-family: defaultfont;
+	font-size: 15px;
+	padding-bottom: 4%;
 }
 
 /*------------CONTENT-KOMENTAR POST------------*/
@@ -268,6 +279,7 @@ opt{
 	margin-left: 5%;
 	overflow: hidden;
 	margin-top: 4%;
+        margin-bottom: 3%;
 
 }
 .komentarattr{

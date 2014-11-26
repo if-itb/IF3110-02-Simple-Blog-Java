@@ -6,72 +6,59 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         <title>Publish Page</title>
-		<h:outputStylesheet name="../../assets/css/mystyle.css" />
+        <h:outputStylesheet library="css" name="mystyle.css"></h:outputStylesheet>
     </h:head>
+	
     <h:body>
-        <div class="wrapper">
-            
+        <div class="wrapper">            
             <div class="top">
                 <div class="title">
-                    <a href="#">SIMPLE<blue>-</blue>BLOG</a>            
-                    <div class="signin">
-                        <hide1><a href="#">username</a></hide1>
-                        <hide2><a href="#">logout</a></hide2>
-                        <a href="#"><img src="../../assets/img/user1.png" onmouseover="this.src='../../assets/img/user_blue1.png'" onmouseout="this.src='../../assets/img/user1.png'" height="20"></img></a>  
-                    </div>           
+					<h:form>
+						<h:commandLink action="index">SIMPLE<blue>-</blue>BLOG</h:commandLink>                               
+						<div class="signin">
+							<hide1><a href="#">username</a></hide1>
+							<hide2><h:commandLink action="index">logout</h:commandLink></hide2>
+							<h:commandLink action="create_post.xhtml"><h:graphicImage name="img/user1.png" height="30px"></h:graphicImage></h:commandLink>  
+						</div>    
+					</h:form>       
                 </div>
             </div><!--end top-->
             <hr  margin-right="30%"></hr>
-            <div class="icon">
-                <a href="#"><img src="../../assets/img/add1.png" onmouseover="this.src='../../assets/img/add2.png'" onmouseout="this.src='../../assets/img/add1.png'" height="30px" title="add new post"></img></a>
-                <a href="#"><img src="../../assets/img/restore1.png" onmouseover="this.src='../../assets/img/restore2.png'" onmouseout="this.src='../../assets/img/restore1.png'" height="30px" title="restore post"></img></a>
-                <a href="#"><img src="../../assets/img/hide1.png" onmouseover="this.src='../../assets/img/hide2.png'" onmouseout="this.src='../../assets/img/hide1.png'" height="30px" title="show unpublished article"></img></a>
-                <a href="#"><img src="../../assets/img/adduser1.png" onmouseover="this.src='../../assets/img/adduser2.png'" onmouseout="this.src='../../assets/img/adduser1.png'" height="30px" title="manage users"></img></a>
-
-            </div>
+            
             <div class="content">
                 <h:form>
-                <ui:repeat value="#{postsController.allUnpublishedPosts}" var="post">
-
-                    <h:inputHidden value="#{post.id}" binding="#{publishpostid}" />
-                    
-                    
+					<ui:repeat value="#{postsController.allUnpublishedPosts}" var="post">
+						<h:inputHidden value="#{post.id}" binding="#{publishpostid}" />			
+						<div class="post">
+							<div class="post_attr">
+								<div class="post_title">
+									<h:outputText value="#{post.title}" binding="#{publishposttitle}" ></h:outputText>
+								</div>
+								<div class="post_date">
+									<h:outputText value="#{post.date}" binding="#{publishpostdate}" ></h:outputText>
+								</div>
+							</div>
+							<div class="post_content">
+								<h:outputText value="#{post.content}" binding="#{publishpostcontent}" ></h:outputText>
+								<br></br>
+								<opt>
+									<h:commandLink value="Edit" action="#{postsController.editPost(publishpostid.value, publishposttitle.value, publishpostdate.value, publishpostcontent.value, false)}" />
+									| 
+									<h:commandLink value="Publish" action="#{postsController.updatePost(publishpostid.value, publishposttitle.value, publishpostdate.value, publishpostcontent.value, true)}" ></h:commandLink>
+								</opt>
+							</div>
+						</div>
+					</ui:repeat>
+				</h:form>
+			</div>
 			
-                <div class="post">
-                    <div class="post_attr">
-                        <div class="post_title">
-                            <h:outputText value="#{post.title}" binding="#{publishposttitle}" ></h:outputText>
-                        </div>
-                        <div class="post_date">
-                            <h:outputText value="#{post.date}" binding="#{publishpostdate}" ></h:outputText>
-                        </div>
-                    </div>
-                    <div class="post_content">
-                        <h:outputText value="#{post.content}" binding="#{publishpostcontent}" ></h:outputText>
-                        <br></br>
-                        <opt>
-                            <h:commandLink value="Edit" action="#{postsController.editPost(publishpostid.value, publishposttitle.value, publishpostdate.value, publishpostcontent.value, false)}" />
-                            | 
-                            <h:commandLink value="Publish" action="#{postsController.updatePost(publishpostid.value, publishposttitle.value, publishpostdate.value, publishpostcontent.value, true)}" ></h:commandLink>
-                        </opt>
-                    </div>
-                </div>
-
-                <div class="clear"></div>
-                    </ui:repeat>
-		</h:form>
-                </div> <!-- end content -->
-
-<!--            <div class="footer">
-                <hr></hr>
-                Chrestella Stephanie <br></br>
-                Christ Angga Saputra <br></br>
-                Willy <br></br>
-            </div>-->
-            
-        </div> <!-- end wrapper -->
-        
-        
-		
+			<!-- end content -->
+			<div class="footer">
+                <hr />
+				Chrestella Stephanie <blue>-</blue> 13512005<br />
+				Christ Angga Saputra <blue>-</blue> 13512019<br />
+				Willy <blue>-</blue> 13512065<br />
+            </div>
+        </div> <!-- end wrapper -->		
     </h:body>
 </html>
