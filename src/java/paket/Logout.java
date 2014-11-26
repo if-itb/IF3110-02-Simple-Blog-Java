@@ -4,6 +4,7 @@
  */
 package paket;
 
+import java.io.IOException;
 import java.io.Serializable;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.Cookie;
@@ -20,7 +21,7 @@ public class Logout implements Serializable{
     /**
      * Creates a new instance of Logout
      */
-    public void Logout() {
+    public void Logout() throws IOException {
         FacesContext facesContext = FacesContext.getCurrentInstance();
         HttpServletRequest request = (HttpServletRequest) facesContext.getExternalContext().getRequest();
         
@@ -36,5 +37,7 @@ public class Logout implements Serializable{
         //ivalidate session
         HttpSession session = request.getSession();
         session.invalidate();
+        
+        FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
     }
 }
