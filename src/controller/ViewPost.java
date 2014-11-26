@@ -1,5 +1,7 @@
 package controller;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
@@ -8,10 +10,12 @@ import java.util.Date;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 
 import entities.Comment;
 import entities.Post;
+import entities.UserData;
 
 @ManagedBean
 @RequestScoped
@@ -20,6 +24,50 @@ public class ViewPost {
 	private String name, email, comment;
 
 	private Post post;
+
+	@ManagedProperty(value = "#{userData}")
+	UserData userData;
+
+	public void setUserData(UserData ud) {
+		userData = ud;
+	}
+
+	/**
+	 * 
+	 * @param id_user
+	 * @return posts of id_user
+	 */
+	public List<Post> getOwnerPostList() {
+		List<Post> result = new ArrayList<>();
+
+		Connection con = DatabaseUtility.getInstance().getLiveConnection();
+
+		ResultSet rs;
+		try {
+			String idPostQuery = "SELECT * FROM `post` WHERE `is_deleted` = 0 AND `is_published` = 1 AND `id_user` = ?";
+
+			PreparedStatement pstmt = con.prepareStatement(idPostQuery);
+			pstmt.setInt(1, userData.getDetails().getUserId());
+			pstmt.execute();
+			rs = pstmt.getResultSet();
+
+			while (rs.next()) {
+				Post post = new Post();
+				post.setId(rs.getInt(1));
+				post.setTitle(rs.getString(3));
+				post.setContent(rs.getString(4));
+				post.setDate(rs.getDate(5));
+				result.add(post);
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println("Error in getPostList(id_user)");
+			e.printStackTrace();
+		}
+
+		return result;
+	}
 
 	public String postComment() {
 		DatabaseUtility dbUtil = DatabaseUtility.getInstance();

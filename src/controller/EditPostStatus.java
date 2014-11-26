@@ -9,11 +9,11 @@ import javax.faces.bean.RequestScoped;
 public class EditPostStatus {
 	private int id;
 
-	public void delete() {
+	public void delete(int temp_id) {
 		DatabaseUtility dbUtil = DatabaseUtility.getInstance();
 
 		String query = "UPDATE post SET id_deleted = 1 WHERE id = "
-				+ this.getId();
+				+ temp_id;
 
 		System.out.println(query);
 

@@ -14,14 +14,16 @@ import entities.UserDetails;
 @ManagedBean
 @ApplicationScoped
 public class DatabaseObject {
+	private String allPostQuery = "SELECT * FROM `post` WHERE `is_deleted` = 0 AND `is_published` = 1";
+	
+	/**
+	 * 
+	 * @return Posts that is not deleted and published
+	 */
 	public List<Post> getPostList() {
-		/**
-		 * Return Posts that is not deleted and published
-		 */
 
 		DatabaseUtility dbUtil = DatabaseUtility.getInstance();
-		ResultSet rs = dbUtil
-				.execute("SELECT * FROM `post` WHERE `is_deleted` = 0 AND `is_published` = 1");
+		ResultSet rs = dbUtil.execute(allPostQuery);
 
 		List<Post> result = new ArrayList<Post>();
 		try {
@@ -41,6 +43,7 @@ public class DatabaseObject {
 
 		return result;
 	}
+
 
 	/**
 	 * 

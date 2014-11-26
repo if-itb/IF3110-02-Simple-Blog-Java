@@ -58,6 +58,10 @@ public class DatabaseUtility {
 		}
 		return rs;
 	}
+	
+	public Connection getLiveConnection() {
+		return con;
+	}
 
 	private Connection getConnection() {
 		Connection connection = null;
