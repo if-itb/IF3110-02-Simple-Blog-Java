@@ -3,6 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
       xmlns:ui="http://java.sun.com/jsf/facelets">
  
     <h:head>
@@ -17,52 +18,104 @@
     <h:body>
         <div class="container-fluid">
       
-        <div class="row" id="header">
+        <h:form><div class="row" id="header">
           <div class="row">
             <div class="col-md-6 col-xs-6 col-sm-6 col-lg-6">
               <p class="header-logo resize"><a href="index.xhtml">Simple Blog</a></p>
               <p class="header-text resize">Because we're hungry.</p>
             </div>
-            <div class="col-md-6 col-xs-6 col-sm-6 col-lg-6">
-              <div class="pull-right icon-header">
-                <button type="button" class="btn btn-info btn-circle btn-lg" data-toggle="tooltip" data-placement="left" title="Add Post"><a href="add_post.xhtml"><i class="glyphicon glyphicon-plus"></i></a></button>
-                <button type="button" class="btn btn-warning btn-circle btn-lg" data-toggle="tooltip" data-placement="left" title="Users Database"><a href="#"><i class="glyphicon glyphicon-user"></i></a></button>
-                <button type="button" class="btn btn-danger btn-circle btn-lg" data-toggle="tooltip" data-placement="left" title="Sign Out"><a href="#"><i class="glyphicon glyphicon-log-out"></i></a></button>
+                <c:choose>
+                    <c:when test="${cookie.cRole.value eq 'Owner'}">
+                        <div class="col-md-6 col-xs-6 col-sm-6 col-lg-6"><div class="pull-right icon-header">
+                        <button type="button" class="btn btn-info btn-circle btn-lg" data-toggle="tooltip" data-placement="left" title="Add Post"><a href="add_post.xhtml"><i class="glyphicon glyphicon-plus"></i></a></button>
+                        <h:commandLink type="button" styleClass="btn btn-danger btn-circle btn-lg" action="#{login.startLogout}">
+                            <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
+                        </h:commandLink>
+                        </div></div>
+                    </c:when>
+
+                    <c:when test="${cookie.cRole.value eq 'Editor'}">
+                        <div class="col-md-6 col-xs-6 col-sm-6 col-lg-6"><div class="pull-right icon-header">                        
+                        <h:commandLink type="button" styleClass="btn btn-danger btn-circle btn-lg" action="#{login.startLogout}">
+                            <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
+                        </h:commandLink>
+                        </div></div>
+                    </c:when>
+
+                    <c:when test="${cookie.cRole.value eq 'Admin'}">
+                        <div class="col-md-6 col-xs-6 col-sm-6 col-lg-6"><div class="pull-right icon-header">
+                        <button type="button" class="btn btn-info btn-circle btn-lg" data-toggle="tooltip" data-placement="left" title="Add Post"><a href="add_post.xhtml"><i class="glyphicon glyphicon-plus"></i></a></button>
+                        <button type="button" class="btn btn-warning btn-circle btn-lg" data-toggle="tooltip" data-placement="left" title="Users Database"><a href="#"><i class="glyphicon glyphicon-user"></i></a></button>
+                        <h:commandLink type="button" styleClass="btn btn-danger btn-circle btn-lg" action="#{login.startLogout}">
+                            <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
+                        </h:commandLink>
+                        </div></div>
+                    </c:when>
+                    <c:otherwise>
+                        <div class="col-md-6 col-xs-6 col-sm-6 col-lg-6"><div class="pull-right icon-header">
+                        <h:commandLink type="button" styleClass="btn btn-danger btn-circle btn-lg" action="login?faces-redirect=true">
+                            <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
+                        </h:commandLink>
+                        </div></div>
+                    </c:otherwise>
+                </c:choose>
               </div>
-            </div>
-          </div>
-        </div>
+        </div></h:form>
 
         <div class="row">
           <div class="col-md-2 col-md-offset-1">
-            <div class="sidebar">
+            <div class="sidebar"><h:form>
               <ul class="nav nav-pills nav-stacked text-center">
-                  <li role="presentation"><img src="resources/bootstrap/img/side.jpg" class="center-block img-responsive img-thumbnail"></img></li>
-                <li role="presentation" class="active"><a href="#">Already Published</a></li>
-                <li role="presentation" class="active"><a href="#">To Be Published</a></li>
-                <li role="presentation" class="active"><a href="#">New Post</a></li>
-                <li role="presentation" class="active"><a href="#">Users' Database</a></li>
-                <li role="presentation" class="active"><a href="#">Sign Out</a></li>
+                <li role="presentation"><img src="resources/bootstrap/img/side.jpg" class="center-block img-responsive img-thumbnail"></img></li>
+                <c:choose>
+                    <c:when test="${cookie.cRole.value eq 'Owner'}">
+                        <li role="presentation" class="active"><a href="#">Already Published</a></li>
+                        <li role="presentation" class="active"><a href="#">New Post</a></li>
+                        <li role="presentation" class="active"><h:commandLink action="#{login.startLogout}" value="Sign Out" /></li>
+                    </c:when>
+
+                    <c:when test="${cookie.cRole.value eq 'Editor'}">
+                        <li role="presentation" class="active"><a href="#">Already Published</a></li>
+                        <li role="presentation" class="active"><a href="#">To Be Published</a></li>
+                        <li role="presentation" class="active"><h:commandLink action="#{login.startLogout}" value="Sign Out" /></li>
+                    </c:when>
+
+                    <c:when test="${cookie.cRole.value eq 'Admin'}">
+                        <li role="presentation" class="active"><a href="#">Already Published</a></li>
+                        <li role="presentation" class="active"><a href="#">To Be Published</a></li>
+                        <li role="presentation" class="active"><a href="#">New Post</a></li>
+                        <li role="presentation" class="active"><a href="#">Users' Database</a></li>
+                        <li role="presentation" class="active"><h:commandLink action="#{login.startLogout}" value="Sign Out" /></li>
+                    </c:when>
+                    <c:otherwise>
+                        <li role="presentation" class="active"><a href="#">Already Published</a></li>
+                        <li role="presentation" class="active"><a href="login.xhtml">Sign In</a></li>
+                    </c:otherwise>
+                </c:choose>
               </ul>
-            </div>
+            </h:form></div>
           </div>
           
             
           <div class="col-md-8">
               <ui:repeat var="thepost" value="#{listpost.posts}">
-            <div class="edit">
+            <h:form><div class="edit">
               <div class="btn-group" role="group" aria-label="...">
-                <h:form>
-                    <h:commandButton type="button" class="btn edit-delete pull-right" value="Edit" action="edit_post">
-                    <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-                    <f:param name="id" value="#{thepost.id}" />
-                </h:commandButton>
-                </h:form>
+                    <h:commandLink type="button" styleClass="btn edit-delete pull-right" action="edit_post">
+                        <f:param name="id" value="#{thepost.id}" />
+                        <i class="glyphicon glyphicon-pencil"></i> Edit
+                    </h:commandLink>
               </div>
-              <div class="btn-group" role="group" aria-label="...">
-                  <f:param name="id" value="#{thepost.id}"><button type="button" class="btn edit-delete pull-right" action="edit_post"><span class="glyphicon glyphicon-floppy-remove" aria-hidden="true"></span> Delete</button></f:param>
+              <div class="btn-group" role="group" aria-label="...">                  
+                  <f:param name="id" value="#{thepost.id}">
+                  <h:commandLink type="button" styleClass="btn edit-delete pull-right">
+                        <f:param name="id" value="#{thepost.id}" />
+                        <i class="glyphicon glyphicon-floppy-remove"></i> Delete
+                  </h:commandLink>
+                  </f:param>
               </div>
-            </div>
+            </div></h:form>
+                  
             <div class="post">
                 <div class="post-title text-center">
                     <h:form>
@@ -87,7 +140,7 @@
           </div>
         </div>
       </div>
-        
+        <h:outputScript name="bootstrap/js/custom.js" />
         <h:outputScript name="bootstrap/js/bootstrap.min.js" />
     </h:body>
 </html>

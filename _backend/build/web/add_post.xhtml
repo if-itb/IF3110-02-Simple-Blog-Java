@@ -3,6 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
       xmlns:ui="http://java.sun.com/jsf/facelets">
  
     <h:head>
@@ -23,13 +24,38 @@
             <p class="header-logo resize"><a href="index.xhtml">Simple Blog</a></p>
             <p class="header-text resize">Because we're hungry.</p>
           </div>
-          <div class="col-md-6 col-xs-6 col-sm-6 col-lg-6">
-            <div class="pull-right icon-header">
-              <button type="button" class="btn btn-info btn-circle btn-lg" data-toggle="tooltip" data-placement="left" title="Add Post"><a href="#"><i class="glyphicon glyphicon-plus"></i></a></button>
-              <button type="button" class="btn btn-warning btn-circle btn-lg" data-toggle="tooltip" data-placement="left" title="Users Database"><a href="#"><i class="glyphicon glyphicon-user"></i></a></button>
-              <button type="button" class="btn btn-danger btn-circle btn-lg" data-toggle="tooltip" data-placement="left" title="Sign Out"><a href="#"><i class="glyphicon glyphicon-log-out"></i></a></button>
-            </div>
-          </div>
+          <c:choose>
+                    <c:when test="${cookie.cRole.value eq ''}">
+                        <div class="col-md-6 col-xs-6 col-sm-6 col-lg-6"><div class="pull-right icon-header">
+                        <button type="button" class="btn btn-danger btn-circle btn-lg" data-toggle="tooltip" data-placement="left" title="Sign In"><a href="login.xhtml"><i class="glyphicon glyphicon-log-in"></i></a></button>
+                        </div></div>
+                    </c:when>
+
+                    <c:when test="${cookie.cRole.value eq 'Owner'}">
+                        <div class="col-md-6 col-xs-6 col-sm-6 col-lg-6"><div class="pull-right icon-header">
+                        <button type="button" class="btn btn-info btn-circle btn-lg" data-toggle="tooltip" data-placement="left" title="Add Post"><a href="add_post.xhtml"><i class="glyphicon glyphicon-plus"></i></a></button>
+                        <button type="button" class="btn btn-danger btn-circle btn-lg" data-toggle="tooltip" data-placement="left" title="Sign Out"><a href="#"><i class="glyphicon glyphicon-log-out"></i></a></button>
+                        </div></div>
+                    </c:when>
+
+                    <c:when test="${cookie.cRole.value eq 'Editor'}">
+                        <div class="col-md-6 col-xs-6 col-sm-6 col-lg-6"><div class="pull-right icon-header">
+                        <button type="button" class="btn btn-danger btn-circle btn-lg" data-toggle="tooltip" data-placement="left" title="Sign Out"><a href="#"><i class="glyphicon glyphicon-log-out"></i></a></button>
+                        </div></div>
+                    </c:when>
+
+                    <c:when test="${cookie.cRole.value eq 'Admin'}">
+                        <div class="col-md-6 col-xs-6 col-sm-6 col-lg-6"><div class="pull-right icon-header">
+                        <button type="button" class="btn btn-info btn-circle btn-lg" data-toggle="tooltip" data-placement="left" title="Add Post"><a href="add_post.xhtml"><i class="glyphicon glyphicon-plus"></i></a></button>
+                        <button type="button" class="btn btn-warning btn-circle btn-lg" data-toggle="tooltip" data-placement="left" title="Users Database"><a href="#"><i class="glyphicon glyphicon-user"></i></a></button>
+                        <button type="button" class="btn btn-danger btn-circle btn-lg" data-toggle="tooltip" data-placement="left" title="Sign Out"><a href="#"><i class="glyphicon glyphicon-log-out"></i></a></button>
+                        </div></div>
+                    </c:when>
+                    <c:otherwise>
+                        <div class="col-md-6 col-xs-6 col-sm-6 col-lg-6"><div class="pull-right icon-header">
+                        </div></div>
+                    </c:otherwise>
+                </c:choose>
         </div>
       </div>
 
@@ -53,11 +79,17 @@
                 <h:inputTextarea styleClass="form-control" rows="5" binding="#{konten}" />
               </div>
               <div class="form-group">
-                 <label for="exampleInputPassword1">Status</label>
-                 <h:selectOneRadio styleClass="inlineRadioButtons" binding="#{status}" >
-                     <label><f:selectItem itemValue="published" itemLabel="Publish" /></label>
-                     <label><f:selectItem itemValue="unpublish" itemLabel="Unpublish" /></label>
-                 </h:selectOneRadio>	
+                 <c:choose>
+                    <c:when test="${cookie.cRole.value eq 'Admin'}">
+                        <label for="exampleInputPassword1">Status</label> 
+                        <h:selectOneRadio value="#{post.status}" styleClass="inlineRadioButtons">
+                            <label><f:selectItem itemValue="publish" itemLabel="Publish" /></label>
+                            <label><f:selectItem itemValue="unpublished" itemLabel="Unpublish" /></label>
+                        </h:selectOneRadio>
+                    </c:when>
+                    <c:otherwise>
+                    </c:otherwise>
+                </c:choose>	
               </div>
                 <h:commandButton type="submit" styleClass="btn btn-default" value="Submit" 
                                  action="#{postController.addPost(judul.value, tanggal.value, konten.value, status.value)}" />
@@ -76,7 +108,7 @@
         </div>
       </div>
     </div>
-        
+        <h:outputScript name="bootstrap/js/custom.js" />
         <h:outputScript name="bootstrap/js/bootstrap.min.js" />
     </h:body>
 </html>
