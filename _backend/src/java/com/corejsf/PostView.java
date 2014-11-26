@@ -11,11 +11,9 @@
 package com.corejsf;
 
 import java.sql.*;
-import java.util.*;
 import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import javax.faces.bean.ManagedProperty;
 
 @ManagedBean(name = "postview", eager=true)
 @RequestScoped
