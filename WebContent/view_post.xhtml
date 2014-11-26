@@ -27,28 +27,56 @@
 					<h:outputText value="#{viewPost.content}" />
 				</p>
 				<hr />
-				<h:form>
-					Nama:  <h:inputText value="#{viewPost.name}" />
-					<br />
-					Email: <h:inputText id="email_area" value="#{viewPost.email}" />
-					<br />
-					Isi:   <h:inputTextarea value="#{viewPost.comment}"
-						style="resize:none" rows="3" cols="80" />
-					<br />
-					<h:commandButton value="Add Post" action="#{viewPost.postComment}">
-						<f:ajax execute="@form" render="comments_part" />
-					</h:commandButton>
-					<h:panelGroup id="comments_part">
-						<ui:repeat value="#{viewPost.comments}" var="comment">
-							<ul>
-								<li>#{comment.name}</li>
-								<li>#{comment.email}</li>
-								<li>#{comment.time}</li>
-								<li>#{comment.content}</li>
-							</ul>
-						</ui:repeat>
-					</h:panelGroup>
+				<h2>Komentar</h2>
+				<h:form styleClass="form-horizontal" role="form">
+					<div class="form-group">
+						<label for="inputNama" class="col-sm-2 control-label">Nama</label>
+						<div class="col-sm-10">
+							<h:inputText styleClass="form-control" id="inputNama"
+								value="#{viewPost.name}" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="email_area" class="col-sm-2 control-label">Email</label>
+						<div class="col-sm-10">
+							<h:inputText styleClass="form-control" id="email_area"
+								value="#{viewPost.email}" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="inputKomentar" class="col-sm-2 control-label">Komentar</label>
+						<div class="col-sm-10">
+							<h:inputTextarea styleClass="form-control" id="inputKomentar"
+								value="#{viewPost.comment}" style="resize:none" rows="5" />
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-offset-2 col-sm-10">
+							<h:commandButton value="Add Post" styleClass="btn btn-default"
+								action="#{viewPost.postComment}">
+								<f:ajax execute="@form" render="comments_part" />
+							</h:commandButton>
+						</div>
+					</div>
 				</h:form>
+				<hr />
+				
+				<h:panelGroup id="comments_part">
+					<ui:repeat value="#{viewPost.comments}" var="comment">
+						<div class="row">
+							<div class="col-xs-2 col-md-offset-1">
+								<div class="row" style="font-size:16px"><strong>#{comment.name}</strong></div>
+								<br/>
+								<div class="row"><a href="mailto:#{comment.email}">#{comment.email}</a></div>
+								<br/>
+								<div class="row">#{comment.time}</div>
+							</div>
+							<div class="col-xs-5 col-md-offset-1">#{comment.content}</div>
+						</div>
+						<hr/>
+					</ui:repeat>
+				</h:panelGroup>
+
 			</div>
 			<br />
 		</ui:define>
