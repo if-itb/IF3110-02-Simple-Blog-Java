@@ -26,9 +26,9 @@
     </filter>
     
     <filter>
-        <filter-name>ownerRedirect</filter-name>
+        <filter-name>adminownerRedirect</filter-name>
         <filter-class>
-            Filter.FilterOwner
+            Filter.FilterAdminOwner
         </filter-class>
         <init-param>
 	  <param-name>test-param</param-name>
@@ -58,6 +58,17 @@
         </init-param>
     </filter>
     
+    <filter>
+        <filter-name>admineditorRedirect</filter-name>
+        <filter-class>
+            Filter.FilterAdminEditor
+        </filter-class>
+        <init-param>
+	  <param-name>test-param</param-name>
+	  <param-value>Initialization Paramter</param-value>
+        </init-param>
+    </filter>
+    
     <!-- filtered pages -->
     
     <filter-mapping>
@@ -72,7 +83,7 @@
     </filter-mapping>
     
     <filter-mapping>
-        <filter-name>ownerRedirect</filter-name>
+        <filter-name>adminownerRedirect</filter-name>
         <url-pattern>/new_post.jsf</url-pattern>
     </filter-mapping>
     
@@ -83,8 +94,12 @@
     
     <filter-mapping>
         <filter-name>loggedRedirect</filter-name>
-        <url-pattern>/list_post.jsf</url-pattern>
         <url-pattern>/user_management.jsf</url-pattern>
+    </filter-mapping>
+    
+    <filter-mapping>
+        <filter-name>admineditorRedirect</filter-name>
+        <url-pattern>/list_post.jsf</url-pattern>
     </filter-mapping>
     
     <!-- filter mapping -->
@@ -100,8 +115,8 @@
     </filter-mapping>
     
     <filter-mapping>
-        <filter-name>ownerRedirect</filter-name>
-        <servlet-name>ownerRedirect</servlet-name>
+        <filter-name>adminownerRedirect</filter-name>
+        <servlet-name>adminownerRedirect</servlet-name>
     </filter-mapping>
     
     <filter-mapping>
@@ -112,6 +127,11 @@
     <filter-mapping>
         <filter-name>loggedRedirect</filter-name>
         <servlet-name>loggedRedirect</servlet-name>
+    </filter-mapping>
+    
+    <filter-mapping>
+        <filter-name>admineditorRedirect</filter-name>
+        <servlet-name>admineditorRedirect</servlet-name>
     </filter-mapping>
     
     <context-param>

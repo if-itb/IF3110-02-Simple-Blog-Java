@@ -54,7 +54,9 @@ xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
                 <ui:fragment rendered="#{user.role=='admin' || user.role=='owner'}">
                     <li><a href="new_post.jsf" id="new_post"> Add Post</a></li>
                 </ui:fragment>
-                <li><a href="list_post.jsf" id="list_post"> Unpublished Post</a></li>
+                <ui:fragment rendered="#{user.role=='admin' || user.role=='editor'}">
+                    <li><a href="list_post.jsf" id="list_post"> Unpublished Post</a></li>
+                </ui:fragment>
         </ul>
     </ui:fragment>
 </div>
