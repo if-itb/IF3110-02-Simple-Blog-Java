@@ -11,13 +11,14 @@ and open the template in the editor.
     xmlns:c="http://java.sun.com/jsp/jstl/core"
     xmlns:ui="http://java.sun.com/jsf/facelets"
     xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+    #{dbconnector.verify(user, cookiehandler)}
+    #{post.copy(dbconnector.selectPost(param['pid']))}
     <h:head>
-        <title>TODO supply a title</title>
+        <title>#{post.judul}</title>
         <meta name="viewport" content="width=device-width"/>
         <link rel ="stylesheet" type="text/css" href="#{facesContext.externalContext.requestContextPath}/resources/style.css" />
     </h:head>
-    #{dbconnector.verify(user, cookiehandler)}
-    #{post.copy(dbconnector.selectPost(param['pid']))}
+    
     <h:body>
         <div id="menubar" class="bluegrad">
             <div id="menulist">
