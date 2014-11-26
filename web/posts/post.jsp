@@ -88,16 +88,19 @@
                                 KoneksiDatabase.setUser("root2");
                                 KoneksiDatabase.setPassword("akhfa");
                                 KoneksiDatabase.setDatabase("localhost","blog");
-                                try (Connection koneksi = KoneksiDatabase.getKoneksi()) {
+                                try {
+                                    Connection koneksi = KoneksiDatabase.getKoneksi();
                                     Statement statement = koneksi.createStatement();
                                     String username = cookie.getUsername();
                                     System.out.println(username);
                                     String emailQuery = "SELECT * FROM `user` WHERE `username` = 'admin'";
                                     ResultSet result = statement.executeQuery(emailQuery);
-                                    nama = result.getString("nama");
-                                    System.out.println("nama = "+nama);
-                                    email = result.getString("email");
-                                    System.out.println("email = "+email);
+                                    while (result.next()) {
+                                        nama = result.getString("nama");
+                                        System.out.println("nama = "+nama);
+                                        email = result.getString("email");
+                                        System.out.println("email = "+email);
+                                    }
                                 } catch (SQLException ex) {
                                     
                                 }
