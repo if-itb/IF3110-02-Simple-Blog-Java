@@ -18,6 +18,7 @@ public class UserBean {
 
     private String username;
     private String password;
+    private String email;
     /**
      * @return the owner
      */
@@ -111,5 +112,19 @@ public class UserBean {
         this.password = new String();
         this.role = guest;
         return nc.gotoLogin() + "?faces-redirect=true";
+    }
+
+    /**
+     * @return the email
+     */
+    public String getEmail() {
+        return email;
+    }
+
+    /**
+     * @param email the email to set
+     */
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
