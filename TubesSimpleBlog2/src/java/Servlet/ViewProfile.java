@@ -36,12 +36,7 @@ public class ViewProfile extends HttpServlet {
         
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        out.print("<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
-				+ "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">" 
-				+ "<html xmlns=\"http://www.w3.org/1999/xhtml\"" 
-				+ " xmlns:h=\"http://xmlns.jcp.org/jsf/html\"" 
-				+ "	xmlns:f=\"http://xmlns.jcp.org/jsf/core\">"
-				+ "<link rel=\"stylesheet\" href=\"style.css\" type=\"text/css\" /> "
+        out.print("<link rel=\"stylesheet\" href=\"style.css\" type=\"text/css\" /> "
                 + "<title>User Profile</title>"
                 + "<div class=\"header\">Simple Blog</div>"
                 + "<h1> View Profile</h1>"
@@ -52,11 +47,16 @@ public class ViewProfile extends HttpServlet {
         if(session!=null){
            out.print("<p>Welcome "+session.getAttribute("user") );
            out.print("<br/> Kamu " + session.getAttribute("role")+"</p>"
-				   + "<div><br/><h:form><h:commandLink action=\"index\" value=\"Go to Homepage\">"
-				   + "<f:param id=\"thisuser\" value=\""+ session.getAttribute("user") +"\"></f:param>"
-				   + "<f:param id=\"thisrole\" value=\""+ session.getAttribute("role") +"\"></f:param>"
-				   + "</h:commandLink></h:form></div>"
-                   + "<div class=\"footer\">rita | cilvia | linda </div></html>");
+				   + "<a href=\"http://localhost:8080/TubesSimpleBlog2/\">Go to Home</a>"
+                   + "<div class=\"footer\">rita | cilvia | linda </div>");
+		   SampleBean sampleBean = (SampleBean) getServletContext().getAttribute("sampleBean");
+			if (sampleBean == null) {
+				sampleBean = new SampleBean();
+				getServletContext().setAttribute("sampleBean", sampleBean);
+			}
+			sampleBean.setNama(session.getAttribute("user").toString());
+			sampleBean.setRole(session.getAttribute("role").toString());
+			System.out.println("Sample Bean Name Set");
         }   else{
         RequestDispatcher rd= request.getRequestDispatcher("Login.xhtml");
         rd.include(request, response);

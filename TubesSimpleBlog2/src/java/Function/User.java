@@ -156,4 +156,11 @@ public class User {
 			} catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException e) {
 			}
 	}
+	public String setAccount(String nama, String role){
+		System.out.println("nama="+nama);
+		System.out.println("role="+role);
+		this.username = nama;
+		this.role = role;
+		return "index?faces-redirect=true";
+	}
 }

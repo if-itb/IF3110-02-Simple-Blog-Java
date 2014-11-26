@@ -22,19 +22,11 @@ and open the template in the editor.
 		#{listKomentar.showPage(param['idpost'])}
 		<br/><h:outputText value="#{viewPost.postId}"></h:outputText> 
         <br/><h2> #{viewPost.judul}</h2>      
-		<br/><h:outputText>#{viewPost.konten}</h:outputText>
+		<br/><h:outputText value="#{viewPost.konten}"></h:outputText>
 		
          <br/> <h:outputText value="#{viewPost.tanggal}"></h:outputText>
 		 
-		 <c:forEach items="#{listKomentar.arrKomentar}" var="komen">
-			 <h:form>
-			<br/><h:outputText value="#{komen.commentid}"></h:outputText> 
-            <br/><h:outputText value="#{komen.nama}"></h:outputText> 
-			<br/><h:outputText value="#{komen.tanggal}"></h:outputText>
-			<br/><h:outputText value="#{komen.komentar}"></h:outputText>
-                        <hr></hr>
-			</h:form>
-		</c:forEach>
+		 
 		<p>           
             <h:form> 
 				Nama: <h:inputText id="kname" value="#{komentar.nama}" />
@@ -43,5 +35,16 @@ and open the template in the editor.
               <h:commandButton value="Submit" action="#{komentar.addComment()}" onclick="return check();"/>
 			</h:form>
 		</p>
+		 <h:form>
+		 <c:forEach items="#{listKomentar.arrKomentar}" var="komen">
+			 
+			<br/><h:outputText value="#{komen.commentid}"></h:outputText> 
+            <br/><h:outputText value="#{komen.nama}"></h:outputText> 
+			<br/><h:outputText value="#{komen.tanggal}"></h:outputText>
+			<br/><h:outputText value="#{komen.komentar}"></h:outputText>
+                        <hr></hr>
+			
+		</c:forEach>
+		</h:form>
     </h:body>
 </html>

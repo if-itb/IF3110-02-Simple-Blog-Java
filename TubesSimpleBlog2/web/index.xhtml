@@ -16,19 +16,9 @@
 		<h2> List Post </h2>
 		<p>
 		<h:form>
-		#{user.showStatus()}
-		<!--<br/><h:outputText value="#{param['thisuser']}"></h:outputText> 
-		<br/><h:outputText value="#{param['thisrole']}"></h:outputText>-->
-		<br/><h:commandLink action="index" value="Rita Admin">
-			#{user.setUsername("rita")}
-			#{user.setUsername("admin")}
-		</h:commandLink>
-		<br/><h:commandLink action="index" value="Misae Owner">
-			#{user.setUsername("misae")}
-			#{user.setUsername("owner")}
-		</h:commandLink>
-		<br/>Halo	<h:outputText value="#{user.username}"></h:outputText> 
-		<br/>Kamu <h:outputText value="#{user.role}"></h:outputText>
+		<h:outputText id="firstNameText" value="Sample Bean:"></h:outputText>
+         <br/><h:outputText id="accountName" value="#{sampleBean.nama}"></h:outputText>
+         <br/><h:outputText id="accountRole" value="#{sampleBean.role}"></h:outputText>
 		</h:form>
 		<c:forEach items="#{listPost.arrPostPublished}" var="pos">			
 			<h:form>				
@@ -47,7 +37,7 @@
 		
 		<br/>
 		<h:form>
-		<h:commandLink rendered="#{user.role eq 'admin'}" action="usermanagement" value="User Management"></h:commandLink> 
+		<h:commandLink rendered="#{sampleBean.role eq 'admin'}" action="usermanagement" value="User Management"></h:commandLink> 
 		</h:form>
 		<div class="footer">rita | cilvia | linda </div>		
     </h:body>
