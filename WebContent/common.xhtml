@@ -6,6 +6,10 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core">
 <h:head>
 	<title><ui:insert name="title">Common Page</ui:insert></title>
+	<f:metadata>
+		<f:event type="preRenderView"
+			listener="#{userData.checkCookie}" />
+	</f:metadata>
 	<link href="./css/bootstrap.css" rel="stylesheet" type="text/css" />
 </h:head>
 <h:body>

@@ -7,7 +7,11 @@ import java.util.List;
 
 import javax.faces.bean.*;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import constrain.Constant;
 import controller.DatabaseUtility;
 
 @ManagedBean
@@ -52,7 +56,9 @@ public class UserData implements Serializable {
 
 		details = dbUtil.findUser(username, password);
 		if (details != null) {
+			System.out.println("Login, Username and Password Found");
 			loggedIn = true;
+			loginCookie();
 			return ("index?faces-redirect=true");
 		}
 
@@ -76,7 +82,7 @@ public class UserData implements Serializable {
 	}
 
 	public String getLoginLink() {
-		if (!loggedIn) {
+		if (!isLoggedIn()) {
 			return "<a href=\"login.jsf\"><button type=\"button\" class=\"btn btn-warning\">Login</button> </a>";
 		} else {
 			return "<a href=\"logout.jsf\"><button type=\"button\" class=\"btn btn-warning\">Logout</button> </a>";
@@ -84,8 +90,11 @@ public class UserData implements Serializable {
 	}
 
 	public String logout() {
-
 		loggedIn = false;
+		setUsername(null);
+		setPassword(null);
+		logoutCookie();
+		System.out.println("Logout Done");
 		return "index?faces-redirect=true";
 	}
 
@@ -110,6 +119,57 @@ public class UserData implements Serializable {
 			return result;
 		} else {
 			return result;
+		}
+	}
+	
+	public void logoutCookie(){
+		FacesContext fc = FacesContext.getCurrentInstance();
+
+		Cookie cookieUser = new Cookie("username", null);
+		Cookie cookiePassword = new Cookie("password", null);
+
+		cookieUser.setMaxAge(0);
+		cookiePassword.setMaxAge(0);
+
+		HttpServletResponse servletResponse = (HttpServletResponse) (fc
+				.getExternalContext().getResponse());
+		servletResponse.addCookie(cookieUser);
+		servletResponse.addCookie(cookiePassword);
+	}
+	
+	public void loginCookie(){
+		FacesContext fc = FacesContext.getCurrentInstance();
+		
+		Cookie cookieUser = new Cookie("username", username);
+		Cookie cookiePassword = new Cookie("password", password);
+		
+		cookieUser.setMaxAge(Constant.COOKIE_MAX_AGE);
+		cookiePassword.setMaxAge(Constant.COOKIE_MAX_AGE);
+		
+		HttpServletResponse servletResponse = (HttpServletResponse) (fc.getExternalContext().getResponse());
+		servletResponse.addCookie(cookieUser);
+		servletResponse.addCookie(cookiePassword);
+	}
+	
+	public void checkCookie(){
+		FacesContext fc = FacesContext.getCurrentInstance();
+		
+		HttpServletRequest servletRequest = (HttpServletRequest) (fc.getExternalContext().getRequest());
+		Cookie cookies[] = servletRequest.getCookies();
+		
+		if(cookies != null && !isLoggedIn()){
+			for(int i = 0; i< cookies.length; i++){
+				String cookieName = cookies[i].getName();
+				String cookieValue = cookies[i].getValue();
+				
+				if(cookieName.equals("username"))
+					setUsername(cookieValue);
+				
+				if(cookieName.equals("password"))
+					setPassword(cookieValue);
+			}
+			
+			login();
 		}
 	}
 }
