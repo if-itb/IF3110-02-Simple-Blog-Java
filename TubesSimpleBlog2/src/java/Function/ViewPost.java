@@ -7,17 +7,21 @@
 package Function;
 
 import java.util.Date;
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
+import javax.faces.event.ComponentSystemEvent;
 
 /**
  *
@@ -55,6 +59,9 @@ public class ViewPost{
 			conn.close();
 			} catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException e) {
 			}
+		 
+		// ListKomentar listKomen = new ListKomentar();
+		// listKomen.showPage(id);
 	}
 	
     public int getPostId(){

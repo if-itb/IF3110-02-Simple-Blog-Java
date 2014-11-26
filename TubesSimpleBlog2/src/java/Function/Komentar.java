@@ -6,7 +6,6 @@
 
 package Function;
 
-import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.Timestamp;
 import java.sql.PreparedStatement;
@@ -28,7 +27,7 @@ import javax.faces.bean.ViewScoped;
  */
 @ManagedBean(name = "komentar", eager = true)
 @ViewScoped
-public class Komentar implements Serializable{
+public class Komentar {
     @ManagedProperty(value="#{listKomentar.postid}")
 	int pid; 
 	int commentid;

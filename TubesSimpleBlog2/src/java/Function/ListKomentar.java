@@ -22,7 +22,7 @@ import javax.faces.bean.ViewScoped;
  * @author ASUS
  */
 @ManagedBean(name = "listKomentar", eager = true)
-@ViewScoped
+@SessionScoped
 public class ListKomentar {
     private ArrayList<Komentar> arrKomentar;
     private int postid;
@@ -56,6 +56,7 @@ public class ListKomentar {
 				komen.setEmail(res.getString("Email"));                
 				komen.setKomentar(res.getString("Komentar"));                
 				komen.setTanggal(res.getString("Tanggal"));
+                                System.out.println("komenid="+komen.commentid);
 				arrKomentar.add(komen);
 			}
 			conn.close();
