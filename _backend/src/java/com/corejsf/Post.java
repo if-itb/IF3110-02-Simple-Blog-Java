@@ -6,6 +6,7 @@
 
 package com.corejsf;
 
+import java.sql.Date;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
@@ -63,5 +64,29 @@ public class Post {
     
     public void setKonten(String konten){
         this.konten = konten;
+    }
+    
+    public String printTanggal(){
+        Date d = new Date(Integer.parseInt(tanggal.substring(0, 4)), Integer.parseInt(tanggal.substring(5, 7)), Integer.parseInt(tanggal.substring(8, 10)));
+        String s = d.getDate() + " ";
+        String m;
+        switch(d.getMonth()){
+            case 1: m="Januari"; break;
+            case 2: m="Februari"; break;
+            case 3: m="Maret"; break;
+            case 4: m="April"; break;
+            case 5: m="Mei"; break;
+            case 6: m="Juni"; break;
+            case 7: m="Juli"; break;
+            case 8: m="Agustus"; break;
+            case 9: m="September"; break;
+            case 10: m="Oktober"; break;
+            case 11: m="November"; break;
+            case 12: m="Desember"; break;
+            default: m="a"; break;
+        }
+        s = s + m + " " + d.getYear();
+        
+        return s;
     }
 }

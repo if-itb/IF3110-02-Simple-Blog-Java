@@ -52,5 +52,5 @@ public class ListPost {
     public ArrayList<Post> getPosts(){
         return this.posts;
     }
-    
+
 }
