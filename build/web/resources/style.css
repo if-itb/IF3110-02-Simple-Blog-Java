@@ -1,0 +1,106 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Nov 26, 2014, 1:45:39 PM
+    Author     : Jelink
+*/
+
+@font-face{
+    font-family: aventura;
+    src: url(font/Aventura-Bold.otf);
+}
+
+@font-face{
+    font-family: biko_regular;
+    src: url(font/Biko_Regular.otf);
+}
+
+@font-face{
+    font-family: biko_bold;
+    src: url(font/Biko_Bold.otf);
+}
+
+@font-face{
+    font-family: kilogram;
+    src: url(KiloGram_KG.otf);
+}
+
+html,
+body {
+    font-family: 'biko_regular', arial, sans-serif;
+    margin:0;
+    padding:0;
+    height:100%;
+}
+a{
+    text-decoration: none;
+}
+#container {
+   top:60px;
+   min-height:85%;
+   position:relative;
+}
+#header {
+   background:url("img/header1.jpg");
+   background-size:100% auto;
+   background-position-y: center;
+   height: 480px;
+   padding:10px;
+}
+#body {
+   padding:10px;
+   padding-bottom:60px;   /* Height of the footer */
+}
+#footer {
+   position:absolute;
+   bottom:0;
+   width:100%;
+   height:60px;   /* Height of the footer */
+   background:#6cf;
+}
+#menubar {
+    position: fixed;
+    height: 60px;
+    width: 100%;
+    z-index: 100;
+    text-transform: uppercase;
+}
+
+#menubar a{
+    color:#6699FF;
+}
+
+#menubar a:hover{
+    color:white;
+}
+
+#menubar a:click{
+    color:yellow;
+}
+
+#menulist {
+    position: absolute;
+    right: 0px;
+    width: 40%;
+}
+
+#menulist ul{
+    list-style: none;
+    margin-right: 0px;
+}
+
+#menulist li{
+    text-align: center;
+    display: inline-block;
+    min-width: 20%;
+}
+
+.bluegrad {
+    background: -webkit-linear-gradient(red, blue); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(red, blue); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(red, blue); /* For Firefox 3.6 to 15 */
+    background: linear-gradient( #19356C, #1C222E); /* Standard syntax */
+}
