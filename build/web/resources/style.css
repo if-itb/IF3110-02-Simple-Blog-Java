@@ -32,22 +32,28 @@ html,
 body {
     font-family: 'biko_regular', arial, sans-serif;
     margin:0;
-    padding:0;
+    padding:0px !important;
     height:100%;
+    color: #555;
+    font-size: 17px;
 }
 a{
+    color: #6699FF;
     text-decoration: none;
+}
+a:hover{
+    color: #77AAFF;
 }
 #container {
    top:60px;
-   min-height:85%;
+   min-height:92.2%;
    position:relative;
 }
 #header {
    background:url("img/header1.jpg");
    background-size:100% auto;
-   background-position-y: center;
-   height: 480px;
+   background-position-y: -100px ;
+   height: 490px;
    padding:10px;
 }
 #body {
@@ -59,7 +65,8 @@ a{
    bottom:0;
    width:100%;
    height:60px;   /* Height of the footer */
-   background:#6cf;
+   background:#1C222E;
+   color: white;
 }
 #menubar {
     position: fixed;
@@ -103,4 +110,250 @@ a{
     background: -o-linear-gradient(red, blue); /* For Opera 11.1 to 12.0 */
     background: -moz-linear-gradient(red, blue); /* For Firefox 3.6 to 15 */
     background: linear-gradient( #19356C, #1C222E); /* Standard syntax */
+}
+
+#dashmenu{
+    top: 120px;
+    left: 100px;
+    position: absolute;
+    color: white;
+    max-width: 400px;
+}
+
+#dashmenu h1, h2, h3{
+    margin: 10px 0px 10px 0px;
+}
+
+#dashmenu #title{
+    padding: 20px;
+    background: rgba(0,0,0,0.7);
+}
+
+#dashmenu #menus{
+    padding: 20px;
+    background:#6699FF;
+}
+
+#dashmenu #menus ul{
+    padding: 0px;
+}
+
+#dashmenu #menus li{
+    list-style: none;
+    margin-bottom: 2px;
+}
+
+#dashmenu #menus a{
+    text-align: center;
+    padding: 2px;
+    display:block;
+    background:#77AAFF;
+    color: white;
+}
+
+#dashmenu #menus a:hover{
+    background:#88BBFF;
+}
+
+#postContainer{
+    position: relative;
+    width:60%;
+    left:20%;
+}
+
+.onePost{
+    margin: 50px 0 50px 0;
+}
+
+.onePost .buttons{
+    text-align: right;
+}
+
+.buttons a{
+    text-align: center;
+    padding: 10px;
+    display:block-inline;
+    background:#77AAFF;
+    color: white;
+}
+
+.onePost .buttons a:hover{
+    background:#88BBFF;
+}
+
+#footer .identity{
+    margin-top: 14px;
+    padding: 4px;
+    display: inline-block;
+    width: 31%;
+    text-align: center;
+}
+
+#idlist{
+    position: relative;
+    width: 60%;
+    left: 20%;
+}
+
+#footer .left{
+    text-align: left !important;
+}
+
+#footer .right{
+    text-align: right !important;
+}
+
+#rightContainer{
+    position:relative;
+    margin-top: 6%;
+    width:60%;
+    left: 41%;
+}
+
+#rightContainer form{
+    
+}
+
+#rightContainer form input{
+    padding: 5px;
+    margin-bottom: 5px;
+    width: 70%;
+}
+
+#rightContainer form textArea{
+    width: 70%;
+    min-height: 300px;
+    padding: 5px;
+    margin-bottom: 5px;
+}
+
+.button{
+    width: 100px !important;
+}
+
+.postmanip #dashmenu{
+    top: 105px;
+    left: 14%;
+}
+
+#rightContainer table{
+    overflow: auto;
+    max-height: 500px;
+}
+
+table{
+    border-collapse: collapse;
+    table-layout: fixed;
+    min-width: 70%;
+}
+
+table td,th{
+    padding: 7px;
+    margin: 0px;
+}
+
+table td{
+    border-bottom: 1px solid #eee;
+}
+
+table .first{
+    text-align: left;
+    background: #77AAFF;
+    color: white;
+}
+
+#inputankomentar{
+    width : 70%;
+    margin-left : 15%;
+    margin-bottom: 30px;
+}
+
+#inputankomentar input{
+    padding: 5px;
+    margin-bottom: 5px;
+    width: 100%;
+}
+
+#inputankomentar textArea{
+    width: 100%;
+    min-height: 100px;
+    padding: 5px;
+    margin-bottom: 5px;
+}
+
+.oneComment{
+    border-bottom: solid 1px #eee;
+}
+
+#commentStructure{
+    table-layout: fixed;
+    width: 100%;
+}
+
+#commentStructure td{
+    min-width: 100% !important;
+}
+
+hr{
+    border: 1px solid #eee !important;
+    margin: 20px 0 20px 0;
+}
+
+#postContainer h2{
+    text-align: center;
+    margin: 10px 0 15px 0;
+}
+
+.modalDialog {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 99999;
+    opacity:0;
+    -webkit-transition: opacity 400ms ease-in;
+    -moz-transition: opacity 400ms ease-in;
+    transition: opacity 400ms ease-in;
+    pointer-events: none;
+}
+
+.modalDialog:target {
+    opacity:1;
+    pointer-events: auto;
+}
+
+.modalDialog input {
+    width:97%;
+    padding: 5px;
+    margin: 5px 0 5px 0;
+}
+
+.modalDialog > div {
+    width: 400px;
+    position: relative;
+    margin: 10% auto;
+    padding: 10px 20px 10px 20px;
+    border-radius: 10px;
+    background: #fff;
+}
+.close {
+    background: white;
+    line-height: 25px;
+    position: absolute;
+    right: -12px;
+    text-align: center;
+    top: -10px;
+    width: 24px;
+    font-weight: bold;
+    -webkit-border-radius: 12px;
+    -moz-border-radius: 12px;
+    border-radius: 12px;
+    -moz-box-shadow: 1px 1px 3px #000;
+    -webkit-box-shadow: 1px 1px 3px #000;
+    box-shadow: 1px 1px 3px #000;
+}
+.close:hover {
+    background: yellow;
 }

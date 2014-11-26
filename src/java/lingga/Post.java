@@ -1,6 +1,8 @@
 package lingga;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
@@ -16,6 +18,7 @@ public class Post {
     String tanggal;
     String konten;
     boolean published;
+    boolean isReadMore=false;
     
     public Post(){
 	
@@ -74,6 +77,30 @@ public class Post {
         return konten;
     }
     
+    public String getExcerptHTML(int n) {
+	List<String> l = new ArrayList<String>();
+	int pos = 0;
+	while (l.size() < n) {
+	    int excerpt = konten.indexOf(' ', pos);
+	    if (excerpt == -1) {
+		l.add(konten.substring(pos));
+		break;
+	    }
+	    l.add(konten.substring(pos, excerpt));
+	    pos = excerpt + 1;
+	}
+	String retval="";
+	for(String word : l){
+	    retval = retval + ' ' + word;
+	}
+	if(l.size()<n){ 
+	    isReadMore = true;
+	    return retval.replace("\n", " ");
+	}
+	else return retval.replace("\n", " ")+". . .";
+	
+    }
+    
     public String getKontenHTML(){
 	return konten.replace("\n", "<br />");
     }
@@ -104,4 +131,10 @@ public class Post {
 	if(role==4) return "none";
 	else return "block-inline";
     }
+    
+    public String readMoreButton(){
+	if(isReadMore) return "block-inline";
+	else return "none";
+    }
+    
 }

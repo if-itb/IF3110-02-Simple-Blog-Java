@@ -183,7 +183,7 @@ public class User {
 	co.deleteCookie("if3110_sb_uid");
 	
 	//action
-	return "Login?faces-redirect=true";
+	return "Published_Posts?faces-redirect=true";
     }
     
     public void makeEmptySaved(){

@@ -12,16 +12,80 @@
         <link rel ="stylesheet" type="text/css" href="#{facesContext.externalContext.requestContextPath}/resources/style.css" />
     </h:head>
     <h:body>
-        <a href="javascript:history.back()">Back</a><br/>
         #{user.copyToSaved(dbconnector.selectUser(param['uid']))}
-        <h:form>
-            <h:inputText id="username" a:placeholder="#{user.saved.name}" value="#{user.saved.name}"/><br/>
-            <h:inputSecret id="password" value="#{user.saved.password}"/><br/>
-            <h:inputText id="email" value="#{user.saved.email}"/><br/>
-            <h:inputText id="type" value="#{user.saved.type}"/><br/>
-            <h:commandButton id="update" value="Update" action="#{dbconnector.updateUser(user,user.getSaved())}"/><br/>
-            <h:commandButton id="delete" value="Delete" action="#{dbconnector.deleteUser(user,user.getSaved())}"/><br/>
-            <br/>
-        </h:form>
+        <div id="menubar" class="bluegrad">
+            <div id="menulist">
+                <ul>
+                    <li><a href="#{facesContext.externalContext.requestContextPath}/">Home</a></li>
+                    <li style="display:#{user.addButton()}"><a href="Add_Post.xhtml">Add Post +</a></li>
+                    <li style="display:#{user.logInButton()}"><a href="#loginModal">Login</a></li>
+                    <li style="display:#{user.logOutButton()}"><a href="#logoutModal">Logout</a></li>
+                    <li><a href=""><h:outputText value="#{user.name}"/></a></li>
+                </ul>
+            </div>
+        </div>
+        <div id="container" class="postmanip">
+            <div id="dashmenu">
+                <div id="title">
+                    <h1>Add User</h1>
+                    Halaman ini merupakan halaman untuk mengedit user
+                </div>
+                <div id="menus">
+                    <h2>Halo, #{user.name}</h2>
+                    Silakan gunakan menu berikut ini,
+                    <ul>
+                        <li><a href="#{facesContext.externalContext.requestContextPath}/">Home</a></li>
+                        <li style="display:#{user.addButton()}"><a href="Add_Post.xhtml">Add Post +</a></li>
+                        <li style="display:#{user.userMgtButton()}"><a href="User_Management.xhtml">User Management</a></li>
+                        <li style="display:block"><a href="Published_Posts.xhtml">Published Posts</a></li>
+                        <li style="display:#{user.unPubButton()}"><a href="Unpublished_Posts.xhtml">Unpublished Posts</a></li>
+                        <li style="display:#{user.logInButton()}"><a href="#loginModal">Login</a></li>
+                        <li style="display:#{user.logOutButton()}"><a href="#logoutModal">Logout</a></li>
+                        
+                    </ul>
+                </div>
+            </div>
+            <div id="body">
+                <div id="rightContainer">
+                    <h:form>
+                        <h:inputText id="username" a:placeholder="#{user.saved.name}" value="#{user.saved.name}"/><br/>
+                        <h:inputSecret id="password" value="#{user.saved.password}"/><br/>
+                        <h:inputText id="email" value="#{user.saved.email}"/><br/>
+                        <h:inputText id="type" value="#{user.saved.type}"/><br/>
+                        <h:commandButton id="update" value="Update" action="#{dbconnector.updateUser(user,user.getSaved())}"/><br/>
+                        <h:commandButton id="delete" value="Delete" action="#{dbconnector.deleteUser(user,user.getSaved())}"/><br/>
+                        <br/>
+                    </h:form>
+                </div>
+                <div id="footer">
+                    <div id="idlist">
+                        <div class="identity left">Andre Susanto - 13512028</div>
+                        <div class="identity">Jeffrey Lingga - 13512059</div>
+                        <div class="identity right">Adhika Sigit - 13512060</div>
+                    </div>
+                </div>
+            </div>
+            <div id="loginModal" class="modalDialog">
+                <div>
+                    <a href="#close" title="Close" class="close">X</a>
+                    <p>Masukkan username dan password</p>
+                        <h:form>
+                        <h:inputText a:placeholder="username" id="ipTxt1" value="#{user.name}"/><br/>
+                        <h:inputSecret a:placeholder="password" id="isec" value="#{user.password}"/><br/>
+                        <h:commandButton class="button" id="cBtn2" value="Login" action="Published_Posts?faces-redirect=true"/> <!--?faces-redirect=true-->
+                        <br/>
+                    </h:form>
+                </div>
+            </div>
+            <div id="logoutModal" class="modalDialog">
+                <div>
+                    <a href="#close" title="Close" class="close">X</a>
+                        <h:form>
+                        <p>Keluar dari sistem ini?</p>
+                        <h:commandButton id="logout" value="Log Out" action="#{user.logOut(cookiehandler)}"/>
+                    </h:form>
+                </div>
+            </div>
+        </div>
     </h:body>
 </html>

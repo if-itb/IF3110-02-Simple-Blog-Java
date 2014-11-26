@@ -9,7 +9,8 @@ and open the template in the editor.
       xmlns:f="http://java.sun.com/jsf/core"
     xmlns:h="http://java.sun.com/jsf/html"
     xmlns:c="http://java.sun.com/jsp/jstl/core"
-    xmlns:ui="http://java.sun.com/jsf/facelets">
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
     <h:head>
         <title>User Management</title>
         <meta name="viewport" content="width=device-width"/>
@@ -18,12 +19,89 @@ and open the template in the editor.
     <h:body>
         <f:event type="preRenderView" listener="#{user.loggedOffRedirectToInd()}" />
         #{userlist.initUserList(user, dbconnector)}
-        <h1>User Management</h1>
-        <h2>Administrator Only</h2>
-        <a href="Published_Posts.xhtml">Back to Published Posts</a><br/>
-        <ui:repeat var="item" value="#{userlist.getListUser(user)}">
-            <h:outputText value="#{item.name} #{item.email} #{item.type}" escape="false" /><a href="Edit_User.xhtml?uid=#{item.userid}"> Edit</a><br/>
-        </ui:repeat>
-        <a href="Add_User.xhtml">Tambahkan User</a><br/>
+        <div id="menubar" class="bluegrad">
+            <div id="menulist">
+                <ul>
+                    <li><a href="#{facesContext.externalContext.requestContextPath}/">Home</a></li>
+                    <li style="display:#{user.addButton()}"><a href="Add_Post.xhtml">Add Post +</a></li>
+                    <li style="display:#{user.logInButton()}"><a href="#loginModal">Login</a></li>
+                    <li style="display:#{user.logOutButton()}"><a href="#logoutModal">Logout</a></li>
+                    <li><a href=""><h:outputText value="#{user.name}"/></a></li>
+                </ul>
+            </div>
+        </div>
+        <div id="container" class="postmanip">
+            <div id="dashmenu">
+                <div id="title">
+                    <h1>User Management</h1>
+                    Halaman ini hanya tersedia untuk administrator, menampilkan data seluruh user, beserta kemampuan untuk melakukan CRUD terhadap user
+                </div>
+                <div id="menus">
+                    <h2>Halo, #{user.name}</h2>
+                    Silakan gunakan menu berikut ini,
+                    <ul>
+                        <li><a href="#{facesContext.externalContext.requestContextPath}/">Home</a></li>
+                        <li style="display:#{user.addButton()}"><a href="Add_Post.xhtml">Add Post +</a></li>
+                        <li style="display:block"><a href="Published_Posts.xhtml">Published Posts</a></li>
+                        <li style="display:#{user.unPubButton()}"><a href="Unpublished_Posts.xhtml">Unpublished Posts</a></li>
+                        <li style="display:#{user.logInButton()}"><a href="#loginModal">Login</a></li>
+                        <li style="display:#{user.logOutButton()}"><a href="#logoutModal">Logout</a></li>
+                        
+                    </ul>
+                </div>
+            </div>
+            <div id="body">
+                <div id="rightContainer">
+                    <table>
+                        <tr class="first">
+                            <th>Username</th>
+                            <th>Email</th>
+                            <th>Type</th>
+                            <th>Edit</th>
+                        </tr>
+                    <ui:repeat var="item" value="#{userlist.getListUser(user)}">
+                        <tr>
+                            <td>#{item.name}</td>
+                            <td>#{item.email}</td>
+                            <td>#{item.type}</td>
+                            <td><a href="Edit_User.xhtml?uid=#{item.userid}"> Edit</a></td>
+                        </tr>
+                    </ui:repeat>
+                    </table>
+                    <br/>
+                    <div class="buttons">
+                        <a href="Add_User.xhtml">Tambahkan User</a><br/>
+                    </div>
+                </div>
+            </div>
+            <div id="footer">
+                <div id="idlist">
+                    <div class="identity left">Andre Susanto - 13512028</div>
+                    <div class="identity">Jeffrey Lingga - 13512059</div>
+                    <div class="identity right">Adhika Sigit - 13512060</div>
+                </div>
+            </div>
+        </div>
+        <div id="loginModal" class="modalDialog">
+            <div>
+                <a href="#close" title="Close" class="close">X</a>
+                <p>Masukkan username dan password</p>
+                    <h:form>
+                    <h:inputText a:placeholder="username" id="ipTxt1" value="#{user.name}"/><br/>
+                    <h:inputSecret a:placeholder="password" id="isec" value="#{user.password}"/><br/>
+                    <h:commandButton class="button" id="cBtn2" value="Login" action="Published_Posts?faces-redirect=true"/> <!--?faces-redirect=true-->
+                    <br/>
+                </h:form>
+            </div>
+        </div>
+        <div id="logoutModal" class="modalDialog">
+            <div>
+                <a href="#close" title="Close" class="close">X</a>
+                    <h:form>
+                    <p>Keluar dari sistem ini?</p>
+                    <h:commandButton id="logout" value="Log Out" action="#{user.logOut(cookiehandler)}"/>
+                </h:form>
+            </div>
+        </div>
     </h:body>
 </html>

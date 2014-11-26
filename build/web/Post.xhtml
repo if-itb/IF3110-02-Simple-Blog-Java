@@ -16,33 +16,88 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width"/>
         <link rel ="stylesheet" type="text/css" href="#{facesContext.externalContext.requestContextPath}/resources/style.css" />
     </h:head>
+    #{dbconnector.verify(user, cookiehandler)}
+    #{post.copy(dbconnector.selectPost(param['pid']))}
     <h:body>
-        #{dbconnector.verify(user, cookiehandler)}
-        #{post.copy(dbconnector.selectPost(param['pid']))}
-        <h1>#{post.judul}</h1>
-        <h2>#{post.tanggal}</h2>
-        <a href="Published_Posts.xhtml">Back to Published Posts</a>
-        <p><h:outputText value="#{post.konten}" escape="false" /></p>
-        <h:form id="inputankomentar">
-            #{comment.setPost_id(param['pid'])}
-            #{comment.init(user)}
-            <h:inputText a:placeholder="Nama" id="nama" value="#{comment.nama}"/><br/>
-            <h:inputText a:placeholder="Email" id="email" value="#{comment.email}"/><br/>
-            <h:inputTextarea a:placeholder="Komentar" id="komentar" value="#{comment.komentar}"/><br/>
-            <h:commandButton onclick="return validateComment()" id="add" value="Post Comment">
-                <f:ajax execute="inputankomentar" render="komenContainer komentar" listener="#{dbconnector.insertComment(user, comment)}"/>
-            </h:commandButton>
-            <br/>
-            <br/>
-            <h:panelGroup layout="block" id="komenContainer">
-                <ui:repeat var="item" value="#{dbconnector.listComment(post.id_post)}">
-                    <h:outputText value="#{item.nama}" escape="false" /><br/>
-                    <h:outputText value="#{item.email}" escape="false" /><br/>
-                    <h:outputText value="#{item.timestamp}" escape="false" /><br/>
-                    <h:outputText value="#{item.komentar}" escape="false" /><br/>
-                </ui:repeat>
-            </h:panelGroup>
-        </h:form>
+        <div id="menubar" class="bluegrad">
+            <div id="menulist">
+                <ul>
+                    <li><a href="#{facesContext.externalContext.requestContextPath}/">Home</a></li>
+                    <li style="display:#{user.addButton()}"><a href="Add_Post.xhtml">Add Post +</a></li>
+                    <li style="display:#{user.logInButton()}"><a href="#loginModal">Login</a></li>
+                    <li style="display:#{user.logOutButton()}"><a href="#logoutModal">Logout</a></li>
+                    <li><a href=""><h:outputText value="#{user.name}"/></a></li>
+                </ul>
+            </div>
+        </div>
+        <div id="container">
+            <div id="body">
+                <div id="postContainer">
+                    <h1>#{post.judul}</h1>
+                    #{post.tanggal}
+                    <a href="Published_Posts.xhtml">Back to Published Posts</a>
+                    <p><h:outputText value="#{post.getKontenHTML()}" escape="false" /></p>
+                    <hr/>
+                    <h2>Berikan Komentar</h2>
+                    <h:form id="inputankomentar">
+                        #{comment.setPost_id(param['pid'])}
+                        #{comment.init(user)}
+                        <h:inputText a:placeholder="Nama" id="nama" value="#{comment.nama}"/><br/>
+                        <h:inputText a:placeholder="Email" id="email" value="#{comment.email}"/><br/>
+                        <h:inputTextarea a:placeholder="Komentar" id="komentar" value="#{comment.komentar}"/><br/>
+                        <h:commandButton class="button" id="ajaxButton" onclick="return validateComment()" value="Post Comment">
+                            <f:ajax execute="inputankomentar" render="komenContainer komentar" listener="#{dbconnector.insertComment(user, comment)}"/>
+                        </h:commandButton>
+                        <br/>
+                        <br/>
+                        <h:panelGroup layout="block" id="komenContainer">
+                        <table id="commentStructure">
+                        <ui:repeat var= "item" value="#{dbconnector.listComment(post.id_post)}">
+                            <tr class="oneComment">
+                                <td>
+                                    <h:outputText value="#{item.nama}" escape="false" /><br/>
+                                    <h:outputText value="#{item.email}" escape="false" /><br/>
+                                    <h:outputText value="#{item.timestamp}" escape="false" /><br/>
+                                </td>
+                                <td>
+                                    <h:outputText value="#{item.komentar}" escape="false" /><br/>
+                                </td>
+                            </tr>
+                        </ui:repeat>
+                        </table>
+                        </h:panelGroup>
+                    </h:form>
+                </div>
+            </div>
+            <div id="footer">
+                <div id="idlist">
+                    <div class="identity left">Andre Susanto - 13512028</div>
+                    <div class="identity">Jeffrey Lingga - 13512059</div>
+                    <div class="identity right">Adhika Sigit - 13512060</div>
+                </div>
+            </div>
+        </div>
+        <div id="loginModal" class="modalDialog">
+            <div>
+                <a href="#close" title="Close" class="close">X</a>
+                <p>Masukkan username dan password</p>
+                    <h:form>
+                    <h:inputText a:placeholder="username" id="ipTxt1" value="#{user.name}"/><br/>
+                    <h:inputSecret a:placeholder="password" id="isec" value="#{user.password}"/><br/>
+                    <h:commandButton class="button" id="cBtn2" value="Login" action="Published_Posts?faces-redirect=true"/> <!--?faces-redirect=true-->
+                    <br/>
+                </h:form>
+            </div>
+        </div>
+        <div id="logoutModal" class="modalDialog">
+            <div>
+                <a href="#close" title="Close" class="close">X</a>
+                    <h:form>
+                    <p>Keluar dari sistem ini?</p>
+                    <h:commandButton id="logout" value="Log Out" action="#{user.logOut(cookiehandler)}"/>
+                </h:form>
+            </div>
+        </div>
         
     </h:body>
     <script src="#{facesContext.externalContext.requestContextPath}/resources/js/validator.js" type="text/javascript"></script>
