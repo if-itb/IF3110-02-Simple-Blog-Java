@@ -21,8 +21,8 @@ and open the template in the editor.
 		#{viewPost.showPage(param['idpost'])}
 		#{listKomentar.showPage(param['idpost'])}
 		<br/><h:outputText value="#{viewPost.postId}"></h:outputText> 
-        <br/><h2> value="#{viewPost.judul}"</h2>      
-		<br/><h:outputText><p>#{viewPost.konten}</p></h:outputText>
+        <br/><h2> #{viewPost.judul}</h2>      
+		<br/><h:outputText>#{viewPost.konten}</h:outputText>
 		
          <br/> <h:outputText value="#{viewPost.tanggal}"></h:outputText>
 		 

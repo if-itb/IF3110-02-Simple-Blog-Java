@@ -24,7 +24,7 @@ import javax.faces.context.FacesContext;
 @ManagedBean(name = "post", eager = true)
 @RequestScoped
 public class Post {
-	@ManagedProperty(value="#{param.idpost}")
+	//@ManagedProperty(value="#{param.idpost}")
 	private int pidToDelete;
 	private int IDPost;
 	private String title;
@@ -69,7 +69,7 @@ public class Post {
 		this.pidToDelete = id;
 	}
 	
-	public String deletePost(){
+	public String deletePost(int id){
 		String url = "jdbc:mysql://localhost:3306/datapost";
 	   String driver = "com.mysql.jdbc.Driver";
 	   String userName = "root"; 
@@ -79,7 +79,7 @@ public class Post {
 		   Connection conn = DriverManager.getConnection(url,userName,password);
 		   String insertToDB = "delete from posts where PID = ?";
 		   PreparedStatement preparedStatement = conn.prepareStatement(insertToDB);
-		   preparedStatement.setInt(1,pidToDelete);
+		   preparedStatement.setInt(1,id);
 		   preparedStatement.executeUpdate();
 		   conn.close();
 		  // FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");

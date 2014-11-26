@@ -38,8 +38,7 @@
 			</h:commandLink>      
 			<br/><h:outputText value="#{pos.date}"></h:outputText>
 			<br/> <h:outputText value="#{pos.content}"></h:outputText>
-			<br/><h:commandLink action="#{post.deletePost()}" value="Delete" onclick="return confirm('Apakah Anda yakin menghapus post ini?');">
-				<f:param name="idpost" value="#{pos.IDPost}" />
+			<br/><h:commandLink action="#{post.deletePost(pos.IDPost)}" value="Delete" onclick="return confirm('Apakah Anda yakin menghapus post ini?');">
 			</h:commandLink>
 			<hr/>
 			</h:form>
