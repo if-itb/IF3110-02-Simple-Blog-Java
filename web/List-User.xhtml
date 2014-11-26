@@ -14,32 +14,80 @@
         <ui:composition template="template/basis.xhtml">
             <ui:define name="content">
                 <!-- TODO username validator -->
-                <div style="">
-                    <h:form id="edit_user" style="float: left;width: 20%">
-                        <h3>Edit User</h3>
-                        Username : <h:inputText id="username" value="#{editUserBean.edited.username}">
-                                        <f:validator validatorId="usernameValidator" for="username"/>
-                                    </h:inputText>
-                        <h:message styleClass="error_message" id="username_message" for="username" />
-                        Password : <h:inputText value="#{editUserBean.edited.password}"></h:inputText>
-                        Role     : <h:inputText value="#{editUserBean.edited.role}"></h:inputText>
-                        <h:commandButton value="EDIT">
-                            <f:ajax render="user_table username_message" listener="#{editUserBean.edit()}" execute="username"></f:ajax>
-                        </h:commandButton>
-                    </h:form>
-                    <h:form id="add_user" style="float: left;width: 20%">
-                        <h3>add User</h3>
-                        Username : <h:inputText id="username" value="#{addUserBean.user.username}">
-                                        <f:validator validatorId="usernameValidator" for="username"/>
-                                    </h:inputText>
-                        <h:message styleClass="error_message" id="username_message" for="username" />
-                        Password : <h:inputText value="#{addUserBean.user.password}"></h:inputText>
-                        Role     : <h:inputText value="#{addUserBean.user.role}"></h:inputText>
-                        Email    : <h:inputText value="#{addUserBean.user.email}"></h:inputText>
-                        <h:commandButton value="ADD">
-                            <f:ajax render="user_table username_message" listener="#{addUserBean.add()}" execute="add_user"></f:ajax>
-                        </h:commandButton>
-                    </h:form>
+                <h:messages id="error_message" globalOnly="true"></h:messages>
+                <div class="pure-g">
+                    <div class="pure-u-1-2" >
+                        <h:form id="edit_user" styleClass="pure-form pure-u-1-2">
+                            <fieldset>
+                                <legend>Edit user</legend>
+                                <label>Username</label> <br/>
+                                <h:inputText id="username" value="#{editUserBean.edited.username}">
+                                    <f:validator validatorId="usernameValidator" for="username"/>
+                                </h:inputText>
+                                <h:message styleClass="error_message" id="username_message" for="username" />
+                                <br/>
+                                <label>Password</label> <br/>
+                                <h:inputText id="password" value="#{editUserBean.edited.password}">
+                                    <f:validator validatorId="passwordValidator" for="password"/>
+                                </h:inputText>
+                                <h:message styleClass="error_message" id="password_message" for="password" />
+                                <br/>
+                                <label>Role</label> <br/>
+                                <h:selectOneMenu value="#{editUserBean.edited.role}">
+                                    <f:selectItem itemValue="#{editUserBean.edited.getAdmin()}" itemLabel="Admin" />
+                                    <f:selectItem itemValue="#{editUserBean.edited.getOwner()}" itemLabel="Owner" />
+                                    <f:selectItem itemValue="#{editUserBean.edited.getEditor()}" itemLabel="Editor" />
+                                </h:selectOneMenu>	
+                                <br />
+                                <label>Email</label>
+                                <br />
+                                <h:inputText id="email" value="#{editUserBean.edited.email}">
+                                    <f:validator validatorId="emailValidator" for="email"/>
+                                </h:inputText>
+                                <h:message styleClass="error_message" id="email_message" for="email" />
+                                <br/>
+                                <h:commandButton value="EDIT">
+                                    <f:ajax render="@form error_message user_table" listener="#{editUserBean.edit()}" execute="@form"></f:ajax>
+                                </h:commandButton>
+                            </fieldset>
+                        </h:form>
+                    </div>
+                    <div class="pure-u-1-2">
+                        <h:form id="add_user" styleClass="pure-form pure-u-1-2">
+                            <fieldset>
+                                <legend>Add user</legend>
+                                <label>Username</label> <br/>
+                                <h:inputText id="username" value="#{addUserBean.user.username}">
+                                    <f:validator validatorId="usernameValidator" for="username"/>
+                                </h:inputText>
+                                <h:message styleClass="error_message" id="username_message" for="username" />
+                                <br/>
+                                <label>Password</label> <br/>
+                                <h:inputText id="password" value="#{addUserBean.user.password}">
+                                    <f:validator validatorId="passwordValidator" for="password"/>
+                                </h:inputText>
+                                <h:message styleClass="error_message" id="password_message" for="password" />
+                                <br/>
+                                <label>Role</label> <br/>
+                                <h:selectOneMenu value="#{addUserBean.user.role}">
+                                    <f:selectItem itemValue="#{addUserBean.user.getAdmin()}" itemLabel="Admin" />
+                                    <f:selectItem itemValue="#{addUserBean.user.getOwner()}" itemLabel="Owner" />
+                                    <f:selectItem itemValue="#{addUserBean.user.getEditor()}" itemLabel="Editor" />
+                                </h:selectOneMenu>	
+                                <br />
+                                <label>Email</label>
+                                <br />
+                                <h:inputText id="email" value="#{addUserBean.user.email}">
+                                    <f:validator validatorId="emailValidator" for="email"/>
+                                </h:inputText>
+                                <h:message styleClass="error_message" id="email_message" for="email" />
+                                <br/>
+                                <h:commandButton value="ADD">
+                                    <f:ajax render="@form error_message user_table" listener="#{addUserBean.add()}" execute="@form"></f:ajax>
+                                </h:commandButton>
+                            </fieldset>
+                        </h:form>
+                    </div>
                 </div>
                 <h1 class="content-subhead">List User</h1>
                 <h:dataTable value="#{allUserBean.allUser}" var="user"
