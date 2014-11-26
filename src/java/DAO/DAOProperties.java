@@ -15,7 +15,7 @@ import java.util.Properties;
 public class DAOProperties {
     // Constants ----------------------------------------------------------------------------------
 
-    private static final String PROPERTIES_FILE = "dao.properties";
+    private static final String PROPERTIES_FILE = "DAO/DAO.properties";
     private static final Properties PROPERTIES = new Properties();
 
     static {
@@ -24,6 +24,7 @@ public class DAOProperties {
 
         if (propertiesFile == null) {
             throw new DAOConfigurationException(
+                    classLoader+
                 "Properties file '" + PROPERTIES_FILE + "' is missing in classpath.");
         }
 
