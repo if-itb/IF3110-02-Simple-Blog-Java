@@ -19,17 +19,26 @@
                 <br/><br/>
                 <h1>Create Post</h1>
                 <h:form id="editPost">
-                    Judul
-                    <h:inputText class="form-control" value="#{post.judul}"></h:inputText>
-                    <br/>Konten
-                    <h:inputTextarea id="konten" value="#{post.konten}"></h:inputTextarea>
-                    <br/>Tanggal
-                    <h:inputText id="date" class="form-control" value="#{post.tanggal}"></h:inputText>
-                    <br/>Published
+                    <div class="Field">
+                        <div class="form-group">
+                            <h4>Judul</h4>
+                            <h:inputText id="judulPost" class="form-control" value="#{post.judul}"></h:inputText>
+                        </div>
+                        <div class="form-group">
+                            <h4>Konten</h4>
+                            <h:inputTextarea class="form-control" id="konten" value="#{post.konten}"></h:inputTextarea>
+                        </div>
+                        <div class="form-group">
+                            <h4>Tanggal</h4>
+                            <h:inputText id="date" class="form-control" value="#{post.tanggal}"></h:inputText>
+
+                        </div>
+                    Published
                     <h:selectBooleanCheckbox value="#{post.published}"></h:selectBooleanCheckbox>
                     <br/>
                     <h:inputHidden value="#{post.userId}"></h:inputHidden>
                     <h:commandLink onclick="return DateValidator();" rendered="#{postCtrl.post.id==0}" action="#{postCtrl.doSubmit()}" value="Tambah" class="btn btn-primary"></h:commandLink>
+                    </div>
                 </h:form>
             </ui:define>
         </ui:composition>

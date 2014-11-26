@@ -3,14 +3,17 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Willy/Documents/GitHub/IF3110-02-Simple-Blog-Java/web/WEB-INF/faces-config.xml</file>
-            <file>file:/C:/Users/Willy/Documents/GitHub/IF3110-02-Simple-Blog-Java/web/resources/js/DateValidator.js</file>
-            <file>file:/C:/Users/Willy/Documents/GitHub/IF3110-02-Simple-Blog-Java/src/java/models/User.java</file>
-            <file>file:/C:/Users/Willy/Documents/GitHub/IF3110-02-Simple-Blog-Java/web/layouts/main.xhtml</file>
-            <file>file:/C:/Users/Willy/Documents/GitHub/IF3110-02-Simple-Blog-Java/web/post/update.xhtml</file>
-            <file>file:/C:/Users/Willy/Documents/GitHub/IF3110-02-Simple-Blog-Java/web/resources/js/EmailValidator.js</file>
-            <file>file:/C:/Users/Willy/Documents/GitHub/IF3110-02-Simple-Blog-Java/web/post/create.xhtml</file>
-            <file>file:/C:/Users/Willy/Documents/GitHub/IF3110-02-Simple-Blog-Java/web/post/view.xhtml</file>
+            <file>file:/E:/semester%205/WBD/TUGAS%202/IF3110-02-Simple-Blog-Java/web/layouts/content.xhtml</file>
+            <file>file:/E:/semester%205/WBD/TUGAS%202/IF3110-02-Simple-Blog-Java/web/post/index.xhtml</file>
+            <file>file:/E:/semester%205/WBD/TUGAS%202/IF3110-02-Simple-Blog-Java/web/resources/css/clean-blog.min.css</file>
+            <file>file:/E:/semester%205/WBD/TUGAS%202/IF3110-02-Simple-Blog-Java/web/post/update.xhtml</file>
+            <file>file:/E:/semester%205/WBD/TUGAS%202/IF3110-02-Simple-Blog-Java/web/layouts/main.xhtml</file>
+            <file>file:/E:/semester%205/WBD/TUGAS%202/IF3110-02-Simple-Blog-Java/web/post/view.xhtml</file>
+            <file>file:/E:/semester%205/WBD/TUGAS%202/IF3110-02-Simple-Blog-Java/src/java/services/DBConnector.java</file>
+            <file>file:/E:/semester%205/WBD/TUGAS%202/IF3110-02-Simple-Blog-Java/src/java/controllers/PostController.java</file>
+            <file>file:/E:/semester%205/WBD/TUGAS%202/IF3110-02-Simple-Blog-Java/web/resources/css/bootstrap.min.css</file>
+            <file>file:/E:/semester%205/WBD/TUGAS%202/IF3110-02-Simple-Blog-Java/web/post/create.xhtml</file>
+            <file>file:/E:/semester%205/WBD/TUGAS%202/IF3110-02-Simple-Blog-Java/web/WEB-INF/web.xml</file>
         </group>
     </open-files>
 </project-private>
