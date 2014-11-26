@@ -11,19 +11,21 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import java.sql.*;
 import java.util.*;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
 
 /**
  *
  * @author Arina Listyarini DA
  */
-@ManagedBean(name = "postController")
+@ManagedBean(name = "postController", eager = true)
 @RequestScoped
 public class PostController {
 
     /**
      * Creates a new instance of PostController
      */
+    private int id;
     
     public PostController() {}
     
@@ -65,14 +67,17 @@ public class PostController {
         }
     }
     
-    public void deletePost(int id){
+    public String deletePost(int id){
+        System.out.println("MASUK "+id);
         try{
             Connection con = getConnection();
-            PreparedStatement ps = con.prepareStatement("DELETE post, comment FROM post JOIN comment ON post.id=comment.id_post WHERE post.id="+id);
+            PreparedStatement ps = con.prepareStatement("DELETE FROM post WHERE id=?");
+            ps.setInt(1, id);
             ps.executeUpdate();
+            //FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
             con.close();
-        } catch(SQLException e){
-            
+        } catch(SQLException e){            
         }
+        return "index?faces-redirect=true";
     }
 }

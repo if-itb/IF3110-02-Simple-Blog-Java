@@ -46,7 +46,7 @@
               </div>
               <div class="form-group">
                 <label for="exampleInputPassword1">Date</label>
-                <h:inputText styleClass="form-control" binding="#{tanggal}" />
+                <h:inputText styleClass="form-control" value="YYYY-mm-dd" binding="#{tanggal}" />
               </div>
               <div class="form-group">
                 <label for="exampleInputPassword1">Content</label>
@@ -56,7 +56,7 @@
                  <label for="exampleInputPassword1">Status</label>
                  <h:selectOneRadio styleClass="inlineRadioButtons" binding="#{status}" >
                      <label><f:selectItem itemValue="published" itemLabel="Publish" /></label>
-                     <label><f:selectItem itemValue="unpublish" itemLabel="Unpublish" /></label>
+                     <label><f:selectItem itemValue="unpublished" itemLabel="Unpublish" /></label>
                  </h:selectOneRadio>	
               </div>
                 <h:commandButton type="submit" styleClass="btn btn-default" value="Submit" 

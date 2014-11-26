@@ -15,11 +15,10 @@ import java.sql.*;
 import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 
 @ManagedBean(name = "postedit")
-@RequestScoped
+@ViewScoped
 
 public class PostEdit implements Serializable {
     private int id;
@@ -52,18 +51,16 @@ public class PostEdit implements Serializable {
         String user = "root";
         String driver = "com.mysql.jdbc.Driver";
         String password = "";
-        System.out.println("aaa "+id);
         try {
             Class.forName(driver).newInstance();            
             con = DriverManager.getConnection(url, user, password);
-            System.out.println("haha "+id);
             String query = "UPDATE post SET Status=?, Judul=?, Konten=?, Tanggal=? WHERE id=?";
             PreparedStatement ps = con.prepareStatement(query);
             ps.setString(1, pos.getStatus());
             ps.setString(2, pos.getJudul());
             ps.setString(3, pos.getKonten());            
             ps.setString(4, pos.getTanggal());
-            ps.setInt(5, id);               
+            ps.setInt(5, pos.getId());               
             ps.executeUpdate();
             FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
             con.close();
@@ -88,9 +85,9 @@ public class PostEdit implements Serializable {
                 pos.setKonten(res.getString("Konten"));
                 pos.setStatus(res.getString("Status"));
                 pos.setTanggal(res.getString("Tanggal"));
+                pos.setId(id);
                 this.id = id;
-            }
-            System.out.println("dnasid oa "+this.id);
+            }            
             con.close();
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
             System.out.println(ex.getMessage());
