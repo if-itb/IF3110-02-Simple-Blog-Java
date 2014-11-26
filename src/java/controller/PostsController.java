@@ -54,10 +54,10 @@ public class PostsController implements Serializable {
 	public long getActive_date() {
 		return active_date;
 	}
-//
-//	public void setActive_date(long active_date) {
-//		this.active_date = active_date;
-//	}
+
+	public void setActive_date(long active_date) {
+		this.active_date = active_date;
+	}
 
 	public String getActive_content() {
 		return active_content;
