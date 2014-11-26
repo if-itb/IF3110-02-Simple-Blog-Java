@@ -4,6 +4,7 @@
     Author     : user
 --%>
 
+<%@page import="data.Comment"%>
 <%@page import="data.Connector"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="data.Post"%>
@@ -33,14 +34,32 @@
 		    out.println("<br></br>");
 		    out.println(P.getDate().toString());
 		    out.println(" | By ");
-		    out.println(N.getUsernameByID(P.getAuthorID()) );
+		    out.println( N.getUsernameByID(P.getAuthorID()) );
 		    out.println("<br></br>");
 		    out.println(P.getContent().toString());
 		    out.println("</li>");
+		    
+		    ArrayList<Comment> CommentList = new ArrayList<Comment>();
+		    CommentList = N.getComment(P.getPostID());
+		    if (! CommentList.isEmpty()){
+			out.println("<ul>");
+			for (Comment C : CommentList){
+			    out.println("<li>"); 
+			    out.println(C.getDate());
+			    out.println("<br></br>");
+			    out.println(C.getContent());
+			    out.println("<br></br>");
+			    out.println("</li>");
+			}
+			out.println("</ul>");
+		    }
+		    else {
+			out.println(CommentList.isEmpty());
+		    }
+		    out.println("<br></br>");
 		}
+		out.println("</ul>");
 	    }
-	    out.println("</ul>");
-	    
 	 %>
 	    
 	 

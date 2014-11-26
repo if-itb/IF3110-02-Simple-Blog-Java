@@ -17,7 +17,7 @@ public class Comment {
     private int comment_post_id;
     private String comment_email;
     private int comment_user_id;
-    Comment(){}
+    public Comment(){}
     public void setCommentID(int value){
         comment_id = value;
     }

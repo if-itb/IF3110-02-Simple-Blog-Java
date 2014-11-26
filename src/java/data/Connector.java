@@ -49,7 +49,7 @@ public class Connector {
         ArrayList<User> userList = new ArrayList<User>();
         try{
             st = connection.createStatement();
-            String sql = ("SELECT * FROM user_data");
+            String sql = ("SELECT * FROM `user_data`");
             ResultSet rs = st.executeQuery(sql);
             while(rs.next()){
                 User user = new User();
@@ -71,16 +71,16 @@ public class Connector {
         ArrayList<Comment> commentList = new ArrayList<Comment>();
         try{
             st = connection.createStatement();
-            String sql = ("SELECT * FROM comment WHERE comment_post_id = " + post_id + ";");
+            String sql = ("SELECT * FROM `post`.`post_comment` WHERE `comment-post-id` = " + post_id + ";");
             ResultSet rs = st.executeQuery(sql);
             while(rs.next()){
                 Comment comment = new Comment();
-                comment.setCommentID(rs.getInt("comment_id"));
-                comment.setDate(rs.getString("comment_date"));
-                comment.setContent(rs.getString("comment_content"));
-                comment.setCommentPostID(rs.getInt("comment_post_id"));
-                comment.setEmail(rs.getString("comment_email"));
-                comment.setUserID(rs.getInt("comment_user_id"));
+                comment.setCommentID(rs.getInt("comment-id"));
+                comment.setDate(rs.getString("comment-date"));
+                comment.setContent(rs.getString("comment-content"));
+                comment.setCommentPostID(rs.getInt("comment-post-id"));
+                comment.setEmail(rs.getString("comment-email"));
+                comment.setUserID(rs.getInt("comment-user-id"));
                 commentList.add(comment);
             }
         }
@@ -132,7 +132,7 @@ public class Connector {
         Statement st;
         try {
             st = connection.createStatement();
-            String sql = ("INSERT INTO `post`.`post_comment` (`comment_id`, `comment_date`, `comment_content`, `comment_post_id`,`comment_email`, `comment_user_id`) VALUES (NULL, '" + value.getDate() +  "', '" + value.getContent() + "', '" + value.getCommentPostID() + "', '" + value.getEmail() + "', '" + value.getUserID() + ");");
+            String sql = ("INSERT INTO `post`.`post_comment` (`comment-id`, `comment-date`, `comment-content`, `comment-post-id`,`comment-email`, `comment-user-id`) VALUES (NULL, '" + value.getDate() +  "', '" + value.getContent() + "', '" + value.getCommentPostID() + "', '" + value.getEmail() + "', '" + value.getUserID() + ");");
             ResultSet rs = st.executeQuery(sql);
         } catch (SQLException ex) {
             System.err.println("Gagal mengambil data");
