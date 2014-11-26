@@ -5,6 +5,7 @@
     <h:head>
         <title>Create Page</title>
 		<h:outputStylesheet library="css" name="mystyle.css"></h:outputStylesheet>
+		<h:outputScript library="js" name ="custom.js"></h:outputScript>
 		<script src="//tinymce.cachefly.net/4.1/tinymce.min.js"></script>
     </h:head>
 	
@@ -40,82 +41,12 @@
 							<br /><br />
 <!--							Gambar<br/><h:inputFile value="#{fileManagement.file1}"></h:inputFile>
 							<br/><br/>-->
-							<h:commandButton onclick = "return modifyDateToLong()" action="#{fileManagement.upload()}" value="Create"></h:commandButton>
+							<h:commandButton onclick = "return modifyDateToLong()" action="#{postsController.createPost(createposttitle.value, createpostdate.value, createpostcontent.value)}" value="Create"></h:commandButton>
 						</h:form>
 					</div>
 				</div>
 			</div> <!-- end content -->
 
         </div>
-		<script type="text/javascript">
-//			tinymce.init({
-//				selector: "textarea",
-//				theme: "modern",
-//				plugins: [
-//					"advlist autolink lists link image charmap print preview hr anchor pagebreak",
-//					"searchreplace wordcount visualblocks visualchars code fullscreen",
-//					"insertdatetime media nonbreaking save table contextmenu directionality",
-//					"emoticons template paste textcolor colorpicker textpattern"
-//				],
-//				toolbar1: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
-//				toolbar2: "print preview media | forecolor backcolor emoticons",
-//				image_advtab: true,
-//				templates: [
-//					{title: 'Test template 1', content: 'Test 1'},
-//					{title: 'Test template 2', content: 'Test 2'}
-//				]
-//			});
-			
-			function modifyDateToLong() {
-				//validasi dulu
-				var input_date = document.getElementById('post:date_temp').value;
-				var res = input_date.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
-				var retval = false;
-				if(res) {
-					var dt = new Date(res[3],res[2]-1,res[1]);
-					if ((dt.getMonth()+1!=res[2])||(dt.getDate()!=res[1])||(dt.getFullYear()!=res[3])) {
-						alert('tanggal tidak valid');
-						retval = false;
-					} else {
-						var today = new Date();
-						today.setHours(0);
-						today.setMinutes(0);
-						today.setSeconds(0);
-						today.setMilliseconds(0);
-						if (dt &lt; today) {
-							alert('tanggal harus lebih besar atau sama dengan hari ini');
-							retval = false;
-						} else {
-							retval = true;
-							document.getElementById('post:date').value = dt.getTime();
-						}
-					}
-				} else {
-					alert('tanggal tidak valid');
-					retval = false;
-				}
-				return retval;
-			}
-			function previewFile(){
-				var preview = document.querySelector('img'); //selects the query named img
-				var file    = document.querySelector('input[type=file]').files[0]; //sames as here
-				var reader  = new FileReader();
-				console.log('masuk');
-				console.log(preview);
-				console.log(file);
-				console.log('keluar');
-				
-				reader.onloadend = function () {
-					preview.src = reader.result;
-				}
-
-//				if (file) {
-//					reader.readAsDataURL(file); //reads the data as a URL
-//				} else {
-////					preview.src = "";
-//				}
-		   }
-		   previewFile(); 
-		</script>
     </h:body>
 </html>

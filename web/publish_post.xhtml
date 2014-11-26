@@ -36,7 +36,9 @@
 									<h:outputText value="#{post.title}" binding="#{publishposttitle}" ></h:outputText>
 								</div>
 								<div class="post_date">
-									<h:outputText value="#{post.date}" binding="#{publishpostdate}" ></h:outputText>
+									<h:outputText value="#{post.date}" binding="#{publishpostdate}" >
+										<f:convertDateTime type="date" dateStyle="long" timeZone="GMT+7"/>
+									</h:outputText>
 								</div>
 							</div>
 							<div class="post_content">

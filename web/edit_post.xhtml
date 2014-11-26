@@ -7,6 +7,7 @@
     <h:head>
         <title>Edit Page</title>
 		<h:outputStylesheet library="css" name="mystyle.css"></h:outputStylesheet>
+		<h:outputScript library="js" name ="custom.js"></h:outputScript>
     </h:head>
 	
     <h:body>
@@ -29,21 +30,22 @@
             <div class="content">
                 <div class="newpost">
                     <div class="textfield">
-						<h:form>
+						<h:form id="post">
 							<h:messages style="color:red;" />
 							<h:inputHidden value="#{postsController.active_id}" binding="#{editpostid}"></h:inputHidden>	
                             Judul<br></br><h:inputText id="title" value="#{postsController.active_title}" binding="#{editposttitle}" required="true" requiredMessage="Please enter a title"></h:inputText>
                             <br /><br />
 							Tanggal<br></br>
-							<h:inputText id="date" value="#{postsController.active_date}" binding="#{editpostdate}" required="true" requiredMessage="Please enter a date">
+							<h:inputText id="date_temp" value="#{postsController.active_date}" required="true" requiredMessage="Please enter a date">
 								<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT+7"/>
 							</h:inputText>
+							<h:inputHidden id = "date" binding="#{editpostdate}"></h:inputHidden>
                             <br /><br />
 							Content<br></br><h:inputTextarea id="content" value="#{postsController.active_content}" binding="#{editpostcontent}" required="true" requiredMessage="Please enter a content" rows="13" cols="80"></h:inputTextarea>
                             <br /><br />
 							Status <h:selectBooleanCheckbox id="status" value="#{postsController.active_status}" binding="#{editpoststatus}" />
                             <br /><br />
-                            <h:commandButton action="#{postsController.updatePost(editpostid.value, editposttitle.value, editpostdate.value, editpostcontent.value, editpoststatus.value)}" value="Update" ></h:commandButton>
+                            <h:commandButton onclick="return modifyDateToLong()" action="#{postsController.updatePost(editpostid.value, editposttitle.value, editpostdate.value, editpostcontent.value, editpoststatus.value)}" value="Update" ></h:commandButton>
 						</h:form>
                     </div>
                 </div>
