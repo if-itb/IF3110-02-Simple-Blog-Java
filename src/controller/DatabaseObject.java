@@ -1,5 +1,7 @@
 package controller;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -14,14 +16,17 @@ import entities.UserDetails;
 @ManagedBean
 @ApplicationScoped
 public class DatabaseObject {
+	private String allPostQuery = "SELECT * FROM `post` WHERE `is_deleted` = 0 AND `is_published` = 1";
+	private String idPostQuery = "SELECT * FROM `post` WHERE `is_deleted` = 0 AND `is_published` = 1 AND `id_user` = ?";
+
+	/**
+	 * 
+	 * @return Posts that is not deleted and published
+	 */
 	public List<Post> getPostList() {
-		/**
-		 * Return Posts that is not deleted and published
-		 */
 
 		DatabaseUtility dbUtil = DatabaseUtility.getInstance();
-		ResultSet rs = dbUtil
-				.execute("SELECT * FROM `post` WHERE `is_deleted` = 0 AND `is_published` = 1");
+		ResultSet rs = dbUtil.execute(allPostQuery);
 
 		List<Post> result = new ArrayList<Post>();
 		try {
@@ -37,6 +42,41 @@ public class DatabaseObject {
 			// TODO Auto-generated catch block
 			System.err.println("Error at DatabaseObject.getPostList()");
 			System.exit(10);
+		}
+
+		return result;
+	}
+
+	/**
+	 * 
+	 * @param id_user
+	 * @return posts of id_user
+	 */
+	public List<Post> getPostList(int id_user) {
+		List<Post> result = new ArrayList<>();
+
+		Connection con = DatabaseUtility.getInstance().getLiveConnection();
+
+		ResultSet rs;
+		try {
+			PreparedStatement pstmt = con.prepareStatement(idPostQuery);
+			pstmt.setInt(1, id_user);
+			pstmt.execute();
+			rs = pstmt.getResultSet();
+
+			while (rs.next()) {
+				Post post = new Post();
+				post.setId(rs.getInt(1));
+				post.setTitle(rs.getString(3));
+				post.setContent(rs.getString(4));
+				post.setDate(rs.getDate(5));
+				result.add(post);
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println("Error in getPostList(id_user)");
+			e.printStackTrace();
 		}
 
 		return result;
