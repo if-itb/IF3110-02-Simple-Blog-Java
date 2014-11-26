@@ -148,7 +148,7 @@ public class MySQL {
 		List<User> users = new ArrayList<>();
 
 		try {
-			preparedStatement = connect.prepareStatement("SELECT id, username, password, role, deleted_at FROM " + TABLE_USER);
+			preparedStatement = connect.prepareStatement("SELECT id, username, password, role, deleted_at FROM " + TABLE_USER + " ORDER BY username");
 			resultSet = preparedStatement.executeQuery();
 
 			while (resultSet.next()) {
@@ -245,7 +245,7 @@ public class MySQL {
 		List<Post> posts = new ArrayList<>();
 
 		try {
-			preparedStatement = connect.prepareStatement("SELECT id, title, date, content, status, deleted_at FROM " + TABLE_POST);
+			preparedStatement = connect.prepareStatement("SELECT id, title, date, content, status, deleted_at FROM " + TABLE_POST + " ORDER BY updated_at DESC");
 			resultSet = preparedStatement.executeQuery();
 
 			while (resultSet.next()) {
@@ -272,7 +272,7 @@ public class MySQL {
 		List<Post> posts = new ArrayList<>();
 
 		try {
-			preparedStatement = connect.prepareStatement("SELECT id, title, date, content, deleted_at FROM " + TABLE_POST + " WHERE status = 1");
+			preparedStatement = connect.prepareStatement("SELECT id, title, date, content, deleted_at FROM " + TABLE_POST + " WHERE status = 1 ORDER BY updated_at DESC");
 			resultSet = preparedStatement.executeQuery();
 
 			while (resultSet.next()) {
@@ -299,7 +299,7 @@ public class MySQL {
 		List<Post> posts = new ArrayList<>();
 
 		try {
-			preparedStatement = connect.prepareStatement("SELECT id, title, date, content, deleted_at FROM " + TABLE_POST + " WHERE status = 0");
+			preparedStatement = connect.prepareStatement("SELECT id, title, date, content, deleted_at FROM " + TABLE_POST + " WHERE status = 0 ORDER BY updated_at DESC");
 			resultSet = preparedStatement.executeQuery();
 
 			while (resultSet.next()) {
@@ -326,7 +326,7 @@ public class MySQL {
 		List<Post> posts = new ArrayList<>();
 
 		try {
-			preparedStatement = connect.prepareStatement("SELECT id, title, date, content, status FROM " + TABLE_POST + " WHERE deleted_at IS NOT NULL");
+			preparedStatement = connect.prepareStatement("SELECT id, title, date, content, status FROM " + TABLE_POST + " WHERE deleted_at IS NOT NULL ORDER BY updated_at DESC");
 			resultSet = preparedStatement.executeQuery();
 			System.out.println("woi");
 			while (resultSet.next()) {
@@ -439,7 +439,7 @@ public class MySQL {
 		List<Comment> comments = new ArrayList<>();
 
 		try {
-			preparedStatement = connect.prepareStatement("SELECT id, name, email, comment, deleted_at, created_at FROM " + TABLE_COMMENT + " WHERE post_id = " + post_id);
+			preparedStatement = connect.prepareStatement("SELECT id, name, email, comment, deleted_at, created_at FROM " + TABLE_COMMENT + " WHERE post_id = " + post_id + "ORDER BY created_at DESC");
 			resultSet = preparedStatement.executeQuery();
 
 			while (resultSet.next()) {

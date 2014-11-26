@@ -11,8 +11,8 @@ list post
 -	sudah beres
 
 add post
--	validasi tanggal belum diimplementasi
--	tanggal pake milisecond dari 1970, bentuknya long
+-	validasi tanggal belum diimplementasi / uda beres
+-	tanggal pake milisecond dari 1970, bentuknya long / uda beres
 
 publish post
 -	sudah beres
@@ -27,8 +27,8 @@ view post
 -	sudah beres
 
 komentar
--	validasi email belum diimplementasi
--	load list komentar belum pake ajax
+-	validasi email belum diimplementasi -> uda
+-	load list komentar belum pake ajax (ini uda bukan?)
 
 manajemen user
 -	sudah beres
