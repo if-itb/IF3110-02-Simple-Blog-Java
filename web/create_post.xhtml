@@ -6,55 +6,47 @@
         <title>Create Page</title>
 		<h:outputStylesheet library="css" name="mystyle.css"></h:outputStylesheet>
     </h:head>
-    <h:body>        
+	
+    <h:body>
         <div class="wrapper">
-            <h:form>
-               <h:messages style="color:red;" />		
-            <div class="top">
-                <div class="title">
-                    <a href="home.html">SIMPLE<blue>-</blue>BLOG</a>         
-                    <div class="signin">
-                        <hide1><a href="#">username</a></hide1>
-                        <hide2><a href="#">logout</a></hide2> 
-                        <a href="#"><img src="../../resources/img/user1.png" onmouseover="this.src='../../resources/img/user_blue1.png'" onmouseout="this.src='../../resources/img/user1.png'" height="20"></img></a>  
-                    </div>           
-                </div>
-            </div><!--end top-->
-            <hr  margin-right="30%"></hr>
-            <div class="icon">
-                <h:commandLink action="create_post.xhtml"><img src="resources/img/add1.png" onmouseover="this.src='resources/img/add2.png'" onmouseout="this.src='resources/img/add1.png'" height="30px" title="add new post"></img></h:commandLink>
-                <a href="home-admin.html"><img src="resources/img/restore1.png" onmouseover="this.src='resources/img/restore2.png'" onmouseout="this.src='resources/img/restore1.png'" height="30px" title="restore post"></img></a>
-                <a href="home-admin.html"><img src="resources/img/hide1.png" onmouseover="this.src='resources/img/hide2.png'" onmouseout="this.src='resources/img/hide1.png'" height="30px" title="show unpublished article"></img></a>
-                <a href="manageuser.html"><img src="resources/img/adduser1.png" onmouseover="this.src='resources/img/adduser2.png'" onmouseout="this.src='resources/img/adduser1.png'" height="30px" title="manage users"></img></a>
+			<div class="top">
+				<div class="title">
+					<h:form>
+						<h:commandLink action="index">SIMPLE<blue>-</blue>BLOG</h:commandLink>
+						<div class="signin">
+							<hide1><a href="#">username</a></hide1>
+							<hide2><h:commandLink action="index">logout</h:commandLink></hide2>
+							<h:commandLink action="index"><h:graphicImage name="img/user1.png" height="30px"></h:graphicImage></h:commandLink>
+						</div>
+					</h:form>
+				</div>
+			</div><!--end top-->
+			<hr margin-right="30%" />
+
+			<div class="content">
+				<div class="newpost">
+					<div class="textfield">
+						<h:form>
+							<h:messages style="color:red;" />
+							Judul<br /><h:inputText id="title" binding="#{createposttitle}" required="true" requiredMessage="Please enter a title"></h:inputText>
+							<br /><br />
+							Tanggal<br /><h:inputText id="date" binding="#{createpostdate}" required="true" requiredMessage="Please enter a date"></h:inputText>
+							<br /><br />
+							Content<br /><h:inputTextarea id="content" binding="#{createpostcontent}" required="true" requiredMessage="Please enter a content" cols="80" rows="10"></h:inputTextarea>
+							<br /><br />
+							<h:commandButton action="#{postsController.createPost(createposttitle.value, createpostdate.value, createpostcontent.value)}" value="Create"></h:commandButton>
+						</h:form>
+					</div>
+				</div>
+			</div> <!-- end content -->
+
+			<!-- end content -->
+			<div class="footer">
+                <hr />
+				Chrestella Stephanie <blue>-</blue> 13512005<br />
+				Christ Angga Saputra <blue>-</blue> 13512019<br />
+				Willy <blue>-</blue> 13512065<br />
             </div>
-            <div class="content">
-                <div class="newpost">
-                    <div class="textfield">
-                        <form>
-                            Judul<br></br><h:inputText id="title" binding="#{createposttitle}" required="true" requiredMessage="Please enter a title"></h:inputText>
-			<br />
-                            Tanggal<br></br><h:inputText id="date" binding="#{createpostdate}" required="true" requiredMessage="Please enter a date" ></h:inputText>
-			<br />
-                            Content<br></br><h:inputTextarea id="content" binding="#{createpostcontent}" required="true" requiredMessage="Please enter a content" ></h:inputTextarea>
-			<br />
-
-                            <h:commandButton action="#{postsController.createPost(createposttitle.value, createpostdate.value, createpostcontent.value)}" value="Create" ></h:commandButton>
-                        </form>
-                    </div>
-
-                </div>
-            <div class="clear">.</div>
-            </div> <!-- end content -->
-<!--
-            <div class="footer">
-                <hr></hr>
-                footer
-            </div>-->
-            </h:form>
         </div>
-        
-        
-        
-		
     </h:body>
 </html>

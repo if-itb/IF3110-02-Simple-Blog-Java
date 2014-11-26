@@ -79,7 +79,7 @@ public class PostsController implements Serializable {
 		MySQL mysql = new MySQL();
 		
 		mysql.createPost(title, date, content);
-		FacesContext.getCurrentInstance().getExternalContext().redirect("/SimpleBlog/faces/index.xhtml");
+		FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
 	}
 	
 	public List<Post> getAllPosts() {
@@ -116,7 +116,7 @@ public class PostsController implements Serializable {
 		MySQL mysql = new MySQL();
 		
 		mysql.updatePost(id, title, date, content, status);
-		FacesContext.getCurrentInstance().getExternalContext().redirect("/SimpleBlog/faces/index.xhtml");
+		FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
 	}
 	
 	public void deletePost(int id) {
@@ -127,7 +127,7 @@ public class PostsController implements Serializable {
 	
 	public void viewPost(int id) throws IOException {
 		active_id = id;
-		FacesContext.getCurrentInstance().getExternalContext().redirect("post/view.xhtml");
+		FacesContext.getCurrentInstance().getExternalContext().redirect("view_post.xhtml");
 	}
 	
 	public void editPost(int id, String title, long date, String content, boolean status) throws IOException {
@@ -136,14 +136,14 @@ public class PostsController implements Serializable {
 		active_date = date;
 		active_content = content;
 		active_status = status;
-		FacesContext.getCurrentInstance().getExternalContext().redirect("/SimpleBlog/faces/post/edit.xhtml");
+		FacesContext.getCurrentInstance().getExternalContext().redirect("edit_post.xhtml");
 	}
 	
 	public void restorePost(int id) throws IOException {
 		MySQL mysql = new MySQL();
 		
 		mysql.restorePost(id);
-		FacesContext.getCurrentInstance().getExternalContext().redirect("/SimpleBlog/faces/index.xhtml");
+		FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
 	}
 	
 }
