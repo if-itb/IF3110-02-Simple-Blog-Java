@@ -5,6 +5,9 @@
  */
 package model;
 
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+
 /**
  *
  * @author calvin-pc
@@ -37,6 +40,8 @@ public class EditUserBean {
         DAO.UserDAO DB = DAO.DAOFactory.getInstance("javabase.jdbc").getUserDAO();
         if (DB.find(edited.getUsername()) == null) {
             // TODO sambungin dengan error message
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage("Username doesn't exists!"));
         }
         else {
             DB.update(edited);

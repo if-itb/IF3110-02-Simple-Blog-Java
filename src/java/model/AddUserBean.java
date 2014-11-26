@@ -5,6 +5,9 @@
  */
 package model;
 
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+
 /**
  *
  * @author calvin-pc
@@ -36,7 +39,8 @@ public class AddUserBean {
     public void add() {
         DAO.UserDAO DB = DAO.DAOFactory.getInstance("javabase.jdbc").getUserDAO();
         if (DB.find(user.getUsername()) != null) {
-            // TODO sambungin dengan error message
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage("Username already exists!"));
         }
         else {
             DB.create(user);
