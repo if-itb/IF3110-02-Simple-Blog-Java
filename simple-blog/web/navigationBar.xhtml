@@ -3,17 +3,21 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+    
     <c:if test="#{!userController.isUsernamePasswordExist()}">
         <h:form>
-            <label>User Name</label>
-            <h:inputText  value="#{userController.username}"/>
-            <label>Password</label>
-            <h:inputSecret value="#{userController.password}" />
+            <h:inputText id="username"  value="#{userController.username}" a:placeholder="type your username"/>
+            <h:inputSecret id="password" value="#{userController.password}" a:placeholder="type your password"/>
             <h:commandButton value="login" action="#{userController.actionLogin()}"/>
         </h:form>
     </c:if>
     <c:if test="#{userController.isUsernamePasswordExist()}">
+        <c:if test="#{userController.isAdmin() or userController.isOwner()}">
+            <h:link value="+ Tambah Post" outcome="addPost" ></h:link>
+        </c:if>
         <h:form>
             <h:commandButton value="logout" action="#{userController.actionLogout()}"  />
         </h:form>

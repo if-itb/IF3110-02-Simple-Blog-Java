@@ -15,6 +15,7 @@ public class Post {
     private String title;
     private String content;
     private String date;
+    private int userId;
 
     /**
      * @return the id
@@ -70,5 +71,19 @@ public class Post {
      */
     public void setDate(String date) {
         this.date = date;
+    }
+
+    /**
+     * @return the userId
+     */
+    public int getUserId() {
+        return userId;
+    }
+
+    /**
+     * @param userId the userId to set
+     */
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 }

@@ -5,19 +5,12 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
+    
     <h:head>
         <title>Simple Blog</title>
     </h:head>
     <h:body>
         <ui:composition template="mainTemplate.xhtml">
-            <ui:define name="top">
-                <nav class ="nav">
-                    <h:link style="border:none;" id="logo" outcome="index"><h1>Simple<span>-</span>Blog</h1></h:link>
-                    <ul class="nav-primary">
-                        <ui:include src="navigationBar.xhtml"/>
-                    </ul>
-                </nav>
-            </ui:define>
             <ui:define name="content">
                <div class="posts">
                     <nav class="art-list">
@@ -36,7 +29,7 @@
                                     </div>
                                     <p>#{post.content}</p>
 
-                                    <c:if test="#{userController.showEditHapus()}">
+                                    <c:if test="#{userController.showEditHapus(post.userId)}">
                                     <p>
                                         <h:link value="Edit"/> | <h:link value="Hapus"/>
                                     </p>
@@ -46,7 +39,7 @@
                       </ul>
                     </nav>
                 </div>
-               
+               #{userController.test()}
             </ui:define>
     	</ui:composition>
     </h:body>

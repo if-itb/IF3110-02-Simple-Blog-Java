@@ -15,7 +15,12 @@
 
         <div id="top">
             <ui:insert name="top">
-                
+                <nav class ="nav">
+                    <h:link style="border:none;" id="logo" outcome="index"><h1>Simple<span>-</span>Blog</h1></h:link>
+                    <ul class="nav-primary">
+                        <ui:include src="navigationBar.xhtml"/>
+                    </ul>
+                </nav>
             </ui:insert>
         </div>
         <div id="content" class="center_content">

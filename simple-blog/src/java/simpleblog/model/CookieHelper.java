@@ -1,3 +1,5 @@
+package simpleblog.model;
+
 
 import javax.faces.context.FacesContext;
 import javax.servlet.http.Cookie;
