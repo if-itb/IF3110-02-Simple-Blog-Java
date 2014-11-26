@@ -2,6 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
+	  xmlns:f="http://xmlns.jcp.org/jsf/core">
 	  xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
         <title>Edit Page</title>
@@ -32,7 +33,10 @@
 							<h:inputHidden value="#{postsController.active_id}" binding="#{editpostid}"></h:inputHidden>	
                             Judul<br></br><h:inputText id="title" value="#{postsController.active_title}" binding="#{editposttitle}" required="true" requiredMessage="Please enter a title"></h:inputText>
                             <br /><br />
-							Tanggal<br></br><h:inputText id="date" value="#{postsController.active_date}" binding="#{editpostdate}" required="true" requiredMessage="Please enter a date"></h:inputText>
+							Tanggal<br></br>
+							<h:inputText id="date" value="#{postsController.active_date}" binding="#{editpostdate}" required="true" requiredMessage="Please enter a date">
+								<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT+7"/>
+							</h:inputText>
                             <br /><br />
 							Content<br></br><h:inputTextarea id="content" value="#{postsController.active_content}" binding="#{editpostcontent}" required="true" requiredMessage="Please enter a content" rows="13" cols="80"></h:inputTextarea>
                             <br /><br />
