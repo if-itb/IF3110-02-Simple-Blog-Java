@@ -38,4 +38,18 @@
         <managed-bean-class>model.AllUserBean</managed-bean-class>
         <managed-bean-scope>application</managed-bean-scope>
     </managed-bean>
+    <managed-bean>
+        <managed-bean-name>editUserBean</managed-bean-name>
+        <managed-bean-class>model.EditUserBean</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>addUserBean</managed-bean-name>
+        <managed-bean-class>model.AddUserBean</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+    <validator>
+        <validator-id>usernameValidator</validator-id>       
+        <validator-class>validator.UsernameValidator</validator-class>
+    </validator>
 </faces-config>

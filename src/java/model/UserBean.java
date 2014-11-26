@@ -104,4 +104,12 @@ public class UserBean {
     public void setPassword(String password) {
         this.password = password;
     }
+    
+    public String logout () {
+        NavigationController nc = new NavigationController();
+        this.username = new String();
+        this.password = new String();
+        this.role = guest;
+        return nc.gotoLogin() + "?faces-redirect=true";
+    }
 }

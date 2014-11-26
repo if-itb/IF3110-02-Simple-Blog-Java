@@ -11,5 +11,7 @@ package model;
  * @author Afik
  */
 public class jjhj {
-    
+    public int getX() {
+        return 1;
+    }
 }

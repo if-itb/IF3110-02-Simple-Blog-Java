@@ -18,9 +18,9 @@ public class AllUserBean {
      * Creates a new instance of AllUserBean
      */
     public AllUserBean() {
-        UserBean X = new UserBean(); X.setRole(UserBean.getAdmin());
-        UserBean Y = new UserBean(); Y.setRole(UserBean.getEditor());
-        UserBean Z = new UserBean(); Z.setRole(UserBean.getOwner());
+        UserBean X = new UserBean(); X.setRole(UserBean.getAdmin()); X.setUsername("A");
+        UserBean Y = new UserBean(); Y.setRole(UserBean.getEditor()); Y.setUsername("B");
+        UserBean Z = new UserBean(); Z.setRole(UserBean.getOwner()); Z.setUsername("C");
         allUser = new ArrayList<UserBean> ();
         allUser.add(X);
         allUser.add(Y);
@@ -39,6 +39,10 @@ public class AllUserBean {
      */
     public void setAllUser(ArrayList <UserBean> allUser) {
         this.allUser = allUser;
+    }
+    
+    public void refresh() {
+        //TODO database connection here
     }
     
 }
