@@ -26,14 +26,15 @@
             <hr  margin-right="30%"></hr>
             <div class="content">
                 <h:form>
-                    <ui:repeat value="#{usersController.allUsers}" var="user">
-						<h:inputHidden value="#{user.id}" binding="#{userid}" />	
+                  	
 						<div class="adduser">
 							<a href="create_user.xhtml">+ add user</a>
 						</div>
 						<div class="manageuser">       
 							<div class="listname">
 								<ul>
+									  <ui:repeat value="#{usersController.allUsers}" var="user">
+						<h:inputHidden value="#{user.id}" binding="#{userid}" />
 									<li>
 										<role><h:outputText value="#{user.role}" binding="#{userrole}" ></h:outputText></role>
 										<h:outputText value="#{user.username}" binding="#{username}" ></h:outputText> 
@@ -42,13 +43,13 @@
 										&nbsp;
 										<h:commandLink onclick="return confirm('Are you sure you want to delete this user?');" action="#{usersController.deleteUser(userid.value)}"><h:graphicImage name="img/delete1.png" height="17px" title="add new post"></h:graphicImage></h:commandLink>
 									</li>
+											</ui:repeat>
+
 								</ul>
 							</div>
 						</div>
-					</ui:repeat>
 				</h:form>
             </div>
-			
         </div> <!-- end wrapper -->
     </h:body>
 </html>
