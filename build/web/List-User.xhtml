@@ -4,8 +4,12 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
     xmlns:h="http://java.sun.com/jsf/html"
     xmlns:f="http://java.sun.com/jsf/core"
+<<<<<<< HEAD
     xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
     xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+=======
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+>>>>>>> origin/master
 <f:view>
     <h:head>
         <title> List User </title>
@@ -13,6 +17,7 @@
     <h:body>
         <ui:composition template="template/basis.xhtml">
             <ui:define name="content">
+<<<<<<< HEAD
                 <!-- TODO username validator -->
                 <div style="">
                     <h:form id="edit_user" style="float: left;width: 20%">
@@ -77,6 +82,21 @@
                         <h:outputText value="#{user.roleName}" />
                     </h:column>
                 </h:dataTable>
+=======
+                <h1 class="content-subhead">List User>
+                <ul>
+                    <li>    
+                        <section class="list-post">
+                            <h3><a class="list-post-title" href="#{NavigationController.gotoViewPost(1)}">Everything You Need to Know About Grunt</a></h3>
+                                <p class="post-meta">
+                                    By <a class="post-author" href="#">Eric Ferraiuolo</a> under <a class="post-category post-category-js" href="#">JavaScript</a>
+                                </p>
+                                <a class="pure-button" href="#{NavigationController.gotoEditPost(1)}" value="Edit-Post">Edit Post</a>
+                                <a class="pure-button" href="#{NavigationController.gotoDeletePost(1)}" value="Delete-Post">Delete Post</a>
+                        </section>
+                    </li>
+                </ul>
+>>>>>>> origin/master
             </ui:define>
         </ui:composition>>
     </h:body>

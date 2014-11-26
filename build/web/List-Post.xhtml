@@ -4,7 +4,12 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
     xmlns:h="http://java.sun.com/jsf/html"
     xmlns:f="http://java.sun.com/jsf/core"
+<<<<<<< HEAD
     xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+=======
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+>>>>>>> origin/master
 <f:view>
     <h:head>
         <title>List Post</title>
@@ -15,6 +20,7 @@
                 <h1 class="content-subhead">List Post</h1>
                 <ul>
                     <li>    
+<<<<<<< HEAD
                         <section class="list-post">
                             <h3><a class="list-post-title" href="#{NavigationController.gotoViewPost(1)}">Everything You Need to Know About Grunt</a></h3>
                                 <p class="post-meta">
@@ -23,6 +29,18 @@
                                 <a class="pure-button" href="#{NavigationController.gotoEditPost(1)}" value="Edit-Post">Edit Post</a>
                                 <a class="pure-button" href="#{NavigationController.gotoDeletePost(1)}" value="Delete-Post">Delete Post</a>
                         </section>
+=======
+                        <c:forEach var="item" items="#{ListPost.fetchPublishedPost()}">
+                            <section class="list-post">
+                                <h3><a class="list-post-title" href="#{NavigationController.gotoViewPost(item.PID)}">#{item.judul}</a></h3>
+                                    <p class="post-meta">
+                                        By: #{item.author} | #{item.date}
+                                    </p>
+                                    <a class="pure-button" href="#{NavigationController.gotoEditPost(item.PID)}" value="Edit-Post">Edit Post</a>
+                                    <a class="pure-button" href="#{NavigationController.gotoDeletePost(item.PID)}" value="Delete-Post">Delete Post</a>
+                            </section>
+                        </c:forEach>
+>>>>>>> origin/master
                     </li>
                 </ul>
             </ui:define>

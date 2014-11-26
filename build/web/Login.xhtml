@@ -14,16 +14,25 @@
             <ui:define name="content">
                 <h:form id="loginForm">
                     <h2>#{userBean.roleName}</h2>
+<<<<<<< HEAD
                     Username: <h:inputText id="username" value="#{loginBean.username}">
                         <f:validator validatorId="usernameValidator" for="username"/>
                                 </h:inputText>
                     <h:message for="username" style="color:red" />
+=======
+                    <h:messages style="color:red;margin:8px;" />
+                    Username: <h:inputText id="username" value="#{loginBean.username}"></h:inputText>
+>>>>>>> origin/master
                     <br />
                     Password: <h:inputText id="password" value="#{loginBean.password}" />
                     <br/>
                     <h:commandButton id="loginButton" value="Login" 
                                     action="#{loginBean.login()}" 
                     />
+<<<<<<< HEAD
+=======
+                    <!--TODO Semuanya diubah-->
+>>>>>>> origin/master
                 </h:form>
                 <p> Untuk sementara hanya admin yang bisa akses semua page,
                     role number admin = 2 </p>
