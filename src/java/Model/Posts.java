@@ -40,10 +40,6 @@ public class Posts {
         return instance;
     }
     
-    public void addPost(Post p) {
-        posts.add(p);
-    }
-    
     public Post findPost(int post_id)
     {
         
@@ -66,7 +62,8 @@ public class Posts {
                 while (result.next()) {
                 
                     p = new Post(result.getInt("Id_Post"), result.getString("Judul") ,result.getInt("Id_User") ,  
-                        result.getString("Konten"), result.getTimestamp("Tanggal"));
+                        result.getString("Konten"), result.getTimestamp("Tanggal"),result.getBoolean("Published")
+                    ,result.getBoolean("Deleted"));
                     posts.add(p);
                 }
             } 
@@ -88,37 +85,13 @@ public class Posts {
         }
     }
     
-    public void savePost() {
-    /* Asumsi : koneksi diurus oleh kelas yang memanggil atau controller */
-        
-        DatabaseAccess databaseAccess = DatabaseAccess.getInstance();
-        ArrayList<String> columns = new ArrayList(Arrays.asList("id"));
-        
-        for (int i=0; i<posts.size(); i++) {
-            String condition = "post_id=" + posts.get(i).getId();
-            ResultSet result = null;
-            
-            //cek apakah post yang bersangkutan ada di database atau tidak
-            try {
-                result = databaseAccess.selectRecords("Posts", columns, condition);
-            } catch (SQLException ex) {
-                Logger.getLogger(Post.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
-            if (result!=null) { //update
-                updatePostDB(posts.get(i));
-            }
-            else { //insert
-                insertPostDB(posts.get(i));
-            }
-        }
-    }
-    
     public void updatePostDB(Post p) {
         DatabaseAccess databaseAccess = DatabaseAccess.getInstance();
-        ArrayList<String> columns = new ArrayList(Arrays.asList("Judul","Konten", "Tanggal"));
+        String isPublished = p.isPublished() ? "TRUE" : "FALSE";
+        String isDeleted = p.isDeleted() ? "TRUE" : "FALSE";
+        ArrayList<String> columns = new ArrayList(Arrays.asList("Judul","Konten", "Tanggal","Published","Deleted"));
         ArrayList<String>values = new ArrayList(Arrays.asList("'"+p.getTitle()+"'",
-                "'"+p.getText()+"'","'"+ p.getTimestamp()+"'"));
+                "'"+p.getText()+"'","'"+ p.getTimestamp()+"'",isPublished,isDeleted));
         String condition = "Id_Post="+p.getId();
         try {
                 databaseAccess.updateRecords("post", columns, values, condition);
@@ -131,7 +104,7 @@ public class Posts {
      
     public void insertPostDB(Post p) {
         DatabaseAccess databaseAccess = DatabaseAccess.getInstance();
-        String idUser = "" + p.getId() +"";
+        String idUser = "" + p.getCreatorId() +"";
         ArrayList<String> columns = new ArrayList<String>(Arrays.asList("Judul","Tanggal","Konten","Id_User"));
         ArrayList<String> values = new ArrayList<String>(Arrays.asList("'"+p.getTitle()+"'","'"+p.getTimeString()+"'",
                                 "'"+p.getText()+"'",idUser));
@@ -149,7 +122,7 @@ public class Posts {
         ResultSet resultSet = null;
         
         try {
-            resultSet = databaseAccess.selectAllRecords("Posts", condition);
+            resultSet = databaseAccess.selectAllRecords("post", condition);
             }
             catch (SQLException e1) {
 			System.out.println(e1);
@@ -160,7 +133,8 @@ public class Posts {
             while (resultSet.next()){
                 
             posts.add(new Post(resultSet.getInt("Id_Post"), resultSet.getString("Judul"), resultSet.getInt("Id_User"), 
-                    resultSet.getString("Konten"), resultSet.getTimestamp("Tanggal")));
+                    resultSet.getString("Konten"), resultSet.getTimestamp("Tanggal"),resultSet.getBoolean("Published"),
+            resultSet.getBoolean("Deleted")));
             }
         
         } 
@@ -177,7 +151,7 @@ public class Posts {
         ResultSet resultSet = null;
         
         try {
-            resultSet = databaseAccess.selectAllRecords("post", null);
+            resultSet = databaseAccess.selectAllRecords("post", "Published=TRUE");
             }
             catch (SQLException e1) {
 			System.out.println(e1);
@@ -188,7 +162,38 @@ public class Posts {
         {
             while (resultSet.next()){
             posts.add(new Post(resultSet.getInt("Id_Post"), resultSet.getString("Judul"), resultSet.getInt("Id_User"), 
-                    resultSet.getString("Konten"), resultSet.getTimestamp("Tanggal")));
+                    resultSet.getString("Konten"), resultSet.getTimestamp("Tanggal"),
+                    resultSet.getBoolean("Published"),resultSet.getBoolean("Deleted")));
+        }
+        
+        } 
+        catch (SQLException e1) {
+                e1.printStackTrace();
+        }
+        }
+        return posts;
+    }
+    
+    public ArrayList<Post> getUnpublishedPost() {
+        ArrayList<Post> posts=new ArrayList<Post>();
+        
+        DatabaseAccess databaseAccess = DatabaseAccess.getInstance();
+        ResultSet resultSet = null;
+        
+        try {
+            resultSet = databaseAccess.selectAllRecords("post", "Published=FALSE");
+            }
+            catch (SQLException e1) {
+			System.out.println(e1);
+            }
+        
+        if (resultSet!=null){
+        try 
+        {
+            while (resultSet.next()){
+            posts.add(new Post(resultSet.getInt("Id_Post"), resultSet.getString("Judul"), resultSet.getInt("Id_User"), 
+                    resultSet.getString("Konten"), resultSet.getTimestamp("Tanggal"),
+                    resultSet.getBoolean("Published"),resultSet.getBoolean("Deleted")));
         }
         
         } 

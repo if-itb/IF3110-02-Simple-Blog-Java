@@ -54,11 +54,10 @@ xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
                 <ui:fragment rendered="#{user.role=='admin' || user.role=='owner'}">
                     <li><a href="new_post.jsf" id="new_post"> Add Post</a></li>
                 </ui:fragment>
-                <li><a href="list_post.jsf" id="list_post"> List Post</a></li>
+                <li><a href="list_post.jsf" id="list_post"> Unpublished Post</a></li>
         </ul>
     </ui:fragment>
 </div>
-
 <ui:insert name="content">Default content</ui:insert>
 
 <footer class="footer">
@@ -149,7 +148,7 @@ xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
             }
             return value;
         }
-
+        
         function validateDeletion() {
         /* Post deletion confirmation */
                 var answer = confirm ("Apakah anda yakin menghapus post ini?");
@@ -158,36 +157,37 @@ xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
                 }
                 else return false;
         }
-
-        function validateEmail() {
-        /* check comment form */
-            var y = document.getElementById("j_idt18:email").value;
-            var z = document.getElementById("j_idt18:comment").value;
+        
+        function validateUser() {
+        /* check user form */
+            var x = document.getElementById("j_idt18:username").value;
+            var y = document.getElementById("j_idt18:password").value;
+            var z = document.getElementById("j_idt18:email").value;
             var val = true;
             var errMessage = "";
             if (x==="") {
                     val = false;
-                    errMessage += " Name must be filled!";
-                    document.getElementById("j_idt18:email").style.borderColor="#FF0000";
+                    errMessage += " Username must be filled!";
+                    document.getElementById("j_idt18:username").style.borderColor="#FF0000";
             }
             if (y==="") {
                     val = false;
+                    errMessage += " Password must be filled!";
+                    document.getElementById("j_idt18:password").style.borderColor="#FF0000";
+            }
+            if (z==="") {
+                    val = false;
                     errMessage += " Email must be filled!";
-                    document.getElementById("j_idt18:comment").style.borderColor="#FF0000";
+                    document.getElementById("j_idt18:email").style.borderColor="#FF0000";
             }
             else { //validate email format
                     var pattern = /^(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$/;
-                    if (!pattern.test(y)) {
+                    if (!pattern.test(z)) {
                             val = false;
                             errMessage += " Wrong email format!";
                             document.getElementById("j_idt18:email").style.borderColor="#FF0000";
                     }
                     //else no change
-            }
-            if (z==="") {
-                    val = false;
-                    errMessage += " Comment must be filled!";
-                    document.getElementById("j_idt18:comment").style.borderColor="#FF0000";
             }
             if (!val) {
                     alert(errMessage);

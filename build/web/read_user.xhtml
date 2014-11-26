@@ -35,7 +35,7 @@ table {
                                      headerClass="userTableHeader"
                                      rowClasses="userTableOddRow,employeeTableEvenRow"
                                      style="width:100%">
- 
+                        
     			<h:column>
     				<!-- column header -->
     				<f:facet name="header">User ID</f:facet>
@@ -48,6 +48,11 @@ table {
     				#{usr.username}
     			</h:column>
   
+                        <h:column>
+    				<f:facet name="header">Email</f:facet>
+    				#{usr.email}
+    			</h:column>
+                            
     			<h:column>
     				<f:facet name="header">Role</f:facet>
     				#{usr.role}
@@ -56,14 +61,14 @@ table {
                         <h:column>
     				<f:facet name="header">Command</f:facet>
                                 <h:link outcome="update_user.jsf" value="update">
-                                    <f:param name="userId" value="#{user.id}"/>
+                                    <f:param name="userId" value="#{usr.id}"/>
                                 </h:link> | 
                                 <h:commandLink action="#{deleteUserBean.deleteUser}" value="delete">
-                                    <f:param name="username" value="#{user.username}"/>
+                                    <f:param name="userId" value="#{usr.id}"/>
                                 </h:commandLink>
     			</h:column>
  
-    		</h:dataTable>
+                        </h:dataTable>
 		</h:form>
 	</div>
 </div>

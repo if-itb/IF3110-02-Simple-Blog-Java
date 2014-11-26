@@ -10,6 +10,7 @@ template="/assets/template/template.xhtml">
     <div class="posts">
         <nav class="art-list">
           <ul class="art-list-body">
+              
               <ui:repeat var="post" value="#{indexBean.posts}">
                 <li class="art-list-item">
                   <div class="art-list-item-title-and-time">
@@ -20,12 +21,12 @@ template="/assets/template/template.xhtml">
                     <div class="art-list-time"><span style="color:#F40034;">&#10029;</span> Featured</div>
                   </div>
                     <p>#{post.trimText}</p>
-                  <p>
+                  <p> <br/>
                       <h:form>
                         <h:link value="Edit" outcome="edit_post" style="margin-left: 45px;">
                             <f:param name="postId" value="#{post.id}" />
                         </h:link> | 
-                        <h:commandLink value="Hapus" action="#{deletePostBean.deletePost()}">
+                        <h:commandLink value="Hapus" action="#{deletePostBean.deletePost()}" onclick="return validateDeletion();">
                             <f:param name="postId" value="#{post.id}" />
                         </h:commandLink>
                       </h:form>

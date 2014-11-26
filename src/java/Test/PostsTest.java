@@ -29,13 +29,19 @@ public class PostsTest {
         }
         
     
-    
+        System.out.println("PublishedPost");
         ArrayList<Post> posts = Posts.getInstance().getPublishedPost();
         for (Post post:posts){
             System.out.println(post.getText());
         }
         
-        Posts.getInstance().removePost(2);
+        System.out.println("\nUnpublishedPost");
+        ArrayList<Post> posts1 = Posts.getInstance().getUnpublishedPost();
+        for (Post post:posts1){
+            System.out.println(post.getText());
+        }
+        
+        //Posts.getInstance().removePost(2);
         
         try {
             dbManager.closeConnection();

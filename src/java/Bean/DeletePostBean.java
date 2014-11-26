@@ -7,7 +7,7 @@
 package Bean;
 
 import Database.DatabaseAccess;
-import Model.Post;
+import Model.Comments;
 import Model.Posts;
 import Test.UsersTest;
 import java.sql.SQLException;
@@ -46,7 +46,7 @@ public class DeletePostBean {
         }
 
         Posts.getInstance().removePost(Integer.parseInt(postId));
-        
+        Comments.getInstance().deleteCommentByPostId(Integer.parseInt(postId));
         try {
             dbManager.closeConnection();
         } catch (SQLException ex) {

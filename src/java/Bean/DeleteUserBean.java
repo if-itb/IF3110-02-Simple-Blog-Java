@@ -27,19 +27,19 @@ public class DeleteUserBean {
     
     private User user;
     
-    @ManagedProperty(value="#{param.username}")
-    private String username;
+    @ManagedProperty(value="#{param.userId}")
+    private String userId;
 
-    public String getUsername() {
-        return username;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
     
     public DeleteUserBean() {
-        user = new User();
+        this.user = new User();
     }
     
     public void setUser(User user) {
@@ -59,10 +59,9 @@ public class DeleteUserBean {
             Logger.getLogger(UsersTest.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        if (username!=null){
-            user.setUsername(username);
-        }
-        Users.getInstance().deleteUserByUsername(user);
+        user.setId(Integer.parseInt(userId));
+        
+        Users.getInstance().deleteUserByUserId(user);
         
         try {
             dbManager.closeConnection();

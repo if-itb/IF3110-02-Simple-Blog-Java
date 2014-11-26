@@ -2,6 +2,35 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/E:/ITB%202012/TEKNIK%20INFORMATIKA%202012%20NIM%2013512015/Semester%205/Pengembangan%20Aplikasi%20Berbasis%20Web/Tugas/Tubes%202/Integrated/Simple-Blog/src/java/Bean/LogoutBean.java</file>
+            <file>file:/E:/ITB%202012/TEKNIK%20INFORMATIKA%202012%20NIM%2013512015/Semester%205/Pengembangan%20Aplikasi%20Berbasis%20Web/Tugas/Tubes%202/Integrated/Simple-Blog/src/java/Bean/IndexBean.java</file>
+            <file>file:/E:/ITB%202012/TEKNIK%20INFORMATIKA%202012%20NIM%2013512015/Semester%205/Pengembangan%20Aplikasi%20Berbasis%20Web/Tugas/Tubes%202/Integrated/Simple-Blog/src/java/Test/UsersTest.java</file>
+            <file>file:/E:/ITB%202012/TEKNIK%20INFORMATIKA%202012%20NIM%2013512015/Semester%205/Pengembangan%20Aplikasi%20Berbasis%20Web/Tugas/Tubes%202/Integrated/Simple-Blog/src/java/Model/Users.java</file>
+            <file>file:/E:/ITB%202012/TEKNIK%20INFORMATIKA%202012%20NIM%2013512015/Semester%205/Pengembangan%20Aplikasi%20Berbasis%20Web/Tugas/Tubes%202/Integrated/Simple-Blog/src/java/Bean/LoginBean.java</file>
+            <file>file:/E:/ITB%202012/TEKNIK%20INFORMATIKA%202012%20NIM%2013512015/Semester%205/Pengembangan%20Aplikasi%20Berbasis%20Web/Tugas/Tubes%202/Integrated/Simple-Blog/web/assets/template/template.xhtml</file>
+            <file>file:/E:/ITB%202012/TEKNIK%20INFORMATIKA%202012%20NIM%2013512015/Semester%205/Pengembangan%20Aplikasi%20Berbasis%20Web/Tugas/Tubes%202/Integrated/Simple-Blog/src/java/Bean/UnpublishedPost.java</file>
+            <file>file:/E:/ITB%202012/TEKNIK%20INFORMATIKA%202012%20NIM%2013512015/Semester%205/Pengembangan%20Aplikasi%20Berbasis%20Web/Tugas/Tubes%202/Integrated/Simple-Blog/src/java/Filter/FilterAdmin.java</file>
+            <file>file:/E:/ITB%202012/TEKNIK%20INFORMATIKA%202012%20NIM%2013512015/Semester%205/Pengembangan%20Aplikasi%20Berbasis%20Web/Tugas/Tubes%202/Integrated/Simple-Blog/src/java/Bean/PublishPostBean.java</file>
+            <file>file:/E:/ITB%202012/TEKNIK%20INFORMATIKA%202012%20NIM%2013512015/Semester%205/Pengembangan%20Aplikasi%20Berbasis%20Web/Tugas/Tubes%202/Integrated/Simple-Blog/web/WEB-INF/web.xml</file>
+            <file>file:/E:/ITB%202012/TEKNIK%20INFORMATIKA%202012%20NIM%2013512015/Semester%205/Pengembangan%20Aplikasi%20Berbasis%20Web/Tugas/Tubes%202/Integrated/Simple-Blog/src/java/Bean/DeletePostBean.java</file>
+            <file>file:/E:/ITB%202012/TEKNIK%20INFORMATIKA%202012%20NIM%2013512015/Semester%205/Pengembangan%20Aplikasi%20Berbasis%20Web/Tugas/Tubes%202/Integrated/Simple-Blog/src/java/Bean/DeleteUserBean.java</file>
+            <file>file:/E:/ITB%202012/TEKNIK%20INFORMATIKA%202012%20NIM%2013512015/Semester%205/Pengembangan%20Aplikasi%20Berbasis%20Web/Tugas/Tubes%202/Integrated/Simple-Blog/src/java/Bean/ViewPostBean.java</file>
+            <file>file:/E:/ITB%202012/TEKNIK%20INFORMATIKA%202012%20NIM%2013512015/Semester%205/Pengembangan%20Aplikasi%20Berbasis%20Web/Tugas/Tubes%202/Integrated/Simple-Blog/web/update_user.xhtml</file>
+            <file>file:/E:/ITB%202012/TEKNIK%20INFORMATIKA%202012%20NIM%2013512015/Semester%205/Pengembangan%20Aplikasi%20Berbasis%20Web/Tugas/Tubes%202/Integrated/Simple-Blog/src/java/Bean/AddCommentBean.java</file>
+            <file>file:/E:/ITB%202012/TEKNIK%20INFORMATIKA%202012%20NIM%2013512015/Semester%205/Pengembangan%20Aplikasi%20Berbasis%20Web/Tugas/Tubes%202/Integrated/Simple-Blog/src/java/Bean/UpdateUserBean.java</file>
+            <file>file:/E:/ITB%202012/TEKNIK%20INFORMATIKA%202012%20NIM%2013512015/Semester%205/Pengembangan%20Aplikasi%20Berbasis%20Web/Tugas/Tubes%202/Integrated/Simple-Blog/src/java/Model/User.java</file>
+            <file>file:/E:/ITB%202012/TEKNIK%20INFORMATIKA%202012%20NIM%2013512015/Semester%205/Pengembangan%20Aplikasi%20Berbasis%20Web/Tugas/Tubes%202/Integrated/Simple-Blog/web/user_management.xhtml</file>
+            <file>file:/E:/ITB%202012/TEKNIK%20INFORMATIKA%202012%20NIM%2013512015/Semester%205/Pengembangan%20Aplikasi%20Berbasis%20Web/Tugas/Tubes%202/Integrated/Simple-Blog/src/java/Test/PostsTest.java</file>
+            <file>file:/E:/ITB%202012/TEKNIK%20INFORMATIKA%202012%20NIM%2013512015/Semester%205/Pengembangan%20Aplikasi%20Berbasis%20Web/Tugas/Tubes%202/Integrated/Simple-Blog/src/java/Bean/RoleList.java</file>
+            <file>file:/E:/ITB%202012/TEKNIK%20INFORMATIKA%202012%20NIM%2013512015/Semester%205/Pengembangan%20Aplikasi%20Berbasis%20Web/Tugas/Tubes%202/Integrated/Simple-Blog/src/java/Bean/EditPostBean.java</file>
+            <file>file:/E:/ITB%202012/TEKNIK%20INFORMATIKA%202012%20NIM%2013512015/Semester%205/Pengembangan%20Aplikasi%20Berbasis%20Web/Tugas/Tubes%202/Integrated/Simple-Blog/src/java/Bean/AddPostBean.java</file>
+            <file>file:/E:/ITB%202012/TEKNIK%20INFORMATIKA%202012%20NIM%2013512015/Semester%205/Pengembangan%20Aplikasi%20Berbasis%20Web/Tugas/Tubes%202/Integrated/Simple-Blog/src/java/Bean/CreateUserBean.java</file>
+            <file>file:/E:/ITB%202012/TEKNIK%20INFORMATIKA%202012%20NIM%2013512015/Semester%205/Pengembangan%20Aplikasi%20Berbasis%20Web/Tugas/Tubes%202/Integrated/Simple-Blog/web/index.xhtml</file>
+            <file>file:/E:/ITB%202012/TEKNIK%20INFORMATIKA%202012%20NIM%2013512015/Semester%205/Pengembangan%20Aplikasi%20Berbasis%20Web/Tugas/Tubes%202/Integrated/Simple-Blog/src/java/Filter/FilterAdminOwner.java</file>
+            <file>file:/E:/ITB%202012/TEKNIK%20INFORMATIKA%202012%20NIM%2013512015/Semester%205/Pengembangan%20Aplikasi%20Berbasis%20Web/Tugas/Tubes%202/Integrated/Simple-Blog/src/java/Bean/ReadUserBean.java</file>
+            <file>file:/E:/ITB%202012/TEKNIK%20INFORMATIKA%202012%20NIM%2013512015/Semester%205/Pengembangan%20Aplikasi%20Berbasis%20Web/Tugas/Tubes%202/Integrated/Simple-Blog/web/new_user.xhtml</file>
+            <file>file:/E:/ITB%202012/TEKNIK%20INFORMATIKA%202012%20NIM%2013512015/Semester%205/Pengembangan%20Aplikasi%20Berbasis%20Web/Tugas/Tubes%202/Integrated/Simple-Blog/src/java/Model/Post.java</file>
+        </group>
     </open-files>
 </project-private>

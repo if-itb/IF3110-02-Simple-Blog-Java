@@ -3,12 +3,11 @@ package Bean;
 
 import Model.User;
 import Model.Users;
-import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpServletRequest;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -64,17 +63,14 @@ public class LoginBean {
             user.setPassword(new_user.getPassword());
             user.setRole(new_user.getRole());
             user.setUsername(new_user.getUsername());
-            HttpSession session = (HttpSession)FacesContext.getCurrentInstance().getExternalContext().getSession(true);
-            session.setAttribute("isLogin","yes");
+            user.setEmail(new_user.getEmail());
+            HttpServletRequest req = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
+            req.getSession().setAttribute("isLogin", "yes");
             return "user_management?faces-redirect=true";
         }
         else {
             return "login?faces-redirect=true";
         }
     }
-    
-    public String logout() {
-        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-        return "login?faces-redirect=true";
-    }
+
 }

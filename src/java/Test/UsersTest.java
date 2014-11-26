@@ -24,7 +24,7 @@ public class UsersTest {
         user.setUsername("KevinYudi");
         user.setPassword("Password");
         user.setRole("owner");
-        
+        user.setEmail("kevin.kayu@gmail.com");
         DatabaseAccess dbManager = DatabaseAccess.getInstance();
         try {
             dbManager.openConnection();
@@ -33,7 +33,7 @@ public class UsersTest {
         }
         
         
-        //Users.getInstance().addUser(user);
+        Users.getInstance().addUser(user);
         
         User user1 = new User();
         user1.setUsername("winson");
@@ -42,12 +42,15 @@ public class UsersTest {
         //User user2 = Users.getInstance().findUser(5);
         //System.out.println("Nama : "+user2.getUsername());
         
-        User user3 = new User();
+        /*User user3 = new User();
         user3.setId(5);
         user3.setUsername("Eric");
         user3.setPassword("teric");
-        Users.getInstance().updateUser(user3);
-                
+        Users.getInstance().updateUser(user3);*/
+        
+        User user4 = new User();
+        user4.setId(3);
+        Users.getInstance().deleteUserByUserId(user4);
         try {
             dbManager.closeConnection();
         } catch (SQLException ex) {

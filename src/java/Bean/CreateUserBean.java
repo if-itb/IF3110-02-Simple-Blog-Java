@@ -40,14 +40,12 @@ public class CreateUserBean {
         DatabaseAccess dbManager = DatabaseAccess.getInstance();
         try {
             dbManager.openConnection();
-            System.out.println("Berhasil membuka koneksi");
         } catch (SQLException ex) {
             Logger.getLogger(AddPostBean.class.getName()).log(Level.SEVERE, null, ex);
         }
         Users.getInstance().addUser(user);
         try {
             dbManager.closeConnection();
-            System.out.println("Berhasil menutup koneksi");
         } catch (SQLException ex) {
             Logger.getLogger(AddPostBean.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -30,9 +30,12 @@ public class LoginRedirect implements Filter{
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) request;
         String isLogin = (String) req.getSession().getAttribute("isLogin");
-        if ((isLogin!=null) && (isLogin.equals("yes"))) {
+        if (isLogin==null){
+            chain.doFilter(request,response);
+        }
+        else if ((isLogin.equals("yes"))) {
             HttpServletResponse res = (HttpServletResponse) response;
-            res.sendRedirect("/Simple-Blog/user_management.jsf");
+            res.sendRedirect("user_management.jsf");
         }
         else {
             chain.doFilter(request,response);

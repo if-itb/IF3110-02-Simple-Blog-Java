@@ -41,7 +41,12 @@
 <div class="wrapper">
 
 <nav class="nav">
-    <a style="border:none;" id="logo" href="index.jsf"><h1>Simple<span>-</span>Blog</h1></a>
+    <ui:fragment rendered="#{!(user.role=='guest')}">
+        <a style="border:none;" id="logo" href="user_management.jsf"><h1>Simple<span>-</span>Blog</h1></a>
+    </ui:fragment>
+    <ui:fragment rendered="#{user.role=='guest'}">
+        <a style="border:none;" id="logo" href="index.jsf"><h1>Simple<span>-</span>Blog</h1></a>
+    </ui:fragment>
 </nav>
 
 <article class="art simple post">
@@ -62,39 +67,39 @@
             <hr />
             
             <h2>Komentar</h2>
-
-            <div id="contact-area">
-                <form method="post" action="#">
+            <h:form>
+                 <div id="contact-area">
                     <label for="Nama">Nama:</label>
-                    <input type="text" name="Nama" id="Nama"/>
+                    <h:inputText value="#{addCommentBean.name}" id="Nama"></h:inputText>
         
                     <label for="Email">Email:</label>
-                    <input type="text" name="Email" id="Email"/>
+                    <h:inputText value="#{addCommentBean.email}" id="Email"></h:inputText>
                     
                     <label for="Komentar">Komentar:</label><br/>
-                    <textarea name="Komentar" rows="20" cols="20" id="Komentar"></textarea>
+                    <h:inputTextarea value="#{addCommentBean.text}" rows="20" cols="20" id="Komentar"></h:inputTextarea>
 
-                    <input type="submit" name="submit" value="Kirim" class="submit-button"/>
-                </form>
-            </div>
+                    <h:commandButton onclick="return validateComment();" value="Kirim" action="#{addCommentBean.addComment}" class="submit-button">
+                        <f:param name="postId" value="#{param.postId}" />
+                        <f:ajax execute="@form" render="Ajax1" />
+                    </h:commandButton>
+            
+                </div>
 
-            <ul class="art-list-body">
-                <li class="art-list-item">
-                    <div class="art-list-item-title-and-time">
-                        <h2 class="art-list-title"><a href="post.html">Jems</a></h2>
-                        <div class="art-list-time">2 menit lalu</div>
-                    </div>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis repudiandae quae natus quos alias eos repellendus a obcaecati cupiditate similique quibusdam, atque omnis illum, minus ex dolorem facilis tempora deserunt!</p>
-                </li>
-
-                <li class="art-list-item">
-                    <div class="art-list-item-title-and-time">
-                        <h2 class="art-list-title"><a href="post.html">Kave</a></h2>
-                        <div class="art-list-time">1 jam lalu</div>
-                    </div>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis repudiandae quae natus quos alias eos repellendus a obcaecati cupiditate similique quibusdam, atque omnis illum, minus ex dolorem facilis tempora deserunt!</p>
-                </li>
-            </ul>
+                <ul class="art-list-body">
+                    <h:panelGroup id="Ajax1">
+                        <ui:repeat value="#{addCommentBean.comments}" var="komen">
+                            <li class="art-list-item">
+                            <div class="art-list-item-title-and-time">
+                                <h2 class="art-list-title">#{komen.name}</h2>
+                                <div class="art-list-time">#{komen.email}</div>
+                                <div class="art-list-time">#{komen.timeString}</div>
+                            </div>
+                            <p>#{komen.text}</p>
+                            </li>
+                        </ui:repeat>
+                    </h:panelGroup>
+                </ul>
+            </h:form>
         </div>
     </div>
 
@@ -115,4 +120,45 @@
 </div>
 
 </h:body>
+    <script>
+    //<![CDATA[
+        function validateComment() {
+        /* check comment form */
+            var x = document.getElementById("j_idt20:Nama").value;
+            var y = document.getElementById("j_idt20:Email").value;
+            var z = document.getElementById("j_idt20:Komentar").value;
+            var val = true;
+            var errMessage = "";
+            if (x==="") {
+                    val = false;
+                    errMessage += " Name must be filled!";
+                    document.getElementById("j_idt20:Nama").style.borderColor="#FF0000";
+            }
+            if (y==="") {
+                    val = false;
+                    errMessage += " Email must be filled!";
+                    document.getElementById("j_idt20:Email").style.borderColor="#FF0000";
+            }
+            else { //validate email format
+                    var pattern = /^(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$/;
+                    if (!pattern.test(y)) {
+                            val = false;
+                            errMessage += " Wrong email format!";
+                            document.getElementById("j_idt20:Email").style.borderColor="#FF0000";
+                    }
+                    //else no change
+            }
+            if (z==="") {
+                    val = false;
+                    errMessage += " Comment must be filled!";
+                    document.getElementById("j_idt20:Komentar").style.borderColor="#FF0000";
+            }
+            if (!val) {
+                    alert(errMessage);
+            }
+
+            return val;
+        }
+     //]]>
+    </script>
 </html>

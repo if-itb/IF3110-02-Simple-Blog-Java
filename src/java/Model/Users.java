@@ -38,9 +38,7 @@ public class Users {
         ResultSet result = null;
 	try {
             result = databaseAccess.selectAllRecords("user", null);
-            System.out.println("Berhasil melakukan seleksi pada database");
         } catch (SQLException e1) {
-            System.out.println("Gagal melkaukan seleksi pada database");
             System.out.println(e1);
             e1.printStackTrace();
 	}
@@ -134,9 +132,9 @@ public class Users {
     }
     
     public void addUser(User user) {
-        ArrayList<String> columns = new ArrayList<String>(Arrays.asList("Username","Password","Role"));
+        ArrayList<String> columns = new ArrayList<String>(Arrays.asList("Username","Password","Role","Email"));
         ArrayList<String> values = new ArrayList<String>(Arrays.asList("'"+user.getUsername()+
-                "'","'"+user.getPassword()+"'","'"+user.getRole()+"'"));
+                "'","'"+user.getPassword()+"'","'"+user.getRole()+"'","'"+user.getEmail()+"'"));
         DatabaseAccess dbManager = DatabaseAccess.getInstance();
         try {
             dbManager.insertRecords("user",columns,values);
@@ -149,9 +147,9 @@ public class Users {
         DatabaseAccess dbManager = DatabaseAccess.getInstance();
         
         String table = "user";
-        ArrayList<String> columns = new ArrayList<String>(Arrays.asList("Username","Password","Role"));
+        ArrayList<String> columns = new ArrayList<String>(Arrays.asList("Username","Password","Role","Email"));
         ArrayList<String> values = new ArrayList<String>(Arrays.asList("'"+user.getUsername()+"'",
-                "'"+user.getPassword()+"'","'"+user.getRole()+"'"));
+                "'"+user.getPassword()+"'","'"+user.getRole()+"'","'"+user.getEmail()+"'"));
         String condition = "Id_User="+user.getId();
         try {
             dbManager.updateRecords(table,columns,values,condition);
@@ -161,9 +159,9 @@ public class Users {
         
     }
     
-    public void deleteUserByUsername(User user) {
+    public void deleteUserByUserId(User user) {
         DatabaseAccess dbManager = DatabaseAccess.getInstance();
-        String condition = "username='"+user.getUsername()+"'";
+        String condition = "Id_User="+user.getId();
         String tableName = "user";
         try {
             dbManager.deleteRecords(tableName,condition);

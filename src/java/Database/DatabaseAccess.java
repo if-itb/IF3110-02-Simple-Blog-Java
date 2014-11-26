@@ -159,6 +159,7 @@ public class DatabaseAccess {
 			query.append(" WHERE " + condition);
 		}
 		query.append(";");
+                System.out.println(query);
 		ResultSet resultSet = this.statement.executeQuery(query.toString());
 		return resultSet;
 	}

@@ -34,16 +34,16 @@ public class AddPostBean {
         post = new Post();
     }
     
-    public Post getPost() {
-        return post;
-    }
-
     public void setPost(Post post) {
         this.post = post;
     }
     
     public void setUser(User newUser){
-        user = newUser;
+        this.user = newUser;
+    }
+    
+    public Post getPost() {
+        return post;
     }
     
     public User getUser(){
@@ -51,18 +51,16 @@ public class AddPostBean {
     }
     
     public String addPost(){
-        post.setId(user.getId());
+        post.setCreatorId(user.getId());
         DatabaseAccess dbManager = DatabaseAccess.getInstance();
         try {
             dbManager.openConnection();
-            System.out.println("Berhasil membuka koneksi");
         } catch (SQLException ex) {
             Logger.getLogger(AddPostBean.class.getName()).log(Level.SEVERE, null, ex);
         }
         Posts.getInstance().insertPostDB(post);
         try {
             dbManager.closeConnection();
-            System.out.println("Berhasil menutup koneksi");
         } catch (SQLException ex) {
             Logger.getLogger(AddPostBean.class.getName()).log(Level.SEVERE, null, ex);
         }

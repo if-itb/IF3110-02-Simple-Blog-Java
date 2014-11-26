@@ -15,12 +15,15 @@ template="/assets/template/template.xhtml">
 			<label for="password">Password:</label>
                         <h:inputText id="password" value="#{updateUserBean.user.password}"></h:inputText>
 			
+                        <label for="email">Email:</label>
+                        <h:inputText id="email" value="#{updateUserBean.user.email}"></h:inputText>
+                        
 			<label for="role">Role:</label>
 			<h:selectOneMenu value="#{updateUserBean.user.role}" id="role">
 			  <f:selectItems value="#{roleList.roles}"/>
 			</h:selectOneMenu> <br/> <br/>
 
-                        <h:commandButton value="Simpan" class="submit-button" action="#{updateUserBean.updateUser}">
+                        <h:commandButton onclick="return validateUser();" value="Simpan" class="submit-button" action="#{updateUserBean.updateUser}">
                             <f:param name="userId" value="#{updateUserBean.userId}" />
                         </h:commandButton>
 		</h:form>
