@@ -4,47 +4,52 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html">
     <h:head>
         <title>Create Page</title>
-	<h:outputStylesheet library="css" name="mystyle.css"></h:outputStylesheet>
+		<h:outputStylesheet library="css" name="mystyle.css"></h:outputStylesheet>
     </h:head>
+	
     <h:body>
         <div class="wrapper">
             <div class="top">
-                <h:form>
-                <div class="title">                    
-                    <h:commandLink action="index">SIMPLE<blue>-</blue>BLOG</h:commandLink>                                                  
-                    <div class="signin">
-                        <hide1><a href="#">username</a></hide1>
-                        <hide2><hide2><h:commandLink action="index">logout</h:commandLink></hide2></hide2>                        
-                        <h:commandLink action="index"><h:graphicImage name="img/user1.png" height="30px"></h:graphicImage></h:commandLink>  
-                    </div>           
+                <div class="title">  
+					<h:form>                  
+						<h:commandLink action="index">SIMPLE<blue>-</blue>BLOG</h:commandLink>                                                  
+						<div class="signin">
+							<hide1><a href="#">username</a></hide1>
+							<hide2><hide2><h:commandLink action="index">logout</h:commandLink></hide2></hide2>                        
+							<h:commandLink action="index"><h:graphicImage name="img/user1.png" height="30px"></h:graphicImage></h:commandLink>  
+						</div>     
+					</h:form>        
                 </div>
-                </h:form>  
             </div><!--end top-->
             <hr  margin-right="30%"></hr>
             
             <div class="content">
                 <h:form>
-                <h:messages style="color:red;" />		
-                <div class="forms">
-                    <blue><b>Edit User</b></blue>
-                    <form action="manageuser.html">
-                        <div class="textfield">
-                            username :&nbsp;<h:inputText id="username" binding="#{createusername}" required="true" requiredMessage="Please enter a username"></h:inputText><br></br>
-                            password :&nbsp;<h:inputSecret id="password" binding="#{createpassword}" required="true" requiredMessage="Please enter a password" ></h:inputSecret><br></br>
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            role &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:
-                            <h:inputTextarea id="role" binding="#{createrole}" required="true" requiredMessage="Please enter a role" ></h:inputTextarea>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <br></br><br></br>
-                        </div>
-			<h:commandButton action="#{usersController.createUser(createusername.value, createpassword.value, createrole.value)}" value="Create" ></h:commandButton>
-                    </form>
-                </div>
+					<h:messages style="color:red;" />		
+					<div class="forms">
+						<blue><b>Create User</b></blue>
+						<br />
+						<br />
+						<div class="textfield">
+							username : <h:inputText id="username" binding="#{createusername}" required="true" requiredMessage="Please enter a username"></h:inputText>
+							<br /><br />
+							password : <h:inputSecret id="password" binding="#{createpassword}" required="true" requiredMessage="Please enter a password" ></h:inputSecret>
+							<br /><br />
+							role : <h:inputText id="role" binding="#{createrole}" required="true" requiredMessage="Please enter a role" ></h:inputText>
+							<br /><br />
+							<h:commandButton action="#{usersController.createUser(createusername.value, createpassword.value, createrole.value)}" value="Create" ></h:commandButton>
+						</div>
+					</div>
                 </h:form>
-            </div> <!-- end content -->
-<!--            <div class="footer">
-                <hr></hr>
-                footer
-            </div>-->
+            </div>
+			
+			<!-- end content -->
+			<div class="footer">
+                <hr />
+				Chrestella Stephanie <blue>-</blue> 13512005<br />
+				Christ Angga Saputra <blue>-</blue> 13512019<br />
+				Willy <blue>-</blue> 13512065<br />
+            </div>
         </div> <!-- end wrapper -->	
     </h:body>
 </html>

@@ -8,21 +8,22 @@
         <title>View Page</title>
 		<h:outputStylesheet library="css" name="mystyle.css"></h:outputStylesheet>
     </h:head>
+	
     <h:body>
         <div class="wrapper">
 			<div class="top">
-				<h:form>
-					<div class="title">           
+				<div class="title">  
+					<h:form>         
 					<h:commandLink action="index">SIMPLE<blue>-</blue>BLOG</h:commandLink>            
 						<div class="signin">
 							<hide1><a href="#">username</a></hide1>
 							<hide2><h:commandLink action="index">logout</h:commandLink></hide2>
 							<h:commandLink action="index"><h:graphicImage name="img/user1.png" height="30px"></h:graphicImage></h:commandLink>  
-						</div>           
-					</div>
-				</h:form>
+						</div>    
+					</h:form>       
+				</div>
 			</div><!--end top-->
-			<hr margin-right="30%"></hr>
+			<hr  margin-right="30%"></hr>
             
 			<div class="content">
 				<h:form>
@@ -35,30 +36,33 @@
 					</div>
 					<div class="isipost">
 						<h:outputText id="content" value="#{postsController.getPost(viewpostid.value).content}" />
-						<br></br><br></br><br></br>
+						<br /><br />
 						<hr></hr>
+						
 						<div class="h1komentar">
 							COMMENTS
 						</div>
+						
 						<div class="komenforms">
 							<h:messages id="errorMessages" style="color:red;" />
-							<form method="post" action="#">
-								<div class="textfield">
-									<h:outputLabel for="name" value="Name: " />
-									<br></br><h:inputText id="name" binding="#{createname}" required="true" requiredMessage="Please enter your name"></h:inputText>
-										<br></br>
-									<h:outputLabel for="email" value="E-mail: " />
-									<br></br><h:inputText id="email" binding="#{createemail}" required="true" requiredMessage="Please enter your e-mail" ></h:inputText>
-										<br></br>
-										<h:outputLabel for="comment" value="Comment: " /><br></br>
-									<h:inputTextarea id="comment" binding="#{createcomment}" required="true" requiredMessage="Please enter your comment" rows="6" cols="50"></h:inputTextarea>
-								</div>
-								<h:commandButton onclick="return validateEmail()" id="commentCreate" value="Create" action="#{commentsController.createComment(viewpostid.value, createname.value, createemail.value, createcomment.value)}">
+							<div class="textfield">
+								<h:outputLabel for="name" value="Name: " />
+								<br /><h:inputText id="name" binding="#{createname}" required="true" requiredMessage="Please enter your name"></h:inputText>
+								<br /><br />
+								<h:outputLabel for="email" value="E-mail: " />
+								<br></br><h:inputText id="email" binding="#{createemail}" required="true" requiredMessage="Please enter your e-mail" ></h:inputText>
+								<br /><br />
+								<h:outputLabel for="comment" value="Comment: " /><br></br>
+								<h:inputTextarea id="comment" binding="#{createcomment}" required="true" requiredMessage="Please enter your comment" rows="6" cols="50"></h:inputTextarea>
+								<br /><br />
+								<h:commandButton id="commentCreate" value="Create" action="#{commentsController.createComment(viewpostid.value, createname.value, createemail.value, createcomment.value)}">
 									<f:ajax execute="@form" render="@form"></f:ajax>
-							</h:commandButton>
-							</form>
+								</h:commandButton>
+							</div>
 						</div>
-						<br></br><hr></hr>
+						<br />
+						<hr></hr>
+						
 						<ui:repeat id="commentTable" value="#{commentsController.getAllComments(viewpostid.value)}" var="comment">
 							<div class="komentarbox">
 								<h:inputHidden value="#{comment.id}" binding="#{commentid}" />
@@ -70,29 +74,24 @@
 										<h:outputText value="#{comment.date}" binding="#{commentdate}" ></h:outputText>
 									</div>
 								</div>
+								
 								<div class="komentarcontent">
 									<h:outputText value="#{comment.comment}" binding="#{commentcomment}" ></h:outputText>
 								</div>
 							</div>
+							<br />
 						</ui:repeat>
-       </div> 
-        </h:form>
-    </div> <!-- end content -->
-
-</div> <!-- end wrapper -->
-				<script type="text/javascript">
-			function validateEmail() {
-				console.log('ok');
-				var x = document.getElementById('j_idt7:email');
-				var input_email = x.value;
-				var result = input_email.match(/^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$/g);
-				console.log(result);
-				if (result === null) {
-					alert('Email salah');
-					return false;
-				} 
-				return true;
-			}
-		</script>
+					</div>
+				</h:form>
+			</div>
+			
+			<!-- end content -->
+			<div class="footer">
+                <hr />
+				Chrestella Stephanie <blue>-</blue> 13512005<br />
+				Christ Angga Saputra <blue>-</blue> 13512019<br />
+				Willy <blue>-</blue> 13512065<br />
+            </div>
+		</div> <!-- end wrapper -->
     </h:body>
 </html>
