@@ -25,11 +25,17 @@ public class LoginBean {
     public String login() {
         // TODO  Sinkronisasi dengan database
         NavigationController nb = new NavigationController();
-        if (getUsername().equals("budi") && getPassword().equals("kecil")) {
-            user.setRole(2);
-            return nb.gotoListPost() + "?faces-redirect=true";
+        UserBean finded = DAO.DAOFactory.getInstance("javabase.jdbc").getUserDAO().find(username);
+        if (!finded.getPassword().equals(password) || finded == null) {
+            return nb.gotoLogin() + "?faces-redirect=true";
         }
-        else return nb.gotoLogin() + "?faces-redirect=true";
+        else {
+            user.setUsername(finded.getUsername());
+            user.setPassword(finded.getPassword());
+            user.setRole(finded.getRole());
+            user.setEmail(finded.getEmail());
+            return nb.gotoListPost() + "?faces-redirect=true";
+        } 
         
     }
 
