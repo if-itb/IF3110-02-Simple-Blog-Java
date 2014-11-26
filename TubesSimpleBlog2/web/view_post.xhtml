@@ -9,34 +9,75 @@ and open the template in the editor.
       xmlns:h="http://xmlns.jcp.org/jsf/html"
 	  xmlns:f="http://xmlns.jcp.org/jsf/core"
 	  xmlns:c="http://java.sun.com/jsp/jstl/core">
+  
     <h:head>
-        <title>TODO supply a title</title>
+        <title>Simple Blog</title>
         <meta name="viewport" content="width=device-width"/>
-    </h:head>
-    <h:body> 
-		VIEW POST
-		#{viewPost.showPage(param['idpost'])}
-		#{listKomentar.showPage(param['idpost'])}
-		<br/><h:outputText value="#{viewPost.postId}"></h:outputText> 
+          <link rel="stylesheet" href="style.css" type="text/css" />
+    </h:head>        
+        <div class="header">Simple Blog</div>
+        <br/>
+        <div id="nav"> Add Post | Login </div>
+    <h1>View Post </h1>
+    <hr></hr>
+    <h:body>
+ 
+        #{viewPost.showPage(param['idpost'])}
+        #{listKomentar.showPage(param['idpost'])}
+        <br/><h:outputText value="#{viewPost.postId}"></h:outputText> 
         <br/><h:outputText value="#{viewPost.judul}"></h:outputText>      
          <br/><h:outputText value="#{viewPost.konten}"></h:outputText>
          <br/> <h:outputText value="#{viewPost.tanggal}"></h:outputText>
 		 
-		 <c:forEach items="#{listKomentar.arrKomentar}" var="komen">
-			<br/><h:outputText value="#{komen.commentid}"></h:outputText> 
-            <br/><h:outputText value="#{komen.nama}"></h:outputText> 
-			<br/><h:outputText value="#{komen.tanggal}"></h:outputText>
-			<br/> <h:outputText value="#{komen.komentar}"></h:outputText>
-                        <hr></hr>
-		</c:forEach>
-		 #{komentar.clear()}
-		<p>           
-            <h:form> 
-				Nama: <h:inputText id="kname" value="#{komentar.nama}" />
-				Email: <h:inputText id="kemail" value="#{komentar.email}" />
-				Komentar: <h:inputText id="komens" value="#{komentar.komentar}" />
-              <h:commandButton value="Submit" action="#{komentar.addComment()}" onclick="return check();"/>
-			</h:form>
-		</p>
+
+	<h3>Beri Komentar</h3>
+        
+                               
+            <h:form id="formcomment" onsubmit="return validasiEmail()">
+                <h:outputText value="#{komen.nama}" id="kname"></h:outputText>
+                <br/>Nama: <h:inputText id="knamee" value="#{komentar.nama}"/>
+                <br/>Email: <h:inputText  id="kemaill" value="#{komentar.email}"  />
+                <br/>Komentar:   <h:inputText id="komens" value="#{komentar.komentar}" />
+                <h:commandButton value="Submit" action="#{komentar.addComment()}" onclick="return check()">
+                <f:ajax execute="komens" render="kname"></f:ajax> </h:commandButton>  
+            </h:form>
+        
+
+        <h3> Komentar</h3>
+        #{listKomentar.showPage(viewPost.postId)}
+        <h:outputText value="#{listKomentar.postid}" id="idpost"/>
+        <c:forEach items="#{listKomentar.arrKomentar}" var="komen">
+        <p>
+            #{listKomentar.postid}
+            <br/><h:outputText value="#{komen.commentid}" id="kcommentid"></h:outputText> 			
+            <br/><h:outputText value="#{komen.nama}" id="kname"></h:outputText> 
+            <br/><h:outputText value="#{komen.tanggal}"></h:outputText>
+            <br/> <h:outputText value="#{komen.komentar}"></h:outputText>
+            -------</p>
+
+	</c:forEach>
+
+
+<script type="text/javascript">
+
+function validasiEmail(){
+var mail= document.formcomment["formcomment:kemaill"].value; 
+if(mail.match(/^[_A-Za-z0-9-]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)*(\.[A-Za-z]+)$/g))
+{return true;}
+else{
+alert ("Salah Email");
+return false;}}
+
+        </script>       
+<hr></hr>
+        <div id="nav">
+         <form action="Login" method="post">
+             <br/>Username : <input type = "text" name="uname"/>
+             <br/>Password : <input type ="password" name="pass"/>
+             <br/><input type="submit" value="Login"/>
+         </form></div>
+        <div id="footer">
+            rita | cilvia | linda </div>
+        
     </h:body>
 </html>
