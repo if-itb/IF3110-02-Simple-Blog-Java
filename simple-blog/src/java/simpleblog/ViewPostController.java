@@ -42,7 +42,7 @@ public class ViewPostController {
         Connection con = ds.getConnection();
         PreparedStatement ps 
             = con.prepareStatement(
-                "SELECT * FROM post WHERE status="+postId); 
+                "SELECT * FROM post WHERE id="+postId); 
 	ResultSet result =  ps.executeQuery();
         if(result.first())
         {
