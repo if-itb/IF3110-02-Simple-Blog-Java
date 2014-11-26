@@ -4,6 +4,7 @@
     Author     : user
 --%>
 
+<%@page import="data.Connector"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="data.Post"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -17,10 +18,10 @@
         <h1>Simple-Blog</h1>
 	
 	<%
-	    data.Connector N = new data.Connector();
+	    Connector N = new Connector();
 	    //out.println(N.setComment("Ini comment hasil dari javah", 1, "feli-c-s@hotmail.com", 1));
 	    ArrayList<Post> postlist = new ArrayList<Post>();
-	    postlist = N.getPublished();
+	    postlist = N.getPost(1);
 	    if (postlist == null) {
 		out.println("No posts here, move on~");
 	    }
@@ -32,7 +33,6 @@
 		    out.println("<br></br>");
 		    out.println(P.getDate().toString());
 		    out.println(" | By ");
-		    out.println("<br></br>");
 		    out.println(N.getUsernameByID(P.getAuthorID()) );
 		    out.println("<br></br>");
 		    out.println(P.getContent().toString());
@@ -40,6 +40,7 @@
 		}
 	    }
 	    out.println("</ul>");
+	    
 	 %>
 	    
 	 

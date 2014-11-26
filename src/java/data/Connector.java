@@ -24,7 +24,7 @@ public class Connector {
  * @author user
  */
     private Connection connection;
-    Connector(){
+    public Connector(){
         try {
             System.out.println("Loading driver...");
             Class.forName("com.mysql.jdbc.Driver");
@@ -94,7 +94,13 @@ public class Connector {
         ArrayList<Post> listPost = new ArrayList<Post>();
         try {
             st = connection.createStatement();
-            String sql = ("SELECT * FROM post.post_table WHERE category = " + category + " ORDER BY date;");
+	    String cat = new String();
+	    if (category == 0)
+		cat = "unpublished";
+	    else 
+		cat = "published";
+	    
+            String sql = ("SELECT * FROM `post`.`post_table` WHERE `category` = '" + cat + "' ORDER BY `date`;");
             ResultSet rs = st.executeQuery(sql);
             while(rs.next()) {
                 Post post = new Post();
@@ -143,6 +149,28 @@ public class Connector {
             System.err.println("Gagal meng-insert data.");
         }
     }
+    
+     public String getUsernameByID(int user_ID){
+	boolean executed = false;
+	
+	String uName = new String();
+	try {
+	    Statement st;
+	    st = connection.createStatement();
+	    String sqlQuery = "SELECT * FROM `post`.`user_data` WHERE `user_id` = " + Integer.toString(user_ID) + ";";
+	    ResultSet rs = st.executeQuery(sqlQuery);
+	    if (rs.next()){
+	    uName = Boolean.toString(executed);
+	    uName = rs.getString("user_name");
+	    }
+	} catch (Exception e) {
+	    uName = uName + e.toString();
+	    //uName = sqlQuery;
+	}
+	
+	return uName;
+    }
+     
     public void closeConnection(){
         System.out.println("Closing the connection.");
         if (connection != null) try { connection.close(); } catch (SQLException ignore) {}
