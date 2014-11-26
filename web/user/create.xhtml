@@ -15,24 +15,43 @@
 
         <ui:composition template="/layouts/main.xhtml">
             <ui:define name="content">
-                <br/><br/>
-                <h1>Create User</h1>
-                <h:form>
-                    <span style='display:none'>#{user.isNewRecord}</span>
-                    Nama<br/>
-                    <h:inputText class="form-control" value="#{userCtrl.user.nama}"></h:inputText>
-                    Email<br/>
-                    <h:inputText class="form-control" value="#{userCtrl.user.email}"></h:inputText>
-                    <br/>Password
-                    <h:inputSecret class='form-control' value="#{userCtrl.user.password}"></h:inputSecret>
-                    <br/>Admin
-                    <h:selectBooleanCheckbox value="#{userCtrl.user.isAdmin}"></h:selectBooleanCheckbox>
-                    <br/>Editor
-                    <h:selectBooleanCheckbox value="#{userCtrl.user.isEditor}"></h:selectBooleanCheckbox>
-                    <br/>Owner
-                    <h:selectBooleanCheckbox value="#{userCtrl.user.isOwner}"></h:selectBooleanCheckbox>
-                    <h:commandLink action="#{userCtrl.doSubmit()}" value="Tambah" class="btn btn-primary"></h:commandLink>
-                </h:form>
+                <div class='container' style='width:50%;'>
+                    <h1>Create User</h1>
+                    <h:form class='na   vbar-form'>
+                        <div class="Field">
+                            <div class="form-group">
+                                <h4>Nama</h4>
+                                <div class="form-group">
+                                    <h:inputText class="form-control" value="#{userCtrl.user.nama}"></h:inputText>
+                                </div>
+                            </div>
+                        </div>
+                        <span style='display:none'>#{user.isNewRecord}</span>
+                        <div class="Field">
+                            <div class="form-group">
+                                <h4>Email</h4>
+                                <div class="form-group">
+                                    <h:inputText class="form-control" value="#{userCtrl.user.email}"></h:inputText>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <h4>Password</h4>
+                                <div class="form-group">
+                                    <h:inputSecret class='form-control' value="#{userCtrl.user.password}"></h:inputSecret>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="Field">
+                            <h4>Peran :</h4>
+                            <div class="form-group">
+                                Admin<h:selectBooleanCheckbox value="#{userCtrl.user.isAdmin}"></h:selectBooleanCheckbox>
+                                Editor<h:selectBooleanCheckbox value="#{userCtrl.user.isEditor}"></h:selectBooleanCheckbox>
+                                Owner<h:selectBooleanCheckbox value="#{userCtrl.user.isOwner}"></h:selectBooleanCheckbox>
+                            </div>
+                        </div>
+                        <h:commandLink style='float:right' action="#{userCtrl.doSubmit()}" value="Tambah" class="btn btn-primary"></h:commandLink>
+                    </h:form>
+                </div>
             </ui:define>
         </ui:composition>
     </h:body>

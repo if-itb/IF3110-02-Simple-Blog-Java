@@ -18,21 +18,23 @@
     <h:body>
         <ui:composition template="/layouts/main.xhtml">
             <ui:define name="content">
-                <h1>Daftar Pengguna</h1>
-                <h:form>
-                    <h:commandButton action="#{userCtrl.showCreate()}" value="+ Tambah Pengguna" class="btn btn-primary"></h:commandButton>
-                </h:form>
+                <div class="container">
+                    <h1>Daftar Pengguna</h1>
+                    <h:form>
+                        <h:commandButton action="#{userCtrl.showCreate()}" value="+ Tambah Pengguna" class="btn btn-primary"></h:commandButton>
+                    </h:form>
+                </div>
                 <br/>
-                <h:form>
-                    <table class="table table-striped">
-                        <tr>
-                            <th>Nama</th>
-                            <th>Email</th>
-                            <th>Action</th>
-                        </tr>
-                        <c:forEach var="user" items="#{userCtrl.getUsers()}">
+                <div class='container'>
+                    <h:form>
+                        <table class="table table-striped">
                             <tr>
-                                <div>
+                                <th>Nama</th>
+                                <th>Email</th>
+                                <th>Action</th>
+                            </tr>
+                            <c:forEach var="user" items="#{userCtrl.getUsers()}">
+                                <tr>
                                     <td>#{user.nama}</td>
                                     <td>#{user.email}</td>
                                     <td>
@@ -43,12 +45,11 @@
                                             <f:param name="id" value="#{user.id}"></f:param>
                                         </h:commandButton>
                                     </td>
-
-                                </div>
-                            </tr>
-                        </c:forEach>
-                    </table>
-                </h:form>
+                                </tr>
+                            </c:forEach>
+                        </table>
+                    </h:form>
+                </div>
             </ui:define>
         </ui:composition>
 
