@@ -25,7 +25,7 @@
 			<hr  margin-right="30%"></hr>
             
 			<div class="content">
-				<h:form>
+				<h:form id="comments">
 					<h:inputHidden value="#{postsController.active_id}" binding="#{viewpostid}" ></h:inputHidden>     	
 					<div class="judulpost">
 						<h:outputText id="title" value="#{postsController.getPost(viewpostid.value).title}" /><br></br>
@@ -56,7 +56,7 @@
 								<h:outputLabel for="comment" value="Comment: " /><br></br>
 								<h:inputTextarea id="comment" binding="#{createcomment}" required="true" requiredMessage="Please enter your comment" rows="6" cols="50"></h:inputTextarea>
 								<br /><br />
-								<h:commandButton id="commentCreate" value="Create" action="#{commentsController.createComment(viewpostid.value, createname.value, createemail.value, createcomment.value)}">
+								<h:commandButton onclick="return validateEmail()" id="commentCreate" value="Create" action="#{commentsController.createComment(viewpostid.value, createname.value, createemail.value, createcomment.value)}">
 									<f:ajax execute="@form" render="@form"></f:ajax>
 								</h:commandButton>
 							</div>
@@ -96,5 +96,20 @@
 				Willy <blue>-</blue> 13512065<br />
             </div>
 		</div> <!-- end wrapper -->
+		
+		<script type="text/javascript">
+			function validateEmail() {
+				console.log('ok');
+				var x = document.getElementById('comments:email');
+				var input_email = x.value;
+				var result = input_email.match(/^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$/g);
+				console.log(result);
+				if (result === null) {
+					alert('Email salah');
+					return false;
+				} 
+				return true;
+			}
+		</script>
     </h:body>
 </html>
