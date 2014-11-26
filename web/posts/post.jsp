@@ -4,6 +4,8 @@
     Author     : Rakhmatullah Yoga S
 --%>
 
+<%@page import="java.sql.SQLException"%>
+<%@page import="source.CookieHelper"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.Connection"%>
@@ -43,6 +45,9 @@
             Post post = new Post();
             int ID = Integer.valueOf(request.getParameter("id"));            
             post.setAtribut(ID);
+            CookieHelper cookie = new CookieHelper(request.getCookies());
+            String nama = "";
+            String email = "";
         %>
         <title>Not a Simple Blog | <%= post.getJudul() %> </title>
     </head>
@@ -78,14 +83,42 @@
 
                 <div id="contact-area">
                     <form name="commentForm" method="post" id="commentForm" action="#" onsubmit="return comment()">
-                        <label for="Nama">Nama:</label>
-                        <input type="text" name="Nama" id="Nama">
+                        <%
+                            if(cookie.thereIsCookie()) {
+                                KoneksiDatabase.setUser("root2");
+                                KoneksiDatabase.setPassword("akhfa");
+                                KoneksiDatabase.setDatabase("localhost","blog");
+                                try (Connection koneksi = KoneksiDatabase.getKoneksi()) {
+                                    Statement statement = koneksi.createStatement();
+                                    String username = cookie.getUsername();
+                                    System.out.println(username);
+                                    String emailQuery = "SELECT * FROM `user` WHERE `username` = 'admin'";
+                                    ResultSet result = statement.executeQuery(emailQuery);
+                                    nama = result.getString("nama");
+                                    System.out.println("nama = "+nama);
+                                    email = result.getString("email");
+                                    System.out.println("email = "+email);
+                                } catch (SQLException ex) {
+                                    
+                                }
+                            %>
+                                <label for="Nama">Nama:</label>
+                                <input type="text" name="Nama" id="Nama" value="<%= nama %>" aria-required="true" required="" readonly>
 
-                        <label for="Email">Email:</label>
-                        <input type="text" name="Email" id="Email">
+                                <label for="Email">Email:</label>
+                                <input type="text" name="Email" id="Email" value="<%= email %>" aria-required="true" required="" readonly>                                
+                            <%}
+                            else {%>
+                                <label for="Nama">Nama:</label>
+                                <input type="text" name="Nama" id="Nama" aria-required="true" required="">
+
+                                <label for="Email">Email:</label>
+                                <input type="text" name="Email" id="Email" aria-required="true" required="">                                
+                            <%}
+                        %>
 
                         <label for="Komentar">Komentar:</label><br>
-                        <textarea name="Komentar" rows="20" cols="20" id="Komentar"></textarea>
+                        <textarea name="Komentar" rows="20" cols="20" id="Komentar" aria-required="true" required=""></textarea>
 
                         <input name="PostId" id="PostId" type="hidden" value="<%= ID %>">
                         <input type="submit" name="submit" value="Kirim" class="submit-button" onclick="return validateEmail()">
