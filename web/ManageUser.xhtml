@@ -17,7 +17,7 @@
        <div class="art-body-inner">
     	<h2>Manage User</h2>
         <div id="contact-area">
-            <h:form>
+            <h:form rendered="#{cookieCheck.admin}">
             <h:dataTable value="#{manUser.users}" var="o"
     			styleClass="order-table"
     			headerClass="order-table-header"
@@ -94,6 +94,7 @@
                 <h:commandButton value="Add" action="#{manUser.addAction}" />
     		
             </h:form>
+            <h:outputText rendered="#{!cookieCheck.admin}" value="Anda harus login sebagai admin!"></h:outputText>
             </div>
         </div>
     </div>
