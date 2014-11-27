@@ -4,11 +4,11 @@ import java.sql.Timestamp;
 
 /**
  * Representation of comment
- * @author Luthfi Hamid Masykuri
- * @modified Riva Syafri Rachmatullah
+ * @author Riva Syafri Rachmatullah
  */
-public class Comment {
+public class CommentofComment {
     private int id;
+    private int cid;
     private int pid;
     private String name;
     private String email;
@@ -17,15 +17,17 @@ public class Comment {
     
     /**
      * Create an instance of comment
-     * @param id id of comment
+     * @param id id of comment of comment
+     * @param cid id of comment
      * @param pid id of post
      * @param name name of commentator
      * @param email email of commentator
      * @param content content of comment
      * @param time time taken
      */
-    public Comment(int id, int pid, String name, String email, String content, Timestamp time) {
+    public CommentofComment(int id, int cid, int pid, String name, String email, String content, Timestamp time) {
         this.id = id;
+        this.cid = cid;
         this.pid = pid;
         this.name = name;
         this.email = email;
@@ -34,11 +36,19 @@ public class Comment {
     }
     
     /**
-     * Get id of comment
-     * @return id of comment
+     * Get id of comment of comment
+     * @return id of comment of comment
      */
     public int getID() {
         return id;
+    }
+    
+    /**
+     * Get id of comment
+     * @return id of comment
+     */
+    public int getCID() {
+        return cid;
     }
     
     /**
@@ -82,11 +92,19 @@ public class Comment {
     }
     
     /**
-     * Set id of comment
-     * @param id new id of comment
+     * Set id of comment of comment
+     * @param id new id of comment of comment
      */
     public void setID(int id) {
         this.id = id;
+    }
+    
+    /**
+     * Set id of comment
+     * @param cid new id of comment
+     */
+    public void setCID(int cid) {
+        this.cid = cid;
     }
     
     /**
@@ -106,7 +124,7 @@ public class Comment {
     }
     
     /**
-     * Set name of commentator
+     * Set email of commentator
      * @param email new email
      */
     public void setEmail(String email) {

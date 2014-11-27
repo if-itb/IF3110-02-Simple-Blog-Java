@@ -1,7 +1,9 @@
 package Database;
 
 import Model.Comment;
+import Model.CommentofComment;
 import Model.Post;
+import Model.PostCategory;
 import Model.User;
 import java.sql.Date;
 import java.sql.ResultSet;
@@ -38,13 +40,33 @@ public class PostData {
             if (Data.first()) {
                 int pid = Data.getInt("id");
                 String username = Data.getString("username");
-                String title = Data.getString("password");
-                Date date = Data.getDate("role");
+                Integer category_id = Data.getInt("category_id");
+                PostCategory category = getCategory(category_id);
+                String title = Data.getString("title");
+                Date date = Data.getDate("date");
                 String content = Data.getString("content");
                 boolean ispublished = Data.getBoolean("ispublished");
                 boolean isdeleted = Data.getBoolean("isdeleted");
                 User author = new UserData().getUser(username);
-                return new Post(pid,title, date, content, author, ispublished, isdeleted);
+                return new Post(pid, title, category, date, content, author, ispublished, isdeleted);
+            } else {
+                return null;
+            }
+        } catch (Exception e) {
+            return null;
+        }
+    }
+    
+    public PostCategory getCategory(Integer category_id) {
+        try {
+            this.db.openConnection();
+            this.db.Where("id=", category_id.toString());
+            ResultSet Data = this.db.Select("post_category");
+            this.db.closeConnection();
+            if (Data.first()) {
+                int categoryid = Data.getInt("id");
+                String categoryname = Data.getString("category");
+                return new PostCategory(categoryid, categoryname);
             } else {
                 return null;
             }
@@ -67,13 +89,15 @@ public class PostData {
             while (isExist) {
                 int pid = Data.getInt("id");
                 String username = Data.getString("username");
-                String title = Data.getString("password");
-                Date date = Data.getDate("role");
+                Integer category_id = Data.getInt("category_id");
+                PostCategory category = getCategory(category_id);
+                String title = Data.getString("title");
+                Date date = Data.getDate("date");
                 String content = Data.getString("content");
                 boolean ispublished = Data.getBoolean("ispublished");
                 boolean isdeleted = Data.getBoolean("isdeleted");
                 User author = new UserData().getUser(username);
-                Post post = new Post(pid,title, date, content, author, ispublished, isdeleted);
+                Post post = new Post(pid, title, category, date, content, author, ispublished, isdeleted);
                 ListPost.add(post);
                 isExist = Data.next();
             }
@@ -99,13 +123,15 @@ public class PostData {
             while (isExist) {
                 int pid = Data.getInt("id");
                 String username = Data.getString("username");
-                String title = Data.getString("password");
-                Date date = Data.getDate("role");
+                Integer category_id = Data.getInt("category_id");
+                PostCategory category = getCategory(category_id);
+                String title = Data.getString("title");
+                Date date = Data.getDate("date");
                 String content = Data.getString("content");
                 boolean ispublished = Data.getBoolean("ispublished");
                 boolean isdeleted = Data.getBoolean("isdeleted");
                 User author = new UserData().getUser(username);
-                Post post = new Post(pid,title, date, content, author, ispublished, isdeleted);
+                Post post = new Post(pid, title, category, date, content, author, ispublished, isdeleted);
                 ListPost.add(post);
                 isExist = Data.next();
             }
@@ -140,6 +166,57 @@ public class PostData {
                 isExist = Data.next();
             }
             return ListComment;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+    
+    public List<PostCategory> getAllCategory() {
+        try {
+            this.db.openConnection();
+            ResultSet Data = this.db.Select("post_category");
+            this.db.closeConnection();
+            boolean isExist = Data.first();
+            List<PostCategory> ListCategory = new LinkedList();
+            while (isExist) {
+                int id = Data.getInt("id");
+                String categoryname = Data.getString("category");
+                PostCategory category = new PostCategory(id, categoryname);
+                ListCategory.add(category);
+                isExist = Data.next();
+            }
+            return ListCategory;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+    
+    /**
+     * Get all comment in a post
+     * @param comment_id id of post
+     * @return All comment in a post
+     */
+    public List<CommentofComment> getAllCommentofComment(int comment_id) {
+        try {
+            this.db.openConnection();
+            this.db.Where("cid=", String.valueOf(comment_id));
+            ResultSet Data = this.db.Select("ccomment");
+            this.db.closeConnection();
+            boolean isExist = Data.first();
+            List<CommentofComment> ListCommentofComment = new LinkedList();
+            while (isExist) {
+                int id = Data.getInt("id");
+                int cid = Data.getInt("cid");
+                int pid = Data.getInt("pid");
+                String name = Data.getString("name");
+                String email = Data.getString("email");
+                String content = Data.getString("content");
+                Timestamp time = Data.getTimestamp("time");
+                CommentofComment comment = new CommentofComment(id, cid, pid, name, email, content, time);
+                ListCommentofComment.add(comment);
+                isExist = Data.next();
+            }
+            return ListCommentofComment;
         } catch (Exception e) {
             return null;
         }

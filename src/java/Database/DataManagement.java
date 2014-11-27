@@ -1,5 +1,6 @@
 package Database;
 
+import Model.Post;
 import Model.User;
 import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
@@ -19,9 +20,12 @@ public class DataManagement implements Serializable {
     private Cookie cookie;
     private String message;
     private User user;
+    private Post post;
     private PostData postdata;
 
     public DataManagement() {
+        user = new User();
+        post = new Post();
         message = "";
         cookie = new Cookie("", null);
         cookie.setMaxAge(120);
@@ -30,12 +34,12 @@ public class DataManagement implements Serializable {
     public Cookie getCookie() {
         FacesContext facesContext = FacesContext.getCurrentInstance();
         HttpServletRequest request = (HttpServletRequest) facesContext.getExternalContext().getRequest();
-        Cookie cookies = null;
+        Cookie cookies;
         Cookie[] userCookies = request.getCookies();
         if (userCookies != null && userCookies.length > 0) {
-            for (int i = 0; i < userCookies.length; i++) {
-                if (userCookies[i].getName().equals("Username")) {
-                    cookies = userCookies[i];
+            for (Cookie userCookie : userCookies) {
+                if (userCookie.getName().equals("")) {
+                    cookies = userCookie;
                     return cookies;
                 }
             }

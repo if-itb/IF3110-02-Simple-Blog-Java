@@ -10,6 +10,7 @@ import java.sql.Date;
 public class Post {
     private int id;
     private String title;
+    private PostCategory category;
     private Date date;
     private String content;
     private User author;
@@ -17,18 +18,25 @@ public class Post {
     private boolean isdeleted;
     
     /**
-     * Create new instance of post
+     * Create a new instance of empty post
+     */
+    public Post() {}
+    
+    /**
+     * Create a new instance of post
      * @param id id of post
      * @param title title of post
+     * @param category category of post
      * @param date date of post
      * @param content content of post
      * @param author author of post
      * @param ispublished published/draft post
      * @param isdeleted deleted post
      */
-    public Post(int id, String title, Date date, String content, User author, boolean ispublished, boolean isdeleted) {
+    public Post(int id, String title, PostCategory category, Date date, String content, User author, boolean ispublished, boolean isdeleted) {
         this.id = id;
         this.title = title;
+        this.category = category;
         this.date = date;
         this.content = content;
         this.author = author;
@@ -50,6 +58,14 @@ public class Post {
      */
     public String getTitle() {
         return title;
+    }
+    
+    /**
+     * Get the category of post
+     * @return category of post
+     */
+    public PostCategory getCategory() {
+        return category;
     }
     
     /**
@@ -106,6 +122,14 @@ public class Post {
      */
     public void setTitle(String title) {
         this.title = title;
+    }
+    
+    /**
+     * Set the new category of post
+     * @param category new category
+     */
+    public void setCategory(PostCategory category) {
+        this.category = category;
     }
     
     /**
