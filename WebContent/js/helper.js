@@ -112,3 +112,9 @@ function myfunction() {
 		errorDOM.innerHTML = "Email anda tidak valid";
 	}
 }
+
+function konfirmasi(){
+	tanya=confirm('Apakah anda yakin menghapus post ini?');
+    if (tanya==true) return true;
+    else return false;	
+}

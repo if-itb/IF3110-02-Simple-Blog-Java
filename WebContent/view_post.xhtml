@@ -34,7 +34,7 @@
 					<div class="form-group">
 						<label for="inputNama" class="col-sm-2 control-label">Nama</label>
 						<div class="col-sm-10">
-							<input id="inputNama" type="text" name="nama"
+							<input id="inputNama" type="text" name="nama" value="#{userData.username}"
 								class="form-control" />
 						</div>
 					</div>
@@ -55,7 +55,7 @@
 					<div class="form-group">
 						<div class="col-sm-offset-2 col-sm-10">
 							<button class="btn btn-default" type="submit"
-								onclick="myfunction(); return false;">Add Post</button>
+								onclick="myfunction(); return false;">Add Comment</button>
 						</div>
 					</div>
 				</form>
@@ -69,8 +69,6 @@
 			<script type="text/javascript" src="js/helper.js"></script>
 		</ui:define>
 	</ui:composition>
-
-
 
 </h:body>
 </html>

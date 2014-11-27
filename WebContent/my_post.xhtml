@@ -14,8 +14,7 @@
 					<th width="80%">Post</th>
 					<th colspan="2">Commands</th>
 				</tr>
-				<ui:repeat var="post"
-					value="#{viewPost.ownerPostList}">
+				<ui:repeat var="post" value="#{viewPost.ownerPostList}">
 					<tr>
 						<td width="80%"><h:link value="#{post.title}"
 								outcome="view_post?post_id=#{post.id}" /></td>
@@ -23,13 +22,16 @@
 								<f:param name="post_id" value="#{post.id}" />
 							</h:button></td>
 						<td><h:form>
-								<h:commandButton value="Delete"
+								<h:commandButton value="Delete" onclick="return confirm('Apakah anda yakin menghapus post ini?');"
 									action="#{editPostStatus.delete(post.id)}" />
 							</h:form></td>
 					</tr>
 				</ui:repeat>
 			</table>
 		</div>
+		<ui:define name="script">
+			<script type="text/javascript" src="js/helper.js"></script>
+		</ui:define>
 	</ui:define>
 
 </ui:composition>

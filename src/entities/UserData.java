@@ -141,7 +141,7 @@ public class UserData implements Serializable {
 		FacesContext fc = FacesContext.getCurrentInstance();
 		
 		Cookie cookieUser = new Cookie("username", username);
-		Cookie cookiePassword = new Cookie("password", password);
+		Cookie cookiePassword = new Cookie("password", password);		
 		
 		cookieUser.setMaxAge(Constant.COOKIE_MAX_AGE);
 		cookiePassword.setMaxAge(Constant.COOKIE_MAX_AGE);

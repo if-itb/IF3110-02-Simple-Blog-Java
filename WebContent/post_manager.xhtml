@@ -15,7 +15,8 @@
 					<th width="80%">Post</th>
 					<th colspan="3">Commands</th>
 				</tr>
-				<ui:repeat var="post" value="#{viewPost.publishednotDeletedPostList}">
+				<ui:repeat var="post"
+					value="#{viewPost.publishednotDeletedPostList}">
 					<tr>
 						<td width="80%"><h:link value="#{post.title}"
 								outcome="view_post?post_id=#{post.id}" /></td>
@@ -24,6 +25,7 @@
 							</h:button></td>
 						<td><h:form>
 								<h:commandButton value="Delete"
+									onclick="return confirm('Apakah Anda yakin menghapus post ini?');"
 									action="#{editPostStatus.delete(post.id)}" />
 							</h:form></td>
 						<td><h:form>
@@ -49,6 +51,7 @@
 							</h:button></td>
 						<td><h:form>
 								<h:commandButton value="Delete"
+									onclick="return confirm('Apakah Anda yakin menghapus post ini?');"
 									action="#{editPostStatus.delete(post.id)}" />
 							</h:form></td>
 						<td><h:form>
@@ -77,6 +80,9 @@
 				</ui:repeat>
 			</table>
 		</div>
+	</ui:define>
+	<ui:define name="script">
+		<script type="text/javascript" src="js/helper.js"></script>
 	</ui:define>
 </ui:composition>
 </html>
