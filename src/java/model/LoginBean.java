@@ -21,12 +21,18 @@ public class LoginBean {
      * Creates a new instance of LoginBean
      */
     public LoginBean() {
-        username = "";
-        password = "";
+        CookieHelper ck = new CookieHelper();
+        username = new String();
+        password = new String();
+        if (ck.getCookie("username") != null) {
+            username = ck.getCookie("username").getValue();
+        }
+        if (ck.getCookie("password") != null) {
+            password = ck.getCookie("password").getValue();
+        }
     }
     
     public String login() {
-        // TODO  Sinkronisasi dengan database
         NavigationController nb = new NavigationController();
         UserBean finded = DAO.DAOFactory.getInstance("javabase.jdbc").getUserDAO().find(username);
         if (finded == null || !finded.getPassword().equals(password)) {
@@ -35,13 +41,16 @@ public class LoginBean {
             return nb.gotoLogin() ;
         }
         else {
+            CookieHelper ck = new CookieHelper();
+            int expiry = 60*60*24*30; //30 hari
             user.setUsername(finded.getUsername());
             user.setPassword(finded.getPassword());
             user.setRole(finded.getRole());
             user.setEmail(finded.getEmail());
+            ck.setCookie("username", username, expiry);
+            ck.setCookie("password", password, expiry);
             return nb.gotoListPost() + "?faces-redirect=true";
-        } 
-        
+        }
     }
 
     /**
