@@ -46,9 +46,11 @@
                             <br /><br />
 							Content<br></br><h:inputTextarea id="content" value="#{postsController.active_content}" binding="#{editpostcontent}" required="true" requiredMessage="Please enter a content" rows="13" cols="80"></h:inputTextarea>
                             <br /><br />
-							Status <h:selectBooleanCheckbox id="status" value="#{postsController.active_status}" binding="#{editpoststatus}" />
-                            <br /><br />
-                            <h:commandButton onclick="return modifyDateToLong()" action="#{postsController.updatePost(editpostid.value, editposttitle.value, editpostdate.value, editpostcontent.value, editpoststatus.value)}" value="Update" ></h:commandButton>
+							<h:panelGroup rendered="#{!usersController.owner}">
+								Status <h:selectBooleanCheckbox id="status" value="#{postsController.active_status}" binding="#{editpoststatus}" />
+								<br /><br />
+                            </h:panelGroup>
+							<h:commandButton onclick="return modifyDateToLong()" action="#{postsController.updatePost(editpostid.value, editposttitle.value, editpostdate.value, editpostcontent.value, editpoststatus.value)}" value="Update" ></h:commandButton>
 						</h:form>
                     </div>
                 </div>

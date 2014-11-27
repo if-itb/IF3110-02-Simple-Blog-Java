@@ -33,18 +33,24 @@
 					<div class="manageuser">       
 						<div class="listname">
 							<ul>
-								<ui:repeat value="#{usersController.allUsers}" var="user">
+								<h:dataTable value="#{usersController.allUsers}" var="user">
 									<h:inputHidden value="#{user.id}" binding="#{userid}" />
-									<li>
+									<h:column>
 										<role><h:outputText value="#{user.role}" binding="#{userrole}" ></h:outputText></role>
+									</h:column>
+									<h:column>
 										<h:outputText value="#{user.email}" binding="#{useremail}" ></h:outputText>
+									</h:column>&nbsp;
+									<h:column>
 										<h:outputText value="#{user.username}" binding="#{username}" ></h:outputText>
-										&nbsp;
+									</h:column>&nbsp;
+									<h:column>
 										<h:commandLink action="#{usersController.editUser(userid.value, useremail.value, username.value, userpassword.value, userrole.value)}"><h:graphicImage name="img/edit1.png" height="17px" title="add new post"></h:graphicImage></h:commandLink>
-										&nbsp;
+									</h:column>&nbsp;
+									<h:column>
 										<h:commandLink onclick="return confirm('Are you sure you want to delete this user?');" action="#{usersController.deleteUser(userid.value)}"><h:graphicImage name="img/delete1.png" height="17px" title="add new post"></h:graphicImage></h:commandLink>
-									</li>
-								</ui:repeat>
+									</h:column>
+								</h:dataTable>
 							</ul>
 						</div>
 					</div>
