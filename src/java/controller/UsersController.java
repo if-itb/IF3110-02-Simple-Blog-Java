@@ -27,10 +27,11 @@ import model.database.MySQL;
 @SessionScoped
 public class UsersController implements Serializable {
 
-	private int active_id;
-	private String active_username;
-	private String active_password;
-	private String active_role;
+	private int saved_id;
+	private String saved_email;
+	private String saved_username;
+	private String saved_password;
+	private String saved_role;
 	
 	/**
 	 * Creates a new instance of UsersController
@@ -38,40 +39,57 @@ public class UsersController implements Serializable {
 	public UsersController() {
 	}
 
-	public int getActive_id() {
-		return active_id;
+	public int getSaved_id() {
+		return saved_id;
 	}
 
-	public void setActive_id(int active_id) {
-		this.active_id = active_id;
+	public void setSaved_id(int saved_id) {
+		this.saved_id = saved_id;
 	}
 
-	public String getActive_username() {
-		return active_username;
+	public String getSaved_email() {
+		return saved_email;
 	}
 
-	public void setActive_username(String active_username) {
-		this.active_username = active_username;
+	public void setSaved_email(String saved_email) {
+		this.saved_email = saved_email;
 	}
 
-	public String getActive_password() {
-		return active_password;
+	public String getSaved_username() {
+		return saved_username;
 	}
 
-	public void setActive_password(String active_password) {
-		this.active_password = active_password;
+	public void setSaved_username(String saved_username) {
+		this.saved_username = saved_username;
 	}
 
-	public String getActive_role() {
-		return active_role;
+	public String getSaved_password() {
+		return saved_password;
 	}
 
-	public void setActive_role(String active_role) {
-		this.active_role = active_role;
+	public void setSaved_password(String saved_password) {
+		this.saved_password = saved_password;
 	}
 
-	public String getUsername() {
-		String userCookie = getCookie("username");
+	public String getSaved_role() {
+		return saved_role;
+	}
+
+	public void setSaved_role(String saved_role) {
+		this.saved_role = saved_role;
+	}
+
+	public String getLoginEmail() {
+		String emailCookie = getCookieValue("email");
+		if (emailCookie != null) {
+			return emailCookie;
+		}
+		
+		return "";
+	}
+	
+	public String getLoginUsername() {
+		String userCookie = getCookieValue("username");
 		if (userCookie != null) {
 			return userCookie;
 		}
@@ -80,7 +98,7 @@ public class UsersController implements Serializable {
 	}
 	
 	public boolean isAdmin() {
-		String roleCookie = getCookie("role");
+		String roleCookie = getCookieValue("role");
 		if (roleCookie != null) {
 			return roleCookie.equals("admin");
 		}
@@ -89,7 +107,7 @@ public class UsersController implements Serializable {
 	}
 	
 	public boolean isEditor() {
-		String roleCookie = getCookie("role");
+		String roleCookie = getCookieValue("role");
 		if (roleCookie != null) {
 			return roleCookie.equals("editor");
 		}
@@ -98,7 +116,7 @@ public class UsersController implements Serializable {
 	}
 	
 	public boolean isOwner() {
-		String roleCookie = getCookie("role");
+		String roleCookie = getCookieValue("role");
 		if (roleCookie != null) {
 			return roleCookie.equals("owner");
 		}
@@ -107,15 +125,15 @@ public class UsersController implements Serializable {
 	}
 	
 	public boolean isLogin() {
-		String roleCookie = getCookie("role");
+		String roleCookie = getCookieValue("role");
 		return roleCookie != null;
 	}
 	
-	public void createUser(String username, String password, String role) throws IOException {
+	public void createUser(String email, String username, String password, String role) throws IOException {
 		MySQL mysql = new MySQL();
 		
-		mysql.createUser(username, password, role);
-		FacesContext.getCurrentInstance().getExternalContext().redirect("/SimpleBlog/faces/view_user.xhtml");
+		mysql.createUser(email, username, password, role);
+		FacesContext.getCurrentInstance().getExternalContext().redirect("view_user.xhtml");
 	}
 
 	public User getUser(int id) {
@@ -130,11 +148,11 @@ public class UsersController implements Serializable {
 		return mysql.getAllUsers();
 	}
 
-	public void updateUser(int id, String username, String password, String role) throws IOException {
+	public void updateUser(int id, String email, String username, String password, String role) throws IOException {
 		MySQL mysql = new MySQL();
 		
-		mysql.updateUser(id, username, password, role);
-		FacesContext.getCurrentInstance().getExternalContext().redirect("/SimpleBlog/faces/view_user.xhtml");
+		mysql.updateUser(id, email, username, password, role);
+		FacesContext.getCurrentInstance().getExternalContext().redirect("view_user.xhtml");
 	}
 
 	public void deleteUser(int id) {
@@ -144,16 +162,17 @@ public class UsersController implements Serializable {
 	}
 
 	public void viewUser(int id) throws IOException {
-		active_id = id;
-		FacesContext.getCurrentInstance().getExternalContext().redirect("/SimpleBlog/faces/view_user.xhtml");
+		saved_id = id;
+		FacesContext.getCurrentInstance().getExternalContext().redirect("view_user.xhtml");
 	}
 	
-	public void editUser(int id, String username, String password, String role) throws IOException {
-		active_id = id;
-		active_username = username;
-		active_password = password;
-		active_role = role;
-		FacesContext.getCurrentInstance().getExternalContext().redirect("/SimpleBlog/faces/edit_user.xhtml");
+	public void editUser(int id, String email, String username, String password, String role) throws IOException {
+		saved_id = id;
+		saved_email = email;
+		saved_username = username;
+		saved_password = password;
+		saved_role = role;
+		FacesContext.getCurrentInstance().getExternalContext().redirect("edit_user.xhtml");
 	}
 	
 	public void login(String username, String password) throws IOException {
@@ -168,15 +187,19 @@ public class UsersController implements Serializable {
 			}
 		}
 		
-		if (user != null) { //ada user di database, mulai 
+		if (user != null) { //ada user di database, mulai
+			Cookie email_cookie = new Cookie("email", user.getEmail());
 			Cookie username_cookie = new Cookie("username", user.getUsername());
 			Cookie role_cookie = new Cookie("role",user.getRole());
+			email_cookie.setMaxAge(30*60);
+			email_cookie.setPath("/");
 			username_cookie.setMaxAge(30*60);
 			username_cookie.setPath("/");
 			role_cookie.setMaxAge(30*60);
 			role_cookie.setPath("/");
 			FacesContext context = FacesContext.getCurrentInstance();
 			HttpServletResponse response = (HttpServletResponse) context.getExternalContext().getResponse();
+			response.addCookie(email_cookie);
 			response.addCookie(username_cookie);
 			response.addCookie(role_cookie);
 			response.sendRedirect("index.xhtml");
@@ -188,14 +211,18 @@ public class UsersController implements Serializable {
 	public void logout() throws IOException {
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		HttpServletRequest request = (HttpServletRequest) facesContext.getExternalContext().getRequest();
+		Cookie email_cookie = new Cookie("email","");
 		Cookie username_cookie = new Cookie("username","");
 		Cookie role_cookie = new Cookie("role","");
+		email_cookie.setMaxAge(0);
+		email_cookie.setPath("/");
 		username_cookie.setMaxAge(0);
 		username_cookie.setPath("/");
 		role_cookie.setMaxAge(0);
 		role_cookie.setPath("/");
 		HttpServletResponse response = (HttpServletResponse) facesContext.getExternalContext().getResponse();
 		response.setContentType("text/html");
+		response.addCookie(email_cookie);
 		response.addCookie(username_cookie);
 		response.addCookie(role_cookie);
 		
@@ -203,7 +230,7 @@ public class UsersController implements Serializable {
 		FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
 	}
 
-	public String getCookie(String role) {
+	public String getCookieValue(String name) {
 	    FacesContext facesContext = FacesContext.getCurrentInstance();
 		HttpServletRequest request = (HttpServletRequest) facesContext.getExternalContext().getRequest();
 		Cookie cookie = null;
@@ -211,7 +238,7 @@ public class UsersController implements Serializable {
 		Cookie[] userCookies = request.getCookies();
 		if (userCookies != null && userCookies.length > 0 ) {
 			for (int i = 0; i < userCookies.length; i++) {
-				if (userCookies[i].getName().equals(role)) {
+				if (userCookies[i].getName().equals(name)) {
 					cookie = userCookies[i];
 					return cookie.getValue();
 				}

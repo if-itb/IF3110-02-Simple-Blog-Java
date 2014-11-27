@@ -2,7 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-	  xmlns:f="http://xmlns.jcp.org/jsf/core">
+	  xmlns:f="http://xmlns.jcp.org/jsf/core"
 	  xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
         <title>Edit Page</title>
@@ -17,7 +17,7 @@
 					<h:form>
 						<h:commandLink action="index">SIMPLE<blue>-</blue>BLOG</h:commandLink>
 						<div class="signin">
-							<hide1><h:outputText value="#{usersController.username}"></h:outputText></hide1>
+							<hide1><h:outputText value="#{usersController.loginUsername}"></h:outputText></hide1>
 							<hide2><h:commandLink action="#{usersController.logout()}" rendered="#{usersController.login}">logout</h:commandLink></hide2>
 							<hide2><h:commandLink action="login_user" rendered="#{!usersController.login}">login</h:commandLink></hide2>
 							<h:graphicImage name="img/user1.png" height="30px"></h:graphicImage>
@@ -36,9 +36,12 @@
                             Judul<br></br><h:inputText id="title" value="#{postsController.active_title}" binding="#{editposttitle}" required="true" requiredMessage="Please enter a title"></h:inputText>
                             <br /><br />
 							Tanggal<br></br>
-							<h:inputText id="date_temp" value="#{postsController.active_date}" required="true" requiredMessage="Please enter a date">
+							<h:inputText id="date_temp" required="true" requiredMessage="Please enter a date">
 								<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT+7"/>
 							</h:inputText>
+							<h:inputHidden id="date_active" value="#{postsController.active_date}">
+								<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT+7"/>
+							</h:inputHidden>
 							<h:inputHidden id = "date" binding="#{editpostdate}"></h:inputHidden>
                             <br /><br />
 							Content<br></br><h:inputTextarea id="content" value="#{postsController.active_content}" binding="#{editpostcontent}" required="true" requiredMessage="Please enter a content" rows="13" cols="80"></h:inputTextarea>
@@ -52,5 +55,13 @@
             </div>
 
         </div> <!-- end wrapper -->
+		<script type="text/javascript">
+			(function(){
+				var date = document.getElementById('post:date_active').value;
+				console.log(date);
+				document.getElementById('post:date_temp').value = date;
+				document.getElementById('post:date_active').value = null;
+			})();
+		</script>
     </h:body>
 </html>

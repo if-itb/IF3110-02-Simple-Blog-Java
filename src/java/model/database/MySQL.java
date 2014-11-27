@@ -119,7 +119,7 @@ public class MySQL {
 	}
 
 	// User
-	public boolean createUser(String username, String password, String role) {
+	public boolean createUser(String email, String username, String password, String role) {
 		// kalo user di delete terus di create ulang masih bisa, harusnya ga bisa
 		try {
 			List<User> users = getAllUsers();
@@ -129,12 +129,13 @@ public class MySQL {
 				}
 			}
 
-			preparedStatement = connect.prepareStatement("INSERT INTO " + TABLE_USER + "(username, password, role, created_at, updated_at) VALUES(?, ?, ?, ?, ?)");
-			preparedStatement.setString(1, username);
-			preparedStatement.setString(2, password);
-			preparedStatement.setString(3, role);
-			preparedStatement.setTimestamp(4, new Timestamp(System.currentTimeMillis()), Calendar.getInstance());
+			preparedStatement = connect.prepareStatement("INSERT INTO " + TABLE_USER + "(email, username, password, role, created_at, updated_at) VALUES(?, ?, ?, ?, ?, ?)");
+			preparedStatement.setString(1, email);
+			preparedStatement.setString(2, username);
+			preparedStatement.setString(3, password);
+			preparedStatement.setString(4, role);
 			preparedStatement.setTimestamp(5, new Timestamp(System.currentTimeMillis()), Calendar.getInstance());
+			preparedStatement.setTimestamp(6, new Timestamp(System.currentTimeMillis()), Calendar.getInstance());
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -148,7 +149,7 @@ public class MySQL {
 		List<User> users = new ArrayList<>();
 
 		try {
-			preparedStatement = connect.prepareStatement("SELECT id, username, password, role, deleted_at FROM " + TABLE_USER + " ORDER BY username");
+			preparedStatement = connect.prepareStatement("SELECT id, email, username, password, role, deleted_at FROM " + TABLE_USER + " ORDER BY username");
 			resultSet = preparedStatement.executeQuery();
 
 			while (resultSet.next()) {
@@ -157,6 +158,7 @@ public class MySQL {
 					User user = new User();
 
 					user.setId(resultSet.getInt("id"));
+					user.setUsername(resultSet.getString("email"));
 					user.setUsername(resultSet.getString("username"));
 					user.setPassword(resultSet.getString("password"));
 					user.setRole(resultSet.getString("role"));
@@ -174,12 +176,13 @@ public class MySQL {
 	public User getUser(int id) {
 		User user = new User();
 		try {
-			preparedStatement = connect.prepareStatement("SELECT username, password, role, deleted_at FROM " + TABLE_USER + " WHERE id = " + id);
+			preparedStatement = connect.prepareStatement("SELECT email, username, password, role, deleted_at FROM " + TABLE_USER + " WHERE id = " + id);
 			resultSet = preparedStatement.executeQuery();
 
 			while (resultSet.next()) {
 				if (resultSet.getString("deleted_at") == null) {
 					user.setId(id);
+					user.setUsername(resultSet.getString("email"));
 					user.setUsername(resultSet.getString("username"));
 					user.setPassword(resultSet.getString("password"));
 					user.setRole(resultSet.getString("role"));
@@ -193,13 +196,14 @@ public class MySQL {
 		return user;
 	}
 
-	public boolean updateUser(int id, String username, String password, String role) {
+	public boolean updateUser(int id, String email, String username, String password, String role) {
 		try {
-			preparedStatement = connect.prepareStatement("UPDATE " + TABLE_USER + " SET username = ?, password = ?, role = ?, updated_at = ? WHERE id = " + id);
-			preparedStatement.setString(1, username);
-			preparedStatement.setString(2, password);
-			preparedStatement.setString(3, role);
-			preparedStatement.setTimestamp(4, new Timestamp(System.currentTimeMillis()), Calendar.getInstance());
+			preparedStatement = connect.prepareStatement("UPDATE " + TABLE_USER + " SET email = ?, username = ?, password = ?, role = ?, updated_at = ? WHERE id = " + id);
+			preparedStatement.setString(1, email);
+			preparedStatement.setString(2, username);
+			preparedStatement.setString(3, password);
+			preparedStatement.setString(4, role);
+			preparedStatement.setTimestamp(5, new Timestamp(System.currentTimeMillis()), Calendar.getInstance());
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -439,7 +443,7 @@ public class MySQL {
 		List<Comment> comments = new ArrayList<>();
 
 		try {
-			preparedStatement = connect.prepareStatement("SELECT id, name, email, comment, deleted_at, created_at FROM " + TABLE_COMMENT + " WHERE post_id = " + post_id + "ORDER BY created_at DESC");
+			preparedStatement = connect.prepareStatement("SELECT id, name, email, comment, deleted_at, created_at FROM " + TABLE_COMMENT + " WHERE post_id = " + post_id + " ORDER BY created_at DESC");
 			resultSet = preparedStatement.executeQuery();
 
 			while (resultSet.next()) {

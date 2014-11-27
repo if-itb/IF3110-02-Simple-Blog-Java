@@ -15,7 +15,7 @@
 					<h:form>         
 					<h:commandLink action="index">SIMPLE<blue>-</blue>BLOG</h:commandLink>
 						<div class="signin">
-							<hide1><h:outputText value="#{usersController.username}"></h:outputText></hide1>
+							<hide1><h:outputText value="#{usersController.loginUsername}"></h:outputText></hide1>
 							<hide2><h:commandLink action="#{usersController.logout()}" rendered="#{usersController.login}">logout</h:commandLink></hide2>
 							<hide2><h:commandLink action="login_user" rendered="#{!usersController.login}">login</h:commandLink></hide2>
 							<h:graphicImage name="img/user1.png" height="30px"></h:graphicImage>
@@ -48,18 +48,30 @@
 						<div class="komenforms">
 							<h:messages id="errorMessages" style="color:red;" />
 							<div class="textfield">
-								<h:outputLabel for="name" value="Name: " />
-								<br /><h:inputText id="name" binding="#{createname}" required="true" requiredMessage="Please enter your name"></h:inputText>
-								<br /><br />
-								<h:outputLabel for="email" value="E-mail: " />
-								<br></br><h:inputText id="email" binding="#{createemail}" required="true" requiredMessage="Please enter your e-mail" ></h:inputText>
-								<br /><br />
-								<h:outputLabel for="comment" value="Comment: " /><br></br>
+								<h:panelGroup rendered="#{!usersController.login}">
+									<h:outputLabel for="name" value="Name: " />
+									<br />
+									<h:inputText id="name" binding="#{createname}" required="true" requiredMessage="Please enter your name"></h:inputText>
+									<br /><br />
+									<h:outputLabel for="email" value="E-mail: " />
+									<br />
+									<h:inputText id="email" binding="#{createemail}" required="true" requiredMessage="Please enter your e-mail" ></h:inputText>
+									<br /><br />
+								</h:panelGroup>
+								<h:outputLabel for="comment" value="Comment: " />
+								<br />
 								<h:inputTextarea id="comment" binding="#{createcomment}" required="true" requiredMessage="Please enter your comment" rows="6" cols="50"></h:inputTextarea>
 								<br /><br />
-								<h:commandButton onclick="return validateEmail()" id="commentCreate" value="Create" action="#{commentsController.createComment(viewpostid.value, createname.value, createemail.value, createcomment.value)}">
-									<f:ajax execute="@form" render="@form"></f:ajax>
-								</h:commandButton>
+								<h:panelGroup rendered="#{!usersController.login}">
+									<h:commandButton onclick="return validateEmail()" value="Create" action="#{commentsController.createComment(viewpostid.value, createname.value, createemail.value, createcomment.value)}">
+										<f:ajax execute="@form" render="@form"></f:ajax>
+									</h:commandButton>
+								</h:panelGroup>
+								<h:panelGroup rendered="#{usersController.login}">
+									<h:commandButton onclick="return validateEmail()" value="Create" action="#{commentsController.createComment(viewpostid.value, usersController.loginUsername, usersController.loginEmail, createcomment.value)}">
+										<f:ajax execute="@form" render="@form"></f:ajax>
+									</h:commandButton>
+								</h:panelGroup>
 							</div>
 						</div>
 						<br />
