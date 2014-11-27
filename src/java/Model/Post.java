@@ -13,6 +13,8 @@ public class Post {
     private Date date;
     private String content;
     private User author;
+    private boolean ispublished;
+    private boolean isdeleted;
     
     /**
      * Create new instance of post
@@ -21,13 +23,17 @@ public class Post {
      * @param date date of post
      * @param content content of post
      * @param author author of post
+     * @param ispublished published/draft post
+     * @param isdeleted deleted post
      */
-    public Post(int id,String title,Date date,String content,User author) {
+    public Post(int id, String title, Date date, String content, User author, boolean ispublished, boolean isdeleted) {
         this.id = id;
         this.title = title;
         this.date = date;
         this.content = content;
         this.author = author;
+        this.ispublished = ispublished;
+        this.isdeleted = isdeleted;
     }
     
     /**
@@ -71,6 +77,30 @@ public class Post {
     }
     
     /**
+     * Check whether the post is already published or not
+     * @return publishing status of post
+     */
+    public boolean IsPublished() {
+        return ispublished;
+    }
+    
+    /**
+     * Check whether the post is already deleted or not
+     * @return deleted status of post
+     */
+    public boolean IsDeleted() {
+        return isdeleted;
+    }
+    
+    /**
+     * Set the new id of post
+     * @param id new id of post
+     */
+    public void setID(int id) {
+        this.id = id;
+    }
+    
+    /**
      * Set the new title of post
      * @param title new title
      */
@@ -102,14 +132,17 @@ public class Post {
         this.author = author;
     }
     
-    public static void main(String args[]) {
-       // Instantiate a Date object
-       int year = 2012;
-       int month = 12;
-       int day = 21;
-       Date date = new Date(year-1900,month-1,day);
-        
-       // display time and date using toString()
-       System.out.println(date.toString());
-   }
+    /**
+     * Change status of post to be published or draft
+     */
+    public void changePublishedStatus() {
+        ispublished = !ispublished;
+    }
+    
+    /**
+     * Change status of post to be deleted or not
+     */
+    public void changeDeletedStatus() {
+        isdeleted = !isdeleted;
+    }
 }

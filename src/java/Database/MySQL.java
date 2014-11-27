@@ -24,18 +24,35 @@ public class MySQL {
      * Create a new instance of MySQL Connection
      */
     public MySQL() {
-	try {
-            host = "localhost";
-            user = "luthfi";
-            pass = "underground";
-            db_name = "wbd2";
+        host = "localhost";
+        user = "root";
+        pass = "chmod777";
+        db_name = "wbd2";
+    }
+
+    /**
+     * Open connection to database
+     */
+    public void openConnection() {
+        try {
             String connectionURL = "jdbc:mysql://" + host + "/" + db_name;
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             connection = (Connection) DriverManager.getConnection(connectionURL, user, pass);
             statement = (Statement) connection.createStatement();
-	} catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException e) {}
+	} catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException e) {
+        }
     }
-
+    
+    /**
+     * Close connection to database
+     */
+    public void closeConnection() {
+        try {
+            connection.close();
+        } catch (Exception e) {
+        }
+    }
+    
     /**
      * Create "WHERE" section on query
      * @param col Checked Column
@@ -64,7 +81,7 @@ public class MySQL {
 		where = "";
             }
 	} catch (Exception e) {}
-            return result;
+        return result;
     }
 
     /**

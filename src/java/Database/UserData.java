@@ -1,85 +1,88 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Database;
+
 import Model.User;
 import java.sql.ResultSet;
 import Security.MD5;
 import java.util.LinkedList;
 import java.util.List;
+
 /**
- *
+ * Representation of data user
  * @author Luthfi Hamid Masykuri
+ * @modified Riva Syafri Rachmatullah
  */
 public class UserData {
     private String table;
     private MySQL db;
     
-    public UserData()
-    {
+    /**
+     * Create an instance of UserData
+     */
+    public UserData() {
         table = "user";
         db = new MySQL();
     }
     
-    public User getUser(String user)
-    {
-        try
-        {
+    /**
+     * Get user by its username from database
+     * @param user the username
+     * @return an instance of user from database
+     */
+    public User getUser(String user) {
+        try {
+            this.db.openConnection();
             this.db.Where("username=", user);
             ResultSet Data = this.db.Select(table);
-            if (Data.first())
-            {
+            this.db.closeConnection();
+            if (Data.first()) {
                 String username = Data.getString("username");
                 String password = Data.getString("password");
                 String role = Data.getString("role");
                 String name = Data.getString("name");
                 String email = Data.getString("email");
                 return new User(username,password,role,name,email);
-            }
-            else
-            {
+            } else {
                 return null;
             }
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
+        } catch (Exception e) {
             return null;
         }
     }
     
-    public User validate(String user,String pass)
-    {
-        try
-        {
+    /**
+     * Validate username and password from input to check it with the database
+     * @param user the username input
+     * @param pass the password input
+     * @return an instance of user from database
+     */
+    public User validate(String user, String pass) {
+        try {
+            this.db.openConnection();
             this.db.Where("username=", user);
             this.db.Where("password=", MD5.getMD5(pass));
             ResultSet Data = this.db.Select(table);
-            if (Data.first())
-            {
+            this.db.closeConnection();
+            if (Data.first()) {
                 String username = Data.getString("username");
                 String password = Data.getString("password");
                 String role = Data.getString("role");
                 String name = Data.getString("name");
                 String email = Data.getString("email");
                 return new User(username,password,role,name,email);
-            }
-            else
-            {
+            } else {
                 return null;
             }
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
     }
     
-    public void addUser(User user)
-    {
+    /**
+     * Add new user to database
+     * @param user an instance of user that want to be added to database
+     */
+    public void addUser(User user) {
         String col[] = {"username","password","role","name","email"};
         String val[] = new String[5];
         val[0] = user.getUsername();
@@ -87,12 +90,18 @@ public class UserData {
         val[2] = user.getRole();
         val[3] = user.getName();
         val[4] = user.getEmail();
-        
-        int query = this.db.Insert(table, col, val);
+        this.db.openConnection();
+        this.db.Insert(table, col, val);
+        this.db.closeConnection();
     }
     
-    public void updateUser(String username,User user)
-    {
+    /**
+     * Update a tuple of user in database with an instance of user
+     * @param username the username in database that want to be found
+     * @param user new instance of user that will change the tuple of data selected
+     */
+    public void updateUser(String username, User user) {
+        this.db.openConnection();
         this.db.Where("username=", username);
         String col[] = {"username","password","role","name","email"};
         String val[] = new String[5];
@@ -100,16 +109,21 @@ public class UserData {
         val[1] = user.getPassword();
         val[2] = user.getRole();
         val[3] = user.getName();
-        val[4] = user.getEmail();
-        
+        val[4] = user.getEmail();   
         this.db.Update(table, col, val);
+        this.db.closeConnection();
     }
     
-    public List<User> getAllUser()
-    {
+    /**
+     * Get all user from database
+     * @return list of user
+     */
+    public List<User> getAllUser() {
         try 
         {
+            this.db.openConnection();
             ResultSet Data = this.db.Select(table);
+            this.db.closeConnection();
             boolean isExist = Data.first();
             List<User> ListUser = new LinkedList();
             while (isExist) {
@@ -131,15 +145,15 @@ public class UserData {
         }
     }
     
+    /**
+     * Delete user from database
+     * @param username the deleted username
+     */
     public void delUser(String username)
     {
+        this.db.openConnection();
         this.db.Where("username=", username);
         this.db.Delete(table);
-    }
-    
-    public static void main(String[] args) {
-	UserData user_data = new UserData();
-        User user = new User("admin","admin","admin","admin","admin@simple-blog.com");
-        user_data.addUser(user);
+        this.db.closeConnection();
     }
 }
