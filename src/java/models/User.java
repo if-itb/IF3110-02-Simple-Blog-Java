@@ -163,6 +163,7 @@ public class User implements Serializable {
                 message.setDetail("Invalid Username/Password combination");
                 //message.setSummary("Login Incorrect");
                 message.setSeverity(FacesMessage.SEVERITY_ERROR);
+                context.addMessage("form:error", message);
                 return "fail";
             }
             

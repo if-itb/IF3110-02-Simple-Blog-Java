@@ -12,15 +12,17 @@
             <ui:define name="content" >
                 <div class="col-xs-4 col-xs-offset-4">
                         <h1>Login</h1>
-                        <h:form>
-
+                        <h:form id="form">
+                            <h:message id="error" for="error"/>
                             <h:outputLabel value="#{message.userIdentity}"></h:outputLabel>
+                            
                             Email
                             <h:inputText value="#{userIdentity.email}" class="form-control"></h:inputText>
                             Password
                             <h:inputSecret value="#{userIdentity.password}" class="form-control"></h:inputSecret>
                             <br/>
                                 <h:commandButton action="#{userIdentity.login()}" class="btn btn-success" value="Login"></h:commandButton>
+                                
                         </h:form>
                 </div>
             </ui:define>
