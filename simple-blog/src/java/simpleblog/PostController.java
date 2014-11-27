@@ -42,6 +42,13 @@ public class PostController {
     /**
      * Creates a new instance of PostController
      */
+     
+     public PostController(){
+         title = new String();
+         date = new String();
+         content = new String();
+     }
+     
     public List<Post> getPostList() throws SQLException, NamingException
     {
         Context initCtx = new InitialContext();
@@ -73,9 +80,8 @@ public class PostController {
     
     public boolean insertPost(User user) throws NamingException, SQLException{
          try {
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-            Date parsedDate = dateFormat.parse(date);
-            Timestamp timestamp = new java.sql.Timestamp(parsedDate.getTime());
+            Date dates = new Date();
+            date = date + " " + dates.getHours() + ":" + dates.getMinutes() + ":" + dates.getSeconds();
             Context initCtx = new InitialContext();
             Context envCtx = (Context) initCtx.lookup("java:comp/env");
             ds = (DataSource) envCtx.lookup("jdbc/simpleBlogDb");
