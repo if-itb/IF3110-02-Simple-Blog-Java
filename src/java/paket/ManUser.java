@@ -190,6 +190,10 @@ public class ManUser implements Serializable{
             String sqlStr = "INSERT INTO `usr` (`usrname`, `passwrd`, `nama_usr`, `email_usr`, `role`) VALUES ( '" + usrname + "', '" + passwrd + "', '" + nama_usr + "', '" + email_usr + "', '" + role + "')";
             
            stmnt.executeUpdate(sqlStr);
+           //clean field
+           setUsrname("");
+           setEmail_usr("");
+           setNama_usr("");
         } catch (SQLException ex) {
             ex.printStackTrace();
             System.out.println("Unable to connect to database");
