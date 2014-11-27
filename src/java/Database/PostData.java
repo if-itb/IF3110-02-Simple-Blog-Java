@@ -15,14 +15,12 @@ import java.util.List;
  * @author Riva Syafri Rachmatullah
  */
 public class PostData {
-    private String table;
     private MySQL db;
     
     /**
      * Create an instance of PostData
      */
     public PostData() {
-        table = "post";
         db = new MySQL();
     }
     
@@ -35,7 +33,7 @@ public class PostData {
         try {
             this.db.openConnection();
             this.db.Where("id=", String.valueOf(id));
-            ResultSet Data = this.db.Select(table);
+            ResultSet Data = this.db.Select("post");
             this.db.closeConnection();
             if (Data.first()) {
                 int pid = Data.getInt("id");
@@ -82,7 +80,7 @@ public class PostData {
     public List<Post> getAllPost() {
         try {
             this.db.openConnection();
-            ResultSet Data = this.db.Select(table);
+            ResultSet Data = this.db.Select("post");
             this.db.closeConnection();
             boolean isExist = Data.first();
             List<Post> ListPost = new LinkedList();
@@ -116,7 +114,7 @@ public class PostData {
         try {
             this.db.openConnection();
             this.db.Where("username=", user);
-            ResultSet Data = this.db.Select(table);
+            ResultSet Data = this.db.Select("post");
             this.db.closeConnection();
             boolean isExist = Data.first();
             List<Post> ListPost = new LinkedList();
@@ -227,24 +225,25 @@ public class PostData {
      * @param post the new post
      */
     public void addPost(Post post) {
-        String col[] = {"id", "username", "title", "date", "content", "ispublished", "isdeleted"};
-        String val[] = new String[7];
+        String col[] = {"id", "username", "category", "title", "date", "content", "ispublished", "isdeleted"};
+        String val[] = new String[8];
         val[0] = String.valueOf(post.getID());
         val[1] = post.getAuthor().getUsername();
-        val[2] = post.getTitle();
-        val[3] = post.getDate().toString();
-        val[4] = post.getContent();
+        val[2] = String.valueOf(post.getCategory().getID());
+        val[3] = post.getTitle();
+        val[4] = post.getDate().toString();
+        val[5] = post.getContent();
         if (post.IsPublished()) {
-            val[5] = "1";
-        } else {
-            val[5] = "0";
-        }
-        if (post.IsDeleted()) {
             val[6] = "1";
         } else {
             val[6] = "0";
         }
-        this.db.Insert(table, col, val);
+        if (post.IsDeleted()) {
+            val[7] = "1";
+        } else {
+            val[7] = "0";
+        }
+        this.db.Insert("post", col, val);
     }
     
     /**
@@ -254,24 +253,25 @@ public class PostData {
      */
     public void updatePost(int pid, Post post) {
         this.db.Where("id=", String.valueOf(pid));
-        String col[] = {"id", "username", "title", "date", "content", "ispublished", "isdeleted"};
-        String val[] = new String[7];
+        String col[] = {"id", "username", "category", "title", "date", "content", "ispublished", "isdeleted"};
+        String val[] = new String[8];
         val[0] = String.valueOf(post.getID());
         val[1] = post.getAuthor().getUsername();
-        val[2] = post.getTitle();
-        val[3] = post.getDate().toString();
-        val[4] = post.getContent();
+        val[2] = String.valueOf(post.getCategory().getID());
+        val[3] = post.getTitle();
+        val[4] = post.getDate().toString();
+        val[5] = post.getContent();
         if (post.IsPublished()) {
-            val[5] = "1";
-        } else {
-            val[5] = "0";
-        }
-        if (post.IsDeleted()) {
             val[6] = "1";
         } else {
             val[6] = "0";
         }
-        this.db.Update(table, col, val);
+        if (post.IsDeleted()) {
+            val[7] = "1";
+        } else {
+            val[7] = "0";
+        }
+        this.db.Update("post", col, val);
     }
     
     /**
@@ -280,7 +280,7 @@ public class PostData {
      */
     public void hardDelPost(int pid) {
         this.db.Where("id=", String.valueOf(pid));
-        this.db.Delete(table);
+        this.db.Delete("post");
     }
     
     /**
@@ -290,16 +290,17 @@ public class PostData {
     public void softDelPost(int pid) {
         Post post = getPost(pid);
         this.db.Where("id=", String.valueOf(pid));
-        String col[] = {"id", "username", "title", "date", "content", "ispublished", "isdeleted"};
-        String val[] = new String[7];
+        String col[] = {"id", "username", "category", "title", "date", "content", "ispublished", "isdeleted"};
+        String val[] = new String[8];
         val[0] = String.valueOf(post.getID());
         val[1] = post.getAuthor().getUsername();
-        val[2] = post.getTitle();
-        val[3] = post.getDate().toString();
-        val[4] = post.getContent();
-        val[5] = "0";
-        val[6] = "1";
-        this.db.Update(table, col, val);
+        val[2] = String.valueOf(post.getCategory().getID());
+        val[3] = post.getTitle();
+        val[4] = post.getDate().toString();
+        val[5] = post.getContent();
+        val[6] = "0";
+        val[7] = "1";
+        this.db.Update("post", col, val);
     }
     
     /**
@@ -309,15 +310,59 @@ public class PostData {
     public void restorePost(int pid) {
         Post post = getPost(pid);
         this.db.Where("id=", String.valueOf(pid));
-        String col[] = {"id", "username", "title", "date", "content", "ispublished", "isdeleted"};
-        String val[] = new String[7];
+        String col[] = {"id", "username", "category", "title", "date", "content", "ispublished", "isdeleted"};
+        String val[] = new String[8];
         val[0] = String.valueOf(post.getID());
         val[1] = post.getAuthor().getUsername();
-        val[2] = post.getTitle();
-        val[3] = post.getDate().toString();
-        val[4] = post.getContent();
-        val[5] = "0";
+        val[2] = String.valueOf(post.getCategory().getID());
+        val[3] = post.getTitle();
+        val[4] = post.getDate().toString();
+        val[5] = post.getContent();
         val[6] = "0";
-        this.db.Update(table, col, val);
+        val[7] = "0";
+        this.db.Update("post", col, val);
+    }
+    
+    /**
+     * Add comment to database
+     * @param comment new comment
+     */
+    public void addComment(Comment comment) {
+        String col[] = {"id", "pid", "name", "email", "content", "time"};
+        String val[] = new String[6];
+        val[0] = String.valueOf(comment.getID());
+        val[1] = String.valueOf(comment.getPID());
+        val[2] = comment.getName();
+        val[3] = comment.getEmail();
+        val[4] = comment.getContent();
+        val[5] = comment.getTime().toString();
+        this.db.Insert("comment", col, val);
+    }
+    
+    public void addCommentofComment(CommentofComment comment) {
+        String col[] = {"id", "cid", "pid", "name", "email", "content", "time"};
+        String val[] = new String[7];
+        val[0] = String.valueOf(comment.getID());
+        val[1] = String.valueOf(comment.getCID());
+        val[2] = String.valueOf(comment.getPID());
+        val[3] = comment.getName();
+        val[4] = comment.getEmail();
+        val[5] = comment.getContent();
+        val[6] = comment.getTime().toString();
+        this.db.Insert("ccomment", col, val);
+    }
+    
+    /**
+     * Delete comment from database
+     * @param id id of comment
+     */
+    public void DelComment(int id) {
+        this.db.Where("id=", String.valueOf(id));
+        this.db.Delete("comment");
+    }
+    
+    public void DelCommentofComment (int id) {
+        this.db.Where("id=", String.valueOf(id));
+        this.db.Delete("ccomment");
     }
 }
