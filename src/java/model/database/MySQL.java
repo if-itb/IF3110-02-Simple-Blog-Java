@@ -158,7 +158,7 @@ public class MySQL {
 					User user = new User();
 
 					user.setId(resultSet.getInt("id"));
-					user.setUsername(resultSet.getString("email"));
+					user.setEmail(resultSet.getString("email"));
 					user.setUsername(resultSet.getString("username"));
 					user.setPassword(resultSet.getString("password"));
 					user.setRole(resultSet.getString("role"));
@@ -182,7 +182,7 @@ public class MySQL {
 			while (resultSet.next()) {
 				if (resultSet.getString("deleted_at") == null) {
 					user.setId(id);
-					user.setUsername(resultSet.getString("email"));
+					user.setEmail(resultSet.getString("email"));
 					user.setUsername(resultSet.getString("username"));
 					user.setPassword(resultSet.getString("password"));
 					user.setRole(resultSet.getString("role"));
