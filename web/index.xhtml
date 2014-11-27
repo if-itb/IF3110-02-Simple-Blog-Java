@@ -27,7 +27,10 @@
             <hr  margin-right="30%" />
             <div class="icon">
                 <h:form>
-                    <h:commandLink action="create_post" rendered="#{usersController.owner || usersController.admin}"><h:graphicImage name="img/add1.png" height="30px" title="add new post"></h:graphicImage></h:commandLink>
+                    <!--<h:commandLink action="create_post" rendered="#{usersController.owner || usersController.admin}"><h:graphicImage name="img/add1.png" height="30px" title="add new post"></h:graphicImage></h:commandLink>-->
+                    
+                        <h:commandLink action="create_post" rendered="#{usersController.owner || usersController.admin}"><h:graphicImage name="img/add2.png" height="30px" title="add new post"></h:graphicImage></h:commandLink>
+
                     <h:commandLink action="restore_post" rendered="#{usersController.admin}"><h:graphicImage name="img/restore1.png" height="30px" title="restore post"></h:graphicImage></h:commandLink>
                     <h:commandLink action="publish_post" rendered="#{usersController.editor || usersController.admin}"><h:graphicImage name="img/hide1.png" height="30px" title="unpublished post"></h:graphicImage></h:commandLink>
                     <h:commandLink action="view_user" rendered="#{usersController.admin}"><h:graphicImage name="img/adduser1.png" height="30px" title="manage users"></h:graphicImage></h:commandLink>

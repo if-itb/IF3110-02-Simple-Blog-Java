@@ -86,9 +86,11 @@ body{
 	clear: both;
 }
 /*-------------TOP-----------------*/
-.title{
+
+.title {
 	left:10%;
 	font-size: 50px;
+        font-family: defaultfont;
 }
 .signin{
 	font-size: 20px;
@@ -323,6 +325,19 @@ opt{
 	font-size: 22px;
 }
 
-#j_idt19\:createpost:hover {
-    
-}
+a.rollover {
+	display: block;
+	width: 150px;
+	height: 44px;
+	text-decoration: none;
+	background: url("add1.png");
+	}
+
+a.rollover:hover {
+	background-position: -150px 0;
+	}
+
+.displace {
+	position: absolute;
+	left: -5000px;
+	}
