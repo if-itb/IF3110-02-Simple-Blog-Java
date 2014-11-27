@@ -35,9 +35,10 @@ public class CookieHelper {
 
         if (cookie != null) {
             cookie.setValue(value);
+            cookie.setPath("/");
         } else {
             cookie = new Cookie(name, value);
-            cookie.setPath(request.getContextPath());
+            cookie.setPath("/");
         }
 
         cookie.setMaxAge(expiry);
@@ -63,5 +64,10 @@ public class CookieHelper {
             }
         }
         return null;
+    }
+    
+    public void deleteCookie (String name) {
+        HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+        setCookie(name,null,0);
     }
 }

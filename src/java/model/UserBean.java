@@ -114,8 +114,8 @@ public class UserBean {
         
         //Delete Cookies
         CookieHelper ck = new CookieHelper();
-        ck.setCookie("username", "", 0);
-        ck.setCookie("password", "", 0);
+        ck.deleteCookie("username");
+        ck.deleteCookie("password");
         return nc.gotoLogin() + "?faces-redirect=true";
     }
 
