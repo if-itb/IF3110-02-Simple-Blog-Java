@@ -119,9 +119,7 @@
                         <f:facet name="header">
                             <h:outputText value="Edit" />
                         </f:facet>
-                        <h:commandButton value="edit #{user.username}">
-                            <f:ajax listener="#{editUserBean.setEdited(user)}" render="edit_user">
-                            </f:ajax>
+                        <h:commandButton action="#{editUserBean.setEdited(user)}"value="edit #{user.username}">
                         </h:commandButton>
                     </h:column>
                     <h:column>
