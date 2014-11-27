@@ -2,7 +2,6 @@ package Database;
 
 import Model.User;
 import java.sql.ResultSet;
-import Security.MD5;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -40,40 +39,11 @@ public class UserData {
                 String role = Data.getString("role");
                 String name = Data.getString("name");
                 String email = Data.getString("email");
-                return new User(username,password,role,name,email);
+                return new User(username, password, role, name, email);
             } else {
                 return null;
             }
         } catch (Exception e) {
-            return null;
-        }
-    }
-    
-    /**
-     * Validate username and password from input to check it with the database
-     * @param user the username input
-     * @param pass the password input
-     * @return an instance of user from database
-     */
-    public User validate(String user, String pass) {
-        try {
-            this.db.openConnection();
-            this.db.Where("username=", user);
-            this.db.Where("password=", MD5.getMD5(pass));
-            ResultSet Data = this.db.Select(table);
-            this.db.closeConnection();
-            if (Data.first()) {
-                String username = Data.getString("username");
-                String password = Data.getString("password");
-                String role = Data.getString("role");
-                String name = Data.getString("name");
-                String email = Data.getString("email");
-                return new User(username,password,role,name,email);
-            } else {
-                return null;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
             return null;
         }
     }
@@ -83,7 +53,7 @@ public class UserData {
      * @param user an instance of user that want to be added to database
      */
     public void addUser(User user) {
-        String col[] = {"username","password","role","name","email"};
+        String col[] = {"username", "password", "role", "name", "email"};
         String val[] = new String[5];
         val[0] = user.getUsername();
         val[1] = user.getPassword();
@@ -103,7 +73,7 @@ public class UserData {
     public void updateUser(String username, User user) {
         this.db.openConnection();
         this.db.Where("username=", username);
-        String col[] = {"username","password","role","name","email"};
+        String col[] = {"username", "password", "role", "name", "email"};
         String val[] = new String[5];
         val[0] = user.getUsername();
         val[1] = user.getPassword();
@@ -132,7 +102,7 @@ public class UserData {
                 String role = Data.getString("role");
                 String name = Data.getString("name");
                 String email = Data.getString("email");
-                User user =  new User(username,password,role,name,email);
+                User user =  new User(username, password, role, name, email);
                 ListUser.add(user);
                 isExist = Data.next();
             }

@@ -18,9 +18,7 @@ public class User {
      * Create guest user
      */
     public User() {
-        username = "";
-        password = "";
-        role = "";
+        role = "guest";
     }
     
     /**

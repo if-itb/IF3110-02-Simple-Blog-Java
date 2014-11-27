@@ -5,9 +5,11 @@
         <group>
             <file>file:/D:/Documents/Dropbox/Perkuliahan/Semester%205/IF3038%20Pemrograman%20Internet/IF3110-02-Simple-Blog-Java/src/java/Model/Comment.java</file>
             <file>file:/D:/Documents/Dropbox/Perkuliahan/Semester%205/IF3038%20Pemrograman%20Internet/IF3110-02-Simple-Blog-Java/src/java/Model/Post.java</file>
+            <file>file:/D:/Documents/Dropbox/Perkuliahan/Semester%205/IF3038%20Pemrograman%20Internet/IF3110-02-Simple-Blog-Java/nbproject/build-impl.xml</file>
             <file>file:/D:/Documents/Dropbox/Perkuliahan/Semester%205/IF3038%20Pemrograman%20Internet/IF3110-02-Simple-Blog-Java/src/java/Database/MySQL.java</file>
             <file>file:/D:/Documents/Dropbox/Perkuliahan/Semester%205/IF3038%20Pemrograman%20Internet/IF3110-02-Simple-Blog-Java/src/java/Database/UserData.java</file>
             <file>file:/D:/Documents/Dropbox/Perkuliahan/Semester%205/IF3038%20Pemrograman%20Internet/IF3110-02-Simple-Blog-Java/src/java/Model/User.java</file>
+            <file>file:/D:/Documents/Dropbox/Perkuliahan/Semester%205/IF3038%20Pemrograman%20Internet/IF3110-02-Simple-Blog-Java/src/java/Database/PostData.java</file>
         </group>
     </open-files>
 </project-private>
