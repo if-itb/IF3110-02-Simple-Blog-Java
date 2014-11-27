@@ -132,8 +132,11 @@ public class UsersController implements Serializable {
 	public void createUser(String email, String username, String password, String role) throws IOException {
 		MySQL mysql = new MySQL();
 		
-		mysql.createUser(email, username, password, role);
-		FacesContext.getCurrentInstance().getExternalContext().redirect("view_user.xhtml");
+		if (mysql.createUser(email, username, password, role)) {
+                    FacesContext.getCurrentInstance().getExternalContext().redirect("view_user.xhtml");
+                } else {
+                    
+                }
 	}
 
 	public User getUser(int id) {

@@ -27,29 +27,29 @@
             
             <div class="content">
                 <h:form id="createuserform">
-					<h:messages style="color:red;" />		
-					<div class="forms">
-						<blue><b>Create User</b></blue>
-						<br />
-						<br />
-						<div class="textfield">
-							email : <h:inputText id="email" binding="#{createemail}" required="true" requiredMessage="Please enter an email"></h:inputText>
-							<br /><br />
-							username : <h:inputText id="username" binding="#{createusername}" required="true" requiredMessage="Please enter a username"></h:inputText>
-							<br /><br />
-							password : <h:inputSecret id="password" binding="#{createpassword}" required="true" requiredMessage="Please enter a password" ></h:inputSecret>
-							<br /><br />
-							role : 
-							<h:selectOneMenu binding ="#{createrole}">
-								<f:selectItem itemValue="owner" itemLabel="owner"/>
-								<f:selectItem itemValue="editor" itemLabel="editor"/>
-								<f:selectItem itemValue="admin" itemLabel="admin"/>
-							</h:selectOneMenu>
-							<!--role : <h:inputText id="role" binding="#{createrole}" required="true" requiredMessage="Please enter a role" ></h:inputText>-->
-							<br /><br />
-							<h:commandButton onclick="return validateEmail()" action="#{usersController.createUser(createemail.value, createusername.value, createpassword.value, createrole.value)}" value="Create" ></h:commandButton>
-						</div>
-					</div>
+                        <h:messages style="color:red;" />
+                        <div class="forms">
+                                <blue><b>Create User</b></blue>
+                                <br />
+                                <br />
+                                <div class="textfield">
+                                        email : <h:inputText id="email" binding="#{createemail}" required="true" requiredMessage="Please enter an email"></h:inputText>
+                                        <br /><br />
+                                        username : <h:inputText id="username" binding="#{createusername}" required="true" requiredMessage="Please enter a username"></h:inputText>
+                                        <br /><br />
+                                        password : <h:inputSecret id="password" binding="#{createpassword}" required="true" requiredMessage="Please enter a password" ></h:inputSecret>
+                                        <br /><br />
+                                        role : 
+                                        <h:selectOneMenu binding ="#{createrole}">
+                                                <f:selectItem itemValue="owner" itemLabel="owner"/>
+                                                <f:selectItem itemValue="editor" itemLabel="editor"/>
+                                                <f:selectItem itemValue="admin" itemLabel="admin"/>
+                                        </h:selectOneMenu>
+                                        <!--role : <h:inputText id="role" binding="#{createrole}" required="true" requiredMessage="Please enter a role" ></h:inputText>-->
+                                        <br /><br />
+                                        <h:commandButton onclick="return validateEmail()" action="#{usersController.createUser(createemail.value, createusername.value, createpassword.value, createrole.value)}" value="Create" ></h:commandButton>
+                                </div>
+                        </div>
                 </h:form>
             </div>
 			

@@ -62,20 +62,21 @@
 								<br />
 								<h:inputTextarea id="comment" binding="#{createcomment}" required="true" requiredMessage="Please enter your comment" rows="6" cols="50"></h:inputTextarea>
 								<br /><br />
-								<h:panelGroup rendered="#{!usersController.login}">
-									<h:commandButton onclick="return validateEmail()" value="Create" action="#{commentsController.createComment(viewpostid.value, createname.value, createemail.value, createcomment.value)}">
-										<f:ajax execute="@form" render="@form"></f:ajax>
-									</h:commandButton>
-								</h:panelGroup>
 								<h:panelGroup rendered="#{usersController.login}">
 									<h:commandButton onclick="return validateEmail()" value="Create" action="#{commentsController.createComment(viewpostid.value, usersController.loginUsername, usersController.loginEmail, createcomment.value)}">
-										<f:ajax execute="@form" render="@form"></f:ajax>
+										<f:ajax execute="@form" render="commentsTable"></f:ajax>
+									</h:commandButton>
+								</h:panelGroup>
+								<h:panelGroup rendered="#{!usersController.login}">
+									<h:commandButton onclick="return validateEmail()" value="Create" action="#{commentsController.createComment(viewpostid.value, createname.value, createemail.value, createcomment.value)}">
+										<f:ajax execute="@form" render="commentsTable"></f:ajax>
 									</h:commandButton>
 								</h:panelGroup>
 							</div>
 						</div>
 						<br />
 						<hr></hr>
+                                                <h:panelGroup id="commentsTable">
 						<ui:repeat value="#{commentsController.getAllComments(viewpostid.value)}" var="comment">
 							<div class="komentarbox">
 								<h:inputHidden value="#{comment.id}" binding="#{commentid}" />
@@ -96,6 +97,7 @@
 							</div>
 							<br />
 						</ui:repeat>
+                                                </h:panelGroup>
 					</div>
 				</h:form>
 			</div>
