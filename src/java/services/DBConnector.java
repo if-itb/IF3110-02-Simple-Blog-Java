@@ -20,7 +20,7 @@ public class DBConnector {
      */
     public static java.sql.Connection con;
 
-    private static String URL = "jdbc:mysql://localhost:3306/tubes_2_wbd";
+    private static String URL = "jdbc:mysql://localhost:3306/tubes_2";
     private static String user = "root";
     private static String password = "";
 
