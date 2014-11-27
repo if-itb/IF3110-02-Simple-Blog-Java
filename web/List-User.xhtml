@@ -46,8 +46,7 @@
                                 </h:inputText>
                                 <h:message styleClass="error_message" id="email_message" for="email" />
                                 <br/>
-                                <h:commandButton value="EDIT">
-                                    <f:ajax render="@form error_message user_table_wrapper" listener="#{editUserBean.edit()}" execute="@form"></f:ajax>
+                                <h:commandButton action="#{editUserBean.edit()}" value="EDIT">
                                 </h:commandButton>
                             </fieldset>
                         </h:form>
@@ -82,8 +81,7 @@
                                 </h:inputText>
                                 <h:message styleClass="error_message" id="email_message" for="email" />
                                 <br/>
-                                <h:commandButton value="ADD">
-                                    <f:ajax render="@form error_message user_table_wrapper" listener="#{addUserBean.add()}" execute="@form"></f:ajax>
+                                <h:commandButton action="#{addUserBean.add()}" value="ADD">
                                 </h:commandButton>
                             </fieldset>
                         </h:form>
@@ -131,8 +129,6 @@
                             <h:outputText value="Delete" />
                         </f:facet>
                         <h:commandButton action="#{deleteUserBean.delete(user.username)}" value="delete #{user.username}">
-                            <f:ajax immediate="true" render="user_table_wrapper">
-                            </f:ajax>
                         </h:commandButton>
                     </h:column>
                 </h:dataTable>
