@@ -130,6 +130,64 @@ public class DatabaseHelper {
 		}
 	}
 	
+	/*
+	public boolean validateUser(String username, String password) {
+		try {
+			connectDatabase(URL, USER, PASSWORD);
+			
+			boolean retval = false;
+			String query = "SELECT user.username, user.password "
+					+ "FROM user WHERE user.username = ?"
+					+ "AND user.password = ?";
+			statement = conn.prepareStatement(query);
+			statement.setString(1, username);
+			statement.setString(2, password);
+			statement.executeQuery();
+			result = statement.getResultSet();
+			if(result.first()) {
+				retval = true;
+			}
+			
+			clearResult();
+			clearStatement();
+			disconnectDatabase();
+			return retval;
+			
+		} catch (SQLException ex) {
+			return false;
+		} 
+	}
+	*/
+	
+	public User getUserData(String username, String password) {
+		try {
+			connectDatabase(URL, USER, PASSWORD);
+			
+			User user = null;
+			String query = "SELECT * "
+					+ "FROM user WHERE user.username = ?"
+					+ "AND user.password = ?";
+			statement = conn.prepareStatement(query);
+			statement.setString(1, username);
+			statement.setString(2, password);
+			statement.executeQuery();
+			result = statement.getResultSet();
+			if(result.first()) {
+				user = new User();
+				user.setUsername(result.getString(1));
+				user.setPassword(result.getString(2));
+				user.setRole(result.getString(3));
+			}
+			
+			clearResult();
+			clearStatement();
+			disconnectDatabase();
+			return user;
+		} catch (SQLException ex) {
+			return null;
+		} 
+	}
+	
 	private void connectDatabase(String url, String user, String password) {
 		try {
 			conn = DriverManager.getConnection(url, user, password);
