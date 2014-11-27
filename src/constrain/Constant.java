@@ -16,7 +16,7 @@ public final class Constant {
     public static final String MENU_EDITOR_NAME = "Editor Menu";
     public static final String MENU_EDITOR_URL = "editor_menu.jsf";
     public static final String MENU_POSTMANAGER_NAME = "Post Manager";
-    public static final String MENU_POSTMANAGER_URL = "";
+    public static final String MENU_POSTMANAGER_URL = "post_manager.jsf";
     public static final String MENU_USERMANAGER_NAME = "User Manager";
     public static final String MENU_USERMANAGER_URL = "crud.jsf";
 }

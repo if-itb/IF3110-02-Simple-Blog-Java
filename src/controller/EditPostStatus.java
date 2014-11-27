@@ -20,33 +20,33 @@ public class EditPostStatus {
 		dbUtil.execute(query);
 	}
 	
-	public void undelete(){
+	public void undelete(int temp_id){
 		DatabaseUtility dbUtil = DatabaseUtility.getInstance();
 
-		String query = "UPDATE post SET id_deleted = 0 WHERE id = "
-				+ this.getId();
+		String query = "UPDATE post SET is_deleted = 0 WHERE id = "
+				+ temp_id;
 
 		System.out.println(query);
 
 		dbUtil.execute(query);	
 	}
 
-	public void publish() {
+	public void publish(int temp_id) {
 		DatabaseUtility dbUtil = DatabaseUtility.getInstance();
 
 		String query = "UPDATE post SET is_published = 1 WHERE id = "
-				+ this.getId();
+				+ temp_id;
 
 		System.out.println(query);
 
 		dbUtil.execute(query);
 	}
 	
-	public void unpublish() {
+	public void unpublish(int temp_id) {
 		DatabaseUtility dbUtil = DatabaseUtility.getInstance();
 
 		String query = "UPDATE post SET is_published = 0 WHERE id = "
-				+ this.getId();
+				+ temp_id;
 
 		System.out.println(query);
 

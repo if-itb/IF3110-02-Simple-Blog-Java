@@ -68,7 +68,7 @@ public class ViewPost {
 
 		return result;
 	}
-	
+
 	public List<Post> getUnpublishedPostList() {
 		List<Post> result = new ArrayList<>();
 
@@ -78,8 +78,8 @@ public class ViewPost {
 		try {
 			String idPostQuery = "SELECT * FROM `post` WHERE `is_deleted` = 0 AND `is_published` = 0";
 
-			PreparedStatement pstmt = con.prepareStatement(idPostQuery);			
-			//pstmt.setInt(1, post.getId());
+			PreparedStatement pstmt = con.prepareStatement(idPostQuery);
+			// pstmt.setInt(1, post.getId());
 			pstmt.execute();
 			rs = pstmt.getResultSet();
 
@@ -95,6 +95,68 @@ public class ViewPost {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			System.out.println("Error in getUnpublishedPostList");
+			e.printStackTrace();
+		}
+
+		return result;
+	}
+
+	public List<Post> getSoftDeletedPostList() {
+		List<Post> result = new ArrayList<>();
+
+		Connection con = DatabaseUtility.getInstance().getLiveConnection();
+
+		ResultSet rs;
+		try {
+			String idPostQuery = "SELECT * FROM `post` WHERE `is_deleted` = 1";
+
+			PreparedStatement pstmt = con.prepareStatement(idPostQuery);
+			pstmt.execute();
+			rs = pstmt.getResultSet();
+
+			while (rs.next()) {
+				Post post = new Post();
+				post.setId(rs.getInt(1));
+				post.setTitle(rs.getString(3));
+				post.setContent(rs.getString(4));
+				post.setDate(rs.getDate(5));
+				result.add(post);
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println("Error in getSoftDeletedPostList");
+			e.printStackTrace();
+		}
+
+		return result;
+	}
+
+	public List<Post> getPublishednotDeletedPostList() {
+		List<Post> result = new ArrayList<>();
+
+		Connection con = DatabaseUtility.getInstance().getLiveConnection();
+
+		ResultSet rs;
+		try {
+			String idPostQuery = "SELECT * FROM `post` WHERE `is_deleted` = 0 and `is_published` = 1";
+
+			PreparedStatement pstmt = con.prepareStatement(idPostQuery);
+			pstmt.execute();
+			rs = pstmt.getResultSet();
+
+			while (rs.next()) {
+				Post post = new Post();
+				post.setId(rs.getInt(1));
+				post.setTitle(rs.getString(3));
+				post.setContent(rs.getString(4));
+				post.setDate(rs.getDate(5));
+				result.add(post);
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println("Error in getSoftDeletedPostList");
 			e.printStackTrace();
 		}
 

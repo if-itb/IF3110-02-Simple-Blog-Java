@@ -24,13 +24,12 @@
 							</h:button></td>
 						<td><h:form>
 								<h:commandButton value="Publish Post"
-									action="#{editPostStatus.delete(post.id)}" />
+									action="#{editPostStatus.publish(post.id)}" />
 							</h:form></td>
 					</tr>
 				</ui:repeat>
 			</table>
 		</div>
 	</ui:define>
-
 </ui:composition>
 </html>
