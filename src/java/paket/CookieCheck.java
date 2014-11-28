@@ -22,11 +22,13 @@ public class CookieCheck {
      * Creates a new instance of CookieCheck
      */
     public String CookieCheck() {
-        String cValue=null;
+        String cValue = null;
         Cookie[] cookies = request.getCookies();
-        for (Cookie cookie : cookies){
-            if("role".equals(cookie.getName())){
-                cValue = cookie.getValue();
+        if (cookies!= null && cookies.length>0){
+            for (Cookie cookie : cookies){
+                if("role".equals(cookie.getName())){
+                    cValue = cookie.getValue();
+                }
             }
         }
         return cValue;
@@ -43,9 +45,11 @@ public class CookieCheck {
     public String getUName(){
         String UName="Guest";
         Cookie[] cookies = request.getCookies();
-        for (Cookie cookie : cookies){
-            if("user".equals(cookie.getName())){
-                UName = cookie.getValue();
+        if (cookies!= null && cookies.length>0){
+            for (Cookie cookie : cookies){
+                if("user".equals(cookie.getName())){
+                    UName = cookie.getValue();
+                }
             }
         }
         return UName;
