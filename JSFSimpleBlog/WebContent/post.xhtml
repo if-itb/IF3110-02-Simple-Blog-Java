@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<f:metadata>
+    <f:viewParam name="id" value="#{postBean.selectedPost}" />
+    <f:viewAction action="#{postBean.view}" />
+</f:metadata>
+<h:head>
+<title>Simple Blog | #{postBean.post.judul}</title>
+<link rel="stylesheet" type="text/css" href="css/screen.css" />
+</h:head>
+<h:body>
+<div class="wrapper">
+
+<nav class="nav">
+    <a style="border:none;" id="logo" href="index.jsf"><h1>Simple<span>-</span>Blog</h1></a>
+    <ul class="nav-primary">
+        <li><h:link value="+ Tambah Post" outcome="new_post" /></li>
+    </ul>
+</nav>
+
+<article class="art simple post">
+    
+    <header class="art-header">
+        <div class="art-header-inner" style="margin-top: 0px; opacity: 1;">
+            <time class="art-time"><h:outputText value="#{postBean.post.tanggal}"><f:convertDateTime pattern="EEEE, d MMMM yyyy" /></h:outputText></time>
+            <h2 class="art-title">#{postBean.post.judul}</h2>
+        </div>
+    </header>
+
+    <div class="art-body">
+        <div class="art-body-inner">
+        	<h:messages />
+            #{postBean.post.konten}
+
+            <hr />
+            
+            <!-- <h2>Komentar</h2>
+
+            <div id="contact-area">
+                <h:form>
+                    <label for="Nama">Nama:</label>
+                    <h:inputText value="#{komentarBean.nama}"/>
+        
+                    <label for="Email">Email:</label>
+                    <h:inputText value="#{komentarBean.email}"/>
+                    
+                    <label for="Komentar">Komentar:</label><br>
+                    <h:inputTextarea value="#{komentarBean.komentar}"/>
+
+                    <h:commandButton value="Kirim" action="#{komentarBean.kirim}"/>
+                </h:form>
+            </div>
+
+            <ul class="art-list-body">
+            	<c:forEach>
+                <li class="art-list-item">
+                    <div class="art-list-item-title-and-time">
+                        <h2 class="art-list-title"><a href="#">#{komentarBean.nama}</a></h2>
+                        <div class="art-list-time">#{komentarBean.date}</div>
+                    </div>
+                    <p>#{komentarbean.komentar}</p>
+                </li>
+                </c:forEach>
+            </ul> -->
+        </div>
+    </div>
+
+</article>
+
+<footer class="footer">
+    <div class="back-to-top"><a href="#">Back to top</a></div>
+</footer>
+
+</div>
+
+</h:body></html>

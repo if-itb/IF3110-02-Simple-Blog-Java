@@ -4,7 +4,7 @@
     xmlns:f="http://java.sun.com/jsf/core"
     xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 <h:head>
-<title>Simple Blog</title>
+<title>Simple Blog | Unpublished Posts</title>
 <link rel="stylesheet" type="text/css" href="css/screen.css" />
 </h:head>
 <h:body>
@@ -32,7 +32,7 @@
                 <h:link value="Edit" outcome="edit_post"><f:param name="id" value="#{post.id}" /></h:link> | 
                 <h:form>
                 	<h:inputHidden value="#{post.id}" />
-                	<h:commandLink value="Hapus" action="#{postBean.hapus}" onclick="return confirm('Anda yakin ingin menghapus post ini?')"/>
+                	<h:commandLink value="Publish" action="#{postBean.publish}" />
                 </h:form>
             </li>
             </ui:repeat>
