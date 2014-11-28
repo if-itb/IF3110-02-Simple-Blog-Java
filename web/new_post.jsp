@@ -4,12 +4,11 @@
     Author     : adwisatya
 --%>
 
-<%@page import="User.userPaket"%>
+<%@page import="java.User.userPaket"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import = "Post.Post" %>
-<%@page import= "User.User" %>
-<%@page import= "Post.PostBean" %>
-<!DOCTYPE html>
+<%@page import = "java.Post.Post" %>
+<%@page import= "java.User.User" %>
+<%@page import= "java.Post.PostBean" %>
 <!DOCTYPE html>
 <html>
 <head>

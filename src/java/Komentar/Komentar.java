@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package Komentar;
+package java.Komentar;
 import static java.lang.System.out;
 import java.sql.*;
 import java.text.SimpleDateFormat;

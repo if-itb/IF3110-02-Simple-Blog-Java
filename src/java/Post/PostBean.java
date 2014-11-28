@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package Post;
+package java.Post;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
