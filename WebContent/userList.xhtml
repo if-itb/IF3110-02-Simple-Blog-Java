@@ -1,0 +1,215 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Simple Blog | Manage User</title>
+	<h:outputStylesheet name="assets/css/screen.css"  />
+	<h:outputStylesheet name="assets/img/favicon.ico"  />
+</h:head>
+<h:body class="default">
+<div class="wrapper">
+    <nav class="nav">
+	    <a style="border:none;" id="logo" href="index.xhtml"><h1>Simple<span>-</span>Blog</h1></a>
+	    
+	    <ul class="nav-primary">
+	    	<h:form rendered="#{not userManager.isLoggedIn()}">
+	    		<li><h:inputText value="#{userManager.username}" p:placeholder="User name"></h:inputText></li>
+	    		<li><h:inputSecret value="#{userManager.password}" p:placeholder="Password"></h:inputSecret></li>
+	    		<li><h:commandButton value="Login" action="#{userManager.login}" /></li>
+	    	</h:form>
+	    	<ui:fragment rendered="#{userManager.isLoggedIn()}">
+	    		<li><a href="addNewPost.xhtml">+ Tambah Post</a></li>
+	    		<li>
+		    		<h:form>
+		    		<h:commandLink class="submit-button" value="Logout" action="#{userManager.logout()}" />
+		    		</h:form>
+	    		</li>
+	    	</ui:fragment>
+	    </ul>
+	</nav>
+	
+<article class="art simple post" style="margin-top: 4em;">
+			<div class="art-body">
+			<div class="art-body-inner">
+				<h2>User Data</h2>
+				<div class="contact-area">
+				
+				<h:form rendered="#{not empty userAdmin.userList}">
+					
+			    <h:dataTable id="userTable" value="#{userAdmin.userList}" var="user"
+			    	styleClass="table table-hover"
+			    >
+			    	<h:column>
+			    		<f:facet name="header">ID</f:facet>
+			    		
+			    		<h:outputText id="userId" value="#{user.id}" />
+			    	</h:column>
+			    	<h:column>
+			    		<f:facet name="header">Username</f:facet>
+			    		
+			    		<h:inputText id="name" 
+			    			rendered="#{user.id eq userAdmin.userEditId}" 
+			    			value="#{user.name}" 
+			    			required="true"
+			    			requiredMessage="Please enter your name."/>
+			    		<h:message rendered="#{user.id eq userAdmin.userEditId}" for="name" style="color: red;" />
+			    		<h:outputText rendered="#{user.id ne userAdmin.userEditId}" value="#{user.name}" />
+			    	</h:column>
+			    	<h:column>
+			    		<f:facet name="header">E-mail</f:facet>
+			    		
+			    		<h:inputText id="email" p:type="email" 
+			    			rendered="#{user.id eq userAdmin.userEditId}" 
+			    			value="#{user.email}"
+			    			requried="true"
+			    			requiredMessage="Please enter your email."
+			    			 />
+			    		<h:message rendered="#{user.id eq userAdmin.userEditId}" for="email" style="color: red;" />
+			    		<h:outputLink rendered="#{user.id ne userAdmin.userEditId}" value="mailto:#{user.email}">#{user.email}</h:outputLink>
+			    	</h:column>
+			    	<h:column>
+			    		<f:facet name="header">Role</f:facet>
+			    		
+			    		<h:selectOneMenu id="userRole" rendered="#{user.id eq userAdmin.userEditId and user.id ne sessionScope.userId}" value="#{user.role}">
+			    			<f:selectItems value="#{roleBean.roleList}" var="role" 
+			    				itemLabel="#{role.label}" itemValue="#{role.value}" />
+			    		</h:selectOneMenu>
+			    		
+			    		<h:outputText value="#{user.role.getDescription()}" 
+			    			rendered="#{user.id ne userAdmin.userEditId or user.id eq sessionScope.userId}" />
+			    		
+			    	</h:column>
+			    	<h:column>
+			    		<f:facet name="header">Action</f:facet>
+			    		<h:commandLink value="Edit"
+			    			rendered="#{user.id ne userAdmin.userEditId}"
+			    			action="#{userAdmin.editAction(user.id)}" />
+			    		<ui:fragment rendered="#{user.id eq userAdmin.userEditId}">
+			    			<h:commandLink value="Save"
+				    			action="#{userAdmin.updateUser(user)}" />
+				    		<br/>
+				    		<h:commandLink value="Cancel" immediate="true"
+				    			action="#{userAdmin.cancelEditAction()}" />
+			    		</ui:fragment>
+			    	</h:column>
+			    	<h:column>
+			    		<h:commandLink style="text-align: right;"
+			    			rendered="#{user.id ne sessionScope.userId}"
+			    			onclick="return confirm('Are you sure you want to delete user #{user.name}?')"
+			    			action="#{userAdmin.deleteUser(user.id)}" value="Delete" />
+			    	</h:column>
+			    </h:dataTable>
+			    
+			    <ui:fragment rendered="#{empty userAdmin.userList}">
+			   		<h4>No user avaliable</h4>
+			    </ui:fragment>
+			    </h:form>
+			    
+			    <ui:fragment>
+			    <h:form id="newUser">
+			    	<ui:fragment rendered="#{userAdmin.userAdd ne null}">
+			    		<f:event listener="#{userAdmin.validateNewPassword}" type="postValidate" />
+			    		<h4>New User</h4>
+			    	
+				    	<h:panelGrid styleClass="table" 
+				    	columns="1" border="1" cellPadding="0" cellSpacing="2">
+				    	
+				    		<h:panelGroup>
+					    		<h:outputLabel for="newName">Name</h:outputLabel>
+					    		<h:inputText id="newName" 
+					    			value="#{userAdmin.userAdd.name}" 
+					    			required="true"
+					    			requiredMessage="Please enter your name."/>
+					    		<h:message for="newName" style="color:red;" />
+				    		</h:panelGroup>
+				    	
+				    		<h:panelGroup>
+					    		<h:outputLabel for="newEmail">Email</h:outputLabel>
+					    		<h:inputText id="newEmail" p:type="email"
+					    			value="#{userAdmin.userAdd.email}" 
+					    			required="true"
+					    			requiredMessage="Please enter your email."/>
+					    		<h:message for="newEmail" style="color:red;" />
+				    		</h:panelGroup>
+				    	
+				    		<h:panelGroup>
+				    			<h:outputLabel for="newRole">Role</h:outputLabel>
+				    			<h:selectOneMenu id="newRole" 
+					    			value="#{userAdmin.userAdd.role}">
+					    			
+					    			<f:selectItems value="#{roleBean.roleList}" var="role" 
+					    				itemLabel="#{role.label}" itemValue="#{role.value}" />
+				    			</h:selectOneMenu>
+				    		<h:message for="newRole" style="color:red;" />
+				    		</h:panelGroup>
+				    		
+				    		<h:panelGroup>
+					    		<h:outputLabel for="newPassword">Password</h:outputLabel>
+					    		<h:inputSecret id="newPassword" 
+					    			value="#{userAdmin.userAdd.password}"
+					    			required="true"
+					    			requiredMessage="Please enter password."/>
+					    		<h:message for="newPassword" style="color:red;" />
+				    		</h:panelGroup>
+				    		
+				    		<h:panelGroup>
+					    		<h:outputLabel for="newConfirmPassword">Confirm Password</h:outputLabel>
+					    		<h:inputSecret id="newConfirmPassword"
+					    			required="true"
+					    			requiredMessage="Please enter the same password."/>
+					    		<h:message for="newConfirmPassword" style="color:red;" />
+				    		</h:panelGroup>
+				    		
+				    		<f:facet name="footer">
+				    		<h:panelGroup>
+				    			<h:commandLink action="#{userAdmin.addUser()}" value="Add" />
+				    			<h:commandLink style="float:right;" action="#{userAdmin.cancelAddAction()}" immediate="true" value="Cancel" />
+				    		</h:panelGroup>
+				    		</f:facet>
+				    	</h:panelGrid>
+			    	</ui:fragment>
+			    	
+			    	<h:panelGroup>
+			    	<h:commandLink value="Add User"
+			    		rendered="#{userAdmin.userAdd eq null}" 
+			    		action="#{userAdmin.addAction()}"/>
+			    	<h:commandLink value="Refresh"
+			    		style="float:right;"
+			    		action="#{userAdmin.refresh()}"/>
+			    	</h:panelGroup>
+			    </h:form>
+			    </ui:fragment>
+			    
+			    </div>
+			 </div>
+			 </div>
+		</article>
+
+<footer class="footer">
+    <div class="back-to-top"><a href="#">Back to top</a></div>
+    <!-- <div class="footer-nav"><p></p></div> -->
+    <div class="psi">&Psi;</div>
+    <aside class="offsite-links">
+        Asisten IF3110 /
+        <a class="rss-link" href="#rss">RSS</a> /
+        <br />
+        <a class="twitter-link" href="http://twitter.com/YoGiiSinaga">Yogi</a> /
+        <a class="twitter-link" href="http://twitter.com/sonnylazuardi">Sonny</a> /
+        <a class="twitter-link" href="http://twitter.com/fathanpranaya">Fathan</a> /
+        <br />
+        <a class="twitter-link" href="#">Renusa</a> /
+        <a class="twitter-link" href="#">Kelvin</a> /
+        <a class="twitter-link" href="#">Yanuar</a> /
+        
+    </aside>
+</footer>
+</div>
+</h:body>
+</html>

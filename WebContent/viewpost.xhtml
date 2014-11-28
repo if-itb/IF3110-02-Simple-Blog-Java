@@ -1,0 +1,166 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+ 
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+ 
+   
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Simple Blog</title>
+	<h:outputStylesheet name="assets/css/screen.css" />
+	<h:outputStylesheet name="assets/img/favicon.ico" />
+</h:head>
+ 
+ 
+<h:body class="default">
+    <div class="wrapper">
+ 
+<nav class="nav"> <a style="border: none;" id="logo"
+			href="index.xhtml"><h1>
+				Simple<span>-</span>Blog
+			</h1></a>
+
+		<ul class="nav-primary">
+			<h:form rendered="#{not userManager.isLoggedIn()}">
+				<li><h:inputText value="#{userManager.username}"
+						p:placeholder="User name"></h:inputText></li>
+				<li><h:inputSecret value="#{userManager.password}"
+						p:placeholder="Password"></h:inputSecret></li>
+				<li><h:commandButton value="Login"
+						action="#{userManager.login}" /></li>
+			</h:form>
+			<ui:fragment rendered="#{userManager.isLoggedIn()}">
+				<ui:fragment rendered="#{roleBean.getRole(sessionScope.userRole).description eq 'Owner'}">
+					<li><a href="addNewPost.xhtml">+ Tambah
+						Post</a></li>
+				</ui:fragment>
+				<ui:fragment rendered="#{roleBean.getRole(sessionScope.userRole).description eq 'Admin'}">
+					<li><a href="addNewPost.xhtml">+ Tambah
+						Post</a></li>
+					<li><a href="#">Manage User</a></li>
+				</ui:fragment>
+				<li><h:form>
+						<h:commandLink class="submit-button" value="Logout"
+							action="#{userManager.logout()}" />
+					</h:form></li>
+			</ui:fragment>
+		</ul>
+		</nav>
+ 
+<article class="art simple post">
+   
+    <header class="art-header">
+        <div class="art-header-inner" style="margin-top: 0px; opacity: 1;">
+            <c:forEach items="#{requestBean.ShowDetailPost()}" />
+            <time class="art-time"><h:outputText value="#{requestBean.tanggalToBeShow}" /></time>
+            <h2 class="art-title"><h:outputText value="#{requestBean.judulToBeShow}" /></h2>
+            <p class="art-subtitle"></p>
+        </div>
+    </header>
+ 
+    <div class="art-body">
+        <div class="art-body-inner">
+            <hr class="featured-article" />
+            <p><h:outputText value="#{requestBean.kontenToBeShow}" /></p>
+            <hr/>
+           
+            <h2>Komentar</h2>
+ 
+            <div id="contact-area">
+                <h:form id="komen">
+                	<ui:fragment rendered="#{sessionScope.userRole eq null}">
+	                    <label for="Nama">Nama:</label>
+	                    <h:inputText id="Nama" value="#{requestBean.commentator}"/>
+	       
+	                    <label for="Email">Email:</label>
+	                    <h:inputText id="Email" value="#{requestBean.email}"/>
+                   </ui:fragment>
+                   	<ui:fragment rendered="#{sessionScope.userRole ne null}">
+	                    <h:inputHidden value="#{sessionScope.userName}"/>
+	       				<h:inputHidden value="#{sessionScope.userEmail}"/>
+	       			</ui:fragment>
+                    <label for="Komentar">Komentar:</label>
+                   
+                    <h:inputTextarea rows="20" cols="20" id="Komentar" value="#{requestBean.comment_content}"/>
+                   
+                	<ui:fragment rendered="#{sessionScope.userRole eq null}">
+                    <h:commandButton value="Tambah Komentar" onclick="return validate_comment()" class="submit-button">
+                        <f:ajax render="list" event="click" execute="@form" listener="#{requestBean.addcomment()}" />
+                        <f:param  name="id" value="#{param.id}" />
+                    </h:commandButton>
+                    </ui:fragment>
+                    
+                	<ui:fragment rendered="#{sessionScope.userRole ne null}">
+                	 <h:commandButton value="Tambah Komentar" class="submit-button">
+                        <f:ajax render="list" event="click" execute="@form" listener="#{requestBean.addcomment()}" />
+                        <f:param  name="id" value="#{param.id}" />
+                    </h:commandButton>
+                   </ui:fragment>
+                </h:form>
+                <span id="error" style="color:red;"></span>
+                <span id="errorEmail" style="color:red;"></span>
+            </div>
+            <h:panelGroup id="list">
+            <ul class="art-list-body">
+            <c:forEach items="#{requestBean.retrieveListKomen()}" var="p" >
+                    <li class="art-list-item">
+	                    <div class="art-list-item-title-and-time">
+	                        <h2 class="art-list-title">#{p.commentator}</h2>
+	                        <div class="art-list-time">#{p.tanggal}</div>
+	                    </div>
+	                    <p>#{p.comment_content}</p>
+	                </li>
+            </c:forEach>
+            </ul>
+            </h:panelGroup>
+        </div>
+    </div>
+ 
+</article>
+ 
+<footer class="footer">
+    <div class="back-to-top"><a href="#">Back to top</a></div>
+    <aside class="offsite-links">
+        Asisten IF3110 /
+        <a class="rss-link" href="#rss">RSS</a> /
+        <br/>
+        <a class="twitter-link" href="http://twitter.com/YoGiiSinaga">Yogi</a> /
+        <a class="twitter-link" href="http://twitter.com/sonnylazuardi">Sonny</a> /
+        <a class="twitter-link" href="http://twitter.com/fathanpranaya">Fathan</a> /
+        <br/>
+        <a class="twitter-link" href="#">Renusa</a> /
+        <a class="twitter-link" href="#">Kelvin</a> /
+        <a class="twitter-link" href="#">Yanuar</a> /
+       
+    </aside>
+</footer>
+ 
+</div>
+<script type="text/javascript">
+function validate_email(email) {
+    var reg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+    return reg.test(email);
+} 
+
+function validate_comment(){
+    var Nama=document.getElementById("komen:Nama").value;
+    var Email=document.getElementById("komen:Email").value;
+    var Komen=document.getElementById("komen:Komentar").value;
+    var errorMessage=document.getElementById("error");
+    if(Nama === "" || Email=== "" || Komen=== "" || !validate_email(Email)) {
+        if(Nama === "" || Email=== "" || Komen=== "") errorMessage.innerHTML= "*Post tidak lengkap";
+        else errorMessage.innerHTML="*Format Email tidak sesuai";
+        return false;			
+    } else {
+        errorMessage.innerHTML="";
+        return true;
+    }
+}
+</script>
+</h:body>
+</html>

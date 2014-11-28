@@ -11,12 +11,38 @@
 <h:body class="default">
 <div class="wrapper">
 
-<nav class="nav">
-    <a style="border:none;" id="logo" href="index.html"><h1>Simple<span>-</span>Blog</h1></a>
-    <ul class="nav-primary">
-        <li><a href="new_post.html">+ Tambah Post</a></li>
-    </ul>
-</nav>
+	<nav class="nav"> <a style="border: none;" id="logo"
+			href="index.xhtml"><h1>
+				Simple<span>-</span>Blog
+			</h1></a>
+
+		<ul class="nav-primary">
+			<h:form rendered="#{not userManager.isLoggedIn()}">
+				<li><h:inputText value="#{userManager.username}"
+						p:placeholder="User name"></h:inputText></li>
+				<li><h:inputSecret value="#{userManager.password}"
+						p:placeholder="Password"></h:inputSecret></li>
+				<li><h:commandButton value="Login"
+						action="#{userManager.login}" /></li>
+			</h:form>
+			<ui:fragment rendered="#{userManager.isLoggedIn()}">
+				<ui:fragment rendered="#{roleBean.getRole(sessionScope.userRole).description eq 'Owner'}">
+					<li><a href="addNewPost.xhtml">+ Tambah
+						Post</a></li>
+				</ui:fragment>
+				<ui:fragment rendered="#{roleBean.getRole(sessionScope.userRole).description eq 'Admin'}">
+					<li><a href="addNewPost.xhtml">+ Tambah
+						Post</a></li>
+					<li><a href="userList.xhtml">Manage User</a></li>
+				</ui:fragment>
+				<li><h:form>
+						<h:commandLink class="submit-button" value="Logout"
+							action="#{userManager.logout()}" />
+					</h:form></li>
+			</ui:fragment>
+		</ul>
+		</nav>
+
 
 <article class="art simple post">    
     <h2 class="art-title" style="margin-bottom:40px">-</h2>
@@ -43,11 +69,10 @@
             
         </div>
     </div>
-
 </article>
 
 <footer class="footer">
-    <div class="back-to-top"><a href="">Back to top</a></div>
+    <div class="back-to-top"><a href="#">Back to top</a></div>
     <!-- <div class="footer-nav"><p></p></div> -->
     <div class="psi">&Psi;</div>
     <aside class="offsite-links">

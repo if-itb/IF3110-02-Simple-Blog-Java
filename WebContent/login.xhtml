@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:jsf="http://xmlns.jcp.org/jsf"
+    xmlns:f="http://java.sun.com/jsf/core" 
+    xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+ 	<title><ui:insert name="title">Simple Blog | Login</ui:insert></title>
+	<h:outputStylesheet name="assets/css/screen.css"  />
+	<h:outputStylesheet name="assets/img/favicon.ico"  />
+</h:head>
+
+<h:body class="default">
+<div class="wrapper">
+    <nav class="nav">
+    <a style="border:none;" id="logo" href="index.xhtml"><h1>Simple<span>-</span>Blog</h1></a>
+    
+    <ul class="nav-primary">
+    	<ui:fragment rendered="#{userManager.isLoggedIn()}">
+    		<li><a href="#{request.contextPath}/newPost.xhtml">+ Tambah Post</a></li>
+    		<li>
+	    		<h:form>
+	    		<h:commandLink class="submit-button" value="Logout" action="#{userManager.logout()}" />
+	    		</h:form>
+    		</li>
+    	</ui:fragment>
+    </ul>
+	</nav>
+	
+	<article class="art simple post">    
+    	<h2 class="art-title" style="margin-bottom:40px">-</h2>
+    	<div class="art-body">
+    		<div class="art-body-inner">
+    			<h2>Login</h2>
+    			<div id="contact-area">
+			        <h:form rendered="#{!userManager.isLoggedIn()}">
+			            <label for="Username">Name</label>
+			            <input type="text" id="Username" name="username" value="#{userManager.username}"></input>
+			            <label for="Password">Password</label>
+			            <input type="password" id="Password" name="password" value="#{userManager.password}"></input>
+			            
+			        	<h:commandButton class="submit-button" value="Login" action="#{userManager.login}"/>
+			        </h:form>
+		        </div>
+	        </div>
+        </div>
+	</article>
+	
+	<footer class="footer">
+		  <div class="back-to-top"><a href="#">Back to top</a></div>
+		  <div class="psi">&Psi;</div>
+		  <aside class="offsite-links">
+		        Asisten IF3110 /
+		        <a class="rss-link" href="#rss">RSS</a> /
+		        <br />
+		        <a class="twitter-link" href="http://twitter.com/YoGiiSinaga">Yogi</a> /
+		        <a class="twitter-link" href="http://twitter.com/sonnylazuardi">Sonny</a> /
+		        <a class="twitter-link" href="http://twitter.com/fathanpranaya">Fathan</a> /
+		        <br />
+		        <a class="twitter-link" href="#">Renusa</a> /
+		        <a class="twitter-link" href="#">Kelvin</a> /
+		        <a class="twitter-link" href="#">Yanuar</a> /
+		   </aside>
+		</footer>
+</div>
+</h:body>
+</html>

@@ -73,7 +73,7 @@ public class EditBean {
 			}
 		}
 		
-		return "Unpublished";
+		return "index.xhtml";
 	}
 	
 	public String getId() {

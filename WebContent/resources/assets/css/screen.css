@@ -225,7 +225,7 @@ div.cover > img {
 }
 /* Header */
 .art-header {
-  height: 900px;
+  height: 500px;
   /* Background image is defined in the post */
   background-position: top center;
   background-attachment: fixed;
@@ -233,7 +233,7 @@ div.cover > img {
 }
 /* Contains the time, title and subtitle for an article */
 .art-header-inner {
-  position: fixed;
+  position: relative;
   top: 300px;
   left: 50%;
   margin-left: -490px;
@@ -858,4 +858,92 @@ label {
   margin-right: 15px;
   width: 100px;
   padding-top: 5px;
+}
+
+/* Table (inspired by Bootstrap)
+================================================== */
+ 
+table {
+	max-width: 100%;
+}
+ 
+th {
+	text-align: left;
+}
+ 
+.table {
+	width: 100%;
+	margin-bottom: 20px;
+	border-collapse: collapse;
+}
+ 
+.table > thead > tr > th,
+.table > tbody > tr > th,
+.table > tfoot > tr > th,
+.table > thead > tr > td,
+.table > tbody > tr > td,
+.table > tfoot > tr > td {
+	padding: 8px;
+	line-height: 1.428571429;
+	vertical-align: top;
+	border-top: 1px solid #ddd;
+}
+ 
+.table > thead > tr > th {
+	vertical-align: bottom;
+	border-bottom: 2px solid #ddd;
+}
+ 
+.table > caption + thead > tr:first-child > th,
+.table > colgroup + thead > tr:first-child > th,
+.table > thead:first-child > tr:first-child > th,
+.table > caption + thead > tr:first-child > td,
+.table > colgroup + thead > tr:first-child > td,
+.table > thead:first-child > tr:first-child > td {
+	border-top: 0;
+}
+ 
+.table > tbody + tbody {
+	border-top: 2px solid #ddd;
+}
+ 
+.table .table {
+	background-color: #fff;
+}
+ 
+.table-condensed > thead > tr > th,
+.table-condensed > tbody > tr > th,
+.table-condensed > tfoot > tr > th,
+.table-condensed > thead > tr > td,
+.table-condensed > tbody > tr > td,
+.table-condensed > tfoot > tr > td {
+	padding: 5px;
+}
+ 
+.table-bordered {
+	border: 1px solid #ddd;
+}
+ 
+.table-bordered > thead > tr > th,
+.table-bordered > tbody > tr > th,
+.table-bordered > tfoot > tr > th,
+.table-bordered > thead > tr > td,
+.table-bordered > tbody > tr > td,
+.table-bordered > tfoot > tr > td {
+	border: 1px solid #ddd;
+}
+ 
+.table-bordered > thead > tr > th,
+.table-bordered > thead > tr > td {
+	border-bottom-width: 2px;
+}
+ 
+.table-striped > tbody > tr:nth-child(odd) > td,
+.table-striped > tbody > tr:nth-child(odd) > th {
+	background-color: #eaeaea;
+}
+ 
+.table-hover > tbody > tr:hover > td,
+.table-hover > tbody > tr:hover > th {
+	background-color: #f5f5f5;
 }
