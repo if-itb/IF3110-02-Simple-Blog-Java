@@ -90,7 +90,7 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("<div class=\"wrapper\">\n");
       out.write("\n");
       out.write("<nav class=\"nav\">\n");
-      out.write("    <a style=\"border:none;\" id=\"logo\" href=\"index.php\"><h1>Simple-Blog<span>-of-</span>Bang-Satya-Ilmi-Ojan</h1></a>\n");
+      out.write("    <a style=\"border:none;\" id=\"logo\" href=\"index.jsp\"><h1>Simple-Blog<span>-of-</span>Bang-Satya-Ilmi-Ojan</h1></a>\n");
       out.write("    <ul class=\"nav-primary\">\n");
       out.write("        <li><a href=\"new_post.jsp\">+ Tambah Post</a></li>\n");
       out.write("    </ul>\n");
@@ -104,11 +104,12 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
 
 				PostBean pBean =  new PostBean();
 				for(int i=0;i<pBean.listManyPost().size();i++){
+					if(pBean.listManyPost().get(i).getStatus() != 0){
 			
       out.write("\t\n");
       out.write("\t\t\t<li class=\"art-list-item\">\n");
       out.write("\t\t\t\t<div class=\"art-list-item-title-and-time\">\n");
-      out.write("\t\t\t\t\t<h2 class=\"art-list-title\"><a href=\"show_post.php?id=");
+      out.write("\t\t\t\t\t<h2 class=\"art-list-title\"><a href=\"show_post.jsp?id=");
  out.println(pBean.listManyPost().get(i).getId()); 
       out.write('"');
       out.write('>');
@@ -125,7 +126,7 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
  out.println(pBean.listManyPost().get(i).getKonten()); 
       out.write("</p>\n");
       out.write("\t\t\t\t<p>\n");
-      out.write("\t\t\t\t  <a href=\"edit_post.php?id=");
+      out.write("\t\t\t\t  <a href=\"edit.jsp?id=");
  out.println(pBean.listManyPost().get(i).getId()); 
       out.write("\">Edit</a> | <a href=\"#\" onclick=\"return ConfirmDelete(");
  out.println(pBean.listManyPost().get(i).getId()); 
@@ -135,6 +136,7 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\t\t\t</li>\t\n");
       out.write("\t\t\t");
 
+					}
 				}
 			
       out.write("\n");
@@ -168,7 +170,7 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("    {\n");
       out.write("      var x = confirm(\"Apakah Anda yakin menghapus post ini?\");\n");
       out.write("      if (x)\n");
-      out.write("          return window.location.assign('delete.php?id='+nomor);\n");
+      out.write("          return window.location.assign('delete.jsp?id='+nomor);\n");
       out.write("      else\n");
       out.write("        return false;\n");
       out.write("    }\n");
