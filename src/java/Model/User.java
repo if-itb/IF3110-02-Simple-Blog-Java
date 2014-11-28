@@ -1,12 +1,16 @@
 package Model;
 
-import Security.MD5;
+import Helper.MD5;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 
 /**
  * Representation of User
  * @author Luthfi Hamid Masykuri
  * @modified Riva Syafri Rachmatullah
  */
+@ManagedBean(name="User")
+@RequestScoped
 public class User {
     private String username;
     private String password;
@@ -18,7 +22,11 @@ public class User {
      * Create guest user
      */
     public User() {
-        role = "guest";
+        username = "";
+        password = "";
+        role = "";
+        name = "";
+        email = "";
     }
     
     /**
@@ -114,6 +122,6 @@ public class User {
      * @param email the new email
      */
     public void setEmail(String email) {
-        this.role = email;
+        this.email = email;
     }
 }

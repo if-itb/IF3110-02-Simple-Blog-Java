@@ -1,25 +1,37 @@
 package Database;
 
 import Model.User;
+import Helper.MD5;
+import Helper.CookieHelper;
+import java.io.Serializable;
 import java.sql.ResultSet;
 import java.util.LinkedList;
 import java.util.List;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
+import javax.servlet.http.Cookie;
 
 /**
  * Representation of data user
  * @author Luthfi Hamid Masykuri
  * @modified Riva Syafri Rachmatullah
  */
-public class UserData {
+@ManagedBean(name="UserData")
+@RequestScoped
+public class UserData implements Serializable {
     private String table;
     private MySQL db;
+    private String CookieData;
+    private CookieHelper cook;
     
     /**
      * Create an instance of UserData
      */
     public UserData() {
         table = "user";
+        CookieData = "user_blog";
         db = new MySQL();
+        cook = new CookieHelper();
     }
     
     /**
@@ -29,10 +41,8 @@ public class UserData {
      */
     public User getUser(String user) {
         try {
-            this.db.openConnection();
             this.db.Where("username=", user);
             ResultSet Data = this.db.Select(table);
-            this.db.closeConnection();
             if (Data.first()) {
                 String username = Data.getString("username");
                 String password = Data.getString("password");
@@ -49,10 +59,33 @@ public class UserData {
     }
     
     /**
+     * Validate user and pass
+     * @param user username input
+     * @param pass password input
+     * @return String status to pass
+     */
+    public String validate(String user,String pass) {
+        try {
+            this.db.Where("username=", user);
+            this.db.Where("password=", MD5.getMD5(pass));
+            ResultSet Data = this.db.Select(table);
+            if (Data.first()) {
+                cook.setCookie(CookieData,user, 3600);
+                return "valid";
+            } else {
+                return "invalid";
+            }
+        } catch (Exception e) {
+            return "invalid";
+        }
+    }
+    
+    /**
      * Add new user to database
      * @param user an instance of user that want to be added to database
+     * @return String status to pass
      */
-    public void addUser(User user) {
+    public String addUser(User user) {
         String col[] = {"username", "password", "role", "name", "email"};
         String val[] = new String[5];
         val[0] = user.getUsername();
@@ -60,18 +93,21 @@ public class UserData {
         val[2] = user.getRole();
         val[3] = user.getName();
         val[4] = user.getEmail();
-        this.db.openConnection();
-        this.db.Insert(table, col, val);
-        this.db.closeConnection();
+        int query = this.db.Insert(table, col, val);
+        if (query > 0) {
+            return "success";
+        } else {
+            return "failed";
+        }
     }
     
     /**
      * Update a tuple of user in database with an instance of user
      * @param username the username in database that want to be found
      * @param user new instance of user that will change the tuple of data selected
+     * @return String status to pass
      */
-    public void updateUser(String username, User user) {
-        this.db.openConnection();
+    public String updateUser(String username, User user) {
         this.db.Where("username=", username);
         String col[] = {"username", "password", "role", "name", "email"};
         String val[] = new String[5];
@@ -80,8 +116,12 @@ public class UserData {
         val[2] = user.getRole();
         val[3] = user.getName();
         val[4] = user.getEmail();   
-        this.db.Update(table, col, val);
-        this.db.closeConnection();
+        int query = this.db.Update(table, col, val);
+        if (query > 0) {
+            return "success";
+        } else {
+            return "failed";
+        }
     }
     
     /**
@@ -89,11 +129,8 @@ public class UserData {
      * @return list of user
      */
     public List<User> getAllUser() {
-        try 
-        {
-            this.db.openConnection();
+        try {
             ResultSet Data = this.db.Select(table);
-            this.db.closeConnection();
             boolean isExist = Data.first();
             List<User> ListUser = new LinkedList();
             while (isExist) {
@@ -108,9 +145,7 @@ public class UserData {
             }
             return ListUser;
         } 
-        catch (Exception e) 
-        {
-            e.printStackTrace();
+        catch (Exception e) {
             return null;
         }
     }
@@ -118,12 +153,44 @@ public class UserData {
     /**
      * Delete user from database
      * @param username the deleted username
+     * @return String status to pass
      */
-    public void delUser(String username)
-    {
-        this.db.openConnection();
+    public String delUser(String username) {
         this.db.Where("username=", username);
         this.db.Delete(table);
-        this.db.closeConnection();
+        return "deleted";
+    }
+    
+    /**
+     * Get which user is logged in
+     * @return the user which is logged in
+     */
+    public User userLoggedIn() {
+        Cookie cookie = cook.getCookie(CookieData);
+        if (cookie != null) {
+            String username = cookie.getValue();
+            User user = this.getUser(username);
+            return user;
+        } else {
+            return null;
+        }
+    }
+    
+    /**
+     * Check whether any user is logged in web
+     * @return boolean status
+     */
+    public boolean is_logged_in() {
+        Cookie cookie = cook.getCookie(CookieData);
+        return (cookie != null);
+    }
+    
+    /**
+     * Log out from web
+     * @return boolean status
+     */
+    public boolean logout() {
+        cook.setCookie(CookieData, "", 0);
+        return true;
     }
 }

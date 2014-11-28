@@ -1,12 +1,16 @@
 package Model;
 
 import java.sql.Timestamp;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 
 /**
  * Representation of comment
  * @author Luthfi Hamid Masykuri
  * @modified Riva Syafri Rachmatullah
  */
+@ManagedBean(name="Comment")
+@RequestScoped
 public class Comment {
     private int id;
     private int pid;

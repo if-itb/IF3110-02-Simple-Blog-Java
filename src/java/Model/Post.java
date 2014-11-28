@@ -1,47 +1,56 @@
 package Model;
 
-import java.sql.Date;
+import java.util.Date;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 
 /**
  * Representation of Post
  * @author Luthfi Hamid Masykuri
  * @modified Riva Syafri Rachmatullah 
  */
+@ManagedBean(name="Post")
+@RequestScoped
 public class Post {
     private int id;
     private String title;
-    private PostCategory category;
     private Date date;
     private String content;
     private User author;
-    private boolean ispublished;
-    private boolean isdeleted;
+    private boolean published;
+    private boolean deleted;
     
     /**
-     * Create a new instance of empty post
+     * Create an empty instance of Post
      */
-    public Post() {}
+    public Post()
+    {
+        id = 0;
+        title = "";
+        date = null;
+        content = "";
+        author = null;
+        published = false;
+    }
     
     /**
      * Create a new instance of post
      * @param id id of post
      * @param title title of post
-     * @param category category of post
      * @param date date of post
      * @param content content of post
      * @param author author of post
-     * @param ispublished published/draft post
-     * @param isdeleted deleted post
+     * @param published published/draft post
+     * @param deleted deleted post
      */
-    public Post(int id, String title, PostCategory category, Date date, String content, User author, boolean ispublished, boolean isdeleted) {
+    public Post(int id, String title, Date date, String content, User author, boolean published, boolean deleted) {
         this.id = id;
         this.title = title;
-        this.category = category;
         this.date = date;
         this.content = content;
         this.author = author;
-        this.ispublished = ispublished;
-        this.isdeleted = isdeleted;
+        this.published = published;
+        this.deleted = deleted;
     }
     
     /**
@@ -58,14 +67,6 @@ public class Post {
      */
     public String getTitle() {
         return title;
-    }
-    
-    /**
-     * Get the category of post
-     * @return category of post
-     */
-    public PostCategory getCategory() {
-        return category;
     }
     
     /**
@@ -97,7 +98,7 @@ public class Post {
      * @return publishing status of post
      */
     public boolean IsPublished() {
-        return ispublished;
+        return published;
     }
     
     /**
@@ -105,7 +106,7 @@ public class Post {
      * @return deleted status of post
      */
     public boolean IsDeleted() {
-        return isdeleted;
+        return deleted;
     }
     
     /**
@@ -122,14 +123,6 @@ public class Post {
      */
     public void setTitle(String title) {
         this.title = title;
-    }
-    
-    /**
-     * Set the new category of post
-     * @param category new category
-     */
-    public void setCategory(PostCategory category) {
-        this.category = category;
     }
     
     /**
@@ -158,15 +151,17 @@ public class Post {
     
     /**
      * Change status of post to be published or draft
+     * @param published status of published
      */
-    public void changePublishedStatus() {
-        ispublished = !ispublished;
+    public void setPublished(boolean published) {
+        this.published = published;
     }
     
     /**
      * Change status of post to be deleted or not
+     * @param deleted status of published
      */
-    public void changeDeletedStatus() {
-        isdeleted = !isdeleted;
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
     }
 }

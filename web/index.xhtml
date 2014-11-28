@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Simple Blog</title>
 
@@ -33,22 +34,34 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="index.html">Simple Blog</a>
+                    <a class="navbar-brand" href="index.xhtml">Simple Blog</a>
                 </div>
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            <a href="new_post.html">+ Add Post</a>
+                            <f:subview rendered="#{beans.admin and beans.owner}" id="addpost">
+                                <a href="new_post.xhtml">+ Add Post</a>
+                            </f:subview>
                         </li>
                         <li>
-                            <a href="draft.html">Drafts</a>
+                            <f:subview rendered="#{beans.admin and beans.editor}" id="drafts">
+                                <a href="draft.xhtml">Drafts</a>
+                            </f:subview>
                         </li>
                         <li>
-                            <a href="admin.html">Administrator Page</a>
+                            <f:subview rendered="#{beans.admin}" id="admin">
+                                <a href="admin.xhtml">Administrator Page</a>
+                            </f:subview>
                         </li>
                         <li>
-                            <a href="login.html">Logout</a>
+                            <f:subview rendered="#{beans.isLogin()}" id="logout">
+                                <a href="login.xhtml">Log out</a>
+                            </f:subview>
+                            <h:commandLink action="#{beans.logout()}" value="Logout" rendered="#{beans.isLogin()}"/>
+                            <f:subview rendered="#{!beans.isLogin()}" id="login">
+                                <a href="login.xhtml">Log in</a>
+                            </f:subview>
                         </li>
                     </ul>
                 </div>

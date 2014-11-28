@@ -27,7 +27,7 @@ public class DataManagement implements Serializable {
         user = new User();
         post = new Post();
         message = "";
-        cookie = new Cookie("", null);
+        cookie = new Cookie("Username", null);
         cookie.setMaxAge(120);
     }
     
@@ -38,7 +38,7 @@ public class DataManagement implements Serializable {
         Cookie[] userCookies = request.getCookies();
         if (userCookies != null && userCookies.length > 0) {
             for (Cookie userCookie : userCookies) {
-                if (userCookie.getName().equals("")) {
+                if (userCookie.getName().equals("Username")) {
                     cookies = userCookie;
                     return cookies;
                 }
@@ -97,8 +97,9 @@ public class DataManagement implements Serializable {
 
     /**
      * Log out from web
+     * @return a page of web
      */
-    public void logout() {
+    public String logout() {
         reset();
         message = "";
         cookie.setValue(null);
@@ -106,6 +107,7 @@ public class DataManagement implements Serializable {
         FacesContext facesContex = FacesContext.getCurrentInstance();
         HttpServletResponse response = (HttpServletResponse) facesContex.getExternalContext().getResponse();
         response.addCookie(cookie);
+        return "index.xhmtl";
     }
 
     public void reset() {
@@ -116,6 +118,18 @@ public class DataManagement implements Serializable {
         return user.getRole().compareTo("guest") != 0 && cookie.getValue() != null;
     }
 
+    public boolean isAdmin() {
+        return user.getRole().compareTo("admin") == 0 && cookie.getValue() != null;
+    }
+    
+    public boolean isOwner() {
+        return user.getRole().compareTo("owner") == 0 && cookie.getValue() != null;
+    }
+    
+    public boolean isEditor() {
+        return user.getRole().compareTo("editor") == 0 && cookie.getValue() != null;
+    }
+    
     public boolean activeMessage() {
         return !message.equals("") && !isLogin();
     }

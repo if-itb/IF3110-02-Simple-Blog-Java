@@ -31,29 +31,6 @@ public class MySQL {
     }
 
     /**
-     * Open connection to database
-     */
-    public void openConnection() {
-        try {
-            String connectionURL = "jdbc:mysql://" + host + "/" + db_name;
-            Class.forName("com.mysql.jdbc.Driver").newInstance();
-            connection = (Connection) DriverManager.getConnection(connectionURL, user, pass);
-            statement = (Statement) connection.createStatement();
-	} catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException e) {
-        }
-    }
-    
-    /**
-     * Close connection to database
-     */
-    public void closeConnection() {
-        try {
-            connection.close();
-        } catch (Exception e) {
-        }
-    }
-    
-    /**
      * Create "WHERE" section on query
      * @param col Checked Column
      * @param comp Column Value
@@ -72,6 +49,7 @@ public class MySQL {
      * @return Table created from "SELECT" SQL Syntax
      */
     public ResultSet Select(String Table) {
+        openConnection();
         ResultSet result = null;
 	try {
             if ("".equals(where)) {
@@ -81,6 +59,7 @@ public class MySQL {
 		where = "";
             }
 	} catch (Exception e) {}
+        closeConnection();
         return result;
     }
 
@@ -92,7 +71,8 @@ public class MySQL {
      * @return Result of executed query
      */
     public int Insert(String Table, String Col[], String Val[]) {
-	String ColName = "(";
+	openConnection();
+        String ColName = "(";
 	int i = 1;
 	for (String col : Col) {
             if (i < Col.length) {
@@ -113,7 +93,9 @@ public class MySQL {
             i++;
 	}
 	try {
-            return statement.executeUpdate("INSERT INTO `" + Table + "` " + ColName + " VALUES " + Values);
+            int query = statement.executeUpdate("INSERT INTO `" + Table + "` " + ColName + " VALUES " + Values);
+            closeConnection();
+            return query;
 	} catch (Exception e) {
             return 0;
 	}
@@ -122,16 +104,22 @@ public class MySQL {
     /**
      * Delete tuples from table
      * @param Table Name of table
+     * @return query status
      */
-    public void Delete(String Table) {
-	try {
+    public int Delete(String Table) {
+	openConnection();
+        try {
+            int query;
             if ("".equals(where)) {
-		statement.executeUpdate("DELETE FROM `" + Table + "`");
+		query = statement.executeUpdate("DELETE FROM `" + Table + "`");
             } else {
-		statement.executeUpdate("DELETE FROM `" + Table + "` " + where);
+		query = statement.executeUpdate("DELETE FROM `" + Table + "` " + where);
 		where = "";
             }
+            closeConnection();
+            return query;
 	} catch (Exception e) {
+            return 0;
 	}
     }
 
@@ -140,9 +128,12 @@ public class MySQL {
      * @param Table Name of table
      * @param Col Array of column
      * @param Val Array of Value
+     * @return query status
      */
-    public void Update(String Table, String Col[], String Val[]) {
-	try {
+    public int Update(String Table, String Col[], String Val[]) {
+	openConnection();
+        try {
+            int query;
             String set = "";
             if (Col.length == Val.length) {
 		for (int i = 0; i < Col.length; i++) {
@@ -153,16 +144,39 @@ public class MySQL {
                     }
 		}
 		if ("".equals(where)) {
-                    statement.executeUpdate("UPDATE `" + Table + "` SET " + set);
+                    query = statement.executeUpdate("UPDATE `" + Table + "` SET " + set);
 		} else {
-                    statement.executeUpdate("UPDATE `" + Table + "` SET " + set + " " + where);
+                    query = statement.executeUpdate("UPDATE `" + Table + "` SET " + set + " " + where);
                     where = "";
 		}
+                closeConnection();
+                return query;
+            } else {
+                return 0;
             }
-	} catch (Exception e) {}
+	} catch (Exception e) {
+           return 0;
+        }
     }
 
-    public static void main(String[] args) {
-	MySQL data = new MySQL();
+    /**
+     * Open connection to database
+     */
+    private void openConnection() {
+        try {
+            String connectionURL = "jdbc:mysql://" + host + "/" + db_name;
+            Class.forName("com.mysql.jdbc.Driver").newInstance();
+            connection = (Connection) DriverManager.getConnection(connectionURL, user, pass);
+            statement = (Statement) connection.createStatement();
+	} catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException e) {}
+    }
+    
+    /**
+     * Close connection to database
+     */
+    private void closeConnection() {
+        try {
+            connection.close();
+        } catch (Exception e) {}
     }
 }
