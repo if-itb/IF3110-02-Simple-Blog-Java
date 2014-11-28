@@ -210,7 +210,7 @@ public class PostData implements Serializable {
      * @return String status
      */
     public String editPost(Post post) {
-        this.db.Where("id=", ""+post.getID());
+        this.db.Where("id=", ""+post.getId());
         String col[] = {"title", "date", "content", "author", "published", "deleted"};
         String val[] = new String[6];
         val[0] = post.getTitle();
@@ -218,7 +218,7 @@ public class PostData implements Serializable {
         val[1] = date.toString();
         val[2] = post.getContent();
         val[3] = post.getAuthor().getUsername();
-        if (post.IsPublished()) {
+        if (post.getPublished()) {
             val[4] = "1";
         } else {
             val[4] = "0";
@@ -237,7 +237,7 @@ public class PostData implements Serializable {
      * @param post deleted post
      */
     public void hardDelPost(Post post) {
-        this.db.Where("id=", ""+post.getID());
+        this.db.Where("id=", ""+post.getId());
         this.db.Delete(table);
     }
     
@@ -247,7 +247,7 @@ public class PostData implements Serializable {
      * @return string status
      */
     public String softDelPost(Post post) {
-        this.db.Where("id=", ""+post.getID());
+        this.db.Where("id=", ""+post.getId());
         String col[] = {"title", "date", "content", "author", "published", "deleted"};
         String val[] = new String[6];
         val[0] = post.getTitle();
@@ -271,7 +271,7 @@ public class PostData implements Serializable {
      * @return string status
      */
     public String restorePost(Post post) {
-        this.db.Where("id=", "" + post.getID());
+        this.db.Where("id=", "" + post.getId());
         String col[] = {"title", "date", "content", "author", "published", "deleted"};
         String val[] = new String[6];
         val[0] = post.getTitle();

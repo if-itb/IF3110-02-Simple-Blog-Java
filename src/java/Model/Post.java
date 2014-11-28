@@ -57,7 +57,7 @@ public class Post {
      * Get the id of post
      * @return id of post
      */
-    public int getID() {
+    public int getId() {
         return id;
     }
     
@@ -97,7 +97,7 @@ public class Post {
      * Check whether the post is already published or not
      * @return publishing status of post
      */
-    public boolean IsPublished() {
+    public boolean getPublished() {
         return published;
     }
     
@@ -105,7 +105,7 @@ public class Post {
      * Check whether the post is already deleted or not
      * @return deleted status of post
      */
-    public boolean IsDeleted() {
+    public boolean getDeleted() {
         return deleted;
     }
     
@@ -113,7 +113,7 @@ public class Post {
      * Set the new id of post
      * @param id new id of post
      */
-    public void setID(int id) {
+    public void setId(int id) {
         this.id = id;
     }
     
