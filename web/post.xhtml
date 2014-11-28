@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Simple Blog</title>
 
@@ -36,9 +37,9 @@
                     </small>
                 </h1>
                 <ol class="breadcrumb">
-                    <li><a href="index.html">Home</a>
+                    <li><h:link outcome="index" value="Home" />
                     </li>
-                    <li class="active">Blog Post</li>
+                    <li class="active">#{post.title}</li>
                 </ol>
             </div>
         </div>
@@ -164,30 +165,19 @@
 
                 <!-- Blog Categories Well -->
                 <div class="well">
-                    <h4>Blog Categories</h4>
+                    <h4>Last Posts</h4>
                     <div class="row">
-                        <div class="col-lg-6">
+                        <div class="col-lg-12">
                             <ul class="list-unstyled">
-                                <li><a href="#">Category Name</a>
-                                </li>
-                                <li><a href="#">Category Name</a>
-                                </li>
-                                <li><a href="#">Category Name</a>
-                                </li>
-                                <li><a href="#">Category Name</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="col-lg-6">
-                            <ul class="list-unstyled">
-                                <li><a href="#">Category Name</a>
-                                </li>
-                                <li><a href="#">Category Name</a>
-                                </li>
-                                <li><a href="#">Category Name</a>
-                                </li>
-                                <li><a href="#">Category Name</a>
-                                </li>
+                                <ui:repeat var="p" value="#{PostData.allPost}">
+                                    <li style="margin-top: 15px;font-size: 16px;">
+                                        <img src="http://placehold.it/75x75" alt="" style="margin-right: 10px;" />
+                                        <h:link outcome="post" value="#{p.title}">
+                                            <f:param name="id" value="#{p.id}" />
+                                        </h:link>
+                                        by <a href="#">#{p.author.username}</a>
+                                    </li>
+                                </ui:repeat>
                             </ul>
                         </div>
                     </div>
