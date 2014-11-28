@@ -146,6 +146,7 @@ public class UserData implements Serializable {
             return ListUser;
         } 
         catch (Exception e) {
+            e.printStackTrace();
             return null;
         }
     }
@@ -192,5 +193,10 @@ public class UserData implements Serializable {
     public boolean logout() {
         cook.setCookie(CookieData, "", 0);
         return true;
+    }
+    
+    public static void main(String args[]) {
+        UserData ud = new UserData();
+        List<User> U = ud.getAllUser();
     }
 }

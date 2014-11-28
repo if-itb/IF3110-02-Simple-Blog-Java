@@ -1,0 +1,107 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>Simple Blog | Login</title>
+
+        <!-- Bootstrap Core CSS -->
+        <link href="css/bootstrap.css" rel="stylesheet"/>
+
+        <!-- Custom CSS -->
+        <link href="css/custom.css" rel="stylesheet"/>
+
+        <!-- Custom Fonts -->
+        <link href="font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+
+        <link href='http://fonts.googleapis.com/css?family=Yellowtail' rel='stylesheet' type='text/css'/>
+
+        <link href='http://fonts.googleapis.com/css?family=Raleway:400,300' rel='stylesheet' type='text/css'/>
+
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'/>
+    </h:head>
+    <h:body>
+        <!-- Navigation -->
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="container">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="index.html">Simple Blog</a>
+                </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav navbar-right">
+                                <li>
+                                    <a href="?login">Login</a>
+                                </li>
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+            </div>
+            <!-- /.container -->
+        </nav>
+
+        <!-- Page Content -->
+        <div class="container">
+            <!-- /.row -->
+            <div class="row">
+            <div class="col-md-offset-3"><h1>Login</h1></div>
+        </div>
+        <div class="row">
+            <!-- Comments Form -->
+                <div class="well col-sm-6 col-md-offset-3">
+                    <h:form class="form-horizontal" role="form"  >
+                        <br />
+                      <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-2 col-md-offset-2 control-label">Username</label>
+                        <div class="col-sm-6">
+                            <c:set var="user" value="#{String}" />
+                            <h:inputText class="form-control" value="#{user}" />
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-2 col-md-offset-2 control-label">Password</label>
+                        <div class="col-sm-6">
+                            <c:set var="pass" value="#{String}" />
+                            <h:inputSecret class="form-control" value="#{pass}" />
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-3  col-md-offset-5">
+                            <h:commandButton type="submit" class="btn btn-primary" value="Login" action="#{UserData.validate(user, pass)}" />
+                        </div>
+                      </div>
+                    </h:form>
+                    
+                </div>
+        </div>
+            <hr />
+            <!-- Footer -->
+            <footer>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <p>Copyright &copy; Your Website 2014</p>
+                    </div>
+                </div>
+            </footer>
+
+        </div>
+        <!-- /.container -->
+        <c:set var="validate" value="#{Login.validate()}" />
+        <h:outputScript>
+            if (<h:outputText value="#{validate}" />)
+            {
+            window.location = 'index.xhtml';
+            }
+        </h:outputScript>
+    </h:body>
+</html>
+

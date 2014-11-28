@@ -28,7 +28,7 @@ public class PostData implements Serializable {
      * Create an instance of PostData
      */
     public PostData() {
-        table = table;
+        table = "post";
         db = new MySQL();
     }
     
@@ -46,7 +46,7 @@ public class PostData implements Serializable {
                 String title = Data.getString("title");
                 Date date = Data.getDate("date");
                 String content = Data.getString("content");
-                User author = new UserData().getUser(Data.getString("username"));
+                User author = new UserData().getUser(Data.getString("author"));
                 boolean published = Data.getBoolean("published");
                 boolean deleted = Data.getBoolean("deleted");
                 return new Post(id, title, date, content, author, published, deleted);
@@ -73,7 +73,7 @@ public class PostData implements Serializable {
                 String title = Data.getString("title");
                 Date date = Data.getDate("date");
                 String content = Data.getString("content");
-                User author = new UserData().getUser(Data.getString("username"));
+                User author = new UserData().getUser(Data.getString("author"));
                 boolean published = Data.getBoolean("published");
                 boolean deleted = Data.getBoolean("deleted");
                 Post post = new Post(id, title, date, content, author, published, deleted);
@@ -82,6 +82,7 @@ public class PostData implements Serializable {
             }
             return ListPost;
         } catch (Exception e) {
+            e.printStackTrace();
             return null;
         }
     }
@@ -103,7 +104,7 @@ public class PostData implements Serializable {
                 String title = Data.getString("title");
                 Date date = Data.getDate("date");
                 String content = Data.getString("content");
-                User author = new UserData().getUser(Data.getString("username"));
+                User author = new UserData().getUser(Data.getString("author"));
                 boolean published = Data.getBoolean("published");
                 boolean deleted = Data.getBoolean("deleted");
                 Post post = new Post(pid, title, date, content, author, published, deleted);
@@ -131,7 +132,7 @@ public class PostData implements Serializable {
                 String title = Data.getString("title");
                 Date date = Data.getDate("date");
                 String content = Data.getString("content");
-                User author = new UserData().getUser(Data.getString("username"));
+                User author = new UserData().getUser(Data.getString("author"));
                 boolean published = Data.getBoolean("published");
                 boolean deleted = Data.getBoolean("deleted");
                 Post post = new Post(pid, title, date, content, author, published, deleted);
@@ -161,7 +162,7 @@ public class PostData implements Serializable {
                 String title = Data.getString("title");
                 Date date = Data.getDate("date");
                 String content = Data.getString("content");
-                User author = new UserData().getUser(Data.getString("username"));
+                User author = new UserData().getUser(Data.getString("author"));
                 boolean published = Data.getBoolean("published");
                 boolean deleted = Data.getBoolean("deleted");
                 Post post = new Post(pid, title, date, content, author, published, deleted);
@@ -179,6 +180,7 @@ public class PostData implements Serializable {
      * @param post the new post
      * @param author the author of new post
      * @param published published status of post
+     * @return String status to pass
      */
     public String addPost(Post post, User author, boolean published) {
         String col[] = {"title", "date", "content", "author", "published", "deleted"};
@@ -204,12 +206,11 @@ public class PostData implements Serializable {
     
     /**
      * Edit post on database
-     * @param pid id of post
      * @param post updated post
      * @return String status
      */
-    public String editPost(int pid, Post post) {
-        this.db.Where("id=", String.valueOf(pid));
+    public String editPost(Post post) {
+        this.db.Where("id=", ""+post.getID());
         String col[] = {"title", "date", "content", "author", "published", "deleted"};
         String val[] = new String[6];
         val[0] = post.getTitle();
@@ -232,94 +233,64 @@ public class PostData implements Serializable {
     }
     
     /**
-     * Delete post from database
-     * @param pid 
+     * Delete post from database 
+     * @param post deleted post
      */
-    public void hardDelPost(int pid) {
-        this.db.Where("id=", String.valueOf(pid));
+    public void hardDelPost(Post post) {
+        this.db.Where("id=", ""+post.getID());
         this.db.Delete(table);
     }
     
     /**
      * Check deleted status on database but not delete post in database
-     * @param pid id of post
+     * @param post deleted post to recycle bin
+     * @return string status
      */
-    public void softDelPost(int pid) {
-        Post post = getPost(pid);
-        this.db.Where("id=", String.valueOf(pid));
-        String col[] = {"id", "username", "category", "title", "date", "content", "published", "deleted"};
-        String val[] = new String[8];
-        val[0] = String.valueOf(post.getID());
-        val[1] = post.getAuthor().getUsername();
-        val[2] = String.valueOf(post.getCategory().getID());
-        val[3] = post.getTitle();
-        val[4] = post.getDate().toString();
-        val[5] = post.getContent();
-        val[6] = "0";
-        val[7] = "1";
-        this.db.Update(table, col, val);
+    public String softDelPost(Post post) {
+        this.db.Where("id=", ""+post.getID());
+        String col[] = {"title", "date", "content", "author", "published", "deleted"};
+        String val[] = new String[6];
+        val[0] = post.getTitle();
+        Date date = new Date(post.getDate().getTime());
+        val[1] = date.toString();
+        val[2] = post.getContent();
+        val[3] = post.getAuthor().getUsername();
+        val[4] = "0";
+        val[5] = "1";
+        int query = this.db.Update(table, col, val);
+        if (query > 0) {
+            return "success";
+        } else {
+            return "failed";
+        }
     }
     
     /**
      * Restore soft deleted post in database
-     * @param pid id of post
+     * @param post restored post
+     * @return string status
      */
-    public void restorePost(int pid) {
-        Post post = getPost(pid);
-        this.db.Where("id=", String.valueOf(pid));
-        String col[] = {"id", "username", "category", "title", "date", "content", "published", "deleted"};
-        String val[] = new String[8];
-        val[0] = String.valueOf(post.getID());
-        val[1] = post.getAuthor().getUsername();
-        val[2] = String.valueOf(post.getCategory().getID());
-        val[3] = post.getTitle();
-        val[4] = post.getDate().toString();
-        val[5] = post.getContent();
-        val[6] = "0";
-        val[7] = "0";
-        this.db.Update(table, col, val);
-    }
-    
-    /**
-     * Add comment to database
-     * @param comment new comment
-     */
-    public void addComment(Comment comment) {
-        String col[] = {"id", "pid", "name", "email", "content", "time"};
+    public String restorePost(Post post) {
+        this.db.Where("id=", "" + post.getID());
+        String col[] = {"title", "date", "content", "author", "published", "deleted"};
         String val[] = new String[6];
-        val[0] = String.valueOf(comment.getID());
-        val[1] = String.valueOf(comment.getPID());
-        val[2] = comment.getName();
-        val[3] = comment.getEmail();
-        val[4] = comment.getContent();
-        val[5] = comment.getTime().toString();
-        this.db.Insert("comment", col, val);
+        val[0] = post.getTitle();
+        Date date = new Date(post.getDate().getTime());
+        val[1] = date.toString();
+        val[2] = post.getContent();
+        val[3] = post.getAuthor().getUsername();
+        val[4] = "0";
+        val[5] = "0";
+        int query = this.db.Update(table, col, val);
+        if (query > 0) {
+            return "success";
+        } else {
+            return "failed";
+        }
     }
     
-    public void addCommentofComment(CommentofComment comment) {
-        String col[] = {"id", "cid", "pid", "name", "email", "content", "time"};
-        String val[] = new String[7];
-        val[0] = String.valueOf(comment.getID());
-        val[1] = String.valueOf(comment.getCID());
-        val[2] = String.valueOf(comment.getPID());
-        val[3] = comment.getName();
-        val[4] = comment.getEmail();
-        val[5] = comment.getContent();
-        val[6] = comment.getTime().toString();
-        this.db.Insert("ccomment", col, val);
-    }
-    
-    /**
-     * Delete comment from database
-     * @param id id of comment
-     */
-    public void DelComment(int id) {
-        this.db.Where("id=", String.valueOf(id));
-        this.db.Delete("comment");
-    }
-    
-    public void DelCommentofComment (int id) {
-        this.db.Where("id=", String.valueOf(id));
-        this.db.Delete("ccomment");
+    public static void main(String args[]) {
+        PostData pd = new PostData();
+        List<Post> a = pd.getAllPost();
     }
 }
