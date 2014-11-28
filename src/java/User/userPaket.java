@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package User;
+package java.User;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import java.text.SimpleDateFormat;
