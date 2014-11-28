@@ -28,8 +28,7 @@ html, body {
 body {
   overflow-x: hidden;
   font: 17px/28px ff-meta-serif-web-pro, "Georgia", serif;
-  color: #333;
-  background: #fff;
+  color: #FFF;
 }
 
 
@@ -40,7 +39,7 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: normal;
   text-transform: uppercase;
   font-weight: 700;
-  color: #000;
+  color: #FFF;
   text-rendering: optimizeLegibility;
 }
 
@@ -97,7 +96,7 @@ cite {
 
 header#teaser h1 {
   text-transform: none !important;
-  color: #333;
+  color: #FFF;
   font-size: 28px !important;
   font-weight: 300 !important;
 }
@@ -106,14 +105,28 @@ header#teaser h1 {
 /* Links
 ================================================== */
 a {
-  color: #F40034;
+  color: #00F4F4;
   text-decoration: none;
   -webkit-transition: color .2s ease-in-out;
      -moz-transition: color .2s ease-in-out;
           transition: color .2s ease-in-out;
 }
+
 a:hover {
-  color: #F40034;
+  color: #F400F4;
+}
+
+a:hover:not(#logo){
+  -webkit-animation-name: hoveranim;
+  -webkit-animation-duration: 1s;
+}
+
+@-webkit-keyframes hoveranim{
+  0% {-webkit-transform: rotateY(0deg);}
+  25% {-webkit-transform: rotateY(50deg);}
+  50% {-webkit-transform: rotateY(0deg);}
+  75% {-webkit-transform: rotateY(50deg);}
+  100% {-webkit-transform: rotateY(0deg);}
 }
 
 /*  Layout
@@ -122,7 +135,6 @@ a:hover {
 .wrapper {
   max-width: 1500px;
   margin: 0 auto;
-  background: #fff;
 }
 
 /* Containers to keep content to a set width */
@@ -153,7 +165,6 @@ a:hover {
   height: 70px;
   padding-top: 40px;
   margin-left: -490px; /* Half width of nav */
-  border-bottom: 1px solid #333;
   z-index: 2;
 }
 .nav.fixed {
@@ -177,7 +188,7 @@ a:hover {
   font-weight: 700;
   font-size: 13px;
   line-height: 30px;
-  color: #000;
+  color: #FFFFFF;
   text-transform: uppercase;
 }
 
@@ -221,11 +232,11 @@ div.cover > img {
 /*  Article
 ================================================== */
 .art {
-  margin-top: -131px;
+  margin-top: -50px;
 }
 /* Header */
 .art-header {
-  height: 900px;
+  height: 500px;
   /* Background image is defined in the post */
   background-position: top center;
   background-attachment: fixed;
@@ -233,8 +244,8 @@ div.cover > img {
 }
 /* Contains the time, title and subtitle for an article */
 .art-header-inner {
-  position: fixed;
-  top: 300px;
+  position: relative;
+  top: 250px;
   left: 50%;
   margin-left: -490px;
 }
@@ -261,6 +272,15 @@ div.cover > img {
   line-height: 1.3;
   letter-spacing: 4px;
 }
+.art-title-add-post {
+  font-size: 50px;
+  letter-spacing: 0;
+  padding-top: 20px;
+  line-height: 1.9;
+  text-align: center;
+  letter-spacing: -2px;
+  width: 100%;
+}
 
 /* If small header, make few adjustments */
 .small .art-title {
@@ -268,7 +288,7 @@ div.cover > img {
   line-height: 65px;
 }
 .small.art-header-inner {
-  top: 320px;
+  top: 250px;
 }
 
 /* Body */
@@ -292,7 +312,7 @@ div.cover > img {
   line-height: 1.5;
 }
 .art-body-inner a:hover {
-  border-bottom: 1px solid #F40034;
+  border-bottom: 2px solid #F40034;
   padding-bottom:2px;
 }
 .art-body-inner ul,
@@ -411,13 +431,13 @@ div.cover > img {
   line-height: 20px;
   letter-spacing: 2px;
   text-transform: uppercase;
-  color: #999;
+  color: #FFF;
 }
 .art-list-title a {
-  color: #000;
+  color: #FFF;
 }
 .art-list-title a:hover {
-  color: #F40034;
+  color: #00F4F4;
 }
 .art-list-item p {
   width: 65%;
@@ -441,10 +461,10 @@ div.cover > img {
   font-family: "proxima-nova", "helvetica neue", "helvetica", sans-serif;
   font-size: 13px;
   text-transform: uppercase;
-  color: #777;
+  color: #FFF;
 }
 .footer a:hover {
-  color: #000;
+  color: #000F4F4;
 }
 .back-to-top,
 .footer-nav,
@@ -464,19 +484,19 @@ div.cover > img {
   text-align: right;
 }
 .footer .twitter-link:hover {
-  color: #0084B4;
+  color: #00F4F4;
 }
 .footer .instagram-link:hover {
-  color: #3F729B;
+  color: #00F4F4;
 }
 .footer .github-link:hover {
-  color: #c5376d;
+  color: #00F4F4;
 }
 .footer .caffein8-link:hover{
-  color: black;
+  color: #00F4F4;
 }
 .footer .rss-link:hover {
-  color: #e85d24;
+  color: #00F4F4;
 }
 /* Remove prev & next links on loop */
 .art-list + .footer .footer-nav,
@@ -740,12 +760,19 @@ padding: 0;
 /*  Misc
 ================================================== */
 ::selection {
-  background: #000;
-  color: #fff;
+  background: #FFF;
+  color: #000;
 }
-::-moz-selection {
+
+textarea::selection,input::selection{
   background: #000;
-  color: #fff;
+  color: #FFF;
+}
+
+
+::-moz-selection {
+  background: #FFF;
+  color: #000;
 }
 img.left {
   float: left;
@@ -811,7 +838,7 @@ hr.featured-article {
     padding: 0;
     border: none;
     border-top: medium double #bbb;
-    color: #bbb;
+    color: #000;
     text-align: center;
 }
 hr.featured-article:after {
@@ -849,7 +876,10 @@ hr.featured-article:after {
 
 #contact-area input.submit-button {
   width: 100px;
-  
+  background-color: #FFF;
+  color: #000;
+  cursor: hand;
+  cursor: pointer;
 }
 
 label {
@@ -858,4 +888,55 @@ label {
   margin-right: 15px;
   width: 100px;
   padding-top: 5px;
+}
+
+form.inline {
+  display: inline;
+}
+
+.posts{
+  margin-top: 60px;
+}
+
+.navbackground{
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 1550px;
+  height: 150px;
+  margin-bottom: 20px;
+}
+
+.logologo{
+  float: left;
+}
+
+.navicon{
+  position: absolute;
+  height: 120px;
+  top: 10px;
+  left: 10px;
+  -webkit-animation-name: anim;
+  -webkit-animation-duration: 4s;
+}
+
+.icontext{
+  position: absolute;
+  height: 110px;
+  top: 20px;
+  left: 20px;
+}
+
+@-webkit-keyframes anim{
+  0% {-webkit-transform: rotateX(00deg);}
+  25% {-webkit-transform: rotateX(180deg);}
+  50% {-webkit-transform: rotateX(0deg);}
+  75% {-webkit-transform: rotateX(180deg);}
+  100% {-webkit-transform: rotateX(0deg);}
+}
+
+.background{
+  position: fixed;
+  top: 0;
+  left: 0;
 }

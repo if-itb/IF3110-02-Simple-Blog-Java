@@ -1,0 +1,121 @@
+body {
+  padding-top: 70px;
+}
+
+.bgimage img{
+	height:100%;
+	width:100%;
+}
+
+#adminmode h1,
+#adminmode h2{
+    text-align: center;
+    vertical-align: middle;
+    align-content: center;
+}
+.tombol{
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+    vertical-align: middle;
+    align-content: center;
+}
+@media (max-width:768px) {
+	.container {
+		width: 830px !important;
+	}
+}
+
+.search-wrap {
+	height: 40px;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+	.search-wrap > span {
+		position: absolute;
+		right: 5%;
+		top: 50%;
+		transform: translateY(-50%);
+		font-size: 120%;
+		cursor: pointer;
+	}
+
+	.search-wrap > input {
+		padding-right: 15%;
+		height: 80%;
+	}
+
+.red {
+	color:#D9230F !important;
+}
+
+.footer {
+	margin-top:30px;
+	background: #f8f8f8;
+	padding: 10px;
+	width: 100%;
+	text-align: center;	/* Centering footer */
+}
+
+	.footer .col-xs-3:first-child {
+		height: 174px;
+		line-height: 174px;
+	}
+
+	.contact-wrap {
+		text-align: center;
+	}
+
+	.contact{
+		white-space: normal;
+		line-height: normal;
+		display: inline-block;
+		vertical-align: middle;
+		width: 100%;
+	}
+	
+	@media (max-width: 992px) {
+		.contact > button {
+			font-size: 12px;	
+		}
+
+		.contact > h2 {
+			font-size: 24px;
+		}
+	}
+
+	.footer .col-xs-3:first-child h2,
+	.footer .col-xs-3:first-child h2 > a:hover{
+		text-shadow:1px 1px 3px red;
+		text-decoration: none;
+	}
+
+	.footer .container {
+		text-align: left;
+		padding: 0;
+	}
+
+	.footer h4 {
+		color: gray;
+		text-shadow:0px 0px 1px gray;
+	}
+
+	.footer li {
+		line-height: 200%;
+	}
+
+.copyright {
+	height: 50px;
+	position: relative;
+}
+
+.copyright > p {
+	position: absolute;
+	top: 50%;
+	transform:translateY(-50%);
+}
+
+.main {
+}

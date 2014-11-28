@@ -1,0 +1,134 @@
+
+	.main > h4 {
+		margin-top: 0;
+		padding-bottom:1%;
+		border-bottom: 1px solid black;
+	}
+
+.r2 > .col-xs-8 {
+}
+
+.userinfo {
+	height: 235px;
+}
+
+.overview {
+	position: relative;
+}
+
+.overview-right {
+	line-height: 175px;
+	padding-top: 0;
+	padding-bottom: 0;
+	margin: 0;
+}
+
+.overview-right > span {
+	display: inline-block;
+	line-height: normal;
+	vertical-align: middle;
+}
+
+.avatar > img {
+	width: 150px;
+	display: block;
+}
+
+.avatar h5 {
+	margin-bottom: 0;
+}
+.avatar > span {
+	width: 150px;
+	display: inline-block;
+	text-align: center;
+}
+
+.rating {
+	font-size: 200%;
+	margin-bottom: 10%;
+}
+
+.rating > h5 {
+	margin-top:0; 
+	font-size: 75%;
+}
+
+.activity > p, .activity > em {
+	margin-bottom: 0;
+	font-size: 110%;
+}
+
+.activity .glyphicon {
+	color: green;
+}
+.rating > span:nth-child(1),
+.rating > span:nth-child(2),
+.rating > span:nth-child(3),
+.rating > span:nth-child(4) {	
+	color: orange;
+	text-shadow:1px 1px 5px orange;
+}
+
+.statistic {
+	line-height: 175px;
+}
+
+.statistic > span {
+	line-height: 35px;
+	display: inline-block;
+	vertical-align: middle;
+	font-size: 125%;
+}
+
+.statistic > span .glyphicon {
+	color: #D9230F !important;
+}
+
+.statistic li {
+	letter-spacing: 0.5px;
+}
+
+.listing > h4, .userinfo > h4 {
+	border-bottom: 1px solid black;
+	padding-bottom: 5px;
+}
+
+.booklist > div {
+	padding-left: 5px; 
+	padding-right: 5px; 
+	text-align: center;
+}
+
+.booklist > div >img {
+	width: 100%;
+}
+
+.judulbuku {
+	margin-bottom: 0;
+	font-size: 120%;
+}
+.clear {
+	clear: both;
+}
+
+.userinfo-wrap > li {
+	position: relative;
+	font-size: 110%;
+	line-height: 25px;
+}
+
+.userinfo-wrap >li >span{
+	position: absolute;
+	left: 100px;
+}
+
+.chat {
+	font-size: 120%;
+}
+
+.chat > a:hover {
+	text-decoration: none;
+}
+.chat > .glyphicon {
+	color: green;
+}
