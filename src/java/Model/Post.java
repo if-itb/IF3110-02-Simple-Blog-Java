@@ -164,4 +164,8 @@ public class Post {
     public void setDeleted(boolean deleted) {
         this.deleted = deleted;
     }
+    
+    public boolean isAuthor(User user){
+        return (this.author.getUsername().compareTo(user.getUsername()) == 0);
+    }
 }

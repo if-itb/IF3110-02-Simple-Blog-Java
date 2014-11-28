@@ -35,7 +35,18 @@
                 </div>
             </div>
             <!-- Blog Post Row -->
-            <ui:repeat value="#{PostData.allPost}" var="post">
+            <c:choose>
+                <c:when test="#{UserData.userLoggedIn().role == 'admin'}">
+                    <c:set var="posts" value="#{PostData.allDraft}" />
+                </c:when>
+                <c:when test="#{UserData.userLoggedIn().role == 'editor'}">
+                    <c:set var="posts" value="#{PostData.allDraft}" />
+                </c:when>
+                <c:otherwise>
+                    <c:set var="posts" value="#{PostData.getDraftbyAuthor(UserData.userLoggedIn())}" />
+                </c:otherwise>
+            </c:choose>
+            <ui:repeat value="#{posts}" var="post">
             <div class="row">
                 <div class="col-md-1 text-center">
                     <p><i class="fa fa-file-text fa-4x"></i>
@@ -56,31 +67,8 @@
                     <p>by <a href="#">#{post.author.username}</a>
                     </p>
                     <p>#{post.content}</p>
-                    <c:choose>
-                        <c:when test="#{UserData.is_logged_in()}" >
-                            <c:choose>
-                                <c:when test="#{UserData.userLoggedIn().role == 'admin'}">
-                                    <c:set var="is_edit" value="#{true}" />
-                                </c:when>
-                                <c:when test="#{UserData.userLoggedIn().role == 'editor'}">
-                                    <c:set var="is_edit" value="#{true}" />
-                                </c:when>
-                                <c:when test="#{UserData.userLoggedIn().role == 'owner'}">
-                                    <c:set var="is_edit" value="#{true}" />
-                                </c:when>
-                                <c:otherwise>
-                                    <c:set var="is_edit" value="#{false}" />
-                                </c:otherwise>
-                            </c:choose>
-                        </c:when>
-                        <c:otherwise>
-                            <c:set var="is_edit" value="#{false}" />
-                        </c:otherwise>
-                    </c:choose>
-                    <c:if test="#{is_edit}">
-                        <a href="edit_post.html"><span class="glyphicon glyphicon-pencil"></span></a>
-                        <a href="#"><span class="glyphicon glyphicon-remove"></span></a>
-                    </c:if>
+                    <a href="edit_post.html"><span class="glyphicon glyphicon-pencil"></span></a>
+                    <a href="#"><span class="glyphicon glyphicon-remove"></span></a>
                 </div>
             </div>
         <!-- /.row -->

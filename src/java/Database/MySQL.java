@@ -21,8 +21,8 @@ public class MySQL {
 	public MySQL() {
 		try {
 			host = "localhost";
-			user = "root";
-			pass = "chmod777";
+			user = "luthfi";
+			pass = "underground";
 			db_name = "wbd2";
 			String connectionURL = "jdbc:mysql://" + host + "/" + db_name;
 			Class.forName("com.mysql.jdbc.Driver").newInstance();

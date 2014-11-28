@@ -14,7 +14,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="index.html">Simple Blog</a>
+                    <h:link outcome="index" value="Simple Blog" class="navbar-brand" />
                 </div>
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -26,7 +26,7 @@
                                     <h:link outcome="new_post" value="+ Add Post" />
                                 </li>
                                 <li>
-                                    <a href="draft.html">Drafts</a>
+                                    <h:link outcome="draft" value="Drafts" />
                                 </li>
                                 <li>
                                     <c:if test="#{UserData.userLoggedIn().role == 'admin'}" >

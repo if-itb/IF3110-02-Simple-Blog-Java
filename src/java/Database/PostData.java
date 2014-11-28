@@ -95,7 +95,7 @@ public class PostData implements Serializable {
     public List<Post> getPostbyAuthor(User user) {
         try {
             this.db.Where("published=", "1");
-            this.db.Where("username=", user.getUsername());
+            this.db.Where("author=", user.getUsername());
             ResultSet Data = this.db.Select(table);
             boolean isExist = Data.first();
             List<Post> ListPost = new LinkedList();
@@ -153,7 +153,7 @@ public class PostData implements Serializable {
     public List<Post> getDraftbyAuthor(User user) {
         try {
             this.db.Where("published=", "0");
-            this.db.Where("username=", user.getUsername());
+            this.db.Where("author=", user.getUsername());
             ResultSet Data = this.db.Select(table);
             boolean isExist = Data.first();
             List<Post> ListPost = new LinkedList();
@@ -292,5 +292,9 @@ public class PostData implements Serializable {
     public static void main(String args[]) {
         PostData pd = new PostData();
         List<Post> a = pd.getAllPost();
+        for (Post p : a)
+        {
+            System.out.println(p.getAuthor().getUsername().compareTo("luthfi"));
+        }
     }
 }
