@@ -1,10 +1,10 @@
-<%-- 
+<!-- 
     Document   : index
     Created on : Nov 24, 2014, 4:14:48 PM
     Author     : adwisatya
---%>
+-->
 
-<%@page import="User.userPaket"%>
+<%@page import= "User.userPaket" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import = "Post.Post" %>
 <%@page import= "User.User" %>

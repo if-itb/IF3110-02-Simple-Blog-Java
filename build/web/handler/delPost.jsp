@@ -4,9 +4,9 @@
     Author     : adwisatya
 --%>
 
-<%@page import = "Post.Post" %>
-<%@page import= "User.User" %>
-<%@page import= "Post.PostBean" %>
+<%@page import = "java.Post.Post" %>
+<%@page import= "java.User.User" %>
+<%@page import= "java.Post.PostBean" %>
 
 <%
 	String ID	=	request.getParameter("id");
