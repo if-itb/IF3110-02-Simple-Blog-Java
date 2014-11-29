@@ -13,5 +13,6 @@
     String email = request.getParameter("email");
     String komentar = request.getParameter("komentar");
     String sqlQuery = "INSERT INTO komentar (ID, Nama, Email, Komentar) VALUES ('"+ idPost + "', '" + nama + "', '" + email + "', '" + komentar + "')";
-    Komentar.AddComment(nama, email, komentar);
+    Komentar.AddComment(idPost, nama, email, komentar);
+    //out.println(Komentar.LoadComment(idPost));
 %>

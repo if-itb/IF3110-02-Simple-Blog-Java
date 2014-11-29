@@ -34,7 +34,8 @@ public class Komentar extends Post {
         KoneksiDatabase.setUser("root2");
         KoneksiDatabase.setPassword("akhfa");
         KoneksiDatabase.setDatabase("localhost","blog");
-        try (Connection koneksi = KoneksiDatabase.getKoneksi()) {
+        try {
+            Connection koneksi = KoneksiDatabase.getKoneksi();
             Statement statement = koneksi.createStatement();
             String QueryLoadComment = "SELECT * FROM komentar WHERE idpost="+ID+" ORDER BY Waktu ASC";
             ResultSet result = statement.executeQuery(QueryLoadComment);
@@ -52,6 +53,8 @@ public class Komentar extends Post {
                         "        <p>" + Comment + "</p>\n" +
                         "    </li>";
             }
+        } catch (SQLException ex) {
+
         }
         return HTMLcode;
     }
@@ -70,7 +73,7 @@ public class Komentar extends Post {
         KoneksiDatabase.setDatabase("localhost","blog");
         try (Connection koneksi = KoneksiDatabase.getKoneksi()) {
             Statement statement = koneksi.createStatement();
-            InsertQuery = "INSERT INTO komentar (ID, Nama, Email, Komentar) VALUES ('" + PostID + "', '" + nama + "', '" + email + "', '" + comment + "')";
+            InsertQuery = "INSERT INTO komentar (idpost, nama, email, komentar) VALUES ('" + PostID + "', '" + nama + "', '" + email + "', '" + comment + "')";
             statement.executeUpdate(InsertQuery);
             koneksi.close();
         }
@@ -90,6 +93,6 @@ public class Komentar extends Post {
     }
     
     public static void main(String[] args) throws SQLException {
-        System.out.println(Komentar.LoadComment(31));
+        AddComment(26, "yoga", "rakhmatullahyoga@gmail.com", "wkwkwk");
     }
 }

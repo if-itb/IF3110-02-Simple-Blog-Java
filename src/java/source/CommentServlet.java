@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Rakhmatullah Yoga S
  */
+@WebServlet(name = "CommentServlet", urlPatterns = {"/CommentServlet"})
 public class CommentServlet extends HttpServlet {
 
     /**
@@ -62,6 +63,7 @@ public class CommentServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
+            System.out.println("hai");
             int Id = Integer.parseInt(request.getParameter("id"));
             Post postingan = new Post();
             postingan.setAtribut(Id);
@@ -84,10 +86,12 @@ public class CommentServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
+            System.out.println("hai");
             int ID = Integer.parseInt(request.getParameter("id"));
-            String Nama = request.getParameter("Nama");
-            String Email = request.getParameter("Email");
-            String Comment = request.getParameter("Komentar");
+            String Nama = request.getParameter("nama");
+            String Email = request.getParameter("email");
+            String Comment = request.getParameter("komentar");
+            System.out.println(Nama+Email+Comment);
             Komentar.AddComment(ID, Nama, Email, Comment);
             PrintWriter out = response.getWriter();
             

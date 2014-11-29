@@ -21,9 +21,6 @@ function comment() {
       var idPost = document.getElementById('PostId').value;
       saveComment(idPost);
       loadComment(idPost);
-      document.forms["commentForm"]["Nama"].value="";
-      document.forms["commentForm"]["Email"].value="";
-      document.forms["commentForm"]["Komentar"].value="";
       return false;
     }
     else {
@@ -45,10 +42,10 @@ function validateEmail() {
     }
 }
 function IsValidDate() {
-	var f = document.forms["Post"]["Tanggal"].value;
-  var string = f.split("-");
-	var now = new Date();
-	var date = new Date();
+    var f = document.forms["Post"]["Tanggal"].value;
+var string = f.split("-");
+    var now = new Date();
+    var date = new Date();
   date.setFullYear(string[0],string[1]-1,string[2]);
   if(date < now){
 		alert("Input tanggal tidak valid! (harus >= now)");
@@ -92,5 +89,4 @@ function saveComment(str) {
   xmlhttp.open("POST","insertcomment.jsp",true);
   xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
   xmlhttp.send("id="+str+"&nama="+Nama+"&email="+Email+"&komentar="+Komentar);
-  //alert(str+" "+Nama+" "+Email+" "+Komentar);
 }

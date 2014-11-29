@@ -4,6 +4,7 @@
     Author     : Rakhmatullah Yoga S
 --%>
 
+<%@page import="source.Komentar"%>
 <%@page import="java.sql.SQLException"%>
 <%@page import="source.CookieHelper"%>
 <%@page import="java.sql.ResultSet"%>
@@ -51,7 +52,7 @@
         %>
         <title>Not a Simple Blog | <%= post.getJudul() %> </title>
     </head>
-    <body class="default" onload="loadComment(<%= ID %>)>
+    <body class="default" onload="loadComment(<%= ID %>)">
     <div class="wrapper">
 
     <nav class="nav">
