@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:ui="http://java.sun.com/jsf/facelets"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:f="http://java.sun.com/jsf/core">
+    <f:metadata>
+        <f:viewAction action="#{databaseController.nullUser()}" />
+    </f:metadata>
+<h:head>
+    <title>Insert Data</title>
+</h:head>
+<h:body>
+    <ui:composition template="mainTemplate.xhtml">
+    <ui:define name="content">
+    <div class="posts">
+    <nav class="art-list">
+    <ul class="art-list-body">
+    <f:view>
+        <h:form>
+            <table>
+                <tr>
+                    <td> <h:messages showDetail="true" /> </td>
+                </tr>
+                <tr>
+                    <td><h:outputText value="Enter Username :" /></td>
+                    <td><h:inputText value="#{databaseController.getUser().username}" /></td>
+                </tr>
+                <tr>
+                    <td><h:outputText value="Enter Name : " /></td>
+                    <td><h:inputText value="#{databaseController.getUser().name}" /></td>
+                </tr>
+                <tr>
+                    <td><h:outputText value="Enter your email : "/></td>
+                    <td><h:inputText value="#{databaseController.getUser().email}" /></td>
+                </tr>
+                <tr>
+                    <td><h:outputText value="Enter your password : "/></td>
+                    <td><h:inputText value="#{databaseController.getUser().password}" /></td>
+                </tr>
+                <tr>
+                    <td><h:outputText value="Enter your role : "/></td>
+                    <td><h:inputText value="#{databaseController.getUser().role}" /></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><h:commandButton value="Insert" action="#{databaseController.add()}"/></td>
+                </tr>
+            </table>
+        </h:form>
+    </f:view>
+    <h:link outcome = "ShowTable.xhtml" value="Back"/>
+    </ul>
+    </nav>
+    </div>
+    </ui:define>
+    </ui:composition>
+</h:body>
+</html>

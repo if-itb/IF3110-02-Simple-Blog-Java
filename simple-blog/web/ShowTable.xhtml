@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+          
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+     
+    <h:head>
+    </h:head>
+ 
+    <h:body>
+        <ui:composition template="mainTemplate.xhtml">
+            <ui:define name="content">
+                 <div class="posts">
+                    <nav class="art-list">
+                      <ul class="art-list-body">
+                          
+    	<h4>Tabel Simpleblog</h4>
+                <h:link outcome = "InsertTabel.xhtml" value="+ Tambah"/>
+                <h:dataTable value="#{databaseController.getUserList()}" var="c" cellspacing="25">
+    		<h:column>
+    			<f:facet name="header">
+    				ID
+    			</f:facet>
+                    <center>#{c.id}</center>
+    		</h:column>
+                <h:column>
+    			<f:facet name="header">
+    				Username
+                        </f:facet>
+                    <center>#{c.username}</center>
+    		</h:column>
+                <h:column>
+    			<f:facet name="header">
+    				Name
+                        </f:facet>
+                    <center>#{c.name}</center>
+    		</h:column>
+                <h:column>
+                        <f:facet name="header">
+                                Email
+                        </f:facet>
+                    <center>#{c.email}</center>
+    		</h:column>
+                <h:column>
+                        <f:facet name="header">
+                                Password
+				</f:facet>
+                    <center>#{c.password}</center>
+    		</h:column> 
+                <h:column>
+    			<f:facet name="header">
+    				Role
+                        </f:facet>
+                    <center>#{c.role}</center>
+    		</h:column>
+                    
+                <h:column>
+                        <f:facet name="header">
+                            Action
+                        </f:facet>
+                    <h:link outcome ="EditTable" value="Edit"> <f:param name="id" value= "#{c.id}"/> </h:link> | 
+                    <h:link value="Hapus" onclick="return ConfirmDeleteUser();" outcome="redirectDeleteUser">
+                        <f:param name ="id" value="#{c.id}"/>
+                    </h:link>
+    		</h:column>
+            </h:dataTable>
+           </ul>
+          </nav>
+         </div>
+       </ui:define>
+       <ui:define name="bottom">
+            <h:outputScript name="./js/delete.js" />
+       </ui:define>
+     </ui:composition>
+    </h:body>
+            
+</html>

@@ -28,12 +28,16 @@
                                         <div class='art-list-time'><span style='color:#F40034;'>&#10029;</span> Featured</div>
                                     </div>
                                     <p>#{post.content}</p>
-
-                                    <c:if test="#{userController.showEditHapus(post.userId)}">
+                                    
+                                    
                                     <p>
-                                        <h:link value="Edit"/> | <h:link value="Hapus"/>
+                                        <h:link value="edit" outcome="editPost" rendered="#{userController.showEditHapus(post.userId)}">
+                                            <f:param name="post_id" value="#{post.id}" />
+                                        </h:link>
+                                        <h:outputText value=" | " rendered="#{userController.showEditHapus(post.userId)}"/>
+                                        <h:link value="Hapus" rendered="#{userController.showEditHapus(post.userId)}"/>
                                     </p>
-                                    </c:if>
+                                    
                                 </li>
                             </ui:repeat>
                       </ul>

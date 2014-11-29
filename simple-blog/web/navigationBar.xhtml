@@ -15,11 +15,18 @@
         </h:form>
     </c:if>
     <c:if test="#{userController.isUsernamePasswordExist()}">
-        <c:if test="#{userController.isAdmin() or userController.isOwner()}">
-            <h:link value="+ Tambah Post" outcome="addPost" ></h:link>
-        </c:if>
-        <h:form>
-            <h:commandButton value="logout" action="#{userController.actionLogout()}"  />
-        </h:form>
+        <p>
+            <h:form>
+                <c:if test="#{userController.isAdmin()}">
+                    <h:link value="Edit Database" outcome="ShowTable"></h:link>
+                    |
+                    <h:link value="Unpublished Post"></h:link>
+                    |
+                </c:if> 
+                <h:link value="Tambah Post" outcome="addPost" ></h:link>
+                |
+                <h:commandButton value="logout" action="#{userController.actionLogout()}"  />
+            </h:form>
+        </p>
     </c:if>
 </html>

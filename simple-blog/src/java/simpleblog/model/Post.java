@@ -16,6 +16,7 @@ public class Post {
     private String content;
     private String date;
     private int userId;
+    private int status;
 
     /**
      * @return the id
@@ -85,5 +86,19 @@ public class Post {
      */
     public void setUserId(int userId) {
         this.userId = userId;
+    }
+
+    /**
+     * @return the status
+     */
+    public int getStatus() {
+        return status;
+    }
+
+    /**
+     * @param status the status to set
+     */
+    public void setStatus(int status) {
+        this.status = status;
     }
 }
