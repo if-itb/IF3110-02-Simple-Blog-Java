@@ -3,12 +3,12 @@
     Created on : Nov 25, 2014, 1:51:36 PM
     Author     : adwisatya
 --%>
-<%@page import= "java.User.userPaket"%>
+<%@page import= "User.userPaket"%>
 <%@page contentType= "text/html" pageEncoding="UTF-8"%>
-<%@page import = "java.Post.Post" %>
-<%@page import= "java.User.User" %>
-<%@page import= "java.Komentar.Komentar" %>
-<%@page import= "java.Post.PostBean" %>
+<%@page import = "Post.Post" %>
+<%@page import= "User.User" %>
+<%@page import= "Komentar.Komentar" %>
+<%@page import= "Post.PostBean" %>
 <%@page import= "java.text.SimpleDateFormat" %>
 <%@page import= "java.util.Date" %>
 <%@page import= "java.sql.*" %>
