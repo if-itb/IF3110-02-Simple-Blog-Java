@@ -37,6 +37,17 @@ body{
   text-decoration: none;
 }
 
+.login{
+    margin-top: 130px;
+    margin-bottom: 135px;
+    padding: 20px;
+    background-color: #ffffff;
+}
+
+.red{
+    color: #d9534f;
+}
+
 .post{
   background-color: #ffffff;
   margin-bottom: 20px;
