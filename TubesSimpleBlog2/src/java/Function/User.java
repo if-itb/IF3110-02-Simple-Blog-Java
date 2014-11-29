@@ -78,9 +78,9 @@ public class User {
 	
 	public String updateUser(){
 		String url = "jdbc:mysql://localhost:3306/datapost";
-	   String driver = "com.mysql.jdbc.Driver";
-	   String userName = "root"; 
-	   String passWord = "";
+		String driver = "com.mysql.jdbc.Driver";
+		String userName = "root"; 
+		String passWord = "";
 		try {
 		   Class.forName(driver).newInstance();
 		   Connection conn = DriverManager.getConnection(url,userName,passWord);
@@ -93,17 +93,16 @@ public class User {
 		   preparedStatement.setInt(4, userID);
 		   preparedStatement.executeUpdate();
 		   conn.close();
-	   } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException e) {
-	   }
-	   return "usermanagement?faces-redirect=true";
+		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException e) {
+		}
+		return "usermanagement?faces-redirect=true";
 	}
 	
 	public String deleteUser(int id){
-		System.out.println("id to delete="+uidToDelete);
 		String url = "jdbc:mysql://localhost:3306/datapost";
-	   String driver = "com.mysql.jdbc.Driver";
-	   String userName = "root"; 
-	   String pass = "";
+		String driver = "com.mysql.jdbc.Driver";
+		String userName = "root"; 
+		String pass = "";
 		try {
 		   Class.forName(driver).newInstance();
 		   Connection conn = DriverManager.getConnection(url,userName,pass);
@@ -112,16 +111,16 @@ public class User {
 		   preparedStatement.setInt(1,id);
 		   preparedStatement.executeUpdate();
 		   conn.close();
-		  // FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
-	   } catch (ClassNotFoundException /*| IOException*/ | InstantiationException | IllegalAccessException | SQLException e) {
-	   }
-		return "usermanagement?faces-redirect=true";
+		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException e) {
+		}
+		 return "usermanagement?faces-redirect=true";
     }
+	
 	public String createUser(){
 		String url = "jdbc:mysql://localhost:3306/datapost";
-	   String driver = "com.mysql.jdbc.Driver";
-	   String userName = "root"; 
-	   String pass = "";
+		String driver = "com.mysql.jdbc.Driver";
+		String userName = "root"; 
+		String pass = "";
 		try {
 		   Class.forName(driver).newInstance();
 		   Connection conn = DriverManager.getConnection(url,userName,pass);
@@ -132,35 +131,29 @@ public class User {
 		   preparedStatement.setString(3, this.role);
 		   preparedStatement.executeUpdate();
 		   conn.close();
-	   } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException e) {
-	   }
-	   return "usermanagement?faces-redirect=true";
+		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException e) {
+		}
+		return "usermanagement?faces-redirect=true";
 	}
+	
 	public void showUser(int id){
 		String url = "jdbc:mysql://localhost:3306/datapost";
 		String driver = "com.mysql.jdbc.Driver";
 		String userName = "root"; 
 		String pass = "";
-		 try {
-			Class.forName(driver).newInstance();
-			Connection conn = DriverManager.getConnection(url,userName,pass);
-			Statement st = conn.createStatement();
-			ResultSet res= st.executeQuery("Select * from user where username_id = "+id);
+		try {
+		   Class.forName(driver).newInstance();
+		   Connection conn = DriverManager.getConnection(url,userName,pass);
+		   Statement st = conn.createStatement();
+		   ResultSet res= st.executeQuery("Select * from user where username_id = "+id);
 
-			if(res.next()){
-				username=res.getString("username");
-				role = res.getString("role");
-				userID = id;
-			}
-			conn.close();
-			} catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException e) {
-			}
-	}
-	public String setAccount(String nama, String role){
-		System.out.println("nama="+nama);
-		System.out.println("role="+role);
-		this.username = nama;
-		this.role = role;
-		return "index?faces-redirect=true";
+		   if(res.next()){
+			   username=res.getString("username");
+			   role = res.getString("role");
+			   userID = id;
+		   }
+		   conn.close();
+		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException e) {
+		}
 	}
 }

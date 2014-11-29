@@ -12,7 +12,9 @@
     </h:head>
     <h:body>
 		<div class="header"> Simple Blog </div>
-		<hr></hr>
+                        <div id="nav"> User Management | See Unpublished | Add Post | Logout   </div>
+		<div id="main">
+                    
 		<h2> List Post </h2>
 		<p>
 		<h:form>
@@ -20,6 +22,13 @@
          <br/><h:outputText id="accountName" value="#{sampleBean.nama}"></h:outputText>
          <br/><h:outputText id="accountRole" value="#{sampleBean.role}"></h:outputText>
 		</h:form>
+			
+                    <hr></hr>
+		<p><br/><h:commandLink rendered="#{sampleBean.role eq 'admin' || 'owner'}" action="add_post" value="Add">
+		</h:commandLink>
+			<br/><h:commandLink rendered="#{sampleBean.role eq 'admin' || 'editor'}" action="unpublished_post" value="See Unpublished">
+		</h:commandLink>
+
 		<c:forEach items="#{listPost.arrPostPublished}" var="pos">			
 			<h:form>				
 			<br/><h:outputText value="#{pos.IDPost}"></h:outputText> 
@@ -30,16 +39,23 @@
 			<br/> <h:outputText value="#{pos.content}"></h:outputText>
 			<br/><h:commandLink action="#{post.deletePost(pos.IDPost)}" value="Delete" onclick="return confirm('Apakah Anda yakin menghapus post ini?');">
 			</h:commandLink>
-			<hr/>
+            <br/><h:commandLink rendered="#{sampleBean.role eq 'admin' || 'owner' || 'editor'}" action="edit_post" value="Edit">
+				<f:param name="idpost" value="#{pos.IDPost}" />
+			</h:commandLink>
+                        <div class ="hr"><hr/></div>
 			</h:form>
 		</c:forEach>
-		</p>
-		
+                </p></div>
+		 <div id="nav">
+         <form action="Login" method="post">
+             <br/>Username : <input type = "text" name="uname"/>
+             <br/>Password : <input type ="password" name="pass"/>
+             <br/><input type="submit" value="Login"/>
+         </form></div>
 		<br/>
 		<h:form>
 		<h:commandLink rendered="#{sampleBean.role eq 'admin'}" action="usermanagement" value="User Management"></h:commandLink> 
 		</h:form>
-		<div class="footer">rita | cilvia | linda </div>		
+		<div id="footer">rita | cilvia | linda </div>		
     </h:body>
 </html>
-
