@@ -14,68 +14,6 @@ public class EditUser {
 	private String user_strRole;
 	private int user_role;	
 
-	public int getId() {
-		return user_id;
-	}
-
-	public void setId(int id) {
-		user_id = id;
-	}
-
-	public String getUsername() {
-		return user_username;
-	}
-
-	public void setUsername(String username) {
-		user_username = username;
-	}
-
-	public void setStrRole(String str) {
-		user_strRole = str;
-	}
-
-	public String getStrRole() {
-		return user_strRole;
-	}
-	
-	public String getPassword() {
-		return user_password;
-	}
-
-	public void setPassword(String password) {
-		user_password = password;
-	}
-
-	public String getName() {
-		return user_name;
-	}
-
-	public void setName(String name) {
-		user_name = name;
-	}
-
-	public String getEmail() {
-		return user_email;
-	}
-
-	public void setEmail(String email) {
-		user_email = email;
-	}
-
-	public int getRole() {
-		return user_role;
-	}
-
-	public void setRole(int role) {
-		user_role = role;
-	}
-	
-	public void StrtoIntRole() {
-		if (this.user_strRole=="Regular") user_role=10;
-		else if (this.user_strRole=="Editor") user_role=20;
-		else if (this.user_strRole=="Admin") user_role=30;
-	}
-
 	public void addUser() {
 		DatabaseUtility dbUtil = DatabaseUtility.getInstance();
 
@@ -95,23 +33,19 @@ public class EditUser {
 		System.out.println(query);
 
 		dbUtil.execute(query);
+		
+		setUsername("");
+		setPassword("");
+		setName("");
+		setEmail("");
+		setRole(10);
 	}
 
-	public void deleteUser(int i) {
+	public void changeEmail() {
 		DatabaseUtility dbUtil = DatabaseUtility.getInstance();
 
-		String query = "DELETE FROM user WHERE id = " + i;
-
-		System.out.println(query);
-
-		dbUtil.execute(query);
-	}
-
-	public void changeRole() {
-		DatabaseUtility dbUtil = DatabaseUtility.getInstance();
-
-		String query = "UPDATE user SET role = " + this.getRole()
-				+ " WHERE id = " + this.getId();
+		String query = "UPDATE user SET email = '" + this.getEmail()
+				+ "' WHERE id = " + this.getId();
 
 		System.out.println(query);
 
@@ -129,17 +63,6 @@ public class EditUser {
 		dbUtil.execute(query);
 	}
 
-	public void changeEmail() {
-		DatabaseUtility dbUtil = DatabaseUtility.getInstance();
-
-		String query = "UPDATE user SET email = '" + this.getEmail()
-				+ "' WHERE id = " + this.getId();
-
-		System.out.println(query);
-
-		dbUtil.execute(query);
-	}
-	
 	public void changePassword(){
 		DatabaseUtility dbUtil = DatabaseUtility.getInstance();
 		
@@ -149,9 +72,92 @@ public class EditUser {
 
 		dbUtil.execute(query);
 	}
+
+	public void changeRole() {
+		DatabaseUtility dbUtil = DatabaseUtility.getInstance();
+
+		String query = "UPDATE user SET role = " + this.getRole()
+				+ " WHERE id = " + this.getId();
+
+		System.out.println(query);
+
+		dbUtil.execute(query);
+	}
+
+	public void deleteUser(int i) {
+		DatabaseUtility dbUtil = DatabaseUtility.getInstance();
+
+		String query = "DELETE FROM user WHERE id = " + i;
+
+		System.out.println(query);
+
+		dbUtil.execute(query);
+	}
 	
+	public String getEmail() {
+		return user_email;
+	}
+
+	public int getId() {
+		return user_id;
+	}
+
+	public String getName() {
+		return user_name;
+	}
+
+	public String getPassword() {
+		return user_password;
+	}
+
+	public int getRole() {
+		return user_role;
+	}
+
+	public String getStrRole() {
+		return user_strRole;
+	}
+
+	public String getUsername() {
+		return user_username;
+	}
+
 	public void Initialize(){
 		
+	}
+	
+	public void setEmail(String email) {
+		user_email = email;
+	}
+
+	public void setId(int id) {
+		user_id = id;
+	}
+
+	public void setName(String name) {
+		user_name = name;
+	}
+
+	public void setPassword(String password) {
+		user_password = password;
+	}
+
+	public void setRole(int role) {
+		user_role = role;
+	}
+
+	public void setStrRole(String str) {
+		user_strRole = str;
+	}
+	
+	public void setUsername(String username) {
+		user_username = username;
+	}
+	
+	public void StrtoIntRole() {
+		if (this.user_strRole=="Regular") user_role=10;
+		else if (this.user_strRole=="Editor") user_role=20;
+		else if (this.user_strRole=="Admin") user_role=30;
 	}
 	
 	/*public String execute() {

@@ -96,6 +96,13 @@ public class UserData implements Serializable {
 	public String getUserHeader() {
 		return ("header.xhtml");
 	}
+	
+	public int getUserID() {
+		if (isLoggedIn())
+			return details.getUserId();
+		else
+			return -1;
+	}
 
 	public List<NavigationMenu> getUserMenu() {
 		List<NavigationMenu> result = new ArrayList<NavigationMenu>();

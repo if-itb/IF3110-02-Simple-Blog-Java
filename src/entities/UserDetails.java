@@ -13,28 +13,16 @@ public class UserDetails {
 		this.user_id = user_id;
 	}
 
+	public String getEmail() {
+		return email;
+	}
+
 	public String getName() {
 		return name;
 	}
 
-	public void setName(String str) {
-		name = str;
-	}
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
 	public String getPassword() {
 		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
 	}
 
 	public int getRole() {
@@ -64,23 +52,35 @@ public class UserDetails {
 		return str;
 	}
 
-	public void setRole(int role) {
-		this.role = role;
+	public int getUserId() {
+		return user_id;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getUsername() {
+		return username;
 	}
 
 	public void setEmail(String str) {
 		email = str;
 	}
 
-	public int getUserId() {
-		return user_id;
+	public void setName(String str) {
+		name = str;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public void setRole(int role) {
+		this.role = role;
 	}
 
 	public void setUserId(int n) {
 		user_id = n;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 }

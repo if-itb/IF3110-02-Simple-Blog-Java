@@ -98,13 +98,12 @@ Spesifikasi tugas WBD
 Bonus
 =====
 1. Upload Gambar
-1. Soft Delete
-1. WYSIWYG untuk Form Post
-1. Tampilan
+2. Soft Delete
+3. WYSIWYG untuk Form Post
+4. Tampilan
 
 Todo
 ====
-- delete ada konfirmasi <- **Kevin** simple javascript
 
 user:
 - edit published post bermasalah
@@ -121,14 +120,5 @@ editor:
     - waktu jadi mundur 1 hari <- solved dengan mengubah getDate() menjadi return string
     
 admin:
-- crud bermasalah
-    - habis add user kok gak kosong? <- **Eric**: fix dengan edit kode java Viewpost
 - edit harusnya bermasalah seperti yang di atas <- masih ada?
-- hard delete <- **Kevin** simple MySQL
       
-page list: 
-- view_post
-- edit_post
-- crud
-- index
-- editor_menu

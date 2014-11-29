@@ -14,7 +14,7 @@ import entities.UserDetails;
 @ManagedBean
 @ApplicationScoped
 public class DatabaseObject {
-	private String allPostQuery = "SELECT * FROM `post` WHERE `is_deleted` = 0 AND `is_published` = 1";
+	private String allPostQuery = "SELECT * FROM `post` WHERE `is_deleted` = 0 AND `is_published` = 1 ORDER BY `waktu` DESC";
 	
 	/**
 	 * 
