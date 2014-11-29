@@ -1,7 +1,6 @@
 package Database;
 
 import Model.Comment;
-import Model.CommentofComment;
 import Model.Post;
 import Model.User;
 import java.io.Serializable;
@@ -318,75 +317,20 @@ public class PostData implements Serializable {
     }
     
     /**
-     * Get all comment in a post
-     * @param comment comment in post
-     * @return All comment in a post
-     */
-    public List<CommentofComment> getAllCommentofComment(Comment comment) {
-        try {
-            this.db.Where("cid=", "" + comment.getID());
-            ResultSet Data = this.db.Select("ccomment");
-            boolean isExist = Data.first();
-            List<CommentofComment> ListCommentofComment = new LinkedList();
-            while (isExist) {
-                int id = Data.getInt("id");
-                int cid = Data.getInt("cid");
-                String name = Data.getString("name");
-                String email = Data.getString("email");
-                String content = Data.getString("content");
-                Timestamp time = Data.getTimestamp("time");
-                CommentofComment ccomment = new CommentofComment(id, cid, name, email, content, time);
-                ListCommentofComment.add(ccomment);
-                isExist = Data.next();
-            }
-            return ListCommentofComment;
-        } catch (Exception e) {
-            return null;
-        }
-    }
-
-    /**
      * Add comment to database
      * @param comment new comment
-     * @return string status
+     * @param post the post
      */
-    public String addComment(Comment comment) {
-        String col[] = {"id", "pid", "name", "email", "content", "time"};
-        String val[] = new String[6];
-        val[0] = String.valueOf(comment.getID());
-        val[1] = String.valueOf(comment.getPID());
-        val[2] = comment.getName();
-        val[3] = comment.getEmail();
-        val[4] = comment.getContent();
-        val[5] = comment.getTime().toString();
-        int query = this.db.Insert("comment", col, val);
-        if (query > 0) {
-            return "success";
-        } else {
-            return "failed";
-        }
-    }
-    
-    /**
-     * Add comment of comment to database
-     * @param comment new comment of comment
-     * @return string status
-     */
-    public String addCommentofComment(CommentofComment comment) {
-        String col[] = {"id", "cid", "name", "email", "content", "time"};
-        String val[] = new String[6];
-        val[0] = String.valueOf(comment.getID());
-        val[1] = String.valueOf(comment.getCID());
-        val[2] = comment.getName();
-        val[3] = comment.getEmail();
-        val[4] = comment.getContent();
-        val[5] = comment.getTime().toString();
-        int query = this.db.Insert("comment", col, val);
-        if (query > 0) {
-            return "success";
-        } else {
-            return "failed";
-        }
+    public void addComment(Comment comment, Post post) {
+        String col[] = {"pid", "name", "email", "content", "time"};
+        String val[] = new String[5];
+        val[0] = ""+post.getId();
+        val[1] = comment.getName();
+        val[2] = comment.getEmail();
+        val[3] = comment.getContent();
+        java.util.Date date = new java.util.Date();
+        val[4] = new Timestamp(date.getTime()).toString();
+        this.db.Insert("comment", col, val);
     }
     
     /**
@@ -398,17 +342,10 @@ public class PostData implements Serializable {
         this.db.Delete("comment");
     }
     
-    public void DelCommentofComment (int id) {
-        this.db.Where("id=", String.valueOf(id));
-        this.db.Delete("ccomment");
-    }
-    
     public static void main(String args[]) {
         PostData pd = new PostData();
-        List<Post> a = pd.getAllPost();
-        for (Post p : a)
-        {
-            System.out.println(p.getAuthor().getUsername().compareTo("luthfi"));
-        }
+        Post p = new Post(1, null, null, null, null, true, true);
+        Comment c = new Comment(0, 0, "moderator", "moderator@moderate.com", "Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.", null);
+        pd.addComment(c, p);
     }
 }

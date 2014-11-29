@@ -4,7 +4,7 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core">      
     <h:head>
         <title>Simple Blog</title>
 
@@ -73,31 +73,54 @@
                     <!-- Blog Comments -->
 
                     <!-- Comments Form -->
-                    <!-- Comments Form -->
                     <div class="well">
-                        <h:form class="form-horizontal" role="form">
+                        <h:form class="form-horizontal" role="form" id="comment_form">
+                            <c:set var="new_comment" value="#{Comment}" />
                             <h5>Add Comment</h5>
                           <div class="form-group">
-                            <label for="inputName" class="col-sm-2 control-label">Name</label>
+                            <label for="name" class="col-sm-2 control-label">Name</label>
                             <div class="col-sm-9">
-                                <h:inputText value="#{Comment.name}" class="form-control" id="inputName" />
+                                <c:choose>
+                                    <c:when test="#{UserData.is_logged_in()}" >
+                                        <c:set var="author" value="#{UserData.userLoggedIn()}" />
+                                        <h:inputText class="form-control" id="name" value="#{author.name}" valueChangeListener="#{new_comment.name}" required="true" requiredMessage="*Required"/>
+                                        <h:message for="name" class="label label-warning" />
+                                    </c:when>
+                                    <c:otherwise>
+                                        <h:inputText class="form-control" id="name" required="true" value="#{new_comment.name}" requiredMessage="*Required"/>
+                                        <h:message for="name" class="label label-warning" />
+                                    </c:otherwise>
+                                </c:choose>
                             </div>
                           </div>
                           <div class="form-group">
-                            <label for="inputEmail" class="col-sm-2 control-label">Email</label>
+                            <label for="email" class="col-sm-2 control-label">Email</label>
                             <div class="col-sm-9">
-                                <h:inputText value="#{Comment.email}" class="form-control" id="inputEmail" />
+                                <c:choose>
+                                    <c:when test="#{UserData.is_logged_in()}" >
+                                        <c:set var="author" value="#{UserData.userLoggedIn()}" />
+                                        <h:inputText class="form-control" id="email" value="#{author.email}" valueChangeListener="#{new_comment.email}" required="true" requiredMessage="*Required"/>
+                                        <h:message for="email" class="label label-warning" />
+                                    </c:when>
+                                    <c:otherwise>
+                                        <h:inputText class="form-control" id="email" required="true" value="#{new_comment.email}" requiredMessage="*Required"/>
+                                        <h:message for="email" class="label label-warning" />
+                                    </c:otherwise>
+                                </c:choose>
                             </div>
                           </div>
                           <div class="form-group">
-                            <label for="inputComment" class="col-sm-2 control-label">Comment</label>
+                            <label for="content" class="col-sm-2 control-label">Comment</label>
                             <div class="col-sm-9">
-                                <h:inputTextarea value="#{Comment.content}" class="form-control" id="inputComment" />
+                                <h:inputTextarea class="form-control" id="content" required="true" value="#{new_comment.content}" requiredMessage="*Required"/>
+                                <h:message for="content" class="label label-warning" />
                             </div>
                           </div>
                           <div class="form-group">
                             <div class="col-sm-offset-2 col-sm-10">
-                              <button type="submit" class="btn btn-primary">Publish</button>
+                                <h:commandButton type="submit" value="submit" class="btn btn-primary" action="#{PostData.addComment(new_comment, post)}" onclick="return validate();">
+                                    <f:ajax execute="@form" render="comment-list @form"  />
+                                </h:commandButton>
                             </div>
                           </div>
                         </h:form>
@@ -106,45 +129,22 @@
                     <hr />
 
                     <!-- Posted Comments -->
-
-                    <!-- Comment -->
-                    <div class="media">
-                        <a class="pull-left" href="#">
-                            <img class="media-object" src="http://placehold.it/64x64" alt="" />
-                        </a>
-                        <div class="media-body">
-                            <h4 class="media-heading">Start Bootstrap
-                                <small>August 25, 2014 at 9:30 PM</small>
-                            </h4>
-                            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                        </div>
-                    </div>
-
-                    <!-- Comment -->
-                    <div class="media">
-                        <a class="pull-left" href="#">
-                            <img class="media-object" src="http://placehold.it/64x64" alt="" />
-                        </a>
-                        <div class="media-body">
-                            <h4 class="media-heading">Start Bootstrap
-                                <small>August 25, 2014 at 9:30 PM</small>
-                            </h4>
-                            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                            <!-- Nested Comment -->
-                            <div class="media">
-                                <a class="pull-left" href="#">
-                                    <img class="media-object" src="http://placehold.it/64x64" alt="" />
-                                </a>
-                                <div class="media-body">
-                                    <h4 class="media-heading">Nested Start Bootstrap
-                                        <small>August 25, 2014 at 9:30 PM</small>
-                                    </h4>
-                                    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                                </div>
+                    <h:panelGroup id="comment_list">
+                        <ui:repeat value="#{PostData.getAllCommentonPost(post)}" var="comment">
+                        <!-- Comment -->
+                        <div class="media">
+                            <a class="pull-left" href="#">
+                                <img class="media-object" src="http://placehold.it/64x64" alt="" />
+                            </a>
+                            <div class="media-body">
+                                <h4 class="media-heading">#{comment.name}
+                                    <small>#{comment.time}</small>
+                                </h4>
+                                #{comment.content}
                             </div>
-                            <!-- End Nested Comment -->
                         </div>
-                    </div>
+                        </ui:repeat>
+                    </h:panelGroup>
 
                 </div>
 
@@ -181,7 +181,7 @@
                                 </ul>
                             </div>
                         </div>
-                    <!-- /.row -->
+                        <!-- /.row -->
                     </div>
 
                 </div>
@@ -202,6 +202,7 @@
 
         </div>
         <!-- /.container -->
+        <h:outputScript library="js" name="validate.js" />
     </h:body>
 </html>
 
