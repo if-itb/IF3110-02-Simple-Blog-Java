@@ -4,6 +4,7 @@
     Author     : USER
 --%>
 
+<%@page import="org.apache.tomcat.util.http.Cookies"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
 <%@ page import="javax.servlet.http.*,javax.servlet.*" %>
@@ -14,9 +15,29 @@
     Cookie cookie = null;
     String usrC=null;
     String passC=null;
+    int typeC=4;
     Cookie[] cookies = null;
     cookies = request.getCookies();
-    if(cookies!=null)
+    for (Cookie c:cookies){
+    	if (c.getName().equals("LogName")){
+    		usrC=c.getValue();
+    		for (Cookie c2:cookies){
+    		    if (c2.getName().equals("LogType")){
+   					typeC=Integer.parseInt(c2.getValue());
+   				}
+    		}
+    	}
+    }
+    if (typeC==1){
+    	out.println("Selamat Datang, Owner "+usrC);
+    } else if (typeC==2){
+    	out.println("Selamat Datang, Editor "+usrC);
+    } else if (typeC==3){
+    	out.println("Selamat Datang, Admin "+usrC);
+    } else if (typeC==4){
+    	out.println("Selamat Datang, Guest");
+    }
+    /*if(cookies!=null)
     {
         //out.println("Yay, cookies! "+cookies.length);
         /*for(int i=0; i<cookies.length; i++)
@@ -25,12 +46,13 @@
             cookie.setMaxAge(0);
             response.addCookie(cookie);
             //out.println(cookie.getName()+" "+cookie.getValue()+" <br/>");
-        }*/
+        }*//*
         cookie = cookies[cookies.length-1];
         usrC = cookie.getName();
         passC = cookie.getValue();
         out.println("Selamat datang kembali "+usrC);
-    }
+        out.println("<br/>bala");
+    }*/
     //else out.println("No cookies :(");
 %>
 <html>
@@ -39,9 +61,12 @@
         <title>Login</title>
     </head>
     <body>
-        <%
+        <%--
             if(usrC!=null && passC!=null)
             {
+        --%>
+        <%
+        if (typeC!=4){
         %>
         <form method="post" action="index.jsp" id="CookiedLogin">
             <input type="hidden" name="username" id="username" value="${usrC}">	

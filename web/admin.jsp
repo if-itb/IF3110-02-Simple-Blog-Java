@@ -45,19 +45,37 @@
 
 <body class="default">
 <div class="wrapper">
-
-<nav class="nav">
-    <a style="border:none;" id="logo" href="index.jsp"><h1>Simple-Blog<span>-of-</span>Bang-Satya-Ilmi-Ojan</h1></a>
-    <ul class="nav-primary">
-        <li><a href="new_post.jsp">+ Tambah Post</a></li>
-    </ul>
-</nav>
+<jsp:include page="header.jsp"/>
+<%
+	String usrC=" ";
+	int typeC=4;
+	Cookie[] cookies = null;
+	cookies = request.getCookies();
+	if (cookies!=null){
+		for (Cookie c:cookies){
+			if (c.getName().equals("LogName")){
+				usrC=c.getValue();
+				for (Cookie c2:cookies){
+				    if (c2.getName().equals("LogType")){
+							typeC=Integer.parseInt(c2.getValue());
+						}
+				}
+			}
+		}
+	}
+%>
 
 <div id="home">
     <div class="posts">
         <nav class="art-list">
           <ul class="art-list-body">
-			<%
+          <% if (typeC==4||typeC==1){ %>
+				<li class="art-list-item">
+					<div class="art-list-item-title-and-time">
+        			</div>
+        			You can't see unpublished post
+				</li>	
+			<% } else {
 				PostBean pBean =  new PostBean();
 				for(int i=0;i<pBean.listManyPost().size();i++){
 					if(pBean.listManyPost().get(i).getStatus() == 0){
@@ -70,36 +88,22 @@
 							</div>
 							<p><% out.println(pBean.listManyPost().get(i).getKonten()); %></p>
 							<p>
-							  <a href="handler/admPublish.jsp?id=<% out.println(pBean.listManyPost().get(i).getId()); %>">Publish</a> | <a href="edit.jsp?id=<% out.println(pBean.listManyPost().get(i).getId()); %>">Edit</a>
+							  <a href="handler/admPublish.jsp?id=<% out.println(pBean.listManyPost().get(i).getId()); %>">Publish</a>
+							   | <a href="edit.jsp?id=<% out.println(pBean.listManyPost().get(i).getId()); %>">Edit</a>
+							   | <a href="#" onclick="return ConfirmDelete(<% out.println(pBean.listManyPost().get(i).getId()); %>);">Hapus</a>
 							</p>
 						</li>	
 			<%
 					}
 				}
+			}
 			%>
           </ul>
         </nav>
     </div>
 </div>
 
-<footer class="footer">
-    <div class="back-to-top"><a href="">Back to top</a></div>
-    <!-- <div class="footer-nav"><p></p></div> -->
-    <div class="psi">&Psi;</div>
-    <aside class="offsite-links">
-        Asisten IF3110 /
-        <a class="rss-link" href="rss/rss.php">RSS</a> /
-        <br>
-        <a class="twitter-link" href="http://twitter.com/YoGiiSinaga">Yogi</a> /
-        <a class="twitter-link" href="http://twitter.com/sonnylazuardi">Sonny</a> /
-        <a class="twitter-link" href="http://twitter.com/fathanpranaya">Fathan</a> /
-        <br>
-        <a class="twitter-link" href="#">Renusa</a> /
-        <a class="twitter-link" href="#">Kelvin</a> /
-        <a class="twitter-link" href="#">Yanuar</a> /
-        
-    </aside>
-</footer>
+<jsp:include page="footer.jsp"/>
 
 </div>
 <script>

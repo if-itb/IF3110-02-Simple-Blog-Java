@@ -30,45 +30,53 @@ public class Post {
 	public static void Init() throws Exception{
 		Connection conn = null;
 		Statement st = null;
+		ResultSet resultSet = null;
 		try {
 			Class.forName(Driver);
 			Class.forName(Driver).newInstance();
 			conn = DriverManager.getConnection(DbLoc1,DbUser,DbPass);
-			st = conn.createStatement();
-			st.executeUpdate("CREATE DATABASE IF NOT EXISTS `"+DbName+"` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;");
-			st.executeUpdate("USE `"+DbName+"`;");
-			st.executeUpdate(""
-			+ "CREATE TABLE IF NOT EXISTS `comment` ("
-			+ "  `ID` bigint(20) NOT NULL AUTO_INCREMENT,"
-			+ "  `Time` datetime NOT NULL,"
-			+ "  `Parent` bigint(20) NOT NULL,"
-			+ "  `Name` varchar(255) NOT NULL,"
-			+ "  `Email` varchar(255) NOT NULL,"
-			+ "  `Content` text NOT NULL,"
-			+ " PRIMARY KEY (`ID`),"
-			+ "  UNIQUE KEY `ID` (`ID`),"
-			+ "  KEY `Parent` (`Parent`)"
-			+ ") ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;");
-			st.executeUpdate(""
-			+ "CREATE TABLE IF NOT EXISTS `post` ("
-			+ "  `ID` bigint(20) NOT NULL AUTO_INCREMENT,"
-			+ "  `Title` varchar(255) NOT NULL,"
-			+ "  `Date` date NOT NULL,"
-			+ "  `Content` text,"
-			+ " PRIMARY KEY (`ID`),"
-			+ "  UNIQUE KEY `ID` (`ID`)"
-			+ ") ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;");
-			st.executeUpdate(""
-			+ "ALTER TABLE `comment`"
-			+ "ADD CONSTRAINT `comment_ibfk_1` FOREIGN KEY (`Parent`) REFERENCES `post` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;");
+			resultSet = conn.getMetaData().getCatalogs();
+	        while (resultSet.next()) {
+	          String databaseName = resultSet.getString(1);
+	            if(databaseName.equals(DbName)){
+	    			st = conn.createStatement();
+	    			st.executeUpdate("CREATE DATABASE IF NOT EXISTS `"+DbName+"` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;");
+	    			st.executeUpdate("USE `"+DbName+"`;");
+	    			st.executeUpdate(""
+	    			+ "CREATE TABLE IF NOT EXISTS `comment` ("
+	    			+ "  `ID` bigint(20) NOT NULL AUTO_INCREMENT,"
+	    			+ "  `Time` datetime NOT NULL,"
+	    			+ "  `Parent` bigint(20) NOT NULL,"
+	    			+ "  `Name` varchar(255) NOT NULL,"
+	    			+ "  `Email` varchar(255) NOT NULL,"
+	    			+ "  `Content` text NOT NULL,"
+	    			+ " PRIMARY KEY (`ID`),"
+	    			+ "  UNIQUE KEY `ID` (`ID`),"
+	    			+ "  KEY `Parent` (`Parent`)"
+	    			+ ") ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;");
+	    			st.executeUpdate(""
+	    			+ "CREATE TABLE IF NOT EXISTS `post` ("
+	    			+ "  `ID` bigint(20) NOT NULL AUTO_INCREMENT,"
+	    			+ "  `Title` varchar(255) NOT NULL,"
+	    			+ "  `Date` date NOT NULL,"
+	    			+ "  `Content` text,"
+	    			+ " PRIMARY KEY (`ID`),"
+	    			+ "  UNIQUE KEY `ID` (`ID`)"
+	    			+ ") ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;");
+	    			st.executeUpdate(""
+	    			+ "ALTER TABLE `comment`"
+	    			+ "ADD CONSTRAINT `comment_ibfk_1` FOREIGN KEY (`Parent`) REFERENCES `post` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;");
+	            }
+	        }
 		} catch(Exception e){
 			throw e;
 		} finally{
 			try {
-				st.close();
-				conn.close();
-			} catch (SQLException e) {
-				throw e;
+				if (st!=null)st.close();
+				if (conn!=null)conn.close();
+				if (resultSet!=null)resultSet.close();
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
 		}
 	}
