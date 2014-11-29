@@ -3,25 +3,26 @@
 package source;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.ResultSet;
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * @author Try Ajitiono
+ * @author Try Ajitiono + Rakhmatullah Yoga Sutrisna
  */
 public class Post {
     /**
      * Atribut-atribut
      */
-    protected static int idPost;
-    private static String judulPost;
-    private static String tanggalPost;
-    private static String kontenPost;
-    private static int publishStatus;
+    private int idPost;
+    private String judulPost;
+    private String tanggalPost;
+    private String kontenPost;
+    private int publishStatus;
     private boolean cookieOn;
     private User user;
     
@@ -41,7 +42,62 @@ public class Post {
         user.setUsername(c.getUsername());
         cookieOn = true;
     }
-    
+    /**
+     * Menambahkan komentar ke dalam basis data
+     * @param ID 
+     * @return  HTML script untuk memuat komentar yang akan digunakan oleh AJAX
+     * @throws java.sql.SQLException 
+     */
+    public String LoadComment(int ID) throws SQLException {
+        //login database
+        String HTMLcode = "";
+        KoneksiDatabase.setUser("root2");
+        KoneksiDatabase.setPassword("akhfa");
+        KoneksiDatabase.setDatabase("localhost","blog");
+        try {
+            Connection koneksi = KoneksiDatabase.getKoneksi();
+            Statement statement = koneksi.createStatement();
+            String QueryLoadComment = "SELECT * FROM komentar WHERE idpost="+idPost+" ORDER BY Waktu ASC";
+            ResultSet result = statement.executeQuery(QueryLoadComment);
+            while(result.next()) {
+                String Nama = result.getString("Nama");
+                String Email = result.getString("Email");
+                String Comment = result.getString("Komentar");
+                Timestamp Time = result.getTimestamp("Waktu");
+                HTMLcode +=
+                        "    <li class=\"art-list-item\">\n" +
+                        "        <div class=\"art-list-item-title-and-time\">\n" +
+                        "            <h2 class=\"art-list-title\">" + Nama + "</h2>\n" +
+                        "            <div class=\"art-list-time\">" + Time.toString() + "</div>\n" +
+                        "        </div>\n" +
+                        "        <p>" + Comment + "</p>\n" +
+                        "    </li>";
+            }
+        } catch (SQLException ex) {
+
+        }
+        return HTMLcode;
+    }
+    /**
+     * 
+     * @param PostID
+     * @param nama
+     * @param email
+     * @param comment
+     * @throws SQLException 
+     */
+    public void AddComment(int PostID, String nama, String email, String comment) throws SQLException {
+        String InsertQuery;
+        KoneksiDatabase.setUser("root2");
+        KoneksiDatabase.setPassword("akhfa");
+        KoneksiDatabase.setDatabase("localhost","blog");
+        try (Connection koneksi = KoneksiDatabase.getKoneksi()) {
+            Statement statement = koneksi.createStatement();
+            InsertQuery = "INSERT INTO komentar (idpost, nama, email, komentar) VALUES ('" + PostID + "', '" + nama + "', '" + email + "', '" + comment + "')";
+            statement.executeUpdate(InsertQuery);
+            koneksi.close();
+        }
+    }
     /**
      * Menambahkan header message pada halaman utama blog
      * @return header tulisan yang dikembalikan ke halaman utama

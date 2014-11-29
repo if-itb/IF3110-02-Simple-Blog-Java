@@ -4,11 +4,14 @@
     Author     : Rakhmatullah Yoga S
 --%>
 
+<%@page import="source.Post"%>
 <%@page import="source.Komentar"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
 <%
     int IdPost = Integer.valueOf(request.getParameter("id"));
-    out.println(Komentar.LoadComment(IdPost));
+    Post post = new Post();
+    post.setAtribut(IdPost);
+    out.println(post.LoadComment(IdPost));
 %>

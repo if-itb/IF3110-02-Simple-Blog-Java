@@ -4,6 +4,7 @@
     Author     : Rakhmatullah Yoga S
 --%>
 
+<%@page import="source.Post"%>
 <%@page import="source.Komentar"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -13,6 +14,8 @@
     String email = request.getParameter("email");
     String komentar = request.getParameter("komentar");
     String sqlQuery = "INSERT INTO komentar (ID, Nama, Email, Komentar) VALUES ('"+ idPost + "', '" + nama + "', '" + email + "', '" + komentar + "')";
-    Komentar.AddComment(idPost, nama, email, komentar);
+    Post post = new Post();
+    post.setAtribut(idPost);
+    post.AddComment(idPost, nama, email, komentar);
     //out.println(Komentar.LoadComment(idPost));
 %>
