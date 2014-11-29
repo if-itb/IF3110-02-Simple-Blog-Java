@@ -104,7 +104,7 @@ Bonus
 
 Todo
 ====
-- delete ada konfirmasi <- **belum**  
+- delete ada konfirmasi <- **Kevin** simple javascript
 
 user:
 - edit published post bermasalah
@@ -124,7 +124,7 @@ admin:
 - crud bermasalah
     - habis add user kok gak kosong? <- **Eric**: fix dengan edit kode java Viewpost
 - edit harusnya bermasalah seperti yang di atas
-- hard delete <- **Kevin**
+- hard delete <- **Kevin** simple MySQL
       
 page list: 
 - view_post

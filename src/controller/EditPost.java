@@ -7,6 +7,7 @@ import java.util.Date;
 
 
 
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
@@ -91,5 +92,16 @@ public class EditPost {
 			dbUtil.execute(query);
 		}
 		return "index";
+	}
+	
+	public void HardDelete(int temp_id){
+		DatabaseUtility dbUtil = DatabaseUtility.getInstance();
+
+		String query = "Delete from post WHERE id = "
+				+ temp_id;
+
+		System.out.println(query);
+
+		dbUtil.execute(query);
 	}
 }
