@@ -22,8 +22,17 @@ public class Post {
     private String judul;
     private String tanggal;
     private String konten;
+    private int deleted;
     
     public Post() {
+    }
+
+    public int getDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(int deleted) {
+        this.deleted = deleted;
     }
     
     public int getId(){
@@ -82,8 +91,7 @@ public class Post {
             case 9: m="September"; break;
             case 10: m="Oktober"; break;
             case 11: m="November"; break;
-            case 12: m="Desember"; break;
-            default: m="a"; break;
+            default: m="Desember"; break;
         }
         s = s + m + " " + d.getYear();
         

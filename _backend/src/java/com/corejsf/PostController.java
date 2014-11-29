@@ -10,6 +10,8 @@ import java.io.IOException;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import java.sql.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
@@ -48,17 +50,18 @@ public class PostController {
         return con;
     }
     
-    public void addPost(String judul, String tanggal, String konten, String status){
+    public void addPost(String judul, String tanggal, String konten){
         try{
             Connection con = getConnection();
-            String query = "INSERT INTO post (id_member, Status,Judul,Konten,Tanggal) "
-                    + "VALUES (?, ?, ?, ?, ?)";
+            String query = "INSERT INTO post (id_member, Status,Judul,Konten,Tanggal, deleted) "
+                    + "VALUES (?, ?, ?, ?, ?, ?)";
             PreparedStatement ps = con.prepareStatement(query);
             ps.setInt(1, 1);            
-            ps.setString(2, status);
+            ps.setString(2, "unpublished");
             ps.setString(3, judul);
             ps.setString(4, konten);
-            ps.setString(5, tanggal);            
+            ps.setString(5, tanggal);  
+            ps.setInt(6, 0);
             ps.executeUpdate();
             FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
             con.close();
@@ -67,17 +70,62 @@ public class PostController {
         }
     }
     
-    public String deletePost(int id){
+    public String deletePost(int id, int hlm){
+        System.out.println("MASUK "+id);
+        try{
+            Connection con = getConnection();
+            PreparedStatement ps = con.prepareStatement("UPDATE post SET deleted=? WHERE id=?");
+            ps.setInt(1, 1);
+            ps.setInt(2, id);
+            ps.executeUpdate();
+            con.close();
+        } catch(SQLException e){            
+        }
+        if(hlm == 1)
+            return "index?faces-redirect=true";
+        else
+            return "unpublished?faces-redirect=true";
+    }
+    
+    public String restorePost(int id){
+        System.out.println("MASUK "+id);
+        try{
+            Connection con = getConnection();
+            PreparedStatement ps = con.prepareStatement("UPDATE post SET deleted=? WHERE id=?");
+            ps.setInt(1, 0);
+            ps.setInt(2, id);
+            ps.executeUpdate();
+            con.close();
+        } catch(SQLException e){            
+        }
+        return "soft_deleted?faces-redirect=true";
+    }
+    
+    public String deletePostPermanent(int id){
         System.out.println("MASUK "+id);
         try{
             Connection con = getConnection();
             PreparedStatement ps = con.prepareStatement("DELETE FROM post WHERE id=?");
             ps.setInt(1, id);
             ps.executeUpdate();
-            //FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
             con.close();
         } catch(SQLException e){            
         }
-        return "index?faces-redirect=true";
+        return "soft_deleted?faces-redirect=true";
     }
+    
+    public String publishPost(int id){
+        System.out.println("MASUK "+id);
+        try{
+            Connection con = getConnection();
+            PreparedStatement ps = con.prepareStatement("UPDATE post SET status=? WHERE id=?");
+            ps.setString(1, "published");
+            ps.setInt(2, id);
+            ps.executeUpdate();
+            con.close();
+        } catch(SQLException e){            
+        }
+        return "unpublished?faces-redirect=true";
+    }
+
 }

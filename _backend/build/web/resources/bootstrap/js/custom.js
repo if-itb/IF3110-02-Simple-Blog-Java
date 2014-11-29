@@ -19,15 +19,18 @@ function emailValidation(email){
     }
 }
 
-function formAddValidation(){
+function formAddValidation(stat){
     if(document.addform["addform:judul"].value == "" || document.addform["addform:tanggal"].value == "" ||
-            document.addform["addform:konten"].value == "" || document.addform["addform:status"].value == ""){
+            document.addform["addform:konten"].value == ""){
         alert("Semua isian form harus diisi");
         return false;
     } else if(!validasiTanggal(document.addform["addform:tanggal"].value)){
         return false;
     }else{
-        alert("Post berhasil ditambahkan");
+        if (stat==1)
+            alert("Post berhasil ditambahkan");
+        else
+            alert("Post berhasil diedit");
         return true;
     }
 }

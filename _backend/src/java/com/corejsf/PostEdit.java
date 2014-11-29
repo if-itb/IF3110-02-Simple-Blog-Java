@@ -54,13 +54,12 @@ public class PostEdit implements Serializable {
         try {
             Class.forName(driver).newInstance();            
             con = DriverManager.getConnection(url, user, password);
-            String query = "UPDATE post SET Status=?, Judul=?, Konten=?, Tanggal=? WHERE id=?";
+            String query = "UPDATE post SET Judul=?, Konten=?, Tanggal=? WHERE id=?";
             PreparedStatement ps = con.prepareStatement(query);
-            ps.setString(1, pos.getStatus());
-            ps.setString(2, pos.getJudul());
-            ps.setString(3, pos.getKonten());            
-            ps.setString(4, pos.getTanggal());
-            ps.setInt(5, pos.getId());               
+            ps.setString(1, pos.getJudul());
+            ps.setString(2, pos.getKonten());            
+            ps.setString(3, pos.getTanggal());
+            ps.setInt(4, pos.getId());               
             ps.executeUpdate();
             FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
             con.close();
@@ -85,6 +84,7 @@ public class PostEdit implements Serializable {
                 pos.setKonten(res.getString("Konten"));
                 pos.setStatus(res.getString("Status"));
                 pos.setTanggal(res.getString("Tanggal"));
+                pos.setDeleted(res.getInt("deleted"));
                 pos.setId(id);
                 this.id = id;
             }            

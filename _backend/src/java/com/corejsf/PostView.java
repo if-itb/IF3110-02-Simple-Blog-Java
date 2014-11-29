@@ -11,14 +11,13 @@
 package com.corejsf;
 
 import java.sql.*;
-import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 
 @ManagedBean(name = "postview", eager=true)
-@RequestScoped
+@ViewScoped
 
-public class PostView implements Serializable {
+public class PostView {
     private int id;
     
     private Post pos;

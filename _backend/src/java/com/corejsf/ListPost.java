@@ -19,9 +19,14 @@ import javax.faces.bean.RequestScoped;
  * @author Indam Muhammad
  */
 public class ListPost {
-    private ArrayList<Post> posts;
+    private ArrayList<Post> published_posts;
+    private ArrayList<Post> unpublished_posts;
+    private ArrayList<Post> deleted_posts;
+    
     public ListPost(){
-        posts = new ArrayList<Post>();
+        published_posts = new ArrayList<Post>();
+        unpublished_posts = new ArrayList<Post>();
+        deleted_posts = new ArrayList<Post>();
         Connection con = null;
         String url = "jdbc:mysql://localhost:3306/simpleblog";
         String user = "root";
@@ -39,7 +44,15 @@ public class ListPost {
                 pos.setKonten(res.getString("Konten"));
                 pos.setStatus(res.getString("Status"));
                 pos.setTanggal(res.getString("Tanggal"));
-                posts.add(pos);
+                pos.setDeleted(res.getInt("deleted"));
+                if(pos.getDeleted()==1){
+                    deleted_posts.add(pos);
+                }else if(pos.getStatus().equalsIgnoreCase("unpublished")){
+                    unpublished_posts.add(pos);
+                    System.out.println(pos.getJudul());
+                }else{
+                    published_posts.add(pos);
+                }
             }
             con.close();
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
@@ -48,9 +61,29 @@ public class ListPost {
         finally{
         }
     }
+
+    public ArrayList<Post> getDeleted_posts() {
+        return deleted_posts;
+    }
+
+    public void setDeleted_posts(ArrayList<Post> deleted_posts) {
+        this.deleted_posts = deleted_posts;
+    }
     
-    public ArrayList<Post> getPosts(){
-        return this.posts;
+    public ArrayList<Post> getPublished_posts(){
+        return this.published_posts;
+    }
+    
+    public ArrayList<Post> getUnpublished_posts(){
+        return this.unpublished_posts;
+    }
+
+    public void setPublished_posts(ArrayList<Post> published_posts) {
+        this.published_posts = published_posts;
+    }
+
+    public void setUnpublished_posts(ArrayList<Post> unpublished_posts) {
+        this.unpublished_posts = unpublished_posts;
     }
 
 }

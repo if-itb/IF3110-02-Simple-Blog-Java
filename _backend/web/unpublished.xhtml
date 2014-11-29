@@ -68,12 +68,6 @@
               <ul class="nav nav-pills nav-stacked text-center">
                 <li role="presentation"><img src="resources/bootstrap/img/side.jpg" class="center-block img-responsive img-thumbnail"></img></li>
                 <c:choose>
-                    <c:when test="${cookie.cRole.value eq 'Owner'}">
-                        <li role="presentation" class="active"><a href="index.xhtml">Already Published</a></li>
-                        <li role="presentation" class="active"><a href="add_post.xhtml">New Post</a></li>
-                        <li role="presentation" class="active"><h:commandLink action="#{login.startLogout}" value="Sign Out" /></li>
-                    </c:when>
-
                     <c:when test="${cookie.cRole.value eq 'Editor'}">
                         <li role="presentation" class="active"><a href="index.xhtml">Already Published</a></li>
                         <li role="presentation" class="active"><a href="unpublished.xhtml">To Be Published</a></li>
@@ -84,7 +78,7 @@
                         <li role="presentation" class="active"><a href="index.xhtml">Already Published</a></li>
                         <li role="presentation" class="active"><a href="unpublished.xhtml">To Be Published</a></li>
                         <li role="presentation" class="active"><a href="soft_deleted.xhtml">Deleted Post</a></li>
-                        <li role="presentation" class="active"><a href="add_post.xhtml">New Post</a></li>
+                        <li role="presentation" class="active"><a href="add_post.xhtml">New Post</a></li>                        
                         <li role="presentation" class="active"><a href="user.xhtml">Users' Database</a></li>
                         <li role="presentation" class="active"><h:commandLink action="#{login.startLogout}" value="Sign Out" /></li>
                     </c:when>
@@ -98,7 +92,7 @@
           </div>
             
           <div class="col-md-8">
-              <ui:repeat var="thepost" value="#{listpost.published_posts}">
+              <ui:repeat var="thepost" value="#{listpost.unpublished_posts}">
             <div class="edit">
                 <c:choose>
 
@@ -113,11 +107,18 @@
                         </div>
                         <div class="btn-group" role="group" aria-label="...">
                               <h:form>
-                                  <h:commandLink type="button" class="btn edit-delete pull-right" value="Delete" action="#{postController.deletePost(thepost.id,1)}" onclick="return confirm('Apakah anda yakin menghapus post ini?');">
+                                  <h:commandLink type="button" class="btn edit-delete pull-right" value="Delete" action="#{postController.deletePost(thepost.id,2)}" onclick="return confirm('Apakah anda yakin menghapus post ini?');">
                                       <span class="glyphicon glyphicon-floppy-remove" aria-hidden="true"></span>
                                   </h:commandLink>
                               </h:form>                 
-                        </div>                        
+                        </div>
+                        <div class="btn-group" role="group" aria-label="...">
+                              <h:form>
+                                  <h:commandLink type="button" class="btn edit-delete pull-right" value="Publish" action="#{postController.publishPost(thepost.id)}" onclick="return confirm('Apakah anda akan mem-publish post ini?');">
+                                      <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+                                  </h:commandLink>
+                              </h:form>                 
+                        </div>
                     </c:when>
 
                     <c:when test="${cookie.cRole.value eq 'Admin'}">
@@ -131,21 +132,17 @@
                         </div>
                         <div class="btn-group" role="group" aria-label="...">
                               <h:form>
-                                  <h:commandLink type="button" class="btn edit-delete pull-right" value="Delete" action="#{postController.deletePost(thepost.id,1)}" onclick="return confirm('Apakah anda yakin menghapus post ini?');">
+                                  <h:commandLink type="button" class="btn edit-delete pull-right" value="Delete" action="#{postController.deletePost(thepost.id,2)}" onclick="return confirm('Apakah anda yakin menghapus post ini?');">
                                       <span class="glyphicon glyphicon-floppy-remove" aria-hidden="true"></span>
                                   </h:commandLink>
                               </h:form>                 
                         </div>
-                    </c:when>
-                    
-                    <c:when test="${cookie.cRole.value eq 'Owner'}">
                         <div class="btn-group" role="group" aria-label="...">
-                            <h:form>
-                                <h:commandLink type="button" class="btn edit-delete pull-right" value="Edit" action="edit_post">
-                                <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-                                <f:param name="id" value="#{thepost.id}" />
-                                </h:commandLink>
-                            </h:form>
+                              <h:form>
+                                  <h:commandLink type="button" class="btn edit-delete pull-right" value="Publish" action="#{postController.publishPost(thepost.id)}" onclick="return confirm('Apakah anda akan mem-publish post ini?');">
+                                      <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+                                  </h:commandLink>
+                              </h:form>                 
                         </div>
                     </c:when>
                     
