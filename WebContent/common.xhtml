@@ -5,10 +5,9 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:f="http://xmlns.jcp.org/jsf/core">
 <h:head>
-	<title><ui:insert name="title">Common Page</ui:insert></title>
+	<title><ui:insert name="title">Simple Blog</ui:insert></title>
 	<f:metadata>
-		<f:event type="preRenderView"
-			listener="#{userData.checkCookie}" />
+		<f:event type="preRenderView" listener="#{userData.checkCookie}" />
 	</f:metadata>
 	<link href="./css/bootstrap.css" rel="stylesheet" type="text/css" />
 </h:head>
@@ -22,6 +21,5 @@
 	<ui:insert name="content">
 		<ui:include src="contents.xhtml" />
 	</ui:insert>
-	<ui:insert name="script"></ui:insert>
 </h:body>
 </html>

@@ -1,12 +1,7 @@
 package controller;
 
 import javax.faces.bean.ManagedBean;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
 import javax.faces.bean.RequestScoped;
-
-import entities.Post;
 
 @ManagedBean
 @RequestScoped

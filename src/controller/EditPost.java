@@ -55,8 +55,8 @@ public class EditPost {
 		post.setContent(str);
 	}
 
-	public Date getDate(){
-		return post.getDate();
+	public String getDate() {
+		return post.getDate().toString();
 	}
 
 	public void setDate(Date date) {
@@ -78,7 +78,7 @@ public class EditPost {
 			DatabaseUtility dbUtil = DatabaseUtility.getInstance();
 			
 			@SuppressWarnings("deprecation")
-			String date = ""+(1900+post.getDate().getYear())+"/"+(post.getDate().getMonth()+1)+"/"+post.getDate().getDate();
+			String date = ""+(1900+post.getDate().getYear())+"-"+(post.getDate().getMonth()+1)+"-"+post.getDate().getDate();
 			
 			String inTitle = DatabaseUtility.forHTML(post.getTitle());
 			String inContent = DatabaseUtility.forHTML(post.getContent());

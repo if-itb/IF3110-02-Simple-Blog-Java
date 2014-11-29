@@ -1,12 +1,4 @@
-var type0_msg = '';
-
-var type1_msg = 'Masukkan tanggal dengan format dd-mm-yyyy';
-
-var type2_msg = 'Tidak boleh memasukkan tanggal yang sudah berlalu';
-
-var type3_msg = 'Masukkan tanggal yang benar-benar ada';
-
-var typed_msg = 'Terjadi kesalahan FATAL';
+window.onload = get_comments
 
 function isValidDate(str) {
 	// code 1 = not a date
@@ -24,7 +16,7 @@ function isValidDate(str) {
 				.getFullYear()))
 			return 3;
 
-		now = new Date();
+		var now = new Date();
 
 		if (year === now.getFullYear()) {
 			if (month === now.getMonth()) {
@@ -46,18 +38,18 @@ function isValidDate(str) {
 }
 
 function get_comments() {
-    var xmlhttp = new XMLHttpRequest();
+	var xmlhttp = new XMLHttpRequest();
 
-    xmlhttp.onreadystatechange=function() {
-        if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-            document.getElementById("comments_part").innerHTML = xmlhttp.responseText;
-        }
-    }
+	xmlhttp.onreadystatechange = function() {
+		if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+			document.getElementById("comments_part").innerHTML = xmlhttp.responseText;
+		}
+	}
 
-    var getter = "CommentGetter?id=";
-    getter = getter.concat(document.getElementById("inputID").value);
-    xmlhttp.open("GET", getter, true);
-    xmlhttp.send();
+	var getter = "CommentGetter?id=";
+	getter = getter.concat(document.getElementById("inputID").value);
+	xmlhttp.open("GET", getter, true);
+	xmlhttp.send();
 }
 
 function checkEmail() {
@@ -85,7 +77,7 @@ function myfunction() {
 		var name_v = encodeURIComponent(name_tag.value);
 		var email_v = encodeURIComponent(email_tag.value);
 		var content_v = encodeURIComponent(content_tag.value);
-		
+
 		name_tag.value = "";
 		email_tag.value = "";
 		content_tag.value = "";
@@ -104,7 +96,8 @@ function myfunction() {
 		}
 
 		xmlhttp.open("POST", "CommentPoster", true);
-		xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+		xmlhttp.setRequestHeader("Content-Type",
+				"application/x-www-form-urlencoded");
 
 		xmlhttp.send(to_send);
 
@@ -113,8 +106,10 @@ function myfunction() {
 	}
 }
 
-function konfirmasi(){
-	tanya=confirm('Apakah anda yakin menghapus post ini?');
-    if (tanya==true) return true;
-    else return false;	
+function konfirmasi() {
+	var tanya = confirm('Apakah anda yakin menghapus post ini?');
+	if (tanya == true)
+		return true;
+	else
+		return false;
 }
