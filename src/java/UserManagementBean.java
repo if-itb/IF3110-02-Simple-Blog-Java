@@ -10,6 +10,9 @@ import java.sql.ResultSet;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  *
@@ -23,7 +26,7 @@ public class UserManagementBean {
      * Creates a new instance of UserManagementBean
      */
     public UserManagementBean() {
-        
+        userExist = false;
     }
     
     private int id;
@@ -31,6 +34,7 @@ public class UserManagementBean {
     private String password;
     private String email;
     private String role;
+    private boolean userExist;
     
     public int getId()
     {
@@ -55,6 +59,11 @@ public class UserManagementBean {
     public String getRole()
     {
         return role;
+    }
+    
+    public boolean isUserExist()
+    {
+        return userExist;
     }
     
     public void setId(int id)
@@ -117,9 +126,11 @@ public class UserManagementBean {
     
     public void delete()
     {
+        System.out.println("Menghapus pengguna: " + username);
         Connection connect = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
+        
         try
         {
             Class.forName("com.mysql.jdbc.Driver");
@@ -136,6 +147,52 @@ public class UserManagementBean {
                 role = "guest";
                 email = "";
                 System.out.println("Hapus pengguna berhasil");
+                FacesContext.getCurrentInstance().getExternalContext().redirect(((HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest()).getRequestURI());
+            }
+                       
+        } catch (Exception e)
+        {
+            System.out.println("Failed to fetch users");
+        } finally {
+           Close(resultSet, preparedStatement, connect);
+        }
+                
+    }
+    
+    public void create()
+    {
+        System.out.println("create()");
+        Connection connect = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        try
+        {
+            Class.forName("com.mysql.jdbc.Driver");
+
+            connect = DriverManager.getConnection("jdbc:mysql://localhost/" + Config.dbName + "?user=" + Config.dbUsername + "&password=" + Config.dbPassword);
+            
+            preparedStatement = connect.prepareStatement("SELECT * FROM `users` WHERE `username`=?");
+            preparedStatement.setString(1, username);
+            
+            if (!preparedStatement.executeQuery().last())
+            {
+                preparedStatement = connect.prepareStatement("INSERT INTO `users` (`username`, `password`,`email`, `role`) VALUES (?, ?, ?, ?)");
+                preparedStatement.setString(1, this.username);
+                preparedStatement.setString(2, this.password);
+                preparedStatement.setString(3, this.email);
+                preparedStatement.setString(4, this.role);
+
+                if (preparedStatement.executeUpdate() > 0)
+                {
+                    username = "";
+                    password = "";
+                    role = "guest";
+                    email = "";
+                    userExist = false;
+                    System.out.println("Menambah pengguna berhasil");
+                }
+            } else {
+                userExist = true;
             }
                        
         } catch (Exception e)
@@ -146,35 +203,9 @@ public class UserManagementBean {
         }
     }
     
-    public void create()
+    public void processUpdateUser()
     {
-        Connection connect = null;
-        PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
-        try
-        {
-            Class.forName("com.mysql.jdbc.Driver");
-
-            connect = DriverManager.getConnection("jdbc:mysql://localhost/" + Config.dbName + "?user=" + Config.dbUsername + "&password=" + Config.dbPassword);
-
-            preparedStatement = connect.prepareStatement("INSERT INTO `users` WHERE `username`=?");
-            preparedStatement.setString(1, this.username);
-            
-            if (preparedStatement.executeUpdate() > 0)
-            {
-                username = "";
-                password = "";
-                role = "guest";
-                email = "";
-                System.out.println("Hapus pengguna berhasil");
-            }
-                       
-        } catch (Exception e)
-        {
-            System.out.println("Failed to fetch users");
-        } finally {
-           Close(resultSet, preparedStatement, connect);
-        }
+        create();
     }
     
     private void Close(ResultSet r, PreparedStatement p, Connection c)

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <!--
 To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
@@ -6,7 +6,8 @@ and open the template in the editor.
 -->
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 <head>
 
 <meta charset="utf-8" />
@@ -30,7 +31,7 @@ and open the template in the editor.
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->
 
-<title>Simple Blog</title>
+<title>New User - Simple Blog</title>
 
 
 </head>
@@ -46,26 +47,31 @@ and open the template in the editor.
 </nav>
 
 <div style="position:relative;top:180px;left:300px;">
- <h2>Users</h2>
+  <h2>New User</h2>
 
- <div>
-     <a href="edit_user.xhtml">+ Create user</a>
- </div>
 <div id="contact-area">
-  <div class="datagrid"><table>
-          <thead><tr><th>Username</th><th>Role</th><th style="width:50px;">action</th><th style="width:50px;"></th></tr></thead>
-  <tbody>
-    <ui:repeat var="a" value="#{userManagementArrayBean.users}" varStatus="status">
-        <h:panelGroup rendered="#{status.odd}">
-            <tr><td>#{a.username}</td><td>#{a.role}</td><td><a href="#">Edit</a></td><td><h:form><h:commandLink action="#{a.delete()}">Delete</h:commandLink></h:form></td></tr>
-        </h:panelGroup>
-        <h:panelGroup rendered="#{status.even}">
-            <tr class="alt"><td>#{a.username}</td><td>#{a.role}</td><td><a href="#">Edit</a></td><td><h:form><h:commandLink action="#{a.delete()}">Delete</h:commandLink></h:form></td></tr>
-        </h:panelGroup>
-    </ui:repeat>
-  </tbody>
-  </table>
-</div>
+    <c:if test="#{userManagementBean.userExist}">
+        <p style="color:#F40034;">Username already exist</p>
+    </c:if>
+    <h:form rendered="#{userBean.loggedIn}">
+        <label for="Nama">Username:</label>
+        <h:inputText value="#{userManagementBean.username}"/>
+        <label for="Email">Password:</label>
+        <h:inputSecret value="#{userManagementBean.password}"/>
+        <label for="Email">Email</label>
+        <h:inputText value="#{userManagementBean.email}"/>
+        <label for="Role">Role:</label>
+        <h:selectOneMenu value="#{userManagementBean.role}">
+            <f:selectItem itemValue="admin" itemLabel="admin" />
+            <f:selectItem itemValue="editor" itemLabel="editor" />
+            <f:selectItem itemValue="owner" itemLabel="owner" />
+        </h:selectOneMenu>
+        <br />
+        <h:commandButton action="#{userManagementBean.processUpdateUser()}" value="kirim" style="width:80px;"/>
+    </h:form>
+    <c:if test="#{!userBean.loggedIn}">
+        <p>You are not logged in.</p>
+    </c:if>
 </div>
 </div>
 

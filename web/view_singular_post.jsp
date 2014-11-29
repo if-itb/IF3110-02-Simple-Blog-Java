@@ -28,7 +28,7 @@
             </ul>
             </nav>
         </div>
-       <sql:setDataSource var="db_source" driver="com.mysql.jdbc.Driver" user="root" password="" url="jdbc:mysql://localhost/simpleblog-java"/>
+       <sql:setDataSource var="db_source" driver="com.mysql.jdbc.Driver" user="root" password="root" url="jdbc:mysql://localhost/simpleblog-java"/>
         <sql:query var="results" dataSource="${db_source}">
             SELECT * FROM posts WHERE id=<%= request.getParameter("post") %> ;
         </sql:query>
