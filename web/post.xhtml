@@ -74,15 +74,15 @@
 
                     <!-- Comments Form -->
                     <div class="well">
-                        <h:form class="form-horizontal" role="form" id="comment_form">
+                        <h:form class="form-horizontal" role="form" id="comment_form" onsubmit="addComment();return false;">
                             <c:set var="new_comment" value="#{Comment}" />
+                            <c:set var="author" value="#{UserData.userLoggedIn()}" />
                             <h5>Add Comment</h5>
                           <div class="form-group">
                             <label for="name" class="col-sm-2 control-label">Name</label>
                             <div class="col-sm-9">
                                 <c:choose>
                                     <c:when test="#{UserData.is_logged_in()}" >
-                                        <c:set var="author" value="#{UserData.userLoggedIn()}" />
                                         <h:inputText class="form-control" id="name" value="#{author.name}" valueChangeListener="#{new_comment.name}" required="true" requiredMessage="*Required"/>
                                         <h:message for="name" class="label label-warning" />
                                     </c:when>
@@ -98,7 +98,6 @@
                             <div class="col-sm-9">
                                 <c:choose>
                                     <c:when test="#{UserData.is_logged_in()}" >
-                                        <c:set var="author" value="#{UserData.userLoggedIn()}" />
                                         <h:inputText class="form-control" id="email" value="#{author.email}" valueChangeListener="#{new_comment.email}" required="true" requiredMessage="*Required"/>
                                         <h:message for="email" class="label label-warning" />
                                     </c:when>
@@ -118,9 +117,7 @@
                           </div>
                           <div class="form-group">
                             <div class="col-sm-offset-2 col-sm-10">
-                                <h:commandButton type="submit" value="submit" class="btn btn-primary" action="#{PostData.addComment(new_comment, post)}" onclick="return validate();">
-                                    <f:ajax execute="@form" render="comment-list @form"  />
-                                </h:commandButton>
+                                <button id="submit" type="submit" value="Publish" class="btn btn-primary" />
                             </div>
                           </div>
                         </h:form>
@@ -129,22 +126,7 @@
                     <hr />
 
                     <!-- Posted Comments -->
-                    <h:panelGroup id="comment_list">
-                        <ui:repeat value="#{PostData.getAllCommentonPost(post)}" var="comment">
-                        <!-- Comment -->
-                        <div class="media">
-                            <a class="pull-left" href="#">
-                                <img class="media-object" src="http://placehold.it/64x64" alt="" />
-                            </a>
-                            <div class="media-body">
-                                <h4 class="media-heading">#{comment.name}
-                                    <small>#{comment.time}</small>
-                                </h4>
-                                #{comment.content}
-                            </div>
-                        </div>
-                        </ui:repeat>
-                    </h:panelGroup>
+                    <div id="comment_list" />
 
                 </div>
 
@@ -202,7 +184,7 @@
 
         </div>
         <!-- /.container -->
-        <h:outputScript library="js" name="validate.js" />
+        <h:outputScript library="js" name="comment.js" />
     </h:body>
 </html>
 
