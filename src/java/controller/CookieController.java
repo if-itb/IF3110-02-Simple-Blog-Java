@@ -6,6 +6,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.User;
 
+/**
+ * 
+ * @author Ahmad Zaky
+ * Kelas yang mengatur cookie. Kelas ini merupakan kumpulan method.
+ */
 public class CookieController {
     // constants for cookies
     private static final String COOKIE_NAME = "SimpleBlogSessionCookie";
@@ -14,26 +19,16 @@ public class CookieController {
     // set cookie according to current user
     public static void setCookie(User user) {
         FacesContext context = FacesContext.getCurrentInstance();
-//        Cookie cookie = getCookie();
-//        
-//        // update cookie if it already exist
-//        if (cookie != null) {
-//            cookie.setValue(user.getUsername());
-//        }
-//        else {
-//            cookie = new Cookie(COOKIE_NAME, user.getUsername());
-//        }
-//        
-//        cookie.setPath("/");
-//        cookie.setMaxAge(COOKIE_MAX_AGE);
-//        
-        HttpServletResponse response = (HttpServletResponse) context.getExternalContext().getResponse();
+        HttpServletResponse response = 
+                (HttpServletResponse) context.getExternalContext().getResponse();
         response.addCookie(encrypt(user.getUsername()));
     }
     
+    // get the user cookie from the request. If not exist, returns null
     public static Cookie getCookie() {
         FacesContext context = FacesContext.getCurrentInstance();
-        HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
+        HttpServletRequest request = 
+                (HttpServletRequest) context.getExternalContext().getRequest();
         
         Cookie[] userCookies = request.getCookies();
         if (userCookies != null && userCookies.length > 0) {
@@ -47,9 +42,11 @@ public class CookieController {
         return null;
     }
     
+    // remove cookie from user cookies
     public static void removeCookie() {
         FacesContext context = FacesContext.getCurrentInstance();
-        HttpServletResponse response = (HttpServletResponse) context.getExternalContext().getResponse();
+        HttpServletResponse response = 
+                (HttpServletResponse) context.getExternalContext().getResponse();
         Cookie cookie = new Cookie(COOKIE_NAME, "");
         cookie.setPath("/");
         cookie.setMaxAge(0);
@@ -57,6 +54,7 @@ public class CookieController {
         response.addCookie(cookie);
     }
     
+    // returns the (encrypted) cookie from the username
     public static Cookie encrypt(String username) {
         Cookie cookie = new Cookie(COOKIE_NAME, username);
         cookie.setPath("/");
@@ -64,6 +62,7 @@ public class CookieController {
         return cookie;
     }
     
+    // decrypt the username if the cookie is known
     public static String decrypt(Cookie cookie) {
         return cookie.getValue();
     }

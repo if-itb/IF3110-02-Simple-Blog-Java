@@ -34,7 +34,7 @@
                 <h2>Edit Post</h2>
 
                 <div id="contact-area">
-                    <h:form>
+                    <h:form id="_post-form">
                         <h:outputLabel for="judul" value="Judul:" />
                         <h:inputText id="judul" binding="#{title}" p:required="required" value="#{postController.post.title}"/>
 
@@ -47,7 +47,7 @@
                         <h:outputLabel rendered="#{userController.user.role eq 'admin' or userController.user.role eq 'editor'}" for="published" value="Publikasi:"/>
                         <h:selectBooleanCheckbox rendered="#{userController.user.role eq 'admin' or userController.user.role eq 'editor'}" id="published" binding="#{publish}" value="#{postController.post.published}" style="margin-bottom: 30px; width: 20px"/><br/>
 
-                        <h:commandButton action="#{postController.updatePost(postController.post.id, title.value, date.value, content.value, publish.value)}" value="Simpan" class="submit-button" onclick="return validateDate();" style="margin-left: 120px"/>
+                        <h:commandButton action="#{postController.updatePost(postController.post.id, title.value, date.value, content.value, publish.value)}" value="Simpan" class="submit-button" onclick="return validateDate(document.getElementById('_post-form:tanggal').value);" style="margin-left: 120px"/>
                     </h:form>
                 </div>
             </div>
@@ -60,38 +60,7 @@
 
 </div>
 
-<script type="text/javascript">
-    function validateDate(){
-      var inputDate = document.getElementById("j_idt2:tanggal").value + "-";
-      var inputYear=""; var inputMonth=""; var inputDay="";
-      var i = 0;
-      
-      while(inputDate.charAt(i) !=='-'){
-        inputYear = inputYear + inputDate.charAt(i);
-        i++;
-      }
-      i++;
-      while(inputDate.charAt(i) !=='-'){
-        inputMonth = inputMonth + inputDate.charAt(i);
-        i++;
-      }
-      i++;
-      while(inputDate.charAt(i) !=='-'){
-        inputDay = inputDay + inputDate.charAt(i);
-        i++;
-      }
-      var formDate = new Date();
-      formDate.setFullYear(inputYear,inputMonth-1,inputDay);
-      //formDate.setHours(23);
-      //formDate.setMinutes(59);
-      //formDate.setSeconds(59);
-      var cekDate = new Date();
-      if(formDate &lt; cekDate){
-            alert("Tanggal post tidak boleh lebih kecil dari hari ini");
-            return false;
-       }
-   }
-</script>
+<h:outputScript name="assets/js/validator.js"/>
 
 </h:body>
 </html>

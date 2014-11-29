@@ -1,14 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package model;
 
 /**
  *
- * @author Ahmad
+ * @author Ahmad Shahab | 13512033
+ * Kelas yang berisi model Post
  */
 public class Post {
     /* Atribut Post */

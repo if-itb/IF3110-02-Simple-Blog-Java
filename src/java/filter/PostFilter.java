@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package filter;
 
 import controller.PostController;
@@ -20,6 +14,11 @@ import javax.servlet.http.HttpServletResponse;
 import model.Post;
 import model.User;
 
+/**
+ * 
+ * @author Ahmad Zaky
+ * Filter untuk halaman View Post (post.xhtml)
+ */
 public class PostFilter implements Filter {
 
     @Override

@@ -3,6 +3,11 @@ package model;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ *
+ * @author Ahmad Zaky | 13512076
+ * Kelas yang berisi model User
+ */
 public class User {
     /* Constants for available roles */
     public static final String ROLE_GUEST = "guest";
@@ -24,6 +29,7 @@ public class User {
         email = password = "";
     }
     
+    /* Konstruktor parameter dari komponen user */
     public User(String username, String password, String email, String role) {
         this.id = 0;
         this.username = username;
@@ -32,6 +38,7 @@ public class User {
         this.role = role;
     }
     
+    /* Konstruktor parameter dari hasil SQL */
     public User(ResultSet result) {
         try {
             id = result.getInt("id");

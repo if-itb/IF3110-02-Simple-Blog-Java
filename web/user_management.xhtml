@@ -15,17 +15,13 @@
 
     <h:outputStylesheet name="assets/css/screen.css"/>
     <h:outputStylesheet name="assets/css/simple-blog.css"/>
+
     <h:outputScript name="assets/js/simple-blog.js"/>
     <!--<link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico" />-->
     <title>Simple Blog | Manajemen User</title>
 </h:head>
 
 <h:body>
-<div class="wrapper">
-    <ui:insert id="header">
-        <ui:include src="/templates/header.xhtml"/>
-    </ui:insert>
-
 <style>
 input, select {
   margin: 0;
@@ -68,8 +64,12 @@ p{
     font-size: 25px;
 }
 </style>
+<div class="wrapper">
+    <ui:insert id="header">
+        <ui:include src="/templates/header.xhtml"/>
+    </ui:insert>
 
-<div id="home">
+    <div id="home">
     <div class="posts">
         <nav class="art-list">
             <!--GET ALL USER FROM DATABASE -->

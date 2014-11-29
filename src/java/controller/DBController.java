@@ -1,16 +1,19 @@
 package controller;
 
-import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 
-
+/**
+ * 
+ * @author Ahmad Zaky
+ * Kelas yang menghubungkan aplikasi dengan basis data. Kelas ini
+ * adalah kelas singleton.
+ */
 public class DBController {
+    // DB information
     private final String db_driver = "com.mysql.jdbc.Driver";
     private final String db_server = "jdbc:mysql://localhost:3306/if3110-02-simple-blog-java";
     private final String db_username = "root";
@@ -31,6 +34,7 @@ public class DBController {
         }
     }
     
+    // get the instance
     public static DBController getInstance() throws SQLException, ClassNotFoundException {
         if (instance == null) {
             instance = new DBController();
@@ -38,6 +42,7 @@ public class DBController {
         return instance;
     }
     
+    // execute query from the query string
     public ResultSet executeQuery(String sql) throws SQLException {
         PreparedStatement ps = connection.prepareStatement(sql);
         return ps.executeQuery();
@@ -51,6 +56,7 @@ public class DBController {
         return ps.executeQuery();
     }
     
+    // execute update from the query string
     public int executeUpdate(String sql) throws SQLException {
         PreparedStatement ps = connection.prepareStatement(sql);
         return ps.executeUpdate();

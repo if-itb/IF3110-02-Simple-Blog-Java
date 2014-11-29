@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package controller;
 
 import java.io.IOException;
@@ -18,7 +12,8 @@ import model.Post;
 
 /**
  *
- * @author Ahmad
+ * @author Ahmad Shahab
+ * Kelas Post Controller, mengatur penambahan, perubahan, dan penghapusan post
  */
 @ManagedBean(name="postController", eager=true)
 @SessionScoped
@@ -26,13 +21,14 @@ public class PostController {
     // current Post
     private Post post;
     
-    private DBController dbController;
+    private final DBController dbController;
     
     public PostController() throws SQLException, ClassNotFoundException {
         dbController = DBController.getInstance();
         post = null;
     }
 
+    // Getter-Setter untuk post
     /**
      * @return the post
      */
@@ -46,17 +42,11 @@ public class PostController {
     public void setPost(Post post) {
         this.post = post;
     }
-    
 
-    /**
-     * @return the dbController
-     */
-    public DBController getDbController() {
-        return dbController;
-    }
-    
+    // mengembalikan post jika diketahui id-nya
     public Post getPostById(Integer postId) throws SQLException, IOException {
-        ResultSet result = getDbController().executeQuery("SELECT * FROM `post` WHERE id ="+postId.toString());
+        ResultSet result = dbController.executeQuery("SELECT * FROM `post` "
+                + "WHERE `id` = ?", new String[]{postId.toString()});
         Post tempPost = new Post();
         while (result.next()) {
             tempPost.setId(result.getInt("id"));
@@ -68,92 +58,109 @@ public class PostController {
         return tempPost;
     }
     
+    // menampilkan post dengan id postId
     public void viewPost(Integer postId) throws SQLException, IOException{
         setPost(getPostById(postId));
-        
         FacesContext.getCurrentInstance().getExternalContext().redirect("post.xhtml");
     }
     
+    // menampilkan seluruh post yang belum dipublish
     public List<Post> publish() throws SQLException{
-        ResultSet result = getDbController().executeQuery("SELECT * FROM `post`");
+        ResultSet result = dbController.executeQuery("SELECT * FROM `post`");
         List<Post> postList = new ArrayList<>();
         while (result.next()) {
-            Post post = new Post();
+            Post _post = new Post();
             
-            post.setId(result.getInt("id"));
-            post.setContent(result.getString("content"));
-            post.setDate(result.getString("date"));
-            post.setTitle(result.getString("title"));
+            _post.setId(result.getInt("id"));
+            _post.setContent(result.getString("content"));
+            _post.setDate(result.getString("date"));
+            _post.setTitle(result.getString("title"));
             
             boolean publish = false;
             if(result.getInt("published")==1){
                 publish = true;
             }
-            post.setPublished(publish);
+            _post.setPublished(publish);
             
-            if(!post.getPublished()){
-                postList.add(post);
+            if(!_post.getPublished()){
+                postList.add(_post);
             }
         }
         return postList;
     }
     
+    // Mengembalikan list seluruh post yang ada
     public List<Post> getPostList() throws SQLException {
-        ResultSet result = getDbController().executeQuery("SELECT * FROM `post`");
+        ResultSet result = dbController.executeQuery("SELECT * FROM `post`");
         List<Post> postList = new ArrayList<>();
         while (result.next()) {
-            Post post = new Post();
+            Post _post = new Post();
             
-            post.setId(result.getInt("id"));
-            post.setContent(result.getString("content"));
-            post.setDate(result.getString("date"));
-            post.setTitle(result.getString("title"));
+            _post.setId(result.getInt("id"));
+            _post.setContent(result.getString("content"));
+            _post.setDate(result.getString("date"));
+            _post.setTitle(result.getString("title"));
             
             boolean publish = false;
             if(result.getInt("published")==1){
                 publish = true;
             }
-            post.setPublished(publish);
+            _post.setPublished(publish);
             
-            postList.add(post);
+            postList.add(_post);
         }
         return postList;
     }
     
-    public void addPost(String title, String date, String content, boolean publicationStatus) throws SQLException, IOException{
+    // menambahkan post dengan atribut sesuai parameter fungsi ini
+    public void addPost(String title, String date, String content, boolean publicationStatus) 
+            throws SQLException, IOException{
         Integer publication = 0;
         if(publicationStatus){
             publication = 1;
         }
-        getDbController().executeUpdate("INSERT INTO POST (title, date, content,published) VALUES ('"+title+"','"+date+"','"+content+"',"+publication.toString()+")");
+        dbController.executeUpdate("INSERT INTO POST"
+                + "(`title`, `date`, `content`, `published`) "
+                + "VALUES (?, ?, ?, ?)",
+                new String[]{title, date, content, publication.toString()});
         
+        // redirect ke laman utama
         FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
     }
     
+    // mengedit post; redirect ke halaman edit post
     public void editPost(Post _post) throws IOException{
         setPost(_post);
         
         FacesContext.getCurrentInstance().getExternalContext().redirect("edit_post.xhtml");
     }
     
-    public void updatePost(Integer id, String title, String date, String content, boolean publicationStatus) throws SQLException, IOException{
+    // update post dengan atribut sesuai parameter fungsi
+    public void updatePost(Integer id, String title, String date, String content, 
+            boolean publicationStatus) throws SQLException, IOException{
         Integer publication = 0;
         
         if(publicationStatus){
             publication = 1;
         }
         
-        getDbController().executeUpdate("UPDATE POST SET title='"+title+"', date='"+date+"', content='"+content+"',published="+publication.toString()+" WHERE id="+id+"");
+        dbController.executeUpdate("UPDATE `post` SET "
+                + "`title` = ?, `date` = ?, `content` = ?, `published` = ?"
+                + "WHERE `id` = ?",
+                new String[]{title, date, content, publication.toString(), id.toString()});
         
         FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
     }
     
+    // menghapus post dengan id tertentu
     public void deletePost(Integer id) throws SQLException, IOException{
-        getDbController().executeUpdate("DELETE FROM POST WHERE id="+id+"");
+        dbController.executeUpdate("DELETE FROM POST WHERE id=?",
+                new String[]{id.toString()});
         
         FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
     }
     
+    // mempublish post dengan id tertentu
     public void publishPost(Integer id) throws SQLException, IOException {
         Post tempPost = getPostById(id);
         tempPost.setPublished(true);
@@ -162,6 +169,7 @@ public class PostController {
                 tempPost.getContent(), tempPost.getPublished());
     }
     
+    // menonpublish post dengan id tertentu
     public void unpublishPost(Integer id) throws SQLException, IOException {
         Post tempPost = getPostById(id);
         tempPost.setPublished(false);
