@@ -29,179 +29,179 @@
         <!-- Page Content -->
         <div class="container">
             <c:set var="post" value="#{PostData.getPost(param['id'])}" />
-        <!-- Page Heading/Breadcrumbs -->
-        <div class="row">
-            <div class="col-lg-12">
-                <h1 class="page-header">#{post.title}
-                    <small>by <a href="#">#{post.author.username}</a>
-                    </small>
-                </h1>
-                <ol class="breadcrumb">
-                    <li><h:link outcome="index" value="Home" />
-                    </li>
-                    <li class="active">#{post.title}</li>
-                </ol>
-            </div>
-        </div>
-        <!-- /.row -->
-
-        <!-- Content Row -->
-        <div class="row">
-
-            <!-- Blog Post Content Column -->
-            <div class="col-lg-8">
-                
-                <!-- Blog Post -->
-
-                <hr />
-
-                <!-- Date/Time -->
-                <dt><i class="fa fa-clock-o"></i>  Posted on #{post.date}</dt>
-
-                <hr />
-
-                <!-- Preview Image -->
-                <img class="img-responsive" src="http://placehold.it/900x300" alt="" />
-
-                <hr />
-
-                <!-- Post Content -->
-                <p>#{post.content}</p>
-
-                <hr />
-
-                <!-- Blog Comments -->
-
-                <!-- Comments Form -->
-                <!-- Comments Form -->
-                <div class="well">
-                    <form class="form-horizontal" role="form">
-                        <h5>Add Comment</h5>
-                      <div class="form-group">
-                        <label for="inputEmail3" class="col-sm-2 control-label">Name</label>
-                        <div class="col-sm-9">
-                          <input type="email" class="form-control" id="inputEmail3" />
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <label for="inputPassword3" class="col-sm-2 control-label">Email</label>
-                        <div class="col-sm-9">
-                          <input type="password" class="form-control" id="inputPassword3" />
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <label for="inputPassword3" class="col-sm-2 control-label">Comment</label>
-                        <div class="col-sm-9">
-                          <textarea type="password" class="form-control" id="inputPassword3"></textarea>
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <div class="col-sm-offset-2 col-sm-10">
-                          <button type="submit" class="btn btn-primary">Publish</button>
-                        </div>
-                      </div>
-                    </form>
-                </div>
-
-                <hr />
-
-                <!-- Posted Comments -->
-
-                <!-- Comment -->
-                <div class="media">
-                    <a class="pull-left" href="#">
-                        <img class="media-object" src="http://placehold.it/64x64" alt="" />
-                    </a>
-                    <div class="media-body">
-                        <h4 class="media-heading">Start Bootstrap
-                            <small>August 25, 2014 at 9:30 PM</small>
-                        </h4>
-                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                    </div>
-                </div>
-
-                <!-- Comment -->
-                <div class="media">
-                    <a class="pull-left" href="#">
-                        <img class="media-object" src="http://placehold.it/64x64" alt="" />
-                    </a>
-                    <div class="media-body">
-                        <h4 class="media-heading">Start Bootstrap
-                            <small>August 25, 2014 at 9:30 PM</small>
-                        </h4>
-                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                        <!-- Nested Comment -->
-                        <div class="media">
-                            <a class="pull-left" href="#">
-                                <img class="media-object" src="http://placehold.it/64x64" alt="" />
-                            </a>
-                            <div class="media-body">
-                                <h4 class="media-heading">Nested Start Bootstrap
-                                    <small>August 25, 2014 at 9:30 PM</small>
-                                </h4>
-                                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                            </div>
-                        </div>
-                        <!-- End Nested Comment -->
-                    </div>
-                </div>
-
-            </div>
-
-            <!-- Blog Sidebar Widgets Column -->
-            <div class="col-md-4">
-
-                <!-- Blog Search Well
-                <div class="well">
-                    <h4>Blog Search</h4>
-                    <div class="input-group">
-                        <input type="text" class="form-control">
-                        <span class="input-group-btn">
-                            <button class="btn btn-primary" type="button">Search</button>
-                        </span>
-                    </div>
-                    /.input-group 
-                </div> -->
-
-                <!-- Blog Categories Well -->
-                <div class="well">
-                    <h4>Last Posts</h4>
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <ul class="list-unstyled">
-                                <ui:repeat var="p" value="#{PostData.allPost}">
-                                    <li style="margin-top: 15px;font-size: 16px;">
-                                        <img src="http://placehold.it/75x75" alt="" style="margin-right: 10px;" />
-                                        <h:link outcome="post" value="#{p.title}">
-                                            <f:param name="id" value="#{p.id}" />
-                                        </h:link>
-                                        by <a href="#">#{p.author.username}</a>
-                                    </li>
-                                </ui:repeat>
-                            </ul>
-                        </div>
-                    </div>
-                    <!-- /.row -->
-                </div>
-
-            </div>
-
-        </div>
-        <!-- /.row -->
-
-        <hr />
-
-        <!-- Footer -->
-        <footer>
+            <!-- Page Heading/Breadcrumbs -->
             <div class="row">
                 <div class="col-lg-12">
-                    <p>Copyright &copy; Your Website 2014</p>
+                    <h1 class="page-header">#{post.title}
+                        <small>by <a href="#">#{post.author.username}</a>
+                        </small>
+                    </h1>
+                    <ol class="breadcrumb">
+                        <li><h:link outcome="index" value="Home" />
+                        </li>
+                        <li class="active">#{post.title}</li>
+                    </ol>
                 </div>
             </div>
-        </footer>
+            <!-- /.row -->
 
-    </div>
-    <!-- /.container -->
+            <!-- Content Row -->
+            <div class="row">
+
+                <!-- Blog Post Content Column -->
+                <div class="col-lg-8">
+
+                    <!-- Blog Post -->
+
+                    <hr />
+
+                    <!-- Date/Time -->
+                    <dt><i class="fa fa-clock-o"></i>  Posted on #{post.date}</dt>
+
+                    <hr />
+
+                    <!-- Preview Image -->
+                    <img class="img-responsive" src="http://placehold.it/900x300" alt="" />
+
+                    <hr />
+
+                    <!-- Post Content -->
+                    <p>#{post.content}</p>
+
+                    <hr />
+
+                    <!-- Blog Comments -->
+
+                    <!-- Comments Form -->
+                    <!-- Comments Form -->
+                    <div class="well">
+                        <h:form class="form-horizontal" role="form">
+                            <h5>Add Comment</h5>
+                          <div class="form-group">
+                            <label for="inputName" class="col-sm-2 control-label">Name</label>
+                            <div class="col-sm-9">
+                                <h:inputText value="#{Comment.name}" class="form-control" id="inputName" />
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label for="inputEmail" class="col-sm-2 control-label">Email</label>
+                            <div class="col-sm-9">
+                                <h:inputText value="#{Comment.email}" class="form-control" id="inputEmail" />
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label for="inputComment" class="col-sm-2 control-label">Comment</label>
+                            <div class="col-sm-9">
+                                <h:inputTextarea value="#{Comment.content}" class="form-control" id="inputComment" />
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                              <button type="submit" class="btn btn-primary">Publish</button>
+                            </div>
+                          </div>
+                        </h:form>
+                    </div>
+
+                    <hr />
+
+                    <!-- Posted Comments -->
+
+                    <!-- Comment -->
+                    <div class="media">
+                        <a class="pull-left" href="#">
+                            <img class="media-object" src="http://placehold.it/64x64" alt="" />
+                        </a>
+                        <div class="media-body">
+                            <h4 class="media-heading">Start Bootstrap
+                                <small>August 25, 2014 at 9:30 PM</small>
+                            </h4>
+                            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                        </div>
+                    </div>
+
+                    <!-- Comment -->
+                    <div class="media">
+                        <a class="pull-left" href="#">
+                            <img class="media-object" src="http://placehold.it/64x64" alt="" />
+                        </a>
+                        <div class="media-body">
+                            <h4 class="media-heading">Start Bootstrap
+                                <small>August 25, 2014 at 9:30 PM</small>
+                            </h4>
+                            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                            <!-- Nested Comment -->
+                            <div class="media">
+                                <a class="pull-left" href="#">
+                                    <img class="media-object" src="http://placehold.it/64x64" alt="" />
+                                </a>
+                                <div class="media-body">
+                                    <h4 class="media-heading">Nested Start Bootstrap
+                                        <small>August 25, 2014 at 9:30 PM</small>
+                                    </h4>
+                                    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                                </div>
+                            </div>
+                            <!-- End Nested Comment -->
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Blog Sidebar Widgets Column -->
+                <div class="col-md-4">
+
+                    <!-- Blog Search Well
+                    <div class="well">
+                        <h4>Blog Search</h4>
+                        <div class="input-group">
+                            <input type="text" class="form-control">
+                            <span class="input-group-btn">
+                                <button class="btn btn-primary" type="button">Search</button>
+                            </span>
+                        </div>
+                        /.input-group 
+                    </div> -->
+
+                    <!-- Blog Categories Well -->
+                    <div class="well">
+                        <h4>Last Posts</h4>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <ul class="list-unstyled">
+                                    <ui:repeat var="p" value="#{PostData.allPost}">
+                                        <li style="margin-top: 15px;font-size: 16px;">
+                                            <img src="http://placehold.it/75x75" alt="" style="margin-right: 10px;" />
+                                            <h:link outcome="post" value="#{p.title}">
+                                                <f:param name="id" value="#{p.id}" />
+                                            </h:link>
+                                            by <a href="#">#{p.author.username}</a>
+                                        </li>
+                                    </ui:repeat>
+                                </ul>
+                            </div>
+                        </div>
+                    <!-- /.row -->
+                    </div>
+
+                </div>
+
+            </div>
+            <!-- /.row -->
+
+            <hr />
+
+            <!-- Footer -->
+            <footer>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <p>Copyright &copy; Your Website 2014</p>
+                    </div>
+                </div>
+            </footer>
+
+        </div>
+        <!-- /.container -->
     </h:body>
 </html>
 

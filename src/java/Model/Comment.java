@@ -6,8 +6,7 @@ import javax.faces.bean.RequestScoped;
 
 /**
  * Representation of comment
- * @author Luthfi Hamid Masykuri
- * @modified Riva Syafri Rachmatullah
+ * @author Riva Syafri Rachmatullah
  */
 @ManagedBean(name="Comment")
 @RequestScoped
@@ -18,6 +17,19 @@ public class Comment {
     private String email;
     private String content;
     private Timestamp time;
+    
+    /**
+     * Create an empty instance of Post
+     */
+    public Comment()
+    {
+        id = 0;
+        pid = 0;
+        name = "";
+        email = "";
+        content = "";
+        time = null;
+    }
     
     /**
      * Create an instance of comment

@@ -289,6 +289,120 @@ public class PostData implements Serializable {
         }
     }
     
+    /**
+     * Get all comment in a post
+     * @param post the selected post
+     * @return All comment in a post
+     */
+    public List<Comment> getAllCommentonPost(Post post) {
+        try {
+            this.db.Where("pid=", "" + post.getId());
+            ResultSet Data = this.db.Select("comment");
+            boolean isExist = Data.first();
+            List<Comment> ListComment = new LinkedList();
+            while (isExist) {
+                int id = Data.getInt("id");
+                int pid = Data.getInt("pid");
+                String name = Data.getString("name");
+                String email = Data.getString("email");
+                String content = Data.getString("content");
+                Timestamp time = Data.getTimestamp("time");
+                Comment comment = new Comment(id, pid, name, email, content, time);
+                ListComment.add(comment);
+                isExist = Data.next();
+            }
+            return ListComment;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+    
+    /**
+     * Get all comment in a post
+     * @param comment comment in post
+     * @return All comment in a post
+     */
+    public List<CommentofComment> getAllCommentofComment(Comment comment) {
+        try {
+            this.db.Where("cid=", "" + comment.getID());
+            ResultSet Data = this.db.Select("ccomment");
+            boolean isExist = Data.first();
+            List<CommentofComment> ListCommentofComment = new LinkedList();
+            while (isExist) {
+                int id = Data.getInt("id");
+                int cid = Data.getInt("cid");
+                String name = Data.getString("name");
+                String email = Data.getString("email");
+                String content = Data.getString("content");
+                Timestamp time = Data.getTimestamp("time");
+                CommentofComment ccomment = new CommentofComment(id, cid, name, email, content, time);
+                ListCommentofComment.add(ccomment);
+                isExist = Data.next();
+            }
+            return ListCommentofComment;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    /**
+     * Add comment to database
+     * @param comment new comment
+     * @return string status
+     */
+    public String addComment(Comment comment) {
+        String col[] = {"id", "pid", "name", "email", "content", "time"};
+        String val[] = new String[6];
+        val[0] = String.valueOf(comment.getID());
+        val[1] = String.valueOf(comment.getPID());
+        val[2] = comment.getName();
+        val[3] = comment.getEmail();
+        val[4] = comment.getContent();
+        val[5] = comment.getTime().toString();
+        int query = this.db.Insert("comment", col, val);
+        if (query > 0) {
+            return "success";
+        } else {
+            return "failed";
+        }
+    }
+    
+    /**
+     * Add comment of comment to database
+     * @param comment new comment of comment
+     * @return string status
+     */
+    public String addCommentofComment(CommentofComment comment) {
+        String col[] = {"id", "cid", "name", "email", "content", "time"};
+        String val[] = new String[6];
+        val[0] = String.valueOf(comment.getID());
+        val[1] = String.valueOf(comment.getCID());
+        val[2] = comment.getName();
+        val[3] = comment.getEmail();
+        val[4] = comment.getContent();
+        val[5] = comment.getTime().toString();
+        int query = this.db.Insert("comment", col, val);
+        if (query > 0) {
+            return "success";
+        } else {
+            return "failed";
+        }
+    }
+    
+    /**
+     * Delete comment from database
+     * @param id id of comment
+     */
+    public void DelComment(int id) {
+        this.db.Where("id=", String.valueOf(id));
+        this.db.Delete("comment");
+    }
+    
+    public void DelCommentofComment (int id) {
+        this.db.Where("id=", String.valueOf(id));
+        this.db.Delete("ccomment");
+    }
+    
     public static void main(String args[]) {
         PostData pd = new PostData();
         List<Post> a = pd.getAllPost();
