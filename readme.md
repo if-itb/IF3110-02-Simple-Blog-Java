@@ -123,7 +123,7 @@ editor:
 admin:
 - crud bermasalah
     - habis add user kok gak kosong? <- **Eric**: fix dengan edit kode java Viewpost
-- edit harusnya bermasalah seperti yang di atas
+- edit harusnya bermasalah seperti yang di atas <- masih ada?
 - hard delete <- **Kevin** simple MySQL
       
 page list: 
