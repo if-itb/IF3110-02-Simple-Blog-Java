@@ -1,0 +1,85 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	template="/templates/page-template.xhtml">
+<ui:define name="title">Management User</ui:define>
+
+<ui:define name="bodyContent">
+<c:if test="#{!userLoader.isLoggedIn() and userLoader.isAdmin()}">
+<h:panelGrid style="padding:0 0 0 40px"> 
+	<script>
+	function confirmDelete() {
+		return confirm("Apakah anda yakin akan menghapus username ini?")
+	}
+	</script>
+	<h2 class="title">List of User</h2>
+	<div align="center">
+		<h:form>
+			<h:commandLink class="submit-button" action="add-user?faces-redirect=true" value="+ Add user" />
+		</h:form>
+	</div>
+		<h:dataTable value="#{userLoader.users}" var="u"
+    			styleClass="gridtable"
+    			
+    		>
+ 
+    		<h:column>
+    			<f:facet name="header">
+    				Username
+    			</f:facet>
+    				#{u.username}
+    		</h:column>
+ 
+    		<h:column>
+    			<f:facet name="header">
+    				Name
+				</f:facet>
+    				#{u.name}
+    		</h:column>
+    		
+    		<h:column>
+    			<f:facet name="header">
+    				Role
+				</f:facet>
+    				#{u.roleString}
+    		</h:column>
+    		
+    		<h:column>
+    			<f:facet name="header">
+    				Email
+				</f:facet>
+    				#{u.email}
+    		</h:column>
+    		
+    		<h:column>
+    			<f:facet name="header">
+    				
+				</f:facet>
+    				<h:form>
+						<h:commandLink action="#{userLoader.toEditUser(u.ID)}" value="Edit"/>
+					</h:form>
+    		</h:column>
+
+    		<h:column>
+    			<f:facet name="header">
+    				
+				</f:facet>
+    				<h:form>
+						<h:commandLink action="#{userLoader.deleteUser(u.ID)}" value="Delete" onclick="return confirmDelete();" />
+					</h:form>
+    		</h:column>
+ 
+    	</h:dataTable>
+
+	
+</h:panelGrid>
+</c:if>
+<c:if test="#{userLoader.isLoggedIn() or !userLoader.isAdmin()}"> 
+    <ui:include src="not_allowed.xhtml" />
+</c:if>
+
+</ui:define>
+</ui:composition>

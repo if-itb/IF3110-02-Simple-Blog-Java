@@ -1,0 +1,19 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	template="/templates/page-template.xhtml">
+<ui:define name="title">Invalid</ui:define>
+<ui:define name="bodyContent">
+	
+	<f:view>
+		<h3>Unsuccessfully logged in</h3>
+		<h:form>
+			<p><a href="#{request.contextPath}" >Back to Home Page</a></p>
+		</h:form>
+	</f:view>
+
+</ui:define>
+</ui:composition>

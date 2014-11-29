@@ -1,0 +1,21 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	template="/templates/page-template.xhtml">
+<ui:define name="title">Success</ui:define>
+<ui:define name="bodyContent">
+	
+	<c:if test="#{!userLoader.isLoggedIn()}">
+		<p>Successfully logged in</p>
+		<p>Hi, #{userLoader.getValueCookie()}</p>
+		<p><a href="#{request.contextPath}" >Back to Home Page</a></p>
+	</c:if>
+	<c:if test="#{userLoader.isLoggedIn()}">
+		<ui:include src="not_allowed.xhtml" />
+	</c:if>
+
+</ui:define>
+</ui:composition>
