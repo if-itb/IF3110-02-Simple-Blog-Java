@@ -108,7 +108,8 @@ Bonus
 Todo
 ====
 
+- perbagus tampilan
 - debug untuk fitur guest
 - debug untuk fitur user
 - debug untuk fitur editor
-- debug untuk fitur admin 
+- debug untuk fitur admin

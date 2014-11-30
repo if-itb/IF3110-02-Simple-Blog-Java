@@ -8,14 +8,17 @@
 <ui:composition template="common.xhtml">
 	<ui:define name="title">Unpublished Post</ui:define>
 	<ui:define name="content">
+		<f:metadata>
+			<f:event type="preRenderView"
+				listener="#{userData.check(4, 'index.jsf')}" />
+		</f:metadata>
 		<div class="col-md-8 col-md-offset-2" style="padding-top: 100px">
 			<table class="table table-striped table-bordered">
 				<tr>
 					<th width="80%">Post</th>
 					<th colspan="2">Commands</th>
 				</tr>
-				<ui:repeat var="post"
-					value="#{viewPost.unpublishedPostList}">
+				<ui:repeat var="post" value="#{viewPost.unpublishedPostList}">
 					<tr>
 						<td width="80%"><h:link value="#{post.title}"
 								outcome="view_post?post_id=#{post.id}" /></td>

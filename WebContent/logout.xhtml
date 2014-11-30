@@ -8,6 +8,7 @@
 <h:head>
 	<title>Logout</title>
 	<f:metadata>
+		<f:event type="preRenderView" listener="#{userData.check(14, 'index.jsf')}" />
 		<f:viewAction action="#{userData.logout}"/>
 	</f:metadata>
 </h:head>

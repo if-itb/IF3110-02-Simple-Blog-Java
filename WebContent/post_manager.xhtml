@@ -8,6 +8,10 @@
 <ui:composition template="common.xhtml">
 	<ui:define name="title">All Posts</ui:define>
 	<ui:define name="content">
+		<f:metadata>
+			<f:event type="preRenderView"
+				listener="#{userData.check(8, 'index.jsf')}" />
+		</f:metadata>
 		<div class="col-md-8 col-md-offset-2" style="padding-top: 100px">
 			<p>Published Post</p>
 			<table class="table table-striped table-bordered">
@@ -72,7 +76,7 @@
 				</ui:repeat>
 			</table>
 			<br /> <br /> <br />
-			<p>Soft-Delted Post</p>
+			<p>Soft-Deleted Post</p>
 			<table class="table table-striped table-bordered">
 				<tr>
 					<th width="80%">Post</th>

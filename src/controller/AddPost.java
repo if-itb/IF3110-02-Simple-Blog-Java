@@ -83,6 +83,6 @@ public class AddPost {
 				e.printStackTrace();
 			}
 		}
-		return "index";
+		return "index?faces-redirect=true";
 	}
 }
