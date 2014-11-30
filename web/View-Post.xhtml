@@ -35,7 +35,19 @@ and open the template in the editor.
                 </section>
                 <h1 class="content-subhead">Komentar</h1>
                 <section class="komentar">
-                    
+                    <h:form class="pure-form" id="comment_form" onsubmit="return validateForm(#{komentar.email})"  >
+                        <label for="Nama">Nama:</label>
+                        <input type="text" name="Nama" value="#{komentar.nama}"/>
+                        <br/>
+                        <label for="Email">Email:</label>
+                        <input type="text" name="Email" value="#{komentar.email}"/>
+                        <p size ="10px" id="errmsg"></p>
+
+                        <label for="Komentar">Komentar:</label><br/>
+                        <textarea name="Komentar" rows="5" cols="50" value="#{komentar.komentar}"></textarea>
+
+                        <input type="submit" name="submit" value="submit" class="submit-button" action="#{komentar.AddComment(param['id'])}"/>
+                    </h:form>
                     <ul class="komentar-list">
                         <c:forEach var="komentar" items="#{komentar.fetchComment(param['id'])}">
                             <li>
