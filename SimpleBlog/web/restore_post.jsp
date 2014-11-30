@@ -37,6 +37,7 @@
                             <div class="art-list-time">${deletedpost.tanggal}</div>
                             <!-- <div class="art-list-time"><span style="color:#F40034;">&#10029;</span> Featured</div> -->
                         </div>
+                        <p>${deletedpost.imageHTML}</p>
                         <p>${deletedpost.konten}</p>
                         <p>
                             <a href="restore_post?id=${deletedpost.id}" >Restore</a>

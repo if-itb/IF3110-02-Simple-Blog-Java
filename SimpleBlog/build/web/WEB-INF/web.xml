@@ -37,6 +37,14 @@
         <servlet-name>restore_post</servlet-name>
         <servlet-class>servlet.restore_post</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>new_post</servlet-name>
+        <servlet-class>servlet.new_post</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>edit_post</servlet-name>
+        <servlet-class>servlet.edit_post</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>/faces/*</url-pattern>
@@ -69,12 +77,20 @@
         <servlet-name>restore_post</servlet-name>
         <url-pattern>/faces/restore_post</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>new_post</servlet-name>
+        <url-pattern>/faces/new_post</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>edit_post</servlet-name>
+        <url-pattern>/faces/edit_post</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>faces/index.xhtml</welcome-file>
+        <welcome-file>faces/home.jsp</welcome-file>
     </welcome-file-list>
 </web-app>

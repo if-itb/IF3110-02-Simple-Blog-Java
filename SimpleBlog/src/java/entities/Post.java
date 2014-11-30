@@ -5,6 +5,8 @@
 package entities;
 
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -56,6 +58,9 @@ public class Post implements Serializable {
     private String konten;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPost")
     private Collection<Komentar> komentarCollection;
+    private String image;
+    private String imageHTML;
+    private String formatedTanggal;
 
     public Post() {
     }
@@ -137,4 +142,34 @@ public class Post implements Serializable {
         return "entities.Post[ id=" + id + " ]";
     }
     
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+    
+    public String getImageHTML() {
+        String img = "";
+        if (!(this.image.equals("-"))) {
+            img += "<img src=\"assets/image/"+this.image+"\" style=\"width:100%\" />";
+        }
+        this.imageHTML = img;
+        return this.imageHTML;
+    }
+    
+    public void setImageHTML(String imageHTML) {
+        this.imageHTML = imageHTML;
+    }
+    
+    public String getFormatedTanggal() {
+        DateFormat df2 = new SimpleDateFormat("dd-MM-yyyy");
+        this.formatedTanggal = df2.format(this.tanggal); 
+        return this.formatedTanggal;
+    }
+    
+    public void setFormatedTanggal(String formatedTanggal) {
+        this.formatedTanggal = formatedTanggal;
+    }
 }

@@ -89,12 +89,13 @@
     </div>
     <nav class="nav">
         <ul class="nav-primary">
-            <% if ((role != null) && ((role.equals("admin")) || (role.equals("owner")))) { %><li><a href="new_post.jsp">Tambah Post</a></li><% } %>
+            <li><a href="index.jsp">Home</a></li>
+            <% if ((role != null) && ((role.equals("admin")) || (role.equals("owner")))) { %><li>/</li><li><a href="new_post_image.jsp">Tambah Post</a></li><% } %>
             <% if ((role != null) && ((role.equals("admin")) || (role.equals("editor")))) { %><li>/</li><li><a href="publish_post.jsp">Publish Post</a></li><% } %>
             <% if ((role != null) && (role.equals("admin"))) { %><li>/</li><li><a href="restore_post.jsp">Restore Post</a></li><% } %>
             <% if ((role != null) && (role.equals("admin"))) { %><li>/</li><li><a href="list_user.jsp">User</a></li><% } %>
             <% if (email != null) { %><li>/</li><li><a href="logout.jsp">Logout</a></li><% } %>
-            <% if ((email == null) && (role == null) && (nama == null)) { %><li><a href="login.jsp">Login</a></li><% } %>
+            <% if ((email == null) && (role == null) && (nama == null)) { %><li>/</li><li><a href="login.jsp">Login</a></li><% } %>
         </ul> 
     </nav>
 </div>

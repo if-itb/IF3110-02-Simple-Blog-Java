@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 24, 2014 at 09:43 PM
+-- Generation Time: Nov 30, 2014 at 01:37 PM
 -- Server version: 5.6.20
 -- PHP Version: 5.5.15
 
@@ -30,18 +30,10 @@ CREATE TABLE IF NOT EXISTS `komentar` (
 `id` int(255) NOT NULL,
   `nama` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
-  `tanggal` datetime NOT NULL,
+  `tanggal` date NOT NULL,
   `komentar` text NOT NULL,
   `id_post` int(255) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
-
---
--- Dumping data for table `komentar`
---
-
-INSERT INTO `komentar` (`id`, `nama`, `email`, `tanggal`, `komentar`, `id_post`) VALUES
-(4, 'sasa', 'asa@fa.com', '2014-11-24 00:00:00', 'ter\n', 25),
-(5, 'nama admin', 'admin@simpleblog.com', '2014-11-25 00:00:00', 'asas', 20);
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 -- --------------------------------------------------------
 
@@ -55,18 +47,9 @@ CREATE TABLE IF NOT EXISTS `post` (
   `tanggal` date NOT NULL,
   `konten` text NOT NULL,
   `status` varchar(100) NOT NULL,
-  `is_deleted` varchar(100) NOT NULL DEFAULT 'no'
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=26 ;
-
---
--- Dumping data for table `post`
---
-
-INSERT INTO `post` (`id`, `judul`, `tanggal`, `konten`, `status`, `is_deleted`) VALUES
-(20, 'blablabla', '2014-10-16', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis repudiandae quae natus quos alias eos repellendus a obcaecati cupiditate similique quibusdam, atque omnis illum, minus ex dolorem facilis tempora deserunt!', 'published', ''),
-(21, 'Judul post3', '2014-10-15', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis repudiandae quae natus quos alias eos repellendus a obcaecati cupiditate similique quibusdam, atque omnis illum, minus ex dolorem facilis tempora deserunt!', 'unpublished', ''),
-(23, 'judul blablabla', '2014-10-17', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis repudiandae quae natus quos alias eos repellendus a obcaecati cupiditate similique quibusdam, atque omnis illum, minus ex dolorem facilis tempora deserunt!', 'unpublished', ''),
-(25, 'qqq', '2014-11-26', 'qwqwq', 'unpublished', 'no');
+  `is_deleted` varchar(100) NOT NULL DEFAULT 'no',
+  `image` varchar(100) NOT NULL DEFAULT '-'
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=37 ;
 
 -- --------------------------------------------------------
 
@@ -80,7 +63,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `password` varchar(100) NOT NULL,
   `nama` varchar(100) NOT NULL,
   `role` varchar(100) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 --
 -- Dumping data for table `user`
@@ -121,17 +104,17 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `komentar`
 --
 ALTER TABLE `komentar`
-MODIFY `id` int(255) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+MODIFY `id` int(255) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `post`
 --
 ALTER TABLE `post`
-MODIFY `id` int(255) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=26;
+MODIFY `id` int(255) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=37;
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-MODIFY `id` int(225) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
+MODIFY `id` int(225) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
 --
 -- Constraints for dumped tables
 --

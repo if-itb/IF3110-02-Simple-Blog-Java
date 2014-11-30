@@ -72,6 +72,7 @@ public class model_post {
                 post.setJudul(rset.getString("judul"));
                 post.setKonten(rset.getString("konten"));
                 post.setTanggal(rset.getDate("tanggal"));
+                post.setImage(rset.getString("image"));
             
                 posts.add(post);  
             }
@@ -96,7 +97,7 @@ public class model_post {
                 post.setJudul(rset.getString("judul"));
                 post.setKonten(rset.getString("konten"));
                 post.setTanggal(rset.getDate("tanggal"));
-            
+                post.setImage(rset.getString("image"));
                 posts.add(post);  
             }
                  
@@ -120,7 +121,7 @@ public class model_post {
                 post.setJudul(rset.getString("judul"));
                 post.setKonten(rset.getString("konten"));
                 post.setTanggal(rset.getDate("tanggal"));
-            
+                post.setImage(rset.getString("image"));
                 posts.add(post);  
             }
                  
@@ -145,7 +146,7 @@ public class model_post {
                 post.setJudul(rset.getString("judul"));
                 post.setKonten(rset.getString("konten"));
                 post.setTanggal(rset.getDate("tanggal"));
-               
+                post.setImage(rset.getString("image"));
             }
                  
         } catch (SQLException ex) {

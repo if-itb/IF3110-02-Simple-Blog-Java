@@ -37,9 +37,10 @@
                             <div class="art-list-time">${post.tanggal}</div>
                             <!-- <div class="art-list-time"><span style="color:#F40034;">&#10029;</span> Featured</div> -->
                         </div>
+                        <p>${post.imageHTML}</p>
                         <p>${post.konten}</p>
                         <p>
-                            <a href="edit_post.jsp?id=${post.id}">Edit</a> | <a href="publish_post?id=${post.id}" >Publish</a>
+                            <a href="edit_post_image.jsp?id=${post.id}">Edit</a> | <a href="publish_post?id=${post.id}" >Publish</a>
                         </p>
                         
                     </li>

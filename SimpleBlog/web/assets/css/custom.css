@@ -15,6 +15,7 @@ padding: 0 0 0;
 
 .art-list-item-title-and-time {
 width: 100%;
+text-align: center;
 }
 
 h2 {
@@ -48,4 +49,12 @@ background-color: orange;
 
 .footer, .footer a {
     color: white;
+}
+
+#contact-area .img {
+padding: 5px;
+width: 471px;
+font-family: Helvetica, sans-serif;
+margin: 0px 0px 10px 0px;
+display: -webkit-box;
 }

@@ -33,6 +33,7 @@
         <div class="art-body">
             <div class="art-body-inner">
                 <!-- <hr class="featured-article" /> -->
+                <p>${postBean.post.imageHTML}</p>
                 <p>${postBean.post.konten}</p>
 
 
