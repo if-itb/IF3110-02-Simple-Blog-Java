@@ -1,4 +1,5 @@
 function addComment() {
+    var id = document.getElementById("id").innerHTML;
     var name = document.getElementById("name").value;
     var email = document.getElementById("email").value;
     var content = document.getElementById("content").value;
@@ -26,9 +27,9 @@ function addComment() {
                     }
                 }
             }
-            xmlhttp.open("POST","controller/addComment.php",true);
+            xmlhttp.open("get","CommentServlet",true);
             xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-            xmlhttp.send("id=param['id']&nama="+name+"&email="+email+"&content="+content);
+            xmlhttp.send("id="+id+"&nama="+name+"&email="+email+"&content="+content);
         } else {
             alert("Invalid email!");
             document.getElementById("email").focus();
@@ -39,6 +40,7 @@ function addComment() {
     }
 }
 function loadComment() {
+    var id = document.getElementById("id").innerHTML;
     var xmlhttp;
     if (window.XMLHttpRequest) {
         // code for IE7+, Firefox, Chrome, Opera, Safari
@@ -74,9 +76,9 @@ function loadComment() {
             document.getElementById("comment_list").style="display:block";
         }
     }
-    xmlhttp.open("POST","controller/get_komen.php",true);
+    xmlhttp.open("post","CommentServlet",true);
     xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-    xmlhttp.send("id=param['id']");
+    xmlhttp.send("id="+id);
 }
 function validateEmail(email) {
     var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
