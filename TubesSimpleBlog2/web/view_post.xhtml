@@ -1,4 +1,3 @@
-
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 To change this license header, choose License Headers in Project Properties.
@@ -16,12 +15,17 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width"/>
                 <link rel="stylesheet" href="style.css" type="text/css" />
     </h:head>
-	<div class="header">Simple Blog </div>
-    <h:body> 
+	<h:body>
+		<div class="header">Simple Blog </div>
         <div id="nav"> User Management | See Unpublished | Add Post | Logout   </div>
         <div id="main">
 		<h1>View Post</h1>
 		<hr/>
+		<h:form>
+		<h:outputText id="firstNameText" value="Sample Bean:"></h:outputText>
+         <br/><h:outputText id="accountName" value="#{sampleBean.nama}"></h:outputText>
+         <br/><h:outputText id="accountRole" value="#{sampleBean.role}"></h:outputText>
+		</h:form>
 		#{viewPost.showPage(param['idpost'])}
 		#{listKomentar.showPage(param['idpost'])}
 		<br/><h:outputText value="#{viewPost.postId}"></h:outputText> 
@@ -30,7 +34,7 @@ and open the template in the editor.
          <br/> <h:outputText value="#{viewPost.tanggal}"></h:outputText>
 		 
 		<p>           
-        <h:form id="formcomment" onsubmit="return validasiEmail()">
+        <h:form rendered="#{sampleBean.role ne 'editor'}" id="formcomment" onsubmit="return validasiEmail()">
 			Nama: <h:inputText id="name" value="#{komentar.nama}"></h:inputText>
     		Email : <h:inputText id="email" value="#{komentar.email}"></h:inputText>
             Komentar : <h:inputText id="koment" value="#{komentar.komentar}"></h:inputText>  

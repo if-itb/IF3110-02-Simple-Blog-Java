@@ -12,23 +12,24 @@
     </h:head>
     <h:body>
 		<div class="header"> Simple Blog </div>
-                        <div id="nav"> User Management | See Unpublished | Add Post | Logout   </div>
+        <div id="nav"> User Management | See Unpublished | Add Post | Logout   </div>
 		<div id="main">
                     
 		<h2> List Post </h2>
-		<p>
+		
 		<h:form>
 		<h:outputText id="firstNameText" value="Sample Bean:"></h:outputText>
          <br/><h:outputText id="accountName" value="#{sampleBean.nama}"></h:outputText>
          <br/><h:outputText id="accountRole" value="#{sampleBean.role}"></h:outputText>
-		</h:form>
+		
 			
                     <hr></hr>
-		<p><br/><h:commandLink rendered="#{sampleBean.role eq 'admin' || 'owner'}" action="add_post" value="Add">
+		<br/><h:commandLink rendered="#{sampleBean.role eq 'admin' or sampleBean.role eq 'owner'}" action="add_post" value="Add">
 		</h:commandLink>
-			<br/><h:commandLink rendered="#{sampleBean.role eq 'admin' || 'editor'}" action="unpublished_post" value="See Unpublished">
+		<br/><h:commandLink rendered="#{sampleBean.role eq 'admin' or sampleBean.role eq 'editor'}" action="unpublished_post" value="See Unpublished">
 		</h:commandLink>
-
+		</h:form>
+		<p>
 		<c:forEach items="#{listPost.arrPostPublished}" var="pos">			
 			<h:form>				
 			<br/><h:outputText value="#{pos.IDPost}"></h:outputText> 
@@ -39,13 +40,14 @@
 			<br/> <h:outputText value="#{pos.content}"></h:outputText>
 			<br/><h:commandLink action="#{post.deletePost(pos.IDPost)}" value="Delete" onclick="return confirm('Apakah Anda yakin menghapus post ini?');">
 			</h:commandLink>
-            <br/><h:commandLink rendered="#{sampleBean.role eq 'admin' || 'owner' || 'editor'}" action="edit_post" value="Edit">
+            <br/><h:commandLink rendered="#{sampleBean.role eq 'admin' or sampleBean.role eq 'owner' or sampleBean.role eq 'editor'}" action="edit_post" value="Edit">
 				<f:param name="idpost" value="#{pos.IDPost}" />
 			</h:commandLink>
-                        <div class ="hr"><hr/></div>
+			<div class ="hr"><hr/></div>
 			</h:form>
 		</c:forEach>
-                </p></div>
+		</p></div>
+						
 		 <div id="nav">
          <form action="Login" method="post">
              <br/>Username : <input type = "text" name="uname"/>
@@ -53,6 +55,7 @@
              <br/><input type="submit" value="Login"/>
          </form></div>
 		<br/>
+		
 		<h:form>
 		<h:commandLink rendered="#{sampleBean.role eq 'admin'}" action="usermanagement" value="User Management"></h:commandLink> 
 		</h:form>
