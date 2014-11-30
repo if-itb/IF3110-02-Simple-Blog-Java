@@ -111,6 +111,11 @@ public class UserBean {
         this.username = new String();
         this.password = new String();
         this.role = guest;
+        
+        //Delete Cookies
+        CookieHelper ck = new CookieHelper();
+        ck.deleteCookie("username");
+        ck.deleteCookie("password");
         return nc.gotoLogin() + "?faces-redirect=true";
     }
 
