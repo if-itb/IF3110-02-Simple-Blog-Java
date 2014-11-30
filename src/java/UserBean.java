@@ -209,6 +209,11 @@ public class UserBean {
     {
         return lastLoginFailed;
     }
+    
+    public boolean isAbleToEditPublishedPost()
+    {
+        return !role.equalsIgnoreCase("guest");
+    }
     private String getAbsoluteContextPath(){
         HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
         StringBuffer buffer = new StringBuffer();

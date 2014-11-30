@@ -25,8 +25,23 @@ public class UserManagementBean {
     /**
      * Creates a new instance of UserManagementBean
      */
+    
+    public boolean loadBean()
+    {
+        userExist = false;
+        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        System.out.println("edit mode");
+        if (request.getParameter("user") != null)
+        {
+            
+            editMode = loadEditUserPage(request.getParameter("user"));
+            
+        }
+        return false;
+    }
     public UserManagementBean() {
         userExist = false;
+      
     }
     
     private int id;
@@ -35,7 +50,12 @@ public class UserManagementBean {
     private String email;
     private String role;
     private boolean userExist;
+    private boolean editMode;
     
+    public boolean isEditMode()
+    {
+        return editMode;
+    }
     public int getId()
     {
         return id;
@@ -205,9 +225,49 @@ public class UserManagementBean {
     
     public void processUpdateUser()
     {
-        create();
+        if (!editMode)
+        {
+            create();
+        } else {
+            update();
+        }
     }
     
+    private boolean loadEditUserPage(String username)
+    {
+        boolean out = false;
+        Connection connect = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        try
+        {
+            Class.forName("com.mysql.jdbc.Driver");
+
+            connect = DriverManager.getConnection("jdbc:mysql://localhost/" + Config.dbName + "?user=" + Config.dbUsername + "&password=" + Config.dbPassword);
+
+            preparedStatement = connect.prepareStatement("SELECT * FROM `users` WHERE `username`=?");
+            preparedStatement.setString(3, username);
+            
+            resultSet = preparedStatement.executeQuery();
+            
+            if (resultSet.next())
+            {
+                out = true;
+                this.username = username;
+                this.password = resultSet.getString("password");
+                this.role = resultSet.getString("role");
+                this.email = resultSet.getString("email");
+                System.out.println("Update pengguna berhasil");
+            }            
+        } catch (Exception e)
+        {
+            System.out.println("Failed to fetch users");
+        } finally {
+            Close(resultSet, preparedStatement, connect);
+        }
+        
+        return out;
+    }
     private void Close(ResultSet r, PreparedStatement p, Connection c)
     {
         if (r != null)
