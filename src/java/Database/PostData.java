@@ -1,7 +1,6 @@
 package Database;
 
 import Model.Comment;
-import Model.CommentofComment;
 import Model.Post;
 import Model.User;
 import java.io.Serializable;
@@ -286,15 +285,6 @@ public class PostData implements Serializable {
             return "success";
         } else {
             return "failed";
-        }
-    }
-    
-    public static void main(String args[]) {
-        PostData pd = new PostData();
-        List<Post> a = pd.getAllPost();
-        for (Post p : a)
-        {
-            System.out.println(p.getAuthor().getUsername().compareTo("luthfi"));
         }
     }
 }
