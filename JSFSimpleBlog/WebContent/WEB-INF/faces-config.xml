@@ -26,6 +26,16 @@
 		<managed-bean-scope>none</managed-bean-scope>
 	</managed-bean>
 	<managed-bean>
+		<managed-bean-name>postController</managed-bean-name>
+		<managed-bean-class>org.wbd.controller.PostController</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>createPostController</managed-bean-name>
+		<managed-bean-class>org.wbd.controller.CreatePostController</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
 		<managed-bean-name>post</managed-bean-name>
 		<managed-bean-class>org.wbd.model.Post</managed-bean-class>
 		<managed-bean-scope>none</managed-bean-scope>

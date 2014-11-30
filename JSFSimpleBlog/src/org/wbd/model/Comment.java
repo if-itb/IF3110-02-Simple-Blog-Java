@@ -4,6 +4,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class Comment {
+	private int postId;
 	private String sender;
 	private String email;
 	private Calendar date;
@@ -13,6 +14,14 @@ public class Comment {
 		
 	}
 	
+	public int getPostId() {
+		return postId;
+	}
+
+	public void setPostId(int postId) {
+		this.postId = postId;
+	}
+
 	public String getSender() {
 		return sender;
 	}

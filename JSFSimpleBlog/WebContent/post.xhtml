@@ -4,11 +4,11 @@
     xmlns:f="http://java.sun.com/jsf/core"
     xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 <f:metadata>
-    <f:viewParam name="id" value="#{postBean.selectedPost}" />
-    <f:viewAction action="#{postBean.view}" />
+    <f:viewParam name="id" value="#{postController.selectedPost}" />
+    <f:viewAction action="#{postController.view}" />
 </f:metadata>
 <h:head>
-<title>Simple Blog | #{postBean.post.judul}</title>
+<title>Simple Blog | #{postController.post.title}</title>
 <link rel="stylesheet" type="text/css" href="css/screen.css" />
 </h:head>
 <h:body>
@@ -25,15 +25,15 @@
     
     <header class="art-header">
         <div class="art-header-inner" style="margin-top: 0px; opacity: 1;">
-            <time class="art-time"><h:outputText value="#{postBean.post.tanggal}"><f:convertDateTime pattern="EEEE, d MMMM yyyy" /></h:outputText></time>
-            <h2 class="art-title">#{postBean.post.judul}</h2>
+            <time class="art-time"><h:outputText value="#{postController.post.date}"><f:convertDateTime pattern="EEEE, d MMMM yyyy" /></h:outputText></time>
+            <h2 class="art-title">#{postController.post.title}</h2>
         </div>
     </header>
 
     <div class="art-body">
         <div class="art-body-inner">
         	<h:messages />
-            #{postBean.post.konten}
+            #{postController.post.content}
 
             <hr />
             
@@ -55,7 +55,7 @@
             </div>
 
             <ul class="art-list-body">
-            	<c:forEach>
+            	<ui:repeat>
                 <li class="art-list-item">
                     <div class="art-list-item-title-and-time">
                         <h2 class="art-list-title"><a href="#">#{komentarBean.nama}</a></h2>
@@ -63,7 +63,7 @@
                     </div>
                     <p>#{komentarbean.komentar}</p>
                 </li>
-                </c:forEach>
+                </ui:repeat>
             </ul> -->
         </div>
     </div>

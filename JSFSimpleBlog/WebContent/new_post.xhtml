@@ -29,17 +29,17 @@
             <h:messages />
                 <h:form id="post">
                     <label for="Judul">Judul:</label>
-                    <h:inputText value="#{createPostBean.newJudul}"/>
+                    <h:inputText value="#{createPostController.newJudul}"/>
 
                     <label for="Tanggal">Tanggal:</label>
-                    <h:inputText value="#{createPostBean.newTanggal}" id="Tanggal">
+                    <h:inputText value="#{createPostController.newTanggal}" id="Tanggal">
                         <f:convertDateTime pattern="d/M/yyyy" />
                     </h:inputText>
                     
                     <label for="Konten">Konten:</label>
-                    <h:inputTextarea value="#{createPostBean.newKonten}"/>
+                    <h:inputTextarea value="#{createPostController.newKonten}"/>
 
-                    <h:commandButton value="Simpan" action="#{createPostBean.simpan}" onclick="return validasi_tanggal()"/>
+                    <h:commandButton value="Simpan" action="#{createPostController.simpan}" onclick="return validasi_tanggal()"/>
                 </h:form>
             </div>
         </div>

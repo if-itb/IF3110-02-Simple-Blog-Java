@@ -1,18 +1,26 @@
 package org.wbd.model;
 
-import java.util.Calendar;
 import java.util.Date;
 
 public class Post {
+	private int id;
 	private String author;
 	private String title;
-	private Calendar date;
+	private Date date;
 	private String content;
 	
 	public Post() {
 		
 	}
 	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	public String getAuthor() {
 		return author;
 	}
@@ -30,11 +38,11 @@ public class Post {
 	}
 	
 	public Date getDate() {
-		return date.getTime();
+		return date;
 	}
 	
 	public void setDate(Date date) {
-		this.date.setTime(date);
+		this.date = date;
 	}
 	
 	public String getContent() {

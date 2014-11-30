@@ -4,8 +4,8 @@
     xmlns:f="http://java.sun.com/jsf/core"
     xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 <f:metadata>
-    <f:viewParam name="id" value="#{createPostBean.selectedPost}" />
-    <f:viewAction action="#{createPostBean.init}" />
+    <f:viewParam name="id" value="#{createPostController.selectedPost}" />
+    <f:viewAction action="#{createPostController.init}" />
 </f:metadata>
 <h:head>
 <title>Simple Blog | Edit Post</title>
@@ -32,19 +32,19 @@
             <div id="contact-area">
                 <h:form id="post">
                     <label for="Judul">Judul:</label>
-                    <h:inputText value="#{createPostBean.newJudul}"/>
+                    <h:inputText value="#{createPostController.newJudul}"/>
 
                     <label for="Tanggal">Tanggal:</label>
-                    <h:inputText value="#{createPostBean.newTanggal}" id="Tanggal">
+                    <h:inputText value="#{createPostController.newTanggal}" id="Tanggal">
                         <f:convertDateTime pattern="d/M/yyyy" />
                     </h:inputText>
                     
                     <label for="Konten">Konten:</label>
-                    <h:inputTextarea value="#{createPostBean.newKonten}"/>
+                    <h:inputTextarea value="#{createPostController.newKonten}"/>
                     
-                    <h:inputHidden value="#{createPostBean.newId}" />
+                    <h:inputHidden value="#{createPostController.newId}" />
 
-                    <h:commandButton value="Simpan" action="#{createPostBean.simpan}" onclick="return validasi_tanggal()"/>
+                    <h:commandButton value="Simpan" action="#{createPostController.simpan}" onclick="return validasi_tanggal()"/>
                 </h:form>
             </div>
         </div>

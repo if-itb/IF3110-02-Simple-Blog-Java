@@ -1,27 +1,35 @@
-package org.wbd.beans;
+package org.wbd.controller;
 
 import java.util.Date;
 
-import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 
-import org.wbd.Post;
+import org.wbd.helper.DatabaseHelper;
+import org.wbd.model.Post;
 
-@ManagedBean
-public class CreatePostBean {
+public class CreatePostController {
 	private int newId;
 	private String newJudul;
 	private Date newTanggal;
 	private String newKonten;
 	
 	private int selectedPost;
+	private DatabaseHelper dbhelp;
+
+	@ManagedProperty("#{loginController}")
+	private LoginController loginController;
 	
-	@ManagedProperty("#{mockPostGetterBean}")
-	private MockPostGetterBean postGetter;
-	
-	public CreatePostBean() {
+	public CreatePostController() {
 		newTanggal = new Date();
 		newId = -1;
+	}
+
+	public int getNewId() {
+		return newId;
+	}
+
+	public void setNewId(int newId) {
+		this.newId = newId;
 	}
 	
 	public String getNewJudul() {
@@ -51,34 +59,25 @@ public class CreatePostBean {
 		this.selectedPost = selectedPost;
 	}
 
-	public MockPostGetterBean getPostGetter() {
-		return postGetter;
+	public LoginController getLoginController() {
+		return loginController;
 	}
 
-	public void setPostGetter(MockPostGetterBean postGetter) {
-		this.postGetter = postGetter;
-	}
-
-	public int getNewId() {
-		return newId;
-	}
-
-	public void setNewId(int newId) {
-		this.newId = newId;
+	public void setLoginController(LoginController loginController) {
+		this.loginController = loginController;
 	}
 
 	public void init() {
-		Post post = postGetter.getPost(selectedPost);
+		Post post = dbhelp.getPost(selectedPost);
 		setNewId(post.getId());
-		setNewJudul(post.getJudul());
-		setNewTanggal(post.getTanggal());
-		setNewKonten(post.getKonten());
+		setNewJudul(post.getTitle());
+		setNewTanggal(post.getDate());
+		setNewKonten(post.getContent());
 	}
 	
 	public String simpan() {
-		if (newId == -1) newId = postGetter.getNextId();
-		Post newPost = new Post(newId, newJudul, newTanggal, newKonten);
-		postGetter.addPost(newPost);
+		String username = loginController.getUser().getUsername();
+		dbhelp.addPost(username, newJudul, (java.sql.Date) newTanggal, newKonten);
 		return "index?faces-redirect=true";
 	}
 }

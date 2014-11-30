@@ -66,10 +66,10 @@ public class DatabaseHelper {
 		try {
 			connectDatabase(URL, USER, PASSWORD);
 			
-			String query = "SELECT post.title, post.date, post.content"
-					+ " FROM user JOIN post"
-					+ "WHERE user.username = ? AND"
-					+ "user.id = post.user_id";
+			String query = "SELECT post.id, post.title, post.date, post.content "
+					+ "FROM user JOIN post "
+					+ "WHERE user.username = ? AND "
+					+ "user.id = post.user_id ";
 			ArrayList<Post> posts = new ArrayList<Post>();
 			
 			statement = conn.prepareStatement(query);
@@ -79,10 +79,11 @@ public class DatabaseHelper {
 			
 			while(result.next()) {
 				Post post = new Post();
+				post.setId(result.getInt(1));
 				post.setAuthor(username);
-				post.setTitle(result.getString(1));
-				post.setDate(Date.valueOf(result.getString(2)));
-				post.setContent(result.getString(3));
+				post.setTitle(result.getString(2));
+				post.setDate(result.getDate(3));
+				post.setContent(result.getString(4));
 				posts.add(post);
 			}
 			
@@ -92,6 +93,105 @@ public class DatabaseHelper {
 			return posts;
 		} catch (SQLException ex) {
 			return null;
+		}
+	}
+
+	public Post getPost(int postId) {
+		try {
+			connectDatabase(URL, USER, PASSWORD);
+			
+			String query =
+				"SELECT post.id, post.title, post.date, post.content, user.username "
+					+ "FROM user JOIN post "
+					+ "WHERE post.id = ? ";
+			
+			statement = conn.prepareStatement(query);
+			statement.setInt(1, postId);
+			statement.executeQuery();
+			result = statement.getResultSet();
+			result.next();
+			Post post = new Post();
+			post.setId(result.getInt(1));
+			post.setAuthor(result.getString(5));
+			post.setTitle(result.getString(2));
+			post.setDate(result.getDate(3));
+			post.setContent(result.getString(4));
+			
+			clearResult();
+			clearStatement();
+			disconnectDatabase();
+			return post;
+		} catch (SQLException ex) {
+			return null;
+		}
+	}
+	
+	public void addPost(String username, String title, Date date, String content) {
+		try {
+			connectDatabase(URL, USER, PASSWORD);
+			
+			statement = conn.prepareStatement("SELECT id FROM user WHERE username = ?");
+			statement.setString(1, username);
+			statement.executeQuery();
+			String userID = statement.getResultSet().getString(0);
+			
+			String query = "INSERT INTO post (title, date, content, user_id) "
+					+ "VALUES (?, ?, ?, ?)";
+			
+			statement = conn.prepareStatement(query);
+			statement.setString(1, title);
+			statement.setDate(2, date);
+			statement.setString(3, content);
+			statement.setString(4, userID);
+			statement.executeQuery();
+			
+			clearResult();
+			clearStatement();
+			disconnectDatabase();
+		} catch (SQLException ex) {
+			return;
+		}
+	}
+	
+	public void updatePost(int postId, String title, Date date, String content) {
+		try {
+			connectDatabase(URL, USER, PASSWORD);
+			
+			String query = "UPDATE post "
+					+ "SET title=?, date=?, content=? "
+					+"WHERE id = ? ";
+			
+			statement = conn.prepareStatement(query);
+			statement.setString(1, title);
+			statement.setDate(2, date);
+			statement.setString(3, content);
+			statement.setInt(4, postId);
+			statement.executeQuery();
+			
+			clearResult();
+			clearStatement();
+			disconnectDatabase();
+		} catch (SQLException ex) {
+			return;
+		}
+	}
+	
+	public void deletePost(int postId) {
+		try {
+			connectDatabase(URL, USER, PASSWORD);
+			
+			String query = "DELETE FROM post "
+					+ "WHERE post.id = ? ";
+
+			statement = conn.prepareStatement(query);
+			statement.setInt(1, postId);
+			statement.executeQuery();
+
+			clearResult();
+			clearStatement();
+			disconnectDatabase();
+		} catch (SQLException ex) {
+			return;
 		}
 	}
 	
