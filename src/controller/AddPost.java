@@ -50,6 +50,7 @@ public class AddPost {
 	}
 
 	public void setDate(Date date) {
+		System.out.println("Set Date Called");
 		post.setDate(date);
 		System.out.println(post.getDate().toString());
 	}

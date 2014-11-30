@@ -16,31 +16,33 @@
 <h:body>
 	<ui:composition template="common.xhtml">
 		<ui:define name="content">
+			<h:outputScript library="js" name="date.js" target="head" />
 			<div class="col-lg-offset-4 col-lg-4"
 				style="border: 5px solid blue; margin-top: 5%; border-radius: 10px;">
 				<h2 align="center">Edit Post</h2>
 				<div align="center">
-					<h:form>
+					<form onsubmit="return checkDate();" method="post" action="#{request.contextPath}/PostUpdater">
 						<div class="row">
-							<span class="col-lg-2">Judul</span> <span class="col-lg-10">: <h:inputText
-									value="#{editPost.title}" /></span>
-						</div>
-						<br />
-						<div class="row">
-							<span class="col-lg-2">Tanggal</span> <span class="col-lg-10">: <h:inputText id="dateInput"
-									value="#{editPost.date}" converter="dateConverter"
-									converterMessage="Format tanggal dalam bentuk yyyy-MM-dd dan lebih besar dari hari ini" />
+							<span class="col-lg-2">Judul</span> <span class="col-lg-10">:
+								<input type="text" name="title" value="#{editPost.title}" />
 							</span>
 						</div>
 						<br />
 						<div class="row">
-							<span class="col-lg-2">Konten</span> <span class="col-lg-10">: <h:inputTextarea rows="5"
-									cols="22" style="resize:none;" value="#{editPost.content}" /></span>
+							<span class="col-lg-2">Tanggal</span> <span class="col-lg-10">:
+								<input id="dateInput" name="date" value="#{editPost.date}" />
+							</span>
 						</div>
-						<h:commandButton class="kumpul" value="Submit"
-							action="#{editPost.execute}" />
-					</h:form>
-					<h:message for="dateInput" style="color:red" />
+						<br />
+						<div class="row">
+							<span class="col-lg-2">Konten</span> <span class="col-lg-10">:
+								<textarea rows="5" cols="22" style="resize:none;" name="content">#{editPost.content}</textarea>
+							</span>
+						</div>
+						<input type="hidden" name="id" value="#{editPost.id}" />
+						<input type="submit" value="Submit"/>
+					</form>
+					<div id="error_msg" style="color: red"></div>
 				</div>
 			</div>
 		</ui:define>

@@ -105,20 +105,7 @@ Bonus
 Todo
 ====
 
-user:
-- edit published post bermasalah
-    - jadi ada karakter aneh <- **Eric**: fix dengan prepared statement *(1)*
-    - jika waktu invalid setelah ditekan ga melakukan apa2 <- **Winson**
-- add post beramasalah
-    - jadi ada karakter aneh <- *(1)*
-    - kemungkinan memiliki kesalahan jika waktu invalid setelah ditekan ga melakukan apa2
-      
-editor: 
-- edit unpublished post bermasalah
-    - jadi ada karakter aneh <- (1)
-    - jika waktu invalid setelah ditekan ga melakukan apa2 
-    - waktu jadi mundur 1 hari <- solved dengan mengubah getDate() menjadi return string
-    
-admin:
-- edit harusnya bermasalah seperti yang di atas <- masih ada?
-      
+- debug untuk fitur guest
+- debug untuk fitur user
+- debug untuk fitur editor
+- debug untuk fitur admin 
