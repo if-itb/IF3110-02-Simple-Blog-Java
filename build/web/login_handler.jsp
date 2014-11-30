@@ -12,16 +12,20 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
-<%
-   Cookie Cusr = new Cookie(request.getParameter("username"),request.getParameter("password"));
-   //Cookie Cpass = new Cookie("pass",request.getParameter("password"));
+<%--
+   	//Cookie Cusr = new Cookie(request.getParameter("username"),request.getParameter("password"));
+	Cookie Cusr=new Cookie("LogName",request.getParameter("username"));
+	Cookie CType=new Cookie("LogType",request.getParameter("username"));
+
+	//Cookie Cpass = new Cookie("pass",request.getParameter("password"));
    
    Cusr.setMaxAge(60);
    //Cpass.setMaxAge(30000000);
    
    response.addCookie(Cusr);
+   response.addCookie(CType);
    //response.addCookie(Cpass);
-%>
+--%>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -43,20 +47,25 @@
         <sql:query dataSource="${Tubes2WBD}" var="result">
             <%= Query %>
         </sql:query>
-            
-        <c:choose>
+          <c:choose>
                 <c:when test="${result.rowCount gt 0}">
-                    <c:redirect url="index.jsp"/>
+                    <form method="post" action="handler/addCookie.jsp" id="successform">
+                        <input type="hidden" name="username" id="username" value="${result.getRows()[0].username}">
+                        <input type="hidden" name="type" id="type" value="${result.getRows()[0].status}">
+                    </form>
+                    <script>
+                        document.getElementById("successform").submit();
+                    </script>
+                    <%--<c:redirect url="index.jsp"/> --%>
                 </c:when>
                 <c:otherwise>
-                    <form method="post" action="login.jsp" id="errorform">
+                    <form method="post" action="index.jsp" id="errorform">
                         <input type="hidden" name="errormessage" id="errormessage" value="errormessage">
                     </form>
                     <script>
                         document.getElementById("errorform").submit();
-                    </script>--%>
+                    </script>
                 </c:otherwise>
         </c:choose>
-   
-    </body>
+   	</body>
 </html>

@@ -3,7 +3,7 @@
     Created on : Nov 25, 2014, 2:31:32 PM
     Author     : adwisatya
 --%>
-<%@page import= "java.Komentar.Komentar" %>
+<%@page import= "Komentar.Komentar" %>
 
 <%
 	String Parent	=	request.getParameter("ID");

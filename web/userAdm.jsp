@@ -1,14 +1,18 @@
-<%-- 
-    Document   : adm post
+<!-- 
+    Document   : index
     Created on : Nov 24, 2014, 4:14:48 PM
     Author     : adwisatya
---%>
+-->
+<%@include file= "/WEB-INF/jspf/koneksi.jspf" %>
 
-<%@page import= "User.userPaket"%>
+<%@page import= "User.userPaket" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import = "Post.Post" %>
 <%@page import= "User.User" %>
 <%@page import= "Post.PostBean" %>
+<%@page import = "java.io.*" %>
+<%@page import="java.sql.*"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -45,6 +49,7 @@
 
 <body class="default">
 <div class="wrapper">
+
 <jsp:include page="header.jsp"/>
 <%
 	String usrC=" ";
@@ -69,33 +74,42 @@
     <div class="posts">
         <nav class="art-list">
           <ul class="art-list-body">
-          <% if (typeC==4||typeC==1){ %>
-				<li class="art-list-item">
-					<div class="art-list-item-title-and-time">
-        			</div>
-        			You can't see unpublished post
-				</li>	
-			<% } else {
-				PostBean pBean =  new PostBean();
-				for(int i=0;i<pBean.listManyPost().size();i++){
-					if(pBean.listManyPost().get(i).getStatus() == 0){
-			%>	
-						<li class="art-list-item">
-							<div class="art-list-item-title-and-time">
-								<h2 class="art-list-title"><a href="show_post.jsp?id=<% out.println(pBean.listManyPost().get(i).getId()); %>"><% out.println(pBean.listManyPost().get(i).getJudul()); %></a></h2>
-								<div class="art-list-time"><% out.println(pBean.listManyPost().get(i).getTanggal()); %></div>
-								<div class="art-list-owner">Owner:&nbsp;<% out.println(pBean.listManyPost().get(i).getOwner()); %></div>
-							</div>
-							<p><% out.println(pBean.listManyPost().get(i).getKonten()); %></p>
-							<p>
-							  <a href="handler/admPublish.jsp?id=<% out.println(pBean.listManyPost().get(i).getId()); %>">Publish</a>
-							   | <a href="edit.jsp?id=<% out.println(pBean.listManyPost().get(i).getId()); %>">Edit</a>
-							   | <a href="#" onclick="return ConfirmDelete(<% out.println(pBean.listManyPost().get(i).getId()); %>);">Hapus</a>
-							</p>
-						</li>	
 			<%
-					}
-				}
+			try{
+			Connection connection = null;
+			Statement statement = null;
+			ResultSet rs = null;
+			Class.forName(xDRIVER);
+			connection = DriverManager.getConnection(xSTRING,xUSERNAME,xPASSWORD);
+			statement = connection.createStatement();
+			String Data = "select * from users";
+			rs = statement.executeQuery(Data);
+			while(rs.next()){
+			%>	
+			<li class="art-list-item">
+				<div class="art-list-item-title-and-time">
+					<tr>
+						<td><%=rs.getString("nama")%></td>
+						<td><%=rs.getString("username")%></td>
+						<td><%=rs.getString("email")%></td>
+					</tr>	
+				</div>
+
+				<p>
+				<% if (typeC!=4){
+				%>
+					<a href="update_user.jsp?id=<%=rs.getString("no")%>">Edit</a> | <a href="#" onclick="return ConfirmDelete(<%=rs.getString("username")%>);">Hapus</a>
+				<% } %>
+				</p>
+				
+			</li>	
+			<%
+			}
+			rs.close();
+			statement.close();
+			connection.close();
+			}catch(Exception ex){
+				out.println("Gagal tersambung. Terdaapat kesalahan.");
 			}
 			%>
           </ul>
@@ -107,11 +121,11 @@
 
 </div>
 <script>
-    function ConfirmDelete(nomor)
+    function ConfirmDelete(username)
     {
       var x = confirm("Apakah Anda yakin menghapus post ini?");
       if (x)
-          return window.location.assign('handler/delPost.jsp?id='+nomor);
+          return window.location.assign('delete_user.jsp?user_username='+username);
       else
         return false;
     }
