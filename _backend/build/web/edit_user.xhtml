@@ -67,7 +67,7 @@
         <div class="col-md-10 col-md-offset-1">
           <div class="edit"></div>
           <div class="post">
-            <div class="post-title">Edit User</div>
+              <div class="post-title">Edit User #{param['id']}</div>
             #{memberController.execute(param['id'])}
             <h:form role="form">
               <div class="form-group">
@@ -86,7 +86,7 @@
                     <label for="exampleInputPassword1">Role</label>
                     <h:inputText styleClass="form-control" id="role" value="#{memberController.mem.role}" />
                 </div>
-                <h:commandButton type="submit" styleClass="btn btn-default" value="Submit" action="#{memberController.addMember(email.value, name.value, password.value, role.value)}"/>
+                <h:commandButton type="submit" styleClass="btn btn-default" value="Submit" action="#{memberController.edit()}"/>
             </h:form>
 
 

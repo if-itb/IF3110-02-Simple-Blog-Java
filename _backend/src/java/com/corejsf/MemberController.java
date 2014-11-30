@@ -16,7 +16,7 @@ import javax.faces.context.FacesContext;
  * @author Gifari
  */
 
-@ManagedBean(name = "memberControler")
+@ManagedBean(name = "memberController")
 @ViewScoped
 
 public class MemberController {
@@ -114,7 +114,7 @@ public class MemberController {
         try {
             Class.forName(driver).newInstance();
             con = DriverManager.getConnection(url, user, password);
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM post WHERE id="+id);
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM member WHERE id="+id);
             ResultSet res = ps.executeQuery();
             while(res.next()){
                 mem.setEmail(res.getString("Email"));
