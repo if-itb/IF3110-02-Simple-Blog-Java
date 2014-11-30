@@ -4,7 +4,7 @@
     xmlns:f="http://java.sun.com/jsf/core"
     xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 <h:head>
-<title>Simple Blog</title>
+<title>Simple Blog | Deleted Posts (Admin)</title>
 <link rel="stylesheet" type="text/css" href="css/screen.css" />
 </h:head>
 <h:body>
@@ -12,11 +12,6 @@
 
 <nav class="nav">
     <a style="border:none;" id="logo" href="index.jsf"><h1>Simple<span>-</span>Blog</h1></a>
-    <ul class="nav-primary">
-        <li><h:link value="+ Tambah Post" outcome="new_post" /></li>
-        <li><h:link value="Unpublished Posts" outcome="unpublished" /></li>
-        <li><h:link value="Deleted Posts (Admin)" outcome="deleted" /></li>
-    </ul>
 </nav>
 
 <div id="home">
@@ -24,16 +19,18 @@
         <nav class="art-list">
           <ul class="art-list-body">
 
-            <ui:repeat value="#{postController.publishedPosts}" var="post">
+            <ui:repeat value="#{deletedPostsController.posts}" var="post">
             <li class="art-list-item">
                 <div class="art-list-item-title-and-time">
-                    <h2 class="art-list-title"><h:link value="#{post.title}" outcome="post"><f:param name="id" value="#{post.id}" /></h:link></h2>
+                    <h2 class="art-list-title">#{post.title}</h2>
                     <div class="art-list-time"><h:outputText value="#{post.date}"><f:convertDateTime pattern="EEEE, d MMM yyyy" /></h:outputText></div>
                 </div>
                 <p>#{post.content.length() gt 250 ? post.content.substring(0, 247).concat('...') : post.content}</p>
-                <h:link value="Edit" outcome="edit_post"><f:param name="id" value="#{post.id}" /></h:link> | 
                 <h:form>
-                	<h:commandLink value="Hapus" action="#{postController.hapus(post.id)}" onclick="return confirm('Anda yakin ingin menghapus post ini?')"/>
+                	<h:commandLink value="Batal hapus" action="#{deletedPostsController.batalHapus(post.id)}"/>
+                </h:form> | 
+                <h:form>
+                	<h:commandLink value="Hapus" action="#{deletedPostsController.hapus(post.id)}" onclick="return confirm('Anda yakin ingin menghapus post ini?')"/>
                 </h:form>
             </li>
             </ui:repeat>

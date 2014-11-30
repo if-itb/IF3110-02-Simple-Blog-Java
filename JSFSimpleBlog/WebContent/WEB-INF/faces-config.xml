@@ -50,4 +50,9 @@
 		<managed-bean-class>org.wbd.controller.CommentController</managed-bean-class>
 		<managed-bean-scope>request</managed-bean-scope>
 	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>deletedPostsController</managed-bean-name>
+		<managed-bean-class>org.wbd.controller.DeletedPostsController</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
 </faces-config>
