@@ -15,6 +15,7 @@ public class Post {
     private String title;
     private String content;
     private String date;
+    private boolean status;
     private int userId;
 
     /**
@@ -85,5 +86,13 @@ public class Post {
      */
     public void setUserId(int userId) {
         this.userId = userId;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 }
