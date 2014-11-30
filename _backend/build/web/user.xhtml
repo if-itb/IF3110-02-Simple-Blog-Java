@@ -91,7 +91,12 @@
                     </h:column>
                     <h:column>    				
                         <f:facet name="header">Edit | Delete</f:facet>    				
-                        <a href="#">Edit</a> | <a href="#">Delete</a>
+                        <h:commandLink action="edit_user" value="Edit">
+                            <f:param name="id" value="#{user.id}" />
+                        </h:commandLink>
+                        | 
+                        <h:commandLink action="#{memberController.deleteMember(user.id)}" value="Delete" onclick="return confirm('Apakah anda yakin menghapus user ini?');">
+                        </h:commandLink>
                     </h:column>
                   </h:dataTable>
               </h:form></div>
