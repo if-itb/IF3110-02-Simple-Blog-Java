@@ -26,15 +26,18 @@ public class UserData implements Serializable {
 
 	public void check(int p, String page) {
 		int now = 1;
-		if (details != null)
+		if (details != null) {
+			if (!loggedIn)
+				System.err.println("when details != null, loggedIn should be = true");
 			now <<= (details.getRole() / 10);
+		}
 
 		if ((now & p) == 0) {
 			try {
 				FacesContext.getCurrentInstance().getExternalContext()
 						.redirect(page);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
+				System.err.println("OMG THIS IS THE MOST FATAL ERROR EVER");
 				e.printStackTrace();
 			}
 		}
