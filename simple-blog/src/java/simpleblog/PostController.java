@@ -6,20 +6,22 @@
 
 package simpleblog;
 
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.sql.Timestamp;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -32,12 +34,14 @@ import simpleblog.model.User;
  * @author Luqman
  */
 @ManagedBean
-@SessionScoped
-public class PostController {
+@ViewScoped
+public class PostController implements Serializable {
      private DataSource ds;
      private String title;
      private String date;
      private String content;
+     private String post_id;
+     private Post post;
      
     /**
      * Creates a new instance of PostController
@@ -47,7 +51,37 @@ public class PostController {
          title = new String();
          date = new String();
          content = new String();
-     }
+         post = new Post();
+    }
+     
+    public void getDatabasePost(){
+        try{
+            //get database connection
+            Context initCtx = new InitialContext();
+            Context envCtx = (Context) initCtx.lookup("java:comp/env");
+            ds = (DataSource) envCtx.lookup("jdbc/simpleBlogDb");
+
+            System.out.println("SELECT * FROM post WHERE post.id = '"+ getPost_id() + "'");
+            
+            Connection conn = ds.getConnection();
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM post WHERE post.id = '"+ getPost_id() + "'"); 
+            ResultSet result =  ps.executeQuery();
+            result.next();
+            post.setId(result.getInt("id"));
+            post.setUserId(result.getInt("user_id"));
+            post.setTitle(result.getString("title"));
+            
+            String[] date = result.getString("date").split(" ");
+            
+            post.setDate(date[0]);
+            post.setContent(result.getString("content"));
+            post.setStatus(result.getInt("status"));
+
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
      
     public List<Post> getPostList() throws SQLException, NamingException
     {
@@ -99,8 +133,37 @@ public class PostController {
          } 
     }
     
+    public boolean editPost(User user) throws NamingException, SQLException{
+         try {
+            Date dates = new Date();
+            date = date + " " + dates.getHours() + ":" + dates.getMinutes() + ":" + dates.getSeconds();
+            System.out.println("UPDATE post SET title= '"+ title +"', date= '"+ date +"', content= '"+ content +"' WHERE id = '"+ post_id +"'");
+            Context initCtx = new InitialContext();
+            Context envCtx = (Context) initCtx.lookup("java:comp/env");
+            ds = (DataSource) envCtx.lookup("jdbc/simpleBlogDb");
+            
+            Connection con = ds.getConnection();
+            PreparedStatement ps = con.prepareStatement(
+                            "UPDATE post SET title= '"+ title +"', date= '"+ date +"', content= '"+ content +"' WHERE id = '"+ post_id +"'");
+            ps.executeUpdate();
+            con.close();
+            ps.close();
+            return true;
+         } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+         } 
+    }
+    
     public String actionInsertPost(User user) throws NamingException, SQLException{
         if(insertPost(user)){
+            return "index";
+        }
+        else return "";
+    }
+    
+    public String actionEditPost(User user) throws NamingException, SQLException{
+        if(editPost(user)){
             return "index";
         }
         else return "";
@@ -146,5 +209,33 @@ public class PostController {
      */
     public void setContent(String content) {
         this.content = content;
+    }
+
+    /**
+     * @return the post
+     */
+    public Post getPost() {
+        return post;
+    }
+
+    /**
+     * @param post the post to set
+     */
+    public void setPost(Post post) {
+        this.post = post;
+    }
+
+    /**
+     * @return the post_id
+     */
+    public String getPost_id() {
+        return post_id;
+    }
+
+    /**
+     * @param post_id the post_id to set
+     */
+    public void setPost_id(String post_id) {
+        this.post_id = post_id;
     }
 }

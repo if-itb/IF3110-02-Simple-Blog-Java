@@ -15,6 +15,23 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import simpleblog.model.CookieHelper;
 import simpleblog.model.User;
+import simpleblog.model.User;
+import java.io.Serializable;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import javax.annotation.Resource;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.SessionScoped;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+import simpleblog.model.Post;
 
 /**
  *
@@ -23,10 +40,6 @@ import simpleblog.model.User;
 @ManagedBean
 @SessionScoped
 public class UserController implements Serializable{
-    
-    @ManagedProperty(value="#{databaseController}")
-    
-    private DatabaseController databaseController;
     
     private CookieHelper cookie;
     private User user;
@@ -42,14 +55,39 @@ public class UserController implements Serializable{
         cookie = new CookieHelper();
     }
 
+    public User loginValidator(String username, String password){
+        user = new User();
+        try{
+            //get database connection
+            Context initCtx = new InitialContext();
+            Context envCtx = (Context) initCtx.lookup("java:comp/env");
+            DataSource ds = (DataSource) envCtx.lookup("jdbc/simpleBlogDb");
+
+            Connection conn = ds.getConnection();
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM user WHERE user.username = '" + username +  "' AND user.password = '" + password + "'"); 
+            ResultSet result =  ps.executeQuery();
+            result.next();
+            user.setId(result.getInt("id"));
+            user.setEmail(result.getString("email"));
+            user.setUsername(result.getString("username"));
+            user.setName(result.getString("name"));
+            user.setPassword(result.getString("password"));
+            user.setRole(result.getString("role"));
+
+            conn.close();
+        
+            return user;
+        } catch (Exception e) {
+            user.setRole("guest");
+            return user;
+        }
+    }
+    
     /**
      * @return the user
      */
     public User getUser() {
-        if(databaseController != null){
-            user = databaseController.loginValidator(username, password);
-        }
-        return user;
+        return loginValidator(username, password);
     }
 
     /**
@@ -93,6 +131,7 @@ public class UserController implements Serializable{
         System.out.println("=========show edit hapus method=========");
         System.out.println("role diset = " + user.getRole());
         System.out.println("user id = " + user.getId());
+        System.out.println("post user id = " + id);
         if(user.getRole().equals("admin"))
         {   
             return true;
@@ -106,22 +145,7 @@ public class UserController implements Serializable{
             return true;
         }
         return false;
-    }
-
-    /**
-     * @return the databaseController
-     */
-    public DatabaseController getDatabaseController() {
-        return databaseController;
-    }
-
-    /**
-     * @param databaseController the databaseController to set
-     */
-    public void setDatabaseController(DatabaseController databaseController) {
-        this.databaseController = databaseController;
-    }
-    
+    }    
     
     public String actionLogin(){
         System.out.println("=========action login method=========");

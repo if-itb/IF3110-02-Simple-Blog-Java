@@ -15,8 +15,8 @@ public class Post {
     private String title;
     private String content;
     private String date;
-    private boolean status;
     private int userId;
+    private int status;
 
     /**
      * @return the id
@@ -88,11 +88,18 @@ public class Post {
         this.userId = userId;
     }
 
-    public boolean isStatus() {
+
+    /**
+     * @return the status
+     */
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    /**
+     * @param status the status to set
+     */
+    public void setStatus(int status) {
         this.status = status;
     }
 }
