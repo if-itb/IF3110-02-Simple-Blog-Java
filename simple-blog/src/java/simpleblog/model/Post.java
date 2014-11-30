@@ -88,7 +88,6 @@ public class Post {
         this.userId = userId;
     }
 
-
     /**
      * @return the status
      */
