@@ -1,9 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
     xmlns:h="http://xmlns.jcp.org/jsf/html"
@@ -15,20 +10,45 @@ and open the template in the editor.
         <title>Simple Blog</title>
 
         <!-- Bootstrap -->
-        <link href="css/bootstrap.min.css" rel="stylesheet"> </link>
-        <link href="http://s3.amazonaws.com/codecademy-content/courses/ltp/css/shift.css" rel="stylesheet"> </link>
-        <link rel="stylesheet" href="http://s3.amazonaws.com/codecademy-content/courses/ltp/css/bootstrap.css"> </link>
-        <link rel="stylesheet" href="css/custom.css"> </link>
-
-        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-        <!--[if lt IE 9]>
-            <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-            <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-        <![endif]-->
+        <h:outputStylesheet name="css/custom.css" />
+        <h:outputStylesheet name="css/bootstrap.css" />
     </h:head>
     
     <h:body>
+        <div id="wrapper">
+            <div id="header">
+                <div class="nav">
+                    <h:form styleClass="nav nav-tabs pull-left">
+                        <li><h:commandLink action="index">Simple Blog</h:commandLink></li>
+                    </h:form>
 
+                    <ul>
+                        <h:form styleClass="nav nav-tabs pull-right">
+                            <li><h:commandLink action="addpost">Add Post</h:commandLink></li>
+                            <li><h:commandLink action="publish">Publish</h:commandLink></li>
+                            <li><h:commandLink action="user">Manage User</h:commandLink></li>                            
+                            <li><h:commandLink action="about">About</h:commandLink></li>
+                            <li><h:commandLink action="login">Login</h:commandLink></li>
+                        </h:form>
+                    </ul>
+
+                    <!--Login Form-->
+                    <div id="loginform">
+                        <h:form class="form" id="login" >
+                            <div id="logindiv">
+                                <h:outputText>username: </h:outputText>
+                                <h:inputText class="form-control status-box" id="username" required="true" requiredMessage="Please enter a valid username" binding="#{username}"/>
+                                <br/>
+                                <h:outputText>password : </h:outputText>
+                                <h:inputSecret class="form-control status-box" id="password" required="true" requiredMessage="Please enter a valid password" binding="#{password}"/>
+                                <br/>
+                                <h:commandButton id="loginbtn" value="Login" action="#{login.login(username.value, password.value)}"/>
+                                <h:commandButton id="cancel" value="Cancel"/>
+                            </div>
+                        </h:form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </h:body>
 </html>

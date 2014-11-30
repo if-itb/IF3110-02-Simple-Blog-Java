@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -14,10 +9,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
-/**
- *
- * @author A 46 CB i3
- */
 @ManagedBean(name = "viewPost", eager = true)
 @ViewScoped
 public class ViewPost implements Serializable {
@@ -32,7 +23,7 @@ public class ViewPost implements Serializable {
     
     // default constructor
     public ViewPost() {
-        komentar = new ArrayList<>();
+        komentar = new ArrayList<Comment>();
     }
     
     // function
@@ -76,7 +67,7 @@ public class ViewPost implements Serializable {
             preparedStatement.setString(4, email);
             preparedStatement.setString(5, komentar);
             preparedStatement.executeUpdate();
-            FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
+            FacesContext.getCurrentInstance().getExternalContext().redirect("publish.xhtml");
         }
         catch(Exception e) {
             e.printStackTrace();

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -13,10 +8,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
-/**
- *
- * @author A 46 CB i3
- */
 @ManagedBean
 @ViewScoped
 public class EditPost implements Serializable {
@@ -55,14 +46,13 @@ public class EditPost implements Serializable {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/simpleblog2", "root", "");
-            PreparedStatement preparedStatement = con.prepareStatement("UPDATE postdata SET judul=?, tanggal=?, konten=?, status=? where id_post=?");
+            PreparedStatement preparedStatement = con.prepareStatement("UPDATE postdata SET judul=?, tanggal=?, konten=? where id_post=?");
             preparedStatement.setString(1, judul);
             preparedStatement.setString(2, tanggal);
             preparedStatement.setString(3, konten);
-            preparedStatement.setString(4, status);
-            preparedStatement.setInt(5, id);
+            preparedStatement.setInt(4, id);
             preparedStatement.executeUpdate();
-            FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
+            FacesContext.getCurrentInstance().getExternalContext().redirect("publish.xhtml");
         }
         catch(Exception e) {
             e.printStackTrace();

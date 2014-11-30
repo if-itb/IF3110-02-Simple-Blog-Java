@@ -1,10 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -15,10 +8,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 
-/**
- *
- * @author A 46 CB i3
- */
 @ManagedBean
 @RequestScoped
 public class ListUser {
@@ -27,7 +16,7 @@ public class ListUser {
     private ArrayList<User> user;
     
     public ListUser() {
-        user = new ArrayList<>();
+        user = new ArrayList<User>();
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/simpleblog2", "root", "");
