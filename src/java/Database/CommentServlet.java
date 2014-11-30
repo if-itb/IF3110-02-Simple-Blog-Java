@@ -61,7 +61,7 @@ public class CommentServlet extends HttpServlet {
         java.util.Date date = new java.util.Date();
         val[4] = new Timestamp(date.getTime()).toString();
         this.db.Insert("comment", col, val);
-        response.getOutputStream().print(val[0] + " " + val [1] + " " + val[2] + " " + val[3]);
+        response.getOutputStream().print("true");
     }
 
     /**

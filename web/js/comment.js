@@ -27,7 +27,7 @@ function addComment() {
                     }
                 }
             }
-            xmlhttp.open("get","CommentServlet",true);
+            xmlhttp.open("get","CommentServlet?" + "id="+id+"&name="+name+"&email="+email+"&content="+content,true);
             xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
             xmlhttp.send("id="+id+"&nama="+name+"&email="+email+"&content="+content);
         } else {
