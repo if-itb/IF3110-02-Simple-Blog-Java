@@ -80,10 +80,10 @@ public class EditPost {
 					+ post.getDate().getDate();
 
 			Connection con = dbUtil.getLiveConnection();
-			String query = "INSERT `post` SET `judul`=?, `isi`=?, `waktu`=? WHERE `id`=?";
+			String query = "UPDATE `post` SET `judul`=?, `isi`=?, `waktu`=? WHERE `id`=?";
 			PreparedStatement pst;
 			System.out
-					.printf("INSERT `post` SET `judul`=%s, `isi`=%s, `waktu`=%s WHERE `id`=%d\n",
+					.printf("UPDATE `post` SET `judul`=%s, `isi`=%s, `waktu`=%s WHERE `id`=%d\n",
 							getTitle(), getContent(), date, getId());
 
 			try {
