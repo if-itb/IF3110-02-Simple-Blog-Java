@@ -26,10 +26,11 @@ public class MemberController {
     public MemberController(){
         mem = new Member1();
     }
+    
     public int getId(){
         return id;
     }
-    public Member1 getPos(){
+    public Member1 getMem(){
         return mem;
     }
     public void setId(int id){
