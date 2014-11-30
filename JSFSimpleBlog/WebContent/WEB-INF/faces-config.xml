@@ -45,4 +45,9 @@
 		<managed-bean-class>org.wbd.model.Comment</managed-bean-class>
 		<managed-bean-scope>none</managed-bean-scope>
 	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>commentController</managed-bean-name>
+		<managed-bean-class>org.wbd.controller.CommentController</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
 </faces-config>

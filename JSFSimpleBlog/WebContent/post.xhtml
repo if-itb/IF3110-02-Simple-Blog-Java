@@ -5,7 +5,9 @@
     xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 <f:metadata>
     <f:viewParam name="id" value="#{postController.selectedPost}" />
+    <f:viewParam name="id" value="#{commentController.selectedPost}" />
     <f:viewAction action="#{postController.view}" />
+    <f:viewAction action="#{commentController.loadSender}" />
 </f:metadata>
 <h:head>
 <title>Simple Blog | #{postController.post.title}</title>
@@ -32,39 +34,44 @@
 
     <div class="art-body">
         <div class="art-body-inner">
-        	<h:messages />
             #{postController.post.content}
 
             <hr />
             
-            <!-- <h2>Komentar</h2>
+            <h2>Komentar</h2>
 
             <div id="contact-area">
-                <h:form>
-                    <label for="Nama">Nama:</label>
-                    <h:inputText value="#{komentarBean.nama}"/>
+                <h:form id="commentForm">
+                    <label>Nama:</label>
+                    <h:inputText value="#{commentController.newSender}"/>
         
-                    <label for="Email">Email:</label>
-                    <h:inputText value="#{komentarBean.email}"/>
+                    <span style="color:red;display:none;" id="email_invalid">Email tidak valid.</span>
+                    <label>Email:</label>
+                    <h:inputText value="#{commentController.newEmail}" id="email"/>
                     
-                    <label for="Komentar">Komentar:</label><br>
-                    <h:inputTextarea value="#{komentarBean.komentar}"/>
+                    <label>Komentar:</label><br />
+                    <h:inputTextarea value="#{commentController.newContent}"/>
 
-                    <h:commandButton value="Kirim" action="#{komentarBean.kirim}"/>
+                    <h:commandButton value="Kirim" action="#{commentController.kirim}" id="sendBtn">
+                    	<f:ajax execute="@form" render="commentList"/>
+                    </h:commandButton>
                 </h:form>
             </div>
 
+			<h:panelGroup id="commentList">
             <ul class="art-list-body">
-            	<ui:repeat>
+            	<ui:repeat value="#{commentController.comments}" var="comment">
                 <li class="art-list-item">
                     <div class="art-list-item-title-and-time">
-                        <h2 class="art-list-title"><a href="#">#{komentarBean.nama}</a></h2>
-                        <div class="art-list-time">#{komentarBean.date}</div>
+                        <h2 class="art-list-title"><a href="javascript:void;">#{comment.sender}</a></h2>
+                        <div class="art-list-time"><h:outputText value="#{comment.date}"><f:convertDateTime pattern="d/M/yy" /></h:outputText></div>
                     </div>
-                    <p>#{komentarbean.komentar}</p>
+                    <p>#{comment.content}</p>
                 </li>
                 </ui:repeat>
-            </ul> -->
+                
+            </ul>
+            </h:panelGroup>
         </div>
     </div>
 
@@ -75,5 +82,35 @@
 </footer>
 
 </div>
+
+<h:form id="hidden" style="display:none">
+    <h:commandLink id="link">
+        <f:ajax event="click" render="commentList" listener="#{commentController.init}" />
+    </h:commandLink>
+</h:form>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script>
+//<![CDATA[
+window.onload = function() {
+	document.getElementById('hidden:link').onclick();
+}
+
+function validasi_email() {
+	var email_regex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
+	var emailvalue = $("#commentForm\\:email").val();
+	if (!email_regex.test(emailvalue)) {
+		$("#commentForm\\:sendBtn").prop("disabled", true);
+		$("#email_invalid").show();
+	} else {
+		$("#commentForm\\:sendBtn").prop("disabled", false);
+		$("#email_invalid").hide();
+	}
+}
+$("#commentForm\\:email").change(validasi_email);
+//]]>
+</script>
+<script type="text/javascript" src="js/fittext.js"></script>
+<script type="text/javascript" src="js/app.js"></script>
+<script type="text/javascript" src="js/respond.min.js"></script>
 
 </h:body></html>

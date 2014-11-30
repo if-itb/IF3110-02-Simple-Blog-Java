@@ -92,7 +92,13 @@ public class DatabaseHelper {
 			disconnectDatabase();
 			return posts;
 		} catch (SQLException ex) {
+			Logger logger = Logger.getLogger(DriverManager.class.getName());
+			logger.log(Level.SEVERE, ex.getMessage(), ex);
 			return null;
+		} finally {
+			clearResult();
+			clearStatement();
+			disconnectDatabase();
 		}
 	}
 
@@ -109,20 +115,27 @@ public class DatabaseHelper {
 			statement.setInt(1, postId);
 			statement.executeQuery();
 			result = statement.getResultSet();
-			result.next();
 			Post post = new Post();
-			post.setId(result.getInt(1));
-			post.setAuthor(result.getString(5));
-			post.setTitle(result.getString(2));
-			post.setDate(result.getDate(3));
-			post.setContent(result.getString(4));
+			if (result.next()) {
+				post.setId(result.getInt(1));
+				post.setAuthor(result.getString(5));
+				post.setTitle(result.getString(2));
+				post.setDate(result.getDate(3));
+				post.setContent(result.getString(4));
+			}
 			
 			clearResult();
 			clearStatement();
 			disconnectDatabase();
 			return post;
 		} catch (SQLException ex) {
+			Logger logger = Logger.getLogger(DriverManager.class.getName());
+			logger.log(Level.SEVERE, ex.getMessage(), ex);
 			return null;
+		} finally {
+			clearResult();
+			clearStatement();
+			disconnectDatabase();
 		}
 	}
 	
@@ -132,8 +145,9 @@ public class DatabaseHelper {
 			
 			statement = conn.prepareStatement("SELECT id FROM user WHERE username = ?");
 			statement.setString(1, username);
-			statement.executeQuery();
-			String userID = statement.getResultSet().getString(0);
+			result = statement.executeQuery();
+			result.next();
+			String userID = result.getString(1);
 			
 			String query = "INSERT INTO post (title, date, content, user_id) "
 					+ "VALUES (?, ?, ?, ?)";
@@ -143,13 +157,14 @@ public class DatabaseHelper {
 			statement.setDate(2, date);
 			statement.setString(3, content);
 			statement.setString(4, userID);
-			statement.executeQuery();
-			
+			statement.executeUpdate();
+		} catch (SQLException ex) {
+			Logger logger = Logger.getLogger(DriverManager.class.getName());
+			logger.log(Level.SEVERE, ex.getMessage(), ex);
+		} finally {
 			clearResult();
 			clearStatement();
 			disconnectDatabase();
-		} catch (SQLException ex) {
-			return;
 		}
 	}
 	
@@ -166,13 +181,18 @@ public class DatabaseHelper {
 			statement.setDate(2, date);
 			statement.setString(3, content);
 			statement.setInt(4, postId);
-			statement.executeQuery();
+			statement.executeUpdate();
 			
 			clearResult();
 			clearStatement();
 			disconnectDatabase();
 		} catch (SQLException ex) {
-			return;
+			Logger logger = Logger.getLogger(DriverManager.class.getName());
+			logger.log(Level.SEVERE, ex.getMessage(), ex);
+		} finally {
+			clearResult();
+			clearStatement();
+			disconnectDatabase();
 		}
 	}
 	
@@ -185,31 +205,32 @@ public class DatabaseHelper {
 
 			statement = conn.prepareStatement(query);
 			statement.setInt(1, postId);
-			statement.executeQuery();
+			statement.executeUpdate();
 
 			clearResult();
 			clearStatement();
 			disconnectDatabase();
 		} catch (SQLException ex) {
-			return;
+			Logger logger = Logger.getLogger(DriverManager.class.getName());
+			logger.log(Level.SEVERE, ex.getMessage(), ex);
+		} finally {
+			clearResult();
+			clearStatement();
+			disconnectDatabase();
 		}
 	}
 	
-	public ArrayList<Comment> getComments(String username, String postTitle) {
+	public ArrayList<Comment> getComments(int postId) {
 		try {
 			connectDatabase(URL, USER, PASSWORD);
 			
-			String query = "SELECT comment.sender, comment.date, comment.content"
-					+ " FROM user JOIN post JOIN comment"
-					+ "WHERE user.username = ? AND"
-					+ "post.title = ? AND"
-					+ "user.id = post.user_id AND"
-					+ "post.id = comment.post_id";
+			String query = "SELECT comment.sender, comment.date, comment.content "
+					+ "FROM post JOIN comment ON post.id = comment.post_id "
+					+ "WHERE post.id = ? ";
 			ArrayList<Comment> comments = new ArrayList<Comment>();
 			
 			statement = conn.prepareStatement(query);
-			statement.setString(1, username);
-			statement.setString(2, postTitle);
+			statement.setInt(1, postId);
 			statement.executeQuery();
 			result = statement.getResultSet();
 			
@@ -226,7 +247,33 @@ public class DatabaseHelper {
 			disconnectDatabase();
 			return comments;
 		} catch (SQLException ex) {
+			Logger logger = Logger.getLogger(DriverManager.class.getName());
+			logger.log(Level.SEVERE, ex.getMessage(), ex);
 			return null;
+		}
+	}
+	
+	public void addComment(int postId, String sender, String email, Date date, String content) {
+		try {
+			connectDatabase(URL, USER, PASSWORD);
+			
+			String query = "INSERT INTO comment (sender, email, date, content, post_id) "
+					+ "VALUES (?, ?, ?, ?, ?)";
+			
+			statement = conn.prepareStatement(query);
+			statement.setString(1, sender);
+			statement.setString(2, email);
+			statement.setDate(3, date);
+			statement.setString(4, content);
+			statement.setInt(5, postId);
+			statement.executeUpdate();
+			
+			clearResult();
+			clearStatement();
+			disconnectDatabase();
+		} catch (SQLException ex) {
+			Logger logger = Logger.getLogger(DriverManager.class.getName());
+			logger.log(Level.SEVERE, ex.getMessage(), ex);
 		}
 	}
 	
@@ -290,10 +337,13 @@ public class DatabaseHelper {
 	
 	private void connectDatabase(String url, String user, String password) {
 		try {
+			Class.forName("com.mysql.jdbc.Driver");
 			conn = DriverManager.getConnection(url, user, password);
 		} catch (SQLException ex) {
 			Logger logger = Logger.getLogger(DriverManager.class.getName());
 			logger.log(Level.SEVERE, ex.getMessage(), ex);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
 		}
 	}
 	

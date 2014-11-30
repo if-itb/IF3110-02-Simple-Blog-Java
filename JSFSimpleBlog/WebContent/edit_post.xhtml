@@ -42,9 +42,9 @@
                     <label for="Konten">Konten:</label>
                     <h:inputTextarea value="#{createPostController.newKonten}"/>
                     
-                    <h:inputHidden value="#{createPostController.newId}" />
+                    <h:inputHidden value="#{createPostController.postId}" />
 
-                    <h:commandButton value="Simpan" action="#{createPostController.simpan}" onclick="return validasi_tanggal()"/>
+                    <h:commandButton value="Simpan" action="#{createPostController.simpanEdit}" onclick="return validasi_tanggal()"/>
                 </h:form>
             </div>
         </div>

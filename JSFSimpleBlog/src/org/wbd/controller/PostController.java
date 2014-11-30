@@ -40,7 +40,8 @@ public class PostController {
 	}
 
 	public List<Post> getPosts() {
-		String username = loginController.getUser().getUsername();
+//		String username = loginController.getUser().getUsername();
+		String username = "test";
 		return dbhelp.getPosts(username);
 	}
 	
@@ -48,8 +49,8 @@ public class PostController {
 		post = dbhelp.getPost(selectedPost);
 	}
 	
-	public String hapus() {
-		dbhelp.deletePost(selectedPost);
+	public String hapus(int id) {
+		dbhelp.deletePost(id);
 		return "index";
 	}
 	

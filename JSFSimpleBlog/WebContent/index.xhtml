@@ -31,8 +31,7 @@
                 <p>#{post.content}</p>
                 <h:link value="Edit" outcome="edit_post"><f:param name="id" value="#{post.id}" /></h:link> | 
                 <h:form>
-                	<h:inputHidden value="#{post.id}" />
-                	<h:commandLink value="Hapus" action="#{postController.hapus}" onclick="return confirm('Anda yakin ingin menghapus post ini?')"/>
+                	<h:commandLink value="Hapus" action="#{postController.hapus(post.id)}" onclick="return confirm('Anda yakin ingin menghapus post ini?')"/>
                 </h:form>
             </li>
             </ui:repeat>

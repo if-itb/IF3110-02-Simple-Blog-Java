@@ -8,7 +8,7 @@ import org.wbd.helper.DatabaseHelper;
 import org.wbd.model.Post;
 
 public class CreatePostController {
-	private int newId;
+	private int postId;
 	private String newJudul;
 	private Date newTanggal;
 	private String newKonten;
@@ -20,16 +20,17 @@ public class CreatePostController {
 	private LoginController loginController;
 	
 	public CreatePostController() {
+		dbhelp = DatabaseHelper.getInstance();
 		newTanggal = new Date();
-		newId = -1;
+		postId = -1;
 	}
 
-	public int getNewId() {
-		return newId;
+	public int getPostId() {
+		return postId;
 	}
 
-	public void setNewId(int newId) {
-		this.newId = newId;
+	public void setPostId(int postId) {
+		this.postId = postId;
 	}
 	
 	public String getNewJudul() {
@@ -69,15 +70,23 @@ public class CreatePostController {
 
 	public void init() {
 		Post post = dbhelp.getPost(selectedPost);
-		setNewId(post.getId());
+		setPostId(post.getId());
 		setNewJudul(post.getTitle());
 		setNewTanggal(post.getDate());
 		setNewKonten(post.getContent());
 	}
 	
 	public String simpan() {
-		String username = loginController.getUser().getUsername();
-		dbhelp.addPost(username, newJudul, (java.sql.Date) newTanggal, newKonten);
+//		String username = loginController.getUser().getUsername();
+		String username = "test";
+		java.sql.Date sqlDate = new java.sql.Date(newTanggal.getTime());
+		dbhelp.addPost(username, newJudul, sqlDate, newKonten);
+		return "index?faces-redirect=true";
+	}
+	
+	public String simpanEdit() {
+		java.sql.Date sqlDate = new java.sql.Date(newTanggal.getTime());
+		dbhelp.updatePost(postId, newJudul, sqlDate, newKonten);
 		return "index?faces-redirect=true";
 	}
 }

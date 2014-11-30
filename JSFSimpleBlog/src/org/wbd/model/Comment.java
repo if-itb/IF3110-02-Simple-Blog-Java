@@ -1,13 +1,12 @@
 package org.wbd.model;
 
-import java.util.Calendar;
 import java.util.Date;
 
 public class Comment {
 	private int postId;
 	private String sender;
 	private String email;
-	private Calendar date;
+	private Date date;
 	private String content;
 	
 	public Comment() {
@@ -39,11 +38,11 @@ public class Comment {
 	}
 	
 	public Date getDate() {
-		return date.getTime();
+		return date;
 	}
 	
 	public void setDate(Date date) {
-		this.date.setTime(date);
+		this.date = date;
 	}
 	
 	public String getContent() {
