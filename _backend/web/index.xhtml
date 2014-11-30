@@ -164,7 +164,13 @@
                 </div>
                 <div class="post-date text-center"><span class="glyphicon glyphicon-time" aria-hidden="true"></span> #{thepost.printTanggal()} | <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> #{thepost.status}</div>
               <p class="text-justified">#{thepost.konten}</p>
-              <a href="#"><button type="button" class="btn btn-lg read-more center-block">Read More</button></a>
+              <h:form>
+                  <button type="button" class="btn btn-lg read-more center-block">
+                    <h:commandLink action="post" value="Read More">
+                        <f:param name="id" value="#{thepost.id}" />
+                    </h:commandLink>
+                  </button>
+              </h:form>
             </div>   
                   </ui:repeat>
           </div>

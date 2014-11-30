@@ -12,7 +12,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />	
         <h:outputStylesheet name="bootstrap/css/bootstrap.css" />
         <h:outputStylesheet name="bootstrap/css/custom.css" />
-        <title>Simple Blog | Add Member</title>
+        <title>Simple Blog | Edit User</title>
     </h:head>
     
     <h:body>
@@ -67,25 +67,26 @@
         <div class="col-md-10 col-md-offset-1">
           <div class="edit"></div>
           <div class="post">
-            <div class="post-title">Add User</div>
+            <div class="post-title">Edit User</div>
+            #{memberController.execute(param['id'])}
             <h:form role="form">
               <div class="form-group">
                 <label for="exampleInputEmail1">Email</label>
-                <h:inputText styleClass="form-control" binding="#{email}" />
+                <h:inputText styleClass="form-control" id="email" value="#{memberController.mem.email}" />
               </div>
               <div class="form-group">
                 <label for="exampleInputPassword1">Name</label>
-                <h:inputText styleClass="form-control" binding="#{name}" />
+                <h:inputText styleClass="form-control" id="name" value="#{memberController.mem.name}" />
               </div>
               <div class="form-group">
                 <label for="exampleInputPassword1">Password</label>
-                <h:inputText styleClass="form-control" binding="#{password}" />
+                <h:inputText styleClass="form-control" id="password" value="#{memberController.mem.password}" />
               </div>
                 <div class="form-group">
                     <label for="exampleInputPassword1">Role</label>
-                    <h:inputText styleClass="form-control" binding="#{role}" />
+                    <h:inputText styleClass="form-control" id="role" value="#{memberController.mem.role}" />
                 </div>
-                <h:commandButton type="submit" styleClass="btn btn-default" value="Submit" action="#{postController.addMember(email.value, name.value, password.value, role.value)}"/>
+                <h:commandButton type="submit" styleClass="btn btn-default" value="Submit" action="#{memberController.addMember(email.value, name.value, password.value, role.value)}"/>
             </h:form>
 
 

@@ -12,7 +12,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />	
         <h:outputStylesheet name="bootstrap/css/bootstrap.css" />
         <h:outputStylesheet name="bootstrap/css/custom.css" />
-        <title>Simple Blog | Add Member</title>
+        <title>Simple Blog | Add User</title>
     </h:head>
     
     <h:body>
@@ -85,7 +85,7 @@
                     <label for="exampleInputPassword1">Role</label>
                     <h:inputText styleClass="form-control" binding="#{role}" />
                 </div>
-                <h:commandButton type="submit" styleClass="btn btn-default" value="Submit" action="#{postController.addMember(email.value, name.value, password.value, role.value)}"/>
+                <h:commandButton type="submit" styleClass="btn btn-default" value="Submit" action="#{memberController.addMember(email.value, name.value, password.value, role.value)}"/>
             </h:form>
 
 
