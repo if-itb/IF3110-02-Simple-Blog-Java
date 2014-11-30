@@ -5,7 +5,6 @@
 --%>
 
 <%@page import="source.Post"%>
-<%@page import="source.Komentar"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%

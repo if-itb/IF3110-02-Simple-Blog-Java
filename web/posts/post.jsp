@@ -4,7 +4,6 @@
     Author     : Rakhmatullah Yoga S
 --%>
 
-<%@page import="source.Komentar"%>
 <%@page import="java.sql.SQLException"%>
 <%@page import="source.CookieHelper"%>
 <%@page import="java.sql.ResultSet"%>
@@ -94,7 +93,7 @@
                                     Statement statement = koneksi.createStatement();
                                     String username = cookie.getUsername();
                                     System.out.println(username);
-                                    String emailQuery = "SELECT * FROM `user` WHERE `username` = 'admin'";
+                                    String emailQuery = "SELECT * FROM `user` WHERE `username` = '"+username+"'";
                                     ResultSet result = statement.executeQuery(emailQuery);
                                     while (result.next()) {
                                         nama = result.getString("nama");
