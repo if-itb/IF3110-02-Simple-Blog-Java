@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 28, 2014 at 05:47 PM
+-- Generation Time: Nov 30, 2014 at 05:35 PM
 -- Server version: 5.5.40
 -- PHP Version: 5.6.0
 
@@ -19,6 +19,29 @@ SET time_zone = "+00:00";
 --
 -- Database: `wbd2`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `comment`
+--
+
+CREATE TABLE IF NOT EXISTS `comment` (
+`id` int(11) NOT NULL,
+  `pid` int(11) NOT NULL,
+  `name` varchar(30) NOT NULL,
+  `email` varchar(30) NOT NULL,
+  `content` text NOT NULL,
+  `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `comment`
+--
+
+INSERT INTO `comment` (`id`, `pid`, `name`, `email`, `content`, `time`) VALUES
+(1, 1, 'riva', 'riva@riva.com', 'Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.', '2014-11-29 04:58:47'),
+(2, 1, 'luthfi', 'luthfi@luthfi.com', 'Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.', '2014-11-29 04:58:47');
 
 -- --------------------------------------------------------
 
@@ -72,6 +95,12 @@ INSERT INTO `user` (`username`, `password`, `role`, `name`, `email`) VALUES
 --
 
 --
+-- Indexes for table `comment`
+--
+ALTER TABLE `comment`
+ ADD PRIMARY KEY (`id`), ADD KEY `pid` (`pid`);
+
+--
 -- Indexes for table `post`
 --
 ALTER TABLE `post`
@@ -88,6 +117,11 @@ ALTER TABLE `user`
 --
 
 --
+-- AUTO_INCREMENT for table `comment`
+--
+ALTER TABLE `comment`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=14;
+--
 -- AUTO_INCREMENT for table `post`
 --
 ALTER TABLE `post`
@@ -95,6 +129,12 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `comment`
+--
+ALTER TABLE `comment`
+ADD CONSTRAINT `comment_ibfk_1` FOREIGN KEY (`pid`) REFERENCES `post` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `post`
