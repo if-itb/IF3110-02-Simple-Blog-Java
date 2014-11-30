@@ -15,8 +15,8 @@
             <ui:define name="content">
                 <h1 class="content-subhead">List Post</h1>
                 <ul>
-                    <li>    
-                        <c:forEach var="item" items="#{ListPost.fetchPublishedPost()}">
+                    <c:forEach var="item" items="#{ListPost.fetchPublishedPost()}">
+                        <li>
                             <section class="list-post">
                                 <h3><a class="list-post-title" href="#{NavigationController.gotoViewPost(item.PID)}">#{item.judul}</a></h3>
                                     <p class="post-meta">
@@ -25,8 +25,8 @@
                                     <a class="pure-button" href="#{NavigationController.gotoEditPost(item.PID)}" value="Edit-Post">Edit Post</a>
                                     <a class="pure-button" href="#{NavigationController.gotoDeletePost(item.PID)}" value="Delete-Post">Delete Post</a>
                             </section>
-                        </c:forEach>
-                    </li>
+                        </li>
+                    </c:forEach>
                 </ul>
             </ui:define>
         </ui:composition>>

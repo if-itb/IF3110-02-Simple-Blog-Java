@@ -125,7 +125,6 @@ public class Post {
             Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/simple_blog_2", "root", "");
             Statement sta = conn.createStatement();
             String Sql = "select * from entries where PID="+id;
-            System.out.println("dsda");
             ResultSet rs = sta.executeQuery(Sql);
             rs.next();
             this.setJudul(rs.getString(2));
@@ -142,19 +141,4 @@ public class Post {
             return null;
         }
     }
-//    
-//    public String gotoEditPost(int post_id) {
-//        PID = post_id;
-//        return "Edit-Post.xhtml";
-//    }
-//    
-//    public String gotoDeletePost(int post_id) {
-//        PID = post_id;
-//        return "Delete-Post.xhtml";
-//    }
-//    
-//    public String gotoViewPost(int post_id) {
-//        PID = post_id;
-//        return "View-Post.xhtml";
-//    }
 }

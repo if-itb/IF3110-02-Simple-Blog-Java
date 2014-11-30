@@ -35,29 +35,36 @@ and open the template in the editor.
                 </section>
                 <h1 class="content-subhead">Komentar</h1>
                 <section class="komentar">
-                    <form class="pure-form" method="post" id="comment_form">
-                        <label for="Nama">Nama:</label>
-                        <input type="text" name="Nama" id="Nama"/>
-                        <br/> <br/>
-                        <label for="Email">Email:</label>
-                        <input type="text" name="Email" id="Email"/>
-                        <br/> <br/>
-                        <label for="Komentar">Komentar:</label><br/>
-                        <textarea name="Komentar" rows="10" cols="50" id="Komentar"></textarea>
-                         <br/> <br/>
-                        <input type="submit" name="submit" value="submit" class="pure-button"/>
-                    </form>
+                    
                     <ul class="komentar-list">
-                        <li>
-                            <p class="Nama">#{komentar.tanggal} | #{komentar.nama}</p>
-                                <br/>
-                            <p class="post-meta">
-                            </p>
-                        </li>
+                        <c:forEach var="komentar" items="#{komentar.fetchComment(param['id'])}">
+                            <li>
+                                <p class="Nama">#{komentar.tanggal} | #{komentar.nama}</p>
+                                    <br/>
+                                <p class="post-meta">
+                                    #{komentar.komentar}
+                                </p>
+                            </li>
+                        </c:forEach>
                     </ul>
                 </section>
             </ui:define>
         </ui:composition>>
+        <script type="text/javascript">
+            //<![CDATA[
+            function validateForm(email) {
+                console.log("email: " + email);
+                var re = "/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/";
+                if (re.test(email)) {
+                    return true;
+                }
+                else {
+                    alert("Masukkan email salah");
+                    return false;
+                }
+            }
+            //]]>
+        </script>
     </h:body>
 </f:view>
 </html>

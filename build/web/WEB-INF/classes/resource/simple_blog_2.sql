@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.1.6
+-- version 4.2.7.1
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 25 Nov 2014 pada 10.46
--- Versi Server: 5.5.36
--- PHP Version: 5.4.25
+-- Generation Time: Nov 26, 2014 at 03:23 AM
+-- Server version: 5.6.20
+-- PHP Version: 5.5.15
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -23,22 +23,20 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `entries`
+-- Table structure for table `entries`
 --
 
 CREATE TABLE IF NOT EXISTS `entries` (
-  `PID` int(11) NOT NULL AUTO_INCREMENT,
+`PID` int(11) NOT NULL,
   `JUDUL` text NOT NULL,
   `TANGGAL` date NOT NULL,
   `KONTEN` text NOT NULL,
   `PUBLISHED` tinyint(1) NOT NULL,
-  `AUTHOR` text NOT NULL,
-  PRIMARY KEY (`PID`),
-  UNIQUE KEY `PID` (`PID`)
+  `AUTHOR` text NOT NULL
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
--- Dumping data untuk tabel `entries`
+-- Dumping data for table `entries`
 --
 
 INSERT INTO `entries` (`PID`, `JUDUL`, `TANGGAL`, `KONTEN`, `PUBLISHED`, `AUTHOR`) VALUES
@@ -47,33 +45,69 @@ INSERT INTO `entries` (`PID`, `JUDUL`, `TANGGAL`, `KONTEN`, `PUBLISHED`, `AUTHOR
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `komentar`
+-- Table structure for table `komentar`
 --
 
 CREATE TABLE IF NOT EXISTS `komentar` (
   `PID` int(11) NOT NULL,
-  `KID` int(11) NOT NULL AUTO_INCREMENT,
+`KID` int(11) NOT NULL,
   `NAMA` varchar(50) NOT NULL,
   `EMAIL` varchar(50) NOT NULL,
   `TANGGAL` date NOT NULL,
-  `KOMENTAR` text NOT NULL,
-  PRIMARY KEY (`KID`),
-  UNIQUE KEY `KID` (`KID`)
+  `KOMENTAR` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `user`
+-- Table structure for table `user`
 --
 
 CREATE TABLE IF NOT EXISTS `user` (
   `USERNAME` varchar(20) NOT NULL,
   `PASSWORD` varchar(20) NOT NULL,
-  `ROLE` varchar(10) NOT NULL,
-  PRIMARY KEY (`USERNAME`)
+  `ROLE` int(11) NOT NULL,
+  `EMAIL` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+INSERT INTO `user` (`USERNAME`, `PASSWORD`, `ROLE`, `EMAIL`) VALUES
+('budi', 'kuyup_hujan', '2', 'budi@kecil.co.id');
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `entries`
+--
+ALTER TABLE `entries`
+ ADD PRIMARY KEY (`PID`), ADD UNIQUE KEY `PID` (`PID`);
+
+--
+-- Indexes for table `komentar`
+--
+ALTER TABLE `komentar`
+ ADD PRIMARY KEY (`KID`), ADD UNIQUE KEY `KID` (`KID`);
+
+--
+-- Indexes for table `user`
+--
+ALTER TABLE `user`
+ ADD PRIMARY KEY (`USERNAME`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `entries`
+--
+ALTER TABLE `entries`
+MODIFY `PID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `komentar`
+--
+ALTER TABLE `komentar`
+MODIFY `KID` int(11) NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

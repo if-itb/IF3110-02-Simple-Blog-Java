@@ -52,6 +52,7 @@ public class NavigationController implements Serializable{
     }
     
     public String gotoViewPost(int post_id) {
+        System.out.println("klik here:" +post_id);
         return "View-Post.xhtml?id=" + post_id;
     }
     
@@ -63,7 +64,7 @@ public class NavigationController implements Serializable{
         return "Delete-Post.xhtml";
     }
     
-    public String gotoViewPost() {
+    public String gotoViewPost(){
         return "View-Post.xhtml";
     }
 }
