@@ -1,7 +1,6 @@
 package org.wbd.controller;
 
 import java.util.Date;
-
 import javax.faces.bean.ManagedProperty;
 
 import org.wbd.helper.DatabaseHelper;
@@ -12,6 +11,7 @@ public class CreatePostController {
 	private String newJudul;
 	private Date newTanggal;
 	private String newKonten;
+	private boolean postPublished;
 	
 	private int selectedPost;
 	private DatabaseHelper dbhelp;
@@ -51,6 +51,14 @@ public class CreatePostController {
 	public void setNewKonten(String newKonten) {
 		this.newKonten = newKonten;
 	}
+
+	public boolean isPostPublished() {
+		return postPublished;
+	}
+
+	public void setPostPublished(boolean postPublished) {
+		this.postPublished = postPublished;
+	}
 	
 	public int getSelectedPost() {
 		return selectedPost;
@@ -74,6 +82,7 @@ public class CreatePostController {
 		setNewJudul(post.getTitle());
 		setNewTanggal(post.getDate());
 		setNewKonten(post.getContent());
+		setPostPublished(post.isPublished());
 	}
 	
 	public String simpan() {
@@ -81,12 +90,16 @@ public class CreatePostController {
 		String username = "test";
 		java.sql.Date sqlDate = new java.sql.Date(newTanggal.getTime());
 		dbhelp.addPost(username, newJudul, sqlDate, newKonten);
-		return "index?faces-redirect=true";
+		return "unpublished?faces-redirect=true";
 	}
 	
 	public String simpanEdit() {
 		java.sql.Date sqlDate = new java.sql.Date(newTanggal.getTime());
 		dbhelp.updatePost(postId, newJudul, sqlDate, newKonten);
-		return "index?faces-redirect=true";
+		if (postPublished) {
+			return "index?faces-redirect=true";
+		} else {
+			return "unpublished?faces-redirect=true";
+		}
 	}
 }

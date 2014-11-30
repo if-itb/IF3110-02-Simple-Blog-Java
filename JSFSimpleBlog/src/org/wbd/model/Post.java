@@ -8,6 +8,7 @@ public class Post {
 	private String title;
 	private Date date;
 	private String content;
+	private boolean published;
 	
 	public Post() {
 		
@@ -51,6 +52,14 @@ public class Post {
 	
 	public void setContent(String content) {
 		this.content = content;
+	}
+
+	public boolean isPublished() {
+		return published;
+	}
+
+	public void setPublished(boolean published) {
+		this.published = published;
 	}
 	
 }

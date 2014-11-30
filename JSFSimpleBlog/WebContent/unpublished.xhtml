@@ -22,17 +22,19 @@
         <nav class="art-list">
           <ul class="art-list-body">
 
-            <ui:repeat value="#{postController.posts}" var="post">
+            <ui:repeat value="#{postController.unpublishedPosts}" var="post">
             <li class="art-list-item">
                 <div class="art-list-item-title-and-time">
                     <h2 class="art-list-title"><h:link value="#{post.title}" outcome="post"><f:param name="id" value="#{post.id}" /></h:link></h2>
                     <div class="art-list-time"><h:outputText value="#{post.date}"><f:convertDateTime pattern="EEEE, d MMM yyyy" /></h:outputText></div>
                 </div>
-                <p>#{post.content}</p>
+                <p>#{post.content.length() gt 250 ? post.content.substring(0, 247).concat('...') : post.content}</p>
                 <h:link value="Edit" outcome="edit_post"><f:param name="id" value="#{post.id}" /></h:link> | 
                 <h:form>
-                	<h:inputHidden value="#{post.id}" /> 
-                	<h:commandLink value="Publish" action="#{postController.publish}" />
+                	<h:commandLink value="Publish" action="#{postController.publish(post.id)}" />
+                </h:form> | 
+                <h:form>
+                	<h:commandLink value="Hapus" action="#{postController.hapus(post.id)}" onclick="return confirm('Anda yakin ingin menghapus post ini?')"/>
                 </h:form>
             </li>
             </ui:repeat>

@@ -62,18 +62,20 @@ public class DatabaseHelper {
 		}
 	}
 	
-	public ArrayList<Post> getPosts(String username) {
+	public ArrayList<Post> getPosts(String username, boolean published) {
 		try {
 			connectDatabase(URL, USER, PASSWORD);
 			
 			String query = "SELECT post.id, post.title, post.date, post.content "
 					+ "FROM user JOIN post "
 					+ "WHERE user.username = ? AND "
-					+ "user.id = post.user_id ";
+					+ "user.id = post.user_id AND "
+					+ "post.published = ?";
 			ArrayList<Post> posts = new ArrayList<Post>();
 			
 			statement = conn.prepareStatement(query);
 			statement.setString(1, username);
+			statement.setBoolean(2, published);
 			statement.executeQuery();
 			result = statement.getResultSet();
 			
@@ -84,12 +86,10 @@ public class DatabaseHelper {
 				post.setTitle(result.getString(2));
 				post.setDate(result.getDate(3));
 				post.setContent(result.getString(4));
+				post.setPublished(published);
 				posts.add(post);
 			}
 			
-			clearResult();
-			clearStatement();
-			disconnectDatabase();
 			return posts;
 		} catch (SQLException ex) {
 			Logger logger = Logger.getLogger(DriverManager.class.getName());
@@ -107,7 +107,7 @@ public class DatabaseHelper {
 			connectDatabase(URL, USER, PASSWORD);
 			
 			String query =
-				"SELECT post.id, post.title, post.date, post.content, user.username "
+				"SELECT post.id, post.title, post.date, post.content, user.username, post.published "
 					+ "FROM user JOIN post "
 					+ "WHERE post.id = ? ";
 			
@@ -122,11 +122,9 @@ public class DatabaseHelper {
 				post.setTitle(result.getString(2));
 				post.setDate(result.getDate(3));
 				post.setContent(result.getString(4));
+				post.setPublished(result.getBoolean(6));
 			}
 			
-			clearResult();
-			clearStatement();
-			disconnectDatabase();
 			return post;
 		} catch (SQLException ex) {
 			Logger logger = Logger.getLogger(DriverManager.class.getName());
@@ -149,15 +147,39 @@ public class DatabaseHelper {
 			result.next();
 			String userID = result.getString(1);
 			
-			String query = "INSERT INTO post (title, date, content, user_id) "
-					+ "VALUES (?, ?, ?, ?)";
+			String query = "INSERT INTO post (title, date, content, user_id, published) "
+					+ "VALUES (?, ?, ?, ?, ?)";
 			
 			statement = conn.prepareStatement(query);
 			statement.setString(1, title);
 			statement.setDate(2, date);
 			statement.setString(3, content);
 			statement.setString(4, userID);
+			statement.setBoolean(5, false);
 			statement.executeUpdate();
+		} catch (SQLException ex) {
+			Logger logger = Logger.getLogger(DriverManager.class.getName());
+			logger.log(Level.SEVERE, ex.getMessage(), ex);
+		} finally {
+			clearResult();
+			clearStatement();
+			disconnectDatabase();
+		}
+	}
+	
+	public void publishPost(int postId) {
+		try {
+			connectDatabase(URL, USER, PASSWORD);
+			
+			String query = "UPDATE post "
+					+ "SET published=? "
+					+ "WHERE id=? ";
+			
+			statement = conn.prepareStatement(query);
+			statement.setBoolean(1, true);
+			statement.setInt(2, postId);
+			statement.executeUpdate();
+			
 		} catch (SQLException ex) {
 			Logger logger = Logger.getLogger(DriverManager.class.getName());
 			logger.log(Level.SEVERE, ex.getMessage(), ex);
@@ -183,9 +205,6 @@ public class DatabaseHelper {
 			statement.setInt(4, postId);
 			statement.executeUpdate();
 			
-			clearResult();
-			clearStatement();
-			disconnectDatabase();
 		} catch (SQLException ex) {
 			Logger logger = Logger.getLogger(DriverManager.class.getName());
 			logger.log(Level.SEVERE, ex.getMessage(), ex);
@@ -207,9 +226,6 @@ public class DatabaseHelper {
 			statement.setInt(1, postId);
 			statement.executeUpdate();
 
-			clearResult();
-			clearStatement();
-			disconnectDatabase();
 		} catch (SQLException ex) {
 			Logger logger = Logger.getLogger(DriverManager.class.getName());
 			logger.log(Level.SEVERE, ex.getMessage(), ex);

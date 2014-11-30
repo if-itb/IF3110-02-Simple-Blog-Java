@@ -39,10 +39,16 @@ public class PostController {
 		return post;
 	}
 
-	public List<Post> getPosts() {
+	public List<Post> getPublishedPosts() {
 //		String username = loginController.getUser().getUsername();
 		String username = "test";
-		return dbhelp.getPosts(username);
+		return dbhelp.getPosts(username, true);
+	}
+
+	public List<Post> getUnpublishedPosts() {
+//		String username = loginController.getUser().getUsername();
+		String username = "test";
+		return dbhelp.getPosts(username, false);
 	}
 	
 	public void view() {
@@ -51,11 +57,11 @@ public class PostController {
 	
 	public String hapus(int id) {
 		dbhelp.deletePost(id);
-		return "index";
+		return "index?faces-redirect=true";
 	}
 	
-	public String publish() {
-		//TODO: implement
-		return "index";
+	public String publish(int id) {
+		dbhelp.publishPost(id);
+		return "index?faces-redirect=true";
 	}
 }

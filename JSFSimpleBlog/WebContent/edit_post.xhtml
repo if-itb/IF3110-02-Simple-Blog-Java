@@ -43,6 +43,7 @@
                     <h:inputTextarea value="#{createPostController.newKonten}"/>
                     
                     <h:inputHidden value="#{createPostController.postId}" />
+                    <h:inputHidden value="#{createPostController.postPublished}" />
 
                     <h:commandButton value="Simpan" action="#{createPostController.simpanEdit}" onclick="return validasi_tanggal()"/>
                 </h:form>
