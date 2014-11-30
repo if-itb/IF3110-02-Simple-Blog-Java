@@ -1,11 +1,11 @@
 function confirmDelete() {
-	var result = confirm('Apakah Anda yakin menghapus post ini?');
-	if (result==true) {
-	    return true;
-	}
-	else {
-		return false;
-	}
+    var result = confirm('Apakah Anda yakin menghapus post ini?');
+    if (result==true) {
+        return true;
+    }
+    else {
+        return false;
+    }
 }
 
 function comment() {
@@ -20,7 +20,7 @@ function comment() {
     if (validateEmail()){
       var idPost = document.getElementById('PostId').value;
       saveComment(idPost);
-      loadComment(idPost);
+      document.forms["commentForm"]["Komentar"].value="";
       return false;
     }
     else {
@@ -38,28 +38,29 @@ function validateEmail() {
         return false;
     }
     else {
-      return true;
+        return true;
     }
 }
+
 function IsValidDate() {
     var f = document.forms["Post"]["Tanggal"].value;
 var string = f.split("-");
     var now = new Date();
     var date = new Date();
-  date.setFullYear(string[0],string[1]-1,string[2]);
-  if(date < now){
-		alert("Input tanggal tidak valid! (harus >= now)");
-		return false;
-	}
-	else{
-		return true;
-	}
+    date.setFullYear(string[0],string[1]-1,string[2]);
+    if(date < now){
+        alert("Input tanggal tidak valid! (harus >= now)");
+        return false;
+    }
+    else{
+        return true;
+    }
 }
+
 function loadComment(str) {
   if (window.XMLHttpRequest) {
-    // code for IE7+, Firefox, Chrome, Opera, Safari
     xmlhttp=new XMLHttpRequest();
-  } else { // code for IE6, IE5
+  } else {
     xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
   }
   xmlhttp.onreadystatechange=function() {
@@ -70,20 +71,21 @@ function loadComment(str) {
   xmlhttp.open("GET","comment.jsp?id="+str,true);
   xmlhttp.send();
 }
+
 function saveComment(str) {
   var xmlhttp;
   var Nama = document.forms["commentForm"]["Nama"].value;
   var Email = document.forms["commentForm"]["Email"].value;
   var Komentar = document.forms["commentForm"]["Komentar"].value;
   if (window.XMLHttpRequest) {
-    // code for IE7+, Firefox, Chrome, Opera, Safari
     xmlhttp=new XMLHttpRequest();
-  } else { // code for IE6, IE5
+  } else {
     xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
   }
   xmlhttp.onreadystatechange=function() {
     if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-      document.getElementById("Comment").innerHTML=xmlhttp.responseText;
+        var idPost = document.getElementById('PostId').value;
+        loadComment(idPost);
     }
   }
   xmlhttp.open("POST","insertcomment.jsp",true);

@@ -74,12 +74,10 @@ public class Post {
                         "    </li>";
             }
         } catch (SQLException ex) {
-
         }
         return HTMLcode;
     }
     /**
-     * 
      * @param PostID
      * @param nama
      * @param email
@@ -91,11 +89,13 @@ public class Post {
         KoneksiDatabase.setUser("root2");
         KoneksiDatabase.setPassword("akhfa");
         KoneksiDatabase.setDatabase("localhost","blog");
-        try (Connection koneksi = KoneksiDatabase.getKoneksi()) {
+        try {
+            Connection koneksi = KoneksiDatabase.getKoneksi();
             Statement statement = koneksi.createStatement();
             InsertQuery = "INSERT INTO komentar (idpost, nama, email, komentar) VALUES ('" + PostID + "', '" + nama + "', '" + email + "', '" + comment + "')";
             statement.executeUpdate(InsertQuery);
-            koneksi.close();
+        } catch (SQLException ex) {
+
         }
     }
     /**
