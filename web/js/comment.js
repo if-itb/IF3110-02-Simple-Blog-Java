@@ -62,9 +62,9 @@ function loadComment() {
                 for (row in list) {
                     inner += '<!-- Comment -->';
                     inner += '      <div class="media">';
-                    inner += '          <a class="pull-left" href="#"><img class="media-object" src="http://placehold.it/64x64" alt="" /></a>';
+                    inner += '          <a class="pull-left" href="#"><img class="media-object" src="http://placehold.it/40x40" alt="" /></a>';
                     inner += '          <div class="media-body">';
-                    inner += '              <h4 class="media-heading">'+list[i].name+'<small>'+list[i].time+'</small></h4>';
+                    inner += '              <h4 class="media-heading">'+list[i].name+'<small> at '+list[i].time+'</small></h4>';
                     inner += '              ' + list[i].content;
                     inner += '          </div>';
                     inner += '      </div>';
