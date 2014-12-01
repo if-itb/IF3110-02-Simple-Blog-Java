@@ -63,38 +63,17 @@
                     <p>by <a href="#">#{post.author.username}</a>
                     </p>
                     <p>#{post.content}</p>
-                    <c:choose>
-                        <c:when test="#{UserData.is_logged_in()}" >
-                            <c:choose>
-                                <c:when test="#{UserData.userLoggedIn().role == 'admin'}">
-                                    <c:set var="is_edit" value="#{true}" />
-                                </c:when>
-                                <c:when test="#{UserData.userLoggedIn().role == 'editor'}">
-                                    <c:set var="is_edit" value="#{true}" />
-                                </c:when>
-                                <c:when test="#{UserData.userLoggedIn().role == 'owner'}">
-                                    <c:set var="is_edit" value="#{true}" />
-                                </c:when>
-                                <c:otherwise>
-                                    <c:set var="is_edit" value="#{false}" />
-                                </c:otherwise>
-                            </c:choose>
-                        </c:when>
-                        <c:otherwise>
-                            <c:set var="is_edit" value="#{false}" />
-                        </c:otherwise>
-                    </c:choose>
-                    <c:if test="#{is_edit}">
-                        <h:link outcome="edit_post">
-                            <f:param name="id" value="#{post.id}" />
-                            <span class="glyphicon glyphicon-pencil"></span>
-                        </h:link>
-                        
-                        <h:commandLink action="#{PostData.softDelPost(post)}" onclick="if (!confirm('Are you sure move this post to trash?')) return false;">
-                            <span class="glyphicon glyphicon-trash"></span>
-                        </h:commandLink>
-                        
-                    </c:if>
+                    <h:inputText class="role" value="#{UserData.userLoggedIn().role}" style="display:none;"/>
+                    <h:inputText class="username1" value="#{UserData.userLoggedIn().username}" style="display:none;"/>
+                    <h:inputText class="username2" value="#{post.author.username}" style="display:none;"/>
+                    <h:link outcome="edit_post" class="edit" style="display: none;">
+                        <f:param name="id" value="#{post.id}" />
+                        <span class="glyphicon glyphicon-pencil"></span>
+                    </h:link>
+
+                    <h:commandLink action="#{PostData.softDelPost(post)}" class="delete" style="display: none;" onclick="if (!confirm('Are you sure move this post to trash?')) return false;">
+                        <span class="glyphicon glyphicon-trash"></span>
+                    </h:commandLink>
                     
                 </div>
             </div>
@@ -114,6 +93,35 @@
 
         </div>
         <!-- /.container -->
+        <script type="text/javascript">
+            //<![CDATA[
+            var edit = document.getElementsByClassName("edit");
+            var del = document.getElementsByClassName("delete");
+            var role = document.getElementsByClassName("role");
+            var username1 = document.getElementsByClassName("username1");
+            var username2 = document.getElementsByClassName("username2");
+            var len = edit.length;
+            var i;
+            for (i = 0;i < len;i++)
+            {
+                if (role.item(i).value == "admin")
+                {
+                    edit.item(i).style = "display:inline";
+                    del.item(i).style = "display:inline";
+                }
+                else if (role.item(i).value == "editor")
+                {
+                    edit.item(i).style = "display:inline";
+                    del.item(i).style = "display:inline";
+                }
+                else if (username1.item(i).value == username2.item(i).value)
+                {
+                    edit.item(i).style = "display:inline";
+                    del.item(i).style = "display:inline";
+                }
+            }
+            //]]>
+        </script>
     </h:body>
 </html>
 
