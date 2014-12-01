@@ -146,7 +146,7 @@ public class ViewPost {
         String dbURL = "jdbc:mysql://localhost:3306/simple_blog";
         String uName = "root";
         String pass = "";
-        Integer i = 0;
+        
         Connection conn = null;
         Statement stmnt = null;
                        

@@ -11,25 +11,31 @@
         <ui:include src="header-script.xhtml"/>
         <title>Simple Blog | Unpublished Post</title>
     </h:head>
-    <h:body class="default" >
+    <h:body class="default" onload="#{unpublished.clear()}" >
     <div class="wrapper">
     <ui:include src="header.xhtml"/>
 
-    <div id="home">
-        <div class="posts">
-            <nav class="art-list">
-                <ul class="art-list-body">
-                    <li class="art-list-item">
-                        <div class="art-list-item-title-and-time">
-                            <h2 class="art-list-title">
-                                
-                            </h2>
-                        </div>
-                    </li>
-                </ul>
-            </nav>
-        </div>
+<div id="home">
+    <div class="posts">
+        <nav class="art-list">
+          <ul class="art-list-body">
+              <ui:repeat value="#{unpublished.ambilPostList()}" var="list">
+                  <li class="art-list-item">
+                      <div class="art-list-item-title-and-time">
+                          <h2 class="art-list-title">
+                              #{list.judul}
+                          </h2>
+                          <div class="art-list-time">#{list.tanggal}</div>
+                      </div>
+                      <p>
+                           #{list.konten}
+                      </p>
+                  </li>
+              </ui:repeat>
+          </ul>
+        </nav>
     </div>
+</div>
     
 <ui:include src="footer.xhtml"/>
     </div>
