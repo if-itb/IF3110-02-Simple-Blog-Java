@@ -54,8 +54,13 @@
                     <p>#{post.date}</p>
                 </div>
                 <div class="col-md-5">
-                    <a href="post.html">
+                    <a href="post.xhtml?id=#{post.id}">
+                        <c:if test="#{post.image.length() == 0}" >
                         <img class="img-responsive img-hover" src="http://placehold.it/600x300" alt=""/>
+                        </c:if>
+                        <c:if test="#{post.image != ''}" >
+                            <h:graphicImage url="upload/#{post.image}" class="img-responsive img-hover" />
+                        </c:if>
                     </a>
                 </div>
                 <div class="col-md-6">

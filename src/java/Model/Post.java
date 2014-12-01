@@ -14,6 +14,7 @@ import javax.faces.bean.RequestScoped;
 public class Post {
     private int id;
     private String title;
+    private String image;
     private Date date;
     private String content;
     private User author;
@@ -27,6 +28,7 @@ public class Post {
     {
         id = 0;
         title = "";
+        image = "";
         date = null;
         content = "";
         author = null;
@@ -43,9 +45,10 @@ public class Post {
      * @param published published/draft post
      * @param deleted deleted post
      */
-    public Post(int id, String title, Date date, String content, User author, boolean published, boolean deleted) {
+    public Post(int id, String title,String image, Date date, String content, User author, boolean published, boolean deleted) {
         this.id = id;
         this.title = title;
+        this.image = image;
         this.date = date;
         this.content = content;
         this.author = author;
@@ -67,6 +70,14 @@ public class Post {
      */
     public String getTitle() {
         return title;
+    }
+    
+    /**
+     * Get the image of post
+     * @return image of post
+     */
+    public String getImage() {
+        return image;
     }
     
     /**
@@ -123,6 +134,14 @@ public class Post {
      */
     public void setTitle(String title) {
         this.title = title;
+    }
+    
+    /**
+     * Set the new image of post
+     * @param image new image
+     */
+    public void setImage(String image) {
+        this.image = image;
     }
     
     /**
