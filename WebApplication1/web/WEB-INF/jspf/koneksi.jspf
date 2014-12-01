@@ -1,9 +1,0 @@
-<%-- any content can be specified here e.g.: --%>
-<%
-String xDRIVER = "com.mysql.jdbc.Driver";
-String xUSERNAME = "root";
-String xPASSWORD = "";
-String xSTRING = "jdbc:mysql://localhost:3306/simpleblogii";
-Class.forName(xDRIVER);
-
-%>
