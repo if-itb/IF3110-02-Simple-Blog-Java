@@ -467,6 +467,7 @@ div.cover > img {
   text-transform: uppercase;
   color: #999;
   float: right;
+  margin-right: 20px;
 }
 
 .art-list-title a {
@@ -1006,7 +1007,7 @@ label {
     position: relative;
     height: 28px;
     width: 1px;
-    left: 63px;
+    left: 70px;
 }
 
 #customers {

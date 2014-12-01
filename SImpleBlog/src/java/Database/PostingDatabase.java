@@ -554,7 +554,7 @@ public class PostingDatabase {
       try {
         con = makeConnection();
         Statement stmt = con.createStatement();
-        String query = "Select * from post where author=\""+login.getUserCookie().getValue()+"\" and status=\"deleted\";";
+        String query = "Select * from post where status=\"deleted\";";
         rs = stmt.executeQuery(query);
 
         while(rs.next()){
