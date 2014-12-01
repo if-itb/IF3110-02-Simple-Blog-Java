@@ -28,4 +28,9 @@
         <managed-bean-class>paket.editPost</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
+    <managed-bean>
+        <managed-bean-name>editUser</managed-bean-name>
+        <managed-bean-class>paket.editUser</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
 </faces-config>
