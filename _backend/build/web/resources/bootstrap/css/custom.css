@@ -1,0 +1,259 @@
+@font-face {
+  font-family: 'Leckerli One';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Leckerli One'), local('LeckerliOne-Regular'), url(http://fonts.gstatic.com/s/leckerlione/v7/S2Y_iLrItTu8kIJTkS7DrHhCUOGz7vYGh680lGh-uXM.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Droid Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Droid Sans'), local('DroidSans'), url(http://fonts.gstatic.com/s/droidsans/v6/s-BiyweUPV0v-yRb-cjciBsxEYwM7FgeyaSgU71cLG0.woff) format('woff');
+}
+
+.inlineRadioButtons { } 
+.inlineRadioButtons label { display: inline; }
+
+body{
+  font-family: 'Droid Sans', sans-serif;
+  font-size: 14px;
+  font-color: #323232;
+  background-color: #e7e7e7;
+}
+
+.btn-info a:link, .btn-info a:hover, .btn-info a:visited, .btn-info a:active, .btn-info a:focus{
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.btn-warning a:link, .btn-warning a:hover, .btn-warning a:visited, .btn-warning a:active, .btn-warning a:focus{
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.btn-danger a:link, .btn-danger a:hover, .btn-danger a:visited, .btn-danger a:active, .btn-danger a:focus{
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.login{
+    margin-top: 130px;
+    margin-bottom: 135px;
+    padding: 20px;
+    background-color: #ffffff;
+}
+
+.red{
+    color: #d9534f;
+}
+
+.post{
+  background-color: #ffffff;
+  margin-bottom: 20px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 25px;
+  padding-right: 22px;
+  border-top: 12px solid #f0ad4e;
+  border-bottom: 12px solid #f0ad4e;
+}
+
+.sidebar{
+  padding: 8px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.post-title, .post-title a:link, .post-title a:hover, .post-title a:visited, .post-title a:active, .post-title a:focus{
+  font-family: 'Leckerli One', cursive;
+  font-size: 50px;
+  text-decoration: none;
+  color: #d9534f;
+}
+
+.post-date{
+  color: #aaaaaa;
+  font-size: 18px;
+  text-transform: uppercase;
+  margin-bottom: 40px;
+}
+
+.footer-text{
+  margin-right: 20px;
+  margin-top: 30px;
+}
+
+.btn-circle {
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  padding: 6px 0;
+  font-size: 12px;
+  line-height: 1.428571429;
+  border-radius: 15px;
+  margin-top: 15px;
+  margin-right: 10px;
+}
+.btn-circle.btn-lg {
+  width: 60px;
+  height: 60px;
+  padding: 10px 16px;
+  font-size: 18px;
+  line-height: 1.33;
+  border-radius: 30px;
+}
+
+.header-logo, .header-logo a:link, .header-logo a:hover, .header-logo a:visited, .header-logo a:active, .header-logo a:focus{
+  font-family: 'Leckerli One', cursive;
+  font-size: 35px;
+  color: #dddddd;
+  margin-top: 10px !important;
+  margin-left: 5px;
+  margin-bottom: -12px !important;
+  text-decoration: none;
+}
+
+.header-text{
+  font-family: 'Droid Sans', sans-serif;
+  font-size: 15px;
+  color: #b7b7b7;
+  margin-left: 10px;
+}
+
+#header{
+  background-color: #323232;
+  height: 90px;
+  overflow: hidden;
+}
+
+#footer{
+  color: #b7b7b7;
+  background-color: #323232;
+  height: 120px;
+  overflow: hidden;
+}
+
+.nav-pills > li.active > a, .nav-pills > li.active > a:active, .nav-pills > li.active > a:focus{
+  background-color: #61c08c;
+  color: #ffffff;
+}
+
+.nav-pills > li.active > a:hover{
+  background-color: #323232;
+  color: #ffffff;
+}
+
+/* BUTTON */
+
+.read-more, .read-more a:hover, .read-more a:link, .read-more a:visited, .read-more a:focus { 
+  color: #FFFFFF; 
+  background-color: #61C08C; 
+  border-color: #61C08C; 
+  font-size: 20px;
+  font-family: 'Leckerli One', cursive;
+  text-decoration: none;
+} 
+ 
+.read-more:hover, 
+.read-more:focus, 
+.read-more:active, 
+.read-more.active, 
+.open .dropdown-toggle.read-more { 
+  color: #FFFFFF; 
+  background-color: #61c08c; 
+  border-color: #61C08C; 
+  text-decoration: none;
+} 
+ 
+.read-more:active, 
+.read-more.active, 
+.open .dropdown-toggle.read-more { 
+  background-image: none; 
+  text-decoration: none;
+} 
+ 
+.read-more.disabled, 
+.read-more[disabled], 
+fieldset[disabled] .read-more, 
+.read-more.disabled:hover, 
+.read-more[disabled]:hover, 
+fieldset[disabled] .read-more:hover, 
+.read-more.disabled:focus, 
+.read-more[disabled]:focus, 
+fieldset[disabled] .read-more:focus, 
+.read-more.disabled:active, 
+.read-more[disabled]:active, 
+fieldset[disabled] .read-more:active, 
+.read-more.disabled.active, 
+.read-more[disabled].active, 
+fieldset[disabled] .read-more.active { 
+  background-color: #61C08C; 
+  border-color: #61C08C; 
+  text-decoration: none;
+} 
+ 
+.read-more .badge { 
+  color: #61C08C; 
+  background-color: #FFFFFF; 
+}
+
+/* BUTTON EDIT DELETE */
+
+.edit{
+  margin-top: 30px;
+  margin-bottom: -5px;
+}
+
+.edit-delete, .edit-delete a:hover, .edit-delete a:link, .edit-delete a:visited, .edit-delete a:focus { 
+  color: #FFFFFF; 
+  background-color: #F0AD4E; 
+  border-color: #F0AD4E; 
+  text-decoration: none;
+}
+ 
+.edit-delete:hover, 
+.edit-delete:focus, 
+.edit-delete:active, 
+.edit-delete.active, 
+.open .dropdown-toggle.edit-delete { 
+  color: #FFFFFF; 
+  background-color: #F0AD4E; 
+  border-color: #F0AD4E; 
+} 
+ 
+.edit-delete:active, 
+.edit-delete.active, 
+.open .dropdown-toggle.edit-delete { 
+  background-image: none; 
+} 
+ 
+.edit-delete.disabled, 
+.edit-delete[disabled], 
+fieldset[disabled] .edit-delete, 
+.edit-delete.disabled:hover, 
+.edit-delete[disabled]:hover, 
+fieldset[disabled] .edit-delete:hover, 
+.edit-delete.disabled:focus, 
+.edit-delete[disabled]:focus, 
+fieldset[disabled] .edit-delete:focus, 
+.edit-delete.disabled:active, 
+.edit-delete[disabled]:active, 
+fieldset[disabled] .edit-delete:active, 
+.edit-delete.disabled.active, 
+.edit-delete[disabled].active, 
+fieldset[disabled] .edit-delete.active { 
+  background-color: #F0AD4E; 
+  border-color: #F0AD4E; 
+} 
+ 
+.edit-delete .badge { 
+  color: #F0AD4E; 
+  background-color: #FFFFFF; 
+}
+
+.comment{
+  border-top: 1px dashed #5bc0de;
+  padding: 5px;
+  margin-top: 20px;
+}

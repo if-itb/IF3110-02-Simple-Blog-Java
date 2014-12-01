@@ -1,0 +1,147 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+ 
+    <h:head>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />	
+        <h:outputStylesheet name="bootstrap/css/bootstrap.css" />
+        <h:outputStylesheet name="bootstrap/css/custom.css" />
+        <title>Simple Blog</title>
+    </h:head>
+    
+    <h:body>
+        <div class="container-fluid">
+      
+        <h:form><div class="row" id="header">
+          <div class="row">
+            <div class="col-md-6 col-xs-6 col-sm-6 col-lg-6">
+              <p class="header-logo resize"><a href="index.xhtml">Simple Blog</a></p>
+              <p class="header-text resize">Because we're hungry.</p>
+            </div>
+                <c:choose>
+                    <c:when test="${cookie.cRole.value eq 'Owner'}">
+                        <div class="col-md-6 col-xs-6 col-sm-6 col-lg-6"><div class="pull-right icon-header">
+                        <h:commandLink type="button" styleClass="btn btn-info btn-circle btn-lg" action="add_post">
+                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                        </h:commandLink>
+                        <h:commandLink type="button" styleClass="btn btn-danger btn-circle btn-lg" action="#{login.startLogout}">
+                            <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
+                        </h:commandLink>
+                        </div></div>
+                    </c:when>
+
+                    <c:when test="${cookie.cRole.value eq 'Editor'}">
+                        <div class="col-md-6 col-xs-6 col-sm-6 col-lg-6"><div class="pull-right icon-header">                        
+                        <h:commandLink type="button" styleClass="btn btn-danger btn-circle btn-lg" action="#{login.startLogout}">
+                            <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
+                        </h:commandLink>
+                        </div></div>
+                    </c:when>
+
+                    <c:when test="${cookie.cRole.value eq 'Admin'}">
+                        <div class="col-md-6 col-xs-6 col-sm-6 col-lg-6"><div class="pull-right icon-header">
+                        <h:commandLink type="button" styleClass="btn btn-info btn-circle btn-lg" action="add_post">
+                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                        </h:commandLink>
+                        <h:commandLink type="button" styleClass="btn btn-warning btn-circle btn-lg" action="user">
+                            <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                        </h:commandLink>
+                        <h:commandLink type="button" styleClass="btn btn-danger btn-circle btn-lg" action="#{login.startLogout}">
+                            <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
+                        </h:commandLink>
+                        </div></div>
+                    </c:when>
+                    <c:otherwise>
+                        <div class="col-md-6 col-xs-6 col-sm-6 col-lg-6"><div class="pull-right icon-header">
+                        <h:commandLink type="button" styleClass="btn btn-danger btn-circle btn-lg" action="login?faces-redirect=true">
+                            <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>
+                        </h:commandLink>
+                        </div></div>
+                    </c:otherwise>
+                </c:choose>
+              </div>
+        </div></h:form>
+
+        <div class="row">
+          <div class="col-md-2 col-md-offset-1">
+            <div class="sidebar"><h:form>
+              <ul class="nav nav-pills nav-stacked text-center">
+                <li role="presentation"><img src="resources/bootstrap/img/side2.jpg" class="center-block img-responsive img-thumbnail"></img></li>
+                <c:choose>
+                    <c:when test="${cookie.cRole.value eq 'Admin'}">
+                        <li role="presentation" class="active"><a href="index.xhtml">Already Published</a></li>
+                        <li role="presentation" class="active"><a href="unpublished.xhtml">To Be Published</a></li>
+                        <li role="presentation" class="active"><a href="soft_deleted.xhtml">Deleted Post</a></li>
+                        <li role="presentation" class="active"><a href="add_post.xhtml">New Post</a></li>                        
+                        <li role="presentation" class="active"><a href="user.xhtml">Users' Database</a></li>
+                        <li role="presentation" class="active"><h:commandLink action="#{login.startLogout}" value="Sign Out" /></li>
+                    </c:when>
+                    <c:otherwise>
+                        <li role="presentation" class="active"><a href="index.xhtml">Already Published</a></li>
+                        <li role="presentation" class="active"><a href="login.xhtml">Sign In</a></li>
+                    </c:otherwise>
+                </c:choose>
+              </ul>
+            </h:form></div>
+          </div>
+            
+          <div class="col-md-8">
+              <ui:repeat var="thepost" value="#{listpost.deleted_posts}">
+            <div class="edit">
+                <c:choose>
+                    <c:when test="${cookie.cRole.value eq 'Admin'}">
+                        <div class="btn-group" role="group" aria-label="...">
+                            <h:form>
+                                <h:commandLink type="button" class="btn edit-delete pull-right" action="#{postController.restorePost(thepost.id)}" onclick="return confirm('Apakah anda ingin me-restore post ini?');" >
+                                <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Restore
+                                </h:commandLink>
+                            </h:form>
+                        </div>
+                        <div class="btn-group" role="group" aria-label="...">
+                              <h:form>
+                                  <h:commandLink type="button" class="btn edit-delete pull-right" action="#{postController.deletePostPermanent(thepost.id)}" onclick="return confirm('Apakah anda yakin menghapus post ini secara permanen?');">
+                                      <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete Permanent
+                                  </h:commandLink>
+                              </h:form>                 
+                        </div>
+
+                    </c:when>
+                    
+                    <c:otherwise></c:otherwise>
+                </c:choose>
+            </div>
+                
+            
+            <div class="post">
+                <div class="post-title text-center">
+                    <h:form>
+                    <h:commandLink action="post" value="#{thepost.judul}">
+                        <f:param name="id" value="#{thepost.id}" />
+                    </h:commandLink>
+                    </h:form>
+                </div>
+                <div class="post-date text-center"><span class="glyphicon glyphicon-time" aria-hidden="true"></span> #{thepost.printTanggal()} | <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> #{thepost.status}</div>
+              <p class="text-justified">#{thepost.konten}</p>
+            </div>   
+                  </ui:repeat>
+          </div>
+            
+        </div>
+
+        <div class="row" id="footer">
+          <div class="footer-text">
+            <p class="text-right">IF3110 Pengembangan Aplikasi Berbasis Web</p>
+            <p class="text-right">Arina Listyarini Dwiastuti (13512006) | Gifari Kautsar (13512020) | Indam Muhammad (13512026)</p>
+          </div>
+        </div>
+      </div>
+        
+        <h:outputScript name="bootstrap/js/bootstrap.min.js" />
+    </h:body>
+</html>
