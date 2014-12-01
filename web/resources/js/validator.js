@@ -61,3 +61,31 @@ function validateEmail(email){
     var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(email);
 }
+
+function validateEdAddUser(){
+    // validasi komentar
+    var username = document.edadduser["edadduser:username"].value;
+    var password = document.edadduser["edadduser:password"].value;
+    var email = document.edadduser["edadduser:email"].value;
+    // validasi komentar kosong
+    if(username === ""){
+        alert('username tidak boleh kosong');
+        return false;
+    }
+    // validasi email tidak kosong
+    else if(email === ""){
+        alert('email tidak boleh kosong');
+        return false;
+    }
+    // validasi email sesuai kaidah
+    else if(!validateEmail(email)){
+        alert("alamat email tidak valid");
+        return false;
+    }
+    // validasi komentar kosong
+    else if(password === ""){
+        alert('password tidak boleh kosong');
+        return false;
+    }
+    return true;
+}

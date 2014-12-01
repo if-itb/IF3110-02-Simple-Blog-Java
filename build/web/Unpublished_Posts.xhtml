@@ -17,6 +17,7 @@ and open the template in the editor.
         <link rel ="stylesheet" type="text/css" href="#{facesContext.externalContext.requestContextPath}/resources/style.css" />
     </h:head>
     <h:body> 
+        <f:event type="preRenderView" listener="#{user.notAdminNotEditorRedirectToPub()}" />
         #{dbconnector.verify(user,cookiehandler)}
         #{user.loggedOffRedirectToInd()}
         #{postlist.initPostList(dbconnector)}
@@ -44,6 +45,7 @@ and open the template in the editor.
                         <li style="display:#{user.addButton()}"><a href="Add_Post.xhtml">Add Post +</a></li>
                         <li style="display:#{user.userMgtButton()}"><a href="User_Management.xhtml">User Management</a></li>
                         <li style="display:block"><a href="Published_Posts.xhtml">Published Posts</a></li>
+                        <li style="display:#{user.userMgtButton()}"><a href="Trash.xhtml">Deleted Posts</a></li>
                         <li style="display:#{user.logInButton()}"><a href="#loginModal">Login</a></li>
                         <li style="display:#{user.logOutButton()}"><a href="#logoutModal">Logout</a></li>
                         
@@ -55,15 +57,20 @@ and open the template in the editor.
             <div id="body">
                 <div id="postContainer">
                     <ui:repeat var="item" value="#{postlist.getUnlistPos(user)}">
-                        <a href="Post.xhtml?pid=#{item.id_post}"><h1>#{item.judul}</h1></a> 
-                        <p><h:outputText value="#{item.tanggal}" escape="false" /></p>
-                        <p><h:outputText value="#{item.getExcerptHTML()}" escape="false" /></p>
-                        <!-- Edit Post -->
-                        <a style="display:#{item.editButton(user.type)}" href="Edit_Post.xhtml?pid=#{item.id_post}">Edit Post</a>
-                        <!-- Delete Post -->
-                        <a style="display:#{item.deleteButton(user.type)}" href="" id="del#{item.id_post}" class="deletebutton">Delete</a>
-                        <!-- Publish Post -->
-                        <a style="display:#{item.publishButton(user.type)}" href="Publish_Post.xhtml?pid=#{item.id_post}">Publish</a>
+                        <div class="onePost">
+                            <a href="Post.xhtml?pid=#{item.id_post}"><h1>#{item.judul}</h1></a> 
+                            <p><h:outputText value="#{item.tanggal}" escape="false" /></p>
+                            <p><h:outputText value="#{item.getExcerptHTML(100)}" escape="false" />
+                            <a style="display:#{item.readMoreButton()}" href="Post.xhtml?pid=#{item.id_post}">Read More</a></p><br/>
+                            <div class="buttons">
+                                <!-- Edit Post -->
+                                <a style="display:#{item.editButton(user.type)}" href="Edit_Post.xhtml?pid=#{item.id_post}">Edit Post</a>
+                                <!-- Delete Post -->
+                                <a style="display:#{item.deleteButton(user.type)}" href="" id="del#{item.id_post}" class="deletebutton">Delete</a>
+                                <!-- Publish Post -->
+                                <a style="display:#{item.publishButton(user.type)}" href="" id="pub#{item.id_post}" class="publishbutton">Publish</a>
+                            </div>
+                        </div>  
                     </ui:repeat>
                 </div>
             </div>

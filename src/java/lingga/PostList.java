@@ -20,10 +20,12 @@ import javax.faces.bean.SessionScoped;
 public class PostList {
     private ArrayList <Post> listPos;
     private ArrayList <Post> unlistPos;
+    private ArrayList <Post> trashPos;
     
     public void initPostList(DBConnector dbc){
         listPos = new ArrayList<Post>(dbc.listPost("true"));
 	unlistPos = new ArrayList<Post>(dbc.listPost("false"));
+	trashPos = new ArrayList<Post>(dbc.listPost("deleted"));
     }
 
     public Post getPost(int n){
@@ -31,17 +33,21 @@ public class PostList {
     }
 
     public ArrayList<Post> getListPos(User us) {
-	if(us.isLoggedon()){
-	    return listPos;
+	return listPos;
+    }
+    
+    public ArrayList<Post> getUnlistPos(User us) {
+	if(us.getType()==2 || us.getType()==3){
+	    return unlistPos;
 	}
 	else{
 	    return null;
 	}
     }
     
-    public ArrayList<Post> getUnlistPos(User us) {
-	if(us.isLoggedon() && (us.getType()==2 || us.getType()==3)){
-	    return unlistPos;
+    public ArrayList<Post> getTrashPos(User us) {
+	if(us.getType()==3){
+	    return trashPos;
 	}
 	else{
 	    return null;

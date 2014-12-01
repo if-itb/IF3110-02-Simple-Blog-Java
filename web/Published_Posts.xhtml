@@ -44,6 +44,7 @@ and open the template in the editor.
                         <li style="display:#{user.addButton()}"><a href="Add_Post.xhtml">Add Post +</a></li>
                         <li style="display:#{user.userMgtButton()}"><a href="User_Management.xhtml">User Management</a></li>
                         <li style="display:#{user.unPubButton()}"><a href="Unpublished_Posts.xhtml">Unpublished Posts</a></li>
+                        <li style="display:#{user.userMgtButton()}"><a href="Trash.xhtml">Deleted Posts</a></li>
                         <li style="display:#{user.logInButton()}"><a href="#loginModal">Login</a></li>
                         <li style="display:#{user.logOutButton()}"><a href="#logoutModal">Logout</a></li>
                         
@@ -59,14 +60,14 @@ and open the template in the editor.
                             <a href="Post.xhtml?pid=#{item.id_post}"><h1>#{item.judul}</h1></a> 
                             <p><h:outputText value="#{item.tanggal}" escape="false" /></p>
                             <p><h:outputText value="#{item.getExcerptHTML(100)}" escape="false" />
-                                <a style="#{item.readMoreButton()}" href="Post.xhtml?pid=#{item.id_post}">Read More</a></p><br/>
+                                <a style="display:#{item.readMoreButton()}" href="Post.xhtml?pid=#{item.id_post}">Read More</a></p><br/>
                             <div class="buttons">
                                 <!-- Edit Post -->
                                 <a style="display:#{item.editButton(user.type)}" href="Edit_Post.xhtml?pid=#{item.id_post}">Edit Post</a>
                                 <!-- Delete Post -->
                                 <a style="display:#{item.deleteButton(user.type)}" href="" id="del#{item.id_post}" class="deletebutton">Delete</a>
                                 <!-- Publish Post -->
-                                <a style="display:#{item.publishButton(user.type)}" href="Publish_Post.xhtml?pid=#{item.id_post}">Publish</a>
+                                <a style="display:#{item.publishButton(user.type)}" href="" id="pub#{item.id_post}" class="publishbutton">Publish</a>
                             </div>
                         </div>
                     </ui:repeat>

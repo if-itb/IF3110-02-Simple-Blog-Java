@@ -51,8 +51,8 @@ a:hover{
 }
 #header {
    background:url("img/header1.jpg");
-   background-size:100% auto;
-   background-position-y: -100px ;
+   background-size:auto 200%;
+   background-position: center -100px ;
    height: 490px;
    padding:10px;
 }
@@ -91,7 +91,7 @@ a:hover{
 #menulist {
     position: absolute;
     right: 0px;
-    width: 40%;
+    min-width: 40%;
 }
 
 #menulist ul{
@@ -102,7 +102,8 @@ a:hover{
 #menulist li{
     text-align: center;
     display: inline-block;
-    min-width: 20%;
+    width: 20%;
+    min-width: 80px;
 }
 
 .bluegrad {
@@ -204,10 +205,13 @@ a:hover{
 }
 
 #rightContainer{
+    display: box;
     position:relative;
     margin-top: 6%;
-    width:60%;
+    margin-right: 0px;
+    width:58%;
     left: 41%;
+    right: 0%;
 }
 
 #rightContainer form{
@@ -218,6 +222,11 @@ a:hover{
     padding: 5px;
     margin-bottom: 5px;
     width: 70%;
+    min-width: 410px;
+}
+
+#rightContainer form label{
+    text-align:  center;
 }
 
 #rightContainer form textArea{
@@ -225,6 +234,7 @@ a:hover{
     min-height: 300px;
     padding: 5px;
     margin-bottom: 5px;
+    min-width: 410px;
 }
 
 .button{
@@ -234,6 +244,7 @@ a:hover{
 .postmanip #dashmenu{
     top: 105px;
     left: 14%;
+    display:box;
 }
 
 #rightContainer table{
@@ -245,6 +256,7 @@ table{
     border-collapse: collapse;
     table-layout: fixed;
     min-width: 70%;
+    max-width: 80%;
 }
 
 table td,th{
@@ -356,4 +368,61 @@ hr{
 }
 .close:hover {
     background: yellow;
+}
+
+#edadduser table input{
+    width: 20px !important;
+    min-width: 0px;
+}
+
+@media all and (max-width: 1200px) {
+    .postmanip #dashmenu{
+        left:5%;
+    }
+    #postContainer{
+        width: 90% !important;
+        left:5%;
+    }
+    #header{
+        background-position: center 10% ;
+    }
+    #rightContainer{
+        left:45%;
+    }
+}
+
+@media all and (max-width: 1000px){
+    #idlist{
+        position: relative;
+        width: 90%;
+        left: 5%;
+        font-size: 15px;
+    }
+    #idlist .identity{
+        padding: 0px;
+    }
+    #inputankomentar{
+        width: 85%;
+        margin-left: 7.5%;
+    }
+    .postmanip #dashmenu{
+        position: relative;
+        display:block;
+    }
+    .postmanip #body #rightContainer{
+        margin-top:150px;
+        margin-bottom:150px;
+        left:5%;
+        right:5%;
+        width:90%;
+    }
+}
+
+@media all and (max-width: 611px){
+    #dashmenu{
+        left: 10% !important;
+        right: 10% !important;
+        min-width: 80% !important;
+    }
+    
 }

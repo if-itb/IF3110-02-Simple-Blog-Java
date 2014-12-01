@@ -12,6 +12,7 @@
         <link rel ="stylesheet" type="text/css" href="#{facesContext.externalContext.requestContextPath}/resources/style.css" />
     </h:head>
     <h:body>
+        <f:event type="preRenderView" listener="#{user.notAdminRedirectToPub()}" />
         #{user.copyToSaved(dbconnector.selectUser(param['uid']))}
         <div id="menubar" class="bluegrad">
             <div id="menulist">
@@ -47,12 +48,16 @@
             </div>
             <div id="body">
                 <div id="rightContainer">
-                    <h:form>
+                    <h:form id="edadduser">
                         <h:inputText id="username" a:placeholder="#{user.saved.name}" value="#{user.saved.name}"/><br/>
-                        <h:inputSecret id="password" value="#{user.saved.password}"/><br/>
+                        <h:inputSecret id="password" value="#{user.saved.password}"  redisplay="true"/><br/>
                         <h:inputText id="email" value="#{user.saved.email}"/><br/>
-                        <h:inputText id="type" value="#{user.saved.type}"/><br/>
-                        <h:commandButton id="update" value="Update" action="#{dbconnector.updateUser(user,user.getSaved())}"/><br/>
+                        <h:selectOneRadio value="#{user.saved.type}">
+                            <f:selectItem itemValue="1" itemLabel="Owner" />
+                            <f:selectItem itemValue="2" itemLabel="Editor" />
+                            <f:selectItem itemValue="3" itemLabel="Administrator" />
+                        </h:selectOneRadio>
+                        <h:commandButton onclick="return validateEdAddUser()" id="update" value="Update" action="#{dbconnector.updateUser(user,user.getSaved())}"/><br/>
                         <h:commandButton id="delete" value="Delete" action="#{dbconnector.deleteUser(user,user.getSaved())}"/><br/>
                         <br/>
                     </h:form>
@@ -88,4 +93,5 @@
             </div>
         </div>
     </h:body>
+    <script src="#{facesContext.externalContext.requestContextPath}/resources/js/validator.js" type="text/javascript"></script>
 </html>

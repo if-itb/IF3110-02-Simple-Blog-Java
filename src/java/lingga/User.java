@@ -89,12 +89,24 @@ public class User {
     public int getType() {
 	return type;
     }
+    
+    public String getTypeName() {
+	String retval=null;
+	switch(type){
+	case 1 : retval = "Owner"; break;
+	case 2 : retval = "Editor"; break;
+	case 3 : retval = "Admin"; break;
+	}
+	return retval;
+    }
 
     public void setType(int type) {
 	this.type = type;
     }
 
     public boolean isLoggedon() {
+	if(type==4) loggedon=false;
+	else loggedon=true;
 	return loggedon;
     }
 
@@ -133,6 +145,34 @@ public class User {
 	}
     }
     
+    public void loggedOnRedirectToUnPub() throws IOException {
+	if(loggedon){
+	    ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+	    ec.redirect(ec.getRequestContextPath() + "/faces/Unpublished_Posts.xhtml");
+	}
+    }
+    
+    public void notAdminRedirectToPub() throws IOException {
+	if(type!=3){
+	    ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+	    ec.redirect(ec.getRequestContextPath() + "/faces/Published_Posts.xhtml");
+	}
+    }
+    
+    public void notAdminNotOwnerRedirectToPub() throws IOException {
+	if(type!=3 && type!=1){
+	    ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+	    ec.redirect(ec.getRequestContextPath() + "/faces/Published_Posts.xhtml");
+	}
+    }
+    
+    public void notAdminNotEditorRedirectToPub() throws IOException {
+	if(type!=3 && type!=2){
+	    ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+	    ec.redirect(ec.getRequestContextPath() + "/faces/Published_Posts.xhtml");
+	}
+    }
+    
     public void loggedOffRedirectToPub() throws IOException {
 	if(!isLoggedon()){
 	    ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
@@ -141,7 +181,7 @@ public class User {
     }
     
     public void loggedOffRedirectToInd() throws IOException {
-	if(!loggedon){
+	if(!isLoggedon()){
 	    ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
 	    ec.redirect(ec.getRequestContextPath() + "/");
 	}
@@ -177,7 +217,7 @@ public class User {
 	name = "";
 	password = "";
 	loggedon = false;
-	type = 4;
+	type = 4; //jadikan guest
 	
 	//cookie
 	co.deleteCookie("if3110_sb_uid");
@@ -191,7 +231,7 @@ public class User {
 	saved.name = "";
 	saved.password = "";
 	saved.email = "";
-	saved.type = 4;
+	saved.type = 1;
 	saved.loggedon = false;
 	saved.output_msg = "";
     }

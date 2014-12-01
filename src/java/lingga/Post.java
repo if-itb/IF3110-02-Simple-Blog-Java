@@ -80,24 +80,31 @@ public class Post {
     public String getExcerptHTML(int n) {
 	List<String> l = new ArrayList<String>();
 	int pos = 0;
-	while (l.size() < n) {
+	boolean br = false;
+	while (l.size() < n && !br) {
 	    int excerpt = konten.indexOf(' ', pos);
 	    if (excerpt == -1) {
 		l.add(konten.substring(pos));
-		break;
+		br=true;
 	    }
-	    l.add(konten.substring(pos, excerpt));
-	    pos = excerpt + 1;
+	    if(!br){
+		l.add(konten.substring(pos, excerpt));
+		pos = excerpt + 1;
+	    }
 	}
 	String retval="";
 	for(String word : l){
 	    retval = retval + ' ' + word;
 	}
+	//System.out.println(">>>"+l.size()+" " + n);
 	if(l.size()<n){ 
-	    isReadMore = true;
+	    this.isReadMore = false;
 	    return retval.replace("\n", " ");
 	}
-	else return retval.replace("\n", " ")+". . .";
+	else{
+	    this.isReadMore = true;
+	    return retval.replace("\n", " ")+". . .";
+	}
 	
     }
     
@@ -132,9 +139,20 @@ public class Post {
 	else return "block-inline";
     }
     
-    public String readMoreButton(){
-	if(isReadMore) return "block-inline";
+    public String hardDeleteButton(int role){
+	if(role==3) return "block-inline";
 	else return "none";
+    }
+    
+    public String readMoreButton(){
+	
+	if(!isReadMore){ 
+	    System.out.println("none");
+	    return "none";
+	}
+	else{
+	    return "block-inline";
+	}
     }
     
 }

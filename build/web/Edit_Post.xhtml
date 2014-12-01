@@ -13,6 +13,7 @@
         <link rel ="stylesheet" type="text/css" href="#{facesContext.externalContext.requestContextPath}/resources/style.css" />
     </h:head>
     <h:body>
+        <f:event type="preRenderView" listener="#{user.loggedOffRedirectToPub()}" />
         <div id="menubar" class="bluegrad">
             <div id="menulist">
                 <ul>

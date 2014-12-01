@@ -48,52 +48,49 @@ public class DBConnector {
     
     //Verifikasi Login
     public String verify(User pengguna, CookieHandler ch){
-        if(pengguna.getType()==4 || !pengguna.isLoggedon()){
-	    try {
-		st = con.createStatement();
-		String username = pengguna.getName();
-		String userpass = pengguna.getPassword();
-		String query = "SELECT * FROM `sb_users` WHERE username='" + username + "' && password='" + userpass + "';";
-		System.out.println(query);
-		rs = st.executeQuery(query);
-		if (rs.next()) {
-		    // Handle user
-		    pengguna.setUserid(rs.getInt("user_id"));
-		    pengguna.setLoggedon(true);
-		    pengguna.setName(username);
-		    pengguna.setType(rs.getInt("type"));
-		    pengguna.setEmail(rs.getString("email"));
-		    //System.out.println("masuk");
-		    // Handle cookie
-		    
-		    ch.setCookie("if3110_sb_uid", Integer.toString(pengguna.getUserid()), 3600);
-		    return "";
-		}
-		else if(ch.getCookie("if3110_sb_uid")!=null){
-		    int sb_uid = Integer.parseInt(ch.getCookie("if3110_sb_uid").getValue());
-		    //System.out.println("uid : " + sb_uid);
-		    pengguna.copy(selectUser(sb_uid));
-		    pengguna.setLoggedon(true);
-		    return "";
-		}
-		else {
-		    pengguna.setLoggedon(true);
-		    pengguna.setName("Guest");
-		    pengguna.setEmail("");
-		    pengguna.setType(4);
-		    return "";
-		}
+	try {
+	    st = con.createStatement();
+	    String username = pengguna.getName();
+	    String userpass = pengguna.getPassword();
+	    String query = "SELECT * FROM `sb_users` WHERE username='" + username + "' && password='" + userpass + "';";
+	    System.out.println(query);
+	    rs = st.executeQuery(query);
+	    if (rs.next()) {
+		// Handle user
+		pengguna.setUserid(rs.getInt("user_id"));
+		pengguna.setLoggedon(true);
+		pengguna.setName(username);
+		pengguna.setType(rs.getInt("type"));
+		pengguna.setEmail(rs.getString("email"));
+		//System.out.println("masuk");
+		// Handle cookie
 
-	    } catch (SQLException ex) {
-		Logger lgr = Logger.getLogger(DBConnector.class.getName());
-		lgr.log(Level.SEVERE, ex.getMessage(), ex);
-		return "Gagal Masuk SQLException";
-
-	    } catch (Throwable e){
-		return "Gagal Masuk Driver";
+		ch.setCookie("if3110_sb_uid", Integer.toString(pengguna.getUserid()), 3600);
+		return "";
 	    }
+	    else if(ch.getCookie("if3110_sb_uid")!=null){
+		int sb_uid = Integer.parseInt(ch.getCookie("if3110_sb_uid").getValue());
+		//System.out.println("uid : " + sb_uid);
+		pengguna.copy(selectUser(sb_uid));
+		pengguna.setLoggedon(true);
+		return "";
+	    }
+	    else {
+		pengguna.setLoggedon(true);
+		pengguna.setName("Guest");
+		pengguna.setEmail("");
+		pengguna.setType(4);
+		return "";
+	    }
+
+	} catch (SQLException ex) {
+	    Logger lgr = Logger.getLogger(DBConnector.class.getName());
+	    lgr.log(Level.SEVERE, ex.getMessage(), ex);
+	    return "Gagal Masuk SQLException";
+
+	} catch (Throwable e){
+	    return "Gagal Masuk Driver";
 	}
-	return null;
     }
     
     /* Mengambil salah satu isi post */
@@ -132,7 +129,7 @@ public class DBConnector {
 		String userpass = rs.getString("password");
 		String email = rs.getString("email");
 		int type = rs.getInt("type");
-
+		System.out.println("select "+username+" "+userpass+" "+email+" "+type);
 		return new User(uid,username,userpass,email,type);
 	    }
 	    else return null;
@@ -171,12 +168,21 @@ public class DBConnector {
     public String insertUser(User pengguna, User p){
 	if(pengguna.isLoggedon() && pengguna.getType()==3){
 	    try {
-		String query = "INSERT INTO `sb_users`(`username`, `password`, `email`, `type`) VALUES ('" + p.getName() + "','" + p.getPassword() + "','" + p.getEmail() + "','" + p.getType() + "')";
-		
-		System.out.println(query);
-		pst = con.prepareStatement(query);
-		pst.executeUpdate();
-		return "User_Management.xhtml?faces-redirect=true";
+		st = con.createStatement();
+		String query = "SELECT COUNT(username) AS c FROM `sb_users` WHERE `username`='" + p.getName() + "'";
+		//System.out.println(query);
+		rs = st.executeQuery(query);
+		rs.next();
+		System.out.println(" >>" + rs.getString("c") + "<<");
+		if(rs.getString("c").equals("0")){
+		    query = "INSERT INTO `sb_users`(`username`, `password`, `email`, `type`) VALUES ('" + p.getName() + "','" + p.getPassword() + "','" + p.getEmail() + "','" + p.getType() + "')";
+
+		    System.out.println(query);
+		    pst = con.prepareStatement(query);
+		    pst.executeUpdate();
+		    return "User_Management.xhtml?faces-redirect=true";
+		}
+		else return "?faces-redirect=true&success=no";
 	    } catch (SQLException ex) {
 		Logger lgr = Logger.getLogger(DBConnector.class.getName());
 		lgr.log(Level.SEVERE, ex.getMessage(), ex);
@@ -189,22 +195,20 @@ public class DBConnector {
     
     /* Menambahkan Komentar ke Database */
     public void insertComment(User pengguna, Comment c){
-	if(pengguna.isLoggedon()){
-	    try {
-		String query = "INSERT INTO `sb_comments`(`nama`, `email`, `komentar`, `id_post`) VALUES ('" + c.getNama() + "','" + c.getEmail() + "','" + c.getKomentar() + "','" + c.getPost_id() + "')";
-		System.out.println(query);
-		pst = con.prepareStatement(query);
-		pst.executeUpdate();
-		//return "Post.xhtml?pid=" + c.getPost_id() + "&faces-redirect=true";
-	    } catch (SQLException ex) {
-		Logger lgr = Logger.getLogger(DBConnector.class.getName());
-		lgr.log(Level.SEVERE, ex.getMessage(), ex);
-		System.out.println("sqlex");
-	    } catch (Throwable e){
-		System.out.println("throw");
-	    }
-	    c.init(pengguna);
+	try {
+	    String query = "INSERT INTO `sb_comments`(`nama`, `email`, `komentar`, `id_post`) VALUES ('" + c.getNama() + "','" + c.getEmail() + "','" + c.getKomentar() + "','" + c.getPost_id() + "')";
+	    System.out.println(query);
+	    pst = con.prepareStatement(query);
+	    pst.executeUpdate();
+	    //return "Post.xhtml?pid=" + c.getPost_id() + "&faces-redirect=true";
+	} catch (SQLException ex) {
+	    Logger lgr = Logger.getLogger(DBConnector.class.getName());
+	    lgr.log(Level.SEVERE, ex.getMessage(), ex);
+	    System.out.println("sqlex");
+	} catch (Throwable e){
+	    System.out.println("throw");
 	}
+	c.init(pengguna);
 	//return null;
     }
     
@@ -233,8 +237,8 @@ public class DBConnector {
 	if(admin.isLoggedon() && admin.getType()==3){
 	    try {
 		String query = "UPDATE `sb_users` SET `username`='" + p.getName() +"', `password`='" + p.getPassword() +"', `email`='" + p.getEmail() + "', `type`='" + p.getType() + "' WHERE `user_id`=" + p.getUserid() + ";";
-		System.out.println(query);
-		System.out.println(query);
+		//System.out.println(query);
+		//System.out.println(query);
 		pst = con.prepareStatement(query);
 		pst.executeUpdate();
 		return "faces/User_Management.xhtml?faces-redirect=true";
@@ -287,9 +291,43 @@ public class DBConnector {
     public String publishPost(User pengguna, Post p){
 	if(pengguna.isLoggedon() && (pengguna.getType()==3 || pengguna.getType()==2)){
 	    try {
-		String query = "UPDATE `sb_posts` SET `published`=true WHERE `id_post`=" + p.id_post + ";";
+		String query = "UPDATE `sb_posts` SET `published`=1 WHERE `id_post`=" + p.id_post + ";";
 		System.out.println(query);
-		int userrole = pengguna.getType();
+		pst = con.prepareStatement(query);
+		pst.executeUpdate();
+		return "Published_Posts?faces-redirect=true";
+	    } catch (SQLException ex) {
+		Logger lgr = Logger.getLogger(DBConnector.class.getName());
+		lgr.log(Level.SEVERE, ex.getMessage(), ex);
+	    } catch (Throwable e){
+	    }
+	}
+	return null;
+    }
+    
+    /* SoftDelete Post */
+    public String softDeletePost(User pengguna, int pid){
+	if(pengguna.getType()!=4){
+	    try {
+		String query = "UPDATE `sb_posts` SET `published`=2 WHERE `id_post`=" + pid + ";";
+		System.out.println(query);
+		pst = con.prepareStatement(query);
+		pst.executeUpdate();
+		return "Published_Posts?faces-redirect=true";
+	    } catch (SQLException ex) {
+		Logger lgr = Logger.getLogger(DBConnector.class.getName());
+		lgr.log(Level.SEVERE, ex.getMessage(), ex);
+	    } catch (Throwable e){
+	    }
+	}
+	return null;
+    }
+    
+    /* Restore Post */
+    public String restorePost(User pengguna, int pid){
+	if(pengguna.getType()==3){
+	    try {
+		String query = "UPDATE `sb_posts` SET `published`=0 WHERE `id_post`=" + pid + ";";
 		System.out.println(query);
 		pst = con.prepareStatement(query);
 		pst.executeUpdate();
@@ -307,7 +345,11 @@ public class DBConnector {
     public ArrayList<Post> listPost(String pub){
         try {
             st = con.createStatement();
-            String query = "SELECT * FROM `sb_posts` WHERE `published`=" + pub + " ORDER BY `tanggal` DESC";
+	    int pubs=0;
+	    if(pub=="true") pubs=1;
+	    else if(pub=="false") pubs=0;
+	    else if(pub=="deleted") pubs=2;
+            String query = "SELECT * FROM `sb_posts` WHERE `published`=" + pubs + " ORDER BY `tanggal` DESC";
 	    System.out.println(query);
             rs = st.executeQuery(query);
             ArrayList<Post> retval = new ArrayList<Post>();
@@ -337,7 +379,7 @@ public class DBConnector {
         try {
             st = con.createStatement();
             String query = "SELECT * FROM `sb_comments` WHERE `id_post`=" + pid + " ORDER BY `timestamp` DESC";
-	    System.out.println(query);
+	    //System.out.println(query);
             rs = st.executeQuery(query);
             ArrayList<Comment> retval = new ArrayList<Comment>();
             while (rs.next()) {
