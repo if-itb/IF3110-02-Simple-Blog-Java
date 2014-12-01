@@ -84,7 +84,7 @@
                     <label for="Tanggal">Tanggal:</label>
                     <input type="text" name="tanggal" id="Tanggal" value="">
                     <input type="hidden" name="owner" id="owner" value="<%=usrC %>">
-                    
+                    Select Image:<input type="file" name="fname"/><br/>  
                     <label for="Konten">Konten:</label><br>
                     <textarea name="konten" rows="20" cols="20" id="Konten"></textarea>
 					<input type="hidden" name="nomor" value="">
