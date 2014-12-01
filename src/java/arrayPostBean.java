@@ -42,7 +42,7 @@ public class arrayPostBean {
 
             connect = DriverManager.getConnection("jdbc:mysql://localhost/" + Config.dbName + "?user=" + Config.dbUsername + "&password=" + Config.dbPassword);
 
-            preparedStatement = connect.prepareStatement("SELECT * from `posts`");
+            preparedStatement = connect.prepareStatement("SELECT * from `posts` ORDER BY `tanggal` DESC");
             resultSet = preparedStatement.executeQuery();
             
             System.out.println(resultSet.isAfterLast());
