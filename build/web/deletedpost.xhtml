@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<h:head>
+	<title>The Blog</title>
+        <link rel="stylesheet" type="text/css" href="resources/main.css">
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<!--<script scr="main.js"></script>-->
+        </link>
+</h:head>
+<h:body>
+    <ui:include src="header.xhtml"/>
+    <div id="FORM">
+		<div id="POST">
+                    #{post.Copy(postController.getSpecifiedPost(param['pid']))}
+                    <h1>#{post.judul}</h1>
+                    <h3>#{post.tanggal}<span>|</span><span class="unpublished"> Deleted </span></h3>
+                    <p><h:outputText value="#{post.kontenHTML}" escape="false"/></p>
+                    <div class="postbut">
+                        <h:form>
+                            <h:inputHidden value="#{post.id}"/>
+                            <h:commandButton action="#{postController.PublishPost(post.id, true)}" class="button" value="RESTORE"/> |
+                            <button onclick="deletePost(#{post.id})" class="button">REMOVE</button>
+                        </h:form>
+                    </div> 
+                </div>
+            <br></br>
+                <div id="POSTS">
+                    <h1>KOMENTAR</h1>
+                    <h:form id="commentform">	
+                        <h:panelGroup id="commentlist">
+                            <ui:repeat var="item" value="#{postController.getComments(post.id)}">
+                                <h:panelGroup class="post">
+                                        <div class="postleft">
+                                            <h1> <h:outputText value="#{item.nama}"/></h1>
+                                            <h4> <h:outputText value="#{item.email}"/></h4>
+                                            <p> <h:outputText value="#{item.tanggal}"/></p>
+                                        </div>
+                                        <div class="postright">
+                                            <p> <h:outputText value="#{item.komen}"/></p>
+                                        </div>
+                                </h:panelGroup>
+                            </ui:repeat>
+                        </h:panelGroup>
+                    </h:form>
+                </div>
+            </div>
+</h:body>
+	<script type="text/javascript">
+		function deletePost(pid){
+		    if (confirm("Apakah yakin ingin menghapus post ini? (tidak bisa di undo)") === true) {
+		        location.href = 'removepost.xhtml?pid='+pid;
+		    }
+		};
+	</script>
+<!--<script type="text/javascript">
+    function validation(){
+        alert("ea");
+    };
+</script>-->
+</html>

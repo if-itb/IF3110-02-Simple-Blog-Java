@@ -1,0 +1,926 @@
+@font-face{
+	font-family: Chase;
+	src: url(fonts/Chase.ttf);
+}
+
+@font-face{
+	font-family: Coolvetica;
+	src: url(fonts/Coolvetica.ttf);
+}
+html,body{
+	position: relative;
+	height: 100%;
+    width: 100%;
+	margin: 0px;
+	padding: 0px;
+	color: black;
+	font-size: 100%;
+	letter-spacing: 100%;
+}
+
+body{
+	background: url(../img/mainbg.png) no-repeat top left fixed ; 
+	-webkit-background-size: 100% 100%;
+	-moz-background-size: 100% 100%;
+	-o-background-size: 100% 100%;
+	background-size: 100% 100%;
+}
+
+div{
+	margin: 0;
+	padding: 0;
+}
+
+a{
+	text-decoration: none;
+}
+
+textarea, input[type=text], input[type=password] {
+    border: none;
+    overflow: auto;
+    outline: none;
+
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+
+/***********************************/
+/*********** LOGO + Nav  ***********/
+/***********************************/
+
+#topLogo img{
+	position: fixed;
+	width: 2.5%;
+	height: auto;
+	top: 1%;
+	left: 5%;
+	right: 5%;
+	margin:auto;
+	z-index: 100;
+}
+#topNav {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	width: 100%;
+	height: auto;
+	z-index: 99;
+	opacity: 1;
+	border-bottom: 5px black solid;
+	background: white;
+
+}
+
+#topNav ul{
+	position: relative;
+	padding-left: 5%;
+	width: 100%;
+	height: 100%;
+}
+
+#topNav ul li{
+	position: relative;
+	display: inline;
+	width: 15%;
+	margin: auto 3%;
+}	
+#topNav ul .title{
+	font-size: 150%
+}
+#topNav ul .right{
+	float: right;
+	margin-right: 5%;
+	text-decoration: none;
+	color: black;
+	font-family: Coolvetica;
+	padding-bottom: 1%;
+}
+
+#topNav ul li a{
+	text-decoration: none;
+	color: black;
+	font-family: Coolvetica;
+}
+
+/***********************************/
+/*********** LOGO + Nav  ***********/
+/***********************************/
+
+#POSTS, #EDITPOSTS{
+	position: relative;
+	display: block;
+	padding: 7% 12% 2%;
+	width: 100%;
+	height: auto;
+	box-sizing: border-box;
+	font-size: 120%;
+}
+
+#EDITPOSTS {
+	font-family: Coolvetica;
+	width:100%;
+	padding: 2% 20%;
+	margin: auto;
+}
+
+
+.post{
+	position: relative;
+	display: block;
+	width: 90%;
+	height: auto;
+	padding: 2%;
+	padding-top: 4%;
+	margin: auto;
+	border-top: 0px solid black;
+	border-bottom: 0px solid black;
+	box-sizing: border-box;
+	overflow: hidden;
+}
+#FORM .post{
+	border-top: 0px solid black;
+	border-bottom: 0px solid black;
+	-webkit-transition: all 0.3s ease-in-out;
+  	-moz-transition: all 0.3s ease-in-out;
+  	-o-transition: all 0.3s ease-in-out;
+  	transition: all 0.3s ease-in-out;
+}
+
+#FORM .post:hover{
+	border-width: 5px;
+	-webkit-transition: all 0.3s ease-in-out;
+	-moz-transition: all 0.3s ease-in-out;
+	-o-transition: all 0.3s ease-in-out;
+	transition: all 0.3s ease-in-out;
+}
+
+
+#POST > h1{
+	letter-spacing: 0px;
+	-webkit-transition: all 0.5s ease-in-out;
+	-moz-transition: all 0.5s ease-in-out;
+	-o-transition: all 0.5s ease-in-out;
+	transition: all 0.5s ease-in-out;
+}
+
+#POST:hover > h1{
+	letter-spacing: 15px;
+	-webkit-transition: all 0.5s ease-in-out;
+	-moz-transition: all 0.5s ease-in-out;
+	-o-transition: all 0.5s ease-in-out;
+	transition: all 0.5s ease-in-out;
+}
+
+.post .title{
+	position: relative;
+	display: block;
+	width: 80%;
+	margin: auto;
+	padding: 1%;
+	font-size: 150%;
+	text-align: center;
+	font-family: Chase;
+}
+
+.post .title a{
+	text-decoration: none;
+	color: black;
+	
+}
+
+.post .title h1{
+	margin: 0;
+	font-size: 200%;
+	text-transform: uppercase;
+}
+
+.post .title h5{
+	margin: 0;
+}
+
+.post > .title h1{
+	letter-spacing: 0px;
+	-webkit-transition: all 0.5s ease-in-out;
+	-moz-transition: all 0.5s ease-in-out;
+	-o-transition: all 0.5s ease-in-out;
+	transition: all 0.5s ease-in-out;
+}
+
+.post:hover > .title h1{
+	letter-spacing: 10px;
+	-webkit-transition: all 0.5s ease-in-out;
+	-moz-transition: all 0.5s ease-in-out;
+	-o-transition: all 0.5s ease-in-out;
+	transition: all 0.5s ease-in-out;
+}
+.post .content{
+	position: relative;
+	display: block;
+	width: 80%;
+	margin: auto;
+	text-align: center;
+}
+
+
+.postleft{
+	position: relative;
+	display: block;
+	width: 35%;
+	float: left;
+	padding:1%;
+	font-family: Coolvetica;
+	font-size: 100%;
+	box-sizing: border-box;
+	word-wrap: break-word;
+}
+
+
+.postleft a{
+	text-decoration: none;
+	color: #000;
+}
+
+
+
+.postright{
+	position: relative;
+	display: block;
+	width: 60%;
+	float: left;
+	padding: 4%;
+	word-wrap: break-word;
+	box-sizing: border-box;
+}
+
+
+ .button{
+	padding:5px;
+	background-color: #000;
+	border: 1px solid #000;
+	color:#fff;
+	text-decoration:none;
+	font-family: Coolvetica;
+	margin: 0;
+	-webkit-transition: all 0.5s ease-in-out;
+	-moz-transition: all 0.5s ease-in-out;
+	-o-transition: all 0.5s ease-in-out;
+	transition: all 0.5s ease-in-out;
+}
+
+.button:hover{
+	background-color: #fff;
+	color:#000;
+	-webkit-transition: all 0.5s ease-in-out;
+	-moz-transition: all 0.5s ease-in-out;
+	-o-transition: all 0.5s ease-in-out;
+	transition: all 0.5s ease-in-out;
+}
+
+
+#POSTS .button{
+	padding:5px;
+	background-color: #fff;
+	border: 1px solid #000;
+	color:#000;
+	text-decoration:none;
+	font-family: Coolvetica;
+	margin: 0;
+	-webkit-transition: all 0.5s ease-in-out;
+	-moz-transition: all 0.5s ease-in-out;
+	-o-transition: all 0.5s ease-in-out;
+	transition: all 0.5s ease-in-out;
+}
+
+#POSTS .button:hover{
+	background-color: #000;
+	color: #fff;
+	-webkit-transition: all 0.5s ease-in-out;
+	-moz-transition: all 0.5s ease-in-out;
+	-o-transition: all 0.5s ease-in-out;
+	transition: all 0.5s ease-in-out;
+}
+
+
+#FORM{
+	width: 100%;
+	margin:auto;
+	padding-top: 2%;
+	color: black;
+	overflow: hidden;
+
+}
+
+#FORM label{
+	font-family: Chase;
+}
+
+#FORM .button{
+	background: #000;
+	color: #fff;
+}
+
+.button:focus {
+	outline:0;
+}
+
+#FORM #POST> h1   {
+	text-align: center;
+	font-size: 400%;
+	margin: 10% 20% 0;
+	font-family: Chase;
+}
+
+#FORM #POST > h3{
+	text-align: center;
+	margin-top: 0;
+	font-size: 150%;
+	font-family: Chase;
+}
+
+#FORM #POST> p{
+	margin: 5%25% ;
+	text-align: justify;
+	font-size: 130%;
+}
+
+#FORM #POSTS{
+	margin-top: 0%;
+	padding-top: 0%;
+	overflow: hidden;
+	margin-bottom: 5%;
+}
+
+#FORM #POSTS h1{
+	font-family: Coolvetica;
+}
+
+#FORM label{
+	font-family: Chase;
+	font-size: 170%;
+}
+
+#FORM input[type=text], #FORM input[type=password]{
+	display: block;
+	border: 2px black solid;
+	width: 70%;
+	height: 15%;
+	padding: 1%;
+}
+
+#FORM textarea{
+	width: 70%;
+	border: 2px black solid;
+	padding: 1%;
+}
+
+#FORM .button{
+	margin-top: 3%;
+	width: 15%;
+	background: #000;
+	color: #fff;
+	-webkit-transition: all 0.5s ease-in-out;
+	-moz-transition: all 0.5s ease-in-out;
+	-o-transition: all 0.5s ease-in-out;
+	transition: all 0.5s ease-in-out;
+}
+
+#FORM .button:hover{
+	background: #fff;
+	color: #000;
+	-webkit-transition: all 0.5s ease-in-out;
+	-moz-transition: all 0.5s ease-in-out;
+	-o-transition: all 0.5s ease-in-out;
+	transition: all 0.5s ease-in-out;
+}
+
+#recPost a{
+	text-decoration: none;
+	color: black;
+}
+
+#comment_form{
+	width: 40%;
+	display: block;
+	float: left;
+}	
+
+#comment_test{
+	padding-top: 7%;
+	width: 55%;
+	display: block;
+	float: right;
+	font-size: 80%;
+}
+
+#comment_test h4{
+	margin-top: 0;
+}
+
+#comment_test h1{
+	margin-bottom: 0;
+}
+
+#EDITPOSTS, #LOGIN, #UserOpt {
+	text-align: center;
+	font-family: Chase;
+	height: 100%;
+}
+
+#EDITPOSTS h1, #LOGIN h1, #UserOpt h1{
+	font-size: 220%;
+}
+
+#EDITPOSTS input[type=text], #EDITPOSTS input[type=password], #LOGIN input[type=text], #LOGIN input[type=password]{
+	margin: auto;
+}
+
+#EDITPOSTS > h1{
+	letter-spacing: 0px;
+	-webkit-transition: all 0.5s ease-in-out;
+	-moz-transition: all 0.5s ease-in-out;
+	-o-transition: all 0.5s ease-in-out;
+	transition: all 0.5s ease-in-out;
+
+}
+
+#EDITPOSTS > h1:hover{
+	letter-spacing: 8px;
+	-webkit-transition: all 0.5s ease-in-out;
+	-moz-transition: all 0.5s ease-in-out;
+	-o-transition: all 0.5s ease-in-out;
+	transition: all 0.5s ease-in-out;
+
+}
+
+#EDITPOSTS label{
+	letter-spacing: 0px;
+	-webkit-transition: all 0.5s ease-in-out;
+	-moz-transition: all 0.5s ease-in-out;
+	-o-transition: all 0.5s ease-in-out;
+	transition: all 0.5s ease-in-out;
+}
+
+#EDITPOSTS  label:hover{
+	letter-spacing: 8px;
+	-webkit-transition: all 0.5s ease-in-out;
+	-moz-transition: all 0.5s ease-in-out;
+	-o-transition: all 0.5s ease-in-out;
+	transition: all 0.5s ease-in-out;
+
+}
+
+
+::-webkit-scrollbar {
+	  width: 12px;
+	  border: 3px solid black;
+} /* this targets the default scrollbar (compulsory) */
+::-webkit-scrollbar-track {
+      background-color: #fff;
+      border-left: 5px solid black;
+} /* the new scrollbar will have a flat appearance with the set background color */
+ 
+::-webkit-scrollbar-thumb {
+      background-color: #000; 
+      border-left: 5px solid black;
+} /* this will style the thumb, ignoring the track */
+ 
+::-webkit-scrollbar-button {
+      background-color: #000;
+      border-left: 5px solid black;
+} /* optionally, you can style the top and the bottom buttons (left and right for horizontal bars) */
+ 
+::-webkit-scrollbar-corner {
+      background-color: #000;
+} /* if both the vertical and the horizontal bars appear, then perhaps the right bottom corner also needs to be styled */
+
+
+/*********************************/
+/*********************************/
+/********** MODAL BRO ************/
+/*********************************/
+/*********************************/
+
+.modalDialog {
+    position: fixed;
+    font-family: Coolvetica;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 99999;
+    opacity:0;
+    -webkit-transition: opacity 400ms ease-in;
+    -moz-transition: opacity 400ms ease-in;
+    transition: opacity 400ms ease-in;
+    pointer-events: none;
+}
+.modalDialog:target {
+    opacity:1;
+    pointer-events: auto;
+}
+#modal-box {
+    width: 20vw;
+    height: 50vh;
+    position: absolute;
+    right: 11%;
+    top: 9%;
+    padding: 5px 20px 13px;
+    border-radius: 0px;
+    background: #fff;
+    border: 5px solid black;
+    overflow: hidden;
+    text-align: center;
+    /*background: -moz-linear-gradient(#fff, #999);
+    background: -webkit-linear-gradient(#fff, #999);
+    background: -o-linear-gradient(#fff, #999);*/
+    text-align: center;
+}
+
+
+.close {
+    
+    color: #000;
+    line-height: 25px;
+    position: absolute;
+    right: 5px;
+    text-align: center;
+    top: 5px;
+    width: 24px;
+    text-decoration: none;
+    font-weight: bold;
+    font-family: Coolvetica;
+    /* background: #606061;
+    -webkit-border-radius: 12px;
+    -moz-border-radius: 12px;
+    border-radius: 12px;
+    -moz-box-shadow: 1px 1px 3px #000;
+    -webkit-box-shadow: 1px 1px 3px #000;
+    box-shadow: 1px 1px 3px #000;*/
+}
+.close:hover {
+    background: #000;
+    color: #fff;
+}
+
+#modal-box #LOGIN{
+	padding: 0;
+}
+
+#modal-box #LOGIN h1{
+	margin: 2%;
+}
+
+#modal-box #LOGIN input[type=text], #modal-boc #LOGIN input[type=password]{
+	width: 90%;
+}
+
+#modal-box #LOGIN label{
+	margin:0;
+}
+
+#modal-box #LOGIN .button{
+	width: 30%;
+}
+
+#UserNav .modalDialog {
+    position: fixed;
+    font-family: Coolvetica;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 99999;
+    opacity:0;
+    -webkit-transition: opacity 400ms ease-in;
+    -moz-transition: opacity 400ms ease-in;
+    transition: opacity 400ms ease-in;
+    pointer-events: none;
+}
+#UserNav  .modalDialog:target {
+    opacity:1;
+    pointer-events: auto;
+}
+#UserNav  #modal-box {
+    width: 20%;
+
+    height: 45%;
+    position: absolute;
+    right: 5%;
+    top: 9%;
+    padding: 5px 20px 5px 20px;
+    border-radius: px;
+    background: #fff;
+    border: 5px solid black;
+    overflow: hidden;
+    /*background: -moz-linear-gradient(#fff, #999);
+    background: -webkit-linear-gradient(#fff, #999);
+    background: -o-linear-gradient(#fff, #999);*/
+}
+#UserOpt .button{
+	width: 90%;
+}
+
+#UserNav .close {
+    
+    color: #000;
+    line-height: 25px;
+    position: absolute;
+    right: 5px;
+    text-align: center;
+    top: 5px;
+    width: 24px;
+    text-decoration: none;
+    font-weight: bold;
+    font-family: Coolvetica;
+    /* background: #606061;
+    -webkit-border-radius: 12px;
+    -moz-border-radius: 12px;
+    border-radius: 12px;
+    -moz-box-shadow: 1px 1px 3px #000;
+    -webkit-box-shadow: 1px 1px 3px #000;
+    box-shadow: 1px 1px 3px #000;*/
+}
+#UserNav .close:hover {
+    background: #000;
+    color: #fff;
+}
+
+#UserOpt ul{
+	list-style: none;
+	padding-left: 0; 
+}
+
+#UserOpt ul li{
+	margin: 3% 0;
+	
+}
+
+#UserOpt ul li:hover > a{
+	letter-spacing: 2px;
+	-webkit-transition: all 0.5s ease-in-out;
+	-moz-transition: all 0.5s ease-in-out;
+	-o-transition: all 0.5s ease-in-out;
+	transition: all 0.5s ease-in-out;
+}
+
+#UserOpt ul li a{
+	color: black;
+	font-size: 150%;
+	letter-spacing: 0px;
+	-webkit-transition: all 0.5s ease-in-out;
+	-moz-transition: all 0.5s ease-in-out;
+	-o-transition: all 0.5s ease-in-out;
+	transition: all 0.5s ease-in-out;
+}
+
+#modal-box #LOGIN{
+    width: 30%;
+}
+
+.unpublished{
+	color: red;
+}
+
+.manage > div > h1{
+	text-align: center;
+	font-family: Chase;
+	font-size: 600%;
+	margin: 0 auto;
+	margin-bottom: 3%;
+}
+
+.manage > div{
+	text-align: center;
+}
+
+
+/*
+input[type=text][type=radio   ]:not(old){
+  width     : 2em;
+  margin    : 0;
+  padding   : 0;
+  font-size : 1em;
+  opacity   : 0;
+}
+
+input[type=text][type=radio   ]:not(old) + label{
+  display      : inline-block;
+  margin-left  : -2em;
+  line-height  : 1.5em;
+}
+
+input[type=text][type=radio   ]:not(old) + label > span{
+  display          : inline-block;
+  width            : 0.875em;
+  height           : 0.875em;
+  margin           : 0.25em 0.5em 0.25em 0.25em;
+  border           : 0.0625em solid rgb(192,192,192);
+  border-radius    : 0.25em;
+  background       : rgb(224,224,224);
+  background-image :    -moz-linear-gradient(rgb(240,240,240),rgb(224,224,224));
+  background-image :     -ms-linear-gradient(rgb(240,240,240),rgb(224,224,224));
+  background-image :      -o-linear-gradient(rgb(240,240,240),rgb(224,224,224));
+  background-image : -webkit-linear-gradient(rgb(240,240,240),rgb(224,224,224));
+  background-image :         linear-gradient(rgb(240,240,240),rgb(224,224,224));
+  vertical-align   : bottom;
+}
+
+input[type=text][type=radio   ]:not(old):checked + label > span{
+  background-image :    -moz-linear-gradient(rgb(224,224,224),rgb(240,240,240));
+  background-image :     -ms-linear-gradient(rgb(224,224,224),rgb(240,240,240));
+  background-image :      -o-linear-gradient(rgb(224,224,224),rgb(240,240,240));
+  background-image : -webkit-linear-gradient(rgb(224,224,224),rgb(240,240,240));
+  background-image :         linear-gradient(rgb(224,224,224),rgb(240,240,240));
+}
+
+input[type=text][type=radio]:not(old):checked + label > span > span{
+  display          : block;
+  width            : 0.5em;
+  height           : 0.5em;
+  margin           : 0.125em;
+  border           : 0.0625em solid rgb(115,153,77);
+  border-radius    : 0.125em;
+  background       : rgb(153,204,102);
+  background-image :    -moz-linear-gradient(rgb(179,217,140),rgb(153,204,102));
+  background-image :     -ms-linear-gradient(rgb(179,217,140),rgb(153,204,102));
+  background-image :      -o-linear-gradient(rgb(179,217,140),rgb(153,204,102));
+  background-image : -webkit-linear-gradient(rgb(179,217,140),rgb(153,204,102));
+  background-image :         linear-gradient(rgb(179,217,140),rgb(153,204,102));
+}
+*/
+
+@media all and (max-width: 800px), only screen and (-webkit-min-device-pixel-ratio: 2) and (max-width: 1024px), only screen and (min--moz-device-pixel-ratio: 2) and (max-width: 1024px), only screen and (-o-min-device-pixel-ratio: 2/1) and (max-width: 1024px), only screen and (min-device-pixel-ratio: 2) and (max-width: 1024px), only screen and (min-resolution: 192dpi) and (max-width: 1024px), only screen and (min-resolution: 2dppx) and (max-width: 1024px) {
+	#topLogo img{
+		display: none;
+	}
+
+	#topNav ul{
+	height: 10%;
+	}
+	#topNav ul .title{
+	font-size: 100%
+	}
+	#topNav ul .right{
+	margin-right: 10%;
+	}
+
+	#topNav ul .button{
+	font-size: 50%;
+	width: 100%;
+	margin: 0;
+	}
+
+
+	#POSTS, #EDITPOSTS{
+		padding: 15% 12% 2%;
+		font-size: 100%;
+	}
+
+	#EDITPOSTS {
+		padding: 10% 5%;
+	}
+
+
+	.post{
+		width: 100%;
+		padding-top: 5%;
+	}
+	#FORM .post:hover{
+		border-width: 0px;
+	}
+
+	#POST:hover > h1{
+		letter-spacing: 0px;
+	}
+
+
+	.post .title a{
+		text-decoration: none;
+		color: black;
+		
+	}
+
+	.post .title h1{
+		margin: 0;
+		font-size: 200%;
+		text-transform: uppercase;
+	}
+
+	.post:hover > .title h1{
+		letter-spacing: 0px;
+	}
+	.post .content{
+		width: 100%;
+	}
+
+
+	.postleft{
+		width: 35%;
+		float: left;
+		padding:1%;
+	}
+
+	.postright{
+		width: 60%;
+		float: right;
+		padding: 4%;
+	}
+
+	.button:hover{
+		background-color: #000;
+		color:#fff;
+	}
+
+	#POSTS .button:hover{
+		background-color: #fff;
+		color: #000;
+	}
+
+	#FORM{
+		width: 100%;
+		margin:auto;
+		padding-top: 2%;
+		color: black;
+		overflow: hidden;
+
+	}
+
+	#FORM .button{
+		background: #000;
+		color: #fff;
+	}
+
+	#FORM #POST> h1{
+		font-size: 300%;
+		margin: 15% 20% 0;
+	}
+
+	#FORM #POST > h3{
+		font-size: 100%;
+	}
+
+	#FORM #POST> p{
+		margin: 5% 22% ;
+		font-size: 100%;
+	}
+
+	#FORM label{
+		font-size: 150%;
+	}
+
+	#FORM input[type=text], #FORM input[type=password]{
+		width: 90%;
+	}
+
+	#FORM textarea{
+		width: 90%;
+	}
+
+	#FORM .button:hover{
+		background: #000;
+		color: #fff;
+	}
+
+	#comment_form{
+		width: 100%;
+		float: none;
+	}	
+
+	#comment_test{
+		padding-top: 7%;
+		width: 100%;
+		float: none;
+		font-size: 80%;
+	}
+
+	#comment_test h4{
+		margin-top: 0;
+	}
+
+	#comment_test h1{
+		margin-bottom: 0;
+	}
+
+	#EDITPOSTS {
+		text-align: center;
+		font-family: Chase;
+		height: 100%;
+	}
+
+	#EDITPOSTS h1{
+		font-size: 220%;
+	}
+
+	#EDITPOSTS input[type=text], #EDITPOSTS input[type=password]{
+		margin: auto;
+	}
+
+	#EDITPOSTS > h1:hover{
+		letter-spacing: 0px;
+	}
+	#EDITPOSTS  label:hover{
+		letter-spacing: 0px;
+	}
+}

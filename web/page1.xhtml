@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <style>
+            .page{
+                font-size: 100px;
+            }
+        </style>
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        Page 1
+        <h:form class="page">
+            yang tadi diinput adalah: #{inputHandler.inputText}
+        </h:form>
+        <ui:repeat var="post" value="#{postController.posts}">
+            <h1>#{post.judul}</h1>
+            <p>#{post.konten}</p><br></br>
+        </ui:repeat>
+    </h:body>
+</html>
+
