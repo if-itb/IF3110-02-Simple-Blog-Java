@@ -42,6 +42,14 @@ public class CookieCheck {
         return "admin".equals(CookieCheck());
     }
     
+    public boolean isOwner(){
+        return "owner".equals(CookieCheck());
+    }
+    
+    public boolean isEditor(){
+        return "editor".equals(CookieCheck());
+    }
+    
     public String getUName(){
         String UName="Guest";
         Cookie[] cookies = request.getCookies();
@@ -66,5 +74,13 @@ public class CookieCheck {
             }
         }
         return UsrName;
+    }
+    
+    public boolean adminORowner(){
+        return (isLoggedIn() && (isAdmin() || isOwner()));
+    }
+    
+    public boolean adminOReditor(){
+        return (isLoggedIn() && (isAdmin() || isEditor()));
     }
 }
