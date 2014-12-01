@@ -17,7 +17,7 @@
             <ui:define name="content">
                 <div class='container' style='width:50%;'>
                     <h1>Create User</h1>
-                    <h:form class='na   vbar-form'>
+                    <h:form class='navbar-form' id="form">
                         <div class="Field">
                             <div class="form-group">
                                 <h4>Nama</h4>
@@ -31,7 +31,7 @@
                             <div class="form-group">
                                 <h4>Email</h4>
                                 <div class="form-group">
-                                    <h:inputText class="form-control" value="#{userCtrl.user.email}"></h:inputText>
+                                    <h:inputText id="email" class="form-control" value="#{userCtrl.user.email}"></h:inputText>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -49,7 +49,7 @@
                                 Owner<h:selectBooleanCheckbox value="#{userCtrl.user.isOwner}"></h:selectBooleanCheckbox>
                             </div>
                         </div>
-                        <h:commandLink style='float:right' action="#{userCtrl.doSubmit()}" value="Tambah" class="btn btn-primary"></h:commandLink>
+                        <h:commandLink style='float:right' action="#{userCtrl.doSubmit()}" value="Tambah" class="btn btn-primary" onclick="return validateEmail();"></h:commandLink>
                     </h:form>
                 </div>
             </ui:define>

@@ -5,7 +5,7 @@
  */
 
 function validateEmail() {
-    var email = document.getElementById("form-komentar:email").value;
+    var email = document.getElementById("form:email").value;
     var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     var ans = re.test(email);
     if (ans == false) {

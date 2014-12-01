@@ -15,7 +15,7 @@
             <ui:define name="content">
                 <div class="row">
                     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                        <h:form style="float:right;">
+                        <h:form style="float:right;" rendered="#{not userIdentity.isGuest}">
                             <h:commandButton action="#{postCtrl.showCreate()}" value="+ Tambah Post" class="btn btn-primary"></h:commandButton>
                         </h:form>
                         <c:forEach var="post" items="#{postCtrl.getPosts()}">
@@ -24,6 +24,9 @@
                                     <div class="post-preview">
                                         <div style="float:right;">
                                             <c:if test="#{!post.published}"><h4><span class="label label-warning">Unpublished</span></h4></c:if>
+                                                <h:commandLink action="#{postCtrl.doPublish()}" class="btn btn-primary" value="publish" rendered="#{ (not post.published) and (userIdentity.isEditor or userIdentity.isAdmin)}">
+                                                    <f:param name="id" value="#{post.id}"/>
+                                                </h:commandLink>
                                         </div>
                                         <h:commandLink class='post-title' action="#{postCtrl.showView()}">
                                             <f:param name="id" value="#{post.id}" />
@@ -31,7 +34,7 @@
                                             <h3 class='post-subtitle'>#{post.konten}</h3>
                                         </h:commandLink>
                                         <p class="post-meta">Posted on #{post.tanggal}</p>
-                                        <h:commandButton action="#{postCtrl.showUpdate()}" value="Update" class="btn btn-success" rendered="#{(userIdentity.isAdmin) or (userIdentity.isEditor)}">
+                                        <h:commandButton action="#{postCtrl.showUpdate()}" value="Update" class="btn btn-success" rendered="#{(userIdentity.isAdmin) or (userIdentity.isOwner)}"><!-- tidak konsisten-->
                                             <f:param name="id" value="#{post.id}" />
                                         </h:commandButton>&nbsp;
                                         <h:commandButton action="#{postCtrl.showDelete()}" value="Delete" class="btn btn-danger" onclick="return confirm('Anda ingin menghapus post ini?')">

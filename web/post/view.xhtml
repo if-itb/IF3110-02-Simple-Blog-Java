@@ -84,7 +84,7 @@
                         <div class="row">
                             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                                 <h3>Tambahkan Komentar</h3>
-                                <h:form id="form-komentar">
+                                <h:form id="form">
                                     <div class="Field">
                                         <div class="form-group">
                                             <h4>Nama</h4>
@@ -100,7 +100,7 @@
                                             <h:inputTextarea class="form-control" value="#{comment.konten}"></h:inputTextarea>
                                         </div>
                                         <h:commandButton type="submit" onclick="return validateEmail();" action="#{comment.add()}" value="Komen!" class="btn btn-primary">
-                                            <f:ajax execute="form-komentar" render="panel-komentar"></f:ajax>
+                                            <f:ajax execute="form" render="panel-komentar"></f:ajax>
                                         </h:commandButton>
                                     </div>
                                     <h:panelGroup id="panel-komentar">

@@ -48,7 +48,7 @@ public class Post implements Serializable {
             Statement st = dbc.getCon().createStatement();
 
             this.comments = new ArrayList<>();
-            String query = "SELECT * FROM comment WHERE post_id=" + id;
+            String query = "SELECT * FROM comment WHERE post_id=" + id + " ORDER BY created_at ASC";
             ResultSet result = st.executeQuery(query);
             while (result.next()) {
                 Comment comment = new Comment();
@@ -228,5 +228,5 @@ public class Post implements Serializable {
     boolean isPublished() {
         return this.published;
     }
-
+    
 }

@@ -175,4 +175,26 @@ public class PostController implements Serializable {
         this.posts = posts;
     }
 
+    public String doPublish (){
+        FacesContext context = FacesContext.getCurrentInstance();
+        Map<String, String> requestParam = context.getExternalContext().getRequestParameterMap();
+        HttpServletRequest req = (HttpServletRequest) context.getExternalContext().getRequest();
+        HttpSession session = req.getSession();
+        post = (Post) session.getAttribute("post");
+        User userIdentity = (User) session.getAttribute("userIdentity");
+        
+        if (requestParam.containsKey("id")) {
+            int post_id = Integer.parseInt(requestParam.get("id"));
+            post.setId(post_id);
+            post.load(post_id);
+            post.setPublished(true);
+            post.setIsNewRecord(false);
+            post.save();
+            System.out.println("jancok");
+            session.setAttribute("post", post);
+            return "success";
+        } else {
+            return "fail";
+        }
+    }
 }
