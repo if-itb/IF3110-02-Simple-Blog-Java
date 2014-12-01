@@ -2,22 +2,22 @@
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 template="./template.xhtml"
-                xmlns:h="http://xmlns.jcp.org/jsf/html">
-    <ui:define name="title"><title>Simple Blog - <!-- Insert post title here --></title></ui:define>
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <ui:define name="title"><title>Simple Blog - #{Pages.current_title}</title></ui:define>
     <ui:define name="content">
         <article class="art simple post">
     
     <header class="art-header">
         <div class="art-header-inner" style="margin-top: 0px; opacity: 1;">
-            <time class="art-time"><!-- <?php echo $date->format('l\, j F Y'); ?> Ganti dengan tanggal --></time>
-            <h2 class="art-title"><!-- <?php echo $result['title']; ?> Ganti dengan page title --></h2>
-            <p class="art-subtitle"></p>
+            <time class="art-time">#{Pages.current_date}</time>
+            <h2 class="art-title">#{Pages.current_title}</h2>
         </div>
     </header>
 
     <div class="art-body">
         <div class="art-body-inner" style="padding-top: 0px;">
-            <p><!-- <?php echo nl2br($result['content']); ?> Ganti dengan konten --></p>
+            <p>#{Pages.current_content}</p>
 
             
             <h2>Komentar</h2>

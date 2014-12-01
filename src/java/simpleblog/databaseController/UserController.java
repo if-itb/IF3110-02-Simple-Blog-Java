@@ -3,23 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package databaseController;
+package simpleblog.databaseController;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 
 /**
  *
  * @author kevhnmay94
  */
-@ManagedBean
-@RequestScoped
-public class PagesController {
+@ManagedBean(eager=true)
+@SessionScoped
+public class UserController {
 
     /**
-     * Creates a new instance of PagesController
+     * Creates a new instance of UserController
      */
-    public PagesController() {
+    public UserController() {
     }
     
 }
