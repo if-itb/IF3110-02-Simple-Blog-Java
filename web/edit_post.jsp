@@ -11,19 +11,19 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 
-<sql:setDataSource var="db_source" driver="com.mysql.jdbc.Driver" user="root" password="" url="jdbc:mysql://localhost/simpleblog-java"/>
+<sql:setDataSource var="db_source" driver="com.mysql.jdbc.Driver" user="root" password="root" url="jdbc:mysql://localhost/simpleblog-java"/>
 <%
     if (request.getParameter("submit") != null){
 %>
     <sql:update var="update" dataSource="${db_source}">
-	UPDATE posts judul = request.getParameter("Judul"), tanggal = request.getParameter("Tanggal"), konten = request.getParameter("Konten")
-	WHERE id = request.getParameter("id");
+        UPDATE posts SET judul = '<%=request.getParameter("Judul")%>', tanggal = '<%=request.getParameter("Tanggal")%>', konten = '<%=request.getParameter("Konten")%>'
+	WHERE id = <%=request.getParameter("id")%>;
     </sql:update>
 <%
     }
 %>
 <sql:query var="read" dataSource="${db_source}">
-    SELECT * from posts WHERE id=request.getParameter("id");
+    SELECT * from posts WHERE id=<%=request.getParameter("id")%>;
 </sql:query>
 
 <!DOCTYPE html>
@@ -51,7 +51,7 @@
 <title>Edit Post</title>
 
 
-</head>
+    </head>
 
 <body>
 <div class="wrapper">
@@ -70,7 +70,7 @@
 
     <div class="art-body">
         <div class="art-body-inner">
-            <h2>Add Post</h2>
+            <h2>Edit Post</h2>
 
             <div id="contact-area">
                 <form method="post" action="#">
@@ -81,9 +81,7 @@
                     <input type="text" name="Tanggal" id="Tanggal" value="${read.rows[0].tanggal}">
                     
                     <label for="Konten">Konten:</label><br>
-                    <textarea name="Konten" rows="20" cols="20" id="Konten">
-			"${read.rows[0].konten}"
-		    </textarea>
+                    <textarea name="Konten" rows="20" cols="20" id="Konten">${read.rows[0].konten}</textarea>
 
                     <input type="submit" name="submit" value="Simpan" class="submit-button">
                 </form>

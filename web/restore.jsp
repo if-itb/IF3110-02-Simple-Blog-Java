@@ -10,6 +10,6 @@
 
 <sql:setDataSource var="db_source" driver="com.mysql.jdbc.Driver" user="root" password="root" url="jdbc:mysql://localhost/simpleblog-java"/>
 <sql:update var="results" dataSource="${db_source}">
-            UPDATE `simpleblog-java`.`posts` SET `deleted` = '1' WHERE `posts`.`id`=<%= request.getParameter("post") %> ;
+            UPDATE `simpleblog-java`.`posts` SET `deleted` = '0' WHERE `posts`.`id`=<%= request.getParameter("post") %> ;
 </sql:update>
-            <c:redirect url="index.xhtml"/>
+            <c:redirect url="recycle_bin.xhtml"/>
