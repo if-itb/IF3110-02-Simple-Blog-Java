@@ -26,7 +26,6 @@ public class PostBean {
 	private String Owner;
 	private String id;
 	private boolean valid;
-	private int Status;
 	
 	public String getJudul() {
 		if (!valid){

@@ -45,8 +45,13 @@
 <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->
-
-<title>Simple Blog of Bangsatya</title>
+<%
+	Date date = new Date();
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	PostBean pBean =  new PostBean();
+	pBean.ViewPost(request.getParameter("id"));
+%>
+<title>Simple Blog of Bangsatya | <% out.println(pBean.getJudul()); %></title>
 </head>
 <jsp:include page="header.jsp"/>
 <%
@@ -67,117 +72,90 @@
 		}
 	}
 %>
-
-<div id="home">
-    <div class="posts">
-        <nav class="art-list">
-          <ul class="art-list-body">
-			<%
-				Date date = new Date();
-				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-				PostBean pBean =  new PostBean();
-				pBean.ViewPost(request.getParameter("id"));
-			%>
-					<center>
-					<table border=1 style="align:center" >
-						<tr>
-							<td colspan="2" align="center">
-								<h4><% out.println(pBean.getJudul()); %></h4>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<% out.println(pBean.getTanggal()); %>
-							</td>
-							<td>
-							</td>
-						</tr>
-						<tr>
-							<td colspan="2">
-								<p><% out.println(pBean.getKonten()); %></p>
-							</td>
-						</tr>
-						<tr>
-							<% if (typeC!=4){ %>
-							<td colspan="2">
-							  <a href="edit.jsp?id=<% out.println(pBean.getId()); %>">Edit</a> | <a href="handler/delPost.jsp?id=<% out.println(pBean.getId()); %>">Hapus</a>
-							</td>
-							<% } %>
-						</tr>
-						<tr>
-
-							<td colspan="2">
-								<hr/>
-								<div id="Komentar">
-								</div>
-								<hr/>
-								<div id="formKomentar">
-									<form method="post" action="#">
-										Nama <input type="text" id="pNama" name="nama"><br/>
-										Email <input type="text" id="pEmail" name="email" ><br/>
-										Pesan<br/>
-											<textarea id="pPesan" name="pesan" cols="84" rows="5"></textarea><br/>
-											<input type="hidden" id="pTanggal" name="tanggal" value="<% out.println(sdf.format(date)); %>">
-										<input type="hidden" id="pId" name="id" value="<% out.println(pBean.getId()); %>">
-										<input type="button" name="postKomentar" value="Post Komentar" onclick="return cekEmail();">
-									</form>
-								</div>
-							</td>
-						</tr>
-					</table>
-
-				</center>
-				<div id="terbaru" align="center">
+<article class="art simple post">
+    <header class="art-header">
+        <div class="art-header-inner" style="margin-top: 0px; opacity: 1;">
+            <time class="art-time"><%=pBean.getTanggal()%></time>
+            <h2 class="art-title"><%=pBean.getJudul()%></h2>
+            <p class="art-subtitle"></p>
+        </div>
+    </header>
+	<div class="art-body">
+        <div class="art-body-inner">
+            <% out.println(pBean.getKonten()); %>
+            <hr />
+			<% if (typeC!=4){ %>
+			<p>
+			  <a href="edit.jsp?id=<% out.println(pBean.getId()); %>">Edit</a> | <a href="handler/delPost.jsp?id=<% out.println(pBean.getId()); %>">Hapus</a>
+			</p>
+			<% } %>
+            
+			<div id="Komentar">
+			</div>
+			<div id="formKomentar">
+			</div>
+			<hr/>
+			<div id="contact-area">
+				<form method="post" onsubmit="return SubmitComment(this);">
+					<label for="Nama">Nama:</label>
+					<input type="text" id="pNama" name="nama">
 					
-				</div>
-				<hr/>
-				<!-- bagian komentar -->
-					<div id="unit-komentar" align="center">
-						<br/>
-						<br/>
-						</br>
-						<hr/>
-					</div>
+					<label for="Email">Email:</label>
+					<input type="text" id="pEmail" name="email" >
+					<label for="Komentar">Komentar:</label><br>
+					<textarea id="pPesan" name="pesan" cols="20" rows="20"></textarea>
+					<input type="hidden" id="pTanggal" name="tanggal" value="<% out.println(sdf.format(date)); %>">
+					<input type="hidden" id="pId" name="id" value="<% out.println(pBean.getId()); %>">
+					<input type="button" class="submit-button" name="postKomentar" value="Kirim" onclick="return cekEmail();">
+				</form>
+			</div>
+			
+			<span id="terbaru">
+			</span>
+			<hr/>
+			<!-- bagian komentar -->
 			<% 
-					String Driver = "com.mysql.jdbc.Driver";
-					String DbUser = "root";
-					String DbPass = "";
-					String DbName = "Tubes2WBD";
-					String DbLoc1 = "jdbc:mysql://localhost:3306/";
-					String DbLoc2 = DbLoc1+DbName;
-					Connection conn = null;
-					Statement st = null;
-					ResultSet rs = null;
+				String Driver = "com.mysql.jdbc.Driver";
+				String DbUser = "root";
+				String DbPass = "";
+				String DbName = "Tubes2WBD";
+				String DbLoc1 = "jdbc:mysql://localhost:3306/";
+				String DbLoc2 = DbLoc1+DbName;
+				Connection conn = null;
+				Statement st = null;
+				ResultSet rs = null;
 
+				try {
+					Class.forName(Driver).newInstance();
+					conn = DriverManager.getConnection(DbLoc2,DbUser,DbPass);
+					st=conn.createStatement();
+					rs=st.executeQuery("SELECT * FROM comment WHERE Parent ='"+request.getParameter("id")+"';");
+					while(rs.next()){
+						out.println("<li class=\"art-list-item\">");
+						out.println("	<div class=\"art-list-item-title-and-time\">");
+						out.println("		<h2 class=\"art-list-title\"><a href=\"mailto:"+rs.getString("email")+"\">"+rs.getString("Name")+"</a></h2>");
+						out.println("		<div class=\"art-list-time\">"+rs.getString("Time")+"<br>");
+						out.println("		</div>");
+						out.println("	</div>");
+						out.println("	<p>"+rs.getString("Content")+"</p>");
+						out.println("</li>");
+					}
+				} catch(Exception e){
+					throw e;
+				} finally{
 					try {
-						Class.forName(Driver).newInstance();
-						conn = DriverManager.getConnection(DbLoc2,DbUser,DbPass);
-						st=conn.createStatement();
-						rs=st.executeQuery("SELECT * FROM comment WHERE Parent ='"+request.getParameter("id")+"';");
-						while(rs.next()){
-							out.println("<div id=\"unit-komentar\" align=\"center\">");
-							out.println(rs.getString("Name")+"<br>");
-							out.println(rs.getString("Time")+"<br>");
-							out.println(rs.getString("Content")+"<br>");
-							out.println("<hr>");
-							out.println("</div>");			
-						}
-					} catch(Exception e){
+						rs.close();
+						st.close();
+						conn.close();
+					} catch (SQLException e) {
 						throw e;
-					} finally{
-						try {
-							rs.close();
-							st.close();
-							conn.close();
-						} catch (SQLException e) {
-							throw e;
-						}
-					}					
-				%>
-          </ul>
-        </nav>
+					}
+				}					
+			%>
+			
+        </div>
     </div>
-</div>
+</article>
 
 <jsp:include page="footer.jsp"/>
 </div>
@@ -207,7 +185,17 @@ function PostKomentar(){
 	var url	=	"post_komentar.jsp";
     var param="ID="+isiid+"&Name="+isinama+"&Email="+isiemail+"&Content="+isipesan;
 	document.getElementById("terbaru").innerHTML = "Sedang memproses komentar";
-	var message = "<div id=unit-komentar align=center><br>" + isinama + "<br>" + isitanggal + "<br>" + isipesan + "<hr></div>";
+	//var message = "<div id=unit-komentar align=center><br>" + isinama + "<br>" + isitanggal + "<br>" + isipesan + "<hr></div>";
+	
+	var message="<li class=\"art-list-item\">";
+	message=message+"	<div class=\"art-list-item-title-and-time\">";
+	message=message+"		<h2 class=\"art-list-title\"><a href=\"mailto:"+isiemail+"\">"+isinama+"</a></h2>";
+	message=message+"		<div class=\"art-list-time\">"+isitanggal+"<br>";
+	message=message+"		</div>";
+	message=message+"	</div>";
+	message=message+"	<p>"+isipesan+"</p>";
+	message=message+"</li>";
+	
 	document.getElementById("terbaru").innerHTML = message;
     xmlhttp.open("POST",url,true);
     xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");

@@ -12,7 +12,7 @@
 	CType.setPath("/");
 	response.addCookie(Cusr);
 	response.addCookie(CType);
-	response.setStatus(response.SC_MOVED_TEMPORARILY);
+	response.setStatus(HttpServletResponse.SC_MOVED_TEMPORARILY);
 	response.setHeader("Location", "../index.jsp");
 	
 %>

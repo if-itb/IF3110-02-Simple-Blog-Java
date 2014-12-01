@@ -14,7 +14,7 @@
 	//PostBean pBean	=	 new PostBean();
 	//pBean.EditPost(ID, Judul, Tanggal, Konten);
 	Post.DeletePost(ID);
-	response.setStatus(response.SC_MOVED_TEMPORARILY);
+	response.setStatus(HttpServletResponse.SC_MOVED_TEMPORARILY);
 	response.setHeader("Location", "../index.jsp");
 
 %>

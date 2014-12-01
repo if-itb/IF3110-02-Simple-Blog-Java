@@ -88,13 +88,14 @@
 			%>	
 			<li class="art-list-item">
 				<div class="art-list-item-title-and-time">
-					<tr>
-						<td><%=rs.getString("nama")%></td>
-						<td><%=rs.getString("username")%></td>
-						<td><%=rs.getString("email")%></td>
-					</tr>	
+					<h2 class="art-list-title"><a href="show_user.jsp?id=<%=rs.getString("no")%>"><%=rs.getString("nama")%></a></h2>
+					<div class="art-list-time"><%=rs.getString("email")%></div>
+					<%=rs.getString("status").equals("3")?"Admin":
+						rs.getString("status").equals("1")?"Owner":
+						rs.getString("status").equals("2")?"Editor":"Guest"%>
 				</div>
-
+				<p>Username : <%=rs.getString("username")%>
+				<br/>Password : *****</p>
 				<p>
 				<% if (typeC!=4){
 				%>

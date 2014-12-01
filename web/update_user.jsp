@@ -90,18 +90,18 @@
 			<br/>
 			<label>Username: </label><input type="text" id="user_username" name="user_username" value="<%=rs.getString("username")%>">
 			<br/>
-			<label>Password: </label><input type="text" id="user_password" name="user_password" value="<%=rs.getString("password")%>">
+			<label>Password: </label><input type="password" id="user_password" name="user_password" value="<%=rs.getString("password")%>">
 			<br/>
 			<label>Email: </label><input type="text" id="user_email" name="user_email" value="<%=rs.getString("email")%>">
 			<br/>
 			<label>Status</label>
-				<select id="user_status" name="user_status" value="1">
-					<option value="1" <%=rs.getString("status").equals("3")?"selected":""%>> Admin </option>
-					<option value="2" <%=rs.getString("status").equals("1")?"selected":""%>> Owner </option>
-					<option value="3" <%=rs.getString("status").equals("2")?"selected":""%>> Editor </option>
+				<select id="user_status" name="user_status">
+					<option value="3" <%=rs.getString("status").equals("1")?"selected":""%>> Admin </option>
+					<option value="1" <%=rs.getString("status").equals("2")?"selected":""%>> Owner </option>
+					<option value="2" <%=rs.getString("status").equals("3")?"selected":""%>> Editor </option>
 				</select>
 			<br/>
-			<input type="submit" class="submit-button" value="Tambah">
+			<input type="submit" class="submit-button" value="Update">
 		</form>
 		<%
 			}

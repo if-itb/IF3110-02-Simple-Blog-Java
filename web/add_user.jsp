@@ -77,15 +77,15 @@
 			<br/>
 			<label>Username: </label><input type="text" id="user_username" name="user_username">
 			<br/>
-			<label>Password: </label><input type="text" id="user_password" name="user_password">
+			<label>Password: </label><input type="password" id="user_password" name="user_password">
 			<br/>
 			<label>Email: </label><input type="text" id="user_email" name="user_email">
 			<br/>
 			<label>Status</label>
 				<select id="user_status" name="user_status">
-					<option value="1"> Admin </option>
-					<option value="2"> Owner </option>
-					<option value="3"> Editor </option>
+					<option value="3"> Admin </option>
+					<option value="1"> Owner </option>
+					<option value="2"> Editor </option>
 				</select>
 			<br/>
 			<input type="submit" class="submit-button" value="Tambah">

@@ -36,6 +36,8 @@
 			
 			connection.close();
 			pStatement.close();
+			response.setStatus(HttpServletResponse.SC_MOVED_TEMPORARILY);
+			response.setHeader("Location", "../userAdm.jsp");
 		}
 
 %>
