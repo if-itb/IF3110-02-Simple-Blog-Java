@@ -17,7 +17,7 @@
             <ui:define name="content">
                 <div class='container' style="width:50%;">
                     <h1>Update User</h1>
-                    <h:form class='navbar-form'>
+                    <h:form class='navbar-form' id="form">
                         <span style='display:none'>#{user.isNewRecord}</span>
                         <div class="Field">
                             <div class="form-group">
@@ -32,7 +32,7 @@
                             <div class="form-group">
                                 <h4>Email</h4>
                                 <div class="form-group">
-                                    <h:inputText class="form-control" value="#{user.email}"></h:inputText>
+                                    <h:inputText id="email" class="form-control" value="#{user.email}"></h:inputText>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -50,7 +50,7 @@
                                 Owner<h:selectBooleanCheckbox value="#{user.isOwner}"></h:selectBooleanCheckbox>
                             </div>
                         </div>
-                        <h:commandLink style='float:right' action="#{userCtrl.doSubmit()}" value="Ubah" class="btn btn-success"></h:commandLink>
+                        <h:commandLink style='float:right' action="#{userCtrl.doSubmit()}" value="Ubah" class="btn btn-success" onclick="return validateEmail();"></h:commandLink>
                     </h:form>
                 </div>
             </ui:define>

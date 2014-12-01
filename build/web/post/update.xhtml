@@ -32,8 +32,8 @@
                             <h:inputText id="date" class="form-control" value="#{post.tanggal}"></h:inputText>
 
                         </div>
-                        Published
-                        <h:selectBooleanCheckbox value="#{post.published}"></h:selectBooleanCheckbox>
+                        <!--Published-->
+                        <h:selectBooleanCheckbox value="#{post.published}" rendered="false"></h:selectBooleanCheckbox>
                         <br/>
                         <h:inputHidden value="#{post.userId}"></h:inputHidden>
                         <h:commandLink onclick="return DateValidator();" rendered="#{post.id!=0}" action="#{postCtrl.doSubmit()}" value="Ubah" class="btn btn-primary"></h:commandLink>
