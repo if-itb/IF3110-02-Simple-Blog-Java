@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+   <h:head>
+		<title>Simple Blog</title>
+   </h:head>
+   <h:body>
+      <h:form>
+		<h1>Simple Blog</h1>
+		<h><h:commandLink value = "Home" action="#{allControl.Home()}"  /></h>
+		<h><h:commandLink value = "Logout" action="#{allControl.Logout()}"  /></h>
+		<h3>Add Post</h3>
+		Title : <h:inputText value="#{allControl.currentPost.title}" /><br/>
+        Date : <h:inputText value="#{allControl.currentPost.date}" /><br/>
+		Content : <h:inputTextarea value="#{allControl.currentPost.content}" cols="30" rows="7"/><br/>
+                <h:commandButton value="Submit" action="#{allControl.addNewPost()}"/>
+		<h4>#{allControl.message}</h4>
+      </h:form>
+   </h:body>
+</html>

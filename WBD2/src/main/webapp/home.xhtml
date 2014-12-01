@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+   <h:head>
+		<title>Simple Blog</title>
+   </h:head>
+   <h:body>
+      <h:form>
+	  <h1>Simple Blog</h1>
+		<h><h:commandLink value = "Login" action="login"  /></h>
+		<hr />
+	  <ui:repeat value="#{dbStatement.PickPublishedPost()}" var="P" varStatus="loop">
+		<h2><h:commandLink value = "#{P.title}" action="#{allControl.showPost()}"  >
+			<f:setPropertyActionListener target="#{allControl.postID}" value="#{P.id}" />
+		</h:commandLink></h2>
+		<h3>#{P.date}</h3>
+		<h3>#{P.content}</h3>
+		<hr />
+		<h:outputText value="" rendered="#{not loop.last}"/>
+		</ui:repeat>
+      </h:form>
+   </h:body>
+</html>
