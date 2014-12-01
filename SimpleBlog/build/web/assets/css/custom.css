@@ -1,0 +1,60 @@
+#logoblog {
+margin-bottom: 30px;
+text-align: center;
+}
+
+.headerblog {
+background-color: orange;
+padding-top: 30px;
+padding-bottom: 30px;
+}
+
+.posts .art-list {
+padding: 0 0 0;
+}
+
+.posts .art-list-item-title-and-time {
+width: 100%;
+text-align: center;
+}
+
+.posts h2 {
+    padding-bottom: 0;
+}
+
+.posts .art-list-item p {
+width: 100%;
+float: left;
+ margin-left: 0; 
+margin-bottom: 15px;
+font-size: 16px;
+line-height: 24px;
+}
+
+#logoblog a:hover {
+    text-decoration: none;
+}
+
+footer {
+background-color: orange;
+}
+
+.art-header {
+    height: 400px;
+}
+
+#home {
+    min-height: 320px;
+}
+
+.footer, .footer a {
+    color: white;
+}
+
+#contact-area .img {
+padding: 5px;
+width: 471px;
+font-family: Helvetica, sans-serif;
+margin: 0px 0px 10px 0px;
+display: -webkit-box;
+}
