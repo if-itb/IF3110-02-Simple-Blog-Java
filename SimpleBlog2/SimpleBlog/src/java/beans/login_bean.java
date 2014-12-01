@@ -6,15 +6,19 @@
 
 package beans;
 
+import java.security.Principal;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -38,6 +42,10 @@ public class login_bean {
     
     public login_bean(){
         checkCookie();
+        HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+        if (session != null){
+            session.invalidate();
+        }
     }
     
     //Getter
@@ -179,4 +187,37 @@ public class login_bean {
             System.out.println("Cannot find any cookie");
         }
     }
+    
+    public String login() throws SQLException, ClassNotFoundException{
+       
+            String message ="";
+            String navto="";
+            HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+
+            try {
+                request.login(username, password);
+                Principal principal = request.getUserPrincipal();
+
+                if (request.isUserInRole("Administrator")){
+                    message = "Username : " + principal.getName() + " You are an administrator ";
+                    navto = "admin";
+                } else if (request.isUserInRole("Manager")){
+                    message = "Username : " + principal.getName() + " You are a manager";
+                    navto = "manager";
+                } else if (request.isUserInRole("Guest")){
+                    message = "Username : " + principal.getName() + " You are a guest";
+                    navto = "guest";
+                }
+                
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, message, null));
+                return navto;
+            } catch (ServletException ex) {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Login gagal bro", null));
+                ex.printStackTrace();
+            }
+            return "failure";
+      
+    }
+    
+    public void logout(){}
 }
