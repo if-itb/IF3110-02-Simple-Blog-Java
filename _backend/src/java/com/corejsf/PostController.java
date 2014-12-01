@@ -71,7 +71,6 @@ public class PostController {
     }
     
     public String deletePost(int id, int hlm){
-        System.out.println("MASUK "+id);
         try{
             Connection con = getConnection();
             PreparedStatement ps = con.prepareStatement("UPDATE post SET deleted=? WHERE id=?");
@@ -88,7 +87,6 @@ public class PostController {
     }
     
     public String restorePost(int id){
-        System.out.println("MASUK "+id);
         try{
             Connection con = getConnection();
             PreparedStatement ps = con.prepareStatement("UPDATE post SET deleted=? WHERE id=?");
@@ -102,7 +100,6 @@ public class PostController {
     }
     
     public String deletePostPermanent(int id){
-        System.out.println("MASUK "+id);
         try{
             Connection con = getConnection();
             PreparedStatement ps = con.prepareStatement("DELETE FROM post WHERE id=?");
@@ -115,7 +112,6 @@ public class PostController {
     }
     
     public String publishPost(int id){
-        System.out.println("MASUK "+id);
         try{
             Connection con = getConnection();
             PreparedStatement ps = con.prepareStatement("UPDATE post SET status=? WHERE id=?");

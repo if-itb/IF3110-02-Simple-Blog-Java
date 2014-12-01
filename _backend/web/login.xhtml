@@ -27,27 +27,33 @@
                 <c:choose>
                     <c:when test="${cookie.cRole.value eq 'Owner'}">
                         <div class="col-md-6 col-xs-6 col-sm-6 col-lg-6"><div class="pull-right icon-header">
-                        <button type="button" class="btn btn-info btn-circle btn-lg" data-toggle="tooltip" data-placement="left" title="Add Post"><a href="add_post.xhtml"><i class="glyphicon glyphicon-plus"></i></a></button>
-                        <h:commandLink type="button" styleClass="btn btn-danger btn-circle btn-lg" action="login?faces-redirect=true">
-                            <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>
+                        <h:commandLink type="button" styleClass="btn btn-info btn-circle btn-lg" action="add_post">
+                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                        </h:commandLink>
+                        <h:commandLink type="button" styleClass="btn btn-danger btn-circle btn-lg" action="#{login.startLogout}">
+                            <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
                         </h:commandLink>
                         </div></div>
                     </c:when>
 
                     <c:when test="${cookie.cRole.value eq 'Editor'}">
                         <div class="col-md-6 col-xs-6 col-sm-6 col-lg-6"><div class="pull-right icon-header">                        
-                        <h:commandLink type="button" styleClass="btn btn-danger btn-circle btn-lg" action="login?faces-redirect=true">
-                            <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>
+                        <h:commandLink type="button" styleClass="btn btn-danger btn-circle btn-lg" action="#{login.startLogout}">
+                            <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
                         </h:commandLink>
                         </div></div>
                     </c:when>
 
                     <c:when test="${cookie.cRole.value eq 'Admin'}">
                         <div class="col-md-6 col-xs-6 col-sm-6 col-lg-6"><div class="pull-right icon-header">
-                        <button type="button" class="btn btn-info btn-circle btn-lg" data-toggle="tooltip" data-placement="left" title="Add Post"><a href="add_post.xhtml"><i class="glyphicon glyphicon-plus"></i></a></button>
-                        <button type="button" class="btn btn-warning btn-circle btn-lg" data-toggle="tooltip" data-placement="left" title="Users Database"><a href="user.xhtml"><i class="glyphicon glyphicon-user"></i></a></button>
-                        <h:commandLink type="button" styleClass="btn btn-danger btn-circle btn-lg" action="login?faces-redirect=true">
-                            <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>
+                        <h:commandLink type="button" styleClass="btn btn-info btn-circle btn-lg" action="add_post">
+                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                        </h:commandLink>
+                        <h:commandLink type="button" styleClass="btn btn-warning btn-circle btn-lg" action="user">
+                            <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                        </h:commandLink>
+                        <h:commandLink type="button" styleClass="btn btn-danger btn-circle btn-lg" action="#{login.startLogout}">
+                            <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
                         </h:commandLink>
                         </div></div>
                     </c:when>

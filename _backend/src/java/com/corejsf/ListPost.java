@@ -36,7 +36,7 @@ public class ListPost {
             Class.forName(driver).newInstance();
             con = DriverManager.getConnection(url, user, password);
             Statement sm = con.createStatement();
-            ResultSet res = sm.executeQuery("SELECT * FROM post ORDER BY Tanggal DESC");
+            ResultSet res = sm.executeQuery("SELECT * FROM post ORDER BY Tanggal DESC, id DESC");
             while(res.next()){
                 Post pos = new Post();
                 pos.setId(res.getInt("id"));
@@ -49,7 +49,6 @@ public class ListPost {
                     deleted_posts.add(pos);
                 }else if(pos.getStatus().equalsIgnoreCase("unpublished")){
                     unpublished_posts.add(pos);
-                    System.out.println(pos.getJudul());
                 }else{
                     published_posts.add(pos);
                 }

@@ -131,7 +131,6 @@ public class MemberController {
     }
     
     public String deleteMember(int id){
-        //System.out.println("MASUK "+id);
         try{
             Connection con = getConnection();
             PreparedStatement ps = con.prepareStatement("DELETE FROM member WHERE id=?");

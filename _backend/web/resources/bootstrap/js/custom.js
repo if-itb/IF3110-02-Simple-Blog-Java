@@ -8,6 +8,22 @@ function loginValidation(){
     }
 }
 
+function userValidation(stat){
+    if(document.userform["userform:email"].value == "" || document.userform["userform:name"].value == "" ||
+            document.userform["userform:password"].value == "" || document.userform["userform:role"].value == ""){
+        alert("Semua isian form harus diisi");
+        return false;
+    } else if(!emailValidation(document.userform["userform:email"].value)){
+        return false;
+    }else{
+        if (stat==1)
+            alert("User berhasil ditambahkan");
+        else
+            alert("User berhasil diedit");
+        return true;
+    }
+}
+
 function emailValidation(email){
     var pattern = /[\w.-]+@[\w.-]+\.\w+/g;
     var result = pattern.test(email);
@@ -15,6 +31,7 @@ function emailValidation(email){
         return true;
     }
     else{
+        alert("Masukan email tidak valid");
         return false;
     }
 }

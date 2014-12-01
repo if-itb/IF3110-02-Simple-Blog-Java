@@ -142,7 +142,7 @@ public class Login {
             Cookie cEmail = new Cookie("cEmail", email);
             Cookie cPassword = new Cookie("cPassword", password);
             Cookie cRole = new Cookie("cRole", role);
-            Cookie cId = new Cookie("cId", role);
+            Cookie cId = new Cookie("cId", Integer.toString(id));
             
             cEmail.setMaxAge(86400);
             cPassword.setMaxAge(86400);

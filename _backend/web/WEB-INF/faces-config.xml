@@ -25,6 +25,16 @@
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
     <managed-bean>
+        <managed-bean-name>listComment</managed-bean-name>
+        <managed-bean-class>com.corejsf.ListComment</managed-bean-class>
+        <managed-bean-scope>view</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>commentAdd</managed-bean-name>
+        <managed-bean-class>com.corejsf.CommentAdd</managed-bean-class>
+        <managed-bean-scope>view</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
         <managed-bean-name>postview</managed-bean-name>
         <managed-bean-class>com.corejsf.PostView</managed-bean-class>
         <managed-bean-scope>view</managed-bean-scope>
@@ -86,6 +96,60 @@
     </navigation-rule>
     <navigation-rule>
         <from-view-id>index.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>#{login.startLogout}</from-action>
+            <from-outcome>logout</from-outcome>
+            <to-view-id>index.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>add_post.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>#{login.startLogout}</from-action>
+            <from-outcome>logout</from-outcome>
+            <to-view-id>index.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>add_user.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>#{login.startLogout}</from-action>
+            <from-outcome>logout</from-outcome>
+            <to-view-id>index.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>failure.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>#{login.startLogout}</from-action>
+            <from-outcome>logout</from-outcome>
+            <to-view-id>index.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>soft_deleted.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>#{login.startLogout}</from-action>
+            <from-outcome>logout</from-outcome>
+            <to-view-id>index.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>unpublished.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>#{login.startLogout}</from-action>
+            <from-outcome>logout</from-outcome>
+            <to-view-id>index.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>user.xhtml</from-view-id>
         <navigation-case>
             <from-action>#{login.startLogout}</from-action>
             <from-outcome>logout</from-outcome>

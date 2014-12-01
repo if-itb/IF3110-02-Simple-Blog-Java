@@ -76,10 +76,11 @@ public class Post {
     }
     
     public String printTanggal(){
-        Date d = new Date(Integer.parseInt(tanggal.substring(0, 4)), Integer.parseInt(tanggal.substring(5, 7)), Integer.parseInt(tanggal.substring(8, 10)));
-        String s = d.getDate() + " ";
+        int dd = Integer.parseInt(tanggal.substring(8,10));
+        String s =  dd + " ";
+        int mm = Integer.parseInt(tanggal.substring(5, 7));
         String m;
-        switch(d.getMonth()){
+        switch(mm){
             case 1: m="Januari"; break;
             case 2: m="Februari"; break;
             case 3: m="Maret"; break;
@@ -93,7 +94,7 @@ public class Post {
             case 11: m="November"; break;
             default: m="Desember"; break;
         }
-        s = s + m + " " + d.getYear();
+        s = s + m + " " + (tanggal.substring(0,4));
         
         return s;
     }
