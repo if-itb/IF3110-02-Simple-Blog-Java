@@ -55,7 +55,7 @@ public class Manager {
     public ArrayList<Post> getPublishedPosts() throws SQLException{
         ArrayList<Post> result;
         result = new ArrayList<>();
-        String q = "SELECT * FROM tb_post WHERE isPublished = true;";
+        String q = "SELECT * FROM tb_post WHERE isPublished = true ORDER BY pdate DESC;";
         ResultSet rs = stmt.executeQuery(q);
         while (rs.next()) {
             Post mPost = new Post();
@@ -99,7 +99,7 @@ public class Manager {
         int i = ps.executeUpdate(q);
         FacesContext context = FacesContext.getCurrentInstance();
         HttpServletResponse response = (HttpServletResponse) context.getExternalContext().getResponse();
-        response.sendRedirect("index.xhtml");
+        response.sendRedirect("home.xhtml");
     }
     public void publishPost(int pid) throws SQLException, IOException{
         String q = "UPDATE tb_post SET isPublished = '1' WHERE pid = "+pid+";";
@@ -107,17 +107,7 @@ public class Manager {
         int i = ps.executeUpdate(q);
         FacesContext context = FacesContext.getCurrentInstance();
         HttpServletResponse response = (HttpServletResponse) context.getExternalContext().getResponse();
-        response.sendRedirect("index.xhtml");
+        response.sendRedirect("home.xhtml");
     }
-
-
-    
-
-
-
-    
-    
-    
-    
     
 }

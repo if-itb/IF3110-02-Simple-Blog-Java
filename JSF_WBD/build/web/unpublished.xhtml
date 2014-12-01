@@ -26,14 +26,24 @@
 
         <link rel="stylesheet" type="text/css" href="assets/css/screen.css"></link>
         <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico"></link>
-        <title>Simple Blog</title>
+        <title>Simple Blog | Unpublished</title>
     </h:head>
     <h:body class="default">
+        <img src="assets/img/background.jpg" class="background"></img>
         <div class="wrapper">
             <nav class="nav">
-                <a style="border:none;" id="logo" href="index.xhtml"><h1>Simple<span>-</span>Blog</h1></a>
+                <a style="border:none;" id="logo" href="home.xhtml"><h1>Simple<span>-</span>Blog</h1></a>
                 <ul class="nav-primary">
-                    <li><a href="new_post.xhtml">+ New Post</a></li>
+                    <ui:fragment rendered="#{login.isAdmin()||login.isOwner()}">
+                        <li><a href="new_post.xhtml">+ New Post</a></li>
+                    </ui:fragment>
+                    <ui:fragment rendered="#{login.isAdmin()||login.isEditor()}">
+                        <li><a href="unpublished.xhtml">Unpublished Posts</a></li>
+                    </ui:fragment>
+                    <ui:fragment rendered="#{login.isAdmin()}">
+                        <li><a href="manageuser.xhtml" >Manage Users</a></li>
+                    </ui:fragment>
+                    <li><a href="index.xhtml">Logout</a></li>
                 </ul>
             </nav>
 
@@ -52,7 +62,7 @@
                                  </div>
                                  <p>#{o.konten} &hellip;</p>
                                  <p><h:form>
-                                         <h:commandLink action="#{manager.publishPost(o.pid)}">Publish</h:commandLink> | <h:commandLink action="#{tempPostEdit.editPost(o.pid)}">Edit</h:commandLink> | <h:commandLink action="#{manager.deletePost(o.pid)}">Delete</h:commandLink>
+                                         <h:commandLink action="#{manager.publishPost(o.pid)}">Publish</h:commandLink> | <h:commandLink action="#{tempPostEdit.editPost(o.pid)}">Edit</h:commandLink> | <h:commandLink action="#{manager.deletePost(o.pid)}" onclick="return confirmdel()">Delete</h:commandLink>
                                  </h:form></p>
                              </li>
                          </ui:repeat>
@@ -67,16 +77,14 @@
                 <!-- <div class="footer-nav"><p></p></div> -->
                 <div class="psi">&Psi;</div>
                 <aside class="offsite-links">
-                    Asisten IF3110 /
-                    <a class="rss-link" href="#rss">RSS</a> /
+                    Titra Wening Rachman /
+                    <a class="rss-link" href="#rss">13512004</a> /
                     <br></br>
-                    <a class="twitter-link" href="http://twitter.com/YoGiiSinaga">Yogi</a> /
-                    <a class="twitter-link" href="http://twitter.com/sonnylazuardi">Sonny</a> /
-                    <a class="twitter-link" href="http://twitter.com/fathanpranaya">Fathan</a> /
+                    <a class="twitter-link" href="#">Kanya Paramita</a> /
+                    <a class="twitter-link" href="#">13512072</a> /
                     <br></br>
-                    <a class="twitter-link" href="#">Renusa</a> /
-                    <a class="twitter-link" href="#">Kelvin</a> /
-                    <a class="twitter-link" href="#">Yanuar</a> /
+                    <a class="twitter-link" href="#">M. Lutfi Fadlan</a> /
+                    <a class="twitter-link" href="#">13512087</a> /
 
                 </aside>
             </footer>
@@ -94,5 +102,17 @@
         <h1>Text yang di bawah ini dateng dari bean:</h1>
         <p>#{helloWorld.message}</p>-->
     </h:body>
+    <script type="text/javascript">
+        function confirmdel(){
+                var retVal = confirm("Do you want to delete?");
+           if( retVal == true ){
+              alert("User wants to delete!");
+                  return true;
+           }else{
+              alert("User does not want to delete!");
+                  return false;
+           }
+        }
+    </script>
 </html>
 

@@ -29,12 +29,12 @@
         <title>Simple Blog</title>
     </h:head>
     <h:body class="default">
+        <img src="assets/img/background.jpg" class="background"></img>
         <div class="wrapper">
             <nav class="nav">
                 <a style="border:none;" id="logo" href="index.xhtml"><h1>Simple<span>-</span>Blog</h1></a>
                 <ul class="nav-primary">
-                    <li><a href="unpublished.xhtml">Unpublished Posts</a></li>
-                    <li><a href="new_post.xhtml">+ New Post</a></li>
+                    <li><a href="login.xhtml">Login</a></li>
                 </ul>
             </nav>
 
@@ -46,15 +46,13 @@
                             <li class="art-list-item">
                                 <div class="art-list-item-title-and-time">
                                     <h:form>
-                                        <h2 class="art-list-title"><h:commandLink action="#{tempPostView.viewPost(o.pid)}">#{o.judul}</h:commandLink></h2>
+                                        <h2 class="art-list-title"><h:commandLink action="#{tempPostView.viewPost2(o.pid)}">#{o.judul}</h:commandLink></h2>
                                     </h:form>
                                     <div class="art-list-time">#{o.tanggal.toString()}</div>
                                     <div class="art-list-time"><span style="color:#F40034;">&#10029;</span> Featured</div>
                                 </div>
                                 <p>#{o.konten} &hellip;</p>
-                                <p><h:form>
-                                        <h:commandLink action="#{tempPostEdit.editPost(o.pid)}">Edit</h:commandLink> | <h:commandLink action="#{manager.deletePost(o.pid)}">Delete</h:commandLink>
-                                </h:form></p>
+                                
                             </li>
                         </ui:repeat>                          
                         
@@ -70,16 +68,14 @@
                 <!-- <div class="footer-nav"><p></p></div> -->
                 <div class="psi">&Psi;</div>
                 <aside class="offsite-links">
-                    Asisten IF3110 /
-                    <a class="rss-link" href="#rss">RSS</a> /
+                    Titra Wening Rachman /
+                    <a class="rss-link" href="#rss">13512004</a> /
                     <br></br>
-                    <a class="twitter-link" href="http://twitter.com/YoGiiSinaga">Yogi</a> /
-                    <a class="twitter-link" href="http://twitter.com/sonnylazuardi">Sonny</a> /
-                    <a class="twitter-link" href="http://twitter.com/fathanpranaya">Fathan</a> /
+                    <a class="twitter-link" href="#">Kanya Paramita</a> /
+                    <a class="twitter-link" href="#">13512072</a> /
                     <br></br>
-                    <a class="twitter-link" href="#">Renusa</a> /
-                    <a class="twitter-link" href="#">Kelvin</a> /
-                    <a class="twitter-link" href="#">Yanuar</a> /
+                    <a class="twitter-link" href="#">M. Lutfi Fadlan</a> /
+                    <a class="twitter-link" href="#">13512087</a> /
 
                 </aside>
             </footer>

@@ -69,6 +69,24 @@ h5 {
   padding-bottom: 10px;
 }
 
+h6 {
+  font-size: 45px;
+  padding-bottom: 25px;
+  padding-top: 10%;
+}
+
+.judul {
+  font-size: 45px;
+  padding-bottom: 10px;
+  font-family: 'Questrial', sans-serif;
+}
+
+.isi {
+  font-size: 28px;
+  font-family: Georgia,Cambria,"Times New Roman",Times,serif;
+  text-align: justify;
+}
+
 p {
   margin: 0 0 28px 0;
 }
@@ -122,11 +140,11 @@ a:hover {
 .wrapper {
   max-width: 1500px;
   margin: 0 auto;
-  background: #fff;
 }
 
 /* Containers to keep content to a set width */
 .nav,
+.nav2,
 .art-header-inner,
 .footer,
 .art-list,
@@ -135,6 +153,7 @@ a:hover {
   width: 980px;
 }
 .nav,
+.nav2,
 .art-body-inner,
 .footer,
 .art-list,
@@ -147,23 +166,27 @@ a:hover {
 /*  Nav
 ================================================== */
 .nav {
-  position: absolute;
   top: 0;
-  left: 50%;
+  left: 0%;
   height: 70px;
   padding-top: 40px;
-  margin-left: -490px; /* Half width of nav */
-  border-bottom: 1px solid #333;
-  z-index: 2;
+  margin-left: 0px; /* Half width of nav */
+  /* border-bottom: 1px solid #333; */
+  z-index: 100;
+  width: 100%;
+  background: rgba(190, 190, 190, 1);
+  position: fixed;
 }
 .nav.fixed {
   position: fixed;
 }
 #logo {
   float: left;
+  margin-left: 5%;
 }
 .nav-primary {
   float: right;
+  margin-right: 5%;
 }
 .nav-primary li {
   display: inline-block;
@@ -197,6 +220,68 @@ a:hover {
   margin-left: 0; /* Remove left margin from the first nav li */
 }
 
+/*  Nav2
+================================================== */
+.nav2 {
+  top: 0;
+  left: 0%;
+  height: 70px;
+  padding-top: 40px;
+  margin-left: 0px; /* Half width of nav */
+  /* border-bottom: 1px solid #333; */
+  z-index: 100;
+  width: 100%;
+  background: rgba(190, 190, 190, 1);
+  position: fixed;
+}
+.nav2.fixed {
+  position: fixed;
+}
+#logo {
+  float: left;
+  margin-left: 10%;
+}
+.nav2-primary {
+  float: right;
+  left: 85%;
+  border: 1px solid;
+  border-radius: 6px;
+  position: fixed;
+}
+.nav2-primary li {
+  display: inline-block;
+  margin-left: 10px;
+  font-weight: 500;
+  width: 120px;
+}
+#logo h1,
+.nav2-primary li,
+.nav2-primary li a {
+  font-family: "proxima-nova", "helvetica neue", "helvetica", sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 30px;
+  color: #000;
+  text-transform: uppercase;
+  margin-left: 5%;
+}
+
+#logo h1 {
+  height: 30px;
+  margin-left: 0px;
+  letter-spacing: 1px;
+  font-family: 'Questrial', sans-serif;
+  font-size: 30px;
+}
+
+#logo h1 span{
+  color: #F40034 !important;
+}
+
+.nav2 li:first-child {
+  margin-left: 0; /* Remove left margin from the first nav li */
+}
+
 /* Home Page 
 ================================================== */
 
@@ -209,7 +294,6 @@ div#home {}
 }
 
 div.cover {
-
 }
 
 div.cover > img {
@@ -221,21 +305,23 @@ div.cover > img {
 /*  Article
 ================================================== */
 .art {
-  margin-top: -70px;
+  margin-top: -131px;
 }
 /* Header */
 .art-header {
+  height: 500px;
   /* Background image is defined in the post */
   background-position: top center;
   background-attachment: fixed;
   overflow: hidden;
+  padding-top: 230px;
 }
 /* Contains the time, title and subtitle for an article */
 .art-header-inner {
   position: relative;
-  margin-top: 250px;
-  margin-left: auto;
-  margin-right: auto;
+  top: 70px;
+  left: 50%;
+  margin-left: -490px;
 }
 .art-time,
 .art-title,
@@ -247,12 +333,14 @@ div.cover > img {
   font-size: 14px;
   line-height: 1.8;
   letter-spacing: 4px;
+  padding-top: 10%;
 }
 .art-title {
   font-size: 100px;
   line-height: .9;
   letter-spacing: -2px;
   width: 100%;
+  padding-top: 1%;
 }
 .art-subtitle {
   margin-top: 4px;
@@ -275,7 +363,7 @@ div.cover > img {
   position: relative;
   width: 100%;
   background: #fff;
-  z-index: 100;
+  z-index: 50;
   -webkit-box-shadow: 0 -3px 3px rgba(0,0,0,.2);
      -moz-box-shadow: 0 -3px 3px rgba(0,0,0,.2);
           box-shadow: 0 -3px 3px rgba(0,0,0,.2);
@@ -289,6 +377,7 @@ div.cover > img {
   font-style: normal;
   font-size: 21px;
   line-height: 1.5;
+  text-align: justify;
 }
 .art-body-inner a:hover {
   border-bottom: 1px solid #F40034;
@@ -385,6 +474,8 @@ div.cover > img {
 .art-list-body {
   position: relative;
   overflow: hidden;
+  float: left;
+  width: 100%;
 }
 .art-list-item {
   padding: 40px 0;
@@ -399,30 +490,38 @@ div.cover > img {
   font-size: 26px;
   line-height: 26px;
   font-weight: 700;
+  padding-left: 20%;
 }
 .art-list-item-title-and-time {
   float: left;
-  width: 30%;
+  width: 60%;
   margin-bottom: 10px;
 }
 .art-list-time {
+  float: left;
   font-size: 12px;
   line-height: 20px;
   letter-spacing: 2px;
   text-transform: uppercase;
+  text-align: right;
   color: #999;
+  margin-left: 34%;
+  margin-right: 10%;
 }
 .art-list-title a {
   color: #000;
+  -webkit-transition: font-size 1s;
+  transition: font-size 1s;
 }
 .art-list-title a:hover {
   color: #F40034;
+  font-size: 30px;
 }
 .art-list-item p {
   width: 65%;
   float: left;
-  margin-left: 5%;
-  margin-bottom: 0;
+  margin-left: 20%;
+  margin-bottom: 10px;
   font-size: 16px;
   line-height: 24px;
 }
@@ -440,7 +539,13 @@ div.cover > img {
   font-family: "proxima-nova", "helvetica neue", "helvetica", sans-serif;
   font-size: 13px;
   text-transform: uppercase;
-  color: #777;
+  color: #666666;
+}
+
+.btt {
+  border: 1px solid;
+  border-radius: 6px;
+  padding: 5px;
 }
 .footer a:hover {
   color: #000;
@@ -448,11 +553,11 @@ div.cover > img {
 .back-to-top,
 .footer-nav,
 .offsite-links {
-  width: 45%;
+  width: 25%;
   float: left;
 }
 .psi {
-  width:10%;
+  width: 50%;
   float:left;
   text-align: center;
 }
@@ -515,6 +620,21 @@ nav.pagination{
 .art-header.white .art-subtitle {
   color: #fff;
   text-shadow: 0 0 8px rgba(0,0,0,.5);
+}
+
+/* Nav2 */
+.nav2.white  {
+  border-bottom-color: #fff;
+  border-bottom-color: rgba(255,255,255,.3);
+}
+.nav2.white li a,
+.nav2.white li,
+.nav2.white #logo h1 {
+  color: #fff;
+  text-shadow: 0 0 8px rgba(0,0,0,.5);
+}
+.nav2.white #logo h1 {
+  background-position: top center;
 }
 
 
@@ -598,6 +718,7 @@ padding: 0;
 @media only screen and (max-width: 1080px) {
   /* Set all of the 980 containers to flexible width */
   .nav,
+  .nav2,
   .art-body-inner,
   .art-header-inner,
   .footer,
@@ -607,6 +728,7 @@ padding: 0;
     width: 90%;
   }
   .nav,
+  .nav2,
   .art-header-inner {
     margin-left: -45%;
   }
@@ -615,7 +737,9 @@ padding: 0;
 @media only screen and (max-width: 1024px) {
   /* Everything becomes scrolling and non-fading */
   .nav,
-  .nav.fixed {
+  .nav2,
+  .nav.fixed,
+  .nav2.fixed {
     position: relative;
     opacity: 1 !important; /* Important to override JS values */
     display: inline-block;
@@ -660,7 +784,8 @@ padding: 0;
   .art-time {
     font-size: 12px;
   }
-  .nav {
+  .nav,
+  .nav2 {
     padding-top: 25px;
     height: 55px;
   }
@@ -708,7 +833,7 @@ padding: 0;
   }
   .back-to-top,
   .footer-nav {
-    width: 50%;
+    width: 10%;
   }
   .back-to-top {
     text-align: left;
@@ -756,6 +881,7 @@ img.right {
 }
 /* Clearfixing pile */
 .nav:before,
+.nav2:before,
 .art-body-inner:before,
 .footer:before,
 .art-list:before {
@@ -763,12 +889,14 @@ img.right {
   display:table;
 }
 .nav:after,
+.nav2:after,
 .art-body-inner:after,
 .footer:after,
 .art-list:after {
   clear:both;
 }
 .nav,
+.nav2,
 .art-body-inner,
 .footer,
 .art-list {
@@ -800,6 +928,7 @@ img.right {
 
 .art-list,
 .nav,
+.nav2,
 .abt,
 .art-body {
   -webkit-animation: le-fade .5s 0s 1 ease-out;
@@ -848,7 +977,6 @@ hr.featured-article:after {
 
 #contact-area input.submit-button {
   width: 100px;
-  
 }
 
 label {
@@ -857,4 +985,38 @@ label {
   margin-right: 15px;
   width: 100px;
   padding-top: 5px;
+}
+
+/* TAMBAHAN SENDIRI */
+
+.background {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+}
+
+/* DATA TABLE */
+
+.order-table{   
+	border-collapse:collapse;
+}
+ 
+.order-table-header{
+	text-align:center;
+	background:none repeat scroll 0 0 #E5E5E5;
+	border-bottom:1px solid #BBBBBB;
+	padding:16px;
+}
+ 
+.order-table-odd-row{
+	text-align:center;
+	background:none repeat scroll 0 0 #FFFFFFF;
+	border-top:1px solid #BBBBBB;
+}
+ 
+.order-table-even-row{
+	text-align:center;
+	background:none repeat scroll 0 0 #F9F9F9;
+	border-top:1px solid #BBBBBB;
 }

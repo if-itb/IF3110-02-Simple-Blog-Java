@@ -71,7 +71,7 @@ public class TempPost {
 
             FacesContext context = FacesContext.getCurrentInstance();
             HttpServletResponse response = (HttpServletResponse) context.getExternalContext().getResponse();
-            response.sendRedirect("index.xhtml");    
+            response.sendRedirect("home.xhtml");    
     
     
     }
