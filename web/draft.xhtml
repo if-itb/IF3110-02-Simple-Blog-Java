@@ -72,8 +72,12 @@
                     <p>by <a href="#">#{post.author.username}</a>
                     </p>
                     <p>#{post.content}</p>
-                    <a href="edit_post.html"><span class="glyphicon glyphicon-pencil"></span></a>
+                    <h:link outcome="edit_post">
+                        <f:param name="id" value="#{post.id}" />
+                        <span class="glyphicon glyphicon-pencil"></span>
+                    </h:link>
                     <a href="#"><span class="glyphicon glyphicon-remove"></span></a>
+                    <a href="#"><span class="glyphicon glyphicon-globe"></span></a>
                 </div>
             </div>
         <!-- /.row -->

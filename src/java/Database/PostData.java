@@ -30,13 +30,23 @@ public class PostData implements Serializable {
     private MySQL db;
     private String table;
     private Part part;
+    private String upload;
     
     /**
      * Create an instance of PostData
      */
     public PostData() {
         table = "post";
+        upload = "";
         db = new MySQL();
+    }
+
+    public String getUpload() {
+        return upload;
+    }
+
+    public void setUpload(String upload) {
+        this.upload = upload;
     }
     
     /**
@@ -226,26 +236,49 @@ public class PostData implements Serializable {
      * @param post updated post
      * @return String status
      */
-    public String editPost(Post post) {
-        this.db.Where("id=", ""+post.getId());
-        String col[] = {"title", "date", "content", "author", "published", "deleted"};
-        String val[] = new String[6];
-        val[0] = post.getTitle();
-        Date date = new Date(post.getDate().getTime());
-        val[1] = date.toString();
-        val[2] = post.getContent();
-        val[3] = post.getAuthor().getUsername();
-        if (post.getPublished()) {
-            val[4] = "1";
-        } else {
+    public String editPost(Post post,boolean published) throws IOException {
+        if (upload.equals("oke")){
+            String image = uploadFile(getPost(post.getId()).getAuthor().getUsername());
+            this.db.Where("id=", ""+post.getId());
+            String col[] = {"title", "image", "date", "content", "published", "deleted"};
+            String val[] = new String[6];
+            val[0] = post.getTitle();
+            val[1] = image;
+            Date date = new Date(post.getDate().getTime());
+            val[2] = date.toString();
+            val[3] = post.getContent();
+            if (published) {
+                val[4] = "1";
+            } else {
+                val[4] = "0";
+            }
+            val[5] = "0";
+            int query = this.db.Update(table, col, val);
+            if (query > 0) {
+                return "success";
+            } else {
+                return "failed";
+            }
+        }else {
+            this.db.Where("id=", ""+post.getId());
+            String col[] = {"title", "date", "content", "published", "deleted"};
+            String val[] = new String[5];
+            val[0] = post.getTitle();
+            Date date = new Date(post.getDate().getTime());
+            val[1] = date.toString();
+            val[2] = post.getContent();
+            if (published) {
+                val[3] = "1";
+            } else {
+                val[3] = "0";
+            }
             val[4] = "0";
-        }
-        val[5] = "0";
-        int query = this.db.Update(table, col, val);
-        if (query > 0) {
-            return "success";
-        } else {
-            return "failed";
+            int query = this.db.Update(table, col, val);
+            if (query > 0) {
+                return "success";
+            } else {
+                return "failed";
+            }
         }
     }
     
@@ -322,6 +355,7 @@ public class PostData implements Serializable {
                 String filename = content.substring(content.indexOf('=') + 1).trim().replace("\"", "");
                 int extensionIndex = filename.lastIndexOf(".");
                 String fileExtension = filename.substring(extensionIndex + 1);
+                System.out.println(filename);
                 return fileExtension;
             }
         }

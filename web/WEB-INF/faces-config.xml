@@ -46,4 +46,16 @@
             <to-view-id>/new_post.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/edit_post.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>failed</from-outcome>
+            <to-view-id>/edit_post.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
 </faces-config>

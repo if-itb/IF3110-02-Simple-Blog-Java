@@ -30,16 +30,18 @@
         <div class="container">
             <!-- Blog Comments -->
 
-        <h1>Add Post</h1>
+        <h1>Edit Post</h1>
 
                 <!-- Comments Form -->
                 <div class="row">
                 <div class="well col-md-12">
-                    <h:form class="form-horizontal" role="form" enctype="multipart/form-data">
+                    <h:form class="form-horizontal" role="form" enctype="multipart/form-data" id="edit">
                         <c:set var="post" value="#{Post}" />
                       <div class="form-group">
                         <label for="title" class="col-sm-2 control-label">Title</label>
                         <div class="col-sm-9">
+                            <h:inputHidden id="id" value="#{post.id}" />
+                            <h:inputHidden id="upload" value="#{PostData.upload}" />
                             <h:inputText class="form-control" id="title" value="#{post.title}" required="true" requiredMessage="*Required" />
                             <h:message for="title" class="label label-warning" />
                         </div>
@@ -47,8 +49,7 @@
                       <div class="form-group">
                         <label for="image" class="col-sm-2 control-label">Image</label>
                         <div class="col-sm-9">
-                            <h:inputFile id="image" value="#{PostData.part}" required="true" requiredMessage="*Required" >
-                                <f:validator validatorId="FileUploadValidator" />
+                            <h:inputFile id="image" value="#{PostData.part}" onchange="SetUpload();">
                             </h:inputFile>
                             <h:message for="image" class="label label-warning" />
                         </div>
@@ -71,9 +72,9 @@
                       </div>
                       <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
-                            <c:set var="author" value="#{UserData.userLoggedIn()}" />
-                            <h:commandButton type="submit" class="btn btn-primary" value="Save" action="#{PostData.addPost(post, author, false)}" />
-                            <h:commandButton type="submit" class="btn btn-primary" value="Publish" action="#{PostData.addPost(post, author, true)}" />
+                            <h:commandButton type="submit" id="save1" style="display: none;" class="btn btn-primary" value="Save" action="#{PostData.editPost(post,true)}" />
+                            <h:commandButton type="submit" id="save2" style="display: none;" class="btn btn-primary" value="Save" action="#{PostData.editPost(post,false)}" />
+                            <h:commandButton type="submit" id="publish" style="display: none;" class="btn btn-primary" value="Publish" action="#{PostData.editPost(post,true)}" />  
                         </div>
                       </div>
                     </h:form>
@@ -92,6 +93,37 @@
 
         </div>
         <!-- /.container -->
+        <c:set var="p" value="#{PostData.getPost(param['id'])}" />
+        <script>
+            document.getElementById("edit:id").value = "#{p.id}";
+            document.getElementById("edit:title").value = "#{p.title}";
+            document.getElementById("edit:date").value = "#{p.date}";
+            document.getElementById("edit:content").value = "#{p.content}";
+            function SetUpload()
+            {
+                if (document.getElementById("edit:image").value != "")
+                {
+                    document.getElementById("edit:upload").value = "oke";
+                }
+                else
+                {
+                    document.getElementById("edit:upload").value = "";
+                }
+            }
+        </script>
+        <c:choose>
+            <c:when test="#{p.published}">
+                <script>
+                    document.getElementById("edit:save1").style = "display:block";
+                </script>
+            </c:when>
+            <c:otherwise>
+                <script>
+                    document.getElementById("edit:save2").style = "display:inline";
+                    document.getElementById("edit:publish").style = "display:inline";
+                </script>
+            </c:otherwise>
+        </c:choose>
     </h:body>
 </html>
 
