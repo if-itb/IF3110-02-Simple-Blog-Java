@@ -83,7 +83,7 @@
 
 			%>
             <div id="contact-area">
-                <form method="post" action="handler/updatePost.jsp">
+                <form method="post" action="handler/updatePost.jsp" onsubmit="return cekInputan()">
                     <label for="Judul">Judul</label>
                     <input type="text" name="judul" id="Judul" value="<% out.println(pBean.getJudul()); %>">
 		
@@ -116,6 +116,44 @@
         mm='0'+mm
     } 
     document.getElementById("Tanggal").value= yyyy + "-" + mm + "-" + dd;
+function cekInputan(){
+    var judul = document.getElementById('Judul').value;
+    var tanggal = document.getElementById('Tanggal').value;
+    var konten = document.getElementById('Konten').value;
+    
+        if(judul=='' || tanggal =='')
+        {
+            alert('Silahkan lengkapi form yang tersedia');
+			return false;
+        }
+        else
+        {
+            if(bandingkanTangal(tanggal)){
+
+            }else{
+                alert('Tanggal tidak benar. Silahkan masukkan tanggal lain.');
+                return false;
+			}
+		}
+}
+function bandingkanTangal(input){
+    var date1   =   new Date();
+    var date2   =   new Date(input);
+
+	if(date1.getFullYear()>date2.getFullYear()){
+		return false;
+	}else{
+		if(date1.getMonth()>date2.getMonth()){
+			return false;
+		}else{
+			if(date1.getDate()>date2.getDate()){
+				return false;
+			}else{
+				return true;
+			}
+		}
+	}
+}
 </script>
 
 </body>

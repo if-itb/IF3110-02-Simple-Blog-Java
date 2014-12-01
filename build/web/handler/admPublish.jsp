@@ -8,6 +8,5 @@
 	String id	=	 request.getParameter("id");
 	Post.publish(id);
 	response.setStatus(HttpServletResponse.SC_MOVED_TEMPORARILY);
-	response.setHeader("Location", "../admin.jsp");
+	response.setHeader("Location", "../postAdm.jsp");
 %>
-

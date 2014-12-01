@@ -98,17 +98,17 @@ tinymce.init({
 					</form>
 					-->
 				</div>
-                <form method="post" action="handler/newPost.jsp">
+                <form method="post" action="handler/newPost.jsp" onsubmit="return cekInputan();">
                     <label for="Judul">Judul</label>
                     <input type="text" name="judul" id="Judul" value="">
                     <label for="Tanggal">Tanggal:</label>
                     <input type="text" name="tanggal" id="Tanggal" value="">
                     <input type="hidden" name="owner" id="owner" value="<%=usrC %>">  
                     <label for="Konten">Konten:</label><br>
-					<textarea name="konten"></textarea>
+					<textarea name="konten" id="Konten"></textarea>
 					<input type="hidden" name="nomor" value="">
 					<input type="hidden" name="link" value="">
-                    <input type="submit" name="submit" value="Post" class="submit-button" onclick="">
+                    <input type="submit" name="submit" value="Post" class="submit-button">
 				</form>
  
             </div>
@@ -134,14 +134,12 @@ tinymce.init({
     document.getElementById("Tanggal").value= yyyy + "-" + mm + "-" + dd;
 </script>
 <script>
-
 function cekInputan(){
     var judul = document.getElementById('Judul').value;
     var tanggal = document.getElementById('Tanggal').value;
     var konten = document.getElementById('Konten').value;
-    var dataString = 'judul='+ judul + '&tanggal=' + tanggal + '&konten=' + konten;
     
-        if(judul=='' || tanggal =='' || konten =='')
+        if(judul=='' || tanggal =='')
         {
             alert('Silahkan lengkapi form yang tersedia');
 			return false;
