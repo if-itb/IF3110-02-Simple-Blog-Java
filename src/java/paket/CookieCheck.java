@@ -54,4 +54,17 @@ public class CookieCheck {
         }
         return UName;
     }
+    
+    public String getUsrName(){
+        String UsrName="Guest";
+        Cookie[] cookies = request.getCookies();
+        if (cookies!= null && cookies.length>0){
+            for (Cookie cookie : cookies){
+                if("username".equals(cookie.getName())){
+                    UsrName = cookie.getValue();
+                }
+            }
+        }
+        return UsrName;
+    }
 }
