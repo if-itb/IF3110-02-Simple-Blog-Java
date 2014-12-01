@@ -45,139 +45,150 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       _jspx_out = out;
       _jspx_resourceInjector = (org.glassfish.jsp.api.ResourceInjector) application.getAttribute("com.sun.appserv.jsp.resource.injector");
 
-      out.write("\n");
-      out.write("\n");
-      out.write("\n");
-      out.write("\n");
-      out.write("\n");
-      out.write("\n");
-      out.write("\n");
-      out.write("<!DOCTYPE html>\n");
-      out.write("<html>\n");
-      out.write("<head>\n");
-      out.write("\n");
-      out.write("<meta charset=\"utf-8\">\n");
-      out.write("<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n");
-      out.write("<meta name=\"viewport\" content=\"width=device-width, initial-scale=1, maximum-scale=1\">\n");
-      out.write("<meta name=\"description\" content=\"Simple Blog\">\n");
-      out.write("<meta name=\"author\" content=\"Bangsatya\">\n");
-      out.write("\n");
-      out.write("<!-- Twitter Card -->\n");
-      out.write("<meta name=\"twitter:card\" content=\"summary\">\n");
-      out.write("<meta name=\"twitter:site\" content=\"omfgitsasalmon\">\n");
-      out.write("<meta name=\"twitter:title\" content=\"Simple Blog\">\n");
-      out.write("<meta name=\"twitter:description\" content=\"Simple Blog\">\n");
-      out.write("<meta name=\"twitter:creator\" content=\"Bangsatya Blog\">\n");
-      out.write("<meta name=\"twitter:image:src\" content=\"{{! TODO: ADD GRAVATAR URL HERE }}\">\n");
-      out.write("\n");
-      out.write("<meta property=\"og:type\" content=\"article\">\n");
-      out.write("<meta property=\"og:title\" content=\"Simple Blog\">\n");
-      out.write("<meta property=\"og:description\" content=\"Deskripsi Blog\">\n");
-      out.write("<meta property=\"og:image\" content=\"{{! TODO: ADD GRAVATAR URL HERE }}\">\n");
-      out.write("<meta property=\"og:site_name\" content=\"Simple Blog\">\n");
-      out.write("\n");
-      out.write("<link rel=\"stylesheet\" type=\"text/css\" href=\"assets/css/screen.css\" />\n");
-      out.write("<link rel=\"shortcut icon\" type=\"image/x-icon\" href=\"img/favicon.ico\">\n");
-      out.write("\n");
-      out.write("<!--[if lt IE 9]>\n");
-      out.write("    <script src=\"http://html5shim.googlecode.com/svn/trunk/html5.js\"></script>\n");
-      out.write("<![endif]-->\n");
-      out.write("\n");
-      out.write("<title>Simple Blog of Bangsatya</title>\n");
-      out.write("</head>\n");
-      out.write("\n");
-      out.write("<body class=\"default\">\n");
-      out.write("<div class=\"wrapper\">\n");
-      out.write("\n");
-      out.write("<nav class=\"nav\">\n");
-      out.write("    <a style=\"border:none;\" id=\"logo\" href=\"index.jsp\"><h1>Simple-Blog<span>-of-</span>Bang-Satya-Ilmi-Ojan</h1></a>\n");
-      out.write("    <ul class=\"nav-primary\">\n");
-      out.write("        <li><a href=\"new_post.jsp\">+ Tambah Post</a></li>\n");
-      out.write("    </ul>\n");
-      out.write("</nav>\n");
-      out.write("\n");
-      out.write("<div id=\"home\">\n");
-      out.write("    <div class=\"posts\">\n");
-      out.write("        <nav class=\"art-list\">\n");
-      out.write("          <ul class=\"art-list-body\">\n");
+      out.write("<!-- \r\n");
+      out.write("    Document   : index\r\n");
+      out.write("    Created on : Nov 24, 2014, 4:14:48 PM\r\n");
+      out.write("    Author     : adwisatya\r\n");
+      out.write("-->\r\n");
+      out.write("\r\n");
+      out.write("\r\n");
+      out.write("\r\n");
+      out.write("\r\n");
+      out.write("\r\n");
+      out.write("\r\n");
+      out.write("<!DOCTYPE html>\r\n");
+      out.write("<html>\r\n");
+      out.write("<head>\r\n");
+      out.write("\r\n");
+      out.write("<meta charset=\"utf-8\">\r\n");
+      out.write("<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\r\n");
+      out.write("<meta name=\"viewport\" content=\"width=device-width, initial-scale=1, maximum-scale=1\">\r\n");
+      out.write("<meta name=\"description\" content=\"Simple Blog\">\r\n");
+      out.write("<meta name=\"author\" content=\"Bangsatya\">\r\n");
+      out.write("\r\n");
+      out.write("<!-- Twitter Card -->\r\n");
+      out.write("<meta name=\"twitter:card\" content=\"summary\">\r\n");
+      out.write("<meta name=\"twitter:site\" content=\"omfgitsasalmon\">\r\n");
+      out.write("<meta name=\"twitter:title\" content=\"Simple Blog\">\r\n");
+      out.write("<meta name=\"twitter:description\" content=\"Simple Blog\">\r\n");
+      out.write("<meta name=\"twitter:creator\" content=\"Bangsatya Blog\">\r\n");
+      out.write("<meta name=\"twitter:image:src\" content=\"{{! TODO: ADD GRAVATAR URL HERE }}\">\r\n");
+      out.write("\r\n");
+      out.write("<meta property=\"og:type\" content=\"article\">\r\n");
+      out.write("<meta property=\"og:title\" content=\"Simple Blog\">\r\n");
+      out.write("<meta property=\"og:description\" content=\"Deskripsi Blog\">\r\n");
+      out.write("<meta property=\"og:image\" content=\"{{! TODO: ADD GRAVATAR URL HERE }}\">\r\n");
+      out.write("<meta property=\"og:site_name\" content=\"Simple Blog\">\r\n");
+      out.write("\r\n");
+      out.write("<link rel=\"stylesheet\" type=\"text/css\" href=\"assets/css/screen.css\" />\r\n");
+      out.write("<link rel=\"shortcut icon\" type=\"image/x-icon\" href=\"img/favicon.ico\">\r\n");
+      out.write("\r\n");
+      out.write("<!--[if lt IE 9]>\r\n");
+      out.write("    <script src=\"http://html5shim.googlecode.com/svn/trunk/html5.js\"></script>\r\n");
+      out.write("<![endif]-->\r\n");
+      out.write("\r\n");
+      out.write("<title>Simple Blog of Bangsatya</title>\r\n");
+      out.write("</head>\r\n");
+      out.write("\r\n");
+      out.write("<body class=\"default\">\r\n");
+      out.write("<div class=\"wrapper\">\r\n");
+      out.write("\r\n");
+      org.apache.jasper.runtime.JspRuntimeLibrary.include(request, response, "header.jsp", out, false);
+      out.write('\r');
+      out.write('\n');
+
+	String usrC=" ";
+	int typeC=4;
+	Cookie[] cookies = null;
+	cookies = request.getCookies();
+	if (cookies!=null){
+		for (Cookie c:cookies){
+			if (c.getName().equals("LogName")){
+				usrC=c.getValue();
+				for (Cookie c2:cookies){
+				    if (c2.getName().equals("LogType")){
+							typeC=Integer.parseInt(c2.getValue());
+						}
+				}
+			}
+		}
+	}
+
+      out.write("\r\n");
+      out.write("\r\n");
+      out.write("<div id=\"home\">\r\n");
+      out.write("    <div class=\"posts\">\r\n");
+      out.write("        <nav class=\"art-list\">\r\n");
+      out.write("          <ul class=\"art-list-body\">\r\n");
       out.write("\t\t\t");
 
 				PostBean pBean =  new PostBean();
 				for(int i=0;i<pBean.listManyPost().size();i++){
 					if(pBean.listManyPost().get(i).getStatus() != 0){
 			
-      out.write("\t\n");
-      out.write("\t\t\t<li class=\"art-list-item\">\n");
-      out.write("\t\t\t\t<div class=\"art-list-item-title-and-time\">\n");
+      out.write("\t\r\n");
+      out.write("\t\t\t<li class=\"art-list-item\">\r\n");
+      out.write("\t\t\t\t<div class=\"art-list-item-title-and-time\">\r\n");
       out.write("\t\t\t\t\t<h2 class=\"art-list-title\"><a href=\"show_post.jsp?id=");
  out.println(pBean.listManyPost().get(i).getId()); 
       out.write('"');
       out.write('>');
  out.println(pBean.listManyPost().get(i).getJudul()); 
-      out.write("</a></h2>\n");
+      out.write("</a></h2>\r\n");
       out.write("\t\t\t\t\t<div class=\"art-list-time\">");
  out.println(pBean.listManyPost().get(i).getTanggal()); 
-      out.write("</div>\n");
+      out.write("</div>\r\n");
       out.write("\t\t\t\t\t<div class=\"art-list-owner\">Owner:&nbsp;");
  out.println(pBean.listManyPost().get(i).getOwner()); 
-      out.write("</div>\n");
-      out.write("\t\t\t\t</div>\n");
+      out.write("</div>\r\n");
+      out.write("\t\t\t\t</div>\r\n");
       out.write("\t\t\t\t<p>");
  out.println(pBean.listManyPost().get(i).getKonten()); 
-      out.write("</p>\n");
-      out.write("\t\t\t\t<p>\n");
-      out.write("\t\t\t\t  <a href=\"edit.jsp?id=");
+      out.write("</p>\r\n");
+      out.write("\t\t\t\t<p>\r\n");
+      out.write("\t\t\t\t");
+ if (typeC!=4){
+				
+      out.write("\r\n");
+      out.write("\t\t\t\t\t<a href=\"edit.jsp?id=");
  out.println(pBean.listManyPost().get(i).getId()); 
       out.write("\">Edit</a> | <a href=\"#\" onclick=\"return ConfirmDelete(");
  out.println(pBean.listManyPost().get(i).getId()); 
-      out.write(");\">Hapus</a>\n");
-      out.write("\t\t\t\t</p>\n");
-      out.write("\t\t\t\t\n");
-      out.write("\t\t\t</li>\t\n");
+      out.write(");\">Hapus</a>\r\n");
+      out.write("\t\t\t\t");
+ } 
+      out.write("\r\n");
+      out.write("\t\t\t\t</p>\r\n");
+      out.write("\t\t\t\t\r\n");
+      out.write("\t\t\t</li>\t\r\n");
       out.write("\t\t\t");
 
 					}
 				}
 			
-      out.write("\n");
-      out.write("          </ul>\n");
-      out.write("        </nav>\n");
-      out.write("    </div>\n");
-      out.write("</div>\n");
-      out.write("\n");
-      out.write("<footer class=\"footer\">\n");
-      out.write("    <div class=\"back-to-top\"><a href=\"\">Back to top</a></div>\n");
-      out.write("    <!-- <div class=\"footer-nav\"><p></p></div> -->\n");
-      out.write("    <div class=\"psi\">&Psi;</div>\n");
-      out.write("    <aside class=\"offsite-links\">\n");
-      out.write("        Asisten IF3110 /\n");
-      out.write("        <a class=\"rss-link\" href=\"rss/rss.php\">RSS</a> /\n");
-      out.write("        <br>\n");
-      out.write("        <a class=\"twitter-link\" href=\"http://twitter.com/YoGiiSinaga\">Yogi</a> /\n");
-      out.write("        <a class=\"twitter-link\" href=\"http://twitter.com/sonnylazuardi\">Sonny</a> /\n");
-      out.write("        <a class=\"twitter-link\" href=\"http://twitter.com/fathanpranaya\">Fathan</a> /\n");
-      out.write("        <br>\n");
-      out.write("        <a class=\"twitter-link\" href=\"#\">Renusa</a> /\n");
-      out.write("        <a class=\"twitter-link\" href=\"#\">Kelvin</a> /\n");
-      out.write("        <a class=\"twitter-link\" href=\"#\">Yanuar</a> /\n");
-      out.write("        \n");
-      out.write("    </aside>\n");
-      out.write("</footer>\n");
-      out.write("\n");
-      out.write("</div>\n");
-      out.write("<script>\n");
-      out.write("    function ConfirmDelete(nomor)\n");
-      out.write("    {\n");
-      out.write("      var x = confirm(\"Apakah Anda yakin menghapus post ini?\");\n");
-      out.write("      if (x)\n");
-      out.write("          return window.location.assign('delete.jsp?id='+nomor);\n");
-      out.write("      else\n");
-      out.write("        return false;\n");
-      out.write("    }\n");
-      out.write("</script>\n");
-      out.write("\n");
-      out.write("</body>\n");
-      out.write("</html>\n");
+      out.write("\r\n");
+      out.write("          </ul>\r\n");
+      out.write("        </nav>\r\n");
+      out.write("    </div>\r\n");
+      out.write("</div>\r\n");
+      out.write("\r\n");
+      org.apache.jasper.runtime.JspRuntimeLibrary.include(request, response, "footer.jsp", out, false);
+      out.write("\r\n");
+      out.write("\r\n");
+      out.write("</div>\r\n");
+      out.write("<script>\r\n");
+      out.write("    function ConfirmDelete(nomor)\r\n");
+      out.write("    {\r\n");
+      out.write("      var x = confirm(\"Apakah Anda yakin menghapus post ini?\");\r\n");
+      out.write("      if (x)\r\n");
+      out.write("          return window.location.assign('delete.jsp?id='+nomor);\r\n");
+      out.write("      else\r\n");
+      out.write("        return false;\r\n");
+      out.write("    }\r\n");
+      out.write("</script>\r\n");
+      out.write("\r\n");
+      out.write("</body>\r\n");
+      out.write("</html>\r\n");
     } catch (Throwable t) {
       if (!(t instanceof SkipPageException)){
         out = _jspx_out;

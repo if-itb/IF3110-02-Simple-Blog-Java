@@ -55,7 +55,7 @@
         		%>
                 <li></li><li><a href="handler/logout.jsp">Logout</a></li>
 		        <br/>
-		        <li><a href="admin.jsp">+ Unpublished Post</a></li>
+		        <li><a href="postAdm.jsp">+ Unpublished Post</a></li>
             	<%
     		} else if (typeC==3){
     			out.println("Halo, Admin "+usrC);
@@ -63,7 +63,7 @@
                 <li></li><li><a href="handler/logout.jsp">Logout</a></li>
 		        <br/>
 		        <li><a href="new_post.jsp">+ Tambah Post</a></li>
-		        <li><a href="admin.jsp">+ Unpublished Post</a></li>
+		        <li><a href="postAdm.jsp">+ Unpublished Post</a></li>
             	<%
     		}
     	}
