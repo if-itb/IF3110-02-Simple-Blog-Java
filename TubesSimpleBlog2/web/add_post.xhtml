@@ -32,7 +32,7 @@
         <div id="main">
         <h2> Add Post </h2>
         <p>
-            <h:form>
+            <h:form id="formpost" onsubmit="return validasiTanggal()">
                 <br/>Judul : <h:inputText id="judul" value="#{post.title}"/>
                 <br/>Tanggal :  <h:inputText id="tanggal" value="#{post.date}">
                     <f:convertDateTime pattern="yyyy-MM-dd"/>
@@ -42,5 +42,20 @@
             </h:form>
         </p>
         </div>
+        <script type="text/javascript">
+        function validasiTanggal(){
+            var tanggal = document.formpost["formpost:tanggal"].value; 
+                if(tanggal.match(/^\d{4}-\d{2}-\d{2}$/)){
+                        var now = new Date();
+                        now.setHours(0,0,0,0);
+                        tanggal = new Date(tanggal);
+                        if(tanggal>=now){return true;}
+                        else{alert("Input tanggal salah"); return false;}
+                } else {
+                        alert("Format tanggal salah");
+                        return false;
+                }
+        }
+        </script>
     </h:body>
 </html>

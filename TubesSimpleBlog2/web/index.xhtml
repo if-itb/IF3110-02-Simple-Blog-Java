@@ -49,6 +49,8 @@
 	</div>
 						
         <div id="nav">
+            <br/>
+            <h:outputText rendered="#{sampleBean.role eq 'admin' or sampleBean.role eq 'owner' or sampleBean.role eq 'editor'}" value="Halo #{sampleBean.nama} (#{sampleBean.role})"/>
             <form action="Login" method="post">
                 <br/>Username : <input type = "text" name="uname"/>
                 <br/>Password : <input type ="password" name="pass"/>
