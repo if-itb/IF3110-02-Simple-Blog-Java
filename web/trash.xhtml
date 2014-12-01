@@ -37,13 +37,13 @@
             <!-- Blog Post Row -->
             <c:choose>
                 <c:when test="#{UserData.userLoggedIn().role == 'admin'}">
-                    <c:set var="posts" value="#{PostData.allDraft}" />
+                    <c:set var="posts" value="#{PostData.allDeleted}" />
                 </c:when>
                 <c:when test="#{UserData.userLoggedIn().role == 'editor'}">
-                    <c:set var="posts" value="#{PostData.allDraft}" />
+                    <c:set var="posts" value="#{PostData.allDeleted}" />
                 </c:when>
                 <c:otherwise>
-                    <c:set var="posts" value="#{PostData.getDraftbyAuthor(UserData.userLoggedIn())}" />
+                    <c:set var="posts" value="#{PostData.getDeletedbyAuthor(UserData.userLoggedIn())}" />
                 </c:otherwise>
             </c:choose>
             <ui:repeat value="#{posts}" var="post">
@@ -73,15 +73,11 @@
                     <p>by <a href="#">#{post.author.username}</a>
                     </p>
                     <p>#{post.content}</p>
-                    <h:link outcome="edit_post">
-                        <f:param name="id" value="#{post.id}" />
-                        <span class="glyphicon glyphicon-pencil"></span>
-                    </h:link>
-                    <h:commandLink action="#{PostData.softDelPost(post)}" onclick="if (!confirm('Are you sure move this post to trash?')) return false;">
-                        <span class="glyphicon glyphicon-trash"></span>
+                    <h:commandLink action="#{PostData.restorePost(post)}">
+                        <span class="glyphicon glyphicon-repeat"></span>
                     </h:commandLink>
-                    <h:commandLink action="#{PostData.publishPost(post)}">
-                        <span class="glyphicon glyphicon-globe"></span>
+                    <h:commandLink action="#{PostData.hardDelPost(post)}"  onclick="if (!confirm('Are you sure delete this post permanently?')) return false;">
+                        <span class="glyphicon glyphicon-remove"></span>
                     </h:commandLink>
                 </div>
             </div>

@@ -36,6 +36,8 @@
             </div>
             <!-- Blog Post Row -->
             <ui:repeat value="#{PostData.allPost}" var="post">
+            
+            <h:form>
             <div class="row">
                 <div class="col-md-1 text-center">
                     <p><i class="fa fa-file-text fa-4x"></i>
@@ -87,13 +89,19 @@
                             <f:param name="id" value="#{post.id}" />
                             <span class="glyphicon glyphicon-pencil"></span>
                         </h:link>
-                        <a href="#"><span class="glyphicon glyphicon-remove"></span></a>
+                        
+                        <h:commandLink action="#{PostData.softDelPost(post)}" onclick="if (!confirm('Are you sure move this post to trash?')) return false;">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </h:commandLink>
+                        
                     </c:if>
+                    
                 </div>
             </div>
         <!-- /.row -->
             
             <hr />
+            </h:form>
             </ui:repeat>
             <!-- Footer -->
             <footer>

@@ -83,6 +83,7 @@ public class PostData implements Serializable {
     public List<Post> getAllPost() {
         try {
             this.db.Where("published=", "1");
+            this.db.Where("deleted=", "0");
             ResultSet Data = this.db.Select(table);
             boolean isExist = Data.first();
             List<Post> ListPost = new LinkedList();
@@ -114,6 +115,7 @@ public class PostData implements Serializable {
     public List<Post> getPostbyAuthor(User user) {
         try {
             this.db.Where("published=", "1");
+            this.db.Where("deleted=", "0");
             this.db.Where("author=", user.getUsername());
             ResultSet Data = this.db.Select(table);
             boolean isExist = Data.first();
@@ -144,6 +146,7 @@ public class PostData implements Serializable {
     public List<Post> getAllDraft() {
         try {
             this.db.Where("published=", "0");
+            this.db.Where("deleted=", "0");
             ResultSet Data = this.db.Select(table);
             boolean isExist = Data.first();
             List<Post> ListPost = new LinkedList();
@@ -174,6 +177,63 @@ public class PostData implements Serializable {
     public List<Post> getDraftbyAuthor(User user) {
         try {
             this.db.Where("published=", "0");
+            this.db.Where("deleted=", "0");
+            this.db.Where("author=", user.getUsername());
+            ResultSet Data = this.db.Select(table);
+            boolean isExist = Data.first();
+            List<Post> ListPost = new LinkedList();
+            while (isExist) {
+                int pid = Data.getInt("id");
+                String title = Data.getString("title");
+                String image = Data.getString("image");
+                Date date = Data.getDate("date");
+                String content = Data.getString("content");
+                User author = new UserData().getUser(Data.getString("author"));
+                boolean published = Data.getBoolean("published");
+                boolean deleted = Data.getBoolean("deleted");
+                Post post = new Post(pid, title, image, date, content, author, published, deleted);
+                ListPost.add(post);
+                isExist = Data.next();
+            }
+            return ListPost;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+    
+    public List<Post> getAllDeleted() {
+        try {
+            this.db.Where("deleted=", "1");
+            ResultSet Data = this.db.Select(table);
+            boolean isExist = Data.first();
+            List<Post> ListPost = new LinkedList();
+            while (isExist) {
+                int pid = Data.getInt("id");
+                String title = Data.getString("title");
+                String image = Data.getString("image");
+                Date date = Data.getDate("date");
+                String content = Data.getString("content");
+                User author = new UserData().getUser(Data.getString("author"));
+                boolean published = Data.getBoolean("published");
+                boolean deleted = Data.getBoolean("deleted");
+                Post post = new Post(pid, title, image, date, content, author, published, deleted);
+                ListPost.add(post);
+                isExist = Data.next();
+            }
+            return ListPost;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+    
+    /**
+     * Get all draft based on username
+     * @param user username
+     * @return All draft by username
+     */
+    public List<Post> getDeletedbyAuthor(User user) {
+        try {
+            this.db.Where("deleted=", "1");
             this.db.Where("author=", user.getUsername());
             ResultSet Data = this.db.Select(table);
             boolean isExist = Data.first();
@@ -286,9 +346,10 @@ public class PostData implements Serializable {
      * Delete post from database 
      * @param post deleted post
      */
-    public void hardDelPost(Post post) {
+    public String hardDelPost(Post post) {
         this.db.Where("id=", ""+post.getId());
         this.db.Delete(table);
+        return "deleted";
     }
     
     /**
@@ -334,6 +395,25 @@ public class PostData implements Serializable {
         int query = this.db.Update(table, col, val);
         if (query > 0) {
             return "success";
+        } else {
+            return "failed";
+        }
+    }
+    
+    public String publishPost(Post post) {
+        this.db.Where("id=", "" + post.getId());
+        String col[] = {"title", "date", "content", "author", "published", "deleted"};
+        String val[] = new String[6];
+        val[0] = post.getTitle();
+        Date date = new Date(post.getDate().getTime());
+        val[1] = date.toString();
+        val[2] = post.getContent();
+        val[3] = post.getAuthor().getUsername();
+        val[4] = "1";
+        val[5] = "0";
+        int query = this.db.Update(table, col, val);
+        if (query > 0) {
+            return "published";
         } else {
             return "failed";
         }

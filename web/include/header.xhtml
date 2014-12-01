@@ -29,6 +29,9 @@
                                     <h:link outcome="draft" value="Drafts" />
                                 </li>
                                 <li>
+                                    <h:link outcome="trash" value="Trash" />
+                                </li>
+                                <li>
                                     <c:if test="#{UserData.userLoggedIn().role == 'admin'}" >
                                     <h:link outcome="admin" value="Administrator Page" />
                                     </c:if>
