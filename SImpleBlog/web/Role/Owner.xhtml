@@ -39,6 +39,12 @@ and open the template in the editor.
                 <ul id="adminoption">
                     <li>
                         <h:form>
+                            <h:commandLink class="art-list-addpost" action="DeletedPost?faces-redirect=true" value="Deleted Post">
+                            </h:commandLink>
+                        </h:form>
+                    </li>
+                    <li>
+                        <h:form>
                             <h:commandLink class="art-list-addpost" action="AddPost?faces-redirect=true" value="+ Add Post">
                             </h:commandLink>
                         </h:form>
@@ -48,7 +54,7 @@ and open the template in the editor.
             <br/>
             <hr/>
           <ul class="art-list-body">
-              <c:forEach items="#{Publishpost.publishedPost}" var="p">
+              <c:forEach items="#{Posting.post}" var="p">
                 <li class="art-list-item">
                     <div class="art-list-item-title-and-time">
                         <h2 class="art-list-title">
@@ -62,7 +68,12 @@ and open the template in the editor.
                     <p> #{p.contentPreview}&hellip;</p>
                     <p>
                         <h:form styleClass="editbutton" rendered="#{Posting.activeUsername == p.author}">
-                            <h:commandLink value="Edit" action="#{Editpost.Redirect(p.id)}"></h:commandLink>
+                            <h:commandLink value="Edit|" action="#{Editpost.Redirect(p.id)}"></h:commandLink>
+                        </h:form>
+                        <h:form styleClass="publishbutton" rendered="#{Posting.activeUsername == p.author}">
+                            <h:commandLink onclick = "return confirmDelete()" value ="Delete" action="#{Posting.deletePost()}">
+                                <f:param name ="throwedid" value = "#{p.id}"></f:param>
+                            </h:commandLink>
                         </h:form>
                     </p>
                 </li>

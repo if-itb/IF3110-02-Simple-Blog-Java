@@ -120,7 +120,7 @@ cite {
   }
 
 span{
-  color: #F40034 !important;
+    color: red !important;
   }
  
 /* Teaser
@@ -467,6 +467,7 @@ div.cover > img {
   text-transform: uppercase;
   color: #999;
   float: right;
+  margin-right: 20px;
 }
 
 .art-list-title a {
@@ -889,6 +890,7 @@ hr.featured-article:after {
   position: relative;
   float: right;
   height: 400px;
+  text-align: center;
 }
 
 #contact-area2 {
@@ -995,6 +997,19 @@ label {
     left: 38px;
 }
 
+.restorebutton{
+    position: relative;
+    height: 28px;
+    width: 1px;
+}
+
+.deletebutton{
+    position: relative;
+    height: 28px;
+    width: 1px;
+    left: 70px;
+}
+
 #customers {
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
     width: 100%;
@@ -1016,6 +1031,22 @@ label {
     color: #ffffff;
 }
 
+
+#customers tr.alt td {
+    color: #000000;
+    background-color: #EAF2D3;
+}
+
+#checkusername{
+    color: #F40034;
+    font-size: 18px;
+}
+
+.usernameAlert{
+    position: absolute;
+    top: -39px;
+    font-size: 17px;
+}
 .CreateUser{
     color:black;
 }
@@ -1031,4 +1062,5 @@ label {
 #contact-area3 {
   margin-top: 25px;
   position: relative;
+
 }

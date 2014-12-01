@@ -37,12 +37,23 @@ public class PostingDatabase {
     Login login;
     String SelectedItem;
     
+    @ManagedProperty(value="#{param.throwedauthor}")
+    private String author;
+    
     @ManagedProperty(value ="#{param.throwedid}")
     private int id;
     
     @ManagedProperty(value="#{param.throwediduser}")
     private String username;
 
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+    
     public String getSelectedItem() {
         return SelectedItem;
     }
@@ -120,7 +131,7 @@ public class PostingDatabase {
         try {
           con = makeConnection();
           Statement stmt = con.createStatement();
-          String query = "Select * from post where (author=\""+login.getUserCookie().getValue()+"\" and status=\"published\";";
+          String query = "Select * from post where author=\""+login.getUserCookie().getValue()+"\" and status=\"published\";";
           rs = stmt.executeQuery(query);
 
           while(rs.next()){
@@ -146,19 +157,19 @@ public class PostingDatabase {
         String Tanggal = request.getParameter("Tanggal");
         String Konten = request.getParameter("Konten");
         ResultSet rs;
-          Connection con = makeConnection();
-          Statement stmt = con.createStatement();
-          String query = "Select COUNT(Id) from post";
-          SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-          java.util.Date parsed = format.parse(Tanggal);
-          java.sql.Date datesql = new java.sql.Date(parsed.getTime());
-          
-          rs = stmt.executeQuery(query);
-          PreparedStatement ps;
-          int countsumId = 0;
-          while(rs.next()){
-             countsumId = rs.getInt(1);
-           }
+        try (Connection con = makeConnection()) {
+            Statement stmt = con.createStatement();
+            String query = "Select COUNT(Id) from post";
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            java.util.Date parsed = format.parse(Tanggal);
+            java.sql.Date datesql = new java.sql.Date(parsed.getTime());
+            
+            rs = stmt.executeQuery(query);
+            PreparedStatement ps;
+            int countsumId = 0;
+            while(rs.next()){
+                countsumId = rs.getInt(1);
+            }
             String query2 = "INSERT INTO post (Judul, Tanggal, Content, Author, Status) VALUES (?,?,?,?,?)";
             ps= con.prepareStatement(query2);
             ps.setString(1,Judul);
@@ -167,53 +178,36 @@ public class PostingDatabase {
             ps.setString(4,login.getUserCookie().getValue());
             ps.setString(5,"unpublished");
             int i = ps.executeUpdate();
+            con.close();
+        }
             ExternalContext extcon = FacesContext.getCurrentInstance().getExternalContext();
             extcon.redirect("/SImpleBlog/Home.xhtml");
     }
 
     public void deletePost() throws ClassNotFoundException, SQLException, IOException, ParseException{
-          Connection con = makeConnection();
-          Statement stmt = con.createStatement();
-          String query = "Update post Set status=\"deleted\" WHERE ID="+id;
-          int rs;
-          rs = stmt.executeUpdate(query);
+        try (Connection con = makeConnection()) {
+            Statement stmt = con.createStatement();
+            String query = "Update post Set status=\"deleted\" WHERE ID="+id;
+            int rs;
+            rs = stmt.executeUpdate(query);
+            con.close();
+        }
           ExternalContext extcon = FacesContext.getCurrentInstance().getExternalContext();
           extcon.redirect("/SImpleBlog/Home.xhtml");
     }
     
-    public void PublishPost() throws ClassNotFoundException, SQLException, IOException, ParseException{
-          Connection con = makeConnection();
-          Statement stmt = con.createStatement();
-          String query = "Update post Set status=\"published\" WHERE ID="+id;
-          int rs;
-          rs = stmt.executeUpdate(query);
-          PreparedStatement ps;
+    public void PublishPost() throws ClassNotFoundException, IOException, ParseException, SQLException{
+        try (Connection con = makeConnection()){
+            Statement stmt = con.createStatement();
+            String query = "Update post Set status=\"published\" WHERE ID="+id;
+            int rs;
+            rs = stmt.executeUpdate(query);
+            PreparedStatement ps;
+            con.close();
+        }
             ExternalContext extcon = FacesContext.getCurrentInstance().getExternalContext();
             extcon.redirect("/SImpleBlog/Home.xhtml");
     }
-    
-    public String addUserOwner() throws ClassNotFoundException, SQLException{
-        
-        HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
-        String Name = request.getParameter("Name");
-        String Username = request.getParameter("Username");
-        String Email = request.getParameter("Email");
-        String Password = request.getParameter("Password");
-        
-        try (Connection con = makeConnection()) {
-            PreparedStatement ps;
-            String query = "INSERT INTO `user` (`Username`,`Password`, `Name`, `email`, `Role`) VALUES (?,?,?,?,?)";
-            ps= con.prepareStatement(query);
-            ps.setString(1,Username);
-            ps.setString(2,Password);
-            ps.setString(3,Name);
-            ps.setString(4,Email);
-            ps.setString(5,"Owner");
-            int i = ps.executeUpdate();
-        }
-        return "/SImpleBlog/Home.xhtml";
-    }
-    
     public void setLoginOnLoad() throws ClassNotFoundException, SQLException, IOException{
         ExternalContext extCont = FacesContext.getCurrentInstance().getExternalContext();
         Cookie cUsername = login.getUserCookie();
@@ -537,20 +531,68 @@ public class PostingDatabase {
             ps.setString(4,Email);
             ps.setString(5,Role);
             int i = ps.executeUpdate();
+            con.close();
         }
     }
     
     public void setDeleteUser() throws ClassNotFoundException, SQLException{
-        System.out.println("username si huang: " + username);
-        Connection con = makeConnection();
-        Statement stmt = con.createStatement();
-        String query = "Delete from user where username=\"" + username + "\";";
-        System.out.println("query : " + query);
-        int rs;
-        rs = stmt.executeUpdate(query);
-        PreparedStatement ps;
+        try (Connection con = makeConnection()) {
+            Statement stmt = con.createStatement();
+            String query = "Delete from user where username=\"" + username + "\";";
+            int rs = stmt.executeUpdate(query);
+            PreparedStatement ps;
+            con.close();
+        }
     }
     
+    public List<Post> getDeletedPosts() throws ClassNotFoundException{
+      ResultSet rs;
+      Connection con;
+      List<Post> records = new ArrayList<>();
+      try {
+        con = makeConnection();
+        Statement stmt = con.createStatement();
+        String query = "Select * from post where status=\"deleted\";";
+        rs = stmt.executeQuery(query);
+
+        while(rs.next()){
+            Post post = new Post();
+            post.setId(rs.getInt(1));
+            post.setJudul(rs.getString(2));
+            post.setTanggal(rs.getString(3));
+            post.setContent(rs.getString(4));
+            post.setAuthor(rs.getString(5));
+            post.setStatus(rs.getString(6));
+            records.add(post);
+         }
+        con.close();
+      } catch (SQLException e) {
+         System.err.println(e);
+      }
+      return records;
+  }
     
+    public void setRestorePost(int id) throws ClassNotFoundException, SQLException, IOException{
+        try (Connection con = makeConnection()) {
+            Statement stmt = con.createStatement();
+            String query = "Update post Set status=\"unpublished\" WHERE ID="+id;
+            int rs;
+            rs = stmt.executeUpdate(query);
+            ExternalContext extcon = FacesContext.getCurrentInstance().getExternalContext();
+            extcon.redirect("/SImpleBlog/Home.xhtml");
+            con.close();
+        }
+    }
     
+    public void setRealDeletePost(int id) throws ClassNotFoundException, SQLException, IOException{
+        try (Connection con = makeConnection()) {
+            Statement stmt = con.createStatement();
+            String query = "Delete from post where id=\"" + id + "\";";
+            int rs;
+            rs = stmt.executeUpdate(query);
+            ExternalContext extcon = FacesContext.getCurrentInstance().getExternalContext();
+            extcon.redirect("/SImpleBlog/Home.xhtml");
+            con.close();
+        }
+    }
 }
