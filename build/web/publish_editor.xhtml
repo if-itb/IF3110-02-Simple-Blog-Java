@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      lang="en"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <meta charset="utf-8"> </meta>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"> </meta>
+        <meta name="viewport" content="width=device-width, initial-scale=1"> </meta>
+        <title>Simple Blog</title>
+        <script src="js/jquery.js"></script>
+
+        <!-- Bootstrap -->
+        <h:outputStylesheet name="css/custom.css" />
+        <h:outputStylesheet name="css/bootstrap.css" />
+    </h:head>
+
+    <h:body>
+        <div id="wrapper">
+            <div id="header">
+                <div class="nav">
+                    <h:form styleClass="nav nav-tabs pull-left">
+                        <li><h:commandLink action="index_editor">Simple Blog</h:commandLink></li>
+                    </h:form>
+
+                    <ul>
+                        <h:form styleClass="nav nav-tabs pull-right">
+                            <li><h:commandLink action="publish_editor">Publish</h:commandLink></li>
+                            <li><h:commandLink action="about_editor">About</h:commandLink></li>
+                            <li><h:commandLink action="#{login.logout()}">Logout</h:commandLink></li>
+                        </h:form>
+                    </ul>
+                </div>
+            </div>
+
+            <div id="content">
+                <div class="jumbotron"> 
+                   <div class="text-center">
+                        <h2>Find an article to read</h2>
+                        <p>Choose from over than 100 articles</p>
+                    </div>
+                </div>
+
+                <div id="summary-posts">
+                    <div id="border-posts"></div>
+                    <ui:repeat value="#{arrPostUnpublished.post}" var="post">
+                        <div id="editdelete">
+                            <h:form>
+                                <h:commandLink action="#{arrPostUnpublished.makepublish(post.id)}" value="Publish">
+                                    <f:param name="id" value="#{post.id}"/>
+                                </h:commandLink><br/>
+                                <h:commandLink action="edit_editor" value="Edit">
+                                    <f:param name="id" value="#{post.id}"/>
+                                </h:commandLink><br/>
+                                <h:commandLink action="#{listPost.delete(post.id)}" value="Delete"></h:commandLink>
+                            </h:form>
+                        </div>
+                        <div class="text-center" id="summary-tanggal">
+                            #{post.tanggal}<br/>
+                        </div>
+                        <div class="text-center" id="summary-judul">
+                            <h:form>
+                                <h:commandLink action="post_editor" value="#{post.judul}">
+                                    <f:param name="id" value="#{post.id}"/>
+                                </h:commandLink>
+                            </h:form>
+                        </div>
+                        <div class="text-center" id="summary-konten">
+                            #{post.konten}<br/>
+                        </div>
+                        <div id="border-posts"></div>
+                    </ui:repeat>
+                </div>
+            </div> 
+        </div>
+    </h:body>
+</html>

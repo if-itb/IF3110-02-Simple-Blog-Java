@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    lang="en">
+    <h:head>
+        <meta charset="utf-8"> </meta>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"> </meta>
+        <meta name="viewport" content="width=device-width, initial-scale=1"> </meta>
+        <title>Simple Blog</title>
+
+        <!-- Bootstrap -->
+        <h:outputStylesheet name="css/custom.css" />
+        <h:outputStylesheet name="css/bootstrap.css" />
+    </h:head>
+    
+    <h:body>
+        <div id="wrapper">
+            <div id="header">
+                <div class="nav">
+                    <h:form styleClass="nav nav-tabs pull-left">
+                        <li><h:commandLink action="index">Simple Blog</h:commandLink></li>
+                    </h:form>
+
+                    <ul>
+                        <h:form styleClass="nav nav-tabs pull-right">
+                            <li><h:commandLink action="addpost">Add Post</h:commandLink></li>
+                            <li><h:commandLink action="publish">Publish</h:commandLink></li>
+                            <li><h:commandLink action="deleted">Deleted</h:commandLink></li>
+                            <li><h:commandLink action="user">Manage User</h:commandLink></li>
+                            <li><h:commandLink action="about">About</h:commandLink></li>
+                            <li><h:commandLink action="#{login.logout()}">Logout</h:commandLink></li>
+                        </h:form>
+                    </ul>
+                </div>
+                <div class="text-center" id="text-tambah-post">
+                    <h1>
+                        Edit Post<br/>
+                    </h1>
+                </div>
+            </div>
+                
+            <div id="content">
+                <div id="addpost">
+                    <h:form id="formaddpost">
+                        #{editPost.run(param['id'])}
+                            <div class="row">
+                                <div class="col-md-2"></div>
+                                    <div class="col-md-8">
+                                        <div class="form-group" id="tambah-judul">
+                                            <h:inputTextarea class="form-control status-box" rows="2" value="#{editPost.judul}"/>
+                                        </div>
+                                    </div>
+                                <div class="col-md-2"></div>
+                            </div>
+
+                            <div class="row">
+                                    <div class="col-md-2"></div>
+                                        <div class="col-md-8">
+                                            <div class="form-group" id="tambah-tanggal">
+                                                <h:inputTextarea class="form-control status-box" rows="2" value="#{editPost.tanggal}"/>
+                                            </div>
+                                        </div>
+                                    <div class="col-md-2"></div>
+                            </div>
+
+                        <div class="row">
+                                    <div class="col-md-2"></div>
+                                        <div class="col-md-8">
+                                            <div class="form-group" id="tambah-konten">
+                                                <h:inputTextarea class="form-control status-box" rows="2" value="#{editPost.konten}"/>
+                                            </div>
+                                        </div>
+                                    <div class="col-md-2"></div>
+                            </div>
+                            
+                            <div class="button-group" id="edit-post-button">
+                                <h:commandButton action="#{editPost.edit()}" value="Edit" ></h:commandButton>
+                            </div>
+                    </h:form>
+                </div>
+            </div>
+        </div>
+    </h:body>
+</html>

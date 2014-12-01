@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      lang="en">
+    <h:head>
+        <meta charset="utf-8"> </meta>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"> </meta>
+        <meta name="viewport" content="width=device-width, initial-scale=1"> </meta>
+        <title>Simple Blog</title>
+
+        <!-- Bootstrap -->
+        <h:outputStylesheet name="css/custom.css"/>
+        <h:outputStylesheet name="css/bootstrap.css"/>
+    </h:head>
+
+    <h:body>
+        <div id="wrapper">
+            <div id="header">
+                <div class="nav">
+                    <h:form styleClass="nav nav-tabs pull-left">
+                        <li><h:commandLink action="index_editor">Simple Blog</h:commandLink></li>
+                    </h:form>
+
+                    <ul>
+                        <h:form styleClass="nav nav-tabs pull-right">
+                            <li><h:commandLink action="publish_editor">Publish</h:commandLink></li>
+                            <li><h:commandLink action="about_editor">About</h:commandLink></li>
+                            <li><h:commandLink action="#{login.logout()}">Logout</h:commandLink></li>
+                        </h:form>
+                    </ul>
+
+                </div>
+            </div>
+
+            <div id="content">
+                <div class="text-center" id="text-latar-belakang">
+                    <div class="row">
+                        <div class="col-md-2"></div>
+                        <div class="col-md-8">
+                            <p>
+                                Blog ini dibuat untuk memenuhi tugas besar mata kuliah <br/>
+                                IF 3110 Pengembangan Aplikasi Berbasis Web 
+                            </p>
+                        </div>
+                        <div class="col-md-2"></div>
+                    </div>
+                </div>
+
+                <div id="learn-more-author">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="thumbnail">
+                                    <a href="https://www.facebook.com/ndreysimaputera"><h:graphicImage name="img/Andrey.jpg"></h:graphicImage></a>
+                                </div>
+                                <a href="https://www.facebook.com/ndreysimaputera">13512058 - Andrey Simaputera</a>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="thumbnail">
+                                    <a href="https://www.facebook.com/henry.menori"><h:graphicImage name="img/Henry.jpg"></h:graphicImage></a>
+                                </div>
+                                <a href="https://www.facebook.com/henry.menori">13512082 - Marcelinus Henry Menori</a>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="thumbnail">
+                                    <a href="https://www.facebook.com/williamstefanh"><h:graphicImage name="img/William.jpg"></h:graphicImage></a>
+                                </div>
+                                <a href="https://www.facebook.com/williamstefanh">13512098 - William Stefan Hartono</a>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+        
+        <script type="text/javascript">
+            function validasiTanggal() {
+                var tgl = document.getElementById("tambah-tanggal").toString();
+                var cek = true;
+                var tglDate = new Date("2014-11-11");
+                var Now = new Date();
+                var YearNow = Now.getFullYear();
+                if(tgl.length == 10 &amp;&amp; tgl.match(/^\d{4}-\d{1,2}-\d{1,2}$/)) {
+                    var tglDate = new Date(tgl);
+                    var Now = new Date();
+                    var YearNow = Now.getFullYear();
+                    var MonthNow = Now.getMonth();
+                    var DateNow = Now.getDate();
+                    var Compare = YearNow + "-" + (MonthNow+1) + "-" + DateNow;
+                    if((tglDate >= Now)||(Compare === tgl)) {
+                            cek = true;
+                    }
+                    else {
+                            cek = false;
+                            alert("Jumlah karakter pada tanggal harus 10 dan sesuai format!!! Tanggal minimal adalah tanggal hari ini!!!");
+                    }
+                } else {
+                    cek = false;
+                    alert("Jumlah karakter pada tanggal harus 10 dan sesuai format!!! Tanggal minimal adalah tanggal hari ini!!!");
+                }
+                return cek;
+            }
+        </script>
+    </h:body>
+</html>

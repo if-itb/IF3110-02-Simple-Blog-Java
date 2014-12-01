@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      lang="en"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <meta charset="utf-8"> </meta>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"> </meta>
+        <meta name="viewport" content="width=device-width, initial-scale=1"> </meta>
+        <title>Simple Blog</title>
+        <script src="js/jquery.js"></script>
+
+        <!-- Bootstrap -->
+        <h:outputStylesheet name="css/custom.css" />
+        <h:outputStylesheet name="css/bootstrap.css" />
+    </h:head>
+
+    <h:body>
+        <div id="wrapper">
+            <div id="header">
+                <div class="nav">
+                    <h:form styleClass="nav nav-tabs pull-left">
+                        <li><h:commandLink action="index">Simple Blog</h:commandLink></li>
+                    </h:form>
+
+                    <ul>
+                        <h:form styleClass="nav nav-tabs pull-right">
+                            <li><h:commandLink action="addpost">Add Post</h:commandLink></li>
+                            <li><h:commandLink action="publish">Publish</h:commandLink></li>
+                            <li><h:commandLink action="deleted">Deleted</h:commandLink></li>
+                            <li><h:commandLink action="user">Manage User</h:commandLink></li>
+                            <li><h:commandLink action="about">About</h:commandLink></li>
+                            <li><h:commandLink action="#{login.logout()}">Logout</h:commandLink></li>
+                        </h:form>
+                    </ul>
+                </div>
+            </div>
+
+            <div id="content">
+                <div class="jumbotron"> 
+                   <div class="text-center">
+                        <h2>Find an article to read</h2>
+                        <p>Choose from over than 100 articles</p>
+                    </div>
+                </div>
+            </div>
+
+            #{viewPost.runPost(param['id'])}
+            <h:form id="formaddcomment">
+            <div id="summary-posts">
+               <div class="text-center" id="summary-tanggal">
+                   <h:outputText value="#{viewPost.tanggal}"></h:outputText><br/>
+               </div>
+
+               <div class="text-center" id="summary-judul">
+                   <h:outputText value="#{viewPost.judul}"></h:outputText><br/>
+               </div>
+
+               <div class="text-center" id="summary-konten">
+                   <h:outputText value="#{viewPost.konten}"></h:outputText><br/>
+               </div>
+               <div id="border-posts"></div>
+           </div>
+            #{viewPost.runComment(param['id'])}
+            <ui:repeat value="#{viewPost.komentar}" var="k">
+                <div class="text-center" id="summary-komentar">
+                    <h:outputText value="#{k.tanggal}"/><br/>
+                    <h:outputText value="#{k.nama}"/><br/>
+                    <h:outputText value="#{k.email}"/><br/>
+                    <h:outputText value="#{k.komentar}"/><br/>
+                    <div id="border-posts"></div>
+                </div>
+            </ui:repeat>
+            
+            <!--<h:form id="formaddcomment" onsubmit="return validasiEmail();">-->
+                <div class="addcomment">
+                    <div class="row">
+                        <div class="col-md-4"></div>
+                            <div class="col-md-4">
+                                <div class="form-group" id="tambah-nama">
+                                    <h:inputTextarea class="form-control status-box" rows="2" binding="#{nama}" value="Masukkan nama Anda di sini"/>
+                                </div>
+                            </div>
+                        <div class="col-md-4"></div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4"></div>
+                            <div class="col-md-4">
+                                <div class="form-group" id="tambah-tanggal">
+                                    <h:inputTextarea class="form-control status-box" rows="2" binding="#{tanggal}" value="Masukkan tanggal komentar di sini"/>
+                                </div>
+                            </div>
+                        <div class="col-md-4"></div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4"></div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <h:inputTextarea id="tambah-email" class="form-control status-box" rows="2" binding="#{email}" value="Masukkan e-mail Anda di sini"/>
+                                </div>
+                            </div>
+                        <div class="col-md-4"></div>
+                    </div>                                
+
+                    <div class="row">
+                        <div class="col-md-4"></div>
+                            <div class="col-md-4">
+                                <div class="form-group" id="tambah-komentar">
+                                    <h:inputTextarea class="form-control status-box" rows="2" binding="#{komentar}" value="Masukkan komentar Anda di sini"/>
+                                </div>
+                            </div>
+                        <div class="col-md-4"></div>
+                    </div>                
+
+                    <div class="button-group" id="post-comment-button">
+                        <h:commandButton onclick="return validasiEmail();"  type="submit" action="#{viewPost.addComment(nama.value, tanggal.value, email.value, komentar.value)}" value="Tambah komentar">
+                            <f:param name="id" value="#{param['id']}"/>
+                            <f:ajax execute="@form" render="@form"/>
+                        </h:commandButton>
+                    </div>
+                </div>
+            </h:form>
+        </div>
+        
+        <script type="text/javascript">
+            function validasiEmail() {
+                var cek = true;
+                var x = document.getElementById("formaddcomment:tambah-email").value;
+                var atpos = x.indexOf("@");
+                var dotpos = x.lastIndexOf(".");
+                if (atpos &lt; 1 &#124;&#124; dotpos &lt; atpos + 2 &#124;&#124; dotpos + 2 &gt;&#61; x.length) {
+                    alert("Bukan alamat e-mail yang valid!!");
+                    cek = false;
+                }
+                return cek;
+            }
+        </script>
+    </h:body>
+</html>

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    lang="en">
+    <h:head>
+        <meta charset="utf-8"> </meta>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"> </meta>
+        <meta name="viewport" content="width=device-width, initial-scale=1"> </meta>
+        <title>Simple Blog</title>
+
+        <!-- Bootstrap -->
+        <h:outputStylesheet name="css/custom.css" />
+        <h:outputStylesheet name="css/bootstrap.css" />
+    </h:head>
+    
+    <h:body>
+        <div id="wrapper">
+            <div id="header">
+                <div class="nav">
+                    <h:form styleClass="nav nav-tabs pull-left">
+                        <li><h:commandLink action="index_owner">Simple Blog</h:commandLink></li>
+                    </h:form>
+
+                    <ul>
+                        <h:form styleClass="nav nav-tabs pull-right">
+                            <li><h:commandLink action="addpost_owner">Add Post</h:commandLink></li>
+                            <li><h:commandLink action="about_owner">About</h:commandLink></li>
+                            <li><h:commandLink action="#{login.logout()}">Logout</h:commandLink></li>
+                        </h:form>
+                    </ul>
+                </div>
+                <div class="text-center" id="text-tambah-post">
+                    <h1>
+                        Tambah Post<br/>
+                        Buat post baru dengan status unpublished
+                    </h1>
+                </div>
+            </div>
+                
+            <div id="content">
+                <div id="addpost">
+                    <h:form id="formaddpost" onsubmit="return validasiTanggal();">
+                            <div class="row">
+                                <div class="col-md-2"></div>
+                                    <div class="col-md-8">
+                                        <div class="form-group" id="tambah-judul">
+                                            <h:inputTextarea class="form-control status-box" rows="2" binding="#{judul}" value="Masukkan judul post di sini"/>
+                                        </div>
+                                    </div>
+                                <div class="col-md-2"></div>
+                            </div>
+
+                            <div class="row">
+                                    <div class="col-md-2"></div>
+                                        <div class="col-md-8">
+                                            <div class="form-group">
+                                                <h:inputTextarea id="tambah-tanggal" class="form-control status-box" rows="2" binding="#{tanggal}" value="Masukkan tanggal post di sini dengan format yyyy-mm-dd, dengan tanggal minimal adalah hari ini"/>
+                                            </div>
+                                        </div>
+                                    <div class="col-md-2"></div>
+                            </div>
+
+                        <div class="row">
+                                    <div class="col-md-2"></div>
+                                        <div class="col-md-8">
+                                            <div class="form-group" id="tambah-konten">
+                                                <h:inputTextarea class="form-control status-box" rows="2" binding="#{konten}" value="Masukkan konten post di sini"/>
+                                            </div>
+                                        </div>
+                                    <div class="col-md-2"></div>
+                            </div>
+                            
+                            <div class="button-group" id="post-button">
+                                <h:commandButton type="submit" action="#{addPost.add(judul.value, tanggal.value, konten.value)}" value="Tambah Post"/>
+                            </div>
+                    </h:form>
+                </div>
+            </div>
+        </div>
+        
+        <script type="text/javascript">
+            function validasiTanggal() {
+                var tgl = document.getElementById("formaddpost:tambah-tanggal").value;
+                var cek = true;
+                var tglDate = new Date();
+                var Now = new Date();
+                var YearNow = Now.getFullYear();
+                if(tgl.match(/^\d{4}-\d{1,2}-\d{1,2}$/)) {
+                    var tglDate = new Date(tgl);
+                    var Now = new Date();
+                    var YearNow = Now.getFullYear();
+                    var MonthNow = Now.getMonth();
+                    var DateNow = Now.getDate();
+                    var Compare = YearNow + "-" + (MonthNow+1) + "-" + DateNow;
+                    if((tglDate >= Now)||(Compare === tgl)) {
+                            cek = true;
+                    }
+                    else {
+                            cek = false;
+                            alert("Jumlah karakter pada tanggal harus 10 dan sesuai format!!! Tanggal minimal adalah tanggal hari ini!!!");
+                    }
+                } else {
+                    cek = false;
+                    alert("Jumlah karakter pada tanggal harus 10 dan sesuai format!!! Tanggal minimal adalah tanggal hari ini!!!");
+                }
+                return cek;
+            }
+        </script>
+    </h:body>
+</html>

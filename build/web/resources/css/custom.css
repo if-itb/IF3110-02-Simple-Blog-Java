@@ -1,0 +1,242 @@
+#wrapper {
+    position: absolute;
+    min-height: 100%;
+    width: 100%;
+    top: 0px;
+    left: 0px;
+    background-color: #333333;
+}
+
+/*dalam header*/
+.nav a {
+    color: #5a5a5a;
+    font-size: 15px;
+    font-weight: bold;
+    padding: 0px 0px;
+    text-transform: uppercase;
+}
+
+.nav li {
+    display: inline;
+}
+
+.navbar-search {
+    position: absolute;
+    top: 200px;
+    right: -420px;
+}
+
+.container {
+    width: 600px;
+    left: 50%;
+    margin-left: -300px;
+}
+
+#header {
+    height: 40px;
+    width: 100%;
+    background-color: #fff;
+    position: absolute;
+    left: 0px;
+}
+
+/*index.xhtml*/
+.jumbotron {
+    background-image: url("../img/jumbotron index.png");
+    height: 200px;
+    font-family: 'Shift', sans-serif;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.jumbotron .container {
+    position: relative;
+    top:100px;
+}
+
+.jumbotron h2 {
+    font-size: 60px;  
+    margin-top: 10px;
+    text-shadow: 5px 5px 5px #000;
+    color :#ffffff;
+}
+
+.jumbotron p {
+    font-size: 20px;
+    color: white;
+    text-shadow: 3px 3px 3px #000;
+}
+
+/*about.xhtml*/
+#text-latar-belakang p {
+    margin-top: 50px;
+    margin-left: 200px;
+    margin-right: 200px;
+    color: whitesmoke;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+#learn-more-author {
+    background-color: #f7f7f7;
+    margin-top: 75px;
+}
+
+#learn-more-author a {
+    color: #00b0ff;
+}
+
+#learn-more-author p {
+    margin-top: -15px;
+}
+
+#text-latar-belakang {
+    color: #5a5a5a;
+    font-size: 30px;
+    font-weight: bold;
+    margin-top: 75px;
+}
+
+/*addpost*/
+#text-tambah-post {
+    color: white;
+    font-size: 60px;
+    font-weight: bold;
+    margin-top: 35px;
+}
+
+#addpost {
+    width: 100%;
+    position: relative;
+    background-color: #999;
+    top: 200px;
+}
+
+#tambah-judul textarea, #tambah-tanggal textarea {
+    resize: none;
+    top: 100px;
+}
+
+#tambah-konten textarea {
+    height: 150px;
+}
+
+#post-button {
+    margin-left: 75.5%;
+}
+
+#edit-post-button {
+    margin-left: 80%;
+}
+
+/*post*/
+#addcomment  {
+    width: 100%;
+    position: relative;
+    background-color: #999;
+    top: 200px;
+}
+
+#tambah-nama textarea, #tambah-email textarea {
+    resize: none;
+}
+
+#post-comment-button {
+    margin-left: 56.2%;
+    color: black;
+}
+
+#summary-komentar {
+    color: white;
+}
+
+/*login*/
+.form {
+border-radius:2px;
+padding:20px 30px;
+box-shadow:0 0 15px;
+font-size:14px;
+font-weight:bold;
+width:350px;
+margin:20px 250px 0 35px;
+float:left;
+}
+
+#username, #password, #loginbtn, #cancel {
+width:50%;
+height:25px;
+border:1px solid #999;
+border-radius:1px;
+}
+
+#logindiv {
+opacity:0.92;
+position: absolute;
+top: 250px;
+left: 50%;
+height: 100%;
+width: 100%;
+margin-left: -50%;
+}
+
+#login {
+width:200px;
+margin:0px;
+background-color:white;
+font-family: 'Fauna One', serif;
+position: relative;
+border: 5px solid rgb(90, 158, 181);
+left: 50%;
+top: 50%;
+margin-left:-210px;
+margin-top:-158px;
+}
+
+.inline {
+    display: inline-block;
+}
+
+/*Summary Posts*/
+#summary-posts {
+    font-family: 'Shift', sans-serif;   
+    margin-top: 50px;
+    color: #fff;
+}
+
+#summary-tanggal {
+    font-size: 16px;  
+    font-weight: bold;
+    margin-bottom: -10px;
+    text-shadow: 3px 3px 3px #000;
+}
+
+#summary-judul {
+    font-size: 50px;  
+    font-weight: bold;
+    margin-bottom: -7px;
+    text-shadow: 5px 5px 5px #000;
+}
+
+#summary-konten {
+    font-size: 20px;  
+    font-weight: bold;  
+}
+
+#border-posts {
+    border-style: solid;
+    border-color: #101010;
+    border-width: thin;
+    border-radius: 1000px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+#editdelete {
+    display: inline;
+}
+
+#text-role {
+    margin-top: 50px;
+    color: white;
+}
