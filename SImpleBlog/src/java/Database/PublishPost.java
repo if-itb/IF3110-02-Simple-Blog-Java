@@ -6,17 +6,14 @@
 
 package Database;
 
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 
 /**
@@ -38,35 +35,30 @@ public class PublishPost {
             String user = "root";
             String password = "";
             conn =  DriverManager.getConnection(url, user, password);
-            System.out.println("CONNECTED");
-        }catch(ClassNotFoundException | InstantiationException e){
-            e.printStackTrace();
+        }catch(InstantiationException e){
+            System.err.println(e);
         }
         return conn;
     }
     
-    public List<Post> getUnpublishedPost() throws ClassNotFoundException, IllegalAccessException{
+    public List<Post> getUnpublishedPost() throws ClassNotFoundException, IllegalAccessException, SQLException{
         ResultSet result;
         List<Post> UnpublishedPost = new ArrayList<>();
-        try {
-          Connection conn = getConnection();
-          Statement stmt = conn.createStatement();
-          String query = "Select * from post where Status = \"unpublished\"";
-          result = stmt.executeQuery(query);
-
-          while(result.next()){
-              Post post = new Post();
-              post.setId(result.getInt(1));
-              post.setJudul(result.getString(2));
-              post.setTanggal(result.getString(3));
-              post.setContent(result.getString(4));
-              post.setAuthor(result.getString(5));
-              post.setStatus(result.getString(6));
-              UnpublishedPost.add(post);
-           }
-          conn.close();
-        } catch (SQLException e) {
-           System.err.println(e);
+        try (Connection conn = getConnection()) {
+            Statement stmt = conn.createStatement();
+            String query = "Select * from post where Status = \"unpublished\"";
+            result = stmt.executeQuery(query);
+            
+            while(result.next()){
+                Post post = new Post();
+                post.setId(result.getInt(1));
+                post.setJudul(result.getString(2));
+                post.setTanggal(result.getString(3));
+                post.setContent(result.getString(4));
+                post.setAuthor(result.getString(5));
+                post.setStatus(result.getString(6));
+                UnpublishedPost.add(post);
+            }
         }
         return UnpublishedPost;
     }
@@ -75,22 +67,22 @@ public class PublishPost {
         ResultSet result;
         List<Post> publishedPost = new ArrayList<>();
         try {
-          Connection conn = getConnection();
-          Statement stmt = conn.createStatement();
-          String query = "Select * from post where Status = \"published\"";
-          result = stmt.executeQuery(query);
-
-          while(result.next()){
-              Post post = new Post();
-              post.setId(result.getInt(1));
-              post.setJudul(result.getString(2));
-              post.setTanggal(result.getString(3));
-              post.setContent(result.getString(4));
-              post.setAuthor(result.getString(5));
-              post.setStatus(result.getString(6));
-              publishedPost.add(post);
-           }
-          conn.close();
+            try (Connection conn = getConnection()) {
+                Statement stmt = conn.createStatement();
+                String query = "Select * from post where Status = \"published\"";
+                result = stmt.executeQuery(query);
+                
+                while(result.next()){
+                    Post post = new Post();
+                    post.setId(result.getInt(1));
+                    post.setJudul(result.getString(2));
+                    post.setTanggal(result.getString(3));
+                    post.setContent(result.getString(4));
+                    post.setAuthor(result.getString(5));
+                    post.setStatus(result.getString(6));
+                    publishedPost.add(post);
+                }
+            }
         } catch (SQLException e) {
            System.err.println(e);
         }
@@ -100,11 +92,11 @@ public class PublishPost {
     public void publishPost(int postID) throws ClassNotFoundException, IllegalAccessException{
         ResultSet result;
         try {
-          Connection conn = getConnection();
-          Statement stmt = conn.createStatement();
-          String query = "Update post set Status = \"published\" WHERE ID = " + postID + ";";
-          stmt.executeUpdate(query);
-          conn.close();
+            try (Connection conn = getConnection()) {
+                Statement stmt = conn.createStatement();
+                String query = "Update post set Status = \"published\" WHERE ID = " + postID + ";";
+                stmt.executeUpdate(query);
+            }
         } catch (SQLException e) {
            System.err.println(e);
         } 

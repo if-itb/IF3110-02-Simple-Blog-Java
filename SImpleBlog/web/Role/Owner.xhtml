@@ -39,6 +39,12 @@ and open the template in the editor.
                 <ul id="adminoption">
                     <li>
                         <h:form>
+                            <h:commandLink class="art-list-addpost" action="DeletedPost?faces-redirect=true" value="Deleted Post">
+                            </h:commandLink>
+                        </h:form>
+                    </li>
+                    <li>
+                        <h:form>
                             <h:commandLink class="art-list-addpost" action="AddPost?faces-redirect=true" value="+ Add Post">
                             </h:commandLink>
                         </h:form>
@@ -48,7 +54,7 @@ and open the template in the editor.
             <br/>
             <hr/>
           <ul class="art-list-body">
-              <c:forEach items="#{Publishpost.publishedPost}" var="p">
+              <c:forEach items="#{Posting.post}" var="p">
                 <li class="art-list-item">
                     <div class="art-list-item-title-and-time">
                         <h2 class="art-list-title">

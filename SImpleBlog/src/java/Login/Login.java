@@ -42,7 +42,6 @@ public class Login {
         if (Cookies!=null && Cookies.length>0){
             for (Cookie Cookie : Cookies) {
                 if (Cookie.getName().equals("username")){
-                    System.out.println("user length: " + Cookies.length);
                     userCookie = Cookie;
                     return userCookie;
                 }
@@ -60,7 +59,6 @@ public class Login {
         if (Cookies!=null && Cookies.length>0){
             for (Cookie Cookie : Cookies) {
                 if (Cookie.getName().equals("password")){
-                    System.out.println("password length: " + Cookies.length);
                     passCookie = Cookie;
                     return passCookie;
                 }
@@ -77,13 +75,11 @@ public class Login {
         if (Cookies!=null && Cookies.length>0){
             for (Cookie Cookie : Cookies) {
                 if (Cookie.getName().equals("username")){
-                    System.out.println("username found!");
                     Cookie.setValue(null);
                     Cookie.setPath(request.getContextPath());
                     Cookie.setMaxAge(0);
                     HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
                     response.addCookie(Cookie);
-                    System.out.println(Cookie.getMaxAge());
                 }
             }
         }
@@ -97,13 +93,11 @@ public class Login {
         if (Cookies!=null && Cookies.length>0){
             for (Cookie Cookie : Cookies) {
                 if (Cookie.getName().equals("password")){
-                    System.out.println("password found!");
                     Cookie.setValue(null);
                     Cookie.setMaxAge(0);
                     Cookie.setPath(request.getContextPath());
                     HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
                     response.addCookie(Cookie);
-                    System.out.println(Cookie.getMaxAge());
                 }
             }
         }
