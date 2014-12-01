@@ -18,19 +18,15 @@ and open the template in the editor.
             <ui:define name="content">
                  <article class="art simple post">
     
-    
-                      
-
                         <div class="art-body">
                             <div class="art-body-inner">
                                 <h2>Tambah Post</h2>
 
                                 <div id="contact-area">
-                                    <h:form>
+                                    <h:form >
                                         <label for="Judul">Judul:</label>
                                         <h:inputText id="Judul" value="#{postAddBean.post.judul}">
                                         </h:inputText>
-
                                         <label for="Tanggal">Tanggal:</label>
                                         <h:inputText id="Tanggal" value="#{postAddBean.post.date}">
                                         </h:inputText>
@@ -47,6 +43,31 @@ and open the template in the editor.
                         </div>
 
             </article>
+            <script>
+                function validateForm() {
+                    var judul = document.getElementById("Judul").value;
+                    var konten = document.getElementById("Konten").value;
+                    var date_input = new Date(document.getElementById("Tanggal").value);
+                    var date_now = new Date();
+                    console.log("date input : " + date_input);
+                    console.log("date now : " + date_now);
+                    console.log("judul:  " + judul);
+                    console.log("konten: " + konten);
+                    if (judul == "" || konten == "" || date_input =="") {
+                        alert("Semua form harus diisi");
+                        return false;
+                    }
+                    else {
+                        if (date_input.setHours(0,0,0,0) >= date_now.setHours(0,0,0,0)) {
+                            return true;
+                        }
+                        else {
+                            alert("Tanggal salah. Pastikan format benar dan lebih dari hari ini");
+                            return false;
+                        }
+                    }
+                }
+            </script>
             </ui:define>
         </ui:composition>>
     </h:body>
