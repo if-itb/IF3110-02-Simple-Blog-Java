@@ -28,24 +28,23 @@
                 <h:form rendered="#{sampleBean.role eq 'admin' or sampleBean.role eq 'editor' or sampleBean.role eq 'owner'}"><a href="Logout">Logout</a></h:form>
             </h:form>
         </div>
-        <hr></hr>
         
-	<h2> List Unpublished Post </h2>
+	<h1> List Unpublished Post </h1>
+    <hr/>
         <c:forEach items="#{listPost.arrPostUnpublished}" var="pos">							
             <h:form>
-                <br/><h:outputText value="#{pos.IDPost}"></h:outputText> 
-                <br/><h:outputText value="#{pos.title}"></h:outputText>    
-                <br/><h:outputText value="#{pos.date}"></h:outputText>
-                <br/> <h:outputText value="#{pos.content}"></h:outputText>
-                <br/><h:commandLink action="#{post.changeStatus(pos.IDPost)}" value="Publish"></h:commandLink>
-                <br/><h:commandLink action="edit_post" value="Edit">
+                <br/><h2><h:outputText value="#{pos.title}"></h:outputText>    </h2>
+                <br/><h3><h:outputText value="#{pos.date}"></h:outputText></h3>
+                <br/><p> <h:outputText value="#{pos.content}"></h:outputText></p>
+                <br/> &nbsp;&nbsp;<h:commandLink action="#{post.changeStatus(pos.IDPost)}" value="Publish"></h:commandLink>
+                &nbsp;&nbsp;<h:commandLink action="edit_post" value="Edit">
 			<f:param name="idpost" value="#{pos.IDPost}" />
                     </h:commandLink>
 		<hr/>
             </h:form>
 	</c:forEach>
 			
-	<div class="footer">rita | cilvia | linda </div>		
+	<div id="footer">rita | cilvia | linda </div>		
     </h:body>
 </html>
 
