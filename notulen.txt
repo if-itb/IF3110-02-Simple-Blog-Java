@@ -1,0 +1,29 @@
+Post:
+status (published/unpublished)
+judul, tanggal, konten
+bisa soft delete
+image
+
+
+User :
+role
+
+komentar:
+nama, email, konten, created at
+
+List Post : semua orang bisa akses
+Add post : admin dan owner.
+
+
+Publish post : 
+(ngepublish/unpublish)
+editor dan admin
+
+Edit post:
+owner dan admin
+
+Delete post:
+semua orang bisa (WTF)
+
+view post:
+semua orang bisa

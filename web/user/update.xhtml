@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    >
+    <h:head>
+        <title>
+            Simple Blog - Create Post
+        </title>
+    </h:head>
+    <h:body>
+
+        <ui:composition template="/layouts/main.xhtml">
+            <ui:define name="content">
+                <div class='container' style="width:50%;">
+                    <h1>Update User</h1>
+                    <h:form class='navbar-form' id="form">
+                        <span style='display:none'>#{user.isNewRecord}</span>
+                        <div class="Field">
+                            <div class="form-group">
+                                <h4>Nama</h4>
+                                <div class="form-group">
+                                    <h:inputText class="form-control" value="#{user.nama}"></h:inputText>
+                                </div>
+                            </div>
+                        </div>
+                        <span style='display:none'>#{user.isNewRecord}</span>
+                        <div class="Field">
+                            <div class="form-group">
+                                <h4>Email</h4>
+                                <div class="form-group">
+                                    <h:inputText id="email" class="form-control" value="#{user.email}"></h:inputText>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <h4>Password</h4>
+                                <div class="form-group">
+                                    <h:inputSecret class='form-control' value="#{user.password}"></h:inputSecret>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="Field">
+                            <h4>Peran :</h4>
+                            <div class="form-group">
+                                Admin<h:selectBooleanCheckbox value="#{user.isAdmin}"></h:selectBooleanCheckbox>
+                                Editor<h:selectBooleanCheckbox value="#{user.isEditor}"></h:selectBooleanCheckbox>
+                                Owner<h:selectBooleanCheckbox value="#{user.isOwner}"></h:selectBooleanCheckbox>
+                            </div>
+                        </div>
+                        <h:commandLink style='float:right' action="#{userCtrl.doSubmit()}" value="Ubah" class="btn btn-success" onclick="return validateEmail();"></h:commandLink>
+                    </h:form>
+                </div>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+
+</html>
