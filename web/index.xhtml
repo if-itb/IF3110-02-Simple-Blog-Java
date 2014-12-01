@@ -29,8 +29,8 @@
                          #{list.konten}
                       </p>
                       <p>
-                          <a><h:link rendered="#{cookieCheck.loggedIn}" value="Edit" outcome="edit_post.xhtml?id=#{list.idpost}"/></a> |
-                          <a><h:link rendered="#{cookieCheck.loggedIn}" value="Hapus" /></a>
+                          <h:form><a><h:link rendered="#{cookieCheck.loggedIn}" value="Edit" outcome="edit_post.xhtml?id=#{list.idpost}"/></a> |
+                              <a><h:commandLink rendered="#{cookieCheck.loggedIn}" value="Hapus" onclick="if (!confirm('Hapus?')) return false;" action="#{deletePost.deletePost()}"/></a></h:form>
                       </p>
                   </li>
               </ui:repeat>

@@ -48,4 +48,9 @@
         <managed-bean-class>paket.SoftDelete</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
+    <managed-bean>
+        <managed-bean-name>deletePost</managed-bean-name>
+        <managed-bean-class>paket.deletePost</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
 </faces-config>

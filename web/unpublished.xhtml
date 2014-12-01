@@ -30,10 +30,10 @@
                       <p>
                            #{list.konten}
                       </p>
-                      <p>
+                      <p><h:form>
                           <a><h:link rendered="#{cookieCheck.loggedIn}" value="Edit" outcome="edit_post.xhtml?id=#{list.idpost}"/></a> |
-                          <a><h:link rendered="#{cookieCheck.loggedIn}" value="Hapus" /></a> |
-                          <a><h:link rendered="#{cookieCheck.adminOReditor()}" value="Publish" outcome="index" /></a>
+                          <a><h:commandLink rendered="#{cookieCheck.loggedIn}" value="Hapus" onclick="if (!confirm('Hapus?')) return false;" action="#{deletePost.deletePost()}"/></a> |
+                          <a><h:link rendered="#{cookieCheck.adminOReditor()}" value="Publish" outcome="index" /></a></h:form>
                       </p>
                   </li>
               </ui:repeat>
