@@ -66,7 +66,7 @@
 	<div class="art-body" style="margin-top:70px">
         <div class="art-body-inner">
        	<%
-       	if (typeC==1) {
+       	if (typeC!=1) {
        	%>
 		You can't add new user
        	<% } else { %>

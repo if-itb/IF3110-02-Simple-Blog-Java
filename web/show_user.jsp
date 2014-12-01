@@ -64,6 +64,13 @@
     <div class="posts">
         <nav class="art-list">
           	<ul class="art-list-body">
+	          <% if (typeC!=3){ %>
+					<li class="art-list-item">
+						<div class="art-list-item-title-and-time">
+	        			</div>
+	        			You can't see any user
+					</li>	
+				<% } else {%>
 				<table border=1 style="align:center; margin: 0 auto; padding-top: 50px;" >
 					<%
 					try{
@@ -126,6 +133,7 @@
 					}	
 					%>
 				</table>
+				<% } %>
 			</ul>
         </nav>
     </div>

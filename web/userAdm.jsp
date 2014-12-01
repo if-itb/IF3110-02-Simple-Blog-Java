@@ -44,7 +44,7 @@
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->
 
-<title>Simple Blog of Bangsatya</title>
+<title>Simple Blog of Bangsatya | Manage User</title>
 </head>
 
 <body class="default">
@@ -74,7 +74,13 @@
     <div class="posts">
         <nav class="art-list">
           <ul class="art-list-body">
-			<%
+          <% if (typeC!=3){ %>
+				<li class="art-list-item">
+					<div class="art-list-item-title-and-time">
+        			</div>
+        			You can't see any user
+				</li>	
+			<% } else {
 			try{
 			Connection connection = null;
 			Statement statement = null;
@@ -111,6 +117,7 @@
 			connection.close();
 			}catch(Exception ex){
 				out.println("Gagal tersambung. Terdapat kesalahan.");
+			}
 			}
 			%>
           </ul>

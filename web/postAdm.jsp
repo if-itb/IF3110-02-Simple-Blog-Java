@@ -40,7 +40,7 @@
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->
 
-<title>Simple Blog of Bangsatya</title>
+<title>Simple Blog of Bangsatya | Unpublished Post</title>
 </head>
 
 <body class="default">

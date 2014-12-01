@@ -40,7 +40,7 @@
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->
 
-<title>Simple Blog of Bangsatya</title>
+<title>Simple Blog of Bangsatya | Trash</title>
 </head>
 
 <body class="default">
@@ -70,11 +70,17 @@
     <div class="posts">
         <nav class="art-list">
           <ul class="art-list-body">
-			<%
+          <% if (typeC!=3){ %>
+				<li class="art-list-item">
+					<div class="art-list-item-title-and-time">
+        			</div>
+        			You can't see deleted post
+				</li>	
+			<% } else {
 				PostBean pBean =  new PostBean();
 				for(int i=0;i<pBean.listManyPost().size();i++){
 					if(pBean.listManyPost().get(i).getStatus() == 3){
-			%>	
+			%>
 			<li class="art-list-item">
 				<div class="art-list-item-title-and-time">
 					<h2 class="art-list-title"><a href="show_post.jsp?id=<% out.println(pBean.listManyPost().get(i).getId()); %>"><% out.println(pBean.listManyPost().get(i).getJudul()); %></a></h2>
@@ -95,6 +101,7 @@
 			<%
 					}
 				}
+			}
 			%>
           </ul>
         </nav>
