@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -30,6 +31,7 @@ public class PublishPostController {
 
     public List<Post> getPostList() throws SQLException, NamingException
     {
+        System.out.println("SELECT * FROM post WHERE status=0");
         DataSource ds;
         Context initCtx = new InitialContext();
         Context envCtx = (Context) initCtx.lookup("java:comp/env");
@@ -55,5 +57,26 @@ public class PublishPostController {
             list.add(post);
         }
         return list;
-    } 
+    }
+    public String publishPost(int post_id)
+    {
+        DataSource ds;
+        try {
+            Date dates = new Date();
+            System.out.println("UPDATE post SET status=1 WHERE id = '"+ post_id +"'");
+            Context initCtx = new InitialContext();
+            Context envCtx = (Context) initCtx.lookup("java:comp/env");
+            ds = (DataSource) envCtx.lookup("jdbc/simpleBlogDb");
+            
+            Connection con = ds.getConnection();
+            PreparedStatement ps = con.prepareStatement("UPDATE post SET status=1 WHERE id = '"+ post_id +"'");
+            ps.executeUpdate();
+            con.close();
+            ps.close();
+            return "";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "";
+        } 
+    }
 }

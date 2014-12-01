@@ -20,7 +20,7 @@
                 <c:if test="#{userController.isAdmin()}">
                     <h:link value="Edit Database" outcome="ShowTable"></h:link>
                     |
-                    <h:link value="Unpublished Post"></h:link>
+                    <h:link value="Unpublished Post" outcome="publishPost"></h:link>
                     |
                 </c:if> 
                 <h:link value="Tambah Post" outcome="addPost" ></h:link>

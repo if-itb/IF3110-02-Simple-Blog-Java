@@ -10,6 +10,7 @@
     </h:head>
     <h:body>
         <ui:composition template="mainTemplate.xhtml">
+            <ui:define name="content">
             <div class="posts">
                 <nav class="art-list">
                   <ul class="art-list-body">
@@ -29,7 +30,14 @@
 
                                 <c:if test="#{userController.showEditHapus(post.userId)}">
                                 <p>
-                                    <h:link value="Publish"/> | <h:link value="Edit"/>
+                                    <h:form>
+                                        <h:commandLink action="#{publishPostController.publishPost(post.id)}" value="Publish"/>
+                                    </h:form>
+                                    | 
+                                    <h:link value="Edit" outcome="editPost">
+                                        <f:param name="post_id" value="#{post.id}"/>
+                                    </h:link>
+                                    
                                 </p>
                                 </c:if>
                             </li>
@@ -37,6 +45,7 @@
                   </ul>
                 </nav>
             </div>
+            </ui:define>
         </ui:composition>
     </h:body>
 </html>
