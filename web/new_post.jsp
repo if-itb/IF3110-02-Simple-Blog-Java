@@ -10,7 +10,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 
-<sql:setDataSource var="db_source" driver="com.mysql.jdbc.Driver" user="root" password="" url="jdbc:mysql://localhost/simpleblog-java"/>
+<sql:setDataSource var="db_source" driver="com.mysql.jdbc.Driver" user="root" password="root" url="jdbc:mysql://localhost/simpleblog-java"/>
 <%
     Cookie [] cookies = request.getCookies();
     String username = "";
@@ -29,7 +29,7 @@
     if (request.getParameter("submit") != null){
 %>
     <sql:update var="results" dataSource="${db_source}">
-	INSERT INTO posts (judul,konten,penulis,tanggal,deleted,published) VALUES ('<%= request.getParameter("Judul")%>', '<%= request.getParameter("Konten")%>', '<%=username%>', '<%= request.getParameter("Tanggal")%>', '0','0'; 
+	INSERT INTO posts (judul,konten,penulis,tanggal,deleted,published) VALUES ('<%= request.getParameter("Judul")%>', '<%= request.getParameter("Konten")%>', '<%=username%>', '<%= request.getParameter("Tanggal")%>', 0,0); 
     </sql:update>
 <%
     }

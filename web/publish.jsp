@@ -9,8 +9,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 <!DOCTYPE html>
-<sql:setDataSource var="db_source" driver="com.mysql.jdbc.Driver" user="root" password="" url="jdbc:mysql://localhost/simpleblog-java"/>
+<sql:setDataSource var="db_source" driver="com.mysql.jdbc.Driver" user="root" password="root" url="jdbc:mysql://localhost/simpleblog-java"/>
 <sql:update var="results" dataSource="${db_source}">
-            DELETE FROM `simpleblog-java`.`posts` WHERE id=<%= request.getParameter("post") %> ;
+            UPDATE `simpleblog-java`.`posts` SET `published`=1 WHERE id=<%= request.getParameter("post") %> ;
 </sql:update>
-            <c:redirect url="view_post.jsp"/>
+            <c:redirect url="unpublished.xhtml"/>

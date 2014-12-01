@@ -215,8 +215,40 @@ public class UserBean {
     
     public boolean isAbleToEditPublishedPost()
     {
-        return !role.equalsIgnoreCase("guest");
+        Cookie role = loadRoleCookie();
+        if (role != null)
+            return role.getValue().equalsIgnoreCase("guest");
+        else
+            return false;
     }
+    
+    public boolean isAdmin()
+    {
+        Cookie role = loadRoleCookie();
+        if (role != null)
+            return role.getValue().equalsIgnoreCase("admin");
+        else 
+            return false;
+    }
+    
+    public boolean isEditor()
+    {
+        Cookie role = loadRoleCookie();
+        if (role != null)
+            return role.getValue().equalsIgnoreCase("editor");
+        else 
+            return false;
+    }
+    
+    public boolean isOwner()
+    {
+        Cookie role = loadRoleCookie();
+        if (role != null)
+            return role.getValue().equalsIgnoreCase("owner");
+        else 
+            return false;
+    }
+    
     private String getAbsoluteContextPath(){
         HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
         StringBuffer buffer = new StringBuffer();
