@@ -35,7 +35,7 @@
                 <!-- Comments Form -->
                 <div class="row">
                 <div class="well col-md-12">
-                    <h:form class="form-horizontal" role="form" enctype="multipart/form-data">
+                    <h:form class="form-horizontal" role="form" enctype="multipart/form-data" id="post">
                         <c:set var="post" value="#{Post}" />
                       <div class="form-group">
                         <label for="title" class="col-sm-2 control-label">Title</label>
@@ -60,6 +60,7 @@
                                 <f:convertDateTime pattern="yyyy-MM-dd" />
                             </h:inputText>
                             <h:message for="date" class="label label-warning" />
+                            <div id="msg-date"></div>
                         </div>
                       </div>
                       <div class="form-group">
@@ -72,8 +73,8 @@
                       <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
                             <c:set var="author" value="#{UserData.userLoggedIn()}" />
-                            <h:commandButton type="submit" class="btn btn-primary" value="Save" action="#{PostData.addPost(post, author, false)}" />
-                            <h:commandButton type="submit" class="btn btn-primary" value="Publish" action="#{PostData.addPost(post, author, true)}" />
+                            <h:commandButton type="submit" class="btn btn-primary" value="Save" action="#{PostData.addPost(post, author, false)}" onclick="if(!validateDate()) return false; else return true;" />
+                            <h:commandButton type="submit" class="btn btn-primary" value="Publish" action="#{PostData.addPost(post, author, true)}" onclick="if(!validateDate()) return false; else return true;" />
                         </div>
                       </div>
                     </h:form>
@@ -92,6 +93,52 @@
 
         </div>
         <!-- /.container -->
+        <script type="text/javascript">
+            //<![CDATA[
+            var now = new Date();
+            var day;
+            if (now.getDay() >= 10)
+            {
+                day = now.getDay();
+            }
+            else
+            {
+                day = "0" + now.getDay();
+            }
+            document.getElementById("post:date").value = now.getFullYear() + "-" + (now.getMonth()+1) + "-" + day;
+            function validateDate() {
+                var tanggal = document.getElementById("post:date").value;
+                var re = /^(19|20)\d\d[\-](0[1-9]|1[012])[\-](0[1-9]|[12][0-9]|3[01])$/;
+                if(re.test(tanggal))
+                {
+                    var d = new Date(tanggal);
+                    var n = new Date();
+                    if (!isNaN(d))
+                    {
+                        if (d >= n)
+                        {
+                            return true;
+                        }
+                        else
+                        {
+                            document.getElementById("msg-date").innerHTML = "<span class='label label-warning'>Date is not valid!</span>";
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        document.getElementById("msg-date").innerHTML = "<span class='label label-warning'>Date is not valid!</span>";
+                        return false;
+                    }
+                }
+                else
+                {
+                    document.getElementById("msg-date").innerHTML = "<span class='label label-warning'>Wrong format. Valid format : yyyy-mm-dd</span>";
+                    return false;
+                }
+            }
+            //]]>
+        </script>
     </h:body>
 </html>
 
