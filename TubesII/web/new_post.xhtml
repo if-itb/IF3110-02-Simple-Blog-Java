@@ -54,7 +54,23 @@
     <div class="art-body">
         <div class="art-body-inner">
             <h2>Tambah Post</h2>
+            
+            <script type="text/javascript">
+                function convert_to_date() {
+                    var data = new Date();
+                    var my_date = document.getElementById('postarea:Tanggal').value;
+                    var parts = my_date.split('/');
+                    var result = new Date(parts[2],parts[1]-1,parts[0],data.getHours(),data.getMinutes(),data.getSeconds());
 
+                    if (result.setHours(0,0,0,0) >= data.setHours(0,0,0,0)) {
+                            return true;
+                    }
+                    else {
+                            alert("Format tanggal salah, tanggal lebih kecil dari tanggal hari ini");
+                            return false;
+                    }
+                }
+            </script>
             <div id="contact-area">
                 <h:form id="postarea">
                     <h:outputLabel for="Judul" value="Judul:"/>
@@ -63,7 +79,7 @@
                     <br/>
                     
                     <h:outputLabel for="Tanggal" value="Tanggal:"/>
-                    <h:inputText id="Tanggal" value="#{newpost.tanggal}" onmouseout="return format_validation()"/>
+                    <h:inputText id="Tanggal" value="#{newpost.tanggal}" onmouseout="return convert_to_date()"/>
                        
                     <br/>
                     
