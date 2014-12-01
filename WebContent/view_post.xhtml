@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition template="common.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+	<ui:define name="content">
+		<f:metadata>
+			<f:viewParam name="post_id" value="#{viewPost.id}" />
+			<f:viewAction action="#{viewPost.execute}" />
+		</f:metadata>
+		<h:outputScript library="js" name="helper.js" target="body" />
+
+		<div class="col-md-8 col-md-offset-2">
+			<h2 class="text-center">
+				<h:outputText value="#{viewPost.title}" />
+			</h2>
+			<h4 class="text-center text-muted">
+				<h:outputText value="#{viewPost.date}" />
+			</h4>
+			<p style="padding-top: 70px">
+				<h:outputText value="#{viewPost.content}" />
+			</p>
+			<hr />
+			<h2>Komentar</h2>
+			<form class="form-horizontal" role="form">
+				<span id="error_area" style="color: red"></span> <input id="inputID"
+					type="hidden" name="post_id" value="#{viewPost.id}" />
+				<div class="form-group">
+					<label for="inputNama" class="col-sm-2 control-label">Nama</label>
+					<div class="col-sm-10">
+						<input id="inputNama" type="text" name="nama"
+							value="#{userData.name}" class="form-control" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="email_area" class="col-sm-2 control-label">Email</label>
+					<div class="col-sm-10">
+						<input id="email_area" type="text" name="email" value="#{userData.email}"
+							class="form-control" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="inputKomentar" class="col-sm-2 control-label">Komentar</label>
+					<div class="col-sm-10">
+						<textarea class="form-control" id="inputKomentar" rows="5"
+							style="resize: none" name="content"></textarea>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-10">
+						<button class="btn btn-default" type="submit"
+							onclick="myfunction(); return false;">Add Comment</button>
+					</div>
+				</div>
+			</form>
+			<hr />
+
+			<span id="comments_part"></span>
+		</div>
+		<br />
+
+	</ui:define>
+</ui:composition>
+

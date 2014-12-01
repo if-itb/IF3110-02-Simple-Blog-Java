@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<ui:composition template="common.xhtml">
+
+	<ui:define name="header">
+		<div class="bag-atas">
+			<h1 class="col-lg-offset-1 col-lg-6 title">Simple-Blog</h1>
+			<div class="col-lg-offset-3 col-lg-2 allign-right"
+				style="padding: 2%">
+				<h:outputText value="#{userData.loginLink}" escape="false" />
+			</div>
+		</div>
+	</ui:define>
+	<ui:define name="content">
+		<f:metadata>
+			<f:event type="preRenderView"
+				listener="#{userData.check(8, 'index.jsf')}" />
+		</f:metadata>
+		<table class="table table-striped table-bordered">
+			<tr>
+				<th>ID</th>
+				<th>Username</th>
+				<th>Password</th>
+				<th>Name</th>
+				<th>e-mail</th>
+				<th>role</th>
+				<th colspan="2">Commands</th>
+			</tr>
+			<ui:repeat value="#{databaseObject.userList}" var="user">
+				<h:panelGroup rendered="#{user.userId!=user_id}">
+					<tr>
+						<td>#{user.userId}</td>
+						<td>#{user.username}</td>
+						<td>#{user.password}</td>
+						<td>#{user.name}</td>
+						<td>#{user.email}</td>
+						<td>#{user.strRole}</td>
+						<td><h:form>
+								<h:commandButton value="Delete"
+									action="#{editUser.deleteUser(user.userId)}" />
+							</h:form></td>
+						<td><h:button value="Edit" outcome="edit_user.jsf">
+								<f:param name="user_id" value="#{user.userId}" />
+								<f:param name="user_username" value="#{user.username}" />
+								<f:param name="user_password" value="#{user.password}" />
+								<f:param name="user_name" value="#{user.name}" />
+								<f:param name="user_email" value="#{user.email}" />
+								<f:param name="user_role" value="#{user.strRole}" />
+							</h:button></td>
+					</tr>
+				</h:panelGroup>
+			</ui:repeat>
+			<tr>
+				<h:form>
+					<td></td>
+					<td><h:inputText value="#{editUser.username}" /></td>
+					<td><h:inputText value="#{editUser.password}" /></td>
+					<td><h:inputText value="#{editUser.name}" /></td>
+					<td><h:inputText value="#{editUser.email}" /></td>
+					<td><h:selectOneMenu value="#{editUser.role}">
+							<f:selectItem itemLabel="Regular" itemValue="10" />
+							<f:selectItem itemLabel="Editor" itemValue="20" />
+							<f:selectItem itemLabel="Admin" itemValue="30" />
+						</h:selectOneMenu></td>
+					<td><h:commandButton value="Add" action="#{editUser.addUser}" /></td>
+				</h:form>
+			</tr>
+		</table>
+	</ui:define>
+</ui:composition>
+</html>
