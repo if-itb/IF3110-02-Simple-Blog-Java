@@ -1,0 +1,14 @@
+=== Timothy ===
+login
+list post
+publish post
+
+=== Andarias ===
+add post
+delete post
+edit post
+
+=== Michi ===
+comment post
+management user
+view post

@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <h:outputStylesheet library="css" name="bootstrap.css"/>
+        <title>Editor</title>
+    </h:head>
+    <h:body>
+        <nav class="navbar navbar-default" role="navigation">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#{user.role}.xhtml">Holy Grail</a>
+                <ul class="nav navbar-nav navbar-left">
+                    <li><a href="publish_post.xhtml">Publish Post</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right ">
+                    <li class="navbar-text">
+                        Welcome, <h:outputText value="#{user.username}"/>!
+                    </li>
+                    <li>
+                        <h:form>
+                            <h:commandLink class="logout" value="Logout" action="#{user.logout()}"/>
+                        </h:form>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        
+        <div class="list-post container-fluid">
+            #{post.setQuery_status("published")}
+            <ui:repeat value="#{post.getDaftar_post()}" var="posts">
+                <div class="post">
+                    <a href="post.xhtml?id=#{posts.id}" class="title" >
+                        #{posts.judul}
+                    </a>
+                    <div class="date">
+                        #{posts.tanggal}
+                    </div>
+                    <div class="author">
+                        #{posts.author}
+                    </div>
+                    <div class="content">
+                        #{posts.konten}
+                    </div>
+                    <a href="#" class="option">
+                       [edit]
+                    </a>
+                    <a href="#" class="option">
+                       [delete]
+                    </a>
+                </div>
+            </ui:repeat>
+            <a class="back-to-top" href="#">Back to top</a>
+        </div>
+    </h:body>
+</html>
+

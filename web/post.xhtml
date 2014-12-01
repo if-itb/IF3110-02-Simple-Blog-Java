@@ -1,0 +1,74 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <h:outputStylesheet library="css" name="bootstrap.css"/>
+        <h:outputScript library="js" name="komenajax.js"/>
+        <title>Post</title>
+    </h:head>
+    <h:body onload="load_comment(#{postdata.id})">
+         <h:outputScript name="ajax.js" library="js" target="head"/>
+        <nav class="navbar navbar-default" role="navigation">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#{user.home}.xhtml">Holy Grail</a>
+                <ul class="nav navbar-nav navbar-right ">
+                    <li class="navbar-text">
+                        <h:outputText value="#{user.greeting}"/>
+                    </li>
+                    <li>
+                        <h:form>
+                            <h:commandLink class="logout" value="Logout" action="#{user.logout()}" rendered="#{user.userLogin}"/>
+                        </h:form>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        
+        
+        <div class="new-post">
+            <div class="post">
+                <a href="#" class="title">
+                    #{postdata.judul}
+                </a>
+                <div class="date">
+                    #{postdata.tanggal}
+                </div>
+                <div class="content">
+                    #{postdata.konten}
+                </div>
+            </div>
+            <h1 class="comments-title" style="padding-top: 0px;">
+                Comments
+            </h1>
+            <form class="form-post" onsubmit="return false;">
+                <div class="row form-element">
+                    <div class="col-md-3"/>
+                    <div class="col-md-3"><label for="Nama">Nama</label></div>
+                    <div class="col-md-3"><input required="true" id="nama" name="nama" type="text" value="#{user.username}"></input></div>
+                </div>
+                <div class="row form-element">
+                    <div class="col-md-3"/>
+                    <div class="col-md-3"><label for="Email">Email</label></div>
+                    <div class="col-md-3"><input required="true" id="email" name="email" type="text" value="#{user.email}"></input></div>
+                    <div class="col-md-3" id="ganti-error-message"></div>
+                </div>
+                <div class="row form-element">
+                    <div class="col-md-3"/>
+                    <div class="col-md-3"><label for="Tanggal">Komentar</label></div>
+                    <div class="col-md-3"><textarea required="true" id="komentar" name="komentar"></textarea></div>
+                </div>
+                <div class="row form-element">
+                    <div class="col-md-6"> 
+                        <input class="btn-success" type="submit" value="Save" id="save" onclick="submitcomment(#{postdata.id})"/>
+                    </div>
+                </div>
+            </form>
+        </div>
+            <div class="post" id="comments">
+            </div>    
+                    
+    </h:body>
+</html>
+

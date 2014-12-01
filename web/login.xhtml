@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>Login</title>
+        <h:outputStylesheet library="css" name="bootstrap.css"/>
+    </h:head>
+    <h:body>
+        <nav class="navbar navbar-default" role="navigation">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="index.xhtml">Holy Grail</a>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="register.xhtml">Register</a></li>
+                </ul>
+            </div>
+        </nav>
+        <h:form class="login container-fluid">
+            <div class="row first-row">
+                <div class="col-md-3"/>
+                <div class="col-md-3"><label for="username">username</label></div>
+                <div class="col-md-3"><h:inputText a:placeholder="username" requiredMessage="username is empty" required="true" id="username" value="#{user.username}"/></div>
+            </div>
+            <div class="row">
+                <div class="col-md-3"/>
+                <div class="col-md-3"><label for="password">password</label></div>
+                <div class="col-md-3"><h:inputSecret a:placeholder="password" requiredMessage="password is empty" required="true" id="password" value="#{user.password}"/></div>
+            </div>
+            <div class="row">
+                <div class="col-md-3"/>
+                <div class="col-md-3"><h:commandButton type="submit" class="login-button btn-success" id="login" value="Login"/></div>
+            </div>
+        </h:form>
+        <c:if test="#{user.username.length() != 0 and user.password.length() != 0}">
+            <h:outputText value="#{user.auth}" escape="false"/>
+        </c:if>
+    </h:body>
+</html>
+
