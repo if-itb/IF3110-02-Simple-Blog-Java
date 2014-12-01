@@ -4,11 +4,11 @@
     Author     : user
 --%>
 
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.text.DateFormat"%>
 <%@page import="data.*"%>
 <%@page import="java.util.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<jsp:useBean id="data" class="data.Post" scope="session"/>
-<jsp:setProperty name="post" property="*"/> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,7 +33,7 @@
 <meta property="og:image" content="{{! TODO: ADD GRAVATAR URL HERE }}">
 <meta property="og:site_name" content="Simple Blog">
 
-<link rel="stylesheet" type="text/css" href="./assets/css/screen.css" />
+<link rel="stylesheet" type="text/css" href="assets/css/screen.css" />
 <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
 
 <!--[if lt IE 9]>
@@ -49,7 +49,7 @@
 <div class="wrapper">
 
 <nav class="nav">
-    <a style="border:none;" id="logo" href="index.html"><h1>Simple<span>-</span>Blog</h1></a>
+    <a style="border:none;" id="logo" href="index.jsp"><h1>Simple<span>-</span>Blog</h1></a>
     <ul class="nav-primary">
         <li><a href="new_post.html">+ Tambah Post</a></li>
     </ul>
@@ -65,17 +65,17 @@
             <h2>Tambah Post</h2>
 
             <div id="contact-area">
-                <form method="post" action="index.jsp" name="form1" id="form1">
-                    <label for="Judul">Judul:</label> 
-                    <input type="text" name="title" id="title">
+                <form method="post" onsubmit ="return validasiTanggal()">
+                    <label for="Judul">Judul:</label>
+                    <input type="text" name="judul" id="Judul">
 
                     <label for="Tanggal">Tanggal:</label>
-                    <input type="text" name="date" id="date">
+                    <input type="text" name="tanggal" id="Tanggal">
                     
                     <label for="Konten">Konten:</label><br>
-                    <textarea name="content" rows="20" cols="20" id="content"></textarea>
+                    <textarea name="content" rows="20" cols="20" id="Konten"></textarea>
 
-                    <input type="submit" name="submit" value="Simpan" class="submit-button" onclick="<% validateDate();%>">
+                    <input type="submit" name="submit" value="Simpan" class="submit-button">
                 </form>
             </div>
         </div>
@@ -104,7 +104,6 @@
 
 </div>
 
-    </body>
 <script type="text/javascript" src="assets/js/fittext.js"></script>
 <script type="text/javascript" src="assets/js/app.js"></script>
 <script type="text/javascript" src="assets/js/respond.min.js"></script>
@@ -118,36 +117,46 @@
       z.parentNode.insertBefore(t,z)}(window,document,'script','ga'));
       ga('create',ga_ua);ga('send','pageview');
 </script>
-        <%!
-            void validateDate(){
-                Date dateNow = new Date();
-                Date datePost = new Date(data.getDate());
-                if (datePost.before(dateNow)){
-        %>
-            <div class="modal " id="validasi" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                        <h4 class="modal-title" id="myModalLabel">Konfirmasi tanggal</h4>
-                    </div>
-                    <div class="modal-body">
-                        Tanggal yang Anda masukkan tidak valid
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary">OK</button>
-                    </div>
-                </div>
-            </div>
-            </div>
-        <%!
-                }
-                else {
-                    post.setCategory(false);
-                    Connector connector = new Connector();
-                    connector.setPost(post);
-                    connector.closeConnection();
-                }
+<%
+            out.println("<script>");
+            out.println("function validasiTanggal(){");
+            out.print("if(");
+            if(isBefore(request.getParameter("tanggal"))) out.print("true");
+            else out.print("false");
+            out.println("){");
+            out.print("alert("); out.print('"'); out.print("Tanggal harus lebih besar atau sama dengan tanggal hari ini!"); out.print('"'); out.println(");");
+            out.println("return false;");
+            out.println("}");
+            out.println("else {");
+            String judul = request.getParameter("judul");
+            String tanggal = request.getParameter("tanggal");
+            String konten = request.getParameter("konten");
+            Post post = new Post();
+            post.setTitle(judul);
+            post.setDate(tanggal);
+            post.setContent(konten);
+            post.setCategory("unpublished");
+            post.setAuthorID(1);
+            Connector conn = new Connector();
+            conn.setPost(post);
+            conn.closeConnection();
+            out.print("window.location=");out.print('"'); out.print("index.jsp");out.print('"'); out.println(");");
+            out.println("return true;");
+            out.println("}");
+            out.println("}");
+            out.println("</script>");
+%>
+<%!
+            boolean isBefore(String s){
+                boolean yes = false;
+                DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+                try{
+                    Date dateUser = df.parse(s);
+                    Date dateNow = new Date();
+                    if(dateUser.before(dateNow)) yes = true;
+                }catch(Exception e){}
+                return yes;
             }
-        %>
+%>
+    </body>
 </html>

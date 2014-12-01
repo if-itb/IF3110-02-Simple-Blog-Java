@@ -6,7 +6,7 @@
 
 <%@page import="java.util.*"%>
 <%@page import="data.*"%>
-<%@page import="java.util.Date"%>
+<%@page import="java.util.*"%>
 <%@page import="java.sql.*" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -51,14 +51,13 @@
 <nav class="nav">
     <a style="border:none;" id="logo" href="index.jsp"><h1>Simple<span>-</span>Blog</h1></a>
     <ul class="nav-primary">
-        <li><a href="publish.jsp">View Unpublish Post</a></li>
         <li><a href="add_post.jsp">+ Tambah Post</a></li>
     </ul>
 </nav>
 <%
     Connector connector = new Connector();
     ArrayList<Post> listpost;
-    listpost = connector.getListPost("published");
+    listpost = connector.getListPost("unpublished");
     connector.closeConnection();
 %>
 <div id="home">
@@ -76,7 +75,7 @@
                         </div>
                         <p><%=listpost.get(i).getContent()%> &hellip;</p>
                         <p>
-                            <a href="edit.jsp?id=<%=listpost.get(i).getPostID()%>">Edit</a> | <a href="javascript:confirmDelete(<%out.print(listpost.get(i).getPostID());%>)">Hapus</a>
+                            <a href="edit.jsp?id=<%=listpost.get(i).getPostID()%>">Publish</a>
                         </p>
                     </li>
             <% 
@@ -123,19 +122,5 @@
       z.parentNode.insertBefore(t,z)}(window,document,'script','ga'));
       ga('create',ga_ua);ga('send','pageview');
 </script>
-<%
-                out.println("<script>");
-out.println("function confirmDelete(id) {");
-    out.println("var x;");
-    out.print("if (confirm(");out.print('"');out.print("Apakah Anda yakin ingin menghapus post ini?");out.print('"');out.println(" == true) {");
-        Connector con = new Connector();
-        int id = Integer.parseInt(request.getParameter("id"));
-        con.deletePost(id);
-        con.closeConnection();
-    out.println("} else {");
-    out.println('}');
-out.println('}');
-out.println("</script>");
-        %>
 </body>
 </html>

@@ -4,9 +4,11 @@
     Author     : user
 --%>
 
+<%@page import="java.text.*"%>
 <%@page import="data.*"%>
 <%@page import="java.util.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -46,15 +48,15 @@
 <body class="default">
     <%
         Connector connector = new Connector();
-        Post post = connector.getPost( Integer.parseInt(request.getParameter("id")) , true);
+        Post post = connector.getPost(1);
         connector.closeConnection();
     %>
 <div class="wrapper">
 
 <nav class="nav">
-    <a style="border:none;" id="logo" href="index.html"><h1>Simple<span>-</span>Blog</h1></a>
+    <a style="border:none;" id="logo" href="index.jsp"><h1>Simple<span>-</span>Blog</h1></a>
     <ul class="nav-primary">
-        <li><a href="new_post.html">+ Tambah Post</a></li>
+        <li><a href="add_post.jsp">+ Tambah Post</a></li>
     </ul>
 </nav>
 
@@ -68,19 +70,17 @@
             <h2>Edit Post</h2>
 
             <div id="contact-area">
-                <form method="post" action="send_edited_post.jsp">
+                <form method="post">
                     <label for="Judul">Judul:</label>
-                    <input type="text" name="judul" id="judul" value ="<%=post.getTitle()%>">
-		    
-		    <input type="hidden" name="post_ID" id="post_ID" value="<%=post.getPostID()%>">
-			   
+                    <input type="text" name="judul" id="Judul" value =<%=post.getTitle()%>>
+                    
                     <label for="Tanggal">Tanggal:</label>
-                    <input type="text" name="date" id="date" value="<%=post.getDate()%>" >
-		    
-                    <label for="Konten">Konten:</label><br>
-                    <textarea name="content" rows="20" cols="20" id="Konten"><%=post.getContent()%></textarea>
+                    <input type="text" name="tanggal" id="Tanggal">
 
-                    <input type="submit" name="submit" value="Simpan" class="submit-button">
+                    <label for="Konten">Konten:</label><br>
+                    <textarea name="content" rows="20" cols="20" id="Konten" ><%=post.getContent()%></textarea>
+
+                    <input type="submit" name="submit" value="Simpan" class="submit-button" onclick = "return validasiTanggal()">
                 </form>
             </div>
         </div>
@@ -122,6 +122,46 @@
       z.parentNode.insertBefore(t,z)}(window,document,'script','ga'));
       ga('create',ga_ua);ga('send','pageview');
 </script>
+<%
+            out.println("<script>");
+            out.println("function validasiTanggal(){");
+            out.print("if(");
+            if(isBefore(request.getParameter("tanggal"))) out.print("true");
+            else out.print("false");
+            out.println("){");
+            out.print("alert("); out.print('"'); out.print("Tanggal harus lebih besar atau sama dengan tanggal hari ini!"); out.print('"'); out.println(");");
+            out.println("return false;");
+            out.println("}");
+            out.println("else {");
+            String judul = request.getParameter("judul");
+            String tanggal = request.getParameter("tanggal");
+            String konten = request.getParameter("konten");
+            post.setTitle(judul);
+            post.setDate(tanggal);
+            post.setContent(konten);
+            post.setCategory("unpublished");
+            post.setAuthorID(1);
+            Connector conn = new Connector();
+            conn.setPost(post);
+            conn.closeConnection();
+            out.print("window.location=");out.print('"'); out.print("http://www.newlocation.com");out.print('"'); out.println(");");
+            out.println("return true;");
+            out.println("}");
+            out.println("}");
+            out.println("</script>");
+%>
+<%!
+            boolean isBefore(String s){
+                boolean yes = false;
+                DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+                try{
+                    Date dateUser = df.parse(s);
+                    Date dateNow = new Date();
+                    if(dateUser.before(dateNow)) yes = true;
+                }catch(Exception e){}
+                return yes;
+            }
+%>
 </body>
 </html>
 
