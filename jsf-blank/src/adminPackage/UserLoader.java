@@ -16,6 +16,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.omg.PortableInterceptor.USER_EXCEPTION;
 
+import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
+
 import somepackage.Connector;
 
 @ManagedBean
@@ -179,6 +181,7 @@ public class UserLoader {
 		con.closeConnection();
 		setUser(user);
 	}
+	
 	
 	public UserAdder getUserAdder() {
 		return userAdder;
