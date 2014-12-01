@@ -10,6 +10,7 @@ and open the template in the editor.
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <head>
         <link type="text/css" rel="stylesheet" href="../assets/screen.css"/>
+        <script type="text/javascript" src="../assets/ajax.js"></script>
         <title>Publish Post</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>                
     </head>   
@@ -94,7 +95,7 @@ and open the template in the editor.
                 <p class="home"><b>Create New User</b></p>
                 <div id="contact-area2">
                 <!--form action="#" method="post">-->
-               <h:form>
+               <h:form onsubmit="return IsEmailValid()" id="Form">
                     <label for="Name">Name:</label>
                     <input type="text" name="Name" id="Name" required="required"/>
 
