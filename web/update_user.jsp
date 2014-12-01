@@ -38,6 +38,11 @@
 				<br/>
 				<label>Email: </label><input type="text" id="user_email" name="user_email" value="<%=rs.getString("email")%>">
 				<br/>
+				<select name="status">
+					<option value="1">Owner</option>
+					<option value="2">Editor</option>
+					<option value="3">Admin</option>
+				</select>
 				<input type="submit" value="Update">
 			</form>
 		<%

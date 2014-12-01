@@ -14,12 +14,12 @@
 	String user_password = request.getParameter("user_password");
 	String user_status = request.getParameter("user_status");
 	String user_email	=	 request.getParameter("user_email");
-
+	String status = request.getParameter("status");
 		if(id != null && user_name != null && user_username != null && user_password != null  && user_email != null && user_status != null ){
 			ResultSet result = null;
 			Connection connection = null;
 			PreparedStatement pStatement;
-			String Query = "update users SET password='"+user_password+"',nama='"+user_name+"',username='"+user_username+"',email='"+user_email+"' WHERE no = '"+id+"';";
+			String Query = "update users SET password='"+user_password+"',nama='"+user_name+"',username='"+user_username+"',email='"+user_email+"',status='"+status+"' WHERE no = '"+id+"';";
 			pStatement = connection.prepareStatement(Query);
 			//pStatement.setString(1, user_name);
 			//pStatement.setString(2, user_password);
