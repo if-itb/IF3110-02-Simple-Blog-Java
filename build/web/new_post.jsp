@@ -83,7 +83,7 @@
 		
                     <label for="Tanggal">Tanggal:</label>
                     <input type="text" name="tanggal" id="Tanggal" value="">
-                    <input type="hidden" name="owner" id="owner" value="aryya">
+                    <input type="hidden" name="owner" id="owner" value="<%=usrC %>">
                     
                     <label for="Konten">Konten:</label><br>
                     <textarea name="konten" rows="20" cols="20" id="Konten"></textarea>
