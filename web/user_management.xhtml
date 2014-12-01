@@ -1,0 +1,142 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:jsf="http://xmlns.jcp.org/jsf">
+    <h:head>
+        <title>Home - Simple blog</title>
+        <link rel="stylesheet" type="text/css" href="assets/style.css" />
+        <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico" />
+    </h:head>
+    <h:body class="default">
+        <div class="wrapper">
+
+            <nav class="nav">
+                <a style="margin: 0px;border:none;float:left" id="logo" href="faces/index.xhtml"><h1>Simple<span>-</span>Blog    |   </h1></a>
+                <h1 style="text-transform: lowercase;font-size: 20px;float: left;color: #553400"><h:outputText value="Hello #{beans.user.fullname}     " style="float:left "/></h1>
+                <ul class="nav-primary">
+                    <li>
+                        <h:form>
+                            <ul>
+
+                                <f:subview id="justAdmin" rendered="#{beans.admin}">
+                                    <li style="padding: 5px">
+                                        <a href="faces/admin_page.xhtml" style="color: #F40034;z-index:100;">Halaman Admin </a>
+                                    </li>
+                                </f:subview>
+
+
+                                <f:subview rendered="#{beans.isLogin() and !beans.owner}" id="publish-post">
+                                    <li style="padding: 5px">
+                                        <a href="add_post.xhtml" onclick="#{beans.genAddPostLink()}" style="color: #F40034">+ Tambah Post </a>
+                                    </li>
+                                </f:subview>
+
+
+                                <f:subview rendered="#{beans.isLogin() and !beans.editor}" id="test">
+                                    <li style="padding: 5px">
+                                        <a href="faces/add_post.xhtml" style="color: #F40034">+ Tambah Post </a>
+                                    </li>
+                                </f:subview>
+
+                                <li>
+                                    <h:outputText value="#{beans.message}" style="color:red" rendered="#{beans.activeMessage()}"/><br></br>
+                                    <h:commandLink action="#{beans.Logout()}" style="color:#F40034;  " value="Logout" rendered="#{beans.isLogin()}"/>
+                                    <h:form rendered="#{!beans.isLogin()}">
+                                        <h:outputText value="username: "/>
+                                        <h:inputText value="#{beans.user.username}"/>
+                                        <h:outputText value="password: "/>
+                                        <h:inputSecret value="#{beans.user.password}"/>
+                                        <h:outputText value="   "/>
+                                        <h:commandButton action="#{beans.login()}" style="background-color: papayawhip;color: darkblue" value="Login" />
+                                    </h:form>
+                                </li>
+                            </ul>
+                        </h:form>
+                    </li>
+                </ul>
+            </nav>
+            <div class="art-header-inner">
+                <table>
+                    <tr>
+                        <td class="username">
+                            username
+                        </td>
+                        <td class="fullname">
+                            fullname
+                        </td>
+                        <td class="email">
+                            e-mail
+                        </td>
+                        <td class="role">
+                            role
+                        </td>
+                        <td class="update">
+                            update
+                        </td>
+                    </tr>
+                    <ui:repeat value="#{beans.users}" var="tel" varStatus="status">
+                        <h:form id="user#{status.index + 1}">
+                            <tr>
+                                <td class="username">
+                                    <input type="text" jsf:value="#{tel.username}" />
+                                </td>
+                                <td class="fullname">
+                                    <input type="text" jsf:value="#{tel.fullname}" />
+                                </td>
+                                <td class="email">
+                                    <input type="text" jsf:value="#{tel.email}" />
+                                </td>
+                                <td class="role">
+                                    <input type="text" jsf:value="#{tel.role}" />
+                                </td>
+                                <td class="update">
+                                    <h:commandButton action="#{beans.updateUserOption(status.index)}" style="background-color: papayawhip;color: darkblue" value="update" />
+                                </td>
+                            </tr>
+                        </h:form>
+                    </ui:repeat>
+                    <h:form>
+                        <tr>
+                            <td colspan="5">
+                                Tambah User baru : 
+                            </td>
+                        </tr>
+                        <tr>                            
+                                <td class="username">
+                                    <input type="text" jsf:value="#{beans.newUser.username}" />
+                                </td>
+                                <td class="fullname">
+                                    <input type="text" jsf:value="#{beans.newUser.fullname}" />
+                                </td>
+                                <td class="email">
+                                    <input type="text" jsf:value="#{beans.newUser.email}" />
+                                </td>
+                                <td class="role">
+                                    <input type="text" jsf:value="#{beans.newUser.role}" />
+                                </td>
+                                <td class="create">
+                                    <h:commandButton action="#{beans.createNewUser()}" style="background-color: papayawhip;color: darkblue" value="create" />
+                                </td>
+                            </tr>
+                    </h:form>
+                </table>
+            </div>
+
+        </div>
+    </h:body>
+    <footer class="footer">
+        <div class="back-to-top"><a href="">Back to top</a></div>
+        <!-- <div class="footer-nav"><p></p></div> -->
+
+        <aside class="offsite-links">
+            IF3110 Tubes II Kelompok 6
+            <br></br>Yusuf Rahmatullah
+            <br></br>Hayyu Lutfi Hanifah
+            <br></br>Nisa Dian Rachmadi    
+        </aside>
+    </footer>
+</html>
+

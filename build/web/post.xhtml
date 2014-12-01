@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>#{beans.post.posttitle} - Simple blog</title>
+        <link rel="stylesheet" type="text/css" href="assets/style.css" />
+        <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico" />
+    </h:head>
+
+    <body class="default">
+        <div class="wrapper">
+
+            <nav class="nav">
+                <a style="margin: 0px;border:none;float:left" id="logo" href="index.xhtml"><h1>Simple<span>-</span>Blog    |   </h1></a>
+                <h1 style="text-transform: lowercase;font-size: 20px;float: left;color: #553400"><h:outputText value="Hello #{beans.user.fullname}     " style="float:left "/></h1>
+                <ul class="nav-primary">
+                    <li>
+                        <h:form>
+                            <ul>
+                                
+                                        <f:subview id="justAdmin" rendered="#{beans.admin}">
+                                            <li style="padding: 5px">
+                                            <a href="faces/admin_page.xhtml" style="color: #F40034;z-index:100;">Halaman Admin </a>
+                                            </li>
+                                        </f:subview>
+                                    
+                                
+                                    <f:subview rendered="#{beans.isLogin()}" id="test">
+                                        <li style="padding: 5px">
+                                        <a href="add_post.xhtml" onclick="#{beans.genAddPostLink()}" style="color: #F40034">+ Tambah Post </a>
+                                        </li>
+                                    </f:subview>
+                                
+                                <li>
+                                    <h:outputText value="#{beans.message}" style="color:red" rendered="#{beans.activeMessage()}"/><br></br>
+                                    <h:commandLink action="#{beans.Logout()}" style="color:#F40034;  " value="Logout" rendered="#{beans.isLogin()}"/>
+                                    <h:form rendered="#{!beans.isLogin()}">
+                                        <h:outputText value="username: "/>
+                                        <h:inputText value="#{beans.user.username}"/>
+                                        <h:outputText value="password: "/>
+                                        <h:inputSecret value="#{beans.user.password}"/>
+                                        <h:outputText value="   "/>
+                                        <h:commandButton action="#{beans.login()}" style="background-color: papayawhip;color: darkblue" value="Login" />
+                                    </h:form>
+                                </li>
+                            </ul>
+                        </h:form>
+                    </li>
+                </ul>
+            </nav>
+            <article class="art simple post">
+
+                <header class="art-header">
+                    <div class="art-header-inner" style="margin-top: 0px; opacity: 1;">
+                        <time class="art-time">#{beans.lihatpost.postdate}</time>
+                        <h2 class="art-title">#{beans.lihatpost.posttitle}</h2>
+                        <p class="art-subtitle"></p>
+                    </div>
+                </header>
+                <div class="art-body">
+                    <div class="art-body-inner">
+                        <hr class="featured-article" />
+                        #{beans.lihatpost.postcontent}
+
+                        <hr />
+
+                        <h2>Komentar</h2>
+
+                        <div id="contact-area">
+                            <h:form id="comment-form">
+                                <label for="Judul">Nama:</label>
+                                <input id="name" type="text" name="Judul" jsf:value="#{beans.komen.komentator}" required="true" />
+
+                                <label for="Tanggal">Email</label>
+                                <input id="email" type="text" name="Tanggal" jsf:value="#{beans.komen.email}" required="true" />
+
+                                <label for="Konten">Komentar:</label><br></br>
+                                <h:inputTextarea rows="20" cols="20" required="true" value="#{beans.komen.komen}" />
+                                
+
+                                <h:commandButton style="float: right" value="Submit" action="#{beans.writeComment()}" onclick="return validateEmail();">
+                                    <f:ajax execute="@form" render="comment-list @form"  />
+                                </h:commandButton>
+                            </h:form>
+                        </div>
+
+                            <ul class="art-list-body">
+                                <h:panelGroup id="comment-list">
+                                <ui:repeat value="#{beans.comments}" var="value">
+                                    <li class="art-list-item">
+                                        <div class="art-list-item-title-and-time">
+                                            <h2 class="art-list-title">#{value.komentator}</h2>
+                                            <div class="art-list-time">
+                                                Posted At <br />
+                                                #{value.commentDate}
+                                            </div>
+                                        </div>
+                                        <div style="margin-left:20px;display:inline-block;">
+                                        <p>
+                                        #{value.komen}
+                                        </p>
+                                        </div>
+                                    </li>   
+                                </ui:repeat>
+                            </h:panelGroup>
+                            </ul>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </body>
+    <footer class="footer">
+        <div class="back-to-top"><a href="">Back to top</a></div>
+        <!-- <div class="footer-nav"><p></p></div> -->
+        <aside class="offsite-links">
+            IF3110 Tubes II Kelompok 6
+            <br />Yusuf Rahmatullah
+            <br />Hayyu Lutfi Hanifah
+            <br />Nisa Dian Rachmadi    
+        </aside>
+    </footer>
+    <script>
+        function validateEmail(){
+            var email = document.getElementById("email").value;
+            var name = document.getElementById("name").value.length;
+            var valid = email.split("@");
+            if(name > 32){
+                alert("nama terlalu panjang, max 32 char");
+            }
+            if(valid === email){
+                alert("format email salah");
+                return false;
+            }else{
+                if(valid.length == 2){
+                    return true;
+                }else{
+                    alert("format email salah");
+                    return false;
+                }
+            }
+        }
+    </script>
+</html>

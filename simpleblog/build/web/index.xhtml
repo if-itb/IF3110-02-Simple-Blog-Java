@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Home - Simple blog</title>
+        <link rel="stylesheet" type="text/css" href="assets/style.css" />
+        <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico" />
+    </h:head>
+    
+    <body class="default">
+        <div class="wrapper">
+
+        <nav class="nav">
+            <a style="margin: 0px;border:none;float:left" id="logo" href="index.xhtml"><h1>Simple<span>-</span>Blog    |   </h1></a>
+            <h1 style="font-size: 20px;float: left;color: dodgerblue"><h:outputText value="Hello #{User.name}     " style="float:left "/></h1>
+            <ul class="nav-primary">
+                <li>
+                    <h:form>
+                        <ul>
+                            <li style="padding: 5px">
+                                <f:subview rendered="#{User.isLogin()}" id="test">
+                                    <a href="add_post.xhtml" style="color: #F40034">+ Tambah Post </a>
+                                </f:subview>
+                            </li>
+                            <li>
+                                <h:outputText value="#{User.messege}" style="color:red" rendered="#{User.activeMessege()}"/><br></br>
+                                <h:commandLink action="#{User.Logout()}" style="color:#F40034;  " value="Logout" rendered="#{User.isLogin()}"/>
+                                <h:form rendered="#{!User.isLogin()}">
+                                    <h:outputText value="username: "/>
+                                    <h:inputText value="#{User.username}"/>
+                                    <h:outputText value="password: "/>
+                                    <h:inputSecret value="#{User.password}"/>
+                                    <h:outputText value="   "/>
+                                    <h:commandButton action="#{User.login()}" style="background-color: papayawhip;color: darkblue" value="Login" />
+                                </h:form>
+                            </li>
+                        </ul>
+                    </h:form>
+                </li>
+            </ul>
+        </nav>
+            <div id="home">
+                <div class="posts">
+                    <nav class="art-list">
+                      <ul class="art-list-body">
+                        <li class="art-list-item">
+                            <div class="art-list-item-title-and-time">
+                                <h2 class="art-list-title"><a href="post.xhtml">Judul</a></h2>
+                                <div class="art-list-time">25 November 2014</div>
+                                <div class="art-list-time"><span style="color:#F40034;">&#10029;</span> Featured</div>
+                            </div>
+                            <p>
+                                Halo ini isi artikel. Hanya mencoba-coba supaya bisa dilihat :3
+                            </p>
+                            <p>
+                              <a href="#">Edit</a> | <a href="#">Hapus</a>
+                            </p>
+                        </li>
+                      </ul>
+                    </nav>
+                </div>
+            </div>
+            
+    </div>
+    </body>
+    <footer class="footer">
+    <div class="back-to-top"><a href="">Back to top</a></div>
+    <!-- <div class="footer-nav"><p></p></div> -->
+
+    <aside class="offsite-links">
+        IF3110 Tubes II Kelompok 6
+        <br></br>Yusuf Rahmatullah
+        <br></br>Hayyu Lutfi Hanifah
+        <br></br>Nisa Dian Rachmadi    
+    </aside>
+</footer>
+</html>
+
