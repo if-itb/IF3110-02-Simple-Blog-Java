@@ -16,10 +16,25 @@ public class User {
     String Name;
     String Email;
     String Role;
-    
+    boolean editable;
     public User(){
     }
-
+    
+    public boolean geteditable(){
+        return this.editable;
+    }
+    
+    public void setEditable(boolean edit){
+        editable = edit;
+    }
+    public void SaveAction(){
+        this.editable = false;
+    }
+    
+    public void WantToEdit(){
+        this.editable = true;
+    }
+    
     public String getEmail() {
         return Email;
     }

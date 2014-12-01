@@ -7,7 +7,7 @@
 
 function confirmPublish() {
     var x;
-    if (confirm("Do you want publish this post?") == true) {
+    if (confirm("Do you want publish this post?") === true) {
         return true;
     } else {
         return false;
@@ -16,9 +16,19 @@ function confirmPublish() {
 
 function confirmDelete() {
     var x;
-    if (confirm("Do you really want to delete this post?") == true) {
+    if (confirm("Do you really to delete this post?") === true) {
         return true;
     } else {
         return false;
     }
+}
+
+function confirmValidate() {
+    var x;
+    if (confirm("Are you sure?") === true) {
+        return true;
+    } else {
+        return false;
+    }
+
 }
