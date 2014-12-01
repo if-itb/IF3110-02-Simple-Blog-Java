@@ -17,7 +17,7 @@ public class Post {
     private String content;
     private boolean category;
     private int post_author_id;
-    Post(){
+    public Post(){
         
     }
     public void setPostID(int value){

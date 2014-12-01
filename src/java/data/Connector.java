@@ -117,6 +117,35 @@ public class Connector {
         }
         return listPost;
     }
+    
+    public Post getPost(int postID, boolean published){
+	Post post = new Post();
+	Statement st;
+	try {
+	    st = connection.createStatement();
+	    String sqlQuery = new String();
+	    if (published){
+		sqlQuery = "SELECT * FROM `post`.`post_table` WHERE `category` = 'published' AND `post_id` = " + Integer.toString(postID);
+		ResultSet rs = st.executeQuery(sqlQuery);
+		while (rs.next()){
+		    post.setPostID(rs.getInt("post_id"));
+		    post.setTitle(rs.getString("title"));
+		    post.setDate(rs.getString("date"));
+		    post.setContent(rs.getString("content"));
+		    post.setCategory(true);
+		    post.setAuthorID(rs.getInt("post_author_id"));
+		}
+	    }
+	    
+	}
+	catch (Exception ex){
+	    
+	}
+	return post;
+    }
+    
+    
+    
     public void setUser(User value){
         Statement st;
         try {
@@ -132,13 +161,88 @@ public class Connector {
         Statement st;
         try {
             st = connection.createStatement();
-            String sql = ("INSERT INTO `post`.`post_comment` (`comment-id`, `comment-date`, `comment-content`, `comment-post-id`,`comment-email`, `comment-user-id`) VALUES (NULL, '" + value.getDate() +  "', '" + value.getContent() + "', '" + value.getCommentPostID() + "', '" + value.getEmail() + "', '" + value.getUserID() + ");");
+	    String sql = new String();
+	    
+	    if (value.getUserID() == 0) // GUEST
+		sql = ("INSERT INTO `post`.`post_comment` (`comment-id`, `comment-date`, `comment-content`, `comment-post-id`,`comment-email`, `comment-user-id`) "
+			+ "VALUES"
+			+ "(NULL, CURDATE(), '" + value.getContent() + "', '" + value.getCommentPostID() + "', '" + value.getEmail() + "', '" + "NULL" + ");");
+	    else {
+		
+		sql = ("INSERT INTO `post`.`post_comment` (`comment-id`, `comment-date`, `comment-content`, `comment-post-id`,`comment-email`, `comment-user-id`) VALUES (NULL, CURDATE(), '" + value.getContent() + "', '" + value.getCommentPostID() + "', '" + this.getEmailByID(value.getUserID()) + "'," + value.getUserID() + ");");
+	    }
+	    
             ResultSet rs = st.executeQuery(sql);
         } catch (SQLException ex) {
             System.err.println("Gagal mengambil data");
         }
         
     }
+    
+        public void setComment(String content, int post_id, String email, int user_id){
+	Statement st;
+	boolean executed = false;
+	String finalQuery = null;
+	try{
+	    st = connection.createStatement();
+	    String sqlQuery = "";
+	    //contoh query bener 
+	    // INSERT INTO `post`.`post_comment` (`comment-id`, `comment-date`, `comment-content`, `comment-post-id`, `comment-email`, `comment-user-id`) VALUES (NULL, '2014-11-24', 'AAAAAAAAAAAAAAAAEH', '1', 'feli@feli.fel', '1');
+		sqlQuery = "INSERT INTO `post`.`post_comment` (`comment-user-id`,`comment-content`,`comment-email`,`comment-post-id`,`comment-date`) VALUES (";
+	    if (user_id != 0) {
+		sqlQuery = sqlQuery + Integer.toString(user_id) + ","; 
+	    }
+	    else {
+		sqlQuery = sqlQuery + "null, "; 
+	    }
+	    
+		sqlQuery = sqlQuery + "'" + content.toString() + "', "; 
+		sqlQuery = sqlQuery + "'" + email.toString() + "', "; 
+		sqlQuery = sqlQuery + Integer.toString(post_id) + ", ";
+		sqlQuery = sqlQuery + "CURDATE() );"; 
+		
+		//finalQuery = sqlQuery;
+		executed = st.execute(sqlQuery);
+	} catch (Exception e) {
+	    System.err.println("Gagal insert comment :v ");
+	    System.out.println(e);
+	}
+	
+    }
+	
+	public String setcommentquery(String content, int post_id, String email, int user_id){
+	Statement st;
+	boolean executed = false;
+	String finalQuery = null;
+	try{
+	    st = connection.createStatement();
+	    String sqlQuery = "";
+	    //contoh query bener 
+	    // INSERT INTO `post`.`post_comment` (`comment-id`, `comment-date`, `comment-content`, `comment-post-id`, `comment-email`, `comment-user-id`) VALUES (NULL, '2014-11-24', 'AAAAAAAAAAAAAAAAEH', '1', 'feli@feli.fel', '1');
+		sqlQuery = "INSERT INTO `post`.`post_comment` (`comment-user-id`,`comment-content`,`comment-email`,`comment-post-id`,`comment-date`) VALUES (";
+	    if (user_id != 0) {
+		sqlQuery = sqlQuery + Integer.toString(user_id) + ","; 
+	    }
+	    else {
+		sqlQuery = sqlQuery + "null, "; 
+	    }
+	    
+		sqlQuery = sqlQuery + "'" + content.toString() + "', "; 
+		sqlQuery = sqlQuery + "'" + email.toString() + "', "; 
+		sqlQuery = sqlQuery + Integer.toString(post_id) + ", ";
+		sqlQuery = sqlQuery + "CURDATE() );"; 
+		
+		finalQuery = sqlQuery;
+		st.executeQuery(sqlQuery);
+		//executed = st.execute(sqlQuery);
+	} catch (Exception e) {
+	    System.err.println("Gagal insert comment :v ");
+	    System.out.println(e);
+	}
+	return finalQuery;
+	
+    }
+    
     public void setPost(Post value){
         Statement st;
         try {
@@ -148,6 +252,26 @@ public class Connector {
         } catch (SQLException ex) {
             System.err.println("Gagal meng-insert data.");
         }
+    }
+    
+        public boolean resetPost(Post value){
+        Statement st;
+	Boolean queryres = false;
+        try {
+            st = connection.createStatement();
+	    //correct query : UPDATE `post_table` SET `post_id`=[value-1],`title`=[value-2],`date`=[value-3],`content`=[value-4],`category`=[value-5],`post_author_id`=[value-6] WHERE 1
+            String sql = "UPDATE `post`.`post_table` "
+		    + "SET `title` ='" + value.getTitle() +  "', "
+		    + "`date` ='" + value.getDate() + "', "
+		    + "`content` = '" + value.getContent() + "' "
+		    + "WHERE `post_id`=" + value.getPostID() + ";" ;
+	    //return sql;
+	    //ResultSet rs = st.executeQuery(sql);
+            queryres = st.execute(sql);
+        } catch (SQLException ex) {
+            System.err.println("Gagal meng-insert data.");
+        }
+	    return queryres;
     }
     
      public String getUsernameByID(int user_ID){
@@ -170,7 +294,26 @@ public class Connector {
 	
 	return uName;
     }
-     
+     public String getEmailByID(int user_ID){
+	boolean executed = false;
+	
+	String uName = new String();
+	try {
+	    Statement st;
+	    st = connection.createStatement();
+	    String sqlQuery = "SELECT * FROM `post`.`user_data` WHERE `user_id` = " + Integer.toString(user_ID) + ";";
+	    ResultSet rs = st.executeQuery(sqlQuery);
+	    if (rs.next()){
+	    uName = Boolean.toString(executed);
+	    uName = rs.getString("user_email");
+	    }
+	} catch (Exception e) {
+	    uName = uName + e.toString();
+	    //uName = sqlQuery;
+	}
+	
+	return uName;
+    }
     public void closeConnection(){
         System.out.println("Closing the connection.");
         if (connection != null) try { connection.close(); } catch (SQLException ignore) {}
