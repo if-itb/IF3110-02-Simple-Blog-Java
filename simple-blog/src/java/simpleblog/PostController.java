@@ -315,7 +315,6 @@ public class PostController implements Serializable {
         this.post_id = post_id;
     }
 
-
     public Part getImage() {
         return image;
     }
@@ -417,5 +416,4 @@ public class PostController implements Serializable {
         } 
     }
     
-
 }
