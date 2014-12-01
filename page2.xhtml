@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:composite="http://java.sun.com/jsf/composite">
+    <h:head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="stylesheet" type="text/css" href="assets/style.css"></link>
+        <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico"></link>
+        <link href='http://fonts.googleapis.com/css?family=Dawning+of+a+New+Day' rel='stylesheet' type='text/css'></link>
+        <link href='http://fonts.googleapis.com/css?family=Quicksand:300,400,700' rel='stylesheet' type='text/css'></link>
+        <title>The Simplest Blog | User-Management</title>
+    </h:head>
+    <h:body class="default">
+        <div class="wrapper">
+            <nav class="nav">
+                <div id="loginsc">
+                    <h:form>
+                        <h:outputLabel value="Halo #{Login.username}"></h:outputLabel>
+                        <h:commandButton action="#{Login.logout()}" value="logout" style="margin-left: 6px; border: none; border-style: none; outline: none; background-color: #acaba9; font-family: 'Quicksand', sans-serif; height: 16px; font-weight: 700; font-color: #fff; cursor: pointer; color:#ffffff;"></h:commandButton>
+                    </h:form>
+                </div>
+                
+                <div id="nav-logo">
+                    <a id="logo" href="index.jsp"><h1>The Simplest Blog</h1></a>
+                </div>
+                
+                <div id="menu">
+                    <ul class="nav-primary">
+                        <li><a href="index.jsp">Home</a></li>
+                        <li><a href="about.jsp">About</a></li>
+                        <li><a href="contact.jsp">Contact</a></li>
+                        <f:subview id="manajemen-user" rendered="#{Login.isAdmin()}"><li><a href="page2.xhtml">User-Management</a></li></f:subview>
+                    <f:subview id="draft" rendered="#{Login.isEditor() or Login.isAdmin()}"><li><a href="unpublished.jsp">Draft</a></li></f:subview>
+                    <f:subview id="tambah-post" rendered="#{Login.isOwner() or Login.isAdmin()}"><li><a href="new.jsp">Create Post</a></li></f:subview>
+                    </ul>
+                </div>
+            </nav>
+            <div>
+                <nav class="tabel">
+                    <div class="art-list-body">
+                        <h2 style="font-size:26px; text-align: center;">User</h2>
+                        <br></br>
+                        <h:dataTable value="#{Login.getUserList()}" var="u" border="0" styleClass="list-user">
+
+                        <h:column>
+                        <f:facet name="header">
+
+                        </f:facet>
+                            <h:form>
+                                <h:inputHidden value="#{u.getIdAkun()}" binding="#{id}"></h:inputHidden>
+                            </h:form>
+                        </h:column>
+
+                        <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Username"></h:outputText>
+                        </f:facet>
+                            <h:outputText value="#{u.username}" binding="#{username}"></h:outputText>
+                        </h:column>
+
+                        <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Password"></h:outputText>
+                        </f:facet>
+                            <h:outputText value="#{u.password}" binding="#{password}"></h:outputText>
+                        </h:column>
+
+                         <h:column>
+                         <f:facet name="header">
+                             <h:outputText value="Role"></h:outputText>
+                         </f:facet>
+                             <h:outputText value="#{u.role}" binding="#{Role}"></h:outputText>
+                         </h:column>
+
+                         <h:column>
+                         <f:facet name="header">
+                             <h:outputText value="Name"></h:outputText>
+                         </f:facet>
+                             <h:outputText value="#{u.name}" binding="#{name}"></h:outputText>
+                         </h:column>
+
+                         <h:column>
+                         <f:facet name="header">
+                             <h:outputText value="Email"></h:outputText>
+                         </f:facet>
+                             <h:outputText value="#{u.email}" binding="#{email}"></h:outputText>
+                         </h:column>
+
+                         <h:column>
+                         <f:facet name="header">
+                         </f:facet>
+                             <h:form>
+                            <h:commandButton action="#{akun.repost(id.value, username.value, password.value, Role.value, name.value, email.value)}" value="Edit" style="margin-left: 6px; border: none; border-style: none; outline: none; background-color: #97cdb6; font-family: 'Quicksand', sans-serif; height: 16px; font-weight: 700; font-color: #fff; cursor: pointer; color:#fff;"></h:commandButton>
+                            <h:commandButton action="#{akun.deleteAkun(id.value)}" onclick="return confirm('are you sure?');" value="Hapus" style="margin-left: 6px; border: none; border-style: none; outline: none; background-color: #acaba9; font-family: 'Quicksand', sans-serif; height: 16px; font-weight: 700; font-color: #fff; cursor: pointer; color:#fff;"></h:commandButton>
+                             </h:form>
+                         </h:column>
+
+                        </h:dataTable>
+                        
+                        <br></br>
+                        <h:form>
+                            <h:commandButton action="faces/register.jsp" value="Add User" style="float:right; margin-right:13px; border: none; border-style: none; outline: none; background-color: #acaba9; font-family: 'Quicksand', sans-serif; height: 16px; font-weight: 700; font-color: #fff; cursor: pointer; color:#fff;"></h:commandButton>
+                        </h:form>
+                    </div>
+                </nav>
+            </div>
+        </div>
+        <div>
+            <div id="footerSlideLink">
+                <div id="footerSlideContent">
+                    <div id="footerSlideText"><a href="">Back to top</a></div>
+                </div>
+            </div>   
+        </div>
+
+        
+    </h:body>
+</html>
