@@ -35,47 +35,38 @@ and open the template in the editor.
                         <f:facet name="header">
                             <h:outputText value="Username"/>
                         </f:facet>
-                        <h:inputText value="#{u.username}" rendered ="#{u.editable}"/>
-                        <h:outputText value="#{u.username}" rendered = "#{not u.editable}"/>
+                        <h:outputText value="#{u.username}"/>
                     </h:column>
                     <h:column>
                         <f:facet name="header">
                             <h:outputText value="Password"/>
                         </f:facet>
-                        <h:inputText value="#{u.password}" rendered ="#{u.editable}"/>
-                        <h:outputText value="#{u.password}" rendered = "#{not u.editable}"/>
+                        <h:outputText value="#{u.password}"/>
                     </h:column>
                     <h:column>
                         <f:facet name="header">
                             <h:outputText value="Name"/>
                         </f:facet>
-                        <h:inputText value="#{u.name}" rendered ="#{u.editable}"/>
-                        <h:outputText value="#{u.name}" rendered = "#{not u.editable}"/>
+                        <h:outputText value="#{u.name}"/>
                     </h:column>
                     <h:column>
                         <f:facet name="header">
                             <h:outputText value="Email"/>
                         </f:facet>
-                        <h:inputText value="#{u.email}" rendered ="#{u.editable}"/>
-                        <h:outputText value="#{u.email}" rendered = "#{not u.editable}"/>
+                        <h:outputText value="#{u.email}"/>
                     </h:column>
                     <h:column>
                         <f:facet name="header">
                             <h:outputText value="Role"/>
                         </f:facet>
-                        <h:inputText value="#{u.role}" rendered ="#{u.editable}"/>
-                        <h:outputText value="#{u.role}" rendered = "#{not u.editable}"/>
+                        <h:outputText value="#{u.role}"/>
                     </h:column>
                     <h:column>
                         <f:facet name="header">
                             <h:outputText value="Operation"/>
                         </f:facet>
                         <h:form>
-                            <u><h:commandLink value="Update" id="update" rendered ="#{not u.editable}" onclick="return confirmValidate()">
-                                    <f:ajax listener="@this" execute = "#{u.WantToEdit()}" render="@all"/>
-                                <f:param name ="throwediduser" value = "#{u.username}"></f:param>
-                            </h:commandLink></u> |
-                            <u><h:commandLink value="Delete" action="#{Posting.setDeleteUser()}" onclick="return confirmValidate()">
+                            <u><h:commandLink value="Delete" style="text-align: center" action="#{Posting.setDeleteUser()}" onclick="return confirmValidate()">
                                 <f:param name ="throwediduser" value = "#{u.username}"></f:param>
                             </h:commandLink></u>
                         </h:form>
@@ -86,16 +77,16 @@ and open the template in the editor.
                 <p class="home"><b>Update User</b></p>
                 <div id="contact-area3">
                     <h:form>
-                        <h:inputText id="EditUsername"/>&nbsp;
-                        <h:inputText id="EditPassword"/>&nbsp;
-                        <h:inputText id="EditName"/>&nbsp;
-                        <h:inputText id="EditEmail"/>&nbsp;
-                        <h:selectOneMenu id="Role">
+                        <input type="text" name="EditUsername" id="EditName" required="required" placeholder="Username"/>
+                        <input type="text" name="EditPassword" id="EditPassoword" required="required" placeholder="Password"/>
+                        <input type="text" name="EditName" id="EditName" required="required" placeholder="Name"/>
+                        <input type="text" name="EditEmail" id="EditEmail" required="required" placeholder="Email"/>&nbsp;
+                        <h:selectOneMenu id="Role" value="#{Posting.selectedItem}">
                             <f:selectItem itemValue="Owner" id="CreateOwner"/>
                             <f:selectItem itemValue="Editor" id="CreateEditor"/>
                             <f:selectItem itemValue="Admin" id="CreateAdmin"/>
-                        </h:selectOneMenu>&nbsp;
-                        <h:commandButton value="Update" class="submit-button" action="#" />
+                        </h:selectOneMenu> &nbsp;
+                        <h:commandButton value="Update" class="submit-button" action="#{Posting.updateUser()}" />
                     </h:form>
                 </div>
                 <br/>

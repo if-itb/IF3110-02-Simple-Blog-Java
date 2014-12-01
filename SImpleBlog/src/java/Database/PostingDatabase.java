@@ -21,6 +21,7 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.Cookie;
@@ -493,7 +494,7 @@ public class PostingDatabase {
     }   
     
     public List<User> getUsers() throws ClassNotFoundException, SQLException{
-        List<User> records = new ArrayList<>();
+        List<User> records = new ArrayList<User>();
         
         ResultSet rs;
         Connection con;
@@ -594,6 +595,30 @@ public class PostingDatabase {
             rs = stmt.executeUpdate(query);
             ExternalContext extcon = FacesContext.getCurrentInstance().getExternalContext();
             extcon.redirect("/SImpleBlog/Home.xhtml");
+            con.close();
+        }
+    }
+    
+    public void updateUser() throws ClassNotFoundException, SQLException, IOException
+    {
+        HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        String Name = request.getParameter("EditName");
+        String Username = request.getParameter("EditUsername");
+        String Email = request.getParameter("EditEmail");
+        String Password = request.getParameter("EditPassword");
+        String Role = SelectedItem;
+        
+        try (Connection con = makeConnection()) {
+            PreparedStatement ps;
+            String query = "UPDATE `user` SET `Password`=?,`Name`=?,`email`=?,`Role`=? WHERE `Username`=?";
+            ps= con.prepareStatement(query);
+            
+            ps.setString(1,Password);
+            ps.setString(2,Name);
+            ps.setString(3,Email);
+            ps.setString(4,Role);
+            ps.setString(5,Username);
+            int i = ps.executeUpdate();
             con.close();
         }
     }
