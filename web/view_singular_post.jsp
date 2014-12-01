@@ -28,6 +28,27 @@
             </ul>
             </nav>
         </div>
+        <%
+         Cookie cookie = null;
+         Cookie[] cookies = null;
+         String nilaiNama ="";
+         String nilaiEmail ="";
+            
+         cookies = request.getCookies();
+         if(cookies.length == 0){
+             //do nothing
+         }
+         else{
+//             cookie = cookies[0];
+//             nilaiNama = cookie.getValue().toString();
+             for(Cookie tmp : cookies){
+                if(tmp.getName().equalsIgnoreCase("username")){
+                    nilaiNama = tmp.getValue().toString();
+                    break;
+                }
+             }
+         }
+         %>
        <sql:setDataSource var="db_source" driver="com.mysql.jdbc.Driver" user="root" password="root" url="jdbc:mysql://localhost/simpleblog-java"/>
         <sql:query var="results" dataSource="${db_source}">
             SELECT * FROM posts WHERE id=<%= request.getParameter("post") %> ;
@@ -37,7 +58,11 @@
             SELECT * FROM komentar WHERE id_post=<%= request.getParameter("post") %> ORDER BY id DESC ;
         </sql:query>
             
-
+        <sql:query var="results_user" dataSource="${db_source}">
+            SELECT username,email FROM users WHERE username="<%= nilaiNama %>" LIMIT 1 ;
+        </sql:query>
+            
+            <c:set var="email" value="${results_user.rows[0].email}" />
 
 <article class="art simple post">
     <c:forEach var="row" items="${results.rows}">
@@ -61,9 +86,9 @@
                 <font id="error" color='white' >Ada kesalahan! </font> 
                 <form>
                     <label for="Nama">Nama:</label>
-                    <input type="text" name="Nama" id="Nama">
+                    <input type="text" name="Nama" id="Nama" value="<%= nilaiNama %>">
                     <label for="Email">Email:</label>
-                    <input type="text" name="Email" id="Email">   
+                    <input type="text" name="Email" id="Email" value="<c:out value="${email}"/>">   
                     <label for="Komentar">Komentar:</label><br>
                     <textarea name="Komentar" rows="20" cols="20" id="Komentar"></textarea>
                  </form>
