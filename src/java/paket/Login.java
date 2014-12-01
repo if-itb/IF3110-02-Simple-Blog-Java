@@ -79,9 +79,13 @@ public class Login implements Serializable{
                     cookie.setMaxAge(3600);
                     Cookie cookie2 = new Cookie("role", role);
                     cookie2.setMaxAge(3600);
+                    Cookie cookie3 = new Cookie("username", usrname);
+                    cookie.setMaxAge(3600);
+                    
                     
                     response.addCookie(cookie);
                     response.addCookie(cookie2);
+                    response.addCookie(cookie3);
                     
                     FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
                     
