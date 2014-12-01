@@ -72,13 +72,13 @@ and open the template in the editor.
                         <h:inputText value="#{Post.judul}" id="Judul"/>
 
                         <label for="Tanggal">Tanggal:</label>
-                        <!--<input type="text" name="Tanggal" id="Tanggal" value="#{Post.tanggal}" placeholder="dd-mm-yyyy"/>-->
+                       <!-- <input type="text" name="Tanggal" id="Tanggal" value="{Post.tanggal}" placeholder="dd-mm-yyyy"/> -->
                         <h:inputText value="#{Post.tanggal}" id="Tanggal" p:placeholder="dd-mm-yyyy"></h:inputText>
                         
                         <label for="Konten">Konten:</label><br/>
                         <h:inputTextarea value="#{Post.konten}" rows="20" cols="20" id="Konten"></h:inputTextarea>
 
-                        <h:commandButton onclick="return validasiTanggal(document.getElementById('Tanggal'))" action="#{Post.insertPost()}" value="Simpan" class="submit-button" />  
+                        <h:commandButton action="#{Post.insertPost()}" value="Simpan" class="submit-button" onclick="return validasiTanggal(document.formPost.Tanggal)"/>  
 
                     </h:form>
                 </div>

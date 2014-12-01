@@ -24,8 +24,10 @@ public class login_bean {
     private String username;
     private String password;
     private String role;
+    private String email;
     private String dbusername;
     private String dbpassword;
+    private String dbemail;
     private String dbrole;
     private boolean remember;
     String rememberstr;
@@ -54,7 +56,9 @@ public class login_bean {
     public String getUsername(){
         return username;
     }
-    
+     public String getEmail(){
+        return email;
+    }
     public boolean getRemember(){
         return remember;
     }
@@ -69,6 +73,9 @@ public class login_bean {
     
     public void setUsername(String username){
         this.username = username;
+    }
+    public void setEmail(String email){
+        this.email = email;
     }
     
     public void setRemember(boolean remember){
@@ -88,7 +95,8 @@ public class login_bean {
         rs.next();
         dbusername = rs.getString(2);
         dbpassword = rs.getString(3);
-        dbrole = rs.getString(4);
+        dbemail = rs.getString(4);
+        dbrole = rs.getString(5);
         con.close();
     }
     
@@ -97,13 +105,14 @@ public class login_bean {
         if(username.equalsIgnoreCase(dbusername)){
             if(password.equals(dbpassword)){
                 role = dbrole;
-                
+                email = dbemail;
                 FacesContext facesContext = FacesContext.getCurrentInstance();
                 
                 //Save the username and password in a cookie
                 Cookie usercookie = new Cookie("usercookie", username);
                 Cookie passcookie = new Cookie("passcookie", password);
                 Cookie rolecookie = new Cookie("rolecookie", role);
+                Cookie emailcookie = new Cookie("emailcookie", role);
                 
                 //Check if checkbox remember me is checked
                 if(remember == false){
@@ -119,11 +128,13 @@ public class login_bean {
                 usercookie.setMaxAge(86400);
                 passcookie.setMaxAge(86400);
                 rolecookie.setMaxAge(86400);
+                emailcookie.setMaxAge(86400);
                 
                 //Add the cookies to response
                 ((HttpServletResponse) facesContext.getExternalContext().getResponse()).addCookie(usercookie);
                 ((HttpServletResponse) facesContext.getExternalContext().getResponse()).addCookie(passcookie);
                 ((HttpServletResponse) facesContext.getExternalContext().getResponse()).addCookie(rolecookie);
+                ((HttpServletResponse) facesContext.getExternalContext().getResponse()).addCookie(emailcookie);
                 ((HttpServletResponse) facesContext.getExternalContext().getResponse()).addCookie(remembercookie);
                 
                 return "valid";
@@ -152,6 +163,8 @@ public class login_bean {
                 } else if(cookiename.equals("passcookie")){
                     password = cookies[i].getValue();
                 } else if(cookiename.equals("rolecookie")){
+                    password = cookies[i].getValue();
+                } else if(cookiename.equals("emailcookie")){
                     password = cookies[i].getValue();
                 } else if(cookiename.equals("remembercookie")){
                     rememberstr = cookies[i].getValue();

@@ -25,6 +25,11 @@ and open the template in the editor.
         <managed-bean-class>beans.Post</managed-bean-class>
         <managed-bean-scope>session</managed-bean-scope>    
     </managed-bean>
+    <managed-bean>
+        <managed-bean-name>Komentar</managed-bean-name>
+        <managed-bean-class>beans.Komentar</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>    
+    </managed-bean>
     <navigation-rule>
         <description>Login Page</description>
         <from-view-id>/login.jsp</from-view-id>

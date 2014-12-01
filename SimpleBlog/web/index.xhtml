@@ -35,6 +35,9 @@ and open the template in the editor.
                 <c:if test="${(login_bean.role == 'admin') || (login_bean.role == 'editor')}" >
                     <li><h:link value="Publish Post" outcome="publish_post" /></li>
                 </c:if>
+                <c:if test="${(login_bean.role == 'admin')}" >
+                    <li><h:link value="Manajemen User" outcome="admin crud.xhtml" /></li>
+                </c:if>
                 <c:if test="${(login_bean.role == null)}" >
                     <li><h:link value="Login" outcome="login.jsp" /></li>
                 </c:if>
@@ -64,7 +67,7 @@ and open the template in the editor.
                                 <c:if test="${(login_bean.role == 'admin') || (login_bean.role == 'owner')}" >
                               <h:commandLink value="Edit" action="#{Post.setDBE(item.id_post)}" /> |
                                 </c:if>
-                               <h:commandLink value="Hapus" onclick="javascript:konfirmDelete()" action="#{Post.hapusPost(item.id_post)}" />
+                               <h:commandLink value="Hapus" onclick="return confirm('Apakah Anda yakin menghapus pos ini?')" action="#{Post.hapusPost(item.id_post)}" />
                                <!-- <a href="javascript:konfirmDelete()">Hapus</a> -->
                             </p>
                             </h:form>

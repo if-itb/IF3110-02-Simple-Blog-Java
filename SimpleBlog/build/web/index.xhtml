@@ -35,6 +35,9 @@ and open the template in the editor.
                 <c:if test="${(login_bean.role == 'admin') || (login_bean.role == 'editor')}" >
                     <li><h:link value="Publish Post" outcome="publish_post" /></li>
                 </c:if>
+                <c:if test="${(login_bean.role == 'admin')}" >
+                    <li><h:link value="Manajemen User" outcome="admin crud.xhtml" /></li>
+                </c:if>
                 <c:if test="${(login_bean.role == null)}" >
                     <li><h:link value="Login" outcome="login.jsp" /></li>
                 </c:if>
