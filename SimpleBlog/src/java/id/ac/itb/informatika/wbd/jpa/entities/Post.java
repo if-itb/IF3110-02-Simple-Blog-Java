@@ -46,6 +46,9 @@ public class Post implements Serializable {
     @Column(name = "post_published")
     private Boolean published;
     
+    @Column(name = "post_deleted")
+    private Boolean deleted;
+
     @Column(name = "post_modified")
     @Temporal(TemporalType.TIMESTAMP)
     private Date modified;
@@ -127,6 +130,15 @@ public class Post implements Serializable {
     public void setModified(Date modified) {
         this.modified = modified;
     }
+    
+    public Boolean getDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(Boolean deleted) {
+        this.deleted = deleted;
+    }
+    
 
     @Override
     public int hashCode() {
