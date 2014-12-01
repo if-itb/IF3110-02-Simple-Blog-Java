@@ -60,6 +60,10 @@
         <validator-id>emailValidator</validator-id>       
         <validator-class>validator.EmailValidator</validator-class>
     </validator>
+    <validator>
+        <validator-id>dateValidator</validator-id>       
+        <validator-class>validator.DateValidator</validator-class>
+    </validator>
     <managed-bean>
         <managed-bean-name>komentar</managed-bean-name>
         <managed-bean-class>model.Komentar</managed-bean-class>

@@ -29,7 +29,10 @@ and open the template in the editor.
                                         </h:inputText>
                                         <label for="Tanggal">Tanggal:</label>
                                         <h:inputText id="Tanggal" value="#{postAddBean.post.date}">
+                                            <f:validator validatorId="dateValidator" for="Tanggal"/>
                                         </h:inputText>
+                                        <h:message styleClass="error_message" id="date_message" for="Tanggal" />
+                                        <p size ="10px" id="errmsg"></p>
                                         <br> </br>
                                         <label for="Konten">Konten:</label><br></br>
                                         <h:inputTextarea rows="20" cols="50" id="Konten" value="#{postAddBean.post.konten}">
@@ -43,31 +46,7 @@ and open the template in the editor.
                         </div>
 
             </article>
-            <script>
-                function validateForm() {
-                    var judul = document.getElementById("Judul").value;
-                    var konten = document.getElementById("Konten").value;
-                    var date_input = new Date(document.getElementById("Tanggal").value);
-                    var date_now = new Date();
-                    console.log("date input : " + date_input);
-                    console.log("date now : " + date_now);
-                    console.log("judul:  " + judul);
-                    console.log("konten: " + konten);
-                    if (judul == "" || konten == "" || date_input =="") {
-                        alert("Semua form harus diisi");
-                        return false;
-                    }
-                    else {
-                        if (date_input.setHours(0,0,0,0) >= date_now.setHours(0,0,0,0)) {
-                            return true;
-                        }
-                        else {
-                            alert("Tanggal salah. Pastikan format benar dan lebih dari hari ini");
-                            return false;
-                        }
-                    }
-                }
-            </script>
+            
             </ui:define>
         </ui:composition>>
     </h:body>

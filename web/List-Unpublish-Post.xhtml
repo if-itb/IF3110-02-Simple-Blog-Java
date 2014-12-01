@@ -24,7 +24,9 @@
                                     </p>
                                 <h:link styleClass="pure-button" outcome="#{NavigationController.gotoEditPost(item.PID)}">Edit Post</h:link>
                                 <h:form>
-                                    <h:commandButton styleClass="pure-button" action="#{postDeleteBean.delete(item.PID)}" value="Delete Post"></h:commandButton>
+                                    <h:commandButton styleClass="pure-button" 
+                                                     onclick="return confirm('Are you sure you want delete this?')"
+                                                     action="#{postDeleteBean.delete(item.PID)}" value="Delete Post"></h:commandButton>
                                 </h:form>
                                     
                                    <h:form>
