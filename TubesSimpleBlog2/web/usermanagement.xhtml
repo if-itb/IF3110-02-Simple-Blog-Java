@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+       
+       
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:c="http://java.sun.com/jsp/jstl/core"
+	  xmlns:f="http://xmlns.jcp.org/jsf/core">
+<link rel="stylesheet" href="style.css" type="text/css" />
+    <head>
+        <title>Simple Blog | User Management</title>
+        <meta name="viewport" content="width=device-width"/>
+    </head>
+    <body>
+	<div class="header"> 
+            <h:form>
+                <h:commandLink action="index" value="Simple Blog" style="color:white;"/>
+            </h:form>
+        </div>
+        <div id="nav"> 
+            <h:form>
+		<h:commandLink rendered="#{sampleBean.role eq 'admin'}" action="usermanagement" value="User Management    "></h:commandLink>
+                &nbsp;&nbsp;&nbsp;
+                <h:commandLink rendered="#{sampleBean.role eq 'admin'}" action="deleted_post" value="See Deleted Post    "></h:commandLink>
+		&nbsp;&nbsp;&nbsp;
+                <h:commandLink rendered="#{sampleBean.role eq 'admin' or sampleBean.role eq 'editor'}" action="unpublished_post" value="See Unpublished    "></h:commandLink>
+                 &nbsp;&nbsp;&nbsp;
+                <h:commandLink rendered="#{sampleBean.role eq 'admin' or sampleBean.role eq 'owner'}" action="add_post" value="Add Post    "></h:commandLink>
+                 &nbsp;&nbsp;&nbsp;
+                <h:form rendered="#{sampleBean.role eq 'admin' or sampleBean.role eq 'editor' or sampleBean.role eq 'owner'}"><a href="Logout">Logout</a></h:form>
+            </h:form>
+        </div>
+	<h1>User Management</h1><div id="main">
+	<h:form>              <hr></hr>
+                      
+            <c:forEach items="#{userManagement.arrUser}" var="user">    
+                <p>
+                <br/><h2><h:outputText value="#{user.username}"></h:outputText></h2>
+                <br/> <h:outputText value="#{user.role}"></h:outputText>
+                <br/><h:commandLink action="#{user.deleteUser(user.userID)}" value="Delete"></h:commandLink>&nbsp;&nbsp;
+                <h:commandLink action="updateuser" value="Update">
+                        <f:param name="iduser" value="#{user.userID}" />
+                        <div class="hr"><hr/></div>
+                </h:commandLink></p>
+            </c:forEach>
+            <br/><br/>
+            <h3><h:commandLink action="createuser" value="Create"></h:commandLink></h3>
+            </h:form>
+</div>
+	<div id="footer"> rita | cilvia | linda </div>
+		
+	</body>
+</html>

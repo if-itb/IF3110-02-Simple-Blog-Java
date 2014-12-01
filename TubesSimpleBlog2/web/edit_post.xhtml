@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:c="http://java.sun.com/jsp/jstl/core"
+	  xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Simple Blog | Edit Post</title>
+        <link rel="stylesheet" href="style.css" type="text/css" />
+    </h:head>
+    <h:body>
+        <div class="header"> 
+            <h:form>
+                <h:commandLink action="index" value="Simple Blog" style="color:white;"/>
+            </h:form>
+        </div>
+        <div id="nav"> 
+            <h:form>
+		<h:commandLink rendered="#{sampleBean.role eq 'admin'}" action="usermanagement" value="User Management    "></h:commandLink>
+                &nbsp;&nbsp;&nbsp;
+                <h:commandLink rendered="#{sampleBean.role eq 'admin'}" action="deleted_post" value="See Deleted Post    "></h:commandLink>
+		&nbsp;&nbsp;&nbsp;
+                <h:commandLink rendered="#{sampleBean.role eq 'admin' or sampleBean.role eq 'editor'}" action="unpublished_post" value="See Unpublished    "></h:commandLink>
+                 &nbsp;&nbsp;&nbsp;
+                <h:commandLink rendered="#{sampleBean.role eq 'admin' or sampleBean.role eq 'owner'}" action="add_post" value="Add Post    "></h:commandLink>
+                 &nbsp;&nbsp;&nbsp;
+                <h:form rendered="#{sampleBean.role eq 'admin' or sampleBean.role eq 'editor' or sampleBean.role eq 'owner'}"><a href="Logout">Logout</a></h:form>
+            </h:form>
+        </div>
+        <div id="main">
+        <h2> Edit Post </h2>
+           <p>
+               #{post.showPost(param['idpost'])}
+              <h:form id="formpost" onsubmit="return validasiTanggal()">
+                <br/>Judul : <h:inputText id="judul" value="#{post.title}"/>
+                <br/>Tanggal :  <h:inputText id="tanggal" value="#{post.date}">
+                    <f:convertDateTime pattern="yyyy-MM-dd"/>
+                   </h:inputText>
+                <br/>Konten :  <h:inputText id="konten" value="#{post.content}"/>
+                <br/><h:commandButton value="Submit" action="#{post.editPost()}" onclick="return check()"/>
+              </h:form>
+           </p>
+        </div>
+        <script type="text/javascript">
+        function validasiTanggal(){
+            var tanggal = document.formpost["formpost:tanggal"].value; 
+
+                if(tanggal.match(/^\d{4}-\d{2}-\d{2}$/)){
+                        var now = new Date();
+                        now.setHours(0,0,0,0);
+                        tanggal = new Date(tanggal);
+                        if(tanggal>=now){return true;}
+                        else{alert("Input tanggal salah"); return false;}
+                } else {
+                        alert("Format tanggal salah");
+                        return false;
+                }
+        }
+        </script>
+    </h:body>
+</html>

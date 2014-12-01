@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:c="http://java.sun.com/jsp/jstl/core"
+	  xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <link rel="stylesheet" href="style.css" type="text/css" />
+        <title>Simple Blog | Unpublished Post</title>
+    </h:head>
+    <h:body>
+	<div class="header"> 
+            <h:form>
+                <h:commandLink action="index" value="Simple Blog" style="color:white;"/>
+            </h:form>
+        </div>
+        <div id="nav"> 
+            <h:form>
+		<h:commandLink rendered="#{sampleBean.role eq 'admin'}" action="usermanagement" value="User Management    "></h:commandLink>
+                &nbsp;&nbsp;&nbsp;
+                <h:commandLink rendered="#{sampleBean.role eq 'admin'}" action="deleted_post" value="See Deleted Post    "></h:commandLink>
+		&nbsp;&nbsp;&nbsp;
+                <h:commandLink rendered="#{sampleBean.role eq 'admin' or sampleBean.role eq 'editor'}" action="unpublished_post" value="See Unpublished    "></h:commandLink>
+                 &nbsp;&nbsp;&nbsp;
+                <h:commandLink rendered="#{sampleBean.role eq 'admin' or sampleBean.role eq 'owner'}" action="add_post" value="Add Post    "></h:commandLink>
+                 &nbsp;&nbsp;&nbsp;
+                <h:form rendered="#{sampleBean.role eq 'admin' or sampleBean.role eq 'editor' or sampleBean.role eq 'owner'}"><a href="Logout">Logout</a></h:form>
+            </h:form>
+        </div>
+        
+	<h1> List Unpublished Post </h1>
+    <hr/>
+        <c:forEach items="#{listPost.arrPostUnpublished}" var="pos">							
+            <h:form>
+                <br/><h2><h:outputText value="#{pos.title}"></h:outputText>    </h2>
+                <br/><h3><h:outputText value="#{pos.date}"></h:outputText></h3>
+                <br/><p> <h:outputText value="#{pos.content}"></h:outputText></p>
+                <br/> &nbsp;&nbsp;<h:commandLink action="#{post.changeStatus(pos.IDPost)}" value="Publish"></h:commandLink>
+                &nbsp;&nbsp;<h:commandLink action="edit_post" value="Edit">
+			<f:param name="idpost" value="#{pos.IDPost}" />
+                    </h:commandLink>
+		<hr/>
+            </h:form>
+	</c:forEach>
+			
+	<div id="footer">rita | cilvia | linda </div>		
+    </h:body>
+</html>
+

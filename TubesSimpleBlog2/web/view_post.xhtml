@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+	  xmlns:f="http://xmlns.jcp.org/jsf/core"
+	  xmlns:c="http://java.sun.com/jsp/jstl/core"
+	  xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Simple Blog | View Post</title>
+        <meta name="viewport" content="width=device-width"/>
+                <link rel="stylesheet" href="style.css" type="text/css" />
+    </h:head>
+    <h:body>
+        <div class="header"> 
+            <h:form>
+                <h:commandLink action="index" value="Simple Blog" style="color:white;"/>
+            </h:form>
+        </div>
+        <div id="nav"> 
+            <h:form>
+		<h:commandLink rendered="#{sampleBean.role eq 'admin'}" action="usermanagement" value="User Management    "></h:commandLink>
+                &nbsp;&nbsp;&nbsp;
+                <h:commandLink rendered="#{sampleBean.role eq 'admin'}" action="deleted_post" value="See Deleted Post    "></h:commandLink>
+		&nbsp;&nbsp;&nbsp;
+                <h:commandLink rendered="#{sampleBean.role eq 'admin' or sampleBean.role eq 'editor'}" action="unpublished_post" value="See Unpublished    "></h:commandLink>
+                 &nbsp;&nbsp;&nbsp;
+                <h:commandLink rendered="#{sampleBean.role eq 'admin' or sampleBean.role eq 'owner'}" action="add_post" value="Add Post    "></h:commandLink>
+                 &nbsp;&nbsp;&nbsp;
+                <h:form rendered="#{sampleBean.role eq 'admin' or sampleBean.role eq 'editor' or sampleBean.role eq 'owner'}"><a href="Logout">Logout</a></h:form>
+            </h:form>
+        </div>
+            <div id="main">
+            <h1>View Post</h1>
+            <hr/>
+            #{komentar.setNama(sampleBean.nama)}        
+            #{komentar.setEmail(sampleBean.email)}
+            #{listKomentar.showPage()}
+            <h2 style="font-size:40px"> #{viewPost.judul}</h2>      
+            <p style="font-size:22px"> <h:outputText value="#{viewPost.tanggal}"></h:outputText></p>
+            <p style="font-size:21px"><h:outputText value="#{viewPost.konten}"></h:outputText></p>
+         
+             <br/><br/>
+             <hr/>
+             <h1 style="font-size:20px">Komentar</h1>
+             <p><h:form rendered="#{sampleBean.role ne 'editor'}" id="formcomment" onsubmit="return validasiEmail()">
+                     &nbsp;&nbsp;&nbsp;
+		<h:outputText rendered="#{sampleBean.role ne 'owner' and sampleBean.role ne 'admin'}" id="textname" value=" Nama : "/>
+                <h:inputText rendered="#{sampleBean.role ne 'owner' and sampleBean.role ne 'admin'}" id="name" value="#{komentar.nama}"></h:inputText>
+    		<h:outputText rendered="#{sampleBean.role ne 'owner' and sampleBean.role ne 'admin'}" id="textemail" value=" Email : "/>
+                <h:inputText rendered="#{sampleBean.role ne 'owner' and sampleBean.role ne 'admin'}" id="email" value="#{komentar.email}"></h:inputText>
+                Komentar : <h:inputText id="koment" value="#{komentar.komentar}"></h:inputText>  
+		<h:commandButton value="Add my comment" action="#{komentar.addComment()}" onclick="return check();">
+                    <f:ajax execute="@form" render="comment-list @form"/>
+                </h:commandButton>  		
+       
+                <div>
+                    <h:panelGroup id="comment-list">
+                        <ui:repeat value="#{listKomentar.arrKomentar}" var="value">
+                            <h2 >#{value.nama}</h2> <br/>
+                            <p>Posted At #{value.tanggal}</p>
+                            <p>#{value.komentar}</p>
+                            <div class="hr"><hr/></div>
+                        </ui:repeat>
+                    </h:panelGroup>
+                </div>
+            </h:form></p>
+             
+            <h:form rendered="#{sampleBean.role eq 'editor'}">
+                <c:forEach items="#{listKomentar.arrKomentar}"  var="komen">
+                    <p>  <br/><h:outputText value="#{komen.nama}"></h:outputText> 
+                    <br/> Posted At <h:outputText value="#{komen.tanggal}"></h:outputText>
+                    <br/><h:outputText value="#{komen.komentar}"></h:outputText></p>
+                    <div class="hr"> <hr></hr></div>
+                </c:forEach>
+            </h:form>
+             </div>
+        
+	<div id="footer">rita | cilvia | linda </div>
+        
+        <script type="text/javascript">
+
+function validasiEmail(){
+var mail= document.formcomment["formcomment:email"].value; 
+if(mail.match(/^[_A-Za-z0-9-]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)*(\.[A-Za-z]+)$/g))
+{return true;}
+else{
+alert ("Salah Email");
+return false;}}
+
+        </script>   
+
+    </h:body>
+</html>
+

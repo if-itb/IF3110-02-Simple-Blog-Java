@@ -1,0 +1,100 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Nov 23, 2014, 8:27:30 PM
+    Author     : ASUS
+*/
+h1{ //Banner
+//   color:maroon;
+   margin-top:0 !important ;
+padding-top: 0;
+margin-left:30px;
+} 
+
+body{
+   font-family: Calibri;
+}
+
+h2 {
+    font-family:Cambria; 
+    text-shadow: 4px;
+    margin-left:30px;
+    color:maroon;
+}
+
+h3{
+    font-size: 12px;
+    margin-left:30px;
+}
+
+html,body{
+    margin:0px !important ;
+    padding:0px !important ;
+    margin-left:30px;
+}
+.header {
+height:40px;
+background-color: #000000;
+width:100%;
+margin:0px;
+padding-top:5px;
+padding-left:10px;
+font-family: Century Gothic;
+font-size:25px;
+color:#FFFFFF !important;
+}
+
+#footer{
+    height:20px;
+background-color: #000000;
+width:100%;
+margin:0px;
+padding-bottom:5px;
+padding-right:10px;
+font-family: Century Gothic;
+font-size:15px;
+color:#FFFFFF;
+text-align: right;
+clear:both;
+}
+hr{
+    width:800px;
+    margin-left:10px;
+}
+
+p{
+       margin-left:30px;
+}
+
+    #wrap {
+    width:750px;
+    margin:0 auto;
+    background:#99c;
+    }
+#nav {
+text-align:right;
+font-family:Cambria;
+}
+#main {
+float:left;
+width:1100px;
+text-align:left;
+margin-left:30px;
+}
+#sidebar {
+float:right;
+width:150px;
+text-align:center;
+}
+
+div.hr {
+}
+
+div.hr hr {
+  width:430px;
+ opacity: 0.5;
+}
+    
