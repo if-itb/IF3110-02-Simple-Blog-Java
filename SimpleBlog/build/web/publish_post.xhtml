@@ -50,7 +50,7 @@ and open the template in the editor.
                                 <c:if test="${(login_bean.role == 'admin') || (login_bean.role == 'owner')}" >
                               <h:commandLink value="Edit" action="#{Post.setDBE(item.id_post)}" /> |
                                 </c:if>
-                                <h:commandLink value="Publish" action="#{publish_bean.changeStatus(item.id_post)}" onclick="javascript:konfirmPublish()" /> 
+                                <h:commandLink value="Publish" action="#{publish_bean.changeStatus(item.id_post)}" onclick="return confirm('Apakah Anda ingin mem-publish pos ini?')" /> 
                                <!-- <a href="javascript:konfirmPublish()" onclick="{publish_bean.changeStatus(item.id_post)}" >Publish</a> -->
                             </p>
                             </h:form>
