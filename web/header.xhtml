@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition >
+<nav class="nav">
+<!--    <a style="border:none;" id="logo" href="index.xhtml"><h1>Simple<span>-</span>Blog</h1></a>-->
+    <h1><h:link style="border: none" id="logo" value="Simple - Blog" outcome="index"></h:link></h1>
+    <ul class="nav-primary">
+        <li><h:outputText value="Howdy, #{cookieCheck.UName}"></h:outputText></li>
+        <li><h:link rendered="#{cookieCheck.adminORowner()}" value="+ Tambah Post" outcome="new_post"></h:link></li>
+        <li><h:link rendered="#{cookieCheck.adminOReditor()}" value="Unpublished Post" outcome="unpublished"></h:link></li>
+        <li><h:link rendered="#{!cookieCheck.loggedIn}" value="Login" outcome="login"></h:link></li>
+        <li><h:form><h:commandLink rendered="#{cookieCheck.loggedIn}" value="Logout" action="#{logout.Logout()}"></h:commandLink></h:form></li>
+        <li><h:link rendered="#{cookieCheck.admin}" value="Soft Del" outcome="softdelete"></h:link></li>
+        <li><h:link rendered="#{cookieCheck.admin}" value="Manage User" outcome="ManageUser"></h:link></li>
+    </ul>
+</nav>
+
+</ui:composition>
+</html>

@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+    <ui:include src="header-script.xhtml"/>
+    <title>Simple Blog</title>
+</h:head>
+    <h:body class="default" onload="#{viewPost.clear()}">
+<div class="wrapper">
+<ui:include src="header.xhtml"/>
+
+<div id="home">
+    <div class="posts">
+        <nav class="art-list">
+          <ul class="art-list-body">
+              <ui:repeat value="#{viewPost.ambilPostList()}" var="list">
+                  <li class="art-list-item">
+                      <div class="art-list-item-title-and-time">
+                          <h2 class="art-list-title">
+                              <a href="post.xhtml?id=#{list.idpost}">#{list.judul}</a>
+                          </h2>
+                          <div class="art-list-time">#{list.tanggal}</div>
+                      </div>
+                      <p>
+                         #{list.konten}
+                      </p>
+                      <p>
+                          <h:form><a><h:link rendered="#{cookieCheck.loggedIn}" value="Edit" outcome="edit_post.xhtml?id=#{list.idpost}"/></a> |
+                              <a><h:commandLink rendered="#{cookieCheck.loggedIn}" value="Hapus" onclick="if (!confirm('Hapus?')) return false;" action="#{deletePost.deletePost()}"/></a></h:form>
+                      </p>
+                  </li>
+              </ui:repeat>
+          </ul>
+        </nav>
+    </div>
+</div>
+
+<ui:include src="footer.xhtml"/>
+</div>
+
+<ui:include src="footer-script.xhtml"/>
+
+</h:body>
+</html>
+

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      >
+    <h:head>
+        <ui:include src="header-script.xhtml"/>
+        <title>Simple Blog | Manage User</title>
+    </h:head>
+    <h:body class="default">
+    <div class="wrapper">
+    <ui:include src="header.xhtml"/>
+      <div class="art-body">
+       <div class="art-body-inner">
+    	<h2>Manage User</h2>
+        <div id="contact-area">
+            <h:form rendered="#{cookieCheck.admin}">
+            <h:dataTable value="#{manUser.users}" var="o"
+    			styleClass="order-table"
+    			headerClass="order-table-header"
+    			rowClasses="order-table-odd-row,order-table-even-row"
+    		>
+
+    			<h:column>
+    			
+    				<f:facet name="header">Username</f:facet>
+    				#{o.usrname}
+    				
+    			</h:column>
+    			    			
+    			<h:column>
+    				
+    				<f:facet name="header">Nama</f:facet>
+    				#{o.nama_usr}
+    				
+    			</h:column>
+    			
+    			<h:column>
+    				
+    				<f:facet name="header">Email</f:facet>
+    				#{o.email_usr}
+    				
+    			</h:column>
+                
+                        <h:column>
+    				
+    				<f:facet name="header">Role</f:facet>
+    				#{o.role}
+    				
+    			</h:column>
+    		
+    			<h:column>
+    				
+    				<f:facet name="header">Action</f:facet>
+    				
+                                <h:commandLink value="Hapus" action="#{manUser.delAction(o)}" />
+                                <h:commandLink value="Edit" action="#{manUser.editAction(o)}" />
+    				
+    			</h:column>
+    			
+    		</h:dataTable>
+    		
+    		<h6>Tambah User</h6>
+    		<table>
+    		<tr>
+    			<td>Username :</td>
+                        <td><h:inputText size="10" value="#{manUser.usrname}" /></td>
+    		</tr>
+    		<tr>
+    			<td>Password :</td>
+                        <td><h:inputSecret size="20" value="#{manUser.passwrd}" /></td>
+    		</tr>
+    		<tr>
+    			<td>Nama :</td>
+                        <td><h:inputText size="5" value="#{manUser.nama_usr}" /></td>
+    		</tr>
+    		<tr>
+    			<td>Email :</td>
+                        <td><h:inputText id="email" size="10" validatorMessage="Invalid email format" required="true" value="#{manUser.email_usr}">
+                                <f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
+                            </h:inputText>
+                            <h:message for="email" style="color: red; font-size: small"/> </td>
+    		</tr>
+                <tr>
+    			<td>Role :</td>
+                        <td><h:selectOneMenu value="#{manUser.role}" >
+                            <f:selectItem itemValue="owner" itemLabel="Owner"/>
+                            <f:selectItem itemValue="editor" itemLabel="Editor"/>
+                            </h:selectOneMenu>
+                        </td>
+    		</tr>
+    		</table>
+    		
+                <h:commandButton value="Add" action="#{manUser.addAction}" />
+    		
+            </h:form>
+            <h:outputText rendered="#{!cookieCheck.admin}" value="Anda harus login sebagai admin!"></h:outputText>
+            </div>
+        </div>
+    </div>
+    <ui:include src="footer.xhtml"/>
+    </div>
+    <ui:include src="footer-script.xhtml"/>
+    </h:body>
+		
+</html>

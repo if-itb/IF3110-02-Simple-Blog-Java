@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      >
+    <h:head>
+        <ui:include src="header-script.xhtml"/>
+        <title>Simple Blog | <h:outputText value="#{viewPost.judul}"></h:outputText> </title>
+    </h:head>
+    <h:body class="default" onload="#{viewPost.ambilPostdanComment()}" >
+    <div class="wrapper">
+    <ui:include src="header.xhtml"/>
+
+    <article class="art simple post">
+        <header class="art-header">
+            <div class="art-header-inner" style="margin-top: 0px; opacity: 1;">
+                <time class="art-time">#{viewPost.tanggal}</time>
+                <h2 class="art-title">#{viewPost.judul}</h2>
+                <p class="art-subtitle"></p>
+            </div>
+        </header>
+        <div class="art-body">
+        <div class="art-body-inner">
+            <hr class="featured-article" />
+            #{viewPost.konten}
+            <hr />
+            
+            <h2>Komentar</h2>
+
+            <div id="contact-area">
+                <h:form >
+                    <h:outputLabel for="Nama">Nama:</h:outputLabel>
+                    <h:inputText id="Nama" value="#{viewPost.nama}" required="true" />
+        
+                    <h:outputLabel for="Email">Email:</h:outputLabel>
+                    <h:inputText id="Email" value="#{viewPost.email}" required="true" />
+                    
+                    <h:outputLabel for="Komentar">Komentar:</h:outputLabel><br/>
+                    <h:inputTextarea rows="20" cols="20" id="Komentar" value="#{viewPost.komen}" required="true"></h:inputTextarea>
+                   
+                    <h:commandButton id="submit" value="Kirim" class="submit-button" action="#{viewPost.executeComment()}"/>
+                </h:form>
+            </div>            
+            <ui:repeat value="#{viewPost.listkomen}" var="list">
+                <ul class="art-list-body">
+                    <div class="art-list-item-title-and-time">
+                        <h2 class="art-list-title">#{list.nama}</h2>
+                        <div class="art-list-time">#{list.tgl_komen}</div>
+                    </div>
+                    <p>
+                        #{list.komen}
+                    </p>
+                </ul>                
+            </ui:repeat>
+        </div>
+    </div>
+    </article>
+    
+<ui:include src="footer.xhtml"/>
+    </div>
+    <ui:include src="footer-script.xhtml"/>
+    </h:body>
+		
+</html>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      >
+    <h:head>
+        <ui:include src="header-script.xhtml"/>
+        <title>Simple Blog | Edit Post</title>
+    </h:head>
+    <h:body class="default" onload="#{editPost.getPost()}">
+    <div class="wrapper">
+    <ui:include src="header.xhtml"/>
+    
+<article class="art simple post">
+    
+    
+    <h2 class="art-title" style="margin-bottom:40px">-</h2>
+
+    <div class="art-body">
+        <div class="art-body-inner">
+            <h2>Edit Post</h2>
+            
+            <div id="contact-area">
+                <h:form id="form1" >
+                    <h:outputLabel for="Judul">
+                        Judul :
+                    </h:outputLabel>
+                    <h:inputText id="Judul" value="#{editPost.judul}" required=""/>
+                    
+                    <h:outputLabel for="Tanggal">
+                        Tanggal :
+                    </h:outputLabel>
+                    <h:inputText id="Tanggal" value="#{editPost.tanggal}" required="true" validatorMessage="invalid">
+                        <f:validateRegex pattern="^\d{4}[\-](0?[1-9]|1[012])[\-](0?[1-9]|[12][0-9]|3[01])$" />
+                    </h:inputText>
+                    <h:message for="Tanggal" style="color: red; font-size: small"/>
+                    
+                    <h:outputLabel for="Konten">
+                        Konten :
+                    </h:outputLabel>
+                    <h:inputTextarea id="Konten" rows="20" cols="20" value="#{editPost.konten}" required="" />
+                    <h:inputHidden value="#{editPost.idpost}" />
+                    
+                    <h:commandButton class="submit-button" value="Simpan" id="submit" type="submit" action="#{editPost.saveEditPost()}" />
+                </h:form>
+            </div>
+        </div>
+    </div>
+
+</article>
+
+<ui:include src="footer.xhtml"/>
+    </div>
+    <ui:include src="footer-script.xhtml"/>
+    </h:body>
+		
+</html>
