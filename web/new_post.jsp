@@ -59,7 +59,35 @@
 
 <title>Simple Blog | Tambah Post</title>
 
+<script type="text/javascript">
+    function checkDate()
+{
+	var re = /^(\d{4})\/(\d{1,2})\/(\d{1,2})$/;
+	var dateField = document.getElementById("Tanggal");
+	var errorMessage = document.getElementById("errorMessage");
+	if ((re.test(dateField.value)) && (dateField.value != ''))
+	{
+		dateString = dateField.value.split("/");
 
+		date = new Date(dateString[0], dateString[1] - 1, dateString[2], 23, 59, 59);
+		currentDate = new Date();
+
+		if (date <= currentDate)
+		{
+			errorMessage.innerHTML = "Tanggal harus lebih baru atau sama dengan hari ini";
+			return false;
+		} else {
+			errorMessage.innerHTML = "";
+			return true;
+		}
+
+	}else {
+		
+		errorMessage.innerHTML = "Format tanggal adalah YYYY/MM/DD";
+		return false;
+	}
+}
+</script>
 </head>
 
 <body class="default">
@@ -82,7 +110,8 @@
             <h2>Tambah Post</h2>
 
             <div id="contact-area">
-                <form method="post" action="#">
+                <form method="post">
+                    <div id="errorMessage"></div>
                     <label for="Judul">Judul:</label>
                     <input type="text" name="Judul" id="Judul">
 
@@ -92,7 +121,7 @@
                     <label for="Konten">Konten:</label><br>
                     <textarea name="Konten" rows="20" cols="20" id="Konten"></textarea>
 
-                    <input type="submit" name="submit" value="Simpan" class="submit-button">
+                    <input type="submit" name="submit" value="Simpan" onclick="return checkDate();" class="submit-button">
                 </form>
             </div>
         </div>
