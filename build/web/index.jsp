@@ -73,7 +73,7 @@
 			<%
 				PostBean pBean =  new PostBean();
 				for(int i=0;i<pBean.listManyPost().size();i++){
-					if(pBean.listManyPost().get(i).getStatus() != 0){
+					if(pBean.listManyPost().get(i).getStatus() == 1){
 			%>	
 			<li class="art-list-item">
 				<div class="art-list-item-title-and-time">
@@ -107,7 +107,7 @@
     {
       var x = confirm("Apakah Anda yakin menghapus post ini?");
       if (x)
-          return window.location.assign('delete.jsp?id='+nomor);
+          return window.location.assign('trashPost.jsp?id='+nomor);
       else
         return false;
     }

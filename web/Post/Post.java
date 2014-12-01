@@ -12,6 +12,7 @@ import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import org.apache.jasper.*;
 /**
  *
  * @author adwisatya
@@ -99,6 +100,30 @@ public class Post {
 				ps.close();
 				conn.close();
 			} catch (SQLException e) {
+				throw e;
+			}
+		}
+	} 
+	public static void TrashPost(String id) throws Exception{
+		Connection conn = null;
+		PreparedStatement ps = null;
+		try{
+			Class.forName(Driver).newInstance();
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/tubes2wbd", "root", "");
+			String queryUpdate = "UPDATE `post` SET `Status`=? WHERE ID='"+id+"';";
+			ps = conn.prepareStatement(queryUpdate);
+			ps.setString(1, "3");
+			if (ps.executeUpdate()==0){
+				throw new Exception("Error trashing post");
+			}
+		}catch(Exception e){
+			
+		}finally{
+			try{
+				ps.close();
+				conn.close();
+				
+			}catch(SQLException e){
 				throw e;
 			}
 		}

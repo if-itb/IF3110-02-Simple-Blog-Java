@@ -181,7 +181,7 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("    {\r\n");
       out.write("      var x = confirm(\"Apakah Anda yakin menghapus post ini?\");\r\n");
       out.write("      if (x)\r\n");
-      out.write("          return window.location.assign('delete.jsp?id='+nomor);\r\n");
+      out.write("          return window.location.assign('trashPost.jsp?id='+nomor);\r\n");
       out.write("      else\r\n");
       out.write("        return false;\r\n");
       out.write("    }\r\n");
