@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<head>
+	<meta charset="utf-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+	<meta name="description" content="Deskripsi Blog"/>
+	<meta name="author" content="Judul Blog"/>
+	
+	<!-- Twitter Card -->
+	<meta name="twitter:card" content="summary"/>
+	<meta name="twitter:site" content="omfgitsasalmon"/>
+	<meta name="twitter:title" content="Simple Blog"/>
+	<meta name="twitter:description" content="Deskripsi Blog"/>
+	<meta name="twitter:creator" content="Simple Blog"/>
+	<meta name="twitter:image:src" content="{{! TODO: ADD GRAVATAR URL HERE }}"/>
+	
+	<meta property="og:type" content="article"/>
+	<meta property="og:title" content="Simple Blog"/>
+	<meta property="og:description" content="Deskripsi Blog"/>
+	<meta property="og:image" content="{{! TODO: ADD GRAVATAR URL HERE }}"/>
+	<meta property="og:site_name" content="Simple Blog"/>
+	
+	<link rel="stylesheet" type="text/css" href="/Tubes2WBD/Web Pages/WEB-INF/templates/assets/css/screen.css" />
+	<link rel="shortcut icon" type="image/x-icon" href="/Tubes2WBD/Web Pages/WEB-INF/templates/assets/img/favicon.ico"/>
+  <title><ui:insert name="title">Simple Blog</ui:insert></title>
+</head>
+
+<body>
+<div class="wrapper">
+	<ui:insert name="header">
+		<ui:include src="/WEB-INF/templates/header.xhtml"/>
+	</ui:insert>
+	<ui:insert name="content">
+	  	
+	</ui:insert>
+	<ui:insert name="footer">
+		<ui:include src="/WEB-INF/templates/footer.xhtml"/>
+	</ui:insert>
+</div>
+</body>
+
+</html>
