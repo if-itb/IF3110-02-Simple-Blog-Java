@@ -22,6 +22,12 @@
                     |
                     <h:link value="Unpublished Post" outcome="publishPost"></h:link>
                     |
+                    <h:link value="Deleted Post" outcome="deletedPost"></h:link>
+                    |
+                </c:if>
+                <c:if test="#{userController.isEditor()}">
+                    <h:link value="Unpublished Post" outcome="publishPost"></h:link>
+                    |
                 </c:if> 
                 <h:link value="Tambah Post" outcome="addPost" ></h:link>
                 |

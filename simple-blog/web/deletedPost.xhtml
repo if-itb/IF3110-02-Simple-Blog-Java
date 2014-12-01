@@ -6,7 +6,7 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
-        <title>Facelet Title</title>
+        <title>Restore Post</title>
     </h:head>
     <h:body>
         <ui:composition template="mainTemplate.xhtml">
@@ -15,7 +15,7 @@
                 <nav class="art-list">
                   <ul class="art-list-body">
                         <!-- buat nge load content !-->
-                        <ui:repeat var="post" value="#{publishPostController.postList}">
+                        <ui:repeat var="post" value="#{postController.softDeletedPost}">
                             <li class='art-list-item'>
                                 <div class='art-list-item-title-and-time'>
                                     <h2 class='art-list-title'>
@@ -29,21 +29,22 @@
                                 <p>#{post.content}</p>
 
                                 <c:if test="#{userController.showEditHapus(post.userId)}">
-                                <h:form>
+                                <h:form onsubmit="ConfirmActionOnDeletedPost()">
                                     <p>
-                                        <h:commandLink action="#{publishPostController.publishPost(post.id)}" value="Publish"/>
-                                        | 
-                                        <h:link value="Edit" outcome="editPost">
-                                            <f:param name="post_id" value="#{post.id}"/>
-                                        </h:link>
+                                        <h:commandLink action="#{postController.restorePost(post.id)}" value="restore"/>
+                                        |
+                                        <h:commandLink action="#{postController.hardDelete(post.id)}" value="hapus"/>
                                     </p>
-                                </h:form>    
+                                </h:form>
                                 </c:if>
                             </li>
                         </ui:repeat>
                   </ul>
                 </nav>
             </div>
+            </ui:define>
+            <ui:define name="bottom">
+                <h:outputScript name="./js/delete.js" />
             </ui:define>
         </ui:composition>
     </h:body>

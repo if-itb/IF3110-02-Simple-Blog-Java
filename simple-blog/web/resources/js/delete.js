@@ -1,4 +1,4 @@
-function ConfirmDeleteIndex(ID)
+function ConfirmDeletePost()
 {
 	if (confirm("Delete Post?"))
             return true;
@@ -7,8 +7,14 @@ function ConfirmDeleteIndex(ID)
 
 function ConfirmDeleteUser(ID)
 {
-	if (confirm("Delete Post?"))
+	if (confirm("Delete User?"))
             return true;
         else return false;
 }
 
+function ConfirmActionOnDeletedPost()
+{
+        if (confirm("Are you sure?"))
+            return true;
+        else return false;
+}
