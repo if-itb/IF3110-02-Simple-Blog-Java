@@ -153,7 +153,12 @@ public class Post {
      * @return 1 apabila admin, 0 bila bukan
      */    
     public boolean isAdmin() {
-        return (user.getUsername().compareTo("admin") == 0);
+        try {
+            return (user.getRole().compareTo("admin") == 0);
+        } catch (SQLException ex) {
+            Logger.getLogger(Post.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
     }
     
     /**
@@ -161,7 +166,12 @@ public class Post {
      * @return 1 apabila admin, 0 bila bukan
      */
     public boolean isEditor() {
-        return (user.getUsername().compareTo("editor") == 0);
+        try {
+            return (user.getRole().compareTo("editor") == 0);
+        } catch (SQLException ex) {
+            Logger.getLogger(Post.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
     }
     
     /**
@@ -169,7 +179,12 @@ public class Post {
      * @return 1 apabila admin, 0 bila bukan
      */
     public boolean isOwner() {
-        return (user.getUsername().compareTo("owner") == 0);
+        try {
+            return (user.getRole().compareTo("owner") == 0);
+        } catch (SQLException ex) {
+            Logger.getLogger(Post.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
     }
     
     /**
