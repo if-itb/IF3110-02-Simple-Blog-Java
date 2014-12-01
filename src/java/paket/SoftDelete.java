@@ -17,19 +17,11 @@ import java.util.ArrayList;
  *
  * @author Mario
  */
-public class Unpublished {
+public class SoftDelete {
 
     private String idpost, judul, konten, tanggal, status, del_stat;
-    private ArrayList<Unpublished> unpub = new ArrayList<Unpublished>();
+    private ArrayList<SoftDelete> sdel = new ArrayList<SoftDelete>();
     
-    public String getDel_stat() {
-        return del_stat;
-    }
-
-    public void setDel_stat(String del_stat) {
-        this.del_stat = del_stat;
-    }
-
     public String getIdpost() {
         return idpost;
     }
@@ -69,14 +61,21 @@ public class Unpublished {
     public void setStatus(String status) {
         this.status = status;
     }
-    
+
+    public String getDel_stat() {
+        return del_stat;
+    }
+
+    public void setDel_stat(String del_stat) {
+        this.del_stat = del_stat;
+    }
     /**
-     * Creates a new instance of Unpublished
+     * Creates a new instance of SoftDelete
      */
-    public Unpublished() {
+    public SoftDelete() {
     }
     
-    public ArrayList<Unpublished> ambilPostList(){
+    public ArrayList<SoftDelete> ambilPostList(){
         String dbURL = "jdbc:mysql://localhost:3306/simple_blog";
         String uName = "root";
         String pass = "";
@@ -98,25 +97,25 @@ public class Unpublished {
             ResultSet rs = stmnt.executeQuery(sqlStr);
             
             while (rs.next()){
-                Unpublished view = new Unpublished();
+                SoftDelete view = new SoftDelete();
                 view.setIdpost(rs.getString("id_post"));
                 view.setJudul(rs.getString("judul"));
                 view.setKonten(rs.getString("konten"));
                 view.setTanggal(rs.getString("tanggal_post"));
                 view.setStatus(rs.getString("status"));
                 view.setDel_stat(rs.getString("del_stat"));
-                if ("unpublished".equals(view.getStatus().toString())){
-                    unpub.add(view);
+                if (!"0".equals(view.getDel_stat().toString())){
+                    sdel.add(view);
                 } 
             }
             
         } catch (SQLException e){
             
         }
-        return unpub;
+        return sdel;
     }
     
     public void clear(){
-        unpub.clear();
+        sdel.clear();
     }
 }

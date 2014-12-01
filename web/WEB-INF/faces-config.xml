@@ -43,4 +43,9 @@
         <managed-bean-class>paket.Unpublished</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
+    <managed-bean>
+        <managed-bean-name>softDelete</managed-bean-name>
+        <managed-bean-class>paket.SoftDelete</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
 </faces-config>
