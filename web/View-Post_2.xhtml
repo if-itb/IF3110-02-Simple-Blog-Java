@@ -46,7 +46,7 @@ and open the template in the editor.
                         <br/>
                         <label for="Email">Email:</label>
                         <h:inputText id="Email" value="#{komentar.email}" rendered="#{userBean.role == 4}">
-                            <f:validator validatorId="emailValidator" for="Email"/>
+                            
                         </h:inputText>
                         <h:message for="Email" style="color:red" />
                         <p size ="10px" id="errmsg"></p>
