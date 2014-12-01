@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:c="http://java.sun.com/jsp/jstl/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:head>
+        <title>Publish Post</title>
+        <meta name="viewport" content="width=device-width"/>
+        <link rel ="stylesheet" type="text/css" href="#{facesContext.externalContext.requestContextPath}/resources/style.css" />
+    </h:head>
+    <h:body>
+        #{post.copy(dbconnector.selectPost(param['pid']))}
+        #{dbconnector.publishPost(user,post)}
+        #{user.loggedOnRedirectToPub()}
+    </h:body>
+</html>
