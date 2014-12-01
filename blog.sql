@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.0.10deb1
+-- version 4.1.12
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: Nov 24, 2014 at 12:34 AM
--- Server version: 5.5.40-0ubuntu0.14.04.1
--- PHP Version: 5.5.9-1ubuntu4.5
+-- Host: 127.0.0.1
+-- Generation Time: Dec 01, 2014 at 03:33 PM
+-- Server version: 5.6.16
+-- PHP Version: 5.5.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -23,10 +23,10 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Comment`
+-- Table structure for table `comment`
 --
 
-CREATE TABLE IF NOT EXISTS `Comment` (
+CREATE TABLE IF NOT EXISTS `comment` (
   `PostID` int(11) NOT NULL,
   `CommentID` int(11) NOT NULL AUTO_INCREMENT,
   `Nama` varchar(50) NOT NULL,
@@ -38,19 +38,21 @@ CREATE TABLE IF NOT EXISTS `Comment` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
--- Dumping data for table `Comment`
+-- Dumping data for table `comment`
 --
 
-INSERT INTO `Comment` (`PostID`, `CommentID`, `Nama`, `Email`, `Komentar`, `Tanggal`) VALUES
-(2, 3, 'Nananananana', 'nanana@gmail.com', 'NanananananananaNanananananananaNanananananananaNanananananananaNanananananananaNanananananananaNanananananananaNanananananananaNanananananananaNanananananananaNanananananananaNanananananananaNanananananananaNanananananananaNanananananananaNanananananananaNanananananananaNanananananananaNanananananananaNanananananananaNanananananananaNanananananananaNanananananananaNanananananananaNanananananananaNanananananananaNananananananana', '2014-11-29');
+INSERT INTO `comment` (`PostID`, `CommentID`, `Nama`, `Email`, `Komentar`, `Tanggal`) VALUES
+(1, 1, 'Bangbang', 'bangbang@gmail.com', 'Menarik sekali user1 dapat melakukan penghapusan user dan pengembalian post yang sudah di delete yang tidak dijelaskan.', '2014-12-03'),
+(2, 2, 'Kismis', 'kismis@gmail.com', 'Editor dapat melakukan edit pada post sebelum melakukan post...menarik', '2014-12-03'),
+(3, 3, 'Kutilang', 'kutilang@gmail.com', 'Owner hanya dapat menambahkan post dan bahkan tidak dapat menghapus post yang telah dibuatnya...Sabar ya', '2014-12-04');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Post`
+-- Table structure for table `post`
 --
 
-CREATE TABLE IF NOT EXISTS `Post` (
+CREATE TABLE IF NOT EXISTS `post` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `Judul` text NOT NULL,
   `Tanggal` date NOT NULL,
@@ -59,24 +61,24 @@ CREATE TABLE IF NOT EXISTS `Post` (
   `Status` varchar(20) NOT NULL,
   PRIMARY KEY (`ID`),
   KEY `Author` (`Author`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=27 ;
 
 --
--- Dumping data for table `Post`
+-- Dumping data for table `post`
 --
 
-INSERT INTO `Post` (`ID`, `Judul`, `Tanggal`, `Content`, `Author`, `Status`) VALUES
-(2, 'Nananananananana', '2014-11-29', 'NanananananananaNanananananananaNanananananananaNanananananananaNanananananananaNanananananananaNanananananananaNanananananananaNanananananananaNanananananananaNanananananananaNanananananananaNanananananananaNanananananananaNanananananananaNanananananananaNanananananananaNanananananananaNanananananananaNanananananananaNanananananananaNanananananananaNanananananananaNanananananananaNanananananananaNanananananananaNanananananananaNanananananananaNanananananananaNanananananananaNanananananananaNanananananananaNanananananananaNanananananananaNanananananananaNanananananananaNanananananananaNanananananananaNanananananananaNanananananananaNanananananananaNanananananananaNanananananananaNanananananananaNananananananana', 'chobits', 'published'),
-(3, 'asdasdasdkljsladjlasd', '2014-11-21', 'asdasdasdkljsladjlasdasdasdasdkljsladjlasdasdasdasdkljsladjlasdasdasdasdkljsladjlasdasdasdasdkljsladjlasdasdasdasdkljsladjlasdasdasdasdkljsladjlasdasdasdasdkljsladjlasd', 'chobits', 'unpublished'),
-(4, 'Nananananana', '2014-11-28', 'NanananananaNanananananaNanananananaNanananananaNanananananaNanananananaNanananananaNanananananaNanananananaNanananananaNanananananaNanananananaNanananananaNanananananaNanananananaNanananananaNanananananaNanananananaNanananananaNanananananaNanananananaNanananananaNanananananaNanananananaNanananananaNanananananaNananananana', 'chobits', 'unpublished');
+INSERT INTO `post` (`ID`, `Judul`, `Tanggal`, `Content`, `Author`, `Status`) VALUES
+(1, 'Kisah User1', '2014-12-02', 'User1 adalah user yang memiliki role sebagai admin yang dapat membuat user baru, melakukan edit pada user, men-delete user serta mengedit post dan meng-publishkannya.', 'User1', 'Published'),
+(2, 'Kisah User2', '2014-12-03', 'User2 adalaah user yang memiliki role sebagai editor yang dapat menambahkan post, melakukan edit pada post serta melakukan delete pada post', 'User2', 'Published'),
+(3, 'Kisah User3', '2014-12-04', 'User3 adalah user yang memiliki role sebagai seorang owner yang hanya dapat melakukan postingan dan tidak dapat mengubah status post yang dibuat. Menyedihkan bukan?', 'User3', 'Published');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `User`
+-- Table structure for table `user`
 --
 
-CREATE TABLE IF NOT EXISTS `User` (
+CREATE TABLE IF NOT EXISTS `user` (
   `Username` varchar(24) NOT NULL,
   `Password` varchar(20) NOT NULL,
   `Name` varchar(50) NOT NULL,
@@ -86,27 +88,29 @@ CREATE TABLE IF NOT EXISTS `User` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `User`
+-- Dumping data for table `user`
 --
 
-INSERT INTO `User` (`Username`, `Password`, `Name`, `email`, `Role`) VALUES
-('chobits', 'chobitsu', 'Mario Filino', 'mario.filino@gmail.com', 'owner');
+INSERT INTO `user` (`Username`, `Password`, `Name`, `email`, `Role`) VALUES
+('User1', 'user1', 'IamUser1', 'user1@gmail.com', 'Admin'),
+('User2', 'user2', 'IamUser2', 'user2@gmail.com', 'Editor'),
+('User3', 'user3', 'IamUser3', 'user3@gmail.com', 'Owner');
 
 --
 -- Constraints for dumped tables
 --
 
 --
--- Constraints for table `Comment`
+-- Constraints for table `comment`
 --
-ALTER TABLE `Comment`
-  ADD CONSTRAINT `Comment_ibfk_1` FOREIGN KEY (`PostID`) REFERENCES `Post` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `comment`
+  ADD CONSTRAINT `Comment_ibfk_1` FOREIGN KEY (`PostID`) REFERENCES `post` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `Post`
+-- Constraints for table `post`
 --
-ALTER TABLE `Post`
-  ADD CONSTRAINT `Post_ibfk_1` FOREIGN KEY (`Author`) REFERENCES `User` (`Username`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `post`
+  ADD CONSTRAINT `Post_ibfk_1` FOREIGN KEY (`Author`) REFERENCES `user` (`Username`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
