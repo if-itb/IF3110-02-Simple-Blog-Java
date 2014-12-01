@@ -57,9 +57,12 @@
                     <div class="art-list-time"><%= publishedPosts.get(i).getTanggal() %></div>
                     <div class="art-list-time"><span style="color:#F40034;">&#10029;</span> Featured</div>
                 </div>
+                <% if (PostDAO.hasImage(publishedPosts.get(i))) {  %>
+                <p><img src="upload/<%= publishedPosts.get(i).getImage() %>" width="200" height="100"></p>
+                <% } %>
                 <p><%= publishedPosts.get(i).getKonten() %> &hellip;</p>
                 <p> <% if (currentUser != null) { %>
-                  <a href="UpdatePost?id=<%= publishedPosts.get(i).getId() %>">Edit</a> | <a href="javascript:void(0);" onclick="confirmSoftDeletion(<%= publishedPosts.get(i).getId() %>)">Delete</a>                   
+                    <a href="UpdatePost?id=<%= publishedPosts.get(i).getId() %>">Edit</a> | <a href="javascript:void(0);" onclick="confirmSoftDeletion(<%= publishedPosts.get(i).getId() %>)">Delete</a> | <% if (!PostDAO.hasImage(publishedPosts.get(i)) && currentUser != null) { %> <a href="AddImagePost?id=<%= publishedPosts.get(i).getId() %>">Add Image</a> <% } else if (PostDAO.hasImage(publishedPosts.get(i)) && currentUser != null) { %><a href="javascript:void(0);" onclick="confirmRemoveImagePost(<%= publishedPosts.get(i).getId() %>)">Remove Image</a><% } %>
                   <% } %>
                 </p>
             </li>

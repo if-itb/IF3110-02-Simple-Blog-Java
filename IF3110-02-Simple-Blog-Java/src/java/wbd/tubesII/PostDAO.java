@@ -100,6 +100,7 @@ public class PostDAO {
 //                post.setTanggal(new SimpleDateFormat("MM/dd/yyyy").parse(rs.getString("tanggal")));
                 post.setKonten(rs.getString("konten"));
                 post.setStatus(rs.getString("status"));
+                post.setImage(rs.getString("image"));
             }
         } catch (SQLException ex) {
             Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -190,7 +191,7 @@ public class PostDAO {
         return posts;
     }
     
-    public static boolean publish (int id) {
+    public static boolean publish(int id) {
         PreparedStatement statement = null;
         try {
             currentCon = ConnectionManager.getConnection();
@@ -203,7 +204,7 @@ public class PostDAO {
         return true;
     }
     
-    public static boolean softDelete (int id) {
+    public static boolean softDelete(int id) {
         PreparedStatement statement = null;
         try {
             currentCon = ConnectionManager.getConnection();
@@ -216,11 +217,46 @@ public class PostDAO {
         return true;
     }
 
-    public static boolean unDelete (int id) {
+    public static boolean unDelete(int id) {
         PreparedStatement statement = null;
         try {
             currentCon = ConnectionManager.getConnection();
             statement = currentCon.prepareStatement("UPDATE `post` SET `status`='Unpublished' WHERE id=" + id);
+            statement.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+    
+    public static boolean hasImage(Post post) {
+        try {
+            return !post.getImage().equals("") && post.getImage() != null;
+        } catch (Exception e){
+            
+        }
+        return false;
+    }
+    
+    public static boolean addImage(String image, int id) {
+        PreparedStatement statement = null;
+        try {
+            currentCon = ConnectionManager.getConnection();
+            statement = currentCon.prepareStatement("UPDATE `post` SET `image`='" + image + "' WHERE id=" + id);
+            statement.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+    
+    public static boolean removeImage(int id) {
+        PreparedStatement statement = null;
+        try {
+            currentCon = ConnectionManager.getConnection();
+            statement = currentCon.prepareStatement("UPDATE `post` SET `image`='' WHERE id=" + id);
             statement.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();

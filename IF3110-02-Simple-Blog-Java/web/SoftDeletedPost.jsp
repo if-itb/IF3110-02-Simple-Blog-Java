@@ -63,6 +63,9 @@
                     <div class="art-list-time"><%= deletedPosts.get(i).getTanggal() %></div>
                     <div class="art-list-time"><span style="color:#F40034;">&#10029;</span> Featured</div>
                 </div>
+                <% if (PostDAO.hasImage(deletedPosts.get(i))) {  %>
+                <p><img src="upload/<%= deletedPosts.get(i).getImage() %>" width="200" height="100"></p>
+                <% } %>
                 <p><%= deletedPosts.get(i).getKonten() %> &hellip;</p>
                 <p>
                   <a href="UndeletePost?id=<%= deletedPosts.get(i).getId() %>">Undelete</a> | <a href="javascript:void(0);" onclick="confirmDeletion(<%= deletedPosts.get(i).getId() %>)">Delete</a>

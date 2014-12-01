@@ -2,10 +2,9 @@ package wbd.tubesII;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.DateFormat;
+import java.net.URLDecoder;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -19,8 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author Asep Saepudin
  */
 @WebServlet(name = "AddNewPost", urlPatterns = {"/AddNewPost"})
-public class AddNewPostServlet extends HttpServlet {
-
+public class AddNewPostServlet extends HttpServlet {    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -79,12 +77,12 @@ public class AddNewPostServlet extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        
-        try {            
+            throws ServletException, IOException {        
+        try {           
+            System.out.println("TANGGAL PARAMETER => " + request.getParameter("tanggal"));
             Post post = new Post();
             post.setJudul(request.getParameter("judul"));
-            post.setTanggal(new SimpleDateFormat("MM/dd/yyyy").parse(request.getParameter("tanggal")));            
+            post.setTanggal(new SimpleDateFormat("MM/dd/yyyy").parse(request.getParameter("tanggal")));
             post.setKonten(request.getParameter("konten"));
             post.setStatus("Unpublished");
             

@@ -4,6 +4,7 @@
     Author     : Asep Saepudin
 --%>
 
+<%@page import="wbd.tubesII.PostDAO"%>
 <%@page import="wbd.tubesII.Post"%>
 <%@page import="wbd.tubesII.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -49,6 +50,12 @@
     <div class="art-body">
         <div class="art-body-inner">
             <hr class="featured-article" />
+            <% if (PostDAO.hasImage(post)) {  %>
+            <br>
+            <center>
+            <p><img src="upload/<%= post.getImage() %>" width="400" height="200"></p>            
+            </center>
+            <% } %>            
             <p><%= post.getKonten() %></p>            
 
             <hr />

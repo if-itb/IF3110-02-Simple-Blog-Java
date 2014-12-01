@@ -12,6 +12,7 @@ public class Post {
     private Date tanggal;
     private String konten;
     private String status;
+    private String image;
 
     public int getId() {
         return id;
@@ -51,5 +52,13 @@ public class Post {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+    
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

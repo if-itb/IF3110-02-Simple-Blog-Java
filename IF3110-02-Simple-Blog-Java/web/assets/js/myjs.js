@@ -92,7 +92,7 @@ function validateKomentar(nama, email, komentar) {
 }
 
 function confirmDeletion(postId) {
-	var confirm = window.confirm("Apakah Anda yakin menghapus post ini?");
+	var confirm = window.confirm("Apakah Anda yakin menghapus post ini secara permanen?");
 	if (confirm == true) {
 		window.location = "DeletePost?id=" + postId;
 	} else {
@@ -104,6 +104,15 @@ function confirmSoftDeletion(postId) {
 	var confirm = window.confirm("Apakah Anda yakin menghapus post ini?");
 	if (confirm == true) {
 		window.location = "SoftDelete?id=" + postId;
+	} else {
+		return false;
+	}
+}
+
+function confirmRemoveImagePost(postId) {
+	var confirm = window.confirm("Apakah Anda yakin menghapus image post ini?");
+	if (confirm == true) {
+		window.location = "RemoveImagePost?id=" + postId;
 	} else {
 		return false;
 	}
