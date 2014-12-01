@@ -41,13 +41,6 @@
 <![endif]-->
 
 <title>Simple Blog of Bangsatya | New Post</title>
-<!-- Place inside the <head> of your HTML -->
-<script type="text/javascript" src="assets/tinymce/tinymce.min.js"></script>
-<script type="text/javascript">
-tinymce.init({
-    selector: "textarea"
- });
-</script>
 
 
 </head>
@@ -105,11 +98,11 @@ tinymce.init({
                     <input type="text" name="tanggal" id="Tanggal" value="">
                     <input type="hidden" name="owner" id="owner" value="<%=usrC %>">  
                     <label for="Konten">Konten:</label><br>
-					<textarea name="konten"></textarea>
+                    <textarea name="konten" rows="20" cols="20" id="Konten"></textarea>
 					<input type="hidden" name="nomor" value="">
 					<input type="hidden" name="link" value="">
-                    <input type="submit" name="submit" value="Post" class="submit-button" onclick="">
-				</form>
+                    <input type="submit" name="submit" value="Post" class="submit-button" onclick="return cekInputan();">
+                </form>
  
             </div>
 			 <% } %>
