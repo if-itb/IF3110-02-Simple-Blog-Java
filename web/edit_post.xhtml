@@ -9,7 +9,7 @@
       >
     <h:head>
         <ui:include src="header-script.xhtml"/>
-        <title>Simple Blog | Tambah Post</title>
+        <title>Simple Blog | Edit Post</title>
     </h:head>
     <h:body class="default" onload="#{editPost.getPost()}">
     <div class="wrapper">
@@ -22,7 +22,7 @@
 
     <div class="art-body">
         <div class="art-body-inner">
-            <h2>Tambah Post</h2>
+            <h2>Edit Post</h2>
             
             <div id="contact-area">
                 <h:form id="form1" >
@@ -40,8 +40,9 @@
                         Konten :
                     </h:outputLabel>
                     <h:inputTextarea id="Konten" rows="20" cols="20" value="#{editPost.konten}" required="" />
+                    <h:inputHidden value="#{editPost.idpost}" />
                     
-                    <h:commandButton class="submit-button" value="Simpan" id="submit" type="submit" action="#{addPost.addPost()}" />
+                    <h:commandButton class="submit-button" value="Simpan" id="submit" type="submit" action="#{editPost.saveEditPost()}" />
                 </h:form>
             </div>
         </div>

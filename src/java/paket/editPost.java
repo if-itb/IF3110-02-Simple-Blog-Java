@@ -6,6 +6,7 @@
 
 package paket;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -28,6 +29,14 @@ public class editPost {
 
     private String tanggal, konten, judul;
     private String username, idpost;
+
+    public String getIdpost() {
+        return idpost;
+    }
+
+    public void setIdpost(String idpost) {
+        this.idpost = idpost;
+    }
 
     public String getTanggal() {
         return tanggal;
@@ -101,6 +110,36 @@ public class editPost {
                 konten = rs.getString("konten");
                 username = rs.getString("usrname");
             }
+            
+        } catch (SQLException e){
+            
+        }
+    }
+    
+    public void saveEditPost() throws IOException {
+        String dbURL = "jdbc:mysql://localhost:3306/simple_blog";
+        String uName = "root";
+        String pass = "";
+        
+        Connection conn = null;
+        Statement stmnt = null;
+        
+        System.out.print(idpost);
+        
+        try {
+            try {
+                Class.forName("com.mysql.jdbc.Driver");
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+                System.out.println("Unable to load Driver");
+            }
+            conn = DriverManager.getConnection(dbURL, uName, pass);
+            stmnt = conn.createStatement();
+            
+            String sqlStr = "UPDATE post SET judul='" +judul +"', konten='" +konten +"', tanggal_post='" +tanggal +"' WHERE id_post=" +idpost;
+            stmnt.executeUpdate(sqlStr);
+                        
+            FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
             
         } catch (SQLException e){
             
