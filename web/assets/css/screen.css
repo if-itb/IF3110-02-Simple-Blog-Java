@@ -29,7 +29,10 @@ body {
   overflow-x: hidden;
   font: 17px/28px ff-meta-serif-web-pro, "Georgia", serif;
   color: #333;
-  background: #fff;
+  background-image: url("../img/wallpaperfrontend.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
 }
 
 
@@ -122,7 +125,6 @@ a:hover {
 .wrapper {
   max-width: 1500px;
   margin: 0 auto;
-  background: #fff;
 }
 
 /* Containers to keep content to a set width */
@@ -225,7 +227,7 @@ div.cover > img {
 }
 /* Header */
 .art-header {
-  height: 900px;
+  height: 600px;
   /* Background image is defined in the post */
   background-position: top center;
   background-attachment: fixed;
@@ -233,7 +235,7 @@ div.cover > img {
 }
 /* Contains the time, title and subtitle for an article */
 .art-header-inner {
-  position: fixed;
+  position: relative;
   top: 300px;
   left: 50%;
   margin-left: -490px;
@@ -275,7 +277,6 @@ div.cover > img {
 .art-body {
   position: relative;
   width: 100%;
-  background: #fff;
   z-index: 100;
   -webkit-box-shadow: 0 -3px 3px rgba(0,0,0,.2);
      -moz-box-shadow: 0 -3px 3px rgba(0,0,0,.2);
@@ -514,7 +515,6 @@ nav.pagination{
 .art-header.white .art-time,
 .art-header.white .art-title,
 .art-header.white .art-subtitle {
-  color: #fff;
   text-shadow: 0 0 8px rgba(0,0,0,.5);
 }
 
