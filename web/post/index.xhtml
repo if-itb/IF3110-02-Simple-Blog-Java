@@ -15,7 +15,7 @@
             <ui:define name="content">
                 <div class="row">
                     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                        <h:form style="float:right;">
+                        <h:form style="float:right;" rendered="#{not userIdentity.isGuest}">
                             <h:commandButton action="#{postCtrl.showCreate()}" value="+ Tambah Post" class="btn btn-primary"></h:commandButton>
                         </h:form>
                         <c:forEach var="post" items="#{postCtrl.getPosts()}">
