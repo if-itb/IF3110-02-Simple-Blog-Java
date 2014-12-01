@@ -108,13 +108,10 @@
                                 }
                                 else
                                 {
-                                    RequestDispatcher rd = getServletContext().getRequestDispatcher("/login/index.html");
+                                    //RequestDispatcher rd = getServletContext().getRequestDispatcher("/login/index.html");
                                     PrintWriter output= response.getWriter();
-                                    output.println("<font color=red>Untuk melakukan user management, perlu akses admin.</font>"
-                                            + "<form action='../LogoutServlet' method='post'>"
-                                            + "<input type='submit' value='Logout'>"
-                                            + "</form>");
-                                    rd.include(request, response);
+                                    output.println("<font color=red>Untuk melakukan user management, perlu akses admin.</font>");
+                                    //rd.include(request, response);
                                 }
                             }
                             else
