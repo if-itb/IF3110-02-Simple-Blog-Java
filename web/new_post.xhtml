@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+xmlns:f="http://xmlns.jcp.org/jsf/core"
+xmlns:h="http://xmlns.jcp.org/jsf/html"
+xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+template="/assets/template/template.xhtml">
+
+<ui:define name="content">
+<h:panelGroup layout="block" class="form">
+	<h:panelGroup layout="block" id="contact-area">
+		<h:form id='postform' onsubmit="return validateForm()">
+			<h:outputLabel for="Judul">Judul:</h:outputLabel>
+                        <h:inputText value="#{addPostBean.post.title}" id="Judul"></h:inputText>
+                        
+			<h:outputLabel for="Tanggal">Tanggal:</h:outputLabel>
+			<h:inputText value="#{addPostBean.post.timeString}" id="Tanggal"/>
+                        
+			<h:outputLabel for="Konten">Konten:</h:outputLabel><br/>
+                        <h:inputTextarea value="#{addPostBean.post.text}" rows="20" cols="20" id="Konten"></h:inputTextarea>
+                        
+                        <h:commandButton action="#{addPostBean.addPost}" class="submit-button" value="submit"></h:commandButton>
+		</h:form>
+	</h:panelGroup>
+</h:panelGroup>
+</ui:define>
+</ui:composition>

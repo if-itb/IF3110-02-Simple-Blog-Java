@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+xmlns:f="http://xmlns.jcp.org/jsf/core"
+xmlns:h="http://xmlns.jcp.org/jsf/html"
+xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+template="/assets/template/template.xhtml">
+
+<ui:define name="content">
+<div class="form">
+	<div id="contact-area">
+		<h:form id='userform'>
+			<label for="username">Username:</label>
+                        <h:inputText id="username" value="#{createUserBean.user.username}"></h:inputText>
+			<label for="password">Password:</label>
+                        <h:inputSecret id="password" value="#{createUserBean.user.password}"></h:inputSecret>
+			<label for="email">Email:</label>
+                        <h:inputText id="email" value="#{createUserBean.user.email}"></h:inputText>
+                        
+			<label for="role">Role:</label>
+			<h:selectOneMenu value="#{createUserBean.user.role}" id="role">
+			  <f:selectItems value="#{roleList.roles}"/>
+			</h:selectOneMenu> <br/> <br/>
+
+                        <h:commandButton onclick="return validateUser();" value="Add User" action="#{createUserBean.createUser}" class="submit-button"></h:commandButton>
+		</h:form>
+	</div>
+</div>
+</ui:define>
+</ui:composition>

@@ -106,14 +106,10 @@ header#teaser h1 {
 /* Links
 ================================================== */
 a {
-  color: #F40034;
   text-decoration: none;
   -webkit-transition: color .2s ease-in-out;
      -moz-transition: color .2s ease-in-out;
           transition: color .2s ease-in-out;
-}
-a:hover {
-  color: #F40034;
 }
 
 /*  Layout
@@ -233,7 +229,7 @@ div.cover > img {
 }
 /* Contains the time, title and subtitle for an article */
 .art-header-inner {
-  position: fixed;
+  position: absolute;
   top: 300px;
   left: 50%;
   margin-left: -490px;
@@ -843,7 +839,7 @@ hr.featured-article:after {
   height: 90px;
 }
 
-#contact-area textarea:focus, #contact-area input:focus {
+#contact-area textarea:focus, #contact-area input:focus, #contact-area select:focus {
   border: 2px solid #900;
 }
 
@@ -852,10 +848,200 @@ hr.featured-article:after {
   
 }
 
+#contact-area select {
+	width : 100px;
+	padding : 5px;
+	border: 2px solid #ccc;
+}
+
 label {
   float: left;
   text-align: right;
   margin-right: 15px;
   width: 100px;
   padding-top: 5px;
+}
+
+.loginContainer {
+	height : 500px;
+}
+
+.login{
+	position : absolute;
+	top : calc(40% - 75px);
+	left : calc(50% - 50px);
+	height : 150px;
+	width : 350px;
+	padding : 10px;
+	z-index : 2;
+}
+
+.login input[type=text]{
+	width : 250px;
+	height : 30px;
+	background : #ffffff;
+	border : 1px solid rgba(62,62,62,0.6);
+	border-radius : 2px;
+	color : #000000;
+	font-family : 'Exo', sans-serif;
+	font-size : 16px;
+	font-weight : 400;
+	padding : 4px;
+}
+
+.login input[type=password]{
+	width : 250px;
+	height : 30px;
+	background : #ffffff;
+	border : 1px solid rgba(62,62,62,0.6);
+	border-radius : 2px;
+	color : #000000;
+	font-family : 'Exo', sans-serif;
+	font-size : 16px;
+	font-weight : 400;
+	padding : 4px;
+	margin-top : 10px;
+}
+
+.login input[type=submit]{
+	width : 260px;
+	height : 35px;
+	background : #3E3E33;
+	border : 1px solid #fff;
+	cursor : pointer;
+	border-radius : 2px;
+	color : #ffffff;
+	font-family : 'Exo', sans-serif;
+	font-size : 16px;
+	font-weight : 400;
+	padding : 6px;
+	margin-top : 10px;
+}
+
+.login input[type=submit]:hover{
+	opacity : 0.8;
+}
+
+.login input[type=submit]:active{
+	opacity : 0.6;
+}
+
+.login input[type=text]:focus{
+	outline : none;
+	border : 1px solid rgba(255,153,51,0.9);
+}
+
+.login input[type=password]:focus{
+	outline : none;
+	border : 1px solid rgba(255,153,51,0.9);
+}
+
+.login input[type=submit]:focus{
+	outline: none;
+}
+
+.login input[type=checkbox] {
+	margin-left : 120px;
+}
+
+.blogAbout{
+	font-family: "proxima-nova", "helvetica neue", "helvetica", sans-serif;
+	font-weight: 300;
+	font-size: 8px;
+	line-height: 30px;
+	color: #000;
+	position : absolute;
+	top : calc(38% - 35px);
+	left: calc(45% - 255px);
+	z-index : 2;
+}
+
+.blogAbout div{
+	float : left;
+	color : #3E3E33;
+	font-size : 35px;
+	font-weight : 200;
+}
+
+.blogAbout div span{
+	text-transform: uppercase;
+	color : #F40034;
+}
+
+.blogAbout div div{
+	font-family: "proxima-nova", "helvetica neue", "helvetica", sans-serif;
+	font-size : 15px;
+	color : #3E3E33;
+}
+
+.crudContaier {
+	height : 500px;
+}
+
+.navManagement {
+	font-family: "proxima-nova", "helvetica neue", "helvetica", sans-serif;
+	margin-left : 0px;
+	position : absolute;
+	top : calc(16%);
+	left: calc(13%);
+	z-index : 2;
+}
+.navManagement ul
+{
+	list-style-type	: none;
+	margin			: 0;
+	padding-left	: 0;
+}
+
+.navManagement li
+{
+	display		: inline;
+	float		: left;
+	padding 	: 8px;
+	padding-left : 20px;
+}
+
+.navManagement a,
+.navManagement a:focus,
+.navManagement a:visited,
+.navManagement a:hover,
+.navManagement a:active {
+	color : #000000;
+	text-decoration : none; 
+}
+
+.navManagement a:hover {
+	color : #FF9933;
+}
+
+.form {
+	margin-top : 200px;
+	margin-left : 300px;
+	margin-bottom : 40px;
+}
+
+.userdata {
+	margin-bottom : 40px;
+}
+
+.userTable{   
+   border-collapse:collapse;
+   border:1px solid #000000;
+}
+
+.userTableHeader{
+   text-align:center;
+   background:none repeat scroll 0 0 #B5B5B5;
+   border-bottom:1px solid #000000;  
+   padding:2px;
+}
+
+.userTableOddRow{
+   text-align:center;
+   background:none repeat scroll 0 0 #FFFFFFF;	
+}
+
+.userTableEvenRow{
+   text-align:center;
+   background:none repeat scroll 0 0 #D3D3D3;
 }
