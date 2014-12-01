@@ -41,6 +41,7 @@
                     </h:outputLabel>
                     <h:inputTextarea id="Konten" rows="20" cols="20" value="#{editPost.konten}" required="" />
                     <h:inputHidden value="#{editPost.idpost}" />
+                    <h:inputTextarea id="Konten" rows="20" cols="20" value="#{addPost.konten}" required="" />
                     
                     <h:commandButton class="submit-button" value="Simpan" id="submit" type="submit" action="#{editPost.saveEditPost()}" />
                 </h:form>
