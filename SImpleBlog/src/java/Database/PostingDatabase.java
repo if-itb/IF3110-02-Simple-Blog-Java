@@ -208,6 +208,7 @@ public class PostingDatabase {
             ExternalContext extcon = FacesContext.getCurrentInstance().getExternalContext();
             extcon.redirect("/SImpleBlog/Home.xhtml");
     }
+
     public void setLoginOnLoad() throws ClassNotFoundException, SQLException, IOException{
         ExternalContext extCont = FacesContext.getCurrentInstance().getExternalContext();
         Cookie cUsername = login.getUserCookie();
@@ -539,7 +540,8 @@ public class PostingDatabase {
         try (Connection con = makeConnection()) {
             Statement stmt = con.createStatement();
             String query = "Delete from user where username=\"" + username + "\";";
-            int rs = stmt.executeUpdate(query);
+            int rs;
+            rs = stmt.executeUpdate(query);
             PreparedStatement ps;
             con.close();
         }
@@ -595,4 +597,5 @@ public class PostingDatabase {
             con.close();
         }
     }
+    
 }
