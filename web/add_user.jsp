@@ -11,11 +11,67 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Add User</title>
-    </head>
-    <body>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="description" content="Simple Blog">
+	<meta name="author" content="Bangsatya">
+	
+	<!-- Twitter Card -->
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:site" content="omfgitsasalmon">
+	<meta name="twitter:title" content="Simple Blog">
+	<meta name="twitter:description" content="Simple Blog">
+	<meta name="twitter:creator" content="Bangsatya Blog">
+	<meta name="twitter:image:src" content="{{! TODO: ADD GRAVATAR URL HERE }}">
+	
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Simple Blog">
+	<meta property="og:description" content="Deskripsi Blog">
+	<meta property="og:image" content="{{! TODO: ADD GRAVATAR URL HERE }}">
+	<meta property="og:site_name" content="Simple Blog">
+	
+	<link rel="stylesheet" type="text/css" href="assets/css/screen.css" />
+	<link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
+	
+	<!--[if lt IE 9]>
+	    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<title>Simple Blog of Bangsatya | Add User</title>
+</head>
+<body>
+<div class="wrapper">
+<jsp:include page="header.jsp"/>
+<%
+	String usrC=" ";
+	int typeC=4;
+	Cookie[] cookies = null;
+	cookies = request.getCookies();
+	if (cookies!=null){
+		for (Cookie c:cookies){
+			if (c.getName().equals("LogName")){
+				usrC=c.getValue();
+				for (Cookie c2:cookies){
+				    if (c2.getName().equals("LogType")){
+							typeC=Integer.parseInt(c2.getValue());
+						}
+				}
+			}
+		}
+	}
+%>
+<article class="art simple post" style="margin-top:120px;">
+	<div class="art-body" style="margin-top:70px">
+        <div class="art-body-inner">
+       	<%
+       	if (typeC==1) {
+       	%>
+		You can't add new user
+       	<% } else { %>
+        <h2>Add New User</h2>
+        <div id="contact-area">
         <form method="post">
 			<label>Nama: </label><input type="text" id="user_name" name="user_name">
 			<br/>
@@ -32,7 +88,7 @@
 					<option value="3"> Editor </option>
 				</select>
 			<br/>
-			<input type="submit" value="Tambah">
+			<input type="submit" class="submit-button" value="Tambah">
 		</form>
 		<%
 			String user_name	=	 request.getParameter("user_name");
@@ -71,6 +127,14 @@
 
 				}
 			}			
-		%>		
-    </body>
+		%>
+		</div>
+		<% } %>
+	</div>
+</div>
+</article>
+
+<jsp:include page="footer.jsp"/>
+</div>
+</body>
 </html>

@@ -62,6 +62,9 @@
         		%>
                 <li></li><li><a href="handler/logout.jsp">Logout</a></li>
 		        <br/>
+		        <li><a href="add_user.jsp">+ Tambah User</a></li>
+		        <li><a href="userAdm.jsp">+ Manage User</a></li>
+		        <br/>
 		        <li><a href="new_post.jsp">+ Tambah Post</a></li>
 		        <li><a href="postAdm.jsp">+ Unpublished Post</a></li>
             	<%
