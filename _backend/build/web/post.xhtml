@@ -1,0 +1,201 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+ 
+    <h:head>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />	
+        <h:outputStylesheet name="bootstrap/css/bootstrap.css" />
+        <h:outputStylesheet name="bootstrap/css/custom.css" />
+        <title>Simple Blog</title>
+    </h:head>
+    
+    <h:body>
+        <div class="container-fluid">
+      
+        <h:form><div class="row" id="header">
+          <div class="row">
+            <div class="col-md-6 col-xs-6 col-sm-6 col-lg-6">
+              <p class="header-logo resize"><a href="index.xhtml">Simple Blog</a></p>
+              <p class="header-text resize">Because we're hungry.</p>
+            </div>
+                <c:choose>
+                    <c:when test="${cookie.cRole.value eq 'Owner'}">
+                        <div class="col-md-6 col-xs-6 col-sm-6 col-lg-6"><div class="pull-right icon-header">
+                        <h:commandLink type="button" styleClass="btn btn-info btn-circle btn-lg" action="add_post">
+                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                        </h:commandLink>
+                        <h:commandLink type="button" styleClass="btn btn-danger btn-circle btn-lg" action="#{login.startLogout}">
+                            <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
+                        </h:commandLink>
+                        </div></div>
+                    </c:when>
+
+                    <c:when test="${cookie.cRole.value eq 'Editor'}">
+                        <div class="col-md-6 col-xs-6 col-sm-6 col-lg-6"><div class="pull-right icon-header">                        
+                        <h:commandLink type="button" styleClass="btn btn-danger btn-circle btn-lg" action="#{login.startLogout}">
+                            <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
+                        </h:commandLink>
+                        </div></div>
+                    </c:when>
+
+                    <c:when test="${cookie.cRole.value eq 'Admin'}">
+                        <div class="col-md-6 col-xs-6 col-sm-6 col-lg-6"><div class="pull-right icon-header">
+                        <h:commandLink type="button" styleClass="btn btn-info btn-circle btn-lg" action="add_post">
+                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                        </h:commandLink>
+                        <h:commandLink type="button" styleClass="btn btn-warning btn-circle btn-lg" action="user">
+                            <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                        </h:commandLink>
+                        <h:commandLink type="button" styleClass="btn btn-danger btn-circle btn-lg" action="#{login.startLogout}">
+                            <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
+                        </h:commandLink>
+                        </div></div>
+                    </c:when>
+                    <c:otherwise>
+                        <div class="col-md-6 col-xs-6 col-sm-6 col-lg-6"><div class="pull-right icon-header">
+                        <h:commandLink type="button" styleClass="btn btn-danger btn-circle btn-lg" action="login?faces-redirect=true">
+                            <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>
+                        </h:commandLink>
+                        </div></div>
+                    </c:otherwise>
+                </c:choose>
+              </div>
+        </div></h:form>
+
+        <div class="row">
+
+        <div class="col-md-10 col-md-offset-1">
+          <div class="edit">
+                <c:choose>
+
+                    <c:when test="${cookie.cRole.value eq 'Editor'}">
+                        <div class="btn-group" role="group" aria-label="...">
+                            <h:form>
+                            <h:commandLink type="button" class="btn edit-delete pull-right" value="Edit" action="edit_post">
+                                <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                                <f:param name="id" value="#{param['id']}" />
+                            </h:commandLink>
+                            </h:form>
+                        </div>
+                        <div class="btn-group" role="group" aria-label="...">
+                              <h:form>
+                                  <h:commandLink type="button" class="btn edit-delete pull-right" value="Delete" action="#{postController.deletePost(postview.id,1)}" onclick="return confirm('Apakah anda yakin menghapus post ini?');">
+                                      <span class="glyphicon glyphicon-floppy-remove" aria-hidden="true"></span>
+                                  </h:commandLink>
+                              </h:form>                 
+                        </div>
+                    </c:when>
+                    #{postview.setId(param['id'])}
+                    <c:when test="${cookie.cRole.value eq 'Admin'}">
+                        <div class="btn-group" role="group" aria-label="...">
+                            <h:form>
+                            <h:commandLink type="button" class="btn edit-delete pull-right" value="Edit" action="edit_post">
+                                <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                                <f:param name="id" value="#{param['id']}" />
+                            </h:commandLink>
+                            </h:form>                            
+                        </div>
+                        <div class="btn-group" role="group" aria-label="...">
+                              <h:form>
+                                  <h:commandLink type="button" class="btn edit-delete pull-right" value="Delete" action="#{postController.deletePost(postview.id,1)}" onclick="return confirm('Apakah anda yakin menghapus post ini?');">
+                                      <span class="glyphicon glyphicon-floppy-remove" aria-hidden="true"></span>
+                                  </h:commandLink>
+                              </h:form>                 
+                        </div>
+                    </c:when>
+                    
+                    <c:when test="${cookie.cRole.value eq 'Owner'}">
+                        <div class="btn-group" role="group" aria-label="...">
+                            <h:form>
+                            <h:commandLink type="button" class="btn edit-delete pull-right" value="Edit" action="edit_post">
+                                <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                                <f:param name="id" value="#{param['id']}" />
+                            </h:commandLink>
+                            </h:form>
+                        </div>
+                    </c:when>
+                    
+                    <c:otherwise></c:otherwise>
+                </c:choose>
+            </div>
+            
+          <div class="post">
+              #{postview.setId(param['id'])}
+              <div class="post-title text-center"><a href="#">#{postview.pos.judul}</a></div>
+              <div class="post-date text-center"><span class="glyphicon glyphicon-time" aria-hidden="true"></span> #{postview.pos.printTanggal()} | <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> #{postview.pos.status}</div>
+            <p class="text-justified">#{postview.pos.konten}</p>
+
+            <div class="post-title">Comments</div>            
+            <h:form id="commentform">
+            <c:choose>
+                <c:when test="${cookie.cRole.value eq 'Admin' || cookie.cRole.value eq 'Editor' || cookie.cRole.value eq 'Owner'}">
+                      #{commentAdd.execute(param['id'])}
+                      <div class="form-group">
+                        <label for="exampleInputPassword1">Komentar</label>
+                        <h:inputTextarea styleClass="form-control" rows="5" binding="#{komentar}" />
+                      </div>
+                        <h:commandButton type="submit" styleClass="btn btn-default" value="Submit" action="#{commentAdd.addCommentUser(cookie.cId.value, komentar.value)}">
+                            <f:param name="id" value="#{param['id']}" />
+                            <f:ajax execute="@form" render="@form" />
+                        </h:commandButton>
+                </c:when>
+                <c:otherwise>
+                      #{commentAdd.execute(param['id'])}
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Name</label>
+                        <h:inputText styleClass="form-control" binding="#{nama}" p:required="required" />
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleInputPassword1">Email</label>
+                        <h:inputText styleClass="form-control" id="email" binding="#{email}" p:required="required" />
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleInputPassword1">Komentar</label>
+                        <h:inputTextarea styleClass="form-control" rows="5" binding="#{komentar}" p:required="required" />
+                      </div>
+                    <h:commandButton type="submit" styleClass="btn btn-default" value="Submit" onclick="return emailValidation(document.getElementById('commentform:email').value);" action="#{commentAdd.addComment(nama.value, email.value, komentar.value)}">
+                            <f:param name="id" value="#{param['id']}" />
+                            <f:ajax execute="@form" render="@form" />
+                    </h:commandButton>
+                </c:otherwise>
+            </c:choose>
+                <ui:repeat var="thecomments" value="#{listComment.execute(param['id'])}">
+                <div class="row comment">
+                <div class="col-md-4 col-xs-4 col-sm-4 col-lg-4">
+                    <div class="comment-owner">#{thecomments.nama}</div>
+                    <div class="comment-date">#{thecomments.printTanggal()}</div>
+                    <div class="comment-owner">#{thecomments.email}</div>
+                </div>
+                <div class="col-md-8 col-xs-8 col-sm-8 col-lg-8">
+                  <div class="comment-content">
+                      <p class="text-justified">#{thecomments.komentar}</p>
+                  </div>
+                </div>
+                </div>
+            </ui:repeat>
+            </h:form>
+            
+          </div>
+        </div>
+
+      </div>
+
+        <div class="row" id="footer">
+          <div class="footer-text">
+            <p class="text-right">IF3110 Pengembangan Aplikasi Berbasis Web</p>
+            <p class="text-right">Arina Listyarini Dwiastuti (13512006) | Gifari Kautsar (13512020) | Indam Muhammad (13512026)</p>
+          </div>
+        </div>
+      </div>
+        
+        <h:outputScript name="bootstrap/js/bootstrap.min.js" />
+        <h:outputScript name="bootstrap/js/custom.js" />
+    </h:body>
+</html>
