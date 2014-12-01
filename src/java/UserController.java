@@ -191,7 +191,29 @@ public class UserController {
         return retval;
     }
     
-    public int getCookieId(){
+    public String getCookieUser(){
+        String cookieuser=null;
+        String retval=null;
+        
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        Cookie[] cookies=((HttpServletRequest)facesContext.getExternalContext().getRequest()).getCookies();
+        
+        for(int i=0;i<cookies.length;i++){
+            if(cookies[i].getName().equalsIgnoreCase("currentuser")){
+                cookieuser=cookies[i].getValue();
+                System.out.println("iduser = "+cookieuser);
+            }
+        }
+        if(cookieuser!=null){
+            retval=cookieuser;
+        }
+        else{
+            retval="Guest";
+        }
+        return retval;
+    }
+    
+    public String getCookieId(){
         String cookieid=null;
         String retval=null;
         
@@ -207,10 +229,7 @@ public class UserController {
         if(cookieid!=null){
             retval=cookieid;
         }
-        else{
-            retval="-1";
-        }
-        return Integer.parseInt(retval);
+        return retval;
     }
     
     public String getCookieType(){

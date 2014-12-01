@@ -311,7 +311,12 @@ public class PostController {
             System.out.println("exception thrown");
            System.out.println(e.getStackTrace()); 
         }
-        return "post.xhtml?pid="+P.getId()+"&faces-redirect=true";
+        if(P.getStatus()==0){
+            return "unpublishedpost.xhtml?pid="+P.getId()+"&faces-redirect=true";
+        }
+        else{
+            return "post.xhtml?pid="+P.getId()+"&faces-redirect=true";
+        }
         //return "index";
     }
 

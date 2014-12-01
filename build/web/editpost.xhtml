@@ -30,6 +30,7 @@
             <div>
                 <label for="Konten">Konten</label><br></br>
             	<h:inputTextarea value="#{post.konten}" id="konten"/>
+                <h:inputHidden value="#{post.status}"/>
 			</div>
                             <br></br>
                             <h:commandButton class="button" onclick="return validate()" action="#{postController.EditPost(post)}" value="Simpan" />
