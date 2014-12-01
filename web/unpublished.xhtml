@@ -30,6 +30,11 @@
                       <p>
                            #{list.konten}
                       </p>
+                      <p>
+                          <a><h:link rendered="#{cookieCheck.loggedIn}" value="Edit" outcome="edit_post.xhtml?id=#{list.idpost}"/></a> |
+                          <a><h:link rendered="#{cookieCheck.loggedIn}" value="Hapus" /></a> |
+                          <a><h:link rendered="#{cookieCheck.adminOReditor()}" value="Publish" outcome="index" /></a>
+                      </p>
                   </li>
               </ui:repeat>
           </ul>

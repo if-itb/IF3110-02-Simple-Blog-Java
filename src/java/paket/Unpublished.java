@@ -6,12 +6,14 @@
 
 package paket;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -118,5 +120,31 @@ public class Unpublished {
     
     public void clear(){
         unpub.clear();
+    }
+    
+    public void jadikanPublish(String id) throws IOException{
+        String dbURL = "jdbc:mysql://localhost:3306/simple_blog";
+        String uName = "root";
+        String pass = "";
+        
+        Connection conn = null;
+        Statement stmnt = null;
+                       
+        try {
+            try {
+                Class.forName("com.mysql.jdbc.Driver");
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+                System.out.println("Unable to load Driver");
+            }
+            conn = DriverManager.getConnection(dbURL, uName, pass);
+            stmnt = conn.createStatement();
+            System.out.print("id disini"+id);
+            String sqlStr = "UPDATE post SET status='published' WHERE id_post="+id;
+            stmnt.executeUpdate(sqlStr);
+            
+        } catch (SQLException e){
+            
+        }
     }
 }

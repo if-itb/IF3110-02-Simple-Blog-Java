@@ -30,6 +30,10 @@
                       <p>
                            #{list.konten}
                       </p>
+                      <p>
+                          <a><h:link rendered="#{cookieCheck.admin}" value="Hapus" /></a> |
+                          <a><h:link rendered="#{cookieCheck.admin}" value="Kembalikan" outcome="index"/></a>
+                      </p>
                   </li>
               </ui:repeat>
           </ul>

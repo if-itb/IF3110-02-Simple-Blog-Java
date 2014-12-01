@@ -24,11 +24,44 @@ import javax.faces.context.FacesContext;
  */
 public class ViewPost {
 
-    private String idpost, judul, konten, tanggal, status;
+    private String idpost, judul, konten, tanggal, status, del_stat, tgl_komen;
     private String komen, nama, email;
     private ResultSet rs;
     private ArrayList<ViewPost> listpost = new ArrayList<ViewPost>();
+    private ArrayList<ViewPost> listkomen = new ArrayList<ViewPost>();
 
+    public String getTgl_komen() {
+        return tgl_komen;
+    }
+
+    public void setTgl_komen(String tgl_komen) {
+        this.tgl_komen = tgl_komen;
+    }
+    
+    public ArrayList<ViewPost> getListpost() {
+        return listpost;
+    }
+
+    public void setListpost(ArrayList<ViewPost> listpost) {
+        this.listpost = listpost;
+    }
+
+    public ArrayList<ViewPost> getListkomen() {
+        return listkomen;
+    }
+
+    public void setListkomen(ArrayList<ViewPost> listkomen) {
+        this.listkomen = listkomen;
+    }
+
+    public String getDel_stat() {
+        return del_stat;
+    }
+
+    public void setDel_stat(String del_stat) {
+        this.del_stat = del_stat;
+    }
+    
     public String getStatus() {
         return status;
     }
@@ -99,6 +132,7 @@ public class ViewPost {
     }
     
     public void ambilPostdanComment(){
+        clear();
         String dbURL = "jdbc:mysql://localhost:3306/simple_blog";
         String uName = "root";
         String pass = "";
@@ -137,6 +171,14 @@ public class ViewPost {
             sqlStr = "SELECT * FROM `komen` WHERE id_post='" +idpost +"'";
             rs = stmnt.executeQuery(sqlStr);
             
+            while (rs.next()){
+                ViewPost view = new ViewPost();
+                view.setKomen(rs.getString("isi"));
+                view.setNama(rs.getString("nama"));
+                view.setTgl_komen(rs.getString("tangggal_kom"));
+                listkomen.add(view);
+            }
+            
         } catch (SQLException e){
             
         }
@@ -165,11 +207,15 @@ public class ViewPost {
             
             while (rs.next()){
                 ViewPost view = new ViewPost();
+                view.setIdpost(rs.getString("id_post"));
                 view.setJudul(rs.getString("judul"));
                 view.setKonten(rs.getString("konten"));
                 view.setTanggal(rs.getString("tanggal_post"));
                 view.setStatus(rs.getString("status"));
-                listpost.add(view);
+                view.setDel_stat(rs.getString("del_stat"));
+                if ("published".equals(view.getStatus().toString())&&("0".equals(view.getDel_stat().toString()))){
+                    listpost.add(view);
+                } 
             }
             
         } catch (SQLException e){
@@ -210,6 +256,7 @@ public class ViewPost {
     
     public void clear(){
         listpost.clear();
+        listkomen.clear();
     }
     
 }

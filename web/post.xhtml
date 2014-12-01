@@ -44,25 +44,18 @@
                    
                     <h:commandButton id="submit" value="Kirim" class="submit-button" action="#{viewPost.executeComment()}"/>
                 </h:form>
-            </div>
-
-            <ul class="art-list-body">
-                <li class="art-list-item">
+            </div>            
+            <ui:repeat value="#{viewPost.listkomen}" var="list">
+                <ul class="art-list-body">
                     <div class="art-list-item-title-and-time">
-                        <h2 class="art-list-title"><a href="post.html">Jems</a></h2>
-                        <div class="art-list-time">2 menit lalu</div>
+                        <h2 class="art-list-title">#{list.nama}</h2>
+                        <div class="art-list-time">#{list.tgl_komen}</div>
                     </div>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis repudiandae quae natus quos alias eos repellendus a obcaecati cupiditate similique quibusdam, atque omnis illum, minus ex dolorem facilis tempora deserunt! &hellip;</p>
-                </li>
-
-                <li class="art-list-item">
-                    <div class="art-list-item-title-and-time">
-                        <h2 class="art-list-title"><a href="post.html">Kave</a></h2>
-                        <div class="art-list-time">1 jam lalu</div>
-                    </div>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis repudiandae quae natus quos alias eos repellendus a obcaecati cupiditate similique quibusdam, atque omnis illum, minus ex dolorem facilis tempora deserunt! &hellip;</p>
-                </li>
-            </ul>
+                    <p>
+                        #{list.komen}
+                    </p>
+                </ul>                
+            </ui:repeat>
         </div>
     </div>
     </article>
