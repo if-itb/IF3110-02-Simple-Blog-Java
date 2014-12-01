@@ -4,11 +4,11 @@
     Author     : adwisatya
 --%>
 
-<%@page import="java.User.userPaket"%>
+<%@page import="User.userPaket"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import = "java.Post.Post" %>
-<%@page import= "java.User.User" %>
-<%@page import= "java.Post.PostBean" %>
+<%@page import = "Post.Post" %>
+<%@page import= "User.User" %>
+<%@page import= "Post.PostBean" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -47,17 +47,34 @@
 
 <body class="default">
 <div class="wrapper">
+<jsp:include page="header.jsp"/>
+<%
+	String usrC=" ";
+	int typeC=4;
+	Cookie[] cookies = null;
+	cookies = request.getCookies();
+	if (cookies!=null){
+		for (Cookie c:cookies){
+			if (c.getName().equals("LogName")){
+				usrC=c.getValue();
+				for (Cookie c2:cookies){
+				    if (c2.getName().equals("LogType")){
+							typeC=Integer.parseInt(c2.getValue());
+						}
+				}
+			}
+		}
+	}
+%>
 
-<nav class="nav" >
-    <a style="border:none;" id="logo" href="index.jsp"><h1>Simple<span>-</span>Blog</h1></a>
-    <ul class="nav-primary">
-        <li><a href="new_post.jsp">+ Edit Post</a></li>
-    </ul>
-</nav>
-
-<article class="art simple post" style="margin-top:50px;">
+<article class="art simple post" style="margin-top:120px;">
         <div class="art-body" style="margin-top:70px">
         <div class="art-body-inner">
+        	<%
+        	if (typeC==4) {
+        	%>
+			You can't edit post
+        	<% } else { %>
             <h2>Edit Post</h2>
 			<%
 				PostBean pBean =  new PostBean();
@@ -79,32 +96,13 @@
                     <input type="submit" name="submit" value="Simpan" class="submit-button" onclick="">
                 </form>
             </div>
-			<%
-			
-			%>
+			 <% } %>
         </div>
     </div>
 
 </article>
 
-<footer class="footer">
-    <div class="back-to-top"><a href="">Back to top</a></div>
-    <!-- <div class="footer-nav"><p></p></div> -->
-    <div class="psi">&Psi;</div>
-    <aside class="offsite-links">
-        Asisten IF3110 /
-        <a class="rss-link" href="rss/rss.php">RSS</a> /
-        <br>
-        <a class="twitter-link" href="http://twitter.com/YoGiiSinaga">Yogi</a> /
-        <a class="twitter-link" href="http://twitter.com/sonnylazuardi">Sonny</a> /
-        <a class="twitter-link" href="http://twitter.com/fathanpranaya">Fathan</a> /
-        <br>
-        <a class="twitter-link" href="#">Renusa</a> /
-        <a class="twitter-link" href="#">Kelvin</a> /
-        <a class="twitter-link" href="#">Yanuar</a> /
-        
-    </aside>
-</footer>
+<jsp:include page="footer.jsp"/>
 </div>
 <script>
     var today = new Date();
