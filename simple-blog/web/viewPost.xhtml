@@ -31,8 +31,10 @@ and open the template in the editor.
     </header>
 
     <div class="art-body">
+        
         <div class="art-body-inner">
             <hr class="featured-article" />
+            <h:graphicImage library="images" name="#{viewPostController.postId}.png" width="630" height="420" style="horizontal-align: middle;"/>
             <p>#{viewPostController.viewPost.content}</p>
 
             <hr />
@@ -47,6 +49,7 @@ and open the template in the editor.
                     <h:inputText id="Email"  value="#{viewPostController.inputEmail}"/>
                     <label for="Komentar">Komentar:</label><br></br>
                     <h:inputTextarea id="Komentar" rows="20" cols="20" value="#{viewPostController.inputComment}"></h:inputTextarea>
+                    
                     <h:commandButton value="Kirim" class="submit-button">
                         <f:ajax  execute="Nama Email Komentar" render=":CommentList"></f:ajax>
                     </h:commandButton>
