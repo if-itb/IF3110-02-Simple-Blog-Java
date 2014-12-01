@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<head>
+	<title>The Blog</title>
+        <link rel="stylesheet" type="text/css" href="resources/main.css"></link>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script  scr="main.js"></script>
+</head>
+<body>
+    #{user.Copy(usercontroller.getSpecifiedUser(param['uid']))}
+    <ui:include src="header.xhtml"/>
+    <div id="FORM"><h:form>
+		<div id="EDITPOSTS">
+                    <h:inputHidden id="id" value="#{user.id}" />
+                <h1>Manage User</h1>
+			<h:form>
+            <div><label for="username">Username</label>
+                <h:inputText id="username" value="#{user.username}"></h:inputText>
+            </div>
+            <br></br>
+            <div>
+                <label for="password">Password</label>
+                <h:inputText id="password" value="#{user.password}"></h:inputText>
+            </div>
+            <br></br>
+            <div>
+                <label for="nama">Nama</label>
+                <h:inputText id="nama" value="#{user.nama}"></h:inputText>
+            </div>
+            <br></br>
+            <div>
+                <label for="email">E-mail</label>
+                <h:inputText id="email" value="#{user.email}"></h:inputText>
+            </div>
+            <br></br>
+            <div>
+                <h:selectOneRadio required="true" value="#{user.tipe}" style="display: inline-block">
+                    <f:selectItem itemValue="Admin" itemLabel="ADMIN" id="admin"/>        
+                    <f:selectItem itemValue="Editor" itemLabel="EDITOR" id="editor"/>
+                    <f:selectItem itemValue="Owner" itemLabel="OWNER" id="owner"/>
+                </h:selectOneRadio>
+            </div>
+            <br></br>
+            <h:commandButton class="button" action="#{usercontroller.editUsers(user)}" value="Simpan"/>
+            </h:form>
+		</div>
+                            </h:form>
+	</div>
+	<!--<script type="text/javascript">
+		function validate(){
+			alert('Post telah ditambahkan');
+			location.href = 'faces/cookie.xhtml';
+		}
+	</script>-->
+</body>
+</html>

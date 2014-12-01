@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <ui:composition>
+        <div id="topLogo"><a href="cookie.xhtml"><img src="logo/bp.png"></img></a></div>
+	<div id="topNav">
+		<ul>
+			<li class="title"><a href="cookie.xhtml">THE BLOG</a></li>
+                        <li class="right"><a href="#openModal"><button class="button">#{usercontroller.cookieUser}</button></a></li>
+		</ul>
+	</div>
+    
+    <div id="openModal" class="modalDialog">        
+    	<div id="modal-box">   
+            <a href="#close" title="Close" class="close">X</a>
+            <div id="FORM">
+                <h:form rendered="#{usercontroller.cookieType eq 'Admin'}">                        
+                <div id="UserOpt">
+                    <h1>You're #{usercontroller.cookieType}</h1>
+                    <ul>
+                        <li><a href="newpost.xhtml">Add Post</a></li>
+                        <li><a href="cookie.xhtml">View Published Post</a></li>
+                        <li><a href="unpublished.xhtml">View Unpublished Post</a></li>
+                        <li><a href="deleted.xhtml">View Deleted Post</a></li>
+                        <li><a href="manage.xhtml">Manage User</a></li>
+                        <li><h:commandButton class="button" action="#{user.logout()}" value="LOGOUT"/></li>                                
+                    </ul>
+                </div>
+                </h:form>    
+                <h:form rendered="#{usercontroller.cookieType eq 'Owner'}">
+                <div id="UserOpt">
+                    <h1>You're #{usercontroller.cookieType}</h1>
+                    <ul>
+                        <li><a href="newpost.xhtml">Add Post</a></li>
+                        <li><a href="cookie.xhtml">View Published Post</a></li>
+                        <li><h:commandButton class="button" action="#{user.logout()}" value="LOGOUT"/></li>                                
+                    </ul>
+                </div>
+                </h:form>
+                <h:form rendered="#{usercontroller.cookieType eq 'Editor'}">
+                    <div id="UserOpt">
+                        <h1>You're #{usercontroller.cookieType}</h1>
+                        <ul> 
+                            <li><a href="newpost.xhtml">Add Post</a></li>
+                            <li><a href="cookie.xhtml">View Published Post</a></li>
+                            <li><a href="unpublished.xhtml">View Unpublished Post</a></li>
+                            <li><h:commandButton class="button" action="#{user.logout()}" value="LOGOUT"/></li>                                
+                        </ul>
+                    </div>                                      
+                </h:form>
+                <h:form rendered="#{usercontroller.cookieType eq 'Guest'}">
+                    <div id="LOGIN">
+                        <h1>Login</h1>
+                        <ul>
+                            <div>
+                                <label for="username">Username</label>
+                                <h:inputText id="username" value="#{user.username}"/>
+                            </div>
+                            <br></br>
+                            <div>
+                                <label for="password">Password</label>
+                                <h:inputSecret id="password" value="#{user.password}"/>
+                            </div>
+                            <br></br>
+                            <h:commandButton type="submit" action="#{user.login()}" value="Login" class="button"/>
+                            <br></br>
+                                    <!--
+                                    <li><a href="newpost.xhtml">Add Post</a></li>
+                                    <li><a href="cookie.xhtml">View Published Post</a></li>
+                                    <li><a href="unpublished.xhtml">View Unpublished Post</a></li>
+                                    <li><a href="deleted.xhtml">View Deleted Post</a></li>
+                                    <li><a href="manage.xhtml">Manage User</a></li>
+                                    <li><button class="button">LOGOUT</button></li>
+                                    -->
+
+                        </ul>                     
+                    </div>                    
+                </h:form>            
+            </div>
+	</div>    
+    </div>
+    </ui:composition>
+</html>
+

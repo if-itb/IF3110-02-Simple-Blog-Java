@@ -1,0 +1,140 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<head>
+	<title>Baspram's Homepage</title>
+        <link rel="stylesheet" type="text/css" href="resources/main.css"></link>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script  scr="main.js"></script>
+</head>
+<body>
+    <div id="topLogo"><a href="index.html"><img src="logo/bp.png"></img></a></div>
+	<div id="topNav">
+		<ul>
+			<li class="title"><a href="index.html">SIMPLE BLOG</a></li>
+			<li class="right"><a href="#UserNav"><button class="button">Menu</button></a></li>
+		</ul>
+	</div>
+	<div id="openModal" class="modalDialog">        
+    	<div id="modal-box">   
+            <a href="#close" title="Close" class="close">X</a>
+            <div id="FORM">
+                <h:form rendered="#{usercontroller.cookieType eq 'Admin'}">                        
+                <div id="UserOpt">
+                    <h1>You're #{usercontroller.cookieType}</h1>
+                    <ul>
+                        <li><a href="newpost.xhtml">Add Post</a></li>
+                        <li><a href="index.xhtml">View Published Post</a></li>
+                        <li><a href="unpublished.xhtml">View Unpublished Post</a></li>
+                        <li><a href="deleted.xhtml">View Deleted Post</a></li>
+                        <li><a href="manage.html">Manage User</a></li>
+                        <li><h:commandButton class="button" action="#{user.logout()}" value="LOGOUT"/></li>                                
+                    </ul>
+                </div>
+                </h:form>    
+                <h:form rendered="#{usercontroller.cookieType eq 'Owner'}">
+                <div id="UserOpt">
+                    <h1>You're #{usercontroller.cookieType}</h1>
+                    <ul>
+                        <li><a href="newpost.xhtml">Add Post</a></li>
+                        <li><a href="index.xhtml">View Published Post</a></li>
+                        <li><h:commandButton class="button" action="#{user.logout()}" value="LOGOUT"/></li>                                
+                    </ul>
+                </div>
+                </h:form>
+                <h:form rendered="#{usercontroller.cookieType eq 'Editor'}">
+                    <div id="UserOpt">
+                        <h1>You're #{usercontroller.cookieType}</h1>
+                        <ul> 
+                            <li><a href="newpost.xhtml">Add Post</a></li>
+                            <li><a href="index.xhtml">View Published Post</a></li>
+                            <li><a href="unpublished.xhtml">View Unpublished Post</a></li>
+                            <li><h:commandButton class="button" action="#{user.logout()}" value="LOGOUT"/></li>                                
+                        </ul>
+                    </div>                                      
+                </h:form>
+                <h:form rendered="#{usercontroller.cookieType eq null}">
+                    <div id="LOGIN">
+                        <h1>Login</h1>
+                        <ul>
+                            <div>
+                                <label for="username">Username</label>
+                                <h:inputText id="username" value="#{user.username}"/>
+                            </div>
+                            <br></br>
+                            <div>
+                                <label for="password">Password</label>
+                                <h:inputSecret id="password" value="#{user.password}"/>
+                            </div>
+                            <br></br>
+                            <h:commandButton type="submit" action="#{user.login()}" value="Login" class="button"/>
+                            <br></br>
+                                    <!--
+                                    <li><a href="newpost.xhtml">Add Post</a></li>
+                                    <li><a href="index.xhtml">View Published Post</a></li>
+                                    <li><a href="unpublished.xhtml">View Unpublished Post</a></li>
+                                    <li><a href="deleted.xhtml">View Deleted Post</a></li>
+                                    <li><a href="manage.xhtml">Manage User</a></li>
+                                    <li><button class="button">LOGOUT</button></li>
+                                    -->
+
+                        </ul>                     
+                    </div>                    
+                </h:form>            
+            </div>
+	</div>    
+    </div>  
+	<div id="FORM">
+		<div id="EDITPOSTS">
+		<h1>Tambah Post</h1>
+			<form name="pos" method="post" onsubmit="validate()" action="index.html">
+            <div><label for="Judul">Judul</label>
+            <input type="text" name="title" id="title" value="This is my blog">
+            </div>
+			<br>
+			<div>
+            <label for="Tanggal">Tanggal</label>
+            <input type="text" name="date" id="date" value="24-10-1994">
+            </div>
+            <br>
+            <div>
+            <label for="Konten">Konten</label><br>
+            <textarea name="content" id="content" rows="10" cols="20">
+            	Bisa membuat postingan baru
+            </textarea>
+			</div>
+			<br>
+            <input type="submit" name="submit" value="Simpan" class="button">
+        </form>
+		</div>
+	</div>
+	<script type="text/javascript">
+		function validate(){
+			var today = new Date(<?php echo time();?> *1000);
+			var date = new Date(document.forms["pos"]["date"].value);
+			date.setHours(23);
+			date.setMinutes(59);
+			date.setSeconds(59);
+			var month = 1+parseInt(date.getMonth());
+			var datebener = date.getFullYear()+"-"+month+"-"+date.getDate();
+			var title = document.forms["pos"]["title"].value;
+			if (title.length <= 50){
+				if (date >= today){
+					document.forms["pos"]["date"].value = datebener;
+					return true;
+				}
+				else{
+					alert('Tanggal yang anda masukkan tidak valid');
+					return false;	
+				}
+			}
+			else{
+				alert('Judul lebih panjang dari 50 karakter');
+				return false;
+			}
+		}
+	</script></body>
+</html>

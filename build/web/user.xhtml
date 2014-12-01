@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<head>
+	<title>The Blog</title>
+	<link rel="stylesheet" type="text/css" href="resources/main.css"></link>
+</head>
+<body>
+	<ui:include src="header.xhtml"/>   
+	<div id="FORM">
+		<div id="EDITPOSTS">
+		<h1>Manage User</h1>
+			<h:form>
+            <div><label for="username">Username</label>
+                <h:inputText id="username" value="#{user.username}"></h:inputText>
+            </div>
+            <br></br>
+            <div>
+                <label for="password">Password</label>
+                <h:inputSecret id="password" value="#{user.password}"></h:inputSecret>
+            </div>
+            <br></br>
+            <div>
+                <label for="nama">Nama</label>
+                <h:inputText id="nama" value="#{user.nama}"></h:inputText>
+            </div>
+            <br></br>
+            <div>
+                <label for="email">E-mail</label>
+                <h:inputText id="email" value="#{user.email}"></h:inputText>
+            </div>
+            <br></br>
+            <div>
+                <h:selectOneRadio required="true" value="#{user.tipe}" style="display: inline-block">
+                    <f:selectItem itemValue="Admin" itemLabel="ADMIN" id="admin"/>        
+                    <f:selectItem itemValue="Editor" itemLabel="EDITOR" id="editor"/>
+                    <f:selectItem itemValue="Owner" itemLabel="OWNER" id="owner"/>
+                </h:selectOneRadio>
+                                <!--
+                                <input id="admin" type="radio" name="field" value="ADMIN"></input>
+  				<label for="admin"><span><span></span></span>ADMIN</label>
+  				<input id="editor" type="radio" name="field" value="EDITOR"></input>
+  				<label for="editor"><span><span></span></span>EDITOR</label>
+  				<input id="owner" type="radio" name="field" value="OWNER"></input>
+  				<label for="owner"><span><span></span></span>OWNER</label>
+                                -->
+                                </div>
+			<br></br>
+                        <h:commandButton class="button" action="#{usercontroller.addUsers(user)}" value="Simpan"/>
+                        </h:form>
+		</div>
+	</div>
+	<!--<script type="text/javascript">
+		function validate(){
+			var today = new Date(<?php echo time();?> *1000);
+			var date = new Date(document.forms["pos"]["date"].value);
+			date.setHours(23);
+			date.setMinutes(59);
+			date.setSeconds(59);
+			var month = 1+parseInt(date.getMonth());
+			var datebener = date.getFullYear()+"-"+month+"-"+date.getDate();
+			var title = document.forms["pos"]["title"].value;
+			if (title.length <= 50){
+				if (date >= today){
+					document.forms["pos"]["date"].value = datebener;
+					return true;
+				}
+				else{
+					alert('Tanggal yang anda masukkan tidak valid');
+					return false;	
+				}
+			}
+			else{
+				alert('Judul lebih panjang dari 50 karakter');
+				return false;
+			}
+		}
+	</script>-->
+</body>
+</html>
