@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Simple Blog | Edit Post</title>
+	<h:outputStylesheet name="assets/css/screen.css"  />
+	<h:outputStylesheet name="assets/img/favicon.ico"  />
+</h:head>
+<h:body class="default">
+<div class="wrapper">
+
+	<nav class="nav"> <a style="border: none;" id="logo"
+			href="index.xhtml"><h1>
+				Simple<span>-</span>Blog
+			</h1></a>
+
+		<ul class="nav-primary">
+			<h:form rendered="#{not userManager.isLoggedIn()}">
+				<li><h:inputText value="#{userManager.username}"
+						p:placeholder="User name"></h:inputText></li>
+				<li><h:inputSecret value="#{userManager.password}"
+						p:placeholder="Password"></h:inputSecret></li>
+				<li><h:commandButton value="Login"
+						action="#{userManager.login}" /></li>
+			</h:form>
+			<ui:fragment rendered="#{userManager.isLoggedIn()}">
+				<ui:fragment rendered="#{roleBean.getRole(sessionScope.userRole).description eq 'Owner'}">
+					<li><a href="addNewPost.xhtml">+ Tambah
+						Post</a></li>
+				</ui:fragment>
+				<ui:fragment rendered="#{roleBean.getRole(sessionScope.userRole).description eq 'Admin'}">
+					<li><a href="addNewPost.xhtml">+ Tambah
+						Post</a></li>
+					<li><a href="userList.xhtml">Manage User</a></li>
+				</ui:fragment>
+				<li><h:form>
+						<h:commandLink class="submit-button" value="Logout"
+							action="#{userManager.logout()}" />
+					</h:form></li>
+			</ui:fragment>
+		</ul>
+		</nav>
+
+
+<article class="art simple post">    
+    <h2 class="art-title" style="margin-bottom:40px">-</h2>
+	#{editBean.dispatchPost()}
+    <div class="art-body">
+        <div class="art-body-inner">
+            <h2>Edit Post</h2>
+
+            <div id="contact-area">
+                <h:form>
+                	<h:inputHidden type="text" value="#{editBean.id}"></h:inputHidden>
+                    <label for="Judul">Judul:</label>
+                    <h:inputText value="#{editBean.judul}"></h:inputText>
+                    
+                    <label for="Tanggal">Tanggal:</label>
+                    <h:inputText type="text" id="Tanggal" value="#{editBean.tanggal}"></h:inputText>
+                    
+                    <label for="Konten">Konten:</label><br />
+                    <h:inputTextarea rows="20" cols="20" id="Konten" value="#{editBean.konten}" ></h:inputTextarea>
+
+                    <h:commandButton action="#{editBean.editPost()}" value="Edit" class="submit-button"></h:commandButton>
+                </h:form>
+            </div>
+            
+        </div>
+    </div>
+</article>
+
+<footer class="footer">
+    <div class="back-to-top"><a href="#">Back to top</a></div>
+    <!-- <div class="footer-nav"><p></p></div> -->
+    <div class="psi">&Psi;</div>
+    <aside class="offsite-links">
+        Asisten IF3110 /
+        <a class="rss-link" href="#rss">RSS</a> /
+        <br />
+        <a class="twitter-link" href="http://twitter.com/YoGiiSinaga">Yogi</a> /
+        <a class="twitter-link" href="http://twitter.com/sonnylazuardi">Sonny</a> /
+        <a class="twitter-link" href="http://twitter.com/fathanpranaya">Fathan</a> /
+        <br />
+        <a class="twitter-link" href="#">Renusa</a> /
+        <a class="twitter-link" href="#">Kelvin</a> /
+        <a class="twitter-link" href="#">Yanuar</a> /
+        
+    </aside>
+</footer>
+</div>
+</h:body>
+</html>
