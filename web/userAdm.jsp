@@ -99,7 +99,7 @@
 				<p>
 				<% if (typeC!=4){
 				%>
-					<a href="update_user.jsp?id=<%=rs.getString("no")%>">Edit</a> | <a href="#" onclick="return ConfirmDelete(<%=rs.getString("username")%>);">Hapus</a>
+					<a href="update_user.jsp?id=<%=rs.getString("no")%>">Edit</a> | <a href="#" onclick="return ConfirmDelete(<%=rs.getString("no")%>);">Hapus</a>
 				<% } %>
 				</p>
 				
@@ -110,7 +110,7 @@
 			statement.close();
 			connection.close();
 			}catch(Exception ex){
-				out.println("Gagal tersambung. Terdaapat kesalahan.");
+				out.println("Gagal tersambung. Terdapat kesalahan.");
 			}
 			%>
           </ul>
@@ -122,11 +122,11 @@
 
 </div>
 <script>
-    function ConfirmDelete(username)
+    function ConfirmDelete(id)
     {
-      var x = confirm("Apakah Anda yakin menghapus post ini?");
+      var x = confirm("Apakah Anda yakin menghapus user ini?");
       if (x)
-          return window.location.assign('handler/delete_user.jsp?user_username='+username);
+          return window.location.assign('handler/delete_user.jsp?id='+id);
       else
         return false;
     }

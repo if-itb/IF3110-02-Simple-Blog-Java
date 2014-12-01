@@ -85,7 +85,9 @@
 				<p>
 				<% if (typeC!=4){
 				%>
-					<a href="edit.jsp?id=<% out.println(pBean.listManyPost().get(i).getId()); %>">Edit</a> | <a href="#" onclick="return ConfirmDelete(<% out.println(pBean.listManyPost().get(i).getId()); %>);">Hapus</a>
+					<a href="handler/recovPost.jsp?id=<% out.println(pBean.listManyPost().get(i).getId()); %>">Recover</a>
+					 | <a href="edit.jsp?id=<% out.println(pBean.listManyPost().get(i).getId()); %>">Edit</a>
+					 | <a href="#" onclick="return ConfirmDelete(<% out.println(pBean.listManyPost().get(i).getId()); %>);">Hapus</a>
 				<% } %>
 				</p>
 				

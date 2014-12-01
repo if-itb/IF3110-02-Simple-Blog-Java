@@ -111,7 +111,7 @@
     {
       var x = confirm("Apakah Anda yakin menghapus post ini?");
       if (x)
-          return window.location.assign('handler/delPost.jsp?id='+nomor);
+          return window.location.assign('trashPost.jsp?id='+nomor);
       else
         return false;
     }

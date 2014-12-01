@@ -122,7 +122,29 @@ public class Post {
 			try{
 				ps.close();
 				conn.close();
-				
+			}catch(SQLException e){
+				throw e;
+			}
+		}
+	} 
+	public static void RecovPost(String id) throws Exception{
+		Connection conn = null;
+		PreparedStatement ps = null;
+		try{
+			Class.forName(Driver).newInstance();
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/tubes2wbd", "root", "");
+			String queryUpdate = "UPDATE `post` SET `Status`=? WHERE ID='"+id+"';";
+			ps = conn.prepareStatement(queryUpdate);
+			ps.setString(1, "0");
+			if (ps.executeUpdate()==0){
+				throw new Exception("Error recovering post");
+			}
+		}catch(Exception e){
+			
+		}finally{
+			try{
+				ps.close();
+				conn.close();
 			}catch(SQLException e){
 				throw e;
 			}
@@ -217,7 +239,6 @@ public class Post {
 				throw e;
 			}
 		}
-		
 	}
 	
 	public static void DeletePost(String id) throws Exception{
