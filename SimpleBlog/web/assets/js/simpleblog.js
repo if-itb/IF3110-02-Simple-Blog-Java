@@ -204,7 +204,57 @@ function parseDate(date) {
 	return valid;
 }
 
-function validatePost(form) {
+function validatePost() {
+	var judul = document.getElementById("Judul").value;        
+	var tanggal = document.getElementById("Tanggal").value;
+	var konten = document.getElementById("Konten").value;
+	
+ 	if (judul == "") {
+ 		alert("Judul tidak boleh kosong");
+ 		return false;
+ 	}
+ 	if (tanggal == "") {
+ 		alert("Tanggal tidak boleh kosong");
+ 		return false;
+ 	} else {
+ 		if (parseDate(tanggal)) {
+	 		var date = tanggal.split("-");
+	 		var postDate = new Date(date[2],date[1]-1,date[0]);
+	 		var today = new Date();
+
+	 		var isGreaterThanToday = true;
+
+	 		if (postDate.getFullYear() < today.getFullYear()) {
+	 			isGreaterThanToday = false;
+	 		} else if (postDate.getFullYear() == today.getFullYear()) {
+		 		if (postDate.getMonth() < today.getMonth()) {
+		 			isGreaterThanToday = false;
+		 		} else if (postDate.getMonth() == today.getMonth()) {
+		 			if (postDate.getDate() < today.getDate()) {
+		 				isGreaterThanToday = false;
+		 			}
+		 		}
+		 	}
+
+	 		if (!isGreaterThanToday) {
+	 			alert("Tanggal harus lebih besar atau sama dengan tanggal sekarang");
+	 			return false;
+	 		}
+	 	} else {
+	 		alert("Format tanggal harus DD-MM-YYYY");
+	 		return false;
+	 	}
+ 	}
+ 	if (konten == "") {
+ 		alert("Konten tidak boleh kosong");
+ 		return false;
+ 	}
+
+
+ 	return true;
+}
+
+function altValidatePost(form) {
 	var judul = form[form.id + ":Judul"].value;        
 	var tanggal = form[form.id + ":Tanggal"].value;
 	var konten = form[form.id + ":Konten"].value;

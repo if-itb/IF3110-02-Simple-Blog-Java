@@ -9,20 +9,20 @@ padding-top: 30px;
 padding-bottom: 30px;
 }
 
-.art-list {
+.posts .art-list {
 padding: 0 0 0;
 }
 
-.art-list-item-title-and-time {
+.posts .art-list-item-title-and-time {
 width: 100%;
 text-align: center;
 }
 
-h2 {
+.posts h2 {
     padding-bottom: 0;
 }
 
-.art-list-item p {
+.posts .art-list-item p {
 width: 100%;
 float: left;
  margin-left: 0; 

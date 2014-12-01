@@ -82,9 +82,11 @@ private static final String DATA_DIRECTORY = "assets/image";
                                              new DiskFileItemFactory()).parseRequest(request);
                     for(FileItem item : multiparts){
                         if(!item.isFormField()){
-                            imagefilename = new File(item.getName()).getName();
-                            item.write( new File(uploadFolder + File.separator + imagefilename));
-                            output = UPLOAD_DIRECTORY + "/" + imagefilename;
+                            if (!item.getName().equals("")) {
+                                imagefilename = new File(item.getName()).getName();
+                                item.write( new File(uploadFolder + File.separator + imagefilename));
+                                output = UPLOAD_DIRECTORY + "/" + imagefilename;
+                            }
                         } else {
                             if (item.getFieldName().equals("Judul")) {
                                 judul = item.getString();
@@ -108,7 +110,8 @@ private static final String DATA_DIRECTORY = "assets/image";
                     if (rs.next()) {
                       id = rs.getInt(1);
                     }
-                    response.sendRedirect("post.jsp?id="+id);
+//                    response.sendRedirect("post.jsp?id="+id);
+                    response.sendRedirect("index.jsp");
                 } catch (Exception ex) {
                    ex.printStackTrace();
                 }         
