@@ -125,7 +125,7 @@
     {
       var x = confirm("Apakah Anda yakin menghapus post ini?");
       if (x)
-          return window.location.assign('delete_user.jsp?user_username='+username);
+          return window.location.assign('handler/delete_user.jsp?user_username='+username);
       else
         return false;
     }

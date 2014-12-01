@@ -28,7 +28,7 @@
 			
 			while(rs.next()){
 		%>	
-			<form method="post" action="update.jsp">
+			<form method="post" action="handler/update.jsp">
 				<input type="hidden" id="id" name="id" value="<% out.println(id); %>">
 				<label>Nama: </label><input type="text" id="user_name" name="user_name" value="<%=rs.getString("nama")%>">
 				<br/>
