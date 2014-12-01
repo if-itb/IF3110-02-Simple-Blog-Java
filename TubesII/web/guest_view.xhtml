@@ -1,0 +1,151 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:cc="http://java.sun.com/jsf/composite"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <f:view>
+    
+    <h:head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    <meta name="description" content="Deskripsi Blog"/>
+    <meta name="author" content="Judul Blog"/>
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="omfgitsasalmon"/>
+    <meta name="twitter:title" content="Simple Blog"/>
+    <meta name="twitter:description" content="Deskripsi Blog"/>
+    <meta name="twitter:creator" content="Simple Blog"/>
+    <meta name="twitter:image:src" content="{{! TODO: ADD GRAVATAR URL HERE }}"/>
+
+    <meta property="og:type" content="article"/>
+    <meta property="og:title" content="Simple Blog"/>
+    <meta property="og:description" content="Deskripsi Blog"/>
+    <meta property="og:image" content="{{! TODO: ADD GRAVATAR URL HERE }}"/>
+    <meta property="og:site_name" content="Simple Blog"/>
+    
+    <title>Simple Blog</title>
+    </h:head>
+    <h:outputStylesheet library="css" name="screen.css"/>
+    <h:body>
+        <div class="wrapper">
+<div class="nav">
+    <a style="border:none;" id="logo" href="guest.xhtml"><h1>Simple<span>-</span>Blog</h1></a>
+</div>
+
+                        
+<div class="art simple post">
+    <div class="art-header">
+        <div class="login">
+            <h:form rendered="#{loginHandler.loggedIn}">
+        <h:outputLabel for="username" value="Username"/>
+        <h:inputText id="username" value="#{loginHandler.username}" required="true" />
+        <br/><br/>
+        <h:outputLabel for="password" value="Password"/>
+        <h:inputSecret id="password" value="#{loginHandler.password}"/>
+        <br/><br/>
+        <h:commandButton value="Login" style="width: 100px;" action="#{loginHandler.login}"/>
+        </h:form>
+           
+        <h:form rendered="#{!loginHandler.loggedIn}">
+            <h:outputText value="You logged in as #{loginHandler.cookies}"/><br/>
+            <h:commandLink value="Logout" action="#{loginHandler.logout}"/>
+        </h:form>
+        </div>
+        <c:forEach items="#{customerBean.getPost(param['id'])}" var="post">
+        <div class="art-header-inner" style="margin-top: 0px; opacity: 1;">
+            <time class="art-time">#{post.tanggal}</time>
+            <h2 class="art-title">#{post.judul}</h2>
+            <p class="art-subtitle"></p>
+        </div>
+        </c:forEach>
+    </div> 
+    <div class="art-body-post">
+        <div class="art-body-inner">
+            <hr class="featured-article" />
+            <c:forEach items="#{customerBean.getPost(param['id'])}" var="post">
+            <p>#{post.isi}</p>
+            <hr />
+            </c:forEach>
+            <h2>Komentar</h2>
+            
+            <div id="contact-area">
+                <h:form id="comment_input">
+                    <h:outputLabel for="Nama" value="Nama"/>
+                    <h:inputText id="nama" value="#{commentBean.nama}" required="true" />
+                    
+                    <br/>
+                    
+                    <h:outputLabel for="Email" value="Email"/>
+                    <h:inputText id="email" value="#{commentBean.email}" onmouseout="return validateEmail()"/>
+                       
+                    <br/>
+                    
+                    <h:outputLabel for="Komentar" value="Komentar"/>
+                    <h:inputTextarea id="komentar" value="#{commentBean.komentar}"/>
+                    
+                    <br/>
+                    <h:commandButton value="Kirim" style="width: 100px;" action="#{commentBean.guestKomentar()}">
+   
+                    </h:commandButton>
+                </h:form>
+               
+            </div>
+                
+            <ul class="art-list-body">
+            <div id="load"></div>    
+            <div id="comment"> 
+                
+                <c:forEach items="#{commentBean.getCommentList(param['id'])}" var="komentar">    
+                    
+                <li class="art-list-item">    
+                    <div class="art-list-item-title-and-time">
+                        <h2 class="art-list-title"><a href="post.html">#{komentar.nama}</a></h2>
+                        <div class="art-list-time">#{komentar.tanggal}</div>
+                    </div>
+                    <p>#{komentar.komentar}&hellip;</p>                        
+                </li>
+                    
+                </c:forEach>
+            </div>    
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="footer">
+    <div class="back-to-top"><a href="">Back to top</a></div>
+    <!-- <div class="footer-nav"><p></p></div> -->
+    <div class="psi">&Psi;</div>
+    <div class="offsite-links">
+        Asisten IF3110 /
+        <a class="rss-link" href="#rss">RSS</a> /
+        <br/>
+        <a class="twitter-link" href="http://twitter.com/YoGiiSinaga">Yogi</a> /
+        <a class="twitter-link" href="http://twitter.com/sonnylazuardi">Sonny</a> /
+        <a class="twitter-link" href="http://twitter.com/fathanpranaya">Fathan</a> /
+        <br/>
+        <a class="twitter-link" href="#">Renusa</a> /
+        <a class="twitter-link" href="#">Kelvin</a> /
+        <a class="twitter-link" href="#">Yanuar</a> /
+        
+    </div>
+</div>
+
+</div>
+<script type="text/javascript" src="resources/js/fittext.js"></script>
+<script type="text/javascript" src="resources/js/app.js"></script>
+<script type="text/javascript" src="resources/js/function.js"></script>
+<script type="text/javascript" src="resources/js/respond.min.js"></script>
+    </h:body>
+    </f:view>
+</html>
+
+
+
