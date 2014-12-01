@@ -1,0 +1,80 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	template="/templates/view-template.xhtml">
+<ui:define name="title">Content</ui:define>
+
+<ui:define name="bodyContent">
+	<c:if test="#{!userLoader.isLoggedIn()}"> 
+	    <p><a href="#{request.contextPath}" >Back to Admin Page</a></p>
+	</c:if>
+	
+		<header class="art-header">
+			<div class="art-header-inner" >
+				<p class="art-time">#{contentLoader.currentContent.stringTanggal}</p>
+				<h2 class="art-title">#{contentLoader.currentContent.judul}</h2>
+				<p class="art-subtitle"></p>
+			</div>
+		</header>
+
+		<div class="art-body">
+			<div class="art-body-inner">
+				<hr class="featured-article" />
+				<p>#{contentLoader.currentContent.content}</p>
+				
+				<h2>Komentar</h2>
+
+				<div id="contact-area">
+					<c:if test="#{userLoader.isLoggedIn()}"> 
+						<h:form id="form">
+							<label for="Nama">Nama:</label>
+							<h:inputText id="nama" value="#{commentAdder.nama}" 
+										required="true" requiredMessage="Harus diisi!" />
+							<h:message for="nama" errorClass="errorMessage" />
+				
+							<label for="Email">Email:</label>
+							<h:inputText id="email" value="#{commentAdder.email}" 
+										required="true" requiredMessage="Harus diisi!" />
+							
+							<label for="Komentar">Komentar:</label><br></br>
+							<h:inputTextarea rows="20" cols="20" id="komentar" value="#{commentAdder.komentar}" 
+											required="true" requiredMessage="Harus diisi!" />
+							
+							<h:commandButton class="submit-button" value="Submit" action="#{commentAdder.addKomen}" onclick="return validateEmail('form:email');">
+								<f:ajax render="daftar-komentar form:nama form:email form:komentar" execute="@form"/>
+							</h:commandButton>
+						</h:form>
+					</c:if>
+					<c:if test="#{!userLoader.isLoggedIn()}"> 
+						<h:form id="form">
+							<label for="Komentar">Komentar:</label><br></br>
+							<h:inputTextarea rows="20" cols="20" id="komentar" value="#{commentAdder.komentar}" 
+											required="true" requiredMessage="Harus diisi!" />
+							
+							<h:commandButton class="submit-button" value="Submit" action="#{commentAdder.addKomenAdmin}">
+								<f:ajax render="daftar-komentar form:komentar" execute="@form"/>
+							</h:commandButton>
+						</h:form>
+					</c:if>
+				</div>
+				<ul class="art-list-body">
+					<h:panelGroup id="daftar-komentar">
+						<ui:repeat var="komentar" value="#{commentLoader.listComment}" varStatus="status">
+						<li class="art-list-item">	
+							<div class="art-list-item-title-and-time">
+								<h2 class="art-list-title">#{komentar.nama}</h2>
+								<div class="art-list-time">#{komentar.stringTanggal}</div>
+								<p>#{komentar.komentar}</p>
+							</div>
+						</li>
+						</ui:repeat>
+					</h:panelGroup>
+					
+				</ul>
+			</div>
+		</div>
+</ui:define>
+</ui:composition>

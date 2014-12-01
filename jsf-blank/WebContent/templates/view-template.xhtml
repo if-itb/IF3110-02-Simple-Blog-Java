@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+<h:head>
+	<title><ui:insert name="title">Simple Blog</ui:insert></title>
+	<h:outputStylesheet name="simple_blog.css" library="css" />
+	<h:outputScript name="validate-email.js" library="js" target="head"/>
+	<h:outputScript name="validate-post.js" library="js" target="head"/>
+	<h:outputScript name="validate-username.js" library="js" target="head"/>
+	
+</h:head>
+<h:body id="subpage">
+
+	<div id="blog_wrapper">
+		<div id="blog_header">
+			<div id="logo"><a href="#{request.contextPath}" ><h1>Simple<span>-</span>Blog</h1></a></div>
+			<div id="menu">
+				<h:form>
+				<c:if test="#{userLoader.isLoggedIn()}">
+					<h:panelGrid columns="3"> 
+					    <h:outputLabel for="username">Username:</h:outputLabel>		        
+				        <h:outputLabel for="password">Password:</h:outputLabel>
+				        <h:outputLabel ></h:outputLabel>
+				        <h:inputText id="username" value="#{userLoader.usname}"/>
+				        <h:inputSecret id="password" value="#{userLoader.uspass}"/>
+				        <h:commandButton value="Login" action="#{userLoader.login()}"/>
+					</h:panelGrid>
+				</c:if>
+				<c:if test="#{!userLoader.isLoggedIn()}"> 
+				    <h:form>
+					    <h:commandButton value="Logout" action="#{userLoader.logout()}"/>	    
+					</h:form>
+				</c:if>
+				</h:form>
+			</div>
+		</div> <!-- END of header -->
+		
+		<div id="blog_main">
+				<ui:insert name="bodyContent">Default Body Content</ui:insert>
+			<div class="clear"></div>
+		</div> <!-- END of main -->
+		
+	</div> <!-- END of wrapper -->
+	
+	<div id="blog_bottom_wrapper">
+		<div id="blog_bottom">
+		</div> <!-- END of bottom -->
+	</div> <!-- END of bottom wrapper -->
+
+	<div id="blog_footer_wrapper">
+		<div id="blog_footer">
+			<div class="back-to-top" style="text-align: center"><a href="">Back to top</a></div>
+			Copyright © 2014 Hendro T.B, Fahmi Dumadi, Khaidzir M. S. 
+		</div> <!-- END of footer -->
+	</div> <!-- END of footer wrapper -->
+	
+</h:body>
+</html>

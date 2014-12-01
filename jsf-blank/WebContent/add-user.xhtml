@@ -1,0 +1,55 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	template="/templates/page-template.xhtml">
+<ui:define name="title">Add Post</ui:define>
+
+<ui:define name="bodyContent">
+<c:if test="#{!userLoader.isLoggedIn() and userLoader.isAdmin()}">
+
+	<script>
+	function validateUsernameEmail(username, email) {
+		if (validateUsername(username)) {
+			return validateEmail(email);
+		}
+		return false;
+	}
+	</script>
+	
+	<h2 class="title">Add User</h2>
+	<div id="contact-area">
+		<h:form id="form">
+			<label for="username">Username</label>
+			<h:inputText id="username" value="#{userLoader.userAdder.username}" required="true" requiredMessage="Harus diisi!" />
+			<h:message for="username" errorClass="errorMessage" />
+
+			<label for="password">Password</label>
+			<h:inputSecret id="password" value="#{userLoader.userAdder.password}" required="true" requiredMessage="Harus diisi!"/>
+			
+			<label for="nama">Nama</label>
+			<h:inputText id="name" value="#{userLoader.userAdder.name}" required="true" requiredMessage="Harus diisi!"/>
+			
+			<label for="email">Email</label>
+			<h:inputText id="email" value="#{userLoader.userAdder.email}" required="true" requiredMessage="Harus diisi!"/>
+			
+			<label for="role">Role</label>
+			<h:selectOneMenu id="role" value="#{userLoader.userAdder.role}">
+				<f:selectItems value="#{userLoader.userAdder.roleMap}" />
+			</h:selectOneMenu>
+			<br /><br />
+			
+			<h:commandButton class="submit-button" value="Submit" action="#{userLoader.addUser()}" onclick="return validateEmail('form:email');">
+			</h:commandButton>
+		</h:form>
+	</div>
+	
+</c:if>
+<c:if test="#{userLoader.isLoggedIn() and !userLoader.isAdmin()}"> 
+    <ui:include src="not_allowed.xhtml" />
+</c:if>
+	
+</ui:define>
+</ui:composition>

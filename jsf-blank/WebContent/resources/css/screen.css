@@ -147,7 +147,11 @@ a:hover {
 /*  Nav
 ================================================== */
 .nav {
+<<<<<<< HEAD
+  position: relative;
+=======
   position: absolute;
+>>>>>>> 995cea6f7f68cf98b3a33285204a120951e7c074
   top: 0;
   left: 50%;
   height: 70px;
@@ -233,7 +237,11 @@ div.cover > img {
 }
 /* Contains the time, title and subtitle for an article */
 .art-header-inner {
+<<<<<<< HEAD
+  position: relative;
+=======
   position: fixed;
+>>>>>>> 995cea6f7f68cf98b3a33285204a120951e7c074
   top: 300px;
   left: 50%;
   margin-left: -490px;
@@ -290,6 +298,11 @@ div.cover > img {
   font-style: normal;
   font-size: 21px;
   line-height: 1.5;
+<<<<<<< HEAD
+  position: relative;
+  bottom: 100px;
+=======
+>>>>>>> 995cea6f7f68cf98b3a33285204a120951e7c074
 }
 .art-body-inner a:hover {
   border-bottom: 1px solid #F40034;
@@ -386,6 +399,10 @@ div.cover > img {
 .art-list-body {
   position: relative;
   overflow: hidden;
+<<<<<<< HEAD
+  bottom: 100px;
+=======
+>>>>>>> 995cea6f7f68cf98b3a33285204a120951e7c074
 }
 .art-list-item {
   padding: 40px 0;
@@ -829,6 +846,10 @@ hr.featured-article:after {
 #contact-area {
   width: 600px;
   margin-top: 25px;
+<<<<<<< HEAD
+  margin-bottom: 100px;
+=======
+>>>>>>> 995cea6f7f68cf98b3a33285204a120951e7c074
 }
 
 #contact-area input, #contact-area textarea {

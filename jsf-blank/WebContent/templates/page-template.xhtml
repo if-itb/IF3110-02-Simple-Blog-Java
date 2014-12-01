@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+<h:head>
+	<title><ui:insert name="title">Simple Blog</ui:insert></title>
+	<h:outputStylesheet name="simple_blog.css" library="css" />
+	<h:outputScript name="validate-email.js" library="js" />
+	<h:outputScript name="validate-post.js" library="js" />
+	<h:outputScript name="validate-username.js" library="js" />
+	
+</h:head>
+<h:body id="subpage">
+
+	<div id="blog_wrapper">
+		<div id="blog_header">
+			<div id="logo"><a href="#{request.contextPath}" ><h1>Simple<span>-</span>Blog</h1></a></div>
+			<div id="menu">
+				<h:form>
+					<h:panelGrid columns="3" rendered="#{userLoader.isLoggedIn()}"> 
+					    <h:outputLabel for="username">Username:</h:outputLabel>		        
+				        <h:outputLabel for="password">Password:</h:outputLabel>
+				        <h:outputLabel ></h:outputLabel>
+				        <h:inputText id="username" value="#{userLoader.usname}"/>
+				        <h:inputSecret id="password" value="#{userLoader.uspass}"/>
+				        <h:commandButton value="Login" action="#{userLoader.login()}"/>
+					</h:panelGrid>
+					<h:panelGrid rendered="#{!userLoader.isLoggedIn()}"> 
+					    <h:form> 
+						    <h:commandButton value="Logout" action="#{userLoader.logout()}"/><!--  rendered="#{!login.loggedIn}"/> -->	    
+						</h:form>
+					</h:panelGrid>
+				</h:form>
+			</div>
+		</div> <!-- END of header -->
+		
+		<div id="blog_main">
+			<c:if test="#{!userLoader.isLoggedIn()}">
+				<div id="blog_content" class="right">
+					<ui:insert name="bodyContent">Default Body Content</ui:insert>
+				</div>
+				<div id="blog_sidebar" class="left">
+					<div class="sidebar_section sidebar_section_bg">
+						<h3>Menu</h3>
+						<ul class="sidebar_link_list">
+								<li><a href="#{request.contextPath}/list-post.jsf" >View Blog</a></li>
+							<h:panelGroup rendered="#{userLoader.isAdmin() or userLoader.isOwner()}">
+								<li><a href="#{request.contextPath}/add-post.jsf">Add Post</a></li>
+							</h:panelGroup>	
+								
+								<li><a href="#{request.contextPath}">List Post</a></li>
+								<li><a href="#{request.contextPath}/unpublished-post.jsf">Unpublished Post</a></li>
+							
+							<h:panelGroup rendered="#{userLoader.isAdmin()}">	
+								<li><a href="#{request.contextPath}/deleted-post.jsf">Trash</a></li>
+								<li><a href="#{request.contextPath}/manajemen-user.jsf">Manajemen User</a></li>
+							</h:panelGroup>
+						</ul>
+					</div>
+				</div>
+			</c:if>
+			<c:if test="#{userLoader.isLoggedIn()}">
+				<ui:insert name="bodyContent">Default Body Content</ui:insert>
+			</c:if>
+			<div class="clear"></div>
+		</div> <!-- END of main -->
+		
+	</div> <!-- END of wrapper -->
+	
+	<div id="blog_bottom_wrapper">
+		<div id="blog_bottom">
+		
+		</div> <!-- END of bottom -->
+	</div> <!-- END of bottom wrapper -->
+
+	<div id="blog_footer_wrapper">
+	
+		<div id="blog_footer">
+			<div class="back-to-top" style="text-align: center"><a href="">Back to top</a></div>
+			Copyright © 2014 Hendro T.B, Fahmi Dumadi, Khaidzir M. S. 
+		</div> <!-- END of footer -->
+	</div> <!-- END of footer wrapper -->
+	
+</h:body>
+</html>

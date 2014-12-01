@@ -1,0 +1,36 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	template="/templates/page-template.xhtml">
+<ui:define name="title">Halaman Utama</ui:define>
+
+<ui:define name="bodyContent">
+	<!-- contoh hyperlink <a href="#{request.contextPath}/login.jsf" >klik </a> -->
+	<nav class="art-list">
+		<ul class="art-list-body">
+			<ui:repeat var="posting" value="#{contentLoader.publishedPost}" varStatus="status">
+				<li class="art-list-item">
+					<div class="art-list-item-title-and-time">
+						<h2 class="art-list-title">
+							<h:form>
+								<h:commandLink action="#{contentLoader.toContentPage(posting.ID)}" value="#{posting.judul}"/>
+							</h:form>
+						</h2>
+						<div class="art-list-time">Tanggal: #{posting.tanggal}</div>
+					</div>
+					<p>#{posting.descContent}</p>
+					<h:form class="alter_link" rendered="#{!userLoader.isLoggedIn()}">
+						<h:commandLink value="Edit" action="#{contentLoader.toEditPage(posting.ID)}"/> |
+						<h:commandLink value="Hapus" onclick="return confirm('Apakah anda yakin menghapus post ini?');" 
+							action="#{contentLoader.deletePostTemp(posting.ID)}" />
+					</h:form>
+				</li>
+			</ui:repeat>
+		</ul>
+	</nav>
+
+</ui:define>
+</ui:composition>
