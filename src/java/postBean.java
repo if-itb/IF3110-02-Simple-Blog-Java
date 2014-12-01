@@ -3,6 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
@@ -127,6 +131,65 @@ public class postBean {
      */
     public void setPublished(boolean published) {
         this.published = published;
+    }
+    
+    public void delete()
+    {
+        System.out.println("Delete id:" + this.id);
+        Connection connect = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        
+        try
+        {
+            Class.forName("com.mysql.jdbc.Driver");
+
+            connect = DriverManager.getConnection("jdbc:mysql://localhost/" + Config.dbName + "?user=" + Config.dbUsername + "&password=" + Config.dbPassword);
+
+            preparedStatement = connect.prepareStatement("UPDATE `posts` SET `deleted`=1 WHERE id=?");
+            
+            if (preparedStatement.executeUpdate() != 0)
+            {
+                this.deleted = true;
+            }
+                       
+                
+        } catch (Exception e)
+        {
+            System.out.println("Class UserManagementArrayBean: Failed to delete post");
+        } finally {
+           Close(resultSet, preparedStatement, connect);
+        } 
+    }
+    
+    private void Close(ResultSet r, PreparedStatement p, Connection c)
+    {
+        if (r != null)
+        {
+            try{
+                r.close();
+            } catch (Exception e)
+            {
+            }
+        }
+        
+        if (p != null)
+        {
+            try{
+                p.close();
+            } catch (Exception e)
+            {
+            }
+        }
+        if (c != null)
+        {
+            try{
+                c.close();
+            } catch (Exception e)
+            {
+                
+            }
+        }
     }
     
     

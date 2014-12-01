@@ -74,7 +74,7 @@ public class arrayPostBean {
                 
         } catch (Exception e)
         {
-            System.out.println("Class UserManagementArrayBean: Failed to fetch users");
+            System.out.println("Class arrrayPostBean: Failed to fetch posts : " + e.getMessage());
         } finally {
            Close(resultSet, preparedStatement, connect);
         }   

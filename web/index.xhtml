@@ -32,6 +32,18 @@ and open the template in the editor.
 <![endif]-->
 
 <title>Simple Blog</title>
+<script type="text/javascript">
+    function konfirmasiHapus()
+    {
+        var r = confirm("Apakah Anda yakin menghapus post ini?");
+        if (r == true)
+        {
+            return true;
+        } else {
+            return false;   
+        }
+    }
+</script>
 
 
 </head>
@@ -59,8 +71,8 @@ and open the template in the editor.
                     <div class="art-list-time">#{a.author}</div>
                 </div>
                 <p>#{a.konten} &#133;</p>
-                <p>
-                  <h:panelGroup rendered="#{userBean.loggedIn}"><a href="#">Edit</a> | <a href="#">Hapus</a></h:panelGroup>
+                <p style="width:100px;">
+                    <h:panelGroup rendered="#{userBean.loggedIn}"><a href="#">Edit</a> | <a href="deleteNonAdmin.jsp?post=#{a.id}" onclick="javascript:return confirm('Are you sure you want to delete this comment?')">Delete</a></h:panelGroup>
                 </p>
             </li>
                     </h:panelGroup></h:panelGroup>

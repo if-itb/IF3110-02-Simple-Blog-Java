@@ -113,11 +113,14 @@ public class UserBean {
         Cookie[] cookies = request.getCookies();
         
         int i;
-        for (i=0; i< cookies.length; i++)
+        if (cookies != null)
         {
-            if (cookies[i].getName().equalsIgnoreCase("username"))
+            for (i=0; i< cookies.length; i++)
             {
-                out = cookies[i];
+                if (cookies[i].getName().equalsIgnoreCase("username"))
+                {
+                    out = cookies[i];
+                }
             }
         }
         
