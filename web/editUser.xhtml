@@ -10,44 +10,63 @@
         <ui:include src="header-script.xhtml"/>
         <title>Simple Blog | Manage User</title>
     </h:head>
-    <h:body class="default">
+    <h:body class="default" onload="#{editUser.ambilUser()}">
     <div class="wrapper">
     <ui:include src="header.xhtml"/>
       <div class="art-body">
        <div class="art-body-inner">
     	<h2>Manage User</h2>
         <div id="contact-area">
-            <h:form>
-            	<table>
+            <h:form>              
+<!--                    <h:outputLabel>
+                        Password :
+                    </h:outputLabel>
+                <h:inputSecret id="Password" value="#{manUser.passwrd}" required=""/>
+                    
+                    <h:outputLabel>
+                        Nama :
+                    </h:outputLabel>
+                <h:inputText id="Nama"  value="#{manUser.nama_usr}" required="" />
+                <h:outputLabel>
+                        Email :
+                    </h:outputLabel>
+                <h:inputText id="Email"  value="#{manUser.email_usr}" required="" />
+                <h:outputLabel>
+                        Role :
+                    </h:outputLabel>
+                         <h:selectOneMenu value="#{manUser.role}" >
+                            <f:selectItem itemValue="owner" itemLabel="Owner"/>
+                            <f:selectItem itemValue="editor" itemLabel="Editor"/>
+                         </h:selectOneMenu>-->
+                    <table>
     		<tr>
     			<td>Username :</td>
-                        <td><h:inputText size="10" value="#{manUser.usrname}" /></td>
+                        <td><h:inputText size="10" value="#{editUser.usrname}" /></td>
     		</tr>
     		<tr>
     			<td>Password :</td>
-                        <td><h:inputSecret size="20" value="#{manUser.passwrd}" /></td>
+                        <td><h:inputSecret size="20" value="#{editUser.passwrd}" /></td>
     		</tr>
     		<tr>
     			<td>Nama :</td>
-                        <td><h:inputText size="5" value="#{manUser.nama_usr}" /></td>
+                        <td><h:inputText size="5" value="#{editUser.nama_usr}" /></td>
     		</tr>
     		<tr>
     			<td>Email :</td>
-                        <td><h:inputText size="10" value="#{manUser.email_usr}" /></td>
+                        <td><h:inputText size="10" value="#{editUser.email_usr}" /></td>
     		</tr>
                 <tr>
     			<td>Role :</td>
-                        <td><h:selectOneMenu value="#{manUser.role}" >
+                        <td><h:selectOneMenu value="#{editUser.role}" >
                             <f:selectItem itemValue="owner" itemLabel="Owner"/>
                             <f:selectItem itemValue="editor" itemLabel="Editor"/>
                             </h:selectOneMenu>
                         </td>
     		</tr>
     		</table>
-    		
-                <h:commandButton value="Add" action="#{manUser.addAction}" />
-    		
-            </h:form>
+                    
+                    <h:commandButton class="submit-button" value="Simpan" id="submit" type="submit" action="#{editPost.saveEditPost()}" />
+                </h:form>
 <!--            <h:outputText rendered="#{!cookieCheck.admin}" value="Anda harus login sebagai admin!"></h:outputText>-->
             </div>
         </div>

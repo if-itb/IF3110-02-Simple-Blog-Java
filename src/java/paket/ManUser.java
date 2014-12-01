@@ -4,6 +4,7 @@
  */
 package paket;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -12,6 +13,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -261,7 +266,12 @@ public class ManUser implements Serializable{
         return null;
     }
     
-    
+    public String editAction(User user) throws IOException {
+	    
+        FacesContext.getCurrentInstance().getExternalContext().redirect("editUser.xhtml?param="+user.usrname);
+			
+        return null;
+    }
 }
     
     
