@@ -19,6 +19,7 @@ import javax.faces.context.FacesContext;
 public class LogoutBean {
     
     public String logout(){
+        CookieHelper.setCookie("userID", "-1", 100);
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         return "login.jsf?faces-redirect=true";
     }
