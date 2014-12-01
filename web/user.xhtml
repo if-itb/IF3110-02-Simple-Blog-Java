@@ -60,7 +60,7 @@ and open the template in the editor.
             <tr><td>#{a.username}</td><td>#{a.role}</td><td><a href="#">Edit</a></td><td><h:form><h:commandLink action="#{a.delete()}">Delete</h:commandLink></h:form></td></tr>
         </h:panelGroup>
         <h:panelGroup rendered="#{status.even}">
-            <tr class="alt"><td>#{a.username}</td><td>#{a.role}</td><td><a href="#">Edit</a></td><td><h:form><h:commandLink action="#{a.delete()}">Delete</h:commandLink></h:form></td></tr>
+            <tr class="alt"><td>#{a.username}</td><td>#{a.role}</td><td><a href="edit_user.jsp?user=#{a.username}">Edit</a></td><td><h:form><h:commandLink action="#{a.delete()}">Delete</h:commandLink></h:form></td></tr>
         </h:panelGroup>
     </ui:repeat>
   </tbody>
