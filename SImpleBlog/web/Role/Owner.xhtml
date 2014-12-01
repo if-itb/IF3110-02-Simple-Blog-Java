@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <head>
+        <link type="text/css" rel="stylesheet" href="..\assets\screen.css"/>
+        <title>Owner's Simple Blog</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <h:body class="default" onload="#{Posting.CheckOwnerRole()}">
+        <script type = "text/javascript" src ="../assets/confirmvalidation.js"/>
+<div class="wrapper">
+
+<nav class="nav">
+    <h:form>
+        <h:commandLink action="Home" ><h1 style="border:none;" class="logo">Simple<span>-</span>Blog</h1></h:commandLink>
+    </h:form>
+    <ul class="nav-primary">
+        <li>
+            <h:form>
+                You are logged in as <u><h:commandLink action="#" id="authorid" value="#{Posting.activeUser}"></h:commandLink></u>
+            </h:form>
+        </li>
+    </ul>
+</nav>
+
+<div id="home">
+    
+    <div class="posts">
+        <nav class="art-list">
+            <div class="table">
+                <ul id="adminoption">
+                    
+                    <li>
+                        <h:form>
+                            <h:commandLink class="art-list-addpost" action="AddPost?faces-redirect=true" value="+ Add Post">
+                            </h:commandLink>
+                        </h:form>
+                    </li>
+                </ul>
+            </div>
+            <br/>
+            <hr/>
+          <ul class="art-list-body">
+              <c:forEach items="#{Posting.post}" var="p">
+                <li class="art-list-item">
+                    <div class="art-list-item-title-and-time">
+                        <h2 class="art-list-title">
+                            <h:form>
+                                <h:commandLink value="#{p.judul}" action="#{Viewpost.Redirect(p.id)}" ></h:commandLink>
+                            </h:form>
+                        </h2>
+                        <div class="art-list-time">By #{p.author}</div>
+                        <div class="art-list-time">#{p.tanggal}</div>
+                    </div>
+                    <p> #{p.contentPreview}&hellip;</p>
+                    <p>
+                        <h:form styleClass="editbutton" rendered="#{Posting.activeUsername == p.author}">
+                            <h:commandLink value="Edit|" action="#{Editpost.Redirect(p.id)}"></h:commandLink>
+                        </h:form>
+                        <h:form styleClass="publishbutton" rendered="#{Posting.activeUsername == p.author}">
+                            <h:commandLink onclick = "return confirmDelete()" value ="Delete" action="#{Posting.deletePost()}">
+                                <f:param name ="throwedid" value = "#{p.id}"></f:param>
+                            </h:commandLink>
+                        </h:form>
+                    </p>
+                </li>
+              </c:forEach>
+          </ul>
+        </nav>
+    </div>
+</div>
+
+<footer class="footer">
+    <div class="back-to-top"><a href=""> Back to top</a>
+    </div>
+    <!-- <div class="footer-nav"><p></p></div> -->
+    <div class="psi">
+        <h:form>
+            <h:commandLink action="#{Posting.setLogout()}" value="Logout" />
+        </h:form>
+    </div>
+    <aside class="offsite-links"> Tubes IF3110 /
+        <a class="rss-link" href="#rss">RSS</a> /
+        <br/>
+        <a class="twitter-link" href="#">Mario Filino</a> /
+        <a class="twitter-link" href="#">Rikysamuel</a> /
+        <a class="twitter-link" href="#">Kevin</a> /
+        <br/>
+        
+    </aside>
+</footer>
+
+</div>
+    </h:body>
+</html>

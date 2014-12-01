@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <head>
+        <link type="text/css" rel="stylesheet" href="../assets/screen.css"/>
+        <title>Publish Post</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>                
+    </head>   
+    <h:body class="default">
+        <div class="wrapper">
+
+        <nav class="nav">
+            <h:form>
+                <h:commandLink action="#{Posting.toHome}" ><h1 style="border:none;" class="logo">Simple<span>-</span>Blog</h1></h:commandLink>
+            </h:form>
+            <ul class="nav-primary">
+                <li>
+                    <h:form>
+                        You are logged in as <u><h:commandLink action="#" id="authorid" value="#{Posting.activeUser}"></h:commandLink></u>
+                    </h:form>
+                </li>
+            </ul>
+            <div id="title">
+                Deleted Post(s)
+            </div>
+        </nav>
+
+        <div id="home">
+            <div class="posts">
+                <nav class="art-list">
+                  <ul class="art-list-body">
+                      <c:forEach items="#{Posting.deletedPosts}" var="post">
+                        <li class="art-list-item">
+                            <div class="art-list-item-title-and-time">
+                                <h2 class="art-list-title">
+                                    <h:form>
+                                        <h:commandLink value="#{post.judul}" action="#{Viewpost.Redirect(post.id)}" ></h:commandLink>
+                                    </h:form>
+                                </h2>
+                                <div class="art-list-time">By #{post.author}</div>
+                                <div class="art-list-time">#{post.tanggal}</div>
+                            </div>
+                            <p>#{post.contentPreview} &hellip;</p>
+                            <p>
+                                <h:form styleClass="restorebutton">
+                                    <h:commandLink value="Restore|" action="#{Posting.setRestorePost(post.id)}"></h:commandLink>
+                                </h:form>
+                                <h:form styleClass="deletebutton">
+                                    <h:commandLink value="Delete" action="#{Posting.setRealDeletePost(post.id)}" onclick="return confirm('Are you sure to delete this post?')"></h:commandLink>
+                                </h:form>
+                            </p>
+                        </li>
+                      </c:forEach>
+                  </ul>
+                </nav>
+            </div>
+        </div>
+
+        <footer class="footer">
+        <div class="back-to-top"><a href=""> Back to top</a>
+        </div>
+        <!-- <div class="footer-nav"><p></p></div> -->
+        <div class="psi">
+            <h:form>
+                <h:commandLink action="#{Posting.setLogout()}" value="Logout" />
+            </h:form>
+        </div>
+        <aside class="offsite-links"> Tubes IF3110 /
+            <a class="rss-link" href="#rss">RSS</a> /
+            <br/>
+            <a class="twitter-link" href="#">Mario Filino</a> /
+            <a class="twitter-link" href="#">Rikysamuel</a> /
+            <a class="twitter-link" href="#">Kevin</a> /
+            <br/>
+
+        </aside>
+    </footer>
+
+        </div>
+    </h:body>
+</html>

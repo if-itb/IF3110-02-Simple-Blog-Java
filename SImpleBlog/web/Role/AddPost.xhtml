@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <link type="text/css" rel="stylesheet" href="../assets\screen.css"/>
+        <title>Simple Blog</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    </h:head>
+    <h:body class="default">
+        <script type = "text/javascript" src ="../assets/confirmdate.js"/>
+<div class="wrapper">
+
+<nav class="nav">
+    <h:form>
+        <h:commandLink action="#{Posting.toHome}" ><h1 style="border:none;" class="logo">Simple<span>-</span>Blog</h1></h:commandLink>
+    </h:form>
+    <ul class="nav-primary">
+        <li>
+            <h:form>
+                You are logged in as <u><h:commandLink action="#" id="authorid" value="#{Posting.activeUser}"></h:commandLink></u>
+            </h:form>
+        </li>
+    </ul>
+</nav>
+
+<article class="art simple post">
+    
+    
+    <h2 class="art-title" style="margin-bottom:40px">-</h2>
+
+    <div class="art-body">
+        <div class="art-body-inner">
+            <h2>Add Post</h2>
+
+            <div id="contact-area">
+                <!--form action="#" method="post">-->
+                <h:form id = "Form" onsubmit="return validateform()">
+                    <label for="Judul">Title:</label>
+                    <input type="text" name="Judul" id="Judul" placeholder ="Input your title" required ="true" />
+
+                    <label for="Tanggal">Date:</label>
+                    <input type="text" name="Tanggal" id="Tanggal" placeholder ="YYYY-MM-DD" required ="true"/>
+                    
+                    <label for="Konten">Content:</label><br />
+                    <textarea name="Konten" id="Konten" placeholder = "Write content here" required = "true"></textarea>
+                    <h:commandButton onclick = "return validateform()" type = "submit" value ="Submit" styleClass="submitbutton" action="#{Posting.addPost()}"></h:commandButton>
+                </h:form>
+            </div>
+        </div>
+    </div>
+
+</article>
+
+<footer class="footer">
+    <div class="back-to-top"><a href=""> Back to top</a>
+    </div>
+    <!-- <div class="footer-nav"><p></p></div> -->
+    <div class="psi">
+        <h:form>
+            <h:commandLink action="#" value="Logout" />
+        </h:form>
+    </div>
+    <aside class="offsite-links"> Tubes IF3110 /
+        <a class="rss-link" href="#rss">RSS</a> /
+        <br/>
+        <a class="twitter-link" href="#">Mario Filino</a> /
+        <a class="twitter-link" href="#">Rikysamuel</a> /
+        <a class="twitter-link" href="#">Kevin</a> /
+        <br/>
+        
+    </aside>
+</footer>
+
+</div>
+    </h:body>
+</html>
+

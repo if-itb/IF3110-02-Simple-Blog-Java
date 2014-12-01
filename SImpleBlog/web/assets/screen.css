@@ -32,6 +32,20 @@ body {
   background: #fff;
 }
 
+.table {
+  margin: 0 auto;
+}
+
+ul#adminoption {
+  min-width: 696px;
+  list-style: none;
+  padding-top: 20px;
+}
+
+ul#adminoption li {
+  display: inline;
+}
+
 
 /* Typography
 ================================================== */
@@ -92,6 +106,23 @@ cite {
   font-style: italic;
   }
 
+.logo{
+  float: left;
+  padding-bottom: 30px;
+  height: 30px;
+  margin-left: 0px;
+  letter-spacing: 1px;
+  font-family: 'Questrial', sans-serif;
+  font-size: 30px;
+  color: #000;
+  text-transform: uppercase;
+  text-align: left;
+  }
+
+span{
+    color: red !important;
+  }
+ 
 /* Teaser
 ================================================== */
 
@@ -166,19 +197,29 @@ a:hover {
   float: right;
 }
 .nav-primary li {
-  display: inline-block;
+  display: initial;
   margin-left: 10px;
   font-weight: 500;
 }
 #logo h1,
-.nav-primary li,
 .nav-primary li a {
   font-family: "proxima-nova", "helvetica neue", "helvetica", sans-serif;
   font-weight: 700;
-  font-size: 13px;
+  font-size: 12px;
+  line-height: 30px;
+  color: #E50000;
+  text-transform: initial;
+  text-align: right;
+}
+
+.nav-primary li {
+  font-family: "proxima-nova", "helvetica neue", "helvetica", sans-serif;
+  font-weight: 700;
+  font-size: 12px;
   line-height: 30px;
   color: #000;
-  text-transform: uppercase;
+  text-transform: initial;
+  text-align: right;  
 }
 
 #logo h1 {
@@ -187,6 +228,9 @@ a:hover {
   letter-spacing: 1px;
   font-family: 'Questrial', sans-serif;
   font-size: 30px;
+  color: #000;
+  text-transform: uppercase;
+  text-align: left;
 }
 
 #logo h1 span{
@@ -225,7 +269,7 @@ div.cover > img {
 }
 /* Header */
 .art-header {
-  height: 900px;
+  height: 564px;
   /* Background image is defined in the post */
   background-position: top center;
   background-attachment: fixed;
@@ -233,7 +277,7 @@ div.cover > img {
 }
 /* Contains the time, title and subtitle for an article */
 .art-header-inner {
-  position: fixed;
+  position: absolute;
   top: 300px;
   left: 50%;
   margin-left: -490px;
@@ -275,6 +319,7 @@ div.cover > img {
 .art-body {
   position: relative;
   width: 100%;
+  top: 50px;
   background: #fff;
   z-index: 100;
   -webkit-box-shadow: 0 -3px 3px rgba(0,0,0,.2);
@@ -381,7 +426,7 @@ div.cover > img {
 /*  List of Articles
 ================================================== */
 .art-list {
-  padding: 120px 0 0;
+  padding: 140px 0 0;
 }
 .art-list-body {
   position: relative;
@@ -397,9 +442,10 @@ div.cover > img {
   border-bottom: none;
 }
 .art-list-title {
-  font-size: 26px;
+  font-size: 20px;
   line-height: 26px;
   font-weight: 700;
+  width: 300px;
 }
 .art-list-item-title-and-time {
   float: left;
@@ -413,6 +459,17 @@ div.cover > img {
   text-transform: uppercase;
   color: #999;
 }
+
+.art-list-addpost {
+  font-size: 15px;
+  line-height: 20px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #999;
+  float: right;
+  margin-right: 20px;
+}
+
 .art-list-title a {
   color: #000;
 }
@@ -435,6 +492,7 @@ div.cover > img {
   padding: 30px 0 40px;
   overflow: hidden;
   border-top: 1px solid #ccc;
+  z-index: 100;
 }
 .footer,
 .footer a {
@@ -829,6 +887,30 @@ hr.featured-article:after {
 #contact-area {
   width: 600px;
   margin-top: 25px;
+  position: relative;
+  float: right;
+  height: 400px;
+  text-align: center;
+}
+
+#contact-area2 {
+  width: 600px;
+  margin-top: 25px;
+  position: relative;
+  height: 267px;
+}
+
+#contact-area2 input, #contact-area2 textarea {
+  padding: 5px;
+  width: 471px;
+  font-family: Helvetica, sans-serif;
+  margin: 0px 0px 10px 0px;
+  border: 2px solid #ccc;
+
+}
+#contact-area3 input{
+    font-family: Helvetica, sans-serif;
+    border: 2px solid #ccc;
 }
 
 #contact-area input, #contact-area textarea {
@@ -843,13 +925,28 @@ hr.featured-article:after {
   height: 90px;
 }
 
+#contact-area2 textarea {
+  height: 90px;
+}
+
 #contact-area textarea:focus, #contact-area input:focus {
+  border: 2px solid #900;
+}
+
+#contact-area2 textarea:focus, #contact-area2 input:focus {
   border: 2px solid #900;
 }
 
 #contact-area input.submit-button {
   width: 100px;
-  
+}
+
+#contact-area2 input.submit-button {
+  width: 100px;
+}
+
+#contact-area3 input.submit-button {
+  width: 100px;
 }
 
 label {
@@ -858,4 +955,112 @@ label {
   margin-right: 15px;
   width: 100px;
   padding-top: 5px;
+}
+
+#title{
+    position: absolute;
+    top: 70px;
+    left: 50%;
+    height: 30px;
+    width: 980px;
+    padding-top: 40px;
+    margin-left: -490px; /* Half width of nav */
+    border-bottom: 1px solid #333;
+    z-index: 2;
+    font-family: Helvetica, sans-serif;
+    font-size: 20px;
+    text-align: center;
+    line-height: 30px;
+}
+
+.submitbutton{
+    margin-right: 0px;
+    position: relative;
+    float: right;
+    right: 7px;
+}
+
+#Konten, #Komentar, #Komentar2{
+    resize: none;
+}
+
+.editbutton{
+    position: relative;
+    height: 28px;
+    width: 1px;
+}
+
+.publishbutton{
+    position: relative;
+    height: 28px;
+    width: 1px;
+    left: 38px;
+}
+
+.restorebutton{
+    position: relative;
+    height: 28px;
+    width: 1px;
+}
+
+.deletebutton{
+    position: relative;
+    height: 28px;
+    width: 1px;
+    left: 70px;
+}
+
+#customers {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#customers td, #customers th {
+    font-size: 1em;
+    border: 1px solid black;
+    padding: 3px 7px 2px 7px;
+}
+
+#customers th {
+    font-size: 1.1em;
+    text-align: left;
+    padding-top: 5px;
+    padding-bottom: 4px;
+    background-color: gray;
+    color: #ffffff;
+}
+
+
+#customers tr.alt td {
+    color: #000000;
+    background-color: #EAF2D3;
+}
+
+#checkusername{
+    color: #F40034;
+    font-size: 18px;
+}
+
+.usernameAlert{
+    position: absolute;
+    top: -39px;
+    font-size: 17px;
+}
+.CreateUser{
+    color:black;
+}
+
+#contact-area2 {
+  text-align: center;
+  width: 600px;
+  margin-top: 25px;
+  position: relative;
+  height: 400px;
+}
+
+#contact-area3 {
+  margin-top: 25px;
+  position: relative;
+
 }

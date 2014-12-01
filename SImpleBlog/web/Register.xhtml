@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <head>
+        <title>Owner's Simple Blog</title>
+        <link type="text/css" rel="stylesheet" href="assets/screen.css"/>
+        <script type="text/javascript" src="assets/ajax.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <h:body class="default">
+        <div class="wrapper">
+
+            <nav class="nav">
+                <h:form>
+                    <h:commandLink action="Home" ><h1 style="border:none;" class="logo">Simple<span>-</span>Blog</h1></h:commandLink>
+                </h:form>
+                <ul class="nav-primary">
+                    <li>Registration</li>
+                </ul>
+            </nav>
+            <article class="art simple post"><br/><br/>
+                <h2 class="art-title" style="margin-bottom:40px">-</h2>
+                <div class="art-body">
+                    <div class="art-body-inner">
+                        <h2>Register</h2>
+
+                        <div id="contact-area">
+                            <!--form action="#" method="post">-->
+                            <h:form id="Form" onsubmit="return IsEmailValidForRegistry()">
+                                <h:message for="Username" class="usernameAlert"/>
+                                <label for="Name">Name:</label>
+                                <h:inputText id="Name" label="Name"/>
+
+                                <label for="Username">Username:</label>
+                                <h:inputText id="Username" label="Username">
+                                    <f:validator validatorId="RegisterValidator" />
+                                </h:inputText>
+
+                                <label for="Email">Email:</label>
+                                <h:inputText id="Email" label="Email" class="Email"/>
+                                
+                                <label for="Password">Password:</label>
+                                <h:inputSecret id="Password" label="Password"/>
+
+                                <br/><br/>
+                                <h:commandButton type="submit" value="Register" class="submit-button" action="#{UserRegistry.addUserOwner()}"/>
+                            </h:form>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </h:body>
+</html>

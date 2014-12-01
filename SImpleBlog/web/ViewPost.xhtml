@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <head>
+        <title>#{Viewpost.post.judul}</title>
+        <link type="text/css" rel="stylesheet" href="assets/screen.css"/>
+        <script type="text/javascript" src="assets/ajax.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <h:body class="default" onload="LoadCommentList(#{Viewpost.postId})">
+        <div class="wrapper">
+
+        <nav class="nav">
+            <h:form>
+
+                <h:commandLink action="Home" ><h1 style="border:none;" class="logo">Simple<span>-</span>Blog</h1></h:commandLink>
+
+                
+
+            </h:form>
+            <ul class="nav-primary">
+                <li></li>
+            </ul>
+        </nav>
+
+        <article class="art simple post">
+
+            <header class="art-header">
+                <div class="art-header-inner" style="margin-top: 0px; opacity: 1;">
+                    <time class="art-time">#{Viewpost.post.tanggal}</time>
+                    <h2 class="art-title">#{Viewpost.post.judul}</h2>
+                    <p class="art-subtitle"></p>
+                </div>
+            </header>
+
+            <div class="art-body">
+                <div class="art-body-inner">
+                    <hr class="featured-article" />
+                    #{Viewpost.post.content}
+                    <hr />
+
+                    <h2>Komentar</h2>
+
+                    <div id="contact-area2">
+                        <h:form rendered="#{Posting.loginState == true}" onsubmit="AddCommentLoggedIn(#{Viewpost.postId})">
+                            <label for="Nama">Nama:</label>
+                            <input type="text" name="Nama2" id="Nama2" required="true" disabled="true" value="#{Posting.activeUser}"/>
+
+                            <label for="Email">Email:</label>
+                            <input type="text" name="Email2" id="Email2" required="true" disabled="true" value="#{Posting.activeUserEmail}"/>
+
+                            <label for="Komentar">Komentar:</label><br/>
+                            <textarea name="Komentar2" rows="20" cols="20" id="Komentar2" required="true"></textarea>
+                            
+                            <h:commandButton type="submit" value="Kirim" class="submit-button"></h:commandButton>
+                        </h:form>
+                        <h:form rendered="#{Posting.loginState == false}" id="Form" onsubmit="return AddComment(#{Viewpost.postId})">
+                            <label for="Nama">Nama:</label>
+                            <input type="text" name="Nama" id="Nama" required="true"/>
+
+                            <label for="Email">Email:</label>
+                            <input type="text" name="Email" id="Email" required="true"/>
+
+                            <label for="Komentar">Komentar:</label><br/>
+                            <textarea name="Komentar" rows="20" cols="20" id="Komentar" required="true"></textarea>
+                            
+                            <h:commandButton type="submit" value="Kirim" class="submit-button" action="#{Viewpost.Redirect(Viewpost.postId)}">
+                            </h:commandButton>
+                        </h:form>
+                    </div>
+
+                    <ul class="art-list-body" id="comment-list">
+                        
+                    </ul>
+                </div>
+            </div>
+
+        </article>
+
+        <footer class="footer">
+            <div class="back-to-top"><a href=""> Back to top</a>
+            </div>
+            <!-- <div class="footer-nav"><p></p></div> -->
+            <div class="psi">
+                <h:form rendered="#{Posting.loginState == true}">
+                    <h:commandLink action="#{Posting.setLogout()}" value="Logout" />
+                </h:form>
+                <h:form rendered="#{Posting.loginState == false}">
+                    -
+                </h:form>
+            </div>
+            <aside class="offsite-links"> Tubes IF3110 /
+                <a class="rss-link" href="#rss">RSS</a> /
+                <br/>
+                <a class="twitter-link" href="#">Mario Filino</a> /
+                <a class="twitter-link" href="#">Rikysamuel</a> /
+                <a class="twitter-link" href="#">Kevin</a> /
+                <br/>
+
+            </aside>
+        </footer>
+
+        </div>
+
+    </h:body>
+</html>

@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <head>
+        <link type="text/css" rel="stylesheet" href="../assets/screen.css"/>
+        <script type="text/javascript" src="../assets/ajax.js"></script>
+        <title>Publish Post</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>                
+    </head>   
+    <h:body class="default">
+        <script type = "text/javascript" src ="../assets/confirmdate.js"/>
+        <script type = "text/javascript" src ="../assets/confirmvalidation.js"/>
+        <div class="wrapper">
+            <nav class="nav">
+                <h:form>
+                    <h:commandLink action="#{Posting.toHome}" ><h1 style="border:none;" class="logo">Simple<span>-</span>Blog</h1></h:commandLink>
+                </h:form>
+                <ul class="nav-primary">
+                    <h:form>
+                        You are logged in as <u><h:commandLink action="#" id="authorid" value="#{Posting.activeUser}"></h:commandLink></u>
+                    </h:form>
+                </ul>
+            </nav>
+        
+        <div id="home">
+            <nav class="art-list">
+                <h:dataTable id="customers" value="#{UserBean.orderList}" var="u">
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Username"/>
+                        </f:facet>
+                        <h:outputText value="#{u.username}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Password"/>
+                        </f:facet>
+                        <h:outputText value="#{u.password}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Name"/>
+                        </f:facet>
+                        <h:outputText value="#{u.name}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Email"/>
+                        </f:facet>
+                        <h:outputText value="#{u.email}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Role"/>
+                        </f:facet>
+                        <h:outputText value="#{u.role}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Operation"/>
+                        </f:facet>
+                        <h:form>
+                            <u><h:commandLink value="Delete" style="text-align: center" action="#{Posting.setDeleteUser()}" onclick="return confirmValidate()">
+                                <f:param name ="throwediduser" value = "#{u.username}"></f:param>
+                            </h:commandLink></u>
+                        </h:form>
+                    </h:column>
+                </h:dataTable>
+                <br/>
+                <hr/>
+                <p class="home"><b>Update User</b></p>
+                <div id="contact-area3">
+                    <h:form>
+                        <input type="text" name="EditUsername" id="EditName" required="required" placeholder="Username"/>
+                        <input type="text" name="EditPassword" id="EditPassoword" required="required" placeholder="Password"/>
+                        <input type="text" name="EditName" id="EditName" required="required" placeholder="Name"/>
+                        <input type="text" name="EditEmail" id="EditEmail" required="required" placeholder="Email"/>&nbsp;
+                        <h:selectOneMenu id="Role" value="#{Posting.selectedItem}">
+                            <f:selectItem itemValue="Owner" id="CreateOwner"/>
+                            <f:selectItem itemValue="Editor" id="CreateEditor"/>
+                            <f:selectItem itemValue="Admin" id="CreateAdmin"/>
+                        </h:selectOneMenu> &nbsp;
+                        <h:commandButton value="Update" class="submit-button" action="#{Posting.updateUser()}" />
+                    </h:form>
+                </div>
+                <br/>
+                <hr/>
+                <p class="home"><b>Create New User</b></p>
+                <div id="contact-area2">
+                <!--form action="#" method="post">-->
+               <h:form onsubmit="return IsEmailValid()" id="Form">
+                    <label for="Name">Name:</label>
+                    <input type="text" name="Name" id="Name" required="required"/>
+
+                    <label for="Username">Username:</label>
+                    <input type="text" name="Username" id="Username" required="required"/>
+
+                    <label for="Email">Email:</label>
+                    <input type="text" name="Email" id="Email" required="required"/>
+
+                    <label for="Password">Password:</label>
+                    <input type="password" name="Password" id="Password" required="required"/>
+
+                    <label for="Role">Role:</label>
+                    <h:selectOneMenu id="Role" value="#{Posting.selectedItem}">
+                        <f:selectItem itemValue="Owner" id="CreateOwner"/>
+                        <f:selectItem itemValue="Editor" id="CreateEditor"/>
+                        <f:selectItem itemValue="Admin" id="CreateAdmin"/>
+                    </h:selectOneMenu>
+                    
+                    <br/><br/>
+                    <h:commandButton value="Register" class="submit-button" action="#{Posting.setInsertNewUser()}" />
+                </h:form>
+                </div>
+                
+            </nav>
+        </div>
+            
+        <footer class="footer">
+            <div class="back-to-top"><a href=""> Back to top</a>
+            </div>
+            <!-- <div class="footer-nav"><p></p></div> -->
+            <div class="psi">
+                <h:form>
+                    <h:commandLink action="#{Posting.setLogout()}" value="Logout" />
+                </h:form>
+            </div>
+            <aside class="offsite-links"> Tubes IF3110 /
+                <a class="rss-link" href="#rss">RSS</a> /
+                <br/>
+                <a class="twitter-link" href="#">Mario Filino</a> /
+                <a class="twitter-link" href="#">Rikysamuel</a> /
+                <a class="twitter-link" href="#">Kevin</a> /
+                <br/>
+            </aside>
+        </footer>
+        </div>
+    </h:body>
+</html>
