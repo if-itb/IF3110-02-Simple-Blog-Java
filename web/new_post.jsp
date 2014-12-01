@@ -1,3 +1,40 @@
+<%-- 
+    Document   : new_post
+    Created on : Dec 1, 2014, 10:59:52 PM
+    Author     : Denny
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page import="java.io.*,java.util.*,java.sql.*"%>
+<%@ page import="javax.servlet.http.*,javax.servlet.*" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
+
+<sql:setDataSource var="db_source" driver="com.mysql.jdbc.Driver" user="root" password="root" url="jdbc:mysql://localhost/simpleblog-java"/>
+<%
+    Cookie [] cookies = request.getCookies();
+    String username = "";
+    int i;
+    if (cookies != null)
+    {
+	for(i=0; i< cookies.length; i++)
+	{
+	    if (cookies[i].getName().equalsIgnoreCase("username"))
+	    {
+		username = cookies[i].getValue();
+	    }
+	}
+    }
+	
+    if (request.getParameter("submit") != null){
+%>
+    <sql:update var="results" dataSource="${db_source}">
+	INSERT INTO posts (judul,konten,penulis,tanggal,deleted,published) VALUES ('<%= request.getParameter("Judul")%>', '<%= request.getParameter("Konten")%>', '<%=username%>', '<%= request.getParameter("Tanggal")%>', 0,0); 
+    </sql:update>
+<%
+    }
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,15 +44,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="Deskripsi Blog">
 <meta name="author" content="Judul Blog">
-
-<!-- Twitter Card -->
-<meta name="twitter:card" content="summary">
-<meta name="twitter:site" content="omfgitsasalmon">
-<meta name="twitter:title" content="Simple Blog">
-<meta name="twitter:description" content="Deskripsi Blog">
-<meta name="twitter:creator" content="Simple Blog">
-<meta name="twitter:image:src" content="{{! TODO: ADD GRAVATAR URL HERE }}">
-
 <meta property="og:type" content="article">
 <meta property="og:title" content="Simple Blog">
 <meta property="og:description" content="Deskripsi Blog">
@@ -31,7 +59,35 @@
 
 <title>Simple Blog | Tambah Post</title>
 
+<script type="text/javascript">
+    function checkDate()
+{
+	var re = /^(\d{4})\/(\d{1,2})\/(\d{1,2})$/;
+	var dateField = document.getElementById("Tanggal");
+	var errorMessage = document.getElementById("errorMessage");
+	if ((re.test(dateField.value)) && (dateField.value != ''))
+	{
+		dateString = dateField.value.split("/");
 
+		date = new Date(dateString[0], dateString[1] - 1, dateString[2], 23, 59, 59);
+		currentDate = new Date();
+
+		if (date <= currentDate)
+		{
+			errorMessage.innerHTML = "Tanggal harus lebih baru atau sama dengan hari ini";
+			return false;
+		} else {
+			errorMessage.innerHTML = "";
+			return true;
+		}
+
+	}else {
+		
+		errorMessage.innerHTML = "Format tanggal adalah YYYY/MM/DD";
+		return false;
+	}
+}
+</script>
 </head>
 
 <body class="default">
@@ -54,7 +110,8 @@
             <h2>Tambah Post</h2>
 
             <div id="contact-area">
-                <form method="post" action="#">
+                <form method="post">
+                    <div id="errorMessage"></div>
                     <label for="Judul">Judul:</label>
                     <input type="text" name="Judul" id="Judul">
 
@@ -64,7 +121,7 @@
                     <label for="Konten">Konten:</label><br>
                     <textarea name="Konten" rows="20" cols="20" id="Konten"></textarea>
 
-                    <input type="submit" name="submit" value="Simpan" class="submit-button">
+                    <input type="submit" name="submit" value="Simpan" onclick="return checkDate();" class="submit-button">
                 </form>
             </div>
         </div>

@@ -1,3 +1,31 @@
+<%-- 
+    Document   : edit_post
+    Created on : Dec 1, 2014, 11:31:44 PM
+    Author     : Denny AH
+--%>
+
+<!DOCTYPE html>
+<%@ page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page import="java.io.*,java.util.*,java.sql.*"%>
+<%@ page import="javax.servlet.http.*,javax.servlet.*" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
+
+<sql:setDataSource var="db_source" driver="com.mysql.jdbc.Driver" user="root" password="root" url="jdbc:mysql://localhost/simpleblog-java"/>
+<%
+    if (request.getParameter("submit") != null){
+%>
+    <sql:update var="update" dataSource="${db_source}">
+        UPDATE posts SET judul = '<%=request.getParameter("Judul")%>', tanggal = '<%=request.getParameter("Tanggal")%>', konten = '<%=request.getParameter("Konten")%>'
+	WHERE id = <%=request.getParameter("id")%>;
+    </sql:update>
+<%
+    }
+%>
+<sql:query var="read" dataSource="${db_source}">
+    SELECT * from posts WHERE id=<%=request.getParameter("id")%>;
+</sql:query>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,15 +35,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="Deskripsi Blog">
 <meta name="author" content="Judul Blog">
-
-<!-- Twitter Card -->
-<meta name="twitter:card" content="summary">
-<meta name="twitter:site" content="omfgitsasalmon">
-<meta name="twitter:title" content="Simple Blog">
-<meta name="twitter:description" content="Deskripsi Blog">
-<meta name="twitter:creator" content="Simple Blog">
-<meta name="twitter:image:src" content="{{! TODO: ADD GRAVATAR URL HERE }}">
-
 <meta property="og:type" content="article">
 <meta property="og:title" content="Simple Blog">
 <meta property="og:description" content="Deskripsi Blog">
@@ -29,51 +48,48 @@
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->
 
-<title>Simple Blog</title>
+<title>Edit Post</title>
 
 
-</head>
+    </head>
 
-<body class="default">
+<body>
 <div class="wrapper">
 
+
 <nav class="nav">
-    <a style="border:none;" id="logo" href="index.html"><h1>Simple<span>-</span>Blog</h1></a>
+    <a style="border:none;" id="logo" href="index.xhtml"><h1>Simple<span>-</span>Blog</h1></a>
     <ul class="nav-primary">
-        <li><a href="new_post.html">+ Tambah Post</a></li>
     </ul>
 </nav>
+    
+<article class="art simple post">
+    
+    
+    <h2 class="art-title" style="margin-bottom:40px">-</h2>
 
-<div id="home">
-    <div class="posts">
-        <nav class="art-list">
-          <ul class="art-list-body">
-            <li class="art-list-item">
-                <div class="art-list-item-title-and-time">
-                    <h2 class="art-list-title"><a href="post.html">Apa itu Simple Blog?</a></h2>
-                    <div class="art-list-time">15 Juli 2014</div>
-                    <div class="art-list-time"><span style="color:#F40034;">&#10029;</span> Featured</div>
-                </div>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis repudiandae quae natus quos alias eos repellendus a obcaecati cupiditate similique quibusdam, atque omnis illum, minus ex dolorem facilis tempora deserunt! &hellip;</p>
-                <p>
-                  <a href="#">Edit</a> | <a href="#">Hapus</a>
-                </p>
-            </li>
+    <div class="art-body">
+        <div class="art-body-inner">
+            <h2>Edit Post</h2>
 
-            <li class="art-list-item">
-                <div class="art-list-item-title-and-time">
-                    <h2 class="art-list-title"><a href="post.html">Siapa dibalik Simple Blog?</a></h2>
-                    <div class="art-list-time">11 Juli 2014</div>
-                </div>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis repudiandae quae natus quos alias eos repellendus a obcaecati cupiditate similique quibusdam, atque omnis illum, minus ex dolorem facilis tempora deserunt! &hellip;</p>
-                <p>
-                  <a href="#">Edit</a> | <a href="#">Hapus</a>
-                </p>
-            </li>
-          </ul>
-        </nav>
+            <div id="contact-area">
+                <form method="post" action="#">
+                    <label for="Judul">Judul:</label>
+                    <input type="text" name="Judul" id="Judul" value="${read.rows[0].judul}">
+
+                    <label for="Tanggal">Tanggal:</label>
+                    <input type="text" name="Tanggal" id="Tanggal" value="${read.rows[0].tanggal}">
+                    
+                    <label for="Konten">Konten:</label><br>
+                    <textarea name="Konten" rows="20" cols="20" id="Konten">${read.rows[0].konten}</textarea>
+
+                    <input type="submit" name="submit" value="Simpan" class="submit-button">
+                </form>
+            </div>
+        </div>
     </div>
-</div>
+
+</article>
 
 <footer class="footer">
     <div class="back-to-top"><a href="">Back to top</a></div>
