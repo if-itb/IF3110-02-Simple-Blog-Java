@@ -79,7 +79,10 @@
     		</tr>
     		<tr>
     			<td>Email :</td>
-                        <td><h:inputText size="10" value="#{manUser.email_usr}" /></td>
+                        <td><h:inputText id="email" size="10" validatorMessage="Invalid email format" required="true" value="#{manUser.email_usr}">
+                                <f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
+                            </h:inputText>
+                            <h:message for="email" style="color: red; font-size: small"/> </td>
     		</tr>
                 <tr>
     			<td>Role :</td>

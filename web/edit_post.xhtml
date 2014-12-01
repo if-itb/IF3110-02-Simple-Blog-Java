@@ -34,7 +34,10 @@
                     <h:outputLabel for="Tanggal">
                         Tanggal :
                     </h:outputLabel>
-                    <h:inputText id="Tanggal" value="#{editPost.tanggal}" required=""/>
+                    <h:inputText id="Tanggal" value="#{addPost.tanggal}" required="true" validatorMessage="invalid">
+                        <f:validateRegex pattern="/^\d{4}[\-](0?[1-9]|1[012])[\-](0?[1-9]|[12][0-9]|3[01])$/" />
+                    </h:inputText>
+                    <h:message for="Tanggal" style="color: red; font-size: small"/>
                     
                     <h:outputLabel for="Konten">
                         Konten :
