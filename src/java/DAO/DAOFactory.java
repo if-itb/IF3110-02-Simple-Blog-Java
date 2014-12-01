@@ -94,7 +94,9 @@ public abstract class DAOFactory {
         return new UserDAOJDBC(this);
     }
 
-    // You can add more DAO implementation getters here.
+    public CommentDAO getKomentarDAO(){
+        return new CommentDAOJDBC(this);
+    }
 
 }
 

@@ -12,6 +12,11 @@ and open the template in the editor.
 <f:view>
     <h:head>
         <title>Post title</title>
+        <f:metadata>
+            <f:viewParam name="id" value="#{Post.PID}"></f:viewParam>
+            <f:viewParam name="id" value="#{allKomentar.PID}"></f:viewParam>
+            <f:viewParam name="id" value="#{komentar.PID}"></f:viewParam>
+        </f:metadata>
     </h:head>
     <h:body>
         <ui:composition template="template/basis.xhtml">
@@ -37,28 +42,37 @@ and open the template in the editor.
                 <section class="komentar">
                     <h:form class="pure-form" id="comment_form" onsubmit="return validateForm(#{komentar.email})"  >
                         <label for="Nama">Nama:</label>
-                        <input type="text" name="Nama" value="#{komentar.nama}"/>
+                        <h:inputText id="Nama" value="#{komentar.nama}"/>
                         <br/>
                         <label for="Email">Email:</label>
-                        <input type="text" name="Email" value="#{komentar.email}"/>
+                        <h:inputText id="Email" value="#{komentar.email}">
+                            <f:validator validatorId="emailValidator" for="Email"/>
+                        </h:inputText>>
                         <p size ="10px" id="errmsg"></p>
 
                         <label for="Komentar">Komentar:</label><br/>
-                        <textarea name="Komentar" rows="5" cols="50" value="#{komentar.komentar}"></textarea>
+                        <h:inputTextarea id="Komentar" rows="5" cols="50" value="#{komentar.komentar}"/>
 
-                        <input type="submit" name="submit" value="submit" class="submit-button" action="#{komentar.AddComment(param['id'])}"/>
+                        <h:commandButton> 
+                            <f:ajax listener="#{addKomentar.add(komentar)}" 
+                                    render="@form" 
+                                    execute="Nama Email Komentar"> </f:ajax>
+                        </h:commandButton>
+                        <div id="list-komentar"> #{allKomentar.PID}
+                        <ul  class="komentar-list">
+                            <c:forEach var="komentar" items="#{allKomentar.getAllKomentar()}">
+                                <li>
+                                    <p class="Nama">#{komentar.tanggal} | #{komentar.nama}</p>
+                                        <br/>
+                                    <p class="post-meta">
+                                        #{komentar.komentar}
+                                    </p>
+                                </li>
+                            </c:forEach>
+                        </ul>
+                        </div>
                     </h:form>
-                    <ul class="komentar-list">
-                        <c:forEach var="komentar" items="#{komentar.fetchComment(param['id'])}">
-                            <li>
-                                <p class="Nama">#{komentar.tanggal} | #{komentar.nama}</p>
-                                    <br/>
-                                <p class="post-meta">
-                                    #{komentar.komentar}
-                                </p>
-                            </li>
-                        </c:forEach>
-                    </ul>
+                    
                 </section>
             </ui:define>
         </ui:composition>>

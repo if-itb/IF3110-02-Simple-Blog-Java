@@ -1,15 +1,6 @@
-<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 <Scene Scope="Project" version="2">
     <Scope Scope="Faces Configuration Only"/>
     <Scope Scope="Project"/>
     <Scope Scope="All Faces Configurations"/>
 </Scene>
-=======
-<?xml version="1.0" encoding="UTF-8"?>
-<Scene Scope="Project" version="2">
-    <Scope Scope="Faces Configuration Only"/>
-    <Scope Scope="Project"/>
-    <Scope Scope="All Faces Configurations"/>
-</Scene>
->>>>>>> bdcae3912815e66498dd5b127fa7f8706f36dcc1

@@ -63,12 +63,21 @@
     <managed-bean>
         <managed-bean-name>komentar</managed-bean-name>
         <managed-bean-class>model.Komentar</managed-bean-class>
-        <managed-bean-scope>request</managed-bean-scope>
+        <managed-bean-scope>view</managed-bean-scope>
     </managed-bean>
     <managed-bean>
         <managed-bean-name>deleteUserBean</managed-bean-name>
         <managed-bean-class>model.DeleteUserBean</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
-
+    <managed-bean>
+        <managed-bean-name>allKomentar</managed-bean-name>
+        <managed-bean-class>model.AllKomentar</managed-bean-class>
+        <managed-bean-scope>view</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>addKomentar</managed-bean-name>
+        <managed-bean-class>model.AddKomentar</managed-bean-class>
+        <managed-bean-scope>view</managed-bean-scope>
+    </managed-bean>
 </faces-config>

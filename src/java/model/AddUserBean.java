@@ -38,12 +38,12 @@ public class AddUserBean {
     
     public void add() {
         DAO.UserDAO DB = DAO.DAOFactory.getInstance("javabase.jdbc").getUserDAO();
-        if (DB.find(user.getUsername()) != null) {
+        if (DB.find(getUser().getUsername()) != null) {
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage("Username already exists!"));
         }
         else {
-            DB.create(user);
+            DB.create(getUser());
         }
     }
 }
