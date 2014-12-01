@@ -34,13 +34,13 @@
             <div id="contact-area">
                 <h:form >
                     <h:outputLabel for="Nama">Nama:</h:outputLabel>
-                    <h:inputText id="Nama" value="#{viewPost.nama}" />
+                    <h:inputText id="Nama" value="#{viewPost.nama}" required="true" />
         
                     <h:outputLabel for="Email">Email:</h:outputLabel>
-                    <h:inputText id="Email" value="#{viewPost.email}" />
+                    <h:inputText id="Email" value="#{viewPost.email}" required="true" />
                     
                     <h:outputLabel for="Komentar">Komentar:</h:outputLabel><br/>
-                    <h:inputTextarea rows="20" cols="20" id="Komentar" value="#{viewPost.komen}"></h:inputTextarea>
+                    <h:inputTextarea rows="20" cols="20" id="Komentar" value="#{viewPost.komen}" required="true"></h:inputTextarea>
                    
                     <h:commandButton id="submit" value="Kirim" class="submit-button" action="#{viewPost.executeComment()}"/>
                 </h:form>

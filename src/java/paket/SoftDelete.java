@@ -118,4 +118,30 @@ public class SoftDelete {
     public void clear(){
         sdel.clear();
     }
+    
+    public void restorePost(){
+        String dbURL = "jdbc:mysql://localhost:3306/simple_blog";
+        String uName = "root";
+        String pass = "";
+        
+        Connection conn = null;
+        Statement stmnt = null;
+                       
+        try {
+            try {
+                Class.forName("com.mysql.jdbc.Driver");
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+                System.out.println("Unable to load Driver");
+            }
+            conn = DriverManager.getConnection(dbURL, uName, pass);
+            stmnt = conn.createStatement();
+            
+            String sqlStr = "UPDATE post SET del_stat=0 WHERE id_post=" +idpost;
+            ResultSet rs = stmnt.executeQuery(sqlStr);
+            
+        } catch (SQLException e){
+            
+        }
+    }
 }

@@ -168,7 +168,7 @@ public class ViewPost {
                 konten = rs.getString("konten");
             }
             
-            sqlStr = "SELECT * FROM `komen` WHERE id_post='" +idpost +"'";
+            sqlStr = "SELECT * FROM `komen` WHERE id_post=" +idpost;
             rs = stmnt.executeQuery(sqlStr);
             
             while (rs.next()){
@@ -257,6 +257,36 @@ public class ViewPost {
     public void clear(){
         listpost.clear();
         listkomen.clear();
+    }
+    
+    public void executeSoftDelete() throws IOException{
+        String dbURL = "jdbc:mysql://localhost:3306/simple_blog";
+        String uName = "root";
+        String pass = "";
+        
+        Connection conn = null;
+        Statement stmnt = null;
+        
+        System.out.print("commentid"+idpost);
+        
+        try {
+            try {
+                Class.forName("com.mysql.jdbc.Driver");
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+                System.out.println("Unable to load Driver");
+            }
+            conn = DriverManager.getConnection(dbURL, uName, pass);
+            stmnt = conn.createStatement();
+            
+            String sqlStr = "UPDATE post SET del_stat=1 WHERE id_post="+idpost;
+            stmnt.executeUpdate(sqlStr);
+            
+            FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
+                                   
+        } catch (SQLException e){
+            
+        }
     }
     
 }
