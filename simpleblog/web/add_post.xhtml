@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:jsf="http://xmlns.jcp.org/jsf">
+    <h:head>
+        <title>New Post- Simple blog</title>
+        <link rel="stylesheet" type="text/css" href="assets/style.css" />
+        <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico" />
+    </h:head>
+    
+    <body class="default">
+        <div class="wrapper">
+
+        <nav class="nav">
+            <a style="margin: 0px;border:none;float:left" id="logo" href="index.xhtml"><h1>Simple<span>-</span>Blog    |   </h1></a>
+            <h1 style="font-size: 20px;float: left;color: dodgerblue"><h:outputText value="Hello #{User.name}     " style="float:left "/></h1>
+            <ul class="nav-primary">
+                <li>
+                    <h:form>
+                        <ul>
+                            <li style="padding: 5px">
+                                <f:subview rendered="#{User.isLogin()}" id="test">
+                                    <a href="add_post.xhtml" style="color: #F40034">+ Tambah Post </a>
+                                </f:subview>
+                            </li>
+                            <li>
+                                <h:outputText value="#{User.messege}" style="color:red" rendered="#{User.activeMessege()}"/><br></br>
+                                <h:commandLink action="#{User.Logout()}" style="color:#F40034;  " value="Logout" rendered="#{User.isLogin()}"/>
+                                <h:form rendered="#{!User.isLogin()}">
+                                    <h:outputText value="username: "/>
+                                    <h:inputText value="#{User.username}"/>
+                                    <h:outputText value="password: "/>
+                                    <h:inputSecret value="#{User.password}"/>
+                                    <h:outputText value="   "/>
+                                    <h:commandButton action="#{User.login()}" style="background-color: papayawhip;color: darkblue" value="Login" />
+                                </h:form>
+                            </li>
+                        </ul>
+                    </h:form>
+                </li>
+            </ul>
+        </nav>
+            <article class="art simple post">
+
+
+            <h2 class="art-title" style="margin-bottom:40px">-</h2>
+
+            <div class="art-body">
+                <div class="art-body-inner">
+                    <h2>Tambah Post</h2>
+
+                    <div id="contact-area">
+                        <h:form>
+                            <label for="Judul">Judul:</label>
+                            <input type="text" name="Judul"/>
+
+                            <label for="Tanggal">Tanggal:</label>
+                            <input type="date" name="Tanggal"/>
+
+                            <label for="Konten">Konten:</label><br></br>
+                            <textarea name="Konten" rows="20" cols="20"></textarea>
+
+                            <h:commandButton style="float: right" value="Submit"/>
+                        </h:form>
+                    </div>
+                </div>
+            </div>
+
+        </article>
+            
+    </div>
+    </body>
+    <footer class="footer">
+    <div class="back-to-top"><a href="">Back to top</a></div>
+    <!-- <div class="footer-nav"><p></p></div> -->
+    <aside class="offsite-links">
+        IF3110 Tubes II Kelompok 6
+        <br></br>Yusuf Rahmatullah
+        <br></br>Hayyu Lutfi Hanifah
+        <br></br>Nisa Dian Rachmadi    
+    </aside>
+</footer>
+</html>

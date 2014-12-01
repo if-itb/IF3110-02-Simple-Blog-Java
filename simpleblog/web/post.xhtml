@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:jsf="http://xmlns.jcp.org/jsf">
+    <h:head>
+        <title>Apa itu Simple blog? - Simple blog</title>
+        <link rel="stylesheet" type="text/css" href="assets/style.css" />
+        <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico" />
+    </h:head>
+    
+    <body class="default">
+        <div class="wrapper">
+
+        <nav class="nav">
+            <a style="margin: 0px;border:none;float:left" id="logo" href="index.xhtml"><h1>Simple<span>-</span>Blog    |   </h1></a>
+            <h1 style="font-size: 20px;float: left;color: dodgerblue"><h:outputText value="Hello #{User.name}     " style="float:left "/></h1>
+            <ul class="nav-primary">
+                <li>
+                    <h:form>
+                        <ul>
+                            <li style="padding: 5px">
+                                <f:subview rendered="#{User.isLogin()}" id="test">
+                                    <a href="add_post.xhtml" style="color: #F40034">+ Tambah Post </a>
+                                </f:subview>
+                            </li>
+                            <li>
+                                <h:outputText value="#{User.messege}" style="color:red" rendered="#{User.activeMessege()}"/><br></br>
+                                <h:commandLink action="#{User.Logout()}" style="color:#F40034;  " value="Logout" rendered="#{User.isLogin()}"/>
+                                <h:form rendered="#{!User.isLogin()}">
+                                    <h:outputText value="username: "/>
+                                    <h:inputText value="#{User.username}"/>
+                                    <h:outputText value="password: "/>
+                                    <h:inputSecret value="#{User.password}"/>
+                                    <h:outputText value="   "/>
+                                    <h:commandButton action="#{User.login()}" style="background-color: papayawhip;color: darkblue" value="Login" />
+                                </h:form>
+                            </li>
+                        </ul>
+                    </h:form>
+                </li>
+            </ul>
+        </nav>
+            <article class="art simple post">
+
+                <header class="art-header">
+                    <div class="art-header-inner" style="margin-top: 0px; opacity: 1;">
+                        <time class="art-time">15 Juli 2014</time>
+                        <h2 class="art-title">Apa itu Simple Blog?</h2>
+                        <p class="art-subtitle"></p>
+                    </div>
+                </header>
+                <div class="art-body">
+                    <div class="art-body-inner">
+                        <hr class="featured-article" />
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis aliquam minus consequuntur amet nulla eius, neque beatae, nostrum possimus, officiis eaque consectetur. Sequi sunt maiores dolore, illum quidem eos explicabo! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam consequuntur consequatur molestiae saepe sed, incidunt sunt inventore minima voluptatum adipisci hic, est ipsa iste. Nobis, aperiam provident quae. Reprehenderit, iste.</p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores animi tenetur nam delectus eveniet iste non culpa laborum provident minima numquam excepturi rem commodi, officia accusamus eos voluptates obcaecati. Possimus?</p>
+
+                        <hr />
+
+                        <h2>Komentar</h2>
+
+                        <div id="contact-area">
+                            <h:form>
+                                <label for="Judul">Nama:</label>
+                                <input type="text" name="Judul"/>
+
+                                <label for="Tanggal">Email</label>
+                                <input type="text" name="Tanggal"/>
+
+                                <label for="Konten">Komentar:</label><br></br>
+                                <textarea name="Konten" rows="20" cols="20"></textarea>
+
+                                <h:commandButton style="float: right" value="Submit"/>
+                            </h:form>
+                        </div>
+                        <article class="art simple post">
+
+                            <ul class="art-list-body">
+                                <li class="art-list-item">
+                                    <div class="art-list-item-title-and-time">
+                                        <h2 class="art-list-title"><a href="post.php">Jems</a></h2>
+                                        <div class="art-list-time">2 menit lalu</div>
+                                    </div>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis repudiandae quae natus quos alias eos repellendus a obcaecati cupiditate similique quibusdam, atque omnis illum, minus ex dolorem facilis tempora deserunt! </p>
+                                </li>
+
+                                <li class="art-list-item">
+                                    <div class="art-list-item-title-and-time">
+                                        <h2 class="art-list-title"><a href="post.php">Kave</a></h2>
+                                        <div class="art-list-time">1 jam lalu</div>
+                                    </div>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis repudiandae quae natus quos alias eos repellendus a obcaecati cupiditate similique quibusdam, atque omnis illum, minus ex dolorem facilis tempora deserunt! </p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+</article>
+    </div>
+    </body>
+    <footer class="footer">
+    <div class="back-to-top"><a href="">Back to top</a></div>
+    <!-- <div class="footer-nav"><p></p></div> -->
+    <aside class="offsite-links">
+        IF3110 Tubes II Kelompok 6
+        <br></br>Yusuf Rahmatullah
+        <br></br>Hayyu Lutfi Hanifah
+        <br></br>Nisa Dian Rachmadi    
+    </aside>
+</footer>
+</html>
