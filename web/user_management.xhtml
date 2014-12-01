@@ -22,12 +22,12 @@ template="/assets/template/template.xhtml">
                   </div>
                     <p>#{post.trimText}</p>
                   <p> <br/>
-                      <h:panelGroup layout="block" rendered="#{post.creatorId==user.id or user.role=='admin' or user.role=='editor'}" >
+                      <h:panelGroup layout="block" rendered="#{post.creatorId==user.id or user.role=='admin'}" >
                       <h:form>
                           <h:link value="Edit"  outcome="edit_post" style="margin-left: 45px;">
                             <f:param name="postId" value="#{post.id}" />
                         </h:link> | 
-                        <h:commandLink value="Hapus" action="#{deletePostBean.deletePost()}" onclick="return validateDeletion();">
+                        <h:commandLink value="Hapus" action="#{deletePostBean.softDeletePost()}" onclick="return validateDeletion();">
                             <f:param name="postId" value="#{post.id}" />
                         </h:commandLink>
                       </h:form>
