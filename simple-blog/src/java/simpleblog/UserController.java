@@ -260,6 +260,10 @@ public class UserController implements Serializable{
         return user.getRole().equals("owner");
     }
     
+    public boolean isEditor(){
+        return user.getRole().equals("editor");
+    }
+    
     public boolean isGuest(){
         return user.getRole().equals("guest");
     }

@@ -22,6 +22,8 @@ import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -52,6 +54,12 @@ public class PostController implements Serializable {
          date = new String();
          content = new String();
          post = new Post();
+    }
+     
+    public void setNull(){
+        title = null;
+        date = null;
+        content = null;
     }
      
     public void getDatabasePost(){
@@ -133,18 +141,18 @@ public class PostController implements Serializable {
          } 
     }
     
-    public boolean editPost(User user) throws NamingException, SQLException{
+    public boolean editPost() throws NamingException, SQLException{
          try {
             Date dates = new Date();
-            date = date + " " + dates.getHours() + ":" + dates.getMinutes() + ":" + dates.getSeconds();
-            System.out.println("UPDATE post SET title= '"+ title +"', date= '"+ date +"', content= '"+ content +"' WHERE id = '"+ post_id +"'");
+            post.setDate(post.getDate() + " " + dates.getHours() + ":" + dates.getMinutes() + ":" + dates.getSeconds());
+            System.out.println("UPDATE post SET title= '"+ post.getTitle() +"', date= '"+ post.getDate() +"', content= '"+ post.getContent() +"' WHERE id = '"+ post_id +"'");
             Context initCtx = new InitialContext();
             Context envCtx = (Context) initCtx.lookup("java:comp/env");
             ds = (DataSource) envCtx.lookup("jdbc/simpleBlogDb");
             
             Connection con = ds.getConnection();
             PreparedStatement ps = con.prepareStatement(
-                            "UPDATE post SET title= '"+ title +"', date= '"+ date +"', content= '"+ content +"' WHERE id = '"+ post_id +"'");
+                            "UPDATE post SET title= '"+ post.getTitle() +"', date= '"+ post.getDate() +"', content= '"+ post.getContent() +"' WHERE id = '"+ post_id +"'");
             ps.executeUpdate();
             con.close();
             ps.close();
@@ -162,8 +170,8 @@ public class PostController implements Serializable {
         else return "";
     }
     
-    public String actionEditPost(User user) throws NamingException, SQLException{
-        if(editPost(user)){
+    public String actionEditPost() throws NamingException, SQLException{
+        if(editPost()){
             return "index";
         }
         else return "";
@@ -238,4 +246,97 @@ public class PostController implements Serializable {
     public void setPost_id(String post_id) {
         this.post_id = post_id;
     }
+    
+    public void softDelete(){
+        try {
+            System.out.println("UPDATE post SET status = 2 WHERE id =" + post_id);
+            Context initCtx = new InitialContext();
+            Context envCtx = (Context) initCtx.lookup("java:comp/env");
+            ds = (DataSource) envCtx.lookup("jdbc/simpleBlogDb");
+            
+            Connection con = ds.getConnection();
+            PreparedStatement ps = con.prepareStatement(
+                            "UPDATE post SET status = 2 WHERE id =" + post_id);
+            ps.executeUpdate();
+            con.close();
+            ps.close();
+         } catch (Exception e) {
+            e.printStackTrace();
+         }
+    }
+    
+    public void hardDelete(int id){
+        try {
+            System.out.println("DELETE FROM post WHERE id = "+post_id);
+            Context initCtx = new InitialContext();
+            Context envCtx = (Context) initCtx.lookup("java:comp/env");
+            ds = (DataSource) envCtx.lookup("jdbc/simpleBlogDb");
+            
+            Connection con = ds.getConnection();
+            PreparedStatement ps = con.prepareStatement(
+                            "DELETE FROM post WHERE id = "+id);
+            ps.executeUpdate();
+            con.close();
+            ps.close();
+         } catch (Exception e) {
+            e.printStackTrace();
+         } 
+    }
+    
+    public void redirectIndex() throws Exception{
+        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+        externalContext.redirect("index.xhtml");
+    }
+    
+    public List<Post> getSoftDeletedPost() throws SQLException, NamingException
+    {
+        DataSource ds;
+        Context initCtx = new InitialContext();
+        Context envCtx = (Context) initCtx.lookup("java:comp/env");
+        ds = (DataSource) envCtx.lookup("jdbc/simpleBlogDb");
+        
+        Connection con = ds.getConnection();
+        PreparedStatement ps 
+            = con.prepareStatement(
+                "SELECT * FROM post WHERE status=2"); 
+	ResultSet result =  ps.executeQuery();
+        
+        List<Post> list = new ArrayList<Post>();
+        
+        while(result.next())
+        {
+            Post post = new Post();
+            
+            post.setId(result.getInt("id"));
+            post.setTitle(result.getString("title"));
+            post.setContent(result.getString("content"));
+            post.setDate(result.getTimestamp("date").toString());
+            post.setUserId(result.getInt("user_id"));
+            list.add(post);
+        }
+        return list;
+    }
+    
+    public String restorePost(int post_id)
+    {
+        DataSource ds;
+        try {
+            Date dates = new Date();
+            System.out.println("UPDATE post SET status=1 WHERE id = '"+ post_id +"'");
+            Context initCtx = new InitialContext();
+            Context envCtx = (Context) initCtx.lookup("java:comp/env");
+            ds = (DataSource) envCtx.lookup("jdbc/simpleBlogDb");
+            
+            Connection con = ds.getConnection();
+            PreparedStatement ps = con.prepareStatement("UPDATE post SET status=1 WHERE id = '"+ post_id +"'");
+            ps.executeUpdate();
+            con.close();
+            ps.close();
+            return "";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "";
+        } 
+    }
+    
 }

@@ -28,7 +28,7 @@
                                 <label for="Konten">Konten:</label><br></br>
                                 <h:inputTextarea label="Konten" rows="20" cols="20" id="Konten" value="#{postController.post.content}"></h:inputTextarea>
 
-                                <h:commandButton value="Simpan" action="#{postController.actionEditPost(userController.user)}" class="submit-button"/>
+                                <h:commandButton value="Simpan" action="#{postController.actionEditPost()}" class="submit-button"/>
                             </h:form>
                         </div>
                     </div>
@@ -36,7 +36,6 @@
             </ui:define>
             <ui:define name="bottom">
                 <h:outputScript name="./js/postValidation.js" />
-                <h:outputScript name="./js/try.js" />
             </ui:define>
     	</ui:composition>
     </h:body>
