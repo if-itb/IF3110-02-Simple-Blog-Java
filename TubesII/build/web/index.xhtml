@@ -1,0 +1,111 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+        <h:outputStylesheet library="css" name="table-style.css"/>
+        <h:outputStylesheet library="css" name="screen.css"/>
+    </h:head>
+    
+    <h:body>
+        <div class="nav">
+            <a style="border:none;" id="logo" href="daftar_post.xhtml"><h1>Simple<span>-</span>Blog</h1></a>
+        </div>
+        
+        <h4 id="user_manager">User Management</h4>
+        <h:form>
+            <h:dataTable value="#{manageUser.users}" var="c" styleClass="order-table" headerClass="order-table-header" rowClasses="order-table-odd-row, order-table-even-row">
+            <h:column>
+                <f:facet name="header">
+                    Username
+                </f:facet>
+                <h:outputText value="#{c.username}" rendered="#{!c.editable}"/>
+                <h:inputText value="#{manageUser.username}" rendered="#{c.editable}"/>
+            </h:column>
+            
+            <h:column>
+                <f:facet name="header">
+                    Password
+                </f:facet>
+                <h:outputText value="#{c.password}" rendered="#{!c.editable}"/>
+                <h:inputText value="#{manageUser.password}" rendered="#{c.editable}"/>
+            </h:column>
+            
+            <h:column>
+                <f:facet name="header">
+                    Email
+                </f:facet>
+                <h:outputText value="#{c.email}" rendered="#{!c.editable}"/> 
+                <h:inputText value="#{manageUser.email}" rendered="#{c.editable}"/>
+            </h:column>
+            
+            <h:column>
+                <f:facet name="header">
+                    Role
+                </f:facet>
+                <h:outputText value="#{c.role}" rendered="#{!c.editable}"/>
+                <h:inputText value="#{manageUser.role}" rendered="#{c.editable}"/>
+            </h:column>
+            
+            <h:column>
+                <f:facet name="header"></f:facet>
+                <h:commandLink action="#{manageUser.deleteUser(c.username)}" style="text-decoration: none">Delete</h:commandLink> 
+                
+            </h:column>
+            
+            <h:column>
+                <f:facet name="header"></f:facet>
+                <h:commandLink action="#{manageUser.editAction(c.username)}" style="text-decoration: none; padding-left: 5px">Edit</h:commandLink> 
+            </h:column>
+                
+            <h:column>
+                <f:facet name="header"></f:facet>
+                <h:commandLink action="#{manageUser.setAction(c.id)}" style="text-decoration: none; padding-left: 5px" rendered="#{c.editable}">Simpan</h:commandLink> 
+            </h:column>
+        </h:dataTable>
+        </h:form>
+        
+        <div id="add_user" style="width: 150px; position: relative; left: 200px;">
+            <h6>Add User</h6>
+            <h:panelGrid columns="2">
+            <h:form>
+                <h:outputText value="Username :"/>
+                <h:inputText id="username" value="#{manageUser.username}"/>
+                
+                <h:outputText value="Password :"/>
+                <h:inputText id="password" value="#{manageUser.password}"/>
+                
+                <h:outputText value="Email :"/>
+                <h:inputText id="email" value="#{manageUser.email}"/>
+                
+                <h:outputText value="Role :"/>
+                <h:inputText id="role" value="#{manageUser.role}"/>
+                
+                <h:commandButton value="Add User" action="#{manageUser.addUser()}"/>
+            </h:form>
+                
+            </h:panelGrid>
+        </div>
+    <div class="footer">
+        <div class="back-to-top"><a href="daftar_post.xhtml">Back to top</a></div>
+        <!-- <div class="footer-nav"><p></p></div> -->
+        <div class="psi">&Psi;</div>
+        <div class="offsite-links">
+            Asisten IF3110 /
+            <a class="rss-link" href="#rss">RSS</a> /
+            <br/>
+            <a class="twitter-link" href="http://twitter.com/YoGiiSinaga">Yogi</a> /
+            <a class="twitter-link" href="http://twitter.com/sonnylazuardi">Sonny</a> /
+            <a class="twitter-link" href="http://twitter.com/fathanpranaya">Fathan</a> /
+            <br/>
+            <a class="twitter-link" href="#">Renusa</a> /
+            <a class="twitter-link" href="#">Kelvin</a> /
+            <a class="twitter-link" href="#">Yanuar</a> /
+
+        </div>
+    </div>
+    </h:body>
+</html>
+

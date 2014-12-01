@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Simple Blog | User Management</title>
+    </h:head>
+    <h:body>
+        <h1>User Management</h1>
+        <h:dataTable value="#{manageUser.users}" var="user">
+            
+            <f:param id="username" value="#{user.username}"/>
+            <h:column>
+                <f:facet name="header">Username</f:facet>
+                <h:outputText value="#{user.username}"/>
+            </h:column>
+             <h:column>
+                <f:facet name="header">Password</f:facet>
+                <h:outputText value="#{user.password}"/>
+            </h:column>
+             <h:column>
+                <f:facet name="header">Email</f:facet>
+                <h:outputText value="#{user.email}"/>
+            </h:column>
+             <h:column>
+                <f:facet name="header">Role</f:facet>
+                <h:outputText value="#{user.role}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Role</f:facet>
+                <h:form>
+                <h:commandLink action="#{manageUser.deleteUser(param['username'])}"/>
+                </h:form>
+            </h:column>
+        </h:dataTable>
+        
+    </h:body>
+</html>
+
