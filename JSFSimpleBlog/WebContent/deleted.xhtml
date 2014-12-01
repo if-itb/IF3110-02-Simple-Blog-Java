@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<h:head>
+<title>Simple Blog | Deleted Posts (Admin)</title>
+<link rel="stylesheet" type="text/css" href="css/screen.css" />
+</h:head>
+<h:body>
+<div class="wrapper">
+
+<nav class="nav">
+    <a style="border:none;" id="logo" href="index.jsf"><h1>Simple<span>-</span>Blog</h1></a>
+</nav>
+
+<div id="home">
+    <div class="posts">
+        <nav class="art-list">
+          <ul class="art-list-body">
+
+            <ui:repeat value="#{deletedPostsController.posts}" var="post">
+            <li class="art-list-item">
+                <div class="art-list-item-title-and-time">
+                    <h2 class="art-list-title">#{post.title}</h2>
+                    <div class="art-list-time"><h:outputText value="#{post.date}"><f:convertDateTime pattern="EEEE, d MMM yyyy" /></h:outputText></div>
+                </div>
+                <p>#{post.content.length() gt 250 ? post.content.substring(0, 247).concat('...') : post.content}</p>
+                <h:form>
+                	<h:commandLink value="Batal hapus" action="#{deletedPostsController.batalHapus(post.id)}"/>
+                </h:form> | 
+                <h:form>
+                	<h:commandLink value="Hapus" action="#{deletedPostsController.hapus(post.id)}" onclick="return confirm('Anda yakin ingin menghapus post ini?')"/>
+                </h:form>
+            </li>
+            </ui:repeat>
+
+          </ul>
+        </nav>
+    </div>
+</div>
+
+<footer class="footer">
+    <div class="back-to-top"><a href="#">Back to top</a></div>
+</footer>
+
+</div>
+
+</h:body></html>

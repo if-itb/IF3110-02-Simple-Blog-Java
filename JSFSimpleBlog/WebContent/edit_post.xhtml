@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<f:metadata>
+    <f:viewParam name="id" value="#{createPostController.selectedPost}" />
+    <f:viewAction action="#{createPostController.init}" />
+</f:metadata>
+<h:head>
+<title>Simple Blog | Edit Post</title>
+<link rel="stylesheet" type="text/css" href="css/screen.css" />
+</h:head>
+<h:body>
+<div class="wrapper">
+
+<nav class="nav">
+    <h1><a style="border:none;" id="logo" href="index.jsf">Simple<span>-</span>Blog</a></h1>
+    <ul class="nav-primary">
+        <li><h:link value="+ Tambah Post" outcome="new_post" /></li>
+    </ul>
+</nav>
+
+<article class="art simple post">
+
+    <h2 class="art-title" style="margin-bottom:40px">-</h2>
+
+    <div class="art-body">
+        <div class="art-body-inner">
+            <h2>Edit Post</h2>
+
+            <div id="contact-area">
+                <h:form id="post">
+                    <label for="Judul">Judul:</label>
+                    <h:inputText value="#{createPostController.newJudul}"/>
+
+                    <label for="Tanggal">Tanggal:</label>
+                    <h:inputText value="#{createPostController.newTanggal}" id="Tanggal">
+                        <f:convertDateTime pattern="d/M/yyyy" />
+                    </h:inputText>
+                    
+                    <label for="Konten">Konten:</label>
+                    <h:inputTextarea value="#{createPostController.newKonten}"/>
+                    
+                    <h:inputHidden value="#{createPostController.postId}" />
+                    <h:inputHidden value="#{createPostController.postPublished}" />
+
+                    <h:commandButton value="Simpan" action="#{createPostController.simpanEdit}" onclick="return validasi_tanggal()"/>
+                </h:form>
+            </div>
+        </div>
+    </div>
+
+</article>
+
+<footer class="footer">
+    <div class="back-to-top"><a href="#">Back to top</a></div>
+</footer>
+
+</div>
+
+<script>
+//<![CDATA[
+    function validasi_tanggal() {
+        var string_tanggal = document.getElementById("post:Tanggal").value.split("/");
+        var inp = new Date(string_tanggal[2], string_tanggal[1], string_tanggal[0]).valueOf();
+        if (inp < new Date().valueOf()) {
+            window.alert("Tanggal tidak valid. Tanggal harus lebih besar atau sama dengan tanggal sekarang.")
+            return false;
+        }
+    }
+//]]>
+</script>
+
+</h:body></html>
