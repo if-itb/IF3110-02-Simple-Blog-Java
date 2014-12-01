@@ -13,4 +13,4 @@
 <sql:update var="results" dataSource="${db_source}">
             DELETE FROM `simpleblog-java`.`posts` WHERE id=<%= request.getParameter("post") %> ;
 </sql:update>
-            <jsp:forward page="view_post.jsp"/>
+            <c:redirect url="view_post.jsp"/>

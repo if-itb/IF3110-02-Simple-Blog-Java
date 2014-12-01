@@ -18,10 +18,10 @@
  
 <sql:setDataSource var="db_post" driver="com.mysql.jdbc.Driver"
      url="jdbc:mysql://localhost/simpleblog-java"
-     user="root"  password=""/>
+     user="root"  password="root"/>
  
 <sql:query dataSource="${db_post}" var="result">
-SELECT id,judul,konten,tanggal FROM posts;
+    SELECT id,judul,konten,tanggal FROM posts;
 </sql:query>
 
 <div id="home">
