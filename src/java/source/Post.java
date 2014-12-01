@@ -57,7 +57,7 @@ public class Post {
         try {
             Connection koneksi = KoneksiDatabase.getKoneksi();
             Statement statement = koneksi.createStatement();
-            String QueryLoadComment = "SELECT * FROM komentar WHERE idpost="+idPost+" ORDER BY Waktu ASC";
+            String QueryLoadComment = "SELECT * FROM komentar WHERE idpost="+idPost+" ORDER BY Waktu DESC";
             ResultSet result = statement.executeQuery(QueryLoadComment);
             while(result.next()) {
                 String Nama = result.getString("Nama");
@@ -303,7 +303,7 @@ public class Post {
                             "</div>\n" +
                             "<p> " + kontenPost + "\n" + "</p>\n";                            
                     if (shortened) //dipotong
-                        toHTML += "... <a href=\"posts/post.jsp?id= " + idPost + "\">Read More</a><br/>\n";
+                        toHTML += "... <a href=\"posts/post.jsp?id=" + idPost + "\">Read More</a><br/>\n";
                     //edit post: untuk semua kecuali guest
                     if (cookieOn) {
                         if (isAdmin() || isEditor() || isOwner()) {
@@ -386,7 +386,7 @@ public class Post {
                                    + "<th>" + tanggalPost + "</th>"
                                    + "<th>" + kontenPost;
                 if (shortened) //dipotong
-                    toHTML += "... <a href=\"posts/post.jsp?id= " + idPost + "\">Read More</a></th>";
+                    toHTML += "... <a href=../posts/post.jsp?id=" + idPost + ">Read More</a></th>";
                 else //tidak dipotong
                     toHTML += "</th>";
                 //status post
