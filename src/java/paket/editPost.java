@@ -6,6 +6,7 @@
 
 package paket;
 
+<<<<<<< HEAD
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -21,12 +22,15 @@ import java.util.regex.Pattern;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 
+=======
+>>>>>>> parent of 4c157a1... tambah edit post
 /**
  *
  * @author Mario
  */
 public class editPost {
 
+<<<<<<< HEAD
     private String tanggal, konten, judul;
     private String username, idpost;
 
@@ -62,12 +66,15 @@ public class editPost {
         this.judul = judul;
     }
     
+=======
+>>>>>>> parent of 4c157a1... tambah edit post
     /**
      * Creates a new instance of editPost
      */
     public editPost() {
     }
     
+<<<<<<< HEAD
     public void ambilTanggal(){
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date();
@@ -146,4 +153,6 @@ public class editPost {
         }
     }
     
+=======
+>>>>>>> parent of 4c157a1... tambah edit post
 }

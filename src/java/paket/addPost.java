@@ -70,6 +70,12 @@ public class addPost {
         CookieCheck cookie = new CookieCheck();
         username = cookie.getUsrName();
         
+        System.out.print(username);
+        System.out.print("username sebelah sini <<");
+        System.out.print(tanggal);
+        System.out.print(judul);
+        System.out.print(konten);
+        
         try {
             try {
                 Class.forName("com.mysql.jdbc.Driver");

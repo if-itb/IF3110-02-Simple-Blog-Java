@@ -11,7 +11,7 @@
         <ui:include src="header-script.xhtml"/>
         <title>Simple Blog | Edit Post</title>
     </h:head>
-    <h:body class="default" onload="#{editPost.getPost()}">
+    <h:body class="default" onload="#{addPost.ambilTanggal()}">
     <div class="wrapper">
     <ui:include src="header.xhtml"/>
     
@@ -29,12 +29,12 @@
                     <h:outputLabel for="Judul">
                         Judul :
                     </h:outputLabel>
-                    <h:inputText id="Judul" value="#{editPost.judul}" required=""/>
+                    <h:inputText id="Judul" value="#{addPost.judul}" required=""/>
                     
                     <h:outputLabel for="Tanggal">
                         Tanggal :
                     </h:outputLabel>
-                    <h:inputText id="Tanggal" value="#{editPost.tanggal}" required=""/>
+                    <h:inputText id="Tanggal" value="#{addPost.tanggal}" required=""/>
                     
                     <h:outputLabel for="Konten">
                         Konten :
