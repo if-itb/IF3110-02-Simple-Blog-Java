@@ -155,8 +155,10 @@ public class ManUser implements Serializable{
                             String email_usr = rSet.getString("email_usr");
                             String role = rSet.getString("role");
                             User user = new User(usrname, passwrd, nama_usr, email_usr, role);
+                            if (!"admin".equals(role)){
+                                users.add(user);
+                            }
                             
-                            users.add(user);
                             System.out.println(users);
                     }
         } catch (SQLException ex) {
