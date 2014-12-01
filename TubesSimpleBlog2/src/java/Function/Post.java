@@ -29,17 +29,19 @@ import javax.faces.context.FacesContext;
 @ManagedBean(name = "post", eager = true)
 @ViewScoped
 public class Post {
-	//@ManagedProperty(value="#{param.idpost}")
-	private int pidToDelete;
 	private int IDPost;
 	private String title;
 	private String content;
 	private Date date;
 	private String status;
+        private String deletedStatus;
 	
-	public int getPidToDelete(){
-		return pidToDelete;
-	}
+        public String getDeletedStatus(){
+            return deletedStatus;
+        }
+        public void setDeletedStatus(String st){
+            this.deletedStatus = st;
+        }
 	public int getIDPost(){
 		return IDPost;
 	}
@@ -70,9 +72,6 @@ public class Post {
 	public void setIDPost(int id){
 		this.IDPost = id;
 	}
-	public void setPidToDelete(int id){
-		this.pidToDelete = id;
-	}
 	    
 	public String addPost(){
 		String url = "jdbc:mysql://localhost:3306/datapost";
@@ -83,12 +82,13 @@ public class Post {
 			java.sql.Date sqlDate= new java.sql.Date(date.getTime());
 			Class.forName(driver).newInstance();
 			Connection conn = DriverManager.getConnection(url,userName,password);
-			String insertToDB = "insert into posts (`Judul`,`Tanggal`,`Konten`,`Status`) value (?,?,?,?)";
+			String insertToDB = "insert into posts (`Judul`,`Tanggal`,`Konten`,`Status`,`Delete`) value (?,?,?,?,?)";
 			PreparedStatement preparedStatement = conn.prepareStatement(insertToDB);
 			preparedStatement.setString(1, this.title);
 			preparedStatement.setDate(2, sqlDate);
 			preparedStatement.setString(3, this.content);
 			preparedStatement.setString(4, "unpublished");
+			preparedStatement.setString(5, "notdeleted");
 			preparedStatement.executeUpdate();
 			conn.close();
 		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException e) {
@@ -149,16 +149,34 @@ public class Post {
 		try {
 		   Class.forName(driver).newInstance();
 		   Connection conn = DriverManager.getConnection(url,userName,password);
-		   String insertToDB = "delete from posts where PID = ?";
+                   String insertToDB = "update posts set Delete='deleted' where PID=?";
 		   PreparedStatement preparedStatement = conn.prepareStatement(insertToDB);
 		   preparedStatement.setInt(1,id);
 		   preparedStatement.executeUpdate();
 		   conn.close();
-		  // FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
-		} catch (ClassNotFoundException /*| IOException*/ | InstantiationException | IllegalAccessException | SQLException e) {
+		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException e) {
 		}
 		return "index?faces-redirect=true";
-     }
+         }
+        
+        public String restorePost(int id){
+		String url = "jdbc:mysql://localhost:3306/datapost";
+		String driver = "com.mysql.jdbc.Driver";
+		String userName = "root"; 
+		String password = "";
+                System.out.println("masuk restore");
+		try {
+		   Class.forName(driver).newInstance();
+		   Connection conn = DriverManager.getConnection(url,userName,password);
+                   String insertToDB = "update posts set `Delete`='notdeleted' where PID=?";
+		   PreparedStatement preparedStatement = conn.prepareStatement(insertToDB);
+		   preparedStatement.setInt(1,id);
+		   preparedStatement.executeUpdate();
+		   conn.close();
+		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException e) {
+		}
+		return "deleted_post?faces-redirect=true";
+         }
      
 	public String changeStatus(int id){
 		String url = "jdbc:mysql://localhost:3306/datapost";

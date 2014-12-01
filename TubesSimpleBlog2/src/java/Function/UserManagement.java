@@ -42,7 +42,8 @@ public class UserManagement {
 				user.setUsername(res.getString("username"));
 				user.setPassword(res.getString("password"));                
 				user.setRole(res.getString("role"));                
-				arrUser.add(user);
+				user.setEmail(res.getString("email"));
+                                arrUser.add(user);
 			}
 			conn.close();
 		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException e) {

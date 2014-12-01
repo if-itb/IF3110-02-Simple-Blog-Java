@@ -7,28 +7,45 @@
 	  xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <link rel="stylesheet" href="style.css" type="text/css" />
-        <title>Simple Blog</title>
+        <title>Simple Blog | Unpublished Post</title>
     </h:head>
     <h:body>
-		<div class="header"> Simple Blog </div>
-		<hr></hr>
-		<h2> List Post </h2>
-		<c:forEach items="#{listPost.arrPostUnpublished}" var="pos">							
+	<div class="header"> 
             <h:form>
-				<br/><h:outputText value="#{pos.IDPost}"></h:outputText> 
-				<br/><h:outputText value="#{pos.title}"></h:outputText>    
-				<br/><h:outputText value="#{pos.date}"></h:outputText>
-				<br/> <h:outputText value="#{pos.content}"></h:outputText>
-                <br/><h:commandLink action="#{post.changeStatus(pos.IDPost)}" value="Publish">
-					</h:commandLink>
-                <br/><h:commandLink action="edit_post" value="Edit">
-						<f:param name="idpost" value="#{pos.IDPost}" />
-					</h:commandLink>
-				<hr/>
+                <h:commandLink action="index" value="Simple Blog" style="color:white;"/>
             </h:form>
-		</c:forEach>
+        </div>
+        <div id="nav"> 
+            <h:form>
+		<h:commandLink rendered="#{sampleBean.role eq 'admin'}" action="usermanagement" value="User Management    "></h:commandLink>
+                &nbsp;&nbsp;&nbsp;
+                <h:commandLink rendered="#{sampleBean.role eq 'admin'}" action="deleted_post" value="See Deleted Post    "></h:commandLink>
+		&nbsp;&nbsp;&nbsp;
+                <h:commandLink rendered="#{sampleBean.role eq 'admin' or sampleBean.role eq 'editor'}" action="unpublished_post" value="See Unpublished    "></h:commandLink>
+                 &nbsp;&nbsp;&nbsp;
+                <h:commandLink rendered="#{sampleBean.role eq 'admin' or sampleBean.role eq 'owner'}" action="add_post" value="Add Post    "></h:commandLink>
+                 &nbsp;&nbsp;&nbsp;
+                <h:form rendered="#{sampleBean.role eq 'admin' or sampleBean.role eq 'editor' or sampleBean.role eq 'owner'}"><a href="Logout">Logout</a></h:form>
+            </h:form>
+        </div>
+        <hr></hr>
+        
+	<h2> List Unpublished Post </h2>
+        <c:forEach items="#{listPost.arrPostUnpublished}" var="pos">							
+            <h:form>
+                <br/><h:outputText value="#{pos.IDPost}"></h:outputText> 
+                <br/><h:outputText value="#{pos.title}"></h:outputText>    
+                <br/><h:outputText value="#{pos.date}"></h:outputText>
+                <br/> <h:outputText value="#{pos.content}"></h:outputText>
+                <br/><h:commandLink action="#{post.changeStatus(pos.IDPost)}" value="Publish"></h:commandLink>
+                <br/><h:commandLink action="edit_post" value="Edit">
+			<f:param name="idpost" value="#{pos.IDPost}" />
+                    </h:commandLink>
+		<hr/>
+            </h:form>
+	</c:forEach>
 			
-		<div class="footer">rita | cilvia | linda </div>		
+	<div class="footer">rita | cilvia | linda </div>		
     </h:body>
 </html>
 

@@ -40,6 +40,7 @@ public class Login extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
+        System.out.println("masuk login");
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         String uname= request.getParameter("uname");
@@ -61,6 +62,7 @@ public class Login extends HttpServlet {
                HttpSession session=request.getSession();
                session.setAttribute("user",uname);
                session.setAttribute("role",rs.getString("role"));
+               session.setAttribute("email",rs.getString("email"));
                 out.print(msg);
                int i = 0;
                Cookie[] cookies = request.getCookies();

@@ -25,6 +25,7 @@ import javax.faces.bean.ViewScoped;
 @SessionScoped
 public class ListKomentar {
     private ArrayList<Komentar> arrKomentar;
+    @ManagedProperty(value="#{viewPost.postId}")
     private int postid;
    
     public ArrayList<Komentar> getArrKomentar(){
@@ -34,9 +35,9 @@ public class ListKomentar {
 		this.arrKomentar = a;
 	}
 	
-	public void showPage(int id){
-		postid = id;
-		System.out.println("listkomentar="+id);
+	public void showPage(){
+		//postid = id;
+		System.out.println("listkomentar="+postid);
 		arrKomentar = new ArrayList<>();
 		String url = "jdbc:mysql://localhost:3306/datapost";
 		String driver = "com.mysql.jdbc.Driver";
@@ -46,7 +47,7 @@ public class ListKomentar {
 			 Class.forName(driver).newInstance();
 			 Connection conn = DriverManager.getConnection(url,userName,password);
 			 Statement st = conn.createStatement();
-			ResultSet res= st.executeQuery("Select * from komentar where postid="+id);
+			ResultSet res= st.executeQuery("Select * from komentar where postid="+postid);
 
 			Komentar komen = null;
 			while(res.next()){ 

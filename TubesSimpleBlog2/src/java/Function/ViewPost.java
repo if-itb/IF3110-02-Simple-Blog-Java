@@ -30,67 +30,63 @@ import javax.faces.event.ComponentSystemEvent;
 @ManagedBean(name = "viewPost", eager = true)
 @SessionScoped
 public class ViewPost{
-//	@ManagedProperty(value="#{param.idpost}")
     private int postId;
-	
     private String judul;
     private String konten;
     private Date tanggal;
 	
-	public void showPage(int id){
-		//postId = id;
-		System.out.println("viewpost="+id);
-		String url = "jdbc:mysql://localhost:3306/datapost";
-		String driver = "com.mysql.jdbc.Driver";
-		String userName = "root"; 
-		String password = "";
-		 try {
-			Class.forName(driver).newInstance();
-			Connection conn = DriverManager.getConnection(url,userName,password);
-			Statement st = conn.createStatement();
-			ResultSet res= st.executeQuery("Select * from posts where PID = "+id);
+    public String showPage(int id){
+        postId = id;
+        System.out.println("viewpost="+id);
+        String url = "jdbc:mysql://localhost:3306/datapost";
+        String driver = "com.mysql.jdbc.Driver";
+        String userName = "root"; 
+        String password = "";
+         try {
+            Class.forName(driver).newInstance();
+            Connection conn = DriverManager.getConnection(url,userName,password);
+            Statement st = conn.createStatement();
+            ResultSet res= st.executeQuery("Select * from posts where PID = "+id);
 
-			if(res.next()){
-				judul=res.getString("Judul");
-				tanggal = res.getDate("Tanggal");                
-				konten = res.getString("Konten");
-				postId = id;
-			}
-			conn.close();
-			} catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException e) {
-			}
-		 
-		// ListKomentar listKomen = new ListKomentar();
-		// listKomen.showPage(id);
-	}
+            if(res.next()){
+                judul=res.getString("Judul");
+                tanggal = res.getDate("Tanggal");                
+                konten = res.getString("Konten");
+                postId = id;
+            }
+            conn.close();
+            } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException e) {
+            }
+         return "view_post";
+    }
 	
     public int getPostId(){
-		return postId;
-	}
+            return postId;
+    }
     
     public String getJudul(){
-		return judul;
-	}
+            return judul;
+    }
     
     public String getKonten(){
-		return konten;
-	}
+            return konten;
+    }
     
     public Date getTanggal(){
-		return tanggal;
-	}
+            return tanggal;
+    }
 	
-	public void setPostId(int postId){
-		this.postId = postId;
-	}
-	public void setJudul(String judul){
-		this.judul = judul;
-	}
-	public void setKonten(String konten){
-		this.konten = konten;
-	}
-	public void setTanggal(Date tanggal){
-		this.tanggal = tanggal;
-	}
+    public void setPostId(int postId){
+            this.postId = postId;
+    }
+    public void setJudul(String judul){
+            this.judul = judul;
+    }
+    public void setKonten(String konten){
+            this.konten = konten;
+    }
+    public void setTanggal(Date tanggal){
+            this.tanggal = tanggal;
+    }
 
  }

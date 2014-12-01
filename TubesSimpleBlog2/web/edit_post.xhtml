@@ -5,11 +5,30 @@
 	  xmlns:ui="http://java.sun.com/jsf/facelets"
 	  xmlns:c="http://java.sun.com/jsp/jstl/core"
 	  xmlns:f="http://xmlns.jcp.org/jsf/core">
-    <head>
-        <title>TODO supply a title</title>
-        <meta name="viewport" content="width=device-width"/>
-    </head>
-    <body>
+    <h:head>
+        <title>Simple Blog | Edit Post</title>
+    </h:head>
+    <h:body>
+	<div class="header"> 
+            <h:form>
+                <h:commandLink action="index" value="Simple Blog" style="color:white;"/>
+            </h:form>
+        </div>
+        <div id="nav"> 
+            <h:form>
+		<h:commandLink rendered="#{sampleBean.role eq 'admin'}" action="usermanagement" value="User Management    "></h:commandLink>
+                &nbsp;&nbsp;&nbsp;
+                <h:commandLink rendered="#{sampleBean.role eq 'admin'}" action="deleted_post" value="See Deleted Post    "></h:commandLink>
+		&nbsp;&nbsp;&nbsp;
+                <h:commandLink rendered="#{sampleBean.role eq 'admin' or sampleBean.role eq 'editor'}" action="unpublished_post" value="See Unpublished    "></h:commandLink>
+                 &nbsp;&nbsp;&nbsp;
+                <h:commandLink rendered="#{sampleBean.role eq 'admin' or sampleBean.role eq 'owner'}" action="add_post" value="Add Post    "></h:commandLink>
+                 &nbsp;&nbsp;&nbsp;
+                <h:form rendered="#{sampleBean.role eq 'admin' or sampleBean.role eq 'editor' or sampleBean.role eq 'owner'}"><a href="Logout">Logout</a></h:form>
+            </h:form>
+        </div>
+        <div id="main">
+        <h2> Edit Post </h2>
            <p>
                #{post.showPost(param['idpost'])}
               <h:form>
@@ -21,5 +40,6 @@
                 <br/><h:commandButton value="Submit" action="#{post.editPost()}" onclick="return check()"/>
               </h:form>
            </p>
-    </body>
+        </div>
+    </h:body>
 </html>

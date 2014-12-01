@@ -26,10 +26,12 @@ import java.sql.Statement;
 public class ListPost {
 	private ArrayList<Post> arrPostPublished;
 	private ArrayList<Post> arrPostUnpublished;
+	private ArrayList<Post> arrPostDeleted;
 	
 	public ListPost(){
 		arrPostPublished = new ArrayList<>();
 		arrPostUnpublished = new ArrayList<>();
+                arrPostDeleted = new ArrayList<>();
 		String url = "jdbc:mysql://localhost:3306/datapost";
 		String driver = "com.mysql.jdbc.Driver";
 		String userName = "root"; 
@@ -47,11 +49,14 @@ public class ListPost {
 				pos.setDate(res.getDate("Tanggal"));                
 				pos.setContent(res.getString("Konten"));                
 				pos.setStatus(res.getString("Status"));
-				if (pos.getStatus().equals("published")){
-					arrPostPublished.add(pos);
+				pos.setDeletedStatus(res.getString("Delete"));
+				if ((pos.getStatus().equals("published")) && (pos.getDeletedStatus().equals("notdeleted"))){
+                                    arrPostPublished.add(pos);
+				} else if ((pos.getStatus().equals("unpublished")) && (pos.getDeletedStatus().equals("notdeleted"))){
+                                    arrPostUnpublished.add(pos);
 				} else {
-					arrPostUnpublished.add(pos);
-				}
+                                    arrPostDeleted.add(pos);
+                                }
 			}
 			conn.close();
 		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException e) {
@@ -64,5 +69,9 @@ public class ListPost {
 	
 	public ArrayList<Post> getArrPostUnpublished(){
 		return arrPostUnpublished;
+	}
+        
+        public ArrayList<Post> getArrPostDeleted(){
+		return arrPostDeleted;
 	}
 }

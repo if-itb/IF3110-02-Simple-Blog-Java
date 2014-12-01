@@ -34,11 +34,12 @@ public class User {
 	private String password;
 	private String role;
 	private int userID;
-	
-	public void showStatus(){
-		System.out.println("username="+username);
-		System.out.println("role="+role);
-	}
+        private String email;
+        
+        public String getEmail(){
+            return email;}
+	public void setEmail(String e){
+            this.email=e;}
 	public int getUidToUpdate(){
 		return uidToUpdate;
 	}
@@ -84,13 +85,14 @@ public class User {
 		try {
 		   Class.forName(driver).newInstance();
 		   Connection conn = DriverManager.getConnection(url,userName,passWord);
-		   String insertToDB = "update user set username = ?, password = ?, role = ? where username_id = ?";
+		   String insertToDB = "update user set username = ?, password = ?, role = ?, email = ? where username_id = ?";
 		   PreparedStatement preparedStatement = conn.prepareStatement(insertToDB);
 		   System.out.println(this.username+" "+this.password+" "+this.role+" "+this.userID);
 		   preparedStatement.setString(1, this.username);
 		   preparedStatement.setString(2, this.password);
 		   preparedStatement.setString(3, this.role);
-		   preparedStatement.setInt(4, userID);
+                   preparedStatement.setString(4, this.email);
+                   preparedStatement.setInt(5, userID);
 		   preparedStatement.executeUpdate();
 		   conn.close();
 		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException e) {
@@ -124,11 +126,12 @@ public class User {
 		try {
 		   Class.forName(driver).newInstance();
 		   Connection conn = DriverManager.getConnection(url,userName,pass);
-		   String insertToDB = "insert into user (`username`, `password`, `role`) value (?,?,?)";
+		   String insertToDB = "insert into user (`username`, `password`, `role`, `email`) value (?,?,?,?)";
 		   PreparedStatement preparedStatement = conn.prepareStatement(insertToDB);
 		   preparedStatement.setString(1, this.username);
 		   preparedStatement.setString(2, this.password);
 		   preparedStatement.setString(3, this.role);
+		   preparedStatement.setString(4, this.email);
 		   preparedStatement.executeUpdate();
 		   conn.close();
 		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException e) {
@@ -151,6 +154,7 @@ public class User {
 			   username=res.getString("username");
 			   role = res.getString("role");
 			   userID = id;
+                           email = res.getString("email");
 		   }
 		   conn.close();
 		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException e) {

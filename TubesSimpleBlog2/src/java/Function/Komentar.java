@@ -29,38 +29,38 @@ import javax.faces.bean.ViewScoped;
 @ViewScoped
 public class Komentar {
     @ManagedProperty(value="#{listKomentar.postid}")
-	int pid; 
-	int commentid;
+    int pid; 
+    int commentid;
     String nama;
     String email;
     String komentar;
     String tanggal;
 	
-	public int getPid(){
-		return pid;
-	}
+    public int getPid(){
+        return pid;
+    }
 	
     public int getCommentid(){
-    return commentid;}
+        return commentid;}
     
     public String getNama(){
-    return nama;}
+        return nama;}
     
     public String getEmail(){
-    return email;}
+        return email;}
     
     public String getKomentar(){
-    return komentar;}
+        return komentar;}
     
     public String getTanggal(){
-    return tanggal;}
+        return tanggal;}
     
     public void setCommentid(int x){
-    this.commentid=x;}
+        this.commentid=x;}
     
-	public void setPid(int p){
-		this.pid = p;
-	}
+    public void setPid(int p){
+        this.pid = p;}
+    
     public void setNama(String n){
     this.nama=n;}
     
@@ -73,34 +73,27 @@ public class Komentar {
     public void setTanggal(String d){
     this.tanggal=d;}
 
-	public void addComment(){
-		String url = "jdbc:mysql://localhost:3306/datapost";
-	   String driver = "com.mysql.jdbc.Driver";
-	   String userName = "root"; 
-	   String password = "";
-		try {
-		   Class.forName(driver).newInstance();
-		   Connection conn = DriverManager.getConnection(url,userName,password);
-		   
-		   Date today = new Date();
-		   Timestamp date = new Timestamp(today.getTime());
-		   String insertToDB = "insert into komentar (`Nama`,`Email`,`Komentar`,`postid`,`tanggal`) value (?,?,?,?,?)";
-		   PreparedStatement preparedStatement = conn.prepareStatement(insertToDB);
-		   preparedStatement.setString(1, this.nama);
-		   preparedStatement.setString(2, this.email);
-		   preparedStatement.setString(3, this.komentar);
-		   preparedStatement.setInt(4,pid);
-		   preparedStatement.setTimestamp(5, date);
-		   preparedStatement.executeUpdate();
-		   conn.close();
-	   } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException e) {
-	   }
+    public void addComment(){
+       String url = "jdbc:mysql://localhost:3306/datapost";
+       String driver = "com.mysql.jdbc.Driver";
+       String userName = "root"; 
+       String password = "";
+       try {
+            Class.forName(driver).newInstance();
+            Connection conn = DriverManager.getConnection(url,userName,password);
+
+            Date today = new Date();
+            Timestamp date = new Timestamp(today.getTime());
+            String insertToDB = "insert into komentar (`Nama`,`Email`,`Komentar`,`postid`,`tanggal`) value (?,?,?,?,?)";
+            PreparedStatement preparedStatement = conn.prepareStatement(insertToDB);
+            preparedStatement.setString(1, this.nama);
+            preparedStatement.setString(2, this.email);
+            preparedStatement.setString(3, this.komentar);
+            preparedStatement.setInt(4,pid);
+            preparedStatement.setTimestamp(5, date);
+            preparedStatement.executeUpdate();
+            conn.close();
+       } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException e) {
+       }
     }
-	
-	public void clear(){
-		nama = "";
-		email = "";
-		komentar = "";
-		tanggal = "";
-	}
 }

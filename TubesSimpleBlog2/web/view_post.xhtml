@@ -11,65 +11,83 @@ and open the template in the editor.
 	  xmlns:c="http://java.sun.com/jsp/jstl/core"
 	  xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
-        <title>View Post</title>
+        <title>Simple Blog | View Post</title>
         <meta name="viewport" content="width=device-width"/>
                 <link rel="stylesheet" href="style.css" type="text/css" />
     </h:head>
-	<h:body>
-		<div class="header">Simple Blog </div>
-        <div id="nav"> User Management | See Unpublished | Add Post | Logout   </div>
-        <div id="main">
-		<h1>View Post</h1>
-		<hr/>
-		<h:form>
-		<h:outputText id="firstNameText" value="Sample Bean:"></h:outputText>
-         <br/><h:outputText id="accountName" value="#{sampleBean.nama}"></h:outputText>
-         <br/><h:outputText id="accountRole" value="#{sampleBean.role}"></h:outputText>
-		</h:form>
-		#{viewPost.showPage(param['idpost'])}
-		#{listKomentar.showPage(param['idpost'])}
-		<br/><h:outputText value="#{viewPost.postId}"></h:outputText> 
-        <br/><h2> #{viewPost.judul}</h2>      
-		<br/><h:outputText value="#{viewPost.konten}"></h:outputText>
-         <br/> <h:outputText value="#{viewPost.tanggal}"></h:outputText>
-		 
-		<p>           
-        <h:form rendered="#{sampleBean.role ne 'editor'}" id="formcomment" onsubmit="return validasiEmail()">
-			Nama: <h:inputText id="name" value="#{komentar.nama}"></h:inputText>
-    		Email : <h:inputText id="email" value="#{komentar.email}"></h:inputText>
-            Komentar : <h:inputText id="koment" value="#{komentar.komentar}"></h:inputText>  
-			<h:commandButton value="Add my comment" action="#{komentar.addComment()}" onclick="return check();">
-				<f:ajax execute="name" render="output" />
-				<f:ajax execute="email" render="output2" />
-				<f:ajax execute="koment" render="output3" />
-			</h:commandButton>  		
-			<h2><h:outputText id="output" value="#{komentar.nama}" /></h2>
-			<h:outputText id="output2" value="#{komentar.email}" /><br/>
-			<h:outputText id="output3" value="#{komentar.komentar}" />
-        </h:form>
-            
-            
-        </p>
-        <h:form>
-			<c:forEach items="#{listKomentar.arrKomentar}" var="komen">
-				<br/><h:outputText value="#{komen.commentid}"></h:outputText> 
-				<br/><h:outputText value="#{komen.nama}"></h:outputText> 
-				<br/><h:outputText value="#{komen.tanggal}"></h:outputText>
-				<br/><h:outputText value="#{komen.komentar}"></h:outputText>
-				<div class="hr"> <hr></hr></div>
-			</c:forEach>
-        </h:form>
+    <h:body>
+        <div class="header"> 
+            <h:form>
+                <h:commandLink action="index" value="Simple Blog" style="color:white;"/>
+            </h:form>
+        </div>
+        <div id="nav"> 
+            <h:form>
+		<h:commandLink rendered="#{sampleBean.role eq 'admin'}" action="usermanagement" value="User Management    "></h:commandLink>
+                &nbsp;&nbsp;&nbsp;
+                <h:commandLink rendered="#{sampleBean.role eq 'admin'}" action="deleted_post" value="See Deleted Post    "></h:commandLink>
+		&nbsp;&nbsp;&nbsp;
+                <h:commandLink rendered="#{sampleBean.role eq 'admin' or sampleBean.role eq 'editor'}" action="unpublished_post" value="See Unpublished    "></h:commandLink>
+                 &nbsp;&nbsp;&nbsp;
+                <h:commandLink rendered="#{sampleBean.role eq 'admin' or sampleBean.role eq 'owner'}" action="add_post" value="Add Post    "></h:commandLink>
+                 &nbsp;&nbsp;&nbsp;
+                <h:form rendered="#{sampleBean.role eq 'admin' or sampleBean.role eq 'editor' or sampleBean.role eq 'owner'}"><a href="Logout">Logout</a></h:form>
+            </h:form>
+        </div>
+            <div id="main">
+            <h1>View Post</h1>
+            <hr/>
+            #{komentar.setNama(sampleBean.nama)}        
+            #{komentar.setEmail(sampleBean.email)}
+            #{listKomentar.showPage()}
+            <h2 style="font-size:40px"> #{viewPost.judul}</h2>      
+            <p style="font-size:22px"> <h:outputText value="#{viewPost.tanggal}"></h:outputText></p>
+            <p style="font-size:21px"><h:outputText value="#{viewPost.konten}"></h:outputText></p>
+         
+             <br/><br/>
+             <hr/>
+             <h1 style="font-size:20px">Komentar</h1>
+             <p><h:form rendered="#{sampleBean.role ne 'editor'}" id="formcomment" onsubmit="return validasiEmail()">
+                     &nbsp;&nbsp;&nbsp;
+		<h:outputText rendered="#{sampleBean.role ne 'owner' and sampleBean.role ne 'admin'}" id="textname" value=" Nama : "/>
+                <h:inputText rendered="#{sampleBean.role ne 'owner' and sampleBean.role ne 'admin'}" id="name" value="#{komentar.nama}"></h:inputText>
+    		<h:outputText rendered="#{sampleBean.role ne 'owner' and sampleBean.role ne 'admin'}" id="textemail" value=" Email : "/>
+                <h:inputText rendered="#{sampleBean.role ne 'owner' and sampleBean.role ne 'admin'}" id="email" value="#{komentar.email}"></h:inputText>
+                Komentar : <h:inputText id="koment" value="#{komentar.komentar}"></h:inputText>  
+		<h:commandButton value="Add my comment" action="#{komentar.addComment()}" onclick="return check();">
+                    <f:ajax execute="@form" render="comment-list @form"/>
+                </h:commandButton>  		
+       
+                <div>
+                    <h:panelGroup id="comment-list">
+                        <ui:repeat value="#{listKomentar.arrKomentar}" var="value">
+                            <h2 >#{value.nama}</h2> <br/>
+                            <p>Posted At #{value.tanggal}</p>
+                            <p>#{value.komentar}</p>
+                            <div class="hr"><hr/></div>
+                        </ui:repeat>
+                    </h:panelGroup>
+                </div>
+            </h:form></p>
+             
+            <h:form rendered="#{sampleBean.role eq 'editor'}">
+                <c:forEach items="#{listKomentar.arrKomentar}"  var="komen">
+                    <p>  <br/><h:outputText value="#{komen.nama}"></h:outputText> 
+                    <br/> Posted At <h:outputText value="#{komen.tanggal}"></h:outputText>
+                    <br/><h:outputText value="#{komen.komentar}"></h:outputText></p>
+                    <div class="hr"> <hr></hr></div>
+                </c:forEach>
+            </h:form>
+             </div>
+	<div id="nav">
+            <form action="Login" method="post">
+                 <br/>Username : <input type = "text" name="uname"/>
+                 <br/>Password : <input type ="password" name="pass"/>
+                 <br/><input type="submit" value="Login"/>
+            </form>
         </div>
         
-		<div id="nav">
-        <form action="Login" method="post">
-             <br/>Username : <input type = "text" name="uname"/>
-             <br/>Password : <input type ="password" name="pass"/>
-             <br/><input type="submit" value="Login"/>
-        </form></div>
-        
-		<div id="footer">
-            rita | cilvia | linda </div>
+	<div id="footer">rita | cilvia | linda </div>
         
         <script type="text/javascript">
 

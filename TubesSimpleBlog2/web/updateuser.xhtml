@@ -11,24 +11,40 @@ and open the template in the editor.
 	  xmlns:c="http://java.sun.com/jsp/jstl/core"
 	  xmlns:f="http://xmlns.jcp.org/jsf/core">
 	
-    <head>
-        <title>Update User</title>
+    <h:head>
+        <title>Simple Blog | Update User</title>
         <link rel="stylesheet" href="style.css" type="text/css" />
         <meta name="viewport" content="width=device-width"/>
-    </head>
-    <body>
-        <div class="header">Simple Blog</div>
-        <p>   <h1>Update User</h1>
-            			<hr></hr>
-
-			<br/><h:outputText value="#{param['iduser']}"></h:outputText>
-			#{user.showUser(param['iduser'])}
+    </h:head>
+    <h:body>
+        <div class="header"> 
+            <h:form>
+                <h:commandLink action="index" value="Simple Blog" style="color:white;"/>
+            </h:form>
+        </div>
+        <div id="nav"> 
+            <h:form>
+		<h:commandLink rendered="#{sampleBean.role eq 'admin'}" action="usermanagement" value="User Management    "></h:commandLink>
+                &nbsp;&nbsp;&nbsp;
+                <h:commandLink rendered="#{sampleBean.role eq 'admin'}" action="deleted_post" value="See Deleted Post    "></h:commandLink>
+		&nbsp;&nbsp;&nbsp;
+                <h:commandLink rendered="#{sampleBean.role eq 'admin' or sampleBean.role eq 'editor'}" action="unpublished_post" value="See Unpublished    "></h:commandLink>
+                 &nbsp;&nbsp;&nbsp;
+                <h:commandLink rendered="#{sampleBean.role eq 'admin' or sampleBean.role eq 'owner'}" action="add_post" value="Add Post    "></h:commandLink>
+                 &nbsp;&nbsp;&nbsp;
+                <h:form rendered="#{sampleBean.role eq 'admin' or sampleBean.role eq 'editor' or sampleBean.role eq 'owner'}"><a href="Logout">Logout</a></h:form>
+            </h:form>
+        </div>
+        <p><h1>Update User</h1>
+            <hr></hr>
+            #{user.showUser(param['iduser'])}
             <h:form> 
-				<br/>Username: <h:inputText id="kname" value="#{user.username}" />
-				<br/>Password: <h:inputSecret id="kpass" value="#{user.password}" />
-				<br/>Role: <h:inputText id="krole" value="#{user.role}"  />
-              <br/><h:commandButton value="Submit" action="#{user.updateUser()}" onclick="return check();"/>
-			</h:form>
-		</p>
-    </body>
+                <br/>Username: <h:inputText id="kname" value="#{user.username}" />
+                <br/>Password: <h:inputSecret id="kpass" value="#{user.password}" />
+                <br/>Email: <h:inputText id="kemail" value="#{user.email}"  />
+                <br/>Role: <h:inputText id="krole" value="#{user.role}"  />
+                 <br/><h:commandButton value="Submit" action="#{user.updateUser()}" onclick="return check();"/>
+            </h:form>
+	</p>
+    </h:body>
 </html>

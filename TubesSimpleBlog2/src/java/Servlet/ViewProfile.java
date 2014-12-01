@@ -48,7 +48,7 @@ public class ViewProfile extends HttpServlet {
            out.print("<p>Welcome "+session.getAttribute("user") );
            out.print("<br/> Kamu " + session.getAttribute("role")+"</p>"
 				   + "<a href=\"http://localhost:8080/TubesSimpleBlog2/\">Go to Home</a>"
-                   + "<div class=\"footer\">rita | cilvia | linda </div>");
+                   + "<div id=\"footer\">rita | cilvia | linda </div>");
 		   SampleBean sampleBean = (SampleBean) getServletContext().getAttribute("sampleBean");
 			if (sampleBean == null) {
 				sampleBean = new SampleBean();
@@ -56,6 +56,7 @@ public class ViewProfile extends HttpServlet {
 			}
 			sampleBean.setNama(session.getAttribute("user").toString());
 			sampleBean.setRole(session.getAttribute("role").toString());
+                        sampleBean.setEmail(session.getAttribute("email").toString());
 			System.out.println("Sample Bean Name Set");
         }   else{
         RequestDispatcher rd= request.getRequestDispatcher("Login.xhtml");
