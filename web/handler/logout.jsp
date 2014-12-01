@@ -13,6 +13,6 @@
 	response.addCookie(Cusr);
 	response.addCookie(CType);
 	response.setStatus(HttpServletResponse.SC_MOVED_TEMPORARILY);
-	response.setHeader("Location", "../index.jsp");
+	response.setHeader("Location", "../");
 	
 %>

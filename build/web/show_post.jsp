@@ -98,10 +98,14 @@
 			<div id="contact-area">
 				<form method="post" onsubmit="return SubmitComment(this);">
 					<label for="Nama">Nama:</label>
-					<input type="text" id="pNama" name="nama">
+					<input type="text" id="pNama" name="nama" value="<%=usrC%>">
 					
 					<label for="Email">Email:</label>
-					<input type="text" id="pEmail" name="email" >
+					<input type="text" id="pEmail" name="email" value="<%
+					userPaket uPaket = new userPaket();
+					uPaket = User.ViewUser(usrC);
+					out.println(uPaket.email);
+					%>">
 					<label for="Komentar">Komentar:</label><br>
 					<textarea id="pPesan" name="pesan" cols="20" rows="20"></textarea>
 					<input type="hidden" id="pTanggal" name="tanggal" value="<% out.println(sdf.format(date)); %>">
