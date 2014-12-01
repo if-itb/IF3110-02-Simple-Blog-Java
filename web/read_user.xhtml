@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+xmlns:f="http://xmlns.jcp.org/jsf/core"
+xmlns:h="http://xmlns.jcp.org/jsf/html"
+template="/assets/template/template.xhtml">
+
+<ui:define name="content">
+<style type="text/css">
+table { 
+		width: 100%; 
+		border-collapse: collapse; 
+	}
+	/* Zebra striping */
+	tr:nth-of-type(odd) { 
+		background: #eee;
+	}
+	th { 
+		background: #333; 
+		color: white; 
+		font-weight: bold;
+	}
+	td, th { 
+		padding: 6px; 
+		border: 1px solid #ccc; 
+		text-align: center; 
+	}
+</style>
+<div id="home">
+	<div class="form">
+	<div id="contact-area">
+		<h:form>
+			<h:dataTable value="#{readUserBean.userList}" var="usr"
+                                     styleClass="userTable"
+                                     headerClass="userTableHeader"
+                                     rowClasses="userTableOddRow,employeeTableEvenRow"
+                                     style="width:100%">
+                        
+    			<h:column>
+    				<!-- column header -->
+    				<f:facet name="header">User ID</f:facet>
+    				<!-- row record -->
+    				#{usr.id}
+    			</h:column>
+ 
+    			<h:column>
+    				<f:facet name="header">Username</f:facet>
+    				#{usr.username}
+    			</h:column>
+  
+                        <h:column>
+    				<f:facet name="header">Email</f:facet>
+    				#{usr.email}
+    			</h:column>
+                            
+    			<h:column>
+    				<f:facet name="header">Role</f:facet>
+    				#{usr.role}
+    			</h:column>
+                            
+                        <h:column>
+    				<f:facet name="header">Command</f:facet>
+                                <h:link outcome="update_user.jsf" value="update">
+                                    <f:param name="userId" value="#{usr.id}"/>
+                                </h:link> | 
+                                <h:commandLink action="#{deleteUserBean.deleteUser}" value="delete">
+                                    <f:param name="userId" value="#{usr.id}"/>
+                                </h:commandLink>
+    			</h:column>
+ 
+                        </h:dataTable>
+		</h:form>
+	</div>
+</div>
+	<div class="userdata">
+	</div>
+</div>
+</ui:define>
+</ui:composition>

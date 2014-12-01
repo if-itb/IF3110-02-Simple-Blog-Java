@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+    
+    <!-- filter -->
+    
+    <filter>
+        <filter-name>loginRedirect</filter-name>
+        <filter-class>
+            Filter.LoginRedirect
+        </filter-class>
+        <init-param>
+	  <param-name>test-param</param-name>
+	  <param-value>Initialization Paramter</param-value>
+        </init-param>
+    </filter>
+    
+     <filter>
+        <filter-name>adminRedirect</filter-name>
+        <filter-class>
+            Filter.FilterAdmin
+        </filter-class>
+        <init-param>
+	  <param-name>test-param</param-name>
+	  <param-value>Initialization Paramter</param-value>
+        </init-param>
+    </filter>
+    
+    <filter>
+        <filter-name>adminownerRedirect</filter-name>
+        <filter-class>
+            Filter.FilterAdminOwner
+        </filter-class>
+        <init-param>
+	  <param-name>test-param</param-name>
+	  <param-value>Initialization Paramter</param-value>
+        </init-param>
+    </filter>
+    
+    <filter>
+        <filter-name>guestRedirect</filter-name>
+        <filter-class>
+            Filter.FilterGuest
+        </filter-class>
+        <init-param>
+	  <param-name>test-param</param-name>
+	  <param-value>Initialization Paramter</param-value>
+        </init-param>
+    </filter>
+    
+    <filter>
+        <filter-name>loggedRedirect</filter-name>
+        <filter-class>
+            Filter.FilterLogged
+        </filter-class>
+        <init-param>
+	  <param-name>test-param</param-name>
+	  <param-value>Initialization Paramter</param-value>
+        </init-param>
+    </filter>
+    
+    <filter>
+        <filter-name>admineditorRedirect</filter-name>
+        <filter-class>
+            Filter.FilterAdminEditor
+        </filter-class>
+        <init-param>
+	  <param-name>test-param</param-name>
+	  <param-value>Initialization Paramter</param-value>
+        </init-param>
+    </filter>
+    
+    <!-- filtered pages -->
+    
+    <filter-mapping>
+        <filter-name>loginRedirect</filter-name>
+        <url-pattern>/login.jsf</url-pattern>
+    </filter-mapping>
+    
+    <filter-mapping>
+        <filter-name>adminRedirect</filter-name>
+        <url-pattern>/new_user.jsf</url-pattern>
+        <url-pattern>/read_user.jsf</url-pattern>
+        <url-pattern>/deleted_post.jsf</url-pattern>
+    </filter-mapping>
+    
+    <filter-mapping>
+        <filter-name>adminownerRedirect</filter-name>
+        <url-pattern>/new_post.jsf</url-pattern>
+    </filter-mapping>
+    
+    <filter-mapping>
+        <filter-name>guestRedirect</filter-name>
+        <url-pattern>/index.jsf</url-pattern>
+    </filter-mapping>
+    
+    <filter-mapping>
+        <filter-name>loggedRedirect</filter-name>
+        <url-pattern>/user_management.jsf</url-pattern>
+    </filter-mapping>
+    
+    <filter-mapping>
+        <filter-name>admineditorRedirect</filter-name>
+        <url-pattern>/list_post.jsf</url-pattern>
+    </filter-mapping>
+    
+    <!-- filter mapping -->
+    
+    <filter-mapping>
+        <filter-name>loginRedirect</filter-name>
+        <servlet-name>LoginRedirect</servlet-name>
+    </filter-mapping>
+    
+    <filter-mapping>
+        <filter-name>adminRedirect</filter-name>
+        <servlet-name>adminRedirect</servlet-name>
+    </filter-mapping>
+    
+    <filter-mapping>
+        <filter-name>adminownerRedirect</filter-name>
+        <servlet-name>adminownerRedirect</servlet-name>
+    </filter-mapping>
+    
+    <filter-mapping>
+        <filter-name>guestRedirect</filter-name>
+        <servlet-name>guestRedirect</servlet-name>
+    </filter-mapping>
+    
+    <filter-mapping>
+        <filter-name>loggedRedirect</filter-name>
+        <servlet-name>loggedRedirect</servlet-name>
+    </filter-mapping>
+    
+    <filter-mapping>
+        <filter-name>admineditorRedirect</filter-name>
+        <servlet-name>admineditorRedirect</servlet-name>
+    </filter-mapping>
+    
+    <context-param>
+        <param-name>javax.faces.PROJECT_STAGE</param-name>
+        <param-value>Development</param-value>
+    </context-param>
+    <servlet>
+        <servlet-name>Faces Servlet</servlet-name>
+        <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Faces Servlet</servlet-name>
+        <url-pattern>*.jsf</url-pattern>
+    </servlet-mapping>
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+    <welcome-file-list>
+        <welcome-file>login.jsf</welcome-file>
+    </welcome-file-list>
+    
+</web-app>

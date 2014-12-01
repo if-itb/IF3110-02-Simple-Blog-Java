@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<h:head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="description" content="Deskripsi Blog"/>
+<meta name="author" content="Judul Blog"/>
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:site" content="omfgitsasalmon"/>
+<meta name="twitter:title" content="Simple Blog"/>
+<meta name="twitter:description" content="Deskripsi Blog"/>
+<meta name="twitter:creator" content="Simple Blog"/>
+<meta name="twitter:image:src" content="{{! TODO: ADD GRAVATAR URL HERE }}"/>
+
+<meta property="og:type" content="article"/>
+<meta property="og:title" content="Simple Blog"/>
+<meta property="og:description" content="Deskripsi Blog"/>
+<meta property="og:image" content="{{! TODO: ADD GRAVATAR URL HERE }}"/>
+<meta property="og:site_name" content="Simple Blog"/>
+
+<link rel="stylesheet" type="text/css" href="assets/css/screen.css" />
+<link rel="stylesheet" type="text/css" href="assets/css/button.css" />
+<link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico"/>
+
+<!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<title>Simple Blog | #{viewPostBean.post.title}</title>
+
+
+</h:head>
+
+<h:body class="default">
+<div class="wrapper">
+
+<nav class="nav">
+    <ui:fragment rendered="#{!(user.role=='guest')}">
+        <a style="border:none;" id="logo" href="user_management.jsf"><h1>Simple<span>-</span>Blog</h1></a>
+    </ui:fragment>
+    <ui:fragment rendered="#{user.role=='guest'}">
+        <a style="border:none;" id="logo" href="index.jsf"><h1>Simple<span>-</span>Blog</h1></a>
+    </ui:fragment>
+</nav>
+
+<article class="art simple post">
+    
+    <header class="art-header">
+        <div class="art-header-inner" style="margin-top: 0px; opacity: 1;">
+            <time class="art-time">#{viewPostBean.post.timeString}</time>
+            <h2 class="art-title">#{viewPostBean.post.title}</h2>
+            <p class="art-subtitle"></p>
+        </div>
+    </header>
+
+    <div class="art-body">
+        <div class="art-body-inner">
+            <hr class="featured-article" />
+            <p>#{viewPostBean.post.text}</p>
+            
+            <hr />
+            
+            <h2>Komentar</h2>
+            <h:form id='komentarform'>
+                 <div id="contact-area">
+                    <label for="Nama">Nama:</label>
+                    <h:inputText value="#{addCommentBean.name}" id="Nama"></h:inputText>
+        
+                    <label for="Email">Email:</label>
+                    <h:inputText value="#{addCommentBean.email}" id="Email"></h:inputText>
+                    
+                    <label for="Komentar">Komentar:</label><br/>
+                    <h:inputTextarea value="#{addCommentBean.text}" rows="20" cols="20" id="Komentar"></h:inputTextarea>
+
+                    <h:commandButton onclick="return validateComment();" value="Kirim" action="#{addCommentBean.addComment}" class="submit-button">
+                        <f:param name="postId" value="#{param.postId}" />
+                        <f:ajax execute="@form" render="Ajax1" />
+                    </h:commandButton>
+            
+                </div>
+
+                <ul class="art-list-body">
+                    <h:panelGroup id="Ajax1">
+                        <ui:repeat value="#{addCommentBean.comments}" var="komen">
+                            <li class="art-list-item">
+                            <div class="art-list-item-title-and-time">
+                                <h2 class="art-list-title">#{komen.name}</h2>
+                                <div class="art-list-time">#{komen.email}</div>
+                                <div class="art-list-time">#{komen.timeString}</div>
+                            </div>
+                            <p>#{komen.text}</p>
+                            </li>
+                        </ui:repeat>
+                    </h:panelGroup>
+                </ul>
+            </h:form>
+        </div>
+    </div>
+
+</article>
+
+<footer class="footer">
+    <div class="back-to-top"><a href="">Back to top</a></div>
+    <!-- <div class="footer-nav"><p></p></div> -->
+    <aside class="offsite-links">
+        PenguasaDunia /
+        <br/>
+		<a class="twitter-link" href="#">Kevin 13512010</a> /
+        <a class="twitter-link" href="#">Wira 13512015</a> /
+        <a class="twitter-link" href="#">Melvin 13512085</a> /
+    </aside>
+</footer>
+
+</div>
+
+</h:body>
+    <script>
+    //<![CDATA[
+        function validateComment() {
+        /* check comment form */
+            var x = document.getElementById("komentarform:Nama").value;
+            var y = document.getElementById("komentarform:Email").value;
+            var z = document.getElementById("komentarform:Komentar").value;
+            var val = true;
+            var errMessage = "";
+            if (x==="") {
+                    val = false;
+                    errMessage += " Name must be filled!";
+                    document.getElementById("komentarform:Nama").style.borderColor="#FF0000";
+            }
+            if (y==="") {
+                    val = false;
+                    errMessage += " Email must be filled!";
+                    document.getElementById("komentarform:Email").style.borderColor="#FF0000";
+            }
+            else { //validate email format
+                    var pattern = /^(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$/;
+                    if (!pattern.test(y)) {
+                            val = false;
+                            errMessage += " Wrong email format!";
+                            document.getElementById("komentarform:Email").style.borderColor="#FF0000";
+                    }
+                    //else no change
+            }
+            if (z==="") {
+                    val = false;
+                    errMessage += " Comment must be filled!";
+                    document.getElementById("komentarform:Komentar").style.borderColor="#FF0000";
+            }
+            if (!val) {
+                    alert(errMessage);
+            }
+
+            return val;
+        }
+     //]]>
+    </script>
+</html>
