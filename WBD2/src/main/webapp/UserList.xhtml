@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+   <h:head>
+		<title>Simple Blog</title>
+   </h:head>
+   <h:body>
+      <h:form>
+	  <h1>Simple Blog</h1>
+	  <h><h:commandLink value = "Home" action="#{allControl.Home()}"  /></h>
+		<h><h:commandLink value = "Logout" action="#{allControl.Logout()}"  /></h>
+		<h><h:commandLink value = "AddPost" action="addpost"  /></h>
+		<hr />
+	  <h2>DataTable Example</h2>
+		<h:form>
+			<h:dataTable value="#{dbStatement.GetUser()}" var="U" >
+				<h:column>    				
+					<f:facet name="header">Name</f:facet>    				
+					#{U.name}
+				</h:column>
+				 <h:column>
+					<f:facet name="header">Pass</f:facet>
+					#{U.pass}
+				</h:column>
+				<h:column>
+					<f:facet name="header">Email</f:facet>
+					#{U.email}
+				</h:column>
+				<h:column>
+					<f:facet name="header">Authority</f:facet>
+					#{U.auth}
+				</h:column>
+				<h:column>
+					<f:facet name="header">Delete?</f:facet>
+					<h:commandButton value="Delete"
+									onclick="return confirm('Apakah Anda yakin menghapus User ini?');"
+									action="#{dbStatement.DeleteUser(U.id)}" />
+				</h:column>
+			</h:dataTable>
+			
+			<h3>Add User</h3>
+			<hr/>
+			<table>
+			<tr>
+            <td>Name :</td>
+            <td><h:inputText value="#{user.name}" /></td>
+			</tr>
+			<tr>
+            <td>Password :</td>
+            <td><h:inputText value="#{user.pass}" /></td>
+			</tr>
+			<tr>
+            <td>Email :</td>
+            <td><h:inputText value="#{user.email}" /></td>
+			</tr>
+			<tr>
+            <td>Authority :</td>
+            <td><h:inputText value="#{user.auth}" /></td>
+			</tr>
+			<tr>
+            <td> </td>
+            <td><h:commandButton value="Add User" 
+               action="#{user.newUser}" /></td>
+			</tr>
+			</table>
+		</h:form>
+      </h:form>
+   </h:body>
+</html>

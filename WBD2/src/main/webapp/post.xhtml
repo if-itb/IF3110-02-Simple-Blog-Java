@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+   <h:head>
+		<title>Simple Blog</title>
+   </h:head>
+   <h:body>
+      <h:form>
+	  <h1>Simple Blog</h1>
+		<h><h:commandLink value = "Home" action="#{allControl.Home()}"  /></h>
+		<hr />
+		<h2>#{allControl.currentPost.title}</h2>
+		<h3>#{allControl.currentPost.date}</h3>
+		<h3>#{allControl.currentPost.content}</h3>
+		<hr />
+		<h3> Comments </h3>
+		<ui:repeat value="#{dbStatement.GetComments(allControl.postID)}" var="C" varStatus="loop">
+			<h3>#{C.name}</h3>
+			<h4>#{C.email}</h4>
+			<h4>#{C.date}</h4>
+			<h4>#{C.content}</h4>
+			<h:outputText value="" rendered="#{not loop.last}"/>
+			<hr />
+		</ui:repeat>
+		<h3>Add Comment</h3>
+		Date : <h:inputText value="#{allControl.lel.date}" /><br/>
+		Content : <h:inputTextarea value="#{allControl.lel.content}" cols="30" rows="7"/><br/>
+                <h:commandButton value="Submit" action="#{allControl.userComment()}"/>
+      </h:form>
+   </h:body>
+</html>

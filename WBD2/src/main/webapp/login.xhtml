@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html">
+    <h:head>
+        <title>Simple Blog</title>
+    </h:head>
+    <h:body>
+	<h:form>
+        <h1>Login Page</h1>
+		<h><h:commandLink value = "Home" action="#{allControl.Home()}"  /></h>
+		<hr />
+        <h>Enter your username and password</h><h1></h1>
+                Username : <h:inputText value="#{allControl.currentUser.name}" />
+                Password : <h:inputSecret value="#{allControl.currentUser.pass}" />
+                <h:commandButton value="Login" action="#{allControl.Login()}"/>
+				#{allControl.message}
+	</h:form>
+    </h:body>
+</html>
