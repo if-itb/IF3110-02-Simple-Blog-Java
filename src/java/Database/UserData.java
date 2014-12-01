@@ -71,7 +71,7 @@ public class UserData implements Serializable {
             this.db.Where("password=", MD5.getMD5(pass));
             ResultSet Data = this.db.Select(table);
             if (Data.first()) {
-                cook.setCookie(CookieData,user, 3600);
+                cook.setCookie(CookieData,user, 24*3600);
                 return "valid";
             } else {
                 return "invalid";
