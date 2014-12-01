@@ -10,9 +10,9 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "users")
-@NamedQueries({@NamedQuery(name = "Post.findAll", query = "SELECT c FROM Post c"),
-                @NamedQuery(name = "Post.findById", query = "SELECT c FROM Post c WHERE c.id = :id"),
-                @NamedQuery(name = "Post.findByRole", query = "SELECT c FROM Post c WHERE c.role = :role")})
+@NamedQueries({@NamedQuery(name = "User.findAll", query = "SELECT c FROM User c"),
+                @NamedQuery(name = "User.findById", query = "SELECT c FROM User c WHERE c.id = :id"),
+                @NamedQuery(name = "User.findByRole", query = "SELECT c FROM User c WHERE c.role = :role")})
 
 public class User {
     

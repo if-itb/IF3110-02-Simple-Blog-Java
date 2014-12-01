@@ -16,16 +16,7 @@ import javax.transaction.UserTransaction;
 
 @ManagedBean
 
-public class CommentJpaController {
-    @Resource
-    private UserTransaction utx = null;
-    
-    @PersistenceUnit(unitName = "SimpleBlogPU")
-    private EntityManagerFactory emf = null;
-    
-    public EntityManager getEntityManager() {
-        return emf.createEntityManager();
-    }
+public class CommentJpaController extends JpaController {
     
     public void create(Comment comment) throws Exception {
         EntityManager em = null;

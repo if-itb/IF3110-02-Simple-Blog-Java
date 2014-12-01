@@ -1,7 +1,7 @@
 package id.ac.itb.informatika.wbd.jpa.entities;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Date;
 import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -34,7 +34,7 @@ public class Post implements Serializable {
     private String title;
     
     @Column(name = "post_date")
-    @Temporal(TemporalType.TIMESTAMP)
+   // @Temporal(TemporalType.TIMESTAMP)
     private Date date;
     
     @Column(name = "post_content")
@@ -50,7 +50,7 @@ public class Post implements Serializable {
     private Boolean deleted;
 
     @Column(name = "post_modified")
-    @Temporal(TemporalType.TIMESTAMP)
+    //@Temporal(TemporalType.TIMESTAMP)
     private Date modified;
     
    // @OneToMany(mappedBy = "post") // mappedBy indicates that this side is the 
