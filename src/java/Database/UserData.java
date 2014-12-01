@@ -23,6 +23,7 @@ public class UserData implements Serializable {
     private MySQL db;
     private String CookieData;
     private CookieHelper cook;
+    private String username;
     
     /**
      * Create an instance of UserData
@@ -107,7 +108,7 @@ public class UserData implements Serializable {
      * @param user new instance of user that will change the tuple of data selected
      * @return String status to pass
      */
-    public String updateUser(String username, User user) {
+    public String updateUser(User user) {
         this.db.Where("username=", username);
         String col[] = {"username", "password", "role", "name", "email"};
         String val[] = new String[5];
@@ -195,8 +196,14 @@ public class UserData implements Serializable {
         return true;
     }
     
-    public static void main(String args[]) {
-        UserData ud = new UserData();
-        List<User> U = ud.getAllUser();
+
+    public String getUsername() {
+        return username;
     }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+    
+    
 }
