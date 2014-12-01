@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <context-param>
+        <param-name>javax.faces.PROJECT_STAGE</param-name>
+        <param-value>Development</param-value>
+    </context-param>
+    <servlet>
+        <servlet-name>Faces Servlet</servlet-name>
+        <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Faces Servlet</servlet-name>
+        <url-pattern>/faces/*</url-pattern>
+    </servlet-mapping>
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+    <welcome-file-list>
+        <welcome-file>faces/index.xhtml</welcome-file>
+    </welcome-file-list>
+    <security-role>
+        <role-name>Owner</role-name>
+    </security-role>
+    <security-role>
+        <role-name>Administrator</role-name>
+    </security-role>
+    <security-role>
+        <role-name>Editor</role-name>
+    </security-role>
+    <security-role>
+        <role-name>Guest</role-name>
+    </security-role>
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Admin Area</web-resource-name>
+            <url-pattern>/faces/admin/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>Administrator</role-name>
+        </auth-constraint>
+    </security-constraint>    
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Editor Area</web-resource-name>
+            <url-pattern>/faces/editor/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>Editor</role-name>
+            <role-name>Owner</role-name>
+            <role-name>Administrator</role-name>
+        </auth-constraint>
+    </security-constraint>    
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Owner Area</web-resource-name>
+            <url-pattern>/faces/owner/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>Owner</role-name>
+            <role-name>Administrator</role-name>
+        </auth-constraint>
+    </security-constraint>    
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Guest Area</web-resource-name>
+            <url-pattern>/faces/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>Guest</role-name>
+            <role-name>Owner</role-name>
+            <role-name>Manager</role-name>
+            <role-name>Administrator</role-name>
+        </auth-constraint>
+    </security-constraint>   
+    <error-page>
+        <error-code>403</error-code>
+        <location>/faces/AccessDenied.xhtml</location>
+    </error-page> 
+</web-app>

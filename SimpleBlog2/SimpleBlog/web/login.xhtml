@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <link rel="stylesheet" type="text/css" href=""/>
+    </h:head>
+    <h:body>
+            <h:form id="login_form" onsubmit="return initialize();">
+                <h2>Login Please:</h2>
+                <table width="250" border="0" cellspacing="0" cellpadding="2">
+                    <tr>
+                        <td colspan="2">
+                            <h:message for="username" styleClass=""/>
+                            <h:message for="password" styleClass=""/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><h:outputText value="Username : "/></td>
+                        <td><h:inputText id="username" value="#{login_bean.username}" /></td>
+                    </tr>
+                    <tr>
+                        <td><h:outputText value="Password : "/></td>
+                        <td><h:inputSecret id="password" value="#{login_bean.password}" required="true" redisplay="true"/></td>
+                    </tr>
+                    <tr>
+                            <td>&nbsp;</td>
+                            <td><h:selectBooleanCheckbox id="remember" value="#{login_bean.remember}" onclick="return check(this);" />
+                            <h:outputLabel for="remember">Remember Me</h:outputLabel></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" align="center">
+                            <h:commandButton action="#{login_bean.login}" onclick="initialize" value="Login" type="submit" />
+                        </td>
+                    </tr>
+                </table>
+            </h:form>
+    </h:body>
+</html>
+
