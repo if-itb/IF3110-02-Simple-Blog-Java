@@ -50,10 +50,10 @@ public class Post implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date modified;
     
-    @OneToMany(mappedBy = "post") // mappedBy indicates that this side is the 
+   // @OneToMany(mappedBy = "post") // mappedBy indicates that this side is the 
    // inverse side, and that the mapping is defined by the attribute parentOrder 
    // at the other side of the association.
-    private Set<Comment> comments;
+   // private Set<Comment> comments;
     
     public Post() {
     }

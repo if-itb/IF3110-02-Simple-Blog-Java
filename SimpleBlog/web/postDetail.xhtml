@@ -1,7 +1,9 @@
-<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 template="./WEB-INF/templates/template.xhtml"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
-                xmlns:p="http://primefaces.org/ui">
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <ui:define name="title">
         Title
@@ -9,7 +11,7 @@
 
     <ui:define name="content">
     
-        <article class="art simple post" onload="loadComment(#{postController.postCurrent.id})">
+        <article class="art simple post">
 
           <header class="art-header">
             <div class="art-header-inner">
@@ -28,32 +30,42 @@
               <h2>Komentar</h2>
 
               <div id="contact-area">
-                <h:form id="NewComment">       
+                <h:form id="NewComment">      
+                    <p:messages/>
+                    
                     <h:outputLabel for="Nama" value="Nama:" />
                     <h:inputText id="Nama" value="#{commentController.commentCurrent.name}" label="Nama" title="Nama" required="true" requiredMessage="Nama tidak boleh kosong" />
                     
                     <h:outputLabel for="Email" value="Email" />
-                    <h:inputText id="Email" value="#{commentController.commentCurrent.name}" label="Email" title="Email" required="true" requiredMessage="Email tidak boleh kosong" />
+                    <h:inputText id="Email" value="#{commentController.commentCurrent.email}" label="Email" title="Email" required="true" requiredMessage="Email tidak boleh kosong" />
                     
                     <h:outputLabel for="Komentar" value="Komentar" />
-                    <h:inputTextarea id="Komentar" value="#{postController.postCurrent.content}" label="Komentar" title="Komentar" rows="20" cols="20" required="true"  requiredMessage="Komentar tidak boleh kosong" />
+                    <h:inputTextarea id="Komentar" value="#{commentController.commentCurrent.content}" label="Komentar" title="Komentar" rows="20" cols="20" required="true"  requiredMessage="Komentar tidak boleh kosong" />
 
-                    <h:commandButton type="submit" value="Kirim" class="submit-button" onclick="validateComment(); return false">
+                    <h:commandButton type="submit" value="Kirim" class="submit-button" onclick="validateComment(); return false" action="#{commentController.newComment(postController.postCurrent.id)}">
+                        <f:ajax execute="@form" render="@form" />
                     </h:commandButton>
                     
                     <h:commandButton value="Load Komentar" class="submit-button">
-                        <p:ajax update="comments" listener="#{commentController.loadComment}"/>
+                        <p:ajax update="comments" listener="#{commentController.loadComment(postController.postCurrent.id)}"/>
                     </h:commandButton>
                     
                     <ul class="art-list-body" >
-                        <h:outputText id="comments" value="#{commentController.commentList}"/>
+                        
+                        <ui:repeat id="comments" value="#{commentController.commentList}" var="comment">
+                        <li class="art-list-item">
+                            <div class="art-list-item-title-and-time">
+                                <h2 class="art-list-title"><h:link value="#{comment.name}"/></h2>
+                                <div class="art-list-time"><h:outputText value="#{comment.date}"/></div>
+                            </div>
+                            <p><h:outputText value="#{comment.content}"/></p>
+                        </li>
+                        </ui:repeat>
                      </ul>
-
                     
                 </h:form>
               </div>
               
-
             </div>
           </div>
 

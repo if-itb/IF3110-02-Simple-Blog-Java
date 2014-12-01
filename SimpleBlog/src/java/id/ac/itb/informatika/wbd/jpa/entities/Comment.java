@@ -30,9 +30,12 @@ public class Comment implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @JoinColumn(name = "post_id")
-    @ManyToOne
-    private Post post;
+ //   @JoinColumn(name = "post_id")
+ //   @ManyToOne
+ //   private Post post;
+    
+    @Column(name = "post_id")
+    private Long post;
     
     @Column(name = "comment_author")
     private String name;
@@ -99,11 +102,11 @@ public class Comment implements Serializable {
         this.featured = featured;
     }
 
-    public Post getPost() {
+    public Long getPost() {
         return post;
     }
 
-    public void setPost(Post post) {
+    public void setPost(Long post) {
         this.post = post;
     }
 

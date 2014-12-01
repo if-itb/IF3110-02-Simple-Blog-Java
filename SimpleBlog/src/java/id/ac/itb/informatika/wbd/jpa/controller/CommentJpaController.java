@@ -6,12 +6,15 @@ import id.ac.itb.informatika.wbd.jsf.JsfUtil;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Resource;
+import javax.faces.bean.ManagedBean;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.PersistenceUnit;
 import javax.persistence.Query;
 import javax.transaction.UserTransaction;
+
+@ManagedBean
 
 public class CommentJpaController {
     @Resource
@@ -24,9 +27,10 @@ public class CommentJpaController {
         return emf.createEntityManager();
     }
     
-    public void create(Comment comment, Long postId) throws Exception {
+    public void create(Comment comment) throws Exception {
         EntityManager em = null;
         
+        //comment = new Comment();
         try {
             utx.begin();
             em = getEntityManager();
@@ -59,7 +63,7 @@ public class CommentJpaController {
         EntityManager em = getEntityManager();
         try {
             Query q = em.createQuery("select object(o) from Comment as o where o.post = :id order by o.date asc");
-            List<Comment> entries = q.setParameter("p", id).getResultList();;
+            List<Comment> entries = q.setParameter("id", id).getResultList();;
             if (entries == null) {
                     entries = new ArrayList<Comment>();
             }

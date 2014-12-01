@@ -5,6 +5,7 @@ import id.ac.itb.informatika.wbd.jsf.JsfUtil;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Resource;
+import javax.faces.bean.ManagedBean;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityNotFoundException;
@@ -12,6 +13,7 @@ import javax.persistence.PersistenceUnit;
 import javax.persistence.Query;
 import javax.transaction.UserTransaction;
 
+@ManagedBean
 public class PostJpaController {
     @Resource
     private UserTransaction utx = null;

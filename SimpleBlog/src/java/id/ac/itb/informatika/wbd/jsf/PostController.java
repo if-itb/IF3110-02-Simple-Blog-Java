@@ -3,14 +3,18 @@ package id.ac.itb.informatika.wbd.jsf;
 import id.ac.itb.informatika.wbd.jpa.controller.PostJpaController;
 import id.ac.itb.informatika.wbd.jpa.entities.Post;
 import java.util.List;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 
+@ManagedBean
+@RequestScoped
 public class PostController {
 
     public PostController() {
         FacesContext facesContext = FacesContext.getCurrentInstance();
-        jpaController = (PostJpaController) facesContext.getApplication().getELResolver().getValue(facesContext.getELContext(), null, "postJpa");
+        jpaController = (PostJpaController) facesContext.getApplication().getELResolver().getValue(facesContext.getELContext(), null, "postJpaController");
         converter = new PostConverter();
     }
     
@@ -18,6 +22,11 @@ public class PostController {
     private List<Post> postList = null;
     private PostJpaController jpaController = null;
     private PostConverter converter = null;
+    
+    
+    public void setPostCurrent(Post postCurrent) {
+        this.postCurrent = postCurrent;
+    }
     
     public Post getPostCurrent() {
         if (postCurrent == null) {

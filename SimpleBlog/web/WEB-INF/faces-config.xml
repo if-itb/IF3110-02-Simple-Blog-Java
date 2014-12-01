@@ -8,23 +8,6 @@
         <el-resolver>id.ac.itb.informatika.wbd.jsf.JsfCrudELResolver</el-resolver>
     </application>
     
-    <managed-bean>
-        <managed-bean-name>postController</managed-bean-name>
-        <managed-bean-class>id.ac.itb.informatika.wbd.jsf.PostController</managed-bean-class>
-        <managed-bean-scope>request</managed-bean-scope>
-    </managed-bean>
-    
-    <managed-bean>
-        <managed-bean-name>postJpa</managed-bean-name>
-        <managed-bean-class>id.ac.itb.informatika.wbd.jpa.controller.PostJpaController</managed-bean-class>
-        <managed-bean-scope>request</managed-bean-scope>
-    </managed-bean>
-    <managed-bean>
-        <managed-bean-name>commentJpa</managed-bean-name>
-        <managed-bean-class>id.ac.itb.informatika.wbd.jpa.controller.CommentJpaController</managed-bean-class>
-        <managed-bean-scope>request</managed-bean-scope>
-    </managed-bean>
-    
     <navigation-rule>
         <navigation-case>
             <from-outcome>post_list</from-outcome>
