@@ -42,12 +42,13 @@ and open the template in the editor.
                 <section class="komentar">
                     <h:form class="pure-form" id="comment_form" onsubmit="return validateForm(#{komentar.email})"  >
                         <label for="Nama">Nama:</label>
-                        <h:inputText id="Nama" value="#{komentar.nama}"/>
+                        <h:inputText id="Nama" value="#{komentar.nama}" rendered="#{userBean.role == 4}"/>
                         <br/>
                         <label for="Email">Email:</label>
-                        <h:inputText id="Email" value="#{komentar.email}">
+                        <h:inputText id="Email" value="#{komentar.email}" rendered="#{userBean.role == 4}">
                             <f:validator validatorId="emailValidator" for="Email"/>
-                        </h:inputText>>
+                        </h:inputText>
+                        <h:message for="Email" style="color:red" />
                         <p size ="10px" id="errmsg"></p>
 
                         <label for="Komentar">Komentar:</label><br/>

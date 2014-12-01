@@ -64,6 +64,11 @@
         <managed-bean-name>komentar</managed-bean-name>
         <managed-bean-class>model.Komentar</managed-bean-class>
         <managed-bean-scope>view</managed-bean-scope>
+        <managed-property>
+            <property-name>user</property-name>
+            <property-class>model.UserBean</property-class>
+            <value>#{userBean}</value>
+        </managed-property>
     </managed-bean>
     <managed-bean>
         <managed-bean-name>deleteUserBean</managed-bean-name>

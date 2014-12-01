@@ -27,7 +27,7 @@ public class CommentDAOJDBC implements CommentDAO {
     private static final String SQL_FIND_BY_KID =
         "SELECT * FROM komentar WHERE KID = ?";
     private static final String SQL_FIND_BY_PID =
-        "SELECT * FROM komentar WHERE PID = ? ORDER_BY TANGGAL DESC";
+        "SELECT * FROM komentar WHERE PID = ? ORDER BY TANGGAL DESC";
     private static final String SQL_INSERT =
         "INSERT INTO komentar (PID, NAMA, EMAIL, TANGGAL, KOMENTAR) VALUES (?, ?, ?, ?, ?)";
  
