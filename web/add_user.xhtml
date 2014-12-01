@@ -42,10 +42,27 @@ and open the template in the editor.
 <nav class="nav">
     <a style="border:none;" id="logo" href="index.xhtml"><h1>Simple<span>-</span>Blog</h1></a>
     <ul class="nav-primary">
-        <li><a href="new_post.html">+ Tambah Post</a></li>
+        <h:panelGroup rendered="#{userBean.admin}"><li>
+            <a href="user.xhtml">User Management</a></li>
+            <li><a href="unpublished.xhtml">Unpublished posts</a></li>
+            <li><a href="recycle_bin.xhtml">Deleted Post</a></li>
+            <li><a href="new_post.jsp">+ Tambah Post</a></li>
+            <li><a href="logout.jsp">Logout</a></li>
+        </h:panelGroup>
+        <h:panelGroup rendered="#{userBean.editor}">
+            <li><a href="unpublished.xhtml">Unpublished posts</a></li>
+            <li><a href="new_post.jsp">+ Tambah Post</a></li>
+            <li><a href="logout.jsp">Logout</a></li>
+        </h:panelGroup>
+        <h:panelGroup rendered="#{userBean.owner}">
+            <li><a href="new_post.jsp">+ Tambah Post</a></li>
+            <li><a href="logout.jsp">Logout</a></li>
+        </h:panelGroup>
+        
+        <h:panelGroup rendered="#{!userBean.loggedIn}"><li><a href="login.xhtml">Log In</a></li></h:panelGroup>
     </ul>
 </nav>
-
+    
  <div style="position:relative;top:180px;left:300px;">
     <c:if test="#{!userManagementBean.editMode}">
   <h2>New User</h2>

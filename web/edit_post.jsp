@@ -59,10 +59,9 @@
 <nav class="nav">
     <a style="border:none;" id="logo" href="index.html"><h1>Simple<span>-</span>Blog</h1></a>
     <ul class="nav-primary">
-        <li><a href="new_post.html">+ Tambah Post</a></li>
     </ul>
 </nav>
-
+    
 <article class="art simple post">
     
     
