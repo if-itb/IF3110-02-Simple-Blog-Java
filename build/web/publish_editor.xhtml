@@ -29,7 +29,7 @@
                         <h:form styleClass="nav nav-tabs pull-right">
                             <li><h:commandLink action="publish_editor">Publish</h:commandLink></li>
                             <li><h:commandLink action="about_editor">About</h:commandLink></li>
-                            <li><h:commandLink action="login_editor">Login</h:commandLink></li>
+                            <li><h:commandLink action="#{login.logout()}">Logout</h:commandLink></li>
                         </h:form>
                     </ul>
                 </div>
@@ -48,6 +48,9 @@
                     <ui:repeat value="#{arrPostUnpublished.post}" var="post">
                         <div id="editdelete">
                             <h:form>
+                                <h:commandLink action="#{arrPostUnpublished.makepublish(post.id)}" value="Publish">
+                                    <f:param name="id" value="#{post.id}"/>
+                                </h:commandLink><br/>
                                 <h:commandLink action="edit_editor" value="Edit">
                                     <f:param name="id" value="#{post.id}"/>
                                 </h:commandLink><br/>

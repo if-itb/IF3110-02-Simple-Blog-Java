@@ -29,28 +29,35 @@
                         <h:form styleClass="nav nav-tabs pull-right">
                             <li><h:commandLink action="addpost">Add Post</h:commandLink></li>
                             <li><h:commandLink action="publish">Publish</h:commandLink></li>
+                            <li><h:commandLink action="deleted">Deleted</h:commandLink></li>
                             <li><h:commandLink action="user">Manage User</h:commandLink></li>
                             <li><h:commandLink action="about">About</h:commandLink></li>
-                            <li><h:commandLink action="login">Login</h:commandLink></li>
+                            <li><h:commandLink action="#{login.logout()}">Logout</h:commandLink></li>
                         </h:form>
                     </ul>
                 </div>
             </div>
+        
             
-            <ui:repeat value="#{listUser.user}" var="u">
-                <h:form>
-                    <h:outputText value="#{u.username}"></h:outputText><br/>
-                    <h:outputText value="#{u.role}"></h:outputText><br/>
-                    <h:commandLink action="#{listUser.delete(u.username)}" value="Delete User"></h:commandLink>
-                    <h:commandLink action="edituser" value="Edit User">
-                        <f:param name="user" value="#{u.username}"/>
-                    </h:commandLink><br/>
-                    <br/>
-                </h:form>
-            </ui:repeat>
-            <h:form>
-                <h:commandLink action="adduser" value="Add User"></h:commandLink><br/>
-                <h:commandLink action="index" value="Home"></h:commandLink>
-            </h:form>
+            <div id="body">
+                <div id="text-role">
+                    <ui:repeat value="#{listUser.user}" var="u">
+                        <h:form>
+                            <h:outputText value="#{u.username}"></h:outputText><br/>
+                            <h:outputText value="#{u.role}"></h:outputText><br/>
+                            <h:commandLink action="#{listUser.delete(u.username)}" value="Delete User"></h:commandLink>
+                            <h:commandLink action="edituser" value="Edit User">
+                                <f:param name="user" value="#{u.username}"/>
+                            </h:commandLink><br/>
+                            <br/>
+                        </h:form>
+                    </ui:repeat>
+                        <h:form>
+                            <h:commandLink action="adduser" value="Add User"></h:commandLink><br/>
+                            <h:commandLink action="index" value="Home"></h:commandLink>
+                        </h:form>
+                </div>
+            </div>
+        </div>
     </h:body>
 </html>

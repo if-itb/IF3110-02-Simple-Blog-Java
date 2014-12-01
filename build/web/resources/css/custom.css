@@ -143,6 +143,7 @@
 
 #post-comment-button {
     margin-left: 56.2%;
+    color: black;
 }
 
 #summary-komentar {
@@ -233,4 +234,9 @@ margin-top:-158px;
 
 #editdelete {
     display: inline;
+}
+
+#text-role {
+    margin-top: 50px;
+    color: white;
 }

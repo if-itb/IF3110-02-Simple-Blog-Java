@@ -6,11 +6,13 @@
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import java.util.*;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -47,7 +49,18 @@ public class ArrPostUnpublished {
             e.printStackTrace();
         }
     }
-    
+    public void makepublish(int id) {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/simpleblog2", "root", "");
+            PreparedStatement preparedStatement = con.prepareStatement("UPDATE postdata SET status='published' where id_post=?");
+            preparedStatement.setInt(1, id);
+            preparedStatement.executeUpdate();
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
     // getter
     public List getPost() {
         return post;

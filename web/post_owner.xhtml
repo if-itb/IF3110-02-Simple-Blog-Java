@@ -21,60 +21,33 @@
         <div id="wrapper">
             <div id="header">
                 <div class="nav">
-                    <h:form styleClass="nav nav-tabs pull-left">
-                        <li><h:commandLink action="index_owner">Simple Blog</h:commandLink></li>
-                    </h:form>
-
-                    <ul>
-                        <h:form styleClass="nav nav-tabs pull-right">
-                            <li><h:commandLink action="addpost_owner">Add Post</h:commandLink></li>
-                            <li><h:commandLink action="about_owner">About</h:commandLink></li>
-                            <li><h:commandLink action="login_owner">Login</h:commandLink></li>
-                        </h:form>
-                    </ul>
-                </div>
-            </div>
-
-            <div id="content">
-                <div class="jumbotron"> 
-                   <div class="text-center">
-                        <h2>Find an article to read</h2>
-                        <p>Choose from over than 100 articles</p>
-                    </div>
-                </div>
-            </div>
-                
+                    <h:form id="formaddcomment">
             <div id="summary-posts">
-                <h:form>
-                    #{viewPost.run(param['id'])}
-                    <div class="text-center" id="summary-tanggal">
-                        <h:outputText value="#{viewPost.tanggal}"></h:outputText><br/>
-                    </div>
+               <div class="text-center" id="summary-tanggal">
+                   <h:outputText value="#{viewPost.tanggal}"></h:outputText><br/>
+               </div>
 
-                    <div class="text-center" id="summary-judul">
-                        <h:outputText value="#{viewPost.judul}"></h:outputText><br/>
-                    </div>
+               <div class="text-center" id="summary-judul">
+                   <h:outputText value="#{viewPost.judul}"></h:outputText><br/>
+               </div>
 
-                    <div class="text-center" id="summary-konten">
-                        <h:outputText value="#{viewPost.konten}"></h:outputText><br/>
-                    </div>
-                    <div id="border-posts"></div>
-                </h:form>
-            </div>
-                
+               <div class="text-center" id="summary-konten">
+                   <h:outputText value="#{viewPost.konten}"></h:outputText><br/>
+               </div>
+               <div id="border-posts"></div>
+           </div>
+            #{viewPost.runComment(param['id'])}
             <ui:repeat value="#{viewPost.komentar}" var="k">
-                <h:form>
-                    <div class="text-center" id="summary-komentar">
-                        <h:outputText value="#{k.tanggal}"/><br/>
-                        <h:outputText value="#{k.nama}"/><br/>
-                        <h:outputText value="#{k.email}"/><br/>
-                        <h:outputText value="#{k.komentar}"/><br/>
-                        <div id="border-posts"></div>
-                    </div>
-                </h:form>
+                <div class="text-center" id="summary-komentar">
+                    <h:outputText value="#{k.tanggal}"/><br/>
+                    <h:outputText value="#{k.nama}"/><br/>
+                    <h:outputText value="#{k.email}"/><br/>
+                    <h:outputText value="#{k.komentar}"/><br/>
+                    <div id="border-posts"></div>
+                </div>
             </ui:repeat>
             
-            <h:form id="formaddcomment" onsubmit="return validasiEmail();">
+            <!--<h:form id="formaddcomment" onsubmit="return validasiEmail();">-->
                 <div class="addcomment">
                     <div class="row">
                         <div class="col-md-4"></div>
@@ -109,7 +82,7 @@
                     <div class="row">
                         <div class="col-md-4"></div>
                             <div class="col-md-4">
-                                <div class="form-group" id="tambah-judul">                                
+                                <div class="form-group" id="tambah-komentar">
                                     <h:inputTextarea class="form-control status-box" rows="2" binding="#{komentar}" value="Masukkan komentar Anda di sini"/>
                                 </div>
                             </div>
@@ -117,7 +90,10 @@
                     </div>                
 
                     <div class="button-group" id="post-comment-button">
-                        <h:commandButton type="submit" action="#{viewPost.addComment(nama.value, tanggal.value, email.value, komentar.value)}" value="Tambah komentar"/>
+                        <h:commandButton onclick="return validasiEmail();"  type="submit" action="#{viewPost.addComment(nama.value, tanggal.value, email.value, komentar.value)}" value="Tambah komentar">
+                            <f:param name="id" value="#{param['id']}"/>
+                            <f:ajax execute="@form" render="@form"/>
+                        </h:commandButton>
                     </div>
                 </div>
             </h:form>

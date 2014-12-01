@@ -29,7 +29,7 @@
                         <h:form styleClass="nav nav-tabs pull-right">
                             <li><h:commandLink action="addpost_owner">Add Post</h:commandLink></li>
                             <li><h:commandLink action="about_owner">About</h:commandLink></li>
-                            <li><h:commandLink action="login-owner">Login</h:commandLink></li>
+                            <li><h:commandLink action="#{login.logout()}">Logout</h:commandLink></li>
                         </h:form>
                     </ul>
                 </div>
@@ -58,10 +58,13 @@
                             <div class="text-center" id="summary-konten">
                                 <h:outputText value="#{post.konten}"></h:outputText><br/>
                             </div>
-                            <h:commandLink action="#{listPost.delete(post.id)}" value="Delete Post"></h:commandLink>
-                            <h:commandLink action="edit_owner" value="Edit Post">
-                                <f:param name="id" value="#{post.id}"/>
-                            </h:commandLink><br/>
+                            <div id="editdelete">
+                                <h:commandLink action="edit" value="Edit">
+                                    <f:param name="id" value="#{post.id}"/>
+                                </h:commandLink><br/>
+                                <h:commandLink action="#{listPost.delete(post.id)}" value="Delete" onclick="return confirm('Apakah Anda yakin menghapus post ini?');"></h:commandLink>
+                            </div>
+                            <br/>
                             <div id="border-posts"></div>
                         </h:form>
                     </ui:repeat>

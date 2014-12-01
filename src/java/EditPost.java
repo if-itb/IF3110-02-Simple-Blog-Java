@@ -52,7 +52,6 @@ public class EditPost implements Serializable {
             preparedStatement.setString(3, konten);
             preparedStatement.setInt(4, id);
             preparedStatement.executeUpdate();
-            FacesContext.getCurrentInstance().getExternalContext().redirect("publish.xhtml");
         }
         catch(Exception e) {
             e.printStackTrace();

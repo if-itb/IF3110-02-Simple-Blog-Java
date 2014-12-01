@@ -8,7 +8,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @ManagedBean
@@ -17,8 +16,9 @@ public class Login {
     
     // attribute
     private ArrayList<User> user;
-    private String cookiename = "username";
     private int expiry = 60*60*24;
+    private String role;
+    private String email;
     // default constructor
     public Login() {
         user = new ArrayList<User>();
@@ -62,44 +62,60 @@ public class Login {
         HttpServletResponse response = (HttpServletResponse) facesContext.getExternalContext().getResponse();
 
         if(check(username, password)){
-            Cookie usernameCookie = new Cookie(cookiename, username);
+            try {
+                Class.forName("com.mysql.jdbc.Driver");
+                Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/simpleblog2", "root", "");
+                Statement ps = con.createStatement();
+                ResultSet rs = ps.executeQuery("select role, email from userdata where username='"+username+"'");
+                rs.next();
+                role = rs.getString(1);
+                email = rs.getString(2);
+            }
+            catch(Exception e) {
+                e.printStackTrace();
+            }
+            
+            Cookie usernameCookie = new Cookie("username", username);
+            Cookie roleCookie = new Cookie("role", role);
+            Cookie emailCookie = new Cookie("email", email);
             usernameCookie.setMaxAge(expiry);
+            roleCookie.setMaxAge(expiry);
+            emailCookie.setMaxAge(expiry);
             response.addCookie(usernameCookie);
-            response.sendRedirect("index.xhtml");
+            response.addCookie(roleCookie);
+            response.addCookie(emailCookie);
+            
+            System.out.println("inirole"+role);
+            if(role.equals("admin")){
+                response.sendRedirect("index.xhtml");
+            }
+            else if(role.equals("editor")){
+                response.sendRedirect("publish_editor.xhtml");
+            }
+            else if(role.equals("owner")){
+                response.sendRedirect("index_owner.xhtml");
+            }
+            else{
+                response.sendRedirect("index_guest.xhtml");
+            }            
         }
         else{
-            Cookie usernameCookie = new Cookie(cookiename, "guest");
-            usernameCookie.setMaxAge(expiry);
-            response.addCookie(usernameCookie);
-            response.sendRedirect("login.xhtml");
+            response.sendRedirect("login_guest.xhtml");
         }
     }
     
     public void logout() throws IOException{
         FacesContext facesContext = FacesContext.getCurrentInstance();
-        Cookie cookie = getCookie();
-        cookie.setValue(null);
-        cookie.setMaxAge(0);
         HttpServletResponse response = (HttpServletResponse) facesContext.getExternalContext().getResponse();
-        response.addCookie(cookie);
-        response.sendRedirect("login.xhtml");
-    }
-    
-    public Cookie getCookie(){
-        FacesContext facesContext = FacesContext.getCurrentInstance();
-        
-        HttpServletRequest request = (HttpServletRequest) facesContext.getExternalContext().getRequest();
-        Cookie cookie = null;
-        
-        Cookie[] userCookies = request.getCookies();
-        if(userCookies != null && userCookies.length > 0){
-            for (Cookie userCookie : userCookies) {
-                if (userCookie.getName().equals(cookiename)) {
-                    cookie = userCookie;
-                    return cookie;
-                }
-            }
-        }
-        return null;
+        Cookie usernameCookie = new Cookie("username", "");
+        Cookie roleCookie = new Cookie("role", "");
+        Cookie emailCookie = new Cookie("email", "");
+        usernameCookie.setMaxAge(0);
+        roleCookie.setMaxAge(0);
+        emailCookie.setMaxAge(0);
+        response.addCookie(usernameCookie);
+        response.addCookie(roleCookie);
+        response.addCookie(emailCookie);
+        response.sendRedirect("index_guest.xhtml");
     }
 }

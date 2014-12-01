@@ -26,9 +26,10 @@
                         <h:form styleClass="nav nav-tabs pull-right">
                             <li><h:commandLink action="addpost">Add Post</h:commandLink></li>
                             <li><h:commandLink action="publish">Publish</h:commandLink></li>
-                            <li><h:commandLink action="user">Manage User</h:commandLink></li>                            
+                            <li><h:commandLink action="deleted">Deleted</h:commandLink></li>
+                            <li><h:commandLink action="user">Manage User</h:commandLink></li>
                             <li><h:commandLink action="about">About</h:commandLink></li>
-                            <li><h:commandLink action="login">Login</h:commandLink></li>
+                            <li><h:commandLink action="#{login.logout()}">Logout</h:commandLink></li>
                         </h:form>
                     </ul>
 

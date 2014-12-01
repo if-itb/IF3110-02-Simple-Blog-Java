@@ -22,13 +22,16 @@
             <div id="header">
                 <div class="nav">
                     <h:form styleClass="nav nav-tabs pull-left">
-                        <li><h:commandLink action="index_editor">Simple Blog</h:commandLink></li>
+                        <li><h:commandLink action="index">Simple Blog</h:commandLink></li>
                     </h:form>
 
                     <ul>
                         <h:form styleClass="nav nav-tabs pull-right">
-                            <li><h:commandLink action="publish_editor">Publish</h:commandLink></li>
-                            <li><h:commandLink action="about_editor">About</h:commandLink></li>
+                            <li><h:commandLink action="addpost">Add Post</h:commandLink></li>
+                            <li><h:commandLink action="publish">Publish</h:commandLink></li>
+                            <li><h:commandLink action="deleted">Deleted</h:commandLink></li>
+                            <li><h:commandLink action="user">Manage User</h:commandLink></li>
+                            <li><h:commandLink action="about">About</h:commandLink></li>
                             <li><h:commandLink action="#{login.logout()}">Logout</h:commandLink></li>
                         </h:form>
                     </ul>
@@ -47,22 +50,22 @@
                     <ui:repeat value="#{arrPost.post}" var="post">
                         <h:form>
                             <div id="border-posts"></div>
+                            <div id="editdelete">
+                                <h:commandLink action="edit" value="Edit">
+                                    <f:param name="id" value="#{post.id}"/>
+                                </h:commandLink><br/>
+                                <h:commandLink action="#{listDeletedPost.restoredelete(post.id)}" value="Restore"></h:commandLink>
+                            </div>
                             <div class="text-center" id="summary-tanggal">
                                 <h:outputText value="#{post.tanggal}"></h:outputText><br/>
                             </div>
                             <div class="text-center" id="summary-judul">
-                                <h:commandLink action="post_editor" value="#{post.judul}">
+                                <h:commandLink action="post" value="#{post.judul}">
                                     <f:param name="id" value="#{post.id}"/>
                                 </h:commandLink>
                             </div>
                             <div class="text-center" id="summary-konten">
                                 <h:outputText value="#{post.konten}"></h:outputText><br/>
-                            </div>
-                            <div id="editdelete">
-                                <h:commandLink action="edit" value="Edit">
-                                    <f:param name="id" value="#{post.id}"/>
-                                </h:commandLink><br/>
-                                <h:commandLink action="#{listPost.delete(post.id)}" value="Delete" onclick="return confirm('Apakah Anda yakin menghapus post ini?');"></h:commandLink>
                             </div>
                             <div id="border-posts"></div>
                         </h:form>

@@ -45,7 +45,7 @@ public class EditUser {
     public void edit() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/webdata", "root", "");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/simpleblog2", "root", "");
             PreparedStatement preparedStatement = con.prepareStatement("UPDATE userdata SET password=?, nama=?, email=?, role=? where username=?");
             preparedStatement.setString(1, password);
             preparedStatement.setString(2, nama);

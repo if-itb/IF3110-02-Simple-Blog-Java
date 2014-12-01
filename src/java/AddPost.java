@@ -24,7 +24,6 @@ public class AddPost {
             preparedStatement.setString(3, konten);
             preparedStatement.setString(4, "unpublished");
             preparedStatement.executeUpdate();
-            FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
         }
         catch(Exception e) {
             e.printStackTrace();

@@ -29,9 +29,10 @@
                         <h:form styleClass="nav nav-tabs pull-right">
                             <li><h:commandLink action="addpost">Add Post</h:commandLink></li>
                             <li><h:commandLink action="publish">Publish</h:commandLink></li>
-                            <li><h:commandLink action="user">Manage User</h:commandLink></li>                            
+                            <li><h:commandLink action="deleted">Deleted</h:commandLink></li>
+                            <li><h:commandLink action="user">Manage User</h:commandLink></li>
                             <li><h:commandLink action="about">About</h:commandLink></li>
-                            <li><h:commandLink action="login">Login</h:commandLink></li>
+                            <li><h:commandLink action="#{login.logout()}">Logout</h:commandLink></li>
                         </h:form>
                     </ul>
                 </div>
@@ -45,38 +46,35 @@
                     </div>
                 </div>
             </div>
-                
+
+            #{viewPost.runPost(param['id'])}
+            <h:form id="formaddcomment">
             <div id="summary-posts">
-                <h:form>
-                    #{viewPost.run(param['id'])}
-                    <div class="text-center" id="summary-tanggal">
-                        <h:outputText value="#{viewPost.tanggal}"></h:outputText><br/>
-                    </div>
+               <div class="text-center" id="summary-tanggal">
+                   <h:outputText value="#{viewPost.tanggal}"></h:outputText><br/>
+               </div>
 
-                    <div class="text-center" id="summary-judul">
-                        <h:outputText value="#{viewPost.judul}"></h:outputText><br/>
-                    </div>
+               <div class="text-center" id="summary-judul">
+                   <h:outputText value="#{viewPost.judul}"></h:outputText><br/>
+               </div>
 
-                    <div class="text-center" id="summary-konten">
-                        <h:outputText value="#{viewPost.konten}"></h:outputText><br/>
-                    </div>
-                    <div id="border-posts"></div>
-                </h:form>
-            </div>
-                
+               <div class="text-center" id="summary-konten">
+                   <h:outputText value="#{viewPost.konten}"></h:outputText><br/>
+               </div>
+               <div id="border-posts"></div>
+           </div>
+            #{viewPost.runComment(param['id'])}
             <ui:repeat value="#{viewPost.komentar}" var="k">
-                <h:form>
-                    <div class="text-center" id="summary-komentar">
-                        <h:outputText value="#{k.tanggal}"/><br/>
-                        <h:outputText value="#{k.nama}"/><br/>
-                        <h:outputText value="#{k.email}"/><br/>
-                        <h:outputText value="#{k.komentar}"/><br/>
-                        <div id="border-posts"></div>
-                    </div>
-                </h:form>
+                <div class="text-center" id="summary-komentar">
+                    <h:outputText value="#{k.tanggal}"/><br/>
+                    <h:outputText value="#{k.nama}"/><br/>
+                    <h:outputText value="#{k.email}"/><br/>
+                    <h:outputText value="#{k.komentar}"/><br/>
+                    <div id="border-posts"></div>
+                </div>
             </ui:repeat>
             
-            <h:form id="formaddcomment" onsubmit="return validasiEmail();">
+            <!--<h:form id="formaddcomment" onsubmit="return validasiEmail();">-->
                 <div class="addcomment">
                     <div class="row">
                         <div class="col-md-4"></div>
@@ -119,7 +117,10 @@
                     </div>                
 
                     <div class="button-group" id="post-comment-button">
-                        <h:commandButton type="submit" action="#{viewPost.addComment(nama.value, tanggal.value, email.value, komentar.value)}" value="Tambah komentar"/>
+                        <h:commandButton onclick="return validasiEmail();"  type="submit" action="#{viewPost.addComment(nama.value, tanggal.value, email.value, komentar.value)}" value="Tambah komentar">
+                            <f:param name="id" value="#{param['id']}"/>
+                            <f:ajax execute="@form" render="@form"/>
+                        </h:commandButton>
                     </div>
                 </div>
             </h:form>

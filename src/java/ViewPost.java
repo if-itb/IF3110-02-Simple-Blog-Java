@@ -27,7 +27,7 @@ public class ViewPost implements Serializable {
     }
     
     // function
-    public void run(int i) {
+    public void runPost(int i) {
        try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/simpleblog2", "root", "");
@@ -40,7 +40,18 @@ public class ViewPost implements Serializable {
                 konten = rs.getString(4);
                 status = rs.getString(5);
             }
-            rs = ps.executeQuery("select * from commentdata where id_post=" + i);
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        } 
+    }
+    public void runComment(int i) {
+       try {
+            komentar.clear();
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/simpleblog2", "root", "");
+            Statement ps = con.createStatement();
+            ResultSet rs = ps.executeQuery("select * from commentdata where id_post=" + i);
             while(rs.next() == true) {
                 Comment c = new Comment();
                 c.setIdc(rs.getInt(1));
@@ -67,7 +78,7 @@ public class ViewPost implements Serializable {
             preparedStatement.setString(4, email);
             preparedStatement.setString(5, komentar);
             preparedStatement.executeUpdate();
-            FacesContext.getCurrentInstance().getExternalContext().redirect("publish.xhtml");
+//            FacesContext.getCurrentInstance().getExternalContext().redirect("publish.xhtml");
         }
         catch(Exception e) {
             e.printStackTrace();

@@ -8,21 +8,21 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 
-@ManagedBean(name = "listPost", eager = true)
+@ManagedBean(name = "listDeletedPost", eager = true)
 @RequestScoped
-public class ListPost {
+public class ListDeletedPost {
 
     // attribute
     private ArrayList<Post> post;
     
     // default constructor
-    public ListPost() {
+    public ListDeletedPost() {
         post = new ArrayList<Post>();
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/simpleblog2", "root", "");
             Statement ps = con.createStatement();
-            ResultSet rs = ps.executeQuery("select * from postdata where status='published'");
+            ResultSet rs = ps.executeQuery("select * from postdata where status='deleted'");
             while(rs.next() == true) {
                 Post p = new Post();
                 p.setId(rs.getInt(1));
@@ -37,15 +37,16 @@ public class ListPost {
             e.printStackTrace();
         }
     }
+    
     // function
-    public void delete(int id) {
+    public void restoredelete(int id) {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/simpleblog2", "root", "");
-            PreparedStatement preparedStatement = con.prepareStatement("UPDATE postdata SET status='deleted' where id_post=?");
+            PreparedStatement preparedStatement = con.prepareStatement("UPDATE postdata SET status='unpublished' where id_post=?");
             preparedStatement.setInt(1, id);
             preparedStatement.executeUpdate();
-            FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
+            FacesContext.getCurrentInstance().getExternalContext().redirect("deleted.xhtml");
         }
         catch(Exception e) {
             e.printStackTrace();
