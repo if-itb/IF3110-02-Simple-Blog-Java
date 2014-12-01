@@ -40,7 +40,7 @@ public class PostFilter implements Filter {
          * * post tidak null, dan
          * * post telah dipublish, atau post unpublished tetapi role = admin atau editor
         */
-        if (post != null && user != null && !(!post.getPublished() && (user.getRole().equals(User.ROLE_GUEST) || user.getRole().equals(User.ROLE_OWNER)))) {
+        if (post != null && user != null && !(post.getPublished()==0 && (user.getRole().equals(User.ROLE_GUEST) || user.getRole().equals(User.ROLE_OWNER)))) {
             chain.doFilter(request, response);
         } else {
             HttpServletResponse res = (HttpServletResponse) response;

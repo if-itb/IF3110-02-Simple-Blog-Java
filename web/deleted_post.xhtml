@@ -28,48 +28,42 @@
         <div class="posts">
             <nav class="art-list">
               <ul class="art-list-body">
-                  <ui:repeat value="#{postController.postList}" class="art-list-item" var="c">
-                      <ui:fragment rendered="#{c.published == 1 or (c.published == 0 and (userController.user.role eq 'admin' or userController.user.role eq 'editor'))}">
+                  <ui:repeat value="#{postController.deletedPostList}" class="art-list-item" var="c">
                         <li class="art-list-item">
                           <div class="art-list-item-title-and-time">
                               <h2 class="art-list-title"><h:form><h:commandLink action="#{postController.viewPost(c.id)}" value="#{c.title}"/></h:form></h2>
                               <div class="art-list-time">#{c.date}</div>
                               <ui:fragment rendered="#{userController.user.role eq 'admin' or userController.user.role eq 'editor'}">
-                                  <div class="art-list-time">Published</div>
+                                  <div class="art-list-time">Deleted</div>
                               </ui:fragment>
                           </div>
                           <p>#{c.content}</p>
                           <h:form>
                               <p>
                                   <ui:fragment rendered="#{userController.user.role eq 'admin' or userController.user.role eq 'editor'}">
-                                    <h:commandLink rendered="#{c.published == 1}" action="#{postController.unpublishPost(c.id)}" value="Unpublish"/>
+                                    <h:commandLink action="#{postController.restorePost(c.id)}" value="Restore"/>
                                     |
-                                  </ui:fragment>
-                                  <ui:fragment rendered="#{userController.user.role ne 'guest'}">
-                                    <h:commandLink action="#{postController.editPost(c)}" value="Edit"/>
-                                    |
-                                    <h:commandLink action="#{postController.deletePost(c.id)}" value="Hapus" onclick="return delPost();"/>
+                                    <h:commandLink action="#{postController.permanentdeletePost(c.id)}" value="Hapus" onclick="return perdelPost();"/>
                                   </ui:fragment>
                               </p>
                           </h:form>
                         </li>
-                      </ui:fragment>
                   </ui:repeat>
 
               </ul>
             </nav>
         </div>
     </div>
-    
+
     <ui:insert id="footer">
         <ui:include src="/templates/footer.xhtml"/>
     </ui:insert>
 
 </div>
 <script type="text/javascript">
-  function delPost(){
+  function perdelPost(){
       var x;
-      if(confirm("Apakah Anda yakin menghapus post ini?")){
+      if(confirm("Apakah Anda yakin menghapus post ini secara permanen?")){
         x = "Post ini telah dihapus";
       }else{
         x = "Post tidak jadi dihapus";

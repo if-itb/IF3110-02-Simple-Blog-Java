@@ -15,6 +15,12 @@
         <ui:fragment rendered="#{userController.user.role eq 'admin'}">
             <li><h:link outcome="user_management">&Psi; Manajemen User</h:link></li>
         </ui:fragment>
+        <ui:fragment rendered="#{userController.user.role eq 'admin' or userController.user.role eq 'editor'}">
+            <li><h:link outcome="unpublished_post">UnpublishedPost</h:link></li>
+        </ui:fragment>
+        <ui:fragment rendered="#{userController.user.role eq 'admin' or userController.user.role eq 'editor'}">
+            <li><h:link outcome="deleted_post">DeletedPost</h:link></li>
+        </ui:fragment>
         <ui:fragment rendered="#{userController.user.role eq 'guest'}">
             <li>Guest <a id="_toggle-login" href="#">(Login)</a></li>
         </ui:fragment>

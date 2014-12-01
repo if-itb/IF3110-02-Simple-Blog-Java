@@ -11,7 +11,7 @@ public class Post {
     private String title;
     private String date;
     private String content;
-    private boolean published;
+    private int published;
 
     /**
      * @return the id
@@ -73,23 +73,28 @@ public class Post {
      * @return the published
      */
     public String getPublishedInfo() {
-        if(published){
+        if(published == 1){
             return "Published";
         }
-        else{
+        else if(published == 0){
             return "Unpublished";
         }
-    
+        else if(published == -1){
+            return "Deleted";
+        }
+        else{
+            return "";
+        }
     }
     
-    public boolean getPublished(){
+    public int getPublished(){
         return published;
     }
 
     /**
      * @param published the pubished to set
      */
-    public void setPublished(boolean published) {
+    public void setPublished(int published) {
         this.published = published;
     }
 }

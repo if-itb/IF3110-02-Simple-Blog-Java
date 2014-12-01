@@ -28,21 +28,20 @@
         <div class="posts">
             <nav class="art-list">
               <ul class="art-list-body">
-                  <ui:repeat value="#{postController.postList}" class="art-list-item" var="c">
-                      <ui:fragment rendered="#{c.published == 1 or (c.published == 0 and (userController.user.role eq 'admin' or userController.user.role eq 'editor'))}">
+                  <ui:repeat value="#{postController.unpublishedPostList}" class="art-list-item" var="c">
                         <li class="art-list-item">
                           <div class="art-list-item-title-and-time">
                               <h2 class="art-list-title"><h:form><h:commandLink action="#{postController.viewPost(c.id)}" value="#{c.title}"/></h:form></h2>
                               <div class="art-list-time">#{c.date}</div>
                               <ui:fragment rendered="#{userController.user.role eq 'admin' or userController.user.role eq 'editor'}">
-                                  <div class="art-list-time">Published</div>
+                                  <div class="art-list-time">Unpublished</div>
                               </ui:fragment>
                           </div>
                           <p>#{c.content}</p>
                           <h:form>
                               <p>
                                   <ui:fragment rendered="#{userController.user.role eq 'admin' or userController.user.role eq 'editor'}">
-                                    <h:commandLink rendered="#{c.published == 1}" action="#{postController.unpublishPost(c.id)}" value="Unpublish"/>
+                                    <h:commandLink rendered="#{c.published == 0}" action="#{postController.publishPost(c.id)}" value="Publish"/>
                                     |
                                   </ui:fragment>
                                   <ui:fragment rendered="#{userController.user.role ne 'guest'}">
@@ -53,14 +52,13 @@
                               </p>
                           </h:form>
                         </li>
-                      </ui:fragment>
                   </ui:repeat>
 
               </ul>
             </nav>
         </div>
     </div>
-    
+
     <ui:insert id="footer">
         <ui:include src="/templates/footer.xhtml"/>
     </ui:insert>

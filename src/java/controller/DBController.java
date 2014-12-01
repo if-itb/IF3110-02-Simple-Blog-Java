@@ -17,7 +17,7 @@ public class DBController {
     private final String db_driver = "com.mysql.jdbc.Driver";
     private final String db_server = "jdbc:mysql://localhost:3306/if3110-02-simple-blog-java";
     private final String db_username = "root";
-    private final String db_password = "password";
+    private final String db_password = "";
     
     private Connection connection = null;
     private static DBController instance = null;

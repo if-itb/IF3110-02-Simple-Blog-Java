@@ -40,7 +40,7 @@ public class EditPostFilter implements Filter {
          * * admin dan editor, atau
          * * owner jika post tersebut telah dipublish
         */
-        if (user != null && post != null && (user.getRole().equals(User.ROLE_ADMIN) || user.getRole().equals(User.ROLE_EDITOR) || user.getRole().equals(User.ROLE_OWNER)&& post.getPublished())) {
+        if (user != null && post != null && (user.getRole().equals(User.ROLE_ADMIN) || user.getRole().equals(User.ROLE_EDITOR) || user.getRole().equals(User.ROLE_OWNER)&& post.getPublished()==1)) {
             chain.doFilter(request, response);
         } else {
             HttpServletResponse res = (HttpServletResponse) response;
