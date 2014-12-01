@@ -3,10 +3,10 @@
     Created on : Nov 25, 2014, 1:01:57 AM
     Author     : adwisatya
 --%>
-<%@page import= "java.User.userPaket"%>
-<%@page import = "java.Post.Post" %>
-<%@page import= "java.User.User" %>
-<%@page import= "java.Post.PostBean" %>
+<%@page import= "User.userPaket"%>
+<%@page import = "Post.Post" %>
+<%@page import= "User.User" %>
+<%@page import= "Post.PostBean" %>
 <%@page import= "java.text.SimpleDateFormat" %>
 <%@page import= "java.util.Date" %>
 <%
