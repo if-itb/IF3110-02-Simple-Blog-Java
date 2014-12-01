@@ -94,6 +94,10 @@ public abstract class DAOFactory {
         return new UserDAOJDBC(this);
     }
 
+    public PostDAO getPostDAO() {
+        return new PostDAOJDBC(this);
+    }
+    
     public CommentDAO getKomentarDAO(){
         return new CommentDAOJDBC(this);
     }

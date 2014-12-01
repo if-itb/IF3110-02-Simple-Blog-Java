@@ -9,11 +9,7 @@ and open the template in the editor.
     xmlns:f="http://java.sun.com/jsf/core"
     xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
     xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
-<<<<<<< HEAD
-    <f:view>
-=======
 <f:view>
->>>>>>> f187f1fdca6e243f3f36a82f6c730f6af75181fc
     <h:head>
         <title>Add Post</title>
     </h:head>
@@ -23,28 +19,29 @@ and open the template in the editor.
                  <article class="art simple post">
     
     
-                        <h2 class="art-title" style="margin-bottom:40px">-</h2>
+                      
 
                         <div class="art-body">
                             <div class="art-body-inner">
                                 <h2>Tambah Post</h2>
 
                                 <div id="contact-area">
-                                    <form method="post" >
+                                    <h:form>
                                         <label for="Judul">Judul:</label>
-                                        <input type="text" name="Judul" id="Judul">
-                                        </input>
+                                        <h:inputText id="Judul" value="#{postAddBean.post.judul}">
+                                        </h:inputText>
 
                                         <label for="Tanggal">Tanggal:</label>
-                                        <input type="text" name="Tanggal" id="Tanggal">
-                                            </input>
+                                        <h:inputText id="Tanggal" value="#{postAddBean.post.date}">
+                                        </h:inputText>
+                                        <br> </br>
                                         <label for="Konten">Konten:</label><br></br>
-                                        <textarea name="Konten" rows="20" cols="20" id="Konten"></textarea>
+                                        <h:inputTextarea rows="20" cols="50" id="Konten" value="#{postAddBean.post.konten}">
+                                        </h:inputTextarea>
 
-                                        <input type="submit" name="submit" value="Simpan" class="submit-button"
-                                               action="#{Post.tambahPost()}">
-                                               </input>
-                                    </form>
+                                        <h:commandButton styleClass="submit-button"
+                                               value="Submit" action="#{postAddBean.add()}"/>
+                                    </h:form>
                                 </div>
                             </div>
                         </div>

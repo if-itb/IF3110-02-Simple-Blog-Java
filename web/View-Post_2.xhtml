@@ -41,14 +41,14 @@ and open the template in the editor.
                 <h1 class="content-subhead">Komentar</h1>
                 <section class="komentar">
                     <h:form class="pure-form" id="comment_form" onsubmit="return validateForm(#{komentar.email})"  >
-                        <label for="Nama">Nama:</label>
+                        <label for="Nama" rendered="#{userBean.role == 4}">Nama:</label>
                         <h:inputText id="Nama" value="#{komentar.nama}" rendered="#{userBean.role == 4}"/>
                         <br/>
-                        <label for="Email">Email:</label>
+                        <label for="Email" rendered="#{userBean.role == 4}">Email:</label>
                         <h:inputText id="Email" value="#{komentar.email}" rendered="#{userBean.role == 4}">
-                            
+                            <f:validator validatorId="emailValidator" for="Email"/>
                         </h:inputText>
-                        <h:message for="Email" style="color:red" />
+                        <h:message styleClass="error_message" id="email_message" for="Email" />
                         <p size ="10px" id="errmsg"></p>
 
                         <label for="Komentar">Komentar:</label><br/>

@@ -27,24 +27,32 @@
             <nav class="nav">
                 <ul class="nav-list">
                     <li class="nav-item">
-                        <a class="pure-button" href="#{NavigationController.gotoAddPost()}" value="Add Post">New Post</a>
+                        <h:form>
+                            <h:commandLink  
+                                           styleClass="pure-button" action="#{NavigationController.gotoAddPost()}" >New Post</h:commandLink>
+                        </h:form>
                     </li>
                     <li class="nav-item">
-                        <a class="pure-button" href="#{NavigationController.gotoListPost()}" value="List-Post">List Post</a>
+                        <h:form>
+                            <h:commandLink styleClass="pure-button" action="#{NavigationController.gotoListPost()}" >List Post</h:commandLink>
+                        </h:form>
                     </li>
                     <li class="nav-item">
-                        <a class="pure-button" href="#{NavigationController.gotoUnpublishedPost()}" value="Unpublished-Post">Unpublished Post</a>
+                        <h:form>
+                            <h:commandLink 
+                                           styleClass="pure-button" action="#{NavigationController.gotoUnpublishedPost()}" >Unpublished Post</h:commandLink>
+                        </h:form>
                     </li>
                     <li class="nav-item">
-                        <a class="pure-button" href="#{NavigationController.gotoListUser()}" value="List-User">List User</a>
+                        <h:form>
+                            <h:commandLink 
+                                           styleClass="pure-button" action="#{NavigationController.gotoListUser()}">List User</h:commandLink>
+                        </h:form>
                     </li>
                     <li class="nav-item">
                         <h:form>
                             <h:commandLink styleClass="pure-button" action="#{userBean.logout()}" >LOGOUT</h:commandLink>
                         </h:form>    
-                    </li>
-                    <li class="nav-item">
-                        <img class="img-role" height="30" width="30" src="../src/java/resource/person.png"></img>
                     </li>
                 </ul>
             </nav>

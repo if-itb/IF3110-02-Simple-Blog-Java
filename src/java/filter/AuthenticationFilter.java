@@ -126,7 +126,8 @@ public class AuthenticationFilter implements Filter {
             if (reqURI.startsWith(nc.gotoLogin())
                     || reqURI.startsWith(nc.gotoListPost())
                     || reqURI.startsWith("css/")
-                    || reqURI.startsWith(nc.gotoViewPost()))
+                    || reqURI.startsWith(nc.gotoViewPost())
+                    || reqURI.startsWith("javax.faces.resource/"))
                    chain.doFilter(request, response);
             else if (user==null)
                 res.sendRedirect(req.getContextPath() +"/faces/" +nc.gotoLogin());  // Anonymous user. Redirect to login page

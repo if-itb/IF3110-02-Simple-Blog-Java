@@ -8,7 +8,7 @@
     xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 <f:view>
     <h:head>
-        <title>List Post</title>
+        <title>List Unpublished Post</title>
     </h:head>
     <h:body>
         <ui:composition template="template/basis.xhtml">
@@ -16,14 +16,20 @@
                 <h1 class="content-subhead">List Post</h1>
                 <ul>
                     <li>    
-                        <c:forEach var="item" items="#{ListPost.fetchUnpublishPost()}">
+                        <c:forEach var="item" items="#{allPostBean.unPublishedPost}">
                             <section class="list-post">
                                 <h3><a class="list-post-title" href="#{NavigationController.gotoViewPost(item.PID)}">#{item.judul}</a></h3>
                                     <p class="post-meta">
                                         By: #{item.author} | #{item.date}
                                     </p>
-                                    <a class="pure-button" href="#{NavigationController.gotoEditPost(item.PID)}" value="Edit-Post">Edit Post</a>
-                                    <a class="pure-button" href="#{NavigationController.gotoDeletePost(item.PID)}" value="Delete-Post">Delete Post</a>
+                                <h:link styleClass="pure-button" outcome="#{NavigationController.gotoEditPost(item.PID)}">Edit Post</h:link>
+                                <h:form>
+                                    <h:commandButton styleClass="pure-button" action="#{postDeleteBean.delete(item.PID)}" value="Delete Post"></h:commandButton>
+                                </h:form>
+                                    
+                                   <h:form>
+                                    <h:commandButton styleClass="pure-button" action="#{postPublishBean.publish(item.PID)}" value="PublishPost"></h:commandButton>
+                                </h:form>
                             </section>
                         </c:forEach>
                     </li>

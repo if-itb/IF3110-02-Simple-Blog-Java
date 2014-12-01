@@ -84,5 +84,40 @@
         <managed-bean-name>addKomentar</managed-bean-name>
         <managed-bean-class>model.AddKomentar</managed-bean-class>
         <managed-bean-scope>view</managed-bean-scope>
+        <managed-property>
+            <property-name>user</property-name>
+            <property-class>model.UserBean</property-class>
+            <value>#{userBean}</value>
+        </managed-property>
+    </managed-bean>
+     <managed-bean>
+        <managed-bean-name>postAddBean</managed-bean-name>
+        <managed-bean-class>model.PostAddBean</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+        <managed-property>
+            <property-name>user</property-name>
+            <property-class>model.UserBean</property-class>
+            <value>#{userBean}</value>
+        </managed-property>
+    </managed-bean>
+     <managed-bean>
+        <managed-bean-name>postEditBean</managed-bean-name>
+        <managed-bean-class>model.PostEditBean</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+     <managed-bean>
+        <managed-bean-name>postDeleteBean</managed-bean-name>
+        <managed-bean-class>model.PostDeleteBean</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>postPublishBean</managed-bean-name>
+        <managed-bean-class>model.PostPublishBean</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>allPostBean</managed-bean-name>
+        <managed-bean-class>model.AllPostBean</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
 </faces-config>
