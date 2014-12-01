@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+  xmlns:c="http://java.sun.com/jsp/jstl/core"
+  xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+    <head>
+
+        <link rel="stylesheet" type="text/css" href="assets/css/screen.css" />
+        <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico" />
+
+        <!--[if lt IE 9]>
+            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+        
+        <title>Simple Blog</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <body class="default">
+        <div class="wrapper">
+
+        <nav class="nav">
+            <a style="border:none;" id="logo" href="index.xhtml"><h1>Simple<span>-</span>Blog</h1></a>
+        </nav>
+
+        <div id="home">
+            <div class="posts">
+                <nav class="art-list">
+                  <ul class="art-list-body">
+                      
+                    <c:forEach var="item" items="#{post_bean.dbData()}">  
+                        <c:if test="#{!item.status}">
+                            <div>#{publish_bean.setId(item.id_post)}</div>
+                        <li class="art-list-item">
+                            <div class="art-list-item-title-and-time">
+                                <h2 class="art-list-title"><a href="#"></a>#{item.judul}</h2>
+                                <div class="art-list-time">#{item.tanggal}</div>
+                            </div>
+                            <c:set var="string1" value="#{item.konten}"/>
+                            <c:set var="string2" value="${fn:substring(string1, 0, 225)}" />
+                            <p>${fn:substring(string1, 0, 225)} ...</p>
+                            <h:form>
+                            <p>
+                                <c:if test="${(login_bean.role == 'admin') || (login_bean.role == 'owner')}" >
+                              <h:commandLink value="Edit" action="#{Post.setDBE(item.id_post)}" /> |
+                                </c:if>
+                                <h:commandLink value="Publish" action="#{publish_bean.changeStatus(item.id_post)}" onclick="return confirm('Apakah Anda ingin mem-publish pos ini?')" /> 
+                               <!-- <a href="javascript:konfirmPublish()" onclick="{publish_bean.changeStatus(item.id_post)}" >Publish</a> -->
+                            </p>
+                            </h:form>
+                        </li>
+                        </c:if>
+                    </c:forEach>
+                    
+                  </ul>
+                </nav>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="back-to-top"><a href="">Back to top</a></div>
+            <!-- <div class="footer-nav"><p></p></div> -->
+            <!-- <div class="psi">&Psi;</div> -->
+            <aside class="offsite-links">
+                Asisten IF3110 /
+                <a class="rss-link" href="#rss">RSS</a> /
+                <br />
+                <a class="twitter-link" href="http://twitter.com/YoGiiSinaga">Yogi</a> /
+                <a class="twitter-link" href="http://twitter.com/sonnylazuardi">Sonny</a> /
+                <a class="twitter-link" href="http://twitter.com/fathanpranaya">Fathan</a> /
+                <br />
+                <a class="twitter-link" href="#">Renusa</a> /
+                <a class="twitter-link" href="#">Kelvin</a> /
+                <a class="twitter-link" href="#">Yanuar</a> /
+
+            </aside>
+        </footer>
+
+        </div>
+        <script type="text/javascript">
+        function konfirmPublish() {
+          if(confirm("Apakah Anda ingin mem-publish pos ini?")) {
+          }
+        }
+        </script>
+        <script type="text/javascript" src="assets/js/fittext.js"></script>
+        <script type="text/javascript" src="assets/js/app.js"></script>
+        <script type="text/javascript" src="assets/js/respond.min.js"></script>
+        <script type="text/javascript">
+          var ga_ua = '{{! TODO: ADD GOOGLE ANALYTICS UA HERE }}';
+
+          (function(g,h,o,s,t,z){g.GoogleAnalyticsObject=s;g[s]||(g[s]=
+              function(){(g[s].q=g[s].q||[]).push(arguments)});g[s].s=+new Date;
+              t=h.createElement(o);z=h.getElementsByTagName(o)[0];
+              t.src='//www.google-analytics.com/analytics.js';
+              z.parentNode.insertBefore(t,z)}(window,document,'script','ga'));
+              ga('create',ga_ua);ga('send','pageview');
+        </script>
+
+</body>
+</html>

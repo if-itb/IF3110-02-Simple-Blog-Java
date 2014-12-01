@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <link rel="stylesheet" type="text/css" href=""/>
+    </h:head>
+    <h:body styleClass="body">
+        <h:outputText value="Access Denied!!!" styleClass="header"></h:outputText>
+        <h:outputText
+            value="You don't have sufficient ights to view the page you're requesting,
+            contact your administrator if you need accesss!!">
+            
+        </h:outputText>
+        <h:messages></h:messages>
+        <h:form>
+            <h:commandLink value="Logout" action="#{login_bean.logout}"></h:commandLink>
+        </h:form>
+    </h:body>
+</html>
+

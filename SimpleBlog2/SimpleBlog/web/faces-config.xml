@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<faces-config version="2.0"
+    xmlns="http://java.sun.com/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd"
+>
+    <managed-bean>
+        <managed-bean-name>login_bean</managed-bean-name>
+        <managed-bean-class>beans.login_bean</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>    
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>post_bean</managed-bean-name>
+        <managed-bean-class>beans.post_bean</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>    
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>Post</managed-bean-name>
+        <managed-bean-class>beans.Post</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>    
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>Komentar</managed-bean-name>
+        <managed-bean-class>beans.Komentar</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>    
+    </managed-bean>
+    <navigation-rule>
+        <description>Login Page</description>
+        <from-view-id>/login.jsp</from-view-id>
+        <navigation-case>
+            <from-action>#{login_bean.checkValidUser}</from-action>
+            <from-outcome>valid</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-action>#{login_bean.checkValidUser}</from-action>
+            <from-outcome>invalid</from-outcome>
+            <to-view-id>/login.jsp</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <description>Relogin Page</description>
+        <from-view-id>/login_fail.jsp</from-view-id>
+        <navigation-case>
+            <from-action>#{login_bean.checkValidUser}</from-action>
+            <from-outcome>valid</from-outcome>
+            <to-view-id>/login_success.jsp</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-action>#{login_bean.checkValidUser}</from-action>
+            <from-outcome>invalid</from-outcome>
+            <to-view-id>/login_fail.jsp</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <navigation-case>
+            <from-action>#{Post.setDBP(item.id_post)}</from-action>
+            <from-outcome>post</from-outcome>
+            <to-view-id>/post.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-action>#{Post.setDBE(item.id_post)}</from-action>
+            <from-outcome>edit</from-outcome>
+            <to-view-id>/edit_post.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <description>Edit Page</description>
+        <from-view-id>/edit_post.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>#{Post.editPost()}</from-action>
+            <from-outcome>edit</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <description>Insert Page</description>
+        <from-view-id>/new_post.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>#{Post.insertPost()}</from-action>
+            <from-outcome>insert</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <description>Publish Page</description>
+        <from-view-id>/publish_post.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>#{publish_bean.changeStatus(item.id_post)}</from-action>
+            <to-view-id>/index.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <display-name>login.xhtml</display-name>
+        <from-view-id>/login.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>#{login_bean.login}</from-action>
+                <from-outcome>failure</from-outcome>
+                <to-view-id>/login.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+		<display-name>login.xhtml</display-name>
+		<from-view-id>/login.xhtml</from-view-id>
+		<navigation-case>
+                    <from-action>#{login_bean.login}</from-action>
+			<from-outcome>owner</from-outcome>
+			<to-view-id>/owner/publish_post.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>login.xhtml</display-name>
+		<from-view-id>/login.xhtml</from-view-id>
+		<navigation-case>
+                    <from-action>#{login_bean.login}</from-action>
+			<from-outcome>admin</from-outcome>
+			<to-view-id>/guest/GuestDashboard.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>login.xhtml</display-name>
+		<from-view-id>/login.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>editor</from-outcome>
+			<to-view-id>/manager/publish_post.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+    <application>
+        <message-bundle>messages.message</message-bundle>
+    </application>
+</faces-config>
