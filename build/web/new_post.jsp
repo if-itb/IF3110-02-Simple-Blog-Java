@@ -6,6 +6,12 @@
 
 
 
+
+<%@page import="java.util.logging.Logger"%>
+<%@page import="java.util.logging.Level"%>
+<%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.Connection"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -46,9 +52,30 @@
 <div class="wrapper">
 
 <nav class="nav">
-    <a style="border:none;" id="logo" href="index.jsp"><h1>Simple<span>-</span>Blog</h1></a>
+    <a style="border:none;" id="logo" href="
+       <%              
+            if ("1".equals(request.getParameter("role")))
+            {
+                String site = new String("http://localhost:8080/IF3110-02-Simple-Blog-Java%202/home-owner.jsp");                
+                
+                
+                out.println(site);
+
+            }
+            else if ("2".equals(request.getParameter("role")))
+            {
+                String site = new String("http://localhost:8080/IF3110-02-Simple-Blog-Java%202/home-editor.jsp");                
+                out.println(site);
+            }
+            else
+            {
+                String site = new String("http://localhost:8080/IF3110-02-Simple-Blog-Java%202/home-admin.jsp");            
+                out.println(site);
+            }
+       %>
+       "><h1>Simple<span>-</span>Blog</h1></a>
     <ul class="nav-primary">
-        <li><a href="new_post.jsp">+ Tambah Post</a></li>
+        
     </ul>
 </nav>
 
@@ -62,7 +89,7 @@
             <h2>Tambah Post</h2>
 
             <div id="contact-area">
-                <form name="PostForm" method="post" onSubmit="return validateDate()" action="AddPostHandling">
+                <form name="PostForm" method="post" onSubmit="return validateDate()" action="AddPostHandling" enctype="multipart/form-data">
                     <label for="Judul">Judul:</label>
                     <input type="text" name="Judul" id="Judul">
 
@@ -78,8 +105,11 @@
                     
                     <label for="Konten">Konten:</label><br>
                     <textarea name="Konten" rows="20" cols="20" id="Konten"></textarea>
-
-                    <input type="submit" name="submit" value="Simpan" class="submit-button">
+                    
+                    <label for="Foto">Foto:</label>
+                    <input type="file" name="file"/>
+                        
+                    <center> <input type="submit" name="submit" value="Simpan" class="submit-button"> </center>
                 </form>
             </div>
         </div>

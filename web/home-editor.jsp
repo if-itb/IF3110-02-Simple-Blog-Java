@@ -122,15 +122,35 @@
                         }
                         String First30WordPost = sb.toString();
                         out.println(First30WordPost);
-                        out.println(" <p> <a href=\""
-                                + "edit_post.jsp?role=2&"
-                                + "post_id="
-                                + rs.getString("post_id")
-                                + "&"
-                                + "user_id="
-                                + request.getParameter("user_id")
-                                + "\">Edit</a> | <a onclick=\"validatedelete(" + rs.getString("post_id") + ")\" href=\"javascript:void(0)\">Hapus</a> </p> </li>");
-                    }
+                        out.println("<br>");
+                         out.println("<br>");
+                        if (rs.getString("picture_filename").isEmpty())
+                        {
+                            out.println(" <p> "
+                            + "<a href=\""
+                            + "edit_post.jsp??role=2&"
+                            + "post_id="
+                            + rs.getString("post_id")
+                            + "&"
+                            + "user_id="
+                            + request.getParameter("user_id")
+                            + "\">Edit</a> | <a onclick=\"validatedelete(" + rs.getString("post_id") + ")\" href=\"javascript:void(0)\">Hapus</a></p> </li>");                            
+                        }
+                        else
+                        {
+                            out.println(" <p> "
+                            + "<img src=\"picture\\"+rs.getString("picture_filename")+".jpg\" width=50>"
+                                    + "<br>"
+                            + "<a href=\""
+                            + "edit_post.jsp??role=2&"
+                            + "post_id="
+                            + rs.getString("post_id")
+                            + "&"
+                            + "user_id="
+                            + request.getParameter("user_id")
+                            + "\">Edit</a> | <a onclick=\"validatedelete(" + rs.getString("post_id") + ")\" href=\"javascript:void(0)\">Hapus</a></p> </li>");
+                        }
+                   }
 		}
 		catch (SQLException ex)
 		{

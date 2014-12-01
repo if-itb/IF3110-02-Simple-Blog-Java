@@ -323,7 +323,7 @@ div.cover > img {
 
 .art-body-inner blockquote p:first-child:before {
   color: #ccc;
-  content: "“";
+  content: "â€œ";
   font-size: 4em;
   line-height: 0.1em;
   margin-right: 0.25em;
@@ -422,7 +422,7 @@ div.cover > img {
 }
 .art-list-item p {
   width: 65%;
-  float: left;
+  float: right;
   margin-left: 5%;
   margin-bottom: 0;
   font-size: 16px;
@@ -505,8 +505,8 @@ div.cover > img {
 }
 
 nav.pagination{
-	text-align: right;
-	padding-bottom: 25px;
+  text-align: right;
+  padding-bottom: 25px;
 }
 /* Art header */
 .art-header.white {
@@ -591,7 +591,7 @@ padding: 0;
 
 
 .gist {
-	font-size: 14px;
+  font-size: 14px;
 }
 
 
@@ -816,7 +816,7 @@ hr.featured-article {
     text-align: center;
 }
 hr.featured-article:after {
-    content: "✭ Featured Article ✭";
+    content: "âœ­ Featured Article âœ­";
     display: inline-block;
     position: relative; 
     top: -0.8em;  

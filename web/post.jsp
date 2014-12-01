@@ -170,6 +170,10 @@
                         out.println("<p>"
                         + rs.getString("konten")
                         + "</p>");
+                        if (!rs.getString("picture_filename").isEmpty())
+                        {
+                            out.println("<img src=\"picture\\"+rs.getString("picture_filename")+".jpg\">");                                                    
+                        }
                     }
 		}
 		catch (SQLException ex)

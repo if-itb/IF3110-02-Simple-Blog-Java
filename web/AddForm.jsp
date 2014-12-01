@@ -20,5 +20,8 @@
         <br/>Email   :<input type="text" name="email" value="email">
         <br/><br><input type="submit" value="Submit"> 
         </form>
+        <br/>
+        <br/>
+        <a href="ManagementUser.jsp">Back to main page</a>
     </body>
 </html>

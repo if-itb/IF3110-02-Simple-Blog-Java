@@ -109,7 +109,7 @@
                     // con=DBConnect.GetDBConnect();
 		try 
 		{
-                    String sql=("SELECT * FROM post WHERE status_publish=1");
+                    String sql=("SELECT * FROM post WHERE status_publish=1 OR 3");
                     PreparedStatement ps = con.prepareStatement(sql);
                     ResultSet rs = ps.executeQuery(sql);    
                     while (rs.next())
@@ -130,15 +130,43 @@
                         }
                         String First30WordPost = sb.toString();
                         out.println(First30WordPost);
-                        out.println(" <p> <a href=\""
-                                + "edit_post.jsp?role=3&"
-                                + "post_id="
-                                + rs.getString("post_id")
-                                + "&"
-                                + "user_id="
-                                + request.getParameter("user_id")
-                                + "\">Edit</a> | <a onclick=\"validatedelete(" + rs.getString("post_id") + ")\" href=\"javascript:void(0)\">Hapus</a> </p> </li>");                    
-                    }
+                         out.println("<br>");
+                        out.println("<br>");
+                        if (rs.getString("picture_filename").isEmpty())
+                        {
+                            out.println(" <p> "
+                            + "<a href=\""
+                            + "edit_post.jsp??role=2&"
+                            + "post_id="
+                            + rs.getString("post_id")
+                            + "&"
+                            + "user_id="
+                            + request.getParameter("user_id")
+                            + "\">Edit</a> | <a onclick=\"validatedelete(" + rs.getString("post_id") + ")\" href=\"javascript:void(0)\">Hapus</a>");                            
+                        }
+                        else
+                        {
+                            out.println(" <p> "
+                            + "<img src=\"picture\\"+rs.getString("picture_filename")+".jpg\" width=50>"
+                                    + "<br>"
+                            + "<a href=\""
+                            + "edit_post.jsp??role=2&"
+                            + "post_id="
+                            + rs.getString("post_id")
+                            + "&"
+                            + "user_id="
+                            + request.getParameter("user_id")
+                            + "\">Edit</a> | <a onclick=\"validatedelete(" + rs.getString("post_id") + ")\" href=\"javascript:void(0)\">Hapus</a></p> </li>");
+                        }
+                        if ("2".equals(rs.getString("status_publish")))
+                        {
+                            out.println(" | <a href=\"RestorePostHandling?"
+                                    + "role=3&post_id="
+                                    + rs.getString("post_id")
+                                    + "\">Restore</a>");
+                        }
+                        out.println("</p> </li>");
+                   }
 		}
 		catch (SQLException ex)
 		{
