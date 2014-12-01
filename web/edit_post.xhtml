@@ -11,7 +11,7 @@
         <ui:include src="header-script.xhtml"/>
         <title>Simple Blog | Edit Post</title>
     </h:head>
-    <h:body class="default" onload="#{addPost.ambilTanggal()}">
+    <h:body class="default" onload="#{editPost.getPost()}">
     <div class="wrapper">
     <ui:include src="header.xhtml"/>
     
@@ -29,19 +29,18 @@
                     <h:outputLabel for="Judul">
                         Judul :
                     </h:outputLabel>
-                    <h:inputText id="Judul" value="#{addPost.judul}" required=""/>
+                    <h:inputText id="Judul" value="#{editPost.judul}" required=""/>
                     
                     <h:outputLabel for="Tanggal">
                         Tanggal :
                     </h:outputLabel>
-                    <h:inputText id="Tanggal" value="#{addPost.tanggal}" required=""/>
+                    <h:inputText id="Tanggal" value="#{editPost.tanggal}" required=""/>
                     
                     <h:outputLabel for="Konten">
                         Konten :
                     </h:outputLabel>
                     <h:inputTextarea id="Konten" rows="20" cols="20" value="#{editPost.konten}" required="" />
                     <h:inputHidden value="#{editPost.idpost}" />
-                    <h:inputTextarea id="Konten" rows="20" cols="20" value="#{addPost.konten}" required="" />
                     
                     <h:commandButton class="submit-button" value="Simpan" id="submit" type="submit" action="#{editPost.saveEditPost()}" />
                 </h:form>

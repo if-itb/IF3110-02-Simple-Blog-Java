@@ -91,6 +91,8 @@ public class editPost {
         if ( matcher.find() )
             idpost = matcher.group( 1 );
         
+        System.out.print(idpost);
+        
         try {
             try {
                 Class.forName("com.mysql.jdbc.Driver");
