@@ -11,7 +11,7 @@
         <ui:include src="header-script.xhtml"/>
         <title>Simple Blog | <h:outputText value="#{viewPost.judul}"></h:outputText> </title>
     </h:head>
-    <h:body class="default" onload="#{viewPost.getPost()}" >
+    <h:body class="default" onload="#{viewPost.ambilPostdanComment()}" >
     <div class="wrapper">
     <ui:include src="header.xhtml"/>
 
@@ -34,15 +34,15 @@
             <div id="contact-area">
                 <h:form >
                     <h:outputLabel for="Nama">Nama:</h:outputLabel>
-                    <h:inputText id="Nama" />
+                    <h:inputText id="Nama" value="#{viewPost.nama}" />
         
                     <h:outputLabel for="Email">Email:</h:outputLabel>
-                    <h:inputText id="Email" />
+                    <h:inputText id="Email" value="#{viewPost.email}" />
                     
                     <h:outputLabel for="Komentar">Komentar:</h:outputLabel><br/>
-                    <h:inputTextarea rows="20" cols="20" id="Komentar"></h:inputTextarea>
+                    <h:inputTextarea rows="20" cols="20" id="Komentar" value="#{viewPost.komen}"></h:inputTextarea>
                    
-                    <h:commandButton id="submit" value="Kirim" class="submit-button" />
+                    <h:commandButton id="submit" value="Kirim" class="submit-button" action="#{viewPost.executeComment()}"/>
                 </h:form>
             </div>
 

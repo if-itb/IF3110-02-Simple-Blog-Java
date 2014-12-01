@@ -31,7 +31,7 @@
     <managed-bean>
         <managed-bean-name>viewPost</managed-bean-name>
         <managed-bean-class>paket.ViewPost</managed-bean-class>
-        <managed-bean-scope>request</managed-bean-scope>
+        <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
     <managed-bean>
         <managed-bean-name>editUser</managed-bean-name>
