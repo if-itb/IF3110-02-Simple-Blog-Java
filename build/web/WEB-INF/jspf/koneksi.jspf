@@ -3,7 +3,7 @@
 String xDRIVER = "com.mysql.jdbc.Driver";
 String xUSERNAME = "root";
 String xPASSWORD = "";
-String xSTRING = "jdbc:mysql://localhost:3306/simpleblogii";
+String xSTRING = "jdbc:mysql://localhost:3306/tubes2wbd";
 Class.forName(xDRIVER);
 
 %>

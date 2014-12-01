@@ -14,23 +14,26 @@
 	String user_password = request.getParameter("user_password");
 	String user_status = request.getParameter("user_status");
 	String user_email	=	 request.getParameter("user_email");
-	String status = request.getParameter("status");
+	
 		if(id != null && user_name != null && user_username != null && user_password != null  && user_email != null && user_status != null ){
-			ResultSet result = null;
 			Connection connection = null;
-			PreparedStatement pStatement;
-			String Query = "update users SET password='"+user_password+"',nama='"+user_name+"',username='"+user_username+"',email='"+user_email+"',status='"+status+"' WHERE no = '"+id+"';";
+			PreparedStatement pStatement = null;
+			Class.forName(xDRIVER);
+			connection = DriverManager.getConnection(xSTRING,xUSERNAME,xPASSWORD);
+			String Query = "UPDATE users SET username=?,password=?,nama=?,email=?,status=? WHERE no=?";
 			pStatement = connection.prepareStatement(Query);
-			//pStatement.setString(1, user_name);
-			//pStatement.setString(2, user_password);
-			//pStatement.setString(3, user_email);
-			//pStatement.setString(4, user_username);
-
+			pStatement.setString(1, user_username);
+			pStatement.setString(2, user_password);
+			pStatement.setString(3, user_name);
+			pStatement.setString(4, user_email);
+			pStatement.setString(5, user_status);
+			pStatement.setString(6, id);
+			
 			int qExec = pStatement.executeUpdate();
 			if(qExec!=0){
 				out.println("Update berhasil");
 			}
-			result.close();
+			
 			connection.close();
 			pStatement.close();
 		}

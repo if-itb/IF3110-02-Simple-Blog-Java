@@ -38,7 +38,7 @@
 				<br/>
 				<label>Email: </label><input type="text" id="user_email" name="user_email" value="<%=rs.getString("email")%>">
 				<br/>
-				<select name="status">
+				<select id="user_status" name="user_status">
 					<option value="1">Owner</option>
 					<option value="2">Editor</option>
 					<option value="3">Admin</option>
