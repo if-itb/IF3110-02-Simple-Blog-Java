@@ -7,7 +7,7 @@
 <%
 	String id	=	 request.getParameter("id");
 	Post.publish(id);
-	response.setStatus(response.SC_MOVED_TEMPORARILY);
+	response.setStatus(HttpServletResponse.SC_MOVED_TEMPORARILY);
 	response.setHeader("Location", "../admin.jsp");
 %>
 

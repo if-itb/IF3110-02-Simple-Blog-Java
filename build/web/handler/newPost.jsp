@@ -9,7 +9,6 @@
 <%@page import= "Post.PostBean" %>
 <%@page import= "java.text.SimpleDateFormat" %>
 <%@page import= "java.util.Date" %>
-<%@page import= "org.oreilly.*" %>
 <%
 	Date date = new Date();
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -21,6 +20,6 @@
 	String Status	=	 request.getParameter("status");
 	PostBean pBean	=	 new PostBean();
 	Post.NewPost(Judul,date,Konten,Owner);
-	response.setStatus(response.SC_MOVED_TEMPORARILY);
+	response.setStatus(HttpServletResponse.SC_MOVED_TEMPORARILY);
 	response.setHeader("Location", "../index.jsp");
 %>

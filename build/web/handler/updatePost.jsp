@@ -20,7 +20,7 @@
 	//PostBean pBean	=	 new PostBean();
 	//pBean.EditPost(ID, Judul, Tanggal, Konten);
 	Post.EditPost(ID, Judul, date, Konten);
-	response.setStatus(response.SC_MOVED_TEMPORARILY);
+	response.setStatus(HttpServletResponse.SC_MOVED_TEMPORARILY);
 	response.setHeader("Location", "../show_post.jsp?id="+ID);
 
 %>

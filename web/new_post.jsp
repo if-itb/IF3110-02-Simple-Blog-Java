@@ -77,19 +77,33 @@
         	<% } else { %>
             <h2>New Post</h2>
             <div id="contact-area">
+				<div align="right">	
+					<!--
+					Upload gambar
+					<form action="upload" method="post" enctype="multipart/form-data">
+						<input type="file" name="file" />
+						<input type="submit" value="upload" />
+					</form> 
+					
+					<form id="file-form" action="upload" method="POST">
+					  <input type="file" id="file-select" name="photos[]" multiple/>
+					  <button type="submit" id="upload-button" >Upload</button>
+					</form>
+					-->
+				</div>
                 <form method="post" action="handler/newPost.jsp">
                     <label for="Judul">Judul</label>
                     <input type="text" name="judul" id="Judul" value="">
-		
                     <label for="Tanggal">Tanggal:</label>
                     <input type="text" name="tanggal" id="Tanggal" value="">
-                    <input type="hidden" name="owner" id="owner" value="<%=usrC %>">
-                    Select Image:<input type="file" name="fname"/><br/>  
+                    <input type="hidden" name="owner" id="owner" value="<%=usrC %>">  
                     <label for="Konten">Konten:</label><br>
                     <textarea name="konten" rows="20" cols="20" id="Konten"></textarea>
 					<input type="hidden" name="nomor" value="">
+					<input type="hidden" name="link" value="">
                     <input type="submit" name="submit" value="Post" class="submit-button" onclick="return cekInputan();">
                 </form>
+ 
             </div>
 			 <% } %>
         </div>
@@ -153,6 +167,55 @@ function bandingkanTangal(input){
 		}
 	}
 }
+</script>
+<script>
+	function uploadGambar(){
+		var form = document.getElementById('file-form');
+		var fileSelect = document.getElementById('file-select');
+		var uploadButton = document.getElementById('upload-button');
+		form.onsubmit = function(event) {
+		  event.preventDefault();
+
+		  // Update button text.
+		  uploadButton.innerHTML = 'Uploading...';
+
+		  // The rest of the code will go here...
+		  var files = fileSelect.files;
+		  var formData = new FormData();
+			for (var i = 0; i < files.length; i++) {
+			  var file = files[i];
+
+			  // Check the file type.
+			  if (!file.type.match('image.*')) {
+				continue;
+			  }
+
+			  // Add the file to the request.
+			  formData.append('photos[]', file, file.name);
+			}
+			// Files
+			formData.append(name, file, filename);
+
+			// Blobs
+			formData.append(name, blob, filename);
+
+			// Strings
+			formData.append(name, value);  
+			var xhr = new XMLHttpRequest();
+			xhr.open('POST', 'upload', true);
+			// Set up a handler for when the request finishes.
+			xhr.onload = function () {
+			  if (xhr.status === 200) {
+				// File(s) uploaded.
+				uploadButton.innerHTML = 'Upload';
+			  } else {
+				alert('An error occurred!');
+			  }
+			};
+			// Send the Data.
+			xhr.send(formData);
+		}
+	}
 </script>
 </body>
 </html>

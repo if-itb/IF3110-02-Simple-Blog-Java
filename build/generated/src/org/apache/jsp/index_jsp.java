@@ -124,7 +124,7 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
 
 				PostBean pBean =  new PostBean();
 				for(int i=0;i<pBean.listManyPost().size();i++){
-					if(pBean.listManyPost().get(i).getStatus() != 0){
+					if(pBean.listManyPost().get(i).getStatus() == 1){
 			
       out.write("\t\r\n");
       out.write("\t\t\t<li class=\"art-list-item\">\r\n");
