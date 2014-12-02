@@ -2,14 +2,21 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <!--<h:outputStylesheet name="./css/default.css"/>-->
         <h:outputStylesheet name="./css/cssLayout.css"/>
         <h:outputStylesheet name="./css/screen.css"/>
-        <title>Simple Blog</title>
+        <style>
+            .preformatted
+            {
+                white-space: pre-wrap;
+            }
+        </style>
+        <ui:insert name="title"><title>Simple Blog</title></ui:insert>
     </h:head>
 
     <h:body>
@@ -18,10 +25,15 @@
             <ui:insert name="top">
                     <nav class="nav">
                         <a style="border:none;" id="logo" href="index.xhtml"><h1>Simple<span>-</span>Blog</h1></a>
-                        <div id="login_status"></div>
+                        <div id="login_status">
+                            <h:form id="loginform">
+                                
+                            </h:form>
+                        </div>
                     </nav>
             </ui:insert>
             <ui:insert name="content"></ui:insert>
+            
         
         <footer class="footer">
             <ui:insert name="bottom">
@@ -36,6 +48,7 @@
             </ui:insert>
         </footer>
     </div>
+        <ui:insert name="jscript"></ui:insert>
     </h:body>
 
 </html>

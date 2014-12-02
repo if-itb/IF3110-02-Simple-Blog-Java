@@ -3,6 +3,7 @@
               xmlns="http://xmlns.jcp.org/xml/ns/javaee"
               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
               xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
+<<<<<<< HEAD
     <managed-bean>
         <managed-bean-name>Post</managed-bean-name>
         <managed-bean-class>model.Post</managed-bean-class>
@@ -22,4 +23,7 @@
         <managed-bean-class>Controller.posting</managed-bean-class>
         <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
+=======
+    
+>>>>>>> 11656e32d318010d842163d5cab9dbaa7526e757
 </faces-config>

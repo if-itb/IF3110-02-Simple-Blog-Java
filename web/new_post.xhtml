@@ -1,7 +1,11 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-                template="./template.xhtml">
+                template="./template.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:define name="title"><title>Simple Blog - New Post</title></ui:define>
 
     <ui:define name="content">
     <article class="art simple post">
@@ -13,23 +17,37 @@
         <div class="art-body-inner">
             <h2 style="text-align:center">Tambah Post</h2>
                 <div id="contact-area">
-                        <form method="post" action="insert_database.php" onsubmit="return Validation()">
-                            <label for="Judul">Judul:</label>
-                            <input type="text" name="Judul" id="Judul" required="" value=""></input>
-
-                            <label for="Tanggal">Tanggal:</label>
-                            <input type="text" name="Tanggal" id="Tanggal" required="" placeholder="format: dd-mm-yyyy"></input>
-                            <div id="errormsg"></div>
-
-                            <label for="Konten"><br></br>Konten:</label><br></br>
-                            <textarea name="Konten" rows="20" cols="20" id="Konten" required=""></textarea>
-
-                            <input type="submit" name="submit" value="Simpan" class="submit-button"></input>
-                        </form>
+                    <h:form id="new_post">
+                        <h:outputLabel for="Judul" >
+                            <h:outputText value="Judul:" />
+                        </h:outputLabel>
+                        <h:inputText id="Judul" required="true" value="#{Pages.current_title}" />
+                        
+                        <h:outputLabel for="Tanggal">
+                            <h:outputText value="Tanggal:" />
+                        </h:outputLabel>
+                        <h:inputText id="Tanggal" required="true" value="#{Pages.current_date}" >
+                            <f:validator validatorId="TanggalValidator" />
+                        </h:inputText> 
+                        
+                        <h:outputLabel for="Konten">
+                            <h:outputText value="Konten:" />
+                        </h:outputLabel>
+                        <h:inputText id="Konten" required="true" value="#{Pages.current_content}" >
+                        </h:inputText>
+                        
+                        <h:commandButton value="Simpan" action="#{Pages.newPost()}" />
+                    </h:form>
                     </div>
         </div>
     </div>
     </article>
+    </ui:define>
+    <ui:define name="jscript">
+        <h:outputScript library="js" name="./resources/js/fittext.js" />
+        <h:outputScript library="js" name="./resources/js/app.js" />
+        <h:outputScript library="js" name="./resources/js/respond.min.js" />
+        <h:outputScript library="js" name="./resources/js/formValidation.js" />
     </ui:define>
 
 </ui:composition>
