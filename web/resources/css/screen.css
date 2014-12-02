@@ -1,6 +1,3 @@
-@import url(http://fonts.googleapis.com/css?family=Open+Sans);
-@import url(http://fonts.googleapis.com/css?family=Questrial);
-
 /* Reset & Basics (Inspired by E. Meyers)
 ================================================== */
 html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, address, cite, code, em, img, small, strong, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, embed, figure, figcaption, footer, header, hgroup, menu, nav, section, summary, time, audio, video {
@@ -50,7 +47,7 @@ h1 {
 }
 
 h2 {
-  font-size: 45px;
+  font-size: 35px;
   padding-bottom: 25px;
 }
 
@@ -106,14 +103,14 @@ header#teaser h1 {
 /* Links
 ================================================== */
 a {
-  color: #F40034;
+  color: #3403F7;
   text-decoration: none;
   -webkit-transition: color .2s ease-in-out;
      -moz-transition: color .2s ease-in-out;
           transition: color .2s ease-in-out;
 }
 a:hover {
-  color: #F40034;
+  color: #FF0000;
 }
 
 /*  Layout
@@ -161,6 +158,7 @@ a:hover {
 }
 #logo {
   float: left;
+  
 }
 .nav-primary {
   float: right;
@@ -233,7 +231,7 @@ div.cover > img {
 }
 /* Contains the time, title and subtitle for an article */
 .art-header-inner {
-  position: fixed;
+  position: relative;
   top: 300px;
   left: 50%;
   margin-left: -490px;
@@ -292,7 +290,6 @@ div.cover > img {
   line-height: 1.5;
 }
 .art-body-inner a:hover {
-  border-bottom: 1px solid #F40034;
   padding-bottom:2px;
 }
 .art-body-inner ul,
@@ -375,6 +372,8 @@ div.cover > img {
   -webkit-box-shadow: none;
      -moz-box-shadow: none;
           box-shadow: none;
+  position: relative;
+  top: 40px;
 }
 
 
@@ -410,14 +409,14 @@ div.cover > img {
   font-size: 12px;
   line-height: 20px;
   letter-spacing: 2px;
-  text-transform: uppercase;
   color: #999;
 }
 .art-list-title a {
   color: #000;
+  cursor: pointer;
 }
 .art-list-title a:hover {
-  color: #F40034;
+  color: #3403F7;
 }
 .art-list-item p {
   width: 65%;
@@ -426,6 +425,13 @@ div.cover > img {
   margin-bottom: 0;
   font-size: 16px;
   line-height: 24px;
+  text-align: justify;
+}
+
+.art-list-item .editable {
+	position: relative;
+	left: 30%;
+	cursor: pointer;
 }
 
 
@@ -840,16 +846,23 @@ hr.featured-article:after {
 }
 
 #contact-area textarea {
-  height: 90px;
+  height: 250px;
 }
 
 #contact-area textarea:focus, #contact-area input:focus {
-  border: 2px solid #900;
+  border: 2px solid #0084B4;
 }
 
 #contact-area input.submit-button {
   width: 100px;
   
+}
+
+#contact-area #errormsg{
+	position:relative;
+	left:115px;
+	color: #FF0000;
+	font-size:medium;
 }
 
 label {
@@ -858,4 +871,6 @@ label {
   margin-right: 15px;
   width: 100px;
   padding-top: 5px;
+}.default {
+
 }

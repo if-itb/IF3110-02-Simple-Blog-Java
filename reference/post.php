@@ -29,51 +29,89 @@
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->
 
-<title>Simple Blog</title>
+<?php 
+	//establish connection to database
+	$link = mysqli_connect('localhost', 'kevhnmay94', "", 'simpleblog');
+	$id = mysqli_real_escape_string($link, $_GET['id']);
+	
+	//retrieve data from database (info_post)
+	$query = "SELECT * FROM `posts` WHERE id = $id";
+	if(!($results = mysqli_query($link, $query)))
+	{
+		die('Error ' . mysqli_errno($link));
+	}
+	$result = $results->fetch_assoc();
+	$retrieved = $result['date'];
+	$date = DateTime::createFromFormat('Y-m-d', $retrieved);
+	
+	//retrieve data from database (info_comment)
+	$query1 = "SELECT * FROM `comments` WHERE pid = $id";
+	if(!($results1 = mysqli_query($link, $query1)))
+	{
+		die('Error ' . mysqli_errno($link));
+	}
+?>
+
+<title>Simple Blog | <?php echo $result['title']; ?></title>
 
 
 </head>
 
-<body class="default">
+<body class="default" onload="loadpost(<?php echo $result['id'] ?>)">
 <div class="wrapper">
 
 <nav class="nav">
-    <a style="border:none;" id="logo" href="index.html"><h1>Simple<span>-</span>Blog</h1></a>
+    <a style="border:none;" id="logo" href="index.php"><h1>Kevhn's<span>-</span>Blog</h1></a>
     <ul class="nav-primary">
         <li><a href="new_post.html">+ Tambah Post</a></li>
     </ul>
 </nav>
 
-<div id="home">
-    <div class="posts">
-        <nav class="art-list">
-          <ul class="art-list-body">
-            <li class="art-list-item">
-                <div class="art-list-item-title-and-time">
-                    <h2 class="art-list-title"><a href="post.html">Apa itu Simple Blog?</a></h2>
-                    <div class="art-list-time">15 Juli 2014</div>
-                    <div class="art-list-time"><span style="color:#F40034;">&#10029;</span> Featured</div>
-                </div>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis repudiandae quae natus quos alias eos repellendus a obcaecati cupiditate similique quibusdam, atque omnis illum, minus ex dolorem facilis tempora deserunt! &hellip;</p>
-                <p>
-                  <a href="#">Edit</a> | <a href="#">Hapus</a>
-                </p>
-            </li>
+<article class="art simple post">
+    
+    <header class="art-header">
+        <div class="art-header-inner" style="margin-top: 0px; opacity: 1;">
+            <time class="art-time"><?php echo $date->format('l\, j F Y'); ?></time>
+            <h2 class="art-title"><?php echo $result['title']; ?></h2>
+            <p class="art-subtitle"></p>
+        </div>
+    </header>
 
-            <li class="art-list-item">
-                <div class="art-list-item-title-and-time">
-                    <h2 class="art-list-title"><a href="post.html">Siapa dibalik Simple Blog?</a></h2>
-                    <div class="art-list-time">11 Juli 2014</div>
-                </div>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis repudiandae quae natus quos alias eos repellendus a obcaecati cupiditate similique quibusdam, atque omnis illum, minus ex dolorem facilis tempora deserunt! &hellip;</p>
-                <p>
-                  <a href="#">Edit</a> | <a href="#">Hapus</a>
-                </p>
-            </li>
-          </ul>
-        </nav>
+    <div class="art-body">
+        <div class="art-body-inner" style="padding-top: 0px;">
+            <p><?php echo nl2br($result['content']); ?></p>
+
+            
+            <h2>Komentar</h2>
+
+            <div id="contact-area">
+                <form method="post" action="addcomment.php" name="form_comment" id="form_comment" onsubmit="return false">
+					<input type="hidden" name="pid" value=<?php echo $id; ?> id="pid">
+				
+                    <label for="nama">Nama:</label>
+                    <input type="text" name="nama" id="nama" required>
+        
+                    <label for="email">Email:</label>
+                    <input type="text" name="email" id="email" required>
+                    <div id='errormsg'></div>
+                    
+                    <label for="komentar"><br>Komentar:</label><br>
+                    <textarea name="komentar" rows="20" cols="20" id="komentar" required></textarea>
+
+                    <input type="submit" name="submit" value="Kirim" class="submit-button" onclick="validatecomment()">
+                </form>
+            </div>
+			<ul class="art-list-body">
+				
+				<div id="ajaxcontent">
+				
+				</div>
+				
+            </ul>
+        </div>
     </div>
-</div>
+
+</article>
 
 <footer class="footer">
     <div class="back-to-top"><a href="">Back to top</a></div>
@@ -96,9 +134,15 @@
 
 </div>
 
+<?php 
+	//close connection to server
+	mysqli_close($link);
+?>
+
 <script type="text/javascript" src="assets/js/fittext.js"></script>
 <script type="text/javascript" src="assets/js/app.js"></script>
 <script type="text/javascript" src="assets/js/respond.min.js"></script>
+<script type="text/javascript" src="assets/js/getdatabase.js"></script>
 <script type="text/javascript">
   var ga_ua = '{{! TODO: ADD GOOGLE ANALYTICS UA HERE }}';
 
