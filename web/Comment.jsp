@@ -12,18 +12,18 @@
 	    //?post_ID=" + post_ID + "&author=" + author + "&email=" + email + "&comment=" + comment
 	    //`comment-content`V, `comment-post-id`V,`comment-email`, `comment-user-id`V
 	    Connector C = new Connector();
-	    int i = Integer.parseInt(request.getParameter("post_ID"));
+	    int i = Integer.parseInt(request.getParameter("Userid"));
 	    	    
 	    Comment inputComment = new Comment(); 
 	    inputComment.setCommentPostID(i);
-	    if ((request.getParameter("author")).equalsIgnoreCase("guest")) {
+	    if ((request.getParameter("Nama")).equalsIgnoreCase("guest")) {
 		//inputComment.setUserID(0); // default for guest
 		//inputComment.setEmail(mail);
-		C.setComment(request.getParameter("comment"), i, request.getParameter("email"), 0);
+		C.setComment(request.getParameter("Komentar"), i, request.getParameter("email"), 0);
 	    }
 	    else {
 		//inputComment.setUserID(1); //dummy
-		C.setComment(request.getParameter("comment"), i, C.getEmailByID(1), 1);
+		C.setComment(request.getParameter("Komentar"), i, C.getEmailByID(1), 1);
 	    }
 	    
 	    

@@ -58,7 +58,7 @@
 <%
     Connector connector = new Connector();
     ArrayList<Post> listpost;
-    listpost = connector.getListPost("published");
+    listpost = connector.getPost(1);
     connector.closeConnection();
 %>
 <div id="home">
@@ -123,8 +123,9 @@
       z.parentNode.insertBefore(t,z)}(window,document,'script','ga'));
       ga('create',ga_ua);ga('send','pageview');
 </script>
+<!--
 <%
-                out.println("<script>");
+              /*  out.println("<script>");
 out.println("function confirmDelete(id) {");
     out.println("var x;");
     out.print("if (confirm(");out.print('"');out.print("Apakah Anda yakin ingin menghapus post ini?");out.print('"');out.println(" == true) {");
@@ -135,7 +136,6 @@ out.println("function confirmDelete(id) {");
     out.println("} else {");
     out.println('}');
 out.println('}');
-out.println("</script>");
-        %>
+out.println("</script>"); */ %>
 </body>
 </html>

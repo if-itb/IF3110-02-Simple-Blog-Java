@@ -135,7 +135,7 @@
             post.setTitle(judul);
             post.setDate(tanggal);
             post.setContent(konten);
-            post.setCategory("unpublished");
+            post.setCategory(false);
             post.setAuthorID(1);
             Connector conn = new Connector();
             conn.setPost(post);

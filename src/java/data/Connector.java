@@ -314,6 +314,30 @@ public class Connector {
 	
 	return uName;
     }
+     
+     
+    public void updatePost(int post_id, Post value){
+        Statement st;
+        try {
+            st = connection.createStatement();
+            String sql = ("INSERT INTO `post`.`post_table` (`post_id`, `title`, `date`, `content`, `category`, `post_author_id`) VALUES (NULL, '" + value.getTitle() +  "', '" + value.getDate() + "', '" + value.getContent() + "', '" + value.getCategory() + "', '" + value.getAuthorID() + "');");
+            ResultSet rs = st.executeQuery(sql);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+    public void deletePost(int post_id){
+        Statement st;
+        try {
+            st = connection.createStatement();
+            String sql = ("DELETE FROM `post`.`post_table` WHERE `post_id` = " + post_id + ";");
+            ResultSet rs = st.executeQuery(sql);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+    
+    
     public void closeConnection(){
         System.out.println("Closing the connection.");
         if (connection != null) try { connection.close(); } catch (SQLException ignore) {}

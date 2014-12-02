@@ -87,7 +87,7 @@
             <div id="contact-area">
                 <!--form name="frm" method="post" onSubmit=" return SubmitComment(<%//out.println(P.getPostID()); %>); return false;"-->
 		<!--?post_ID=" + post_ID + "&author=" + author + "&email=" + email + "&comment=" + comment-->
-                <form name="frm" method="post" onsubmit="return false;">
+                <form name="frm" method="post" action="Comment.jsp">
                     <label for="Nama">Nama:</label>
                     <input type="hidden" name="Userid" id="Userid" value="<%= P.getPostID() %>">
 		    <input type="text" name="Nama" id="Nama">
@@ -98,7 +98,7 @@
                     <label for="Komentar">Komentar:</label><br>
                     <textarea name="Komentar" rows="20" cols="20" id="Komentar"></textarea>
 
-                    <input type="submit" name="submit" value="Kirim" class="submit-button" onclick="SubmitComment(<%=P.getPostID()%>);">
+                    <input type="submit" name="submit" value="Kirim" class="submit-button" onclick="checkValid(frm.Email));">
                 </form>
             </div>
 
