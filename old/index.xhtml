@@ -1,0 +1,74 @@
+<!--        Hello from Facelets
+        <h1>Selamat Datang #{userController.user.username}!</h1>-->
+<!--        <h:form rendered="#{userController.user.role eq 'guest'}">
+            <h:commandLink value="login" action="login"/>
+        </h:form>-->
+<!--        <h3>User List</h3>-->
+<!--        <h:dataTable value="#{userController.getUserList()}" var="c"
+    			styleClass="order-table"
+    			headerClass="order-table-header"
+    			rowClasses="order-table-odd-row,order-table-even-row"
+    		>
+ 
+    		<h:column>
+    			<f:facet name="header">
+    				ID
+    			</f:facet>
+    				#{c.id}
+    		</h:column>
+ 
+    		<h:column>
+    			<f:facet name="header">
+    				Username
+				</f:facet>
+    				#{c.username}
+    		</h:column>
+ 
+ 			<h:column>
+    			<f:facet name="header">
+    				Password
+				</f:facet>
+    				#{c.password}
+    		</h:column>
+ 
+    		<h:column>
+    			<f:facet name="header">
+    				Email
+				</f:facet>
+    				#{c.email}
+    		</h:column>
+            
+    		<h:column>
+    			<f:facet name="header">
+    				Role
+				</f:facet>
+    				#{c.role}
+    		</h:column>
+            
+                <h:column>
+                    <f:facet name="header">
+                        Action
+                    </f:facet>
+                    <h:form><h:commandButton value="Hapus" action="#{userController.removeUser(c.username)}"/></h:form>
+                </h:column>
+                        
+ 
+    	</h:dataTable>-->
+<!--        <h:form>
+            <h3>Add new user</h3>
+            <h:outputLabel for="_new-username" value="Username"/>
+            <h:inputText id="_new-username" binding="#{username}" />
+            <h:outputLabel for="_new-password" value="Password"/>
+            <h:inputText id="_new-password" binding="#{password}" />
+            <h:outputLabel for="_new-email" value="email"/>
+            <h:inputText id="_new-email" binding="#{email}" />
+            <h:outputLabel for="_new-role" value="Role"/>
+            <h:selectOneListbox binding="#{role}">
+                <f:selectItem itemValue="guest" itemLabel="Guest"/>
+                <f:selectItem itemValue="editor" itemLabel="Editor"/>
+                <f:selectItem itemValue="owner" itemLabel="Owner"/>
+                <f:selectItem itemValue="admin" itemLabel="Admin"/>
+            </h:selectOneListbox>
+            
+            <h:commandButton action="{userController.addUser(username.value, password.value, email.value, role.value)}" value="Add User"/>
+        </h:form>-->

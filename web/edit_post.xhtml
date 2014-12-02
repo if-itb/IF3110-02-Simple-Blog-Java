@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="Deskripsi Blog" />
+    <meta name="author" content="Judul Blog" />
+
+    <h:outputStylesheet name="assets/css/screen.css"/>
+    <h:outputStylesheet name="assets/css/simple-blog.css"/>
+    <h:outputScript name="assets/js/simple-blog.js"/>
+    <!--<link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico" />-->
+
+    <title>Simple Blog | Edit Post</title>
+</h:head>
+
+<h:body class="default">
+<div class="wrapper">
+
+    <ui:insert id="header">
+        <ui:include src="/templates/header.xhtml"/>
+    </ui:insert>
+
+    <article class="art simple post">
+        <h2 class="art-title" style="margin-bottom:40px">-</h2>
+
+        <div class="art-body">
+            <div class="art-body-inner">
+                <h2>Edit Post</h2>
+
+                <div id="contact-area">
+                    <h:form id="_post-form">
+                        <h:outputLabel for="judul" value="Judul:" />
+                        <h:inputText id="judul" binding="#{title}" p:required="required" value="#{postController.post.title}"/>
+
+                        <h:outputLabel for="tanggal" value="Tanggal:"/>
+                        <h:inputText id="tanggal" binding="#{date}" p:required="required" p:type="date" value="#{postController.post.date}"/>
+
+                        <h:outputLabel for="konten" value="Konten:"/>
+                        <h:inputTextarea id="konten" rows="20" cols="20" p:required="required" binding="#{content}" value="#{postController.post.content}"/>
+                        
+                        <h:outputLabel rendered="#{userController.user.role eq 'admin' or userController.user.role eq 'editor'}" for="published" value="Publikasi:"/>
+                        <h:selectOneMenu rendered="#{userController.user.role eq 'admin' or userController.user.role eq 'editor'}" id="published" binding="#{publish}" value="#{postController.post.published}" style="margin-bottom: 30px; width: 20px;">
+                            <f:selectItem itemValue="1" itemLabel="Publish"/>
+                            <f:selectItem itemValue="0" itemLabel="Unpublish" />
+                            <f:selectItem itemValue="-1" itemLabel="Delete" />
+                        </h:selectOneMenu>
+                        <h:commandButton action="#{postController.updatePost(postController.post.id, title.value, date.value, content.value, publish.value)}" value="Simpan" class="submit-button" onclick="return validateDate(document.getElementById('_post-form:tanggal').value);" style="margin-left: 120px"/>
+                    </h:form>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <ui:insert id="footer">
+        <ui:include src="/templates/footer.xhtml"/>
+    </ui:insert>
+
+</div>
+
+<h:outputScript name="assets/js/validator.js"/>
+
+</h:body>
+</html>

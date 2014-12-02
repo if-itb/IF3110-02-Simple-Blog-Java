@@ -1,0 +1,81 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<h:head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="Deskripsi Blog" />
+    <meta name="author" content="Judul Blog" />
+
+    <h:outputStylesheet name="assets/css/screen.css"/>
+    <h:outputStylesheet name="assets/css/simple-blog.css"/>
+    <!--<link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico" />-->
+
+    <title>Simple Blog</title>
+</h:head>
+
+<h:body>
+<div class="wrapper">
+    <ui:insert id="header">
+        <ui:include src="/templates/header.xhtml"/>
+    </ui:insert>
+    
+    <div id="home">
+        <div class="posts">
+            <nav class="art-list">
+              <ul class="art-list-body">
+                  <ui:repeat value="#{postController.postList}" class="art-list-item" var="c">
+                      <ui:fragment rendered="#{c.published == 1 or (c.published == 0 and (userController.user.role eq 'admin' or userController.user.role eq 'editor'))}">
+                        <li class="art-list-item">
+                          <div class="art-list-item-title-and-time">
+                              <h2 class="art-list-title"><h:form><h:commandLink action="#{postController.viewPost(c.id)}" value="#{c.title}"/></h:form></h2>
+                              <div class="art-list-time">#{c.date}</div>
+                              <ui:fragment rendered="#{userController.user.role eq 'admin' or userController.user.role eq 'editor'}">
+                                  <div class="art-list-time">Published</div>
+                              </ui:fragment>
+                          </div>
+                          <p>#{c.content}</p>
+                          <h:form>
+                              <p>
+                                  <ui:fragment rendered="#{userController.user.role eq 'admin' or userController.user.role eq 'editor'}">
+                                    <h:commandLink rendered="#{c.published == 1}" action="#{postController.unpublishPost(c.id)}" value="Unpublish"/>
+                                    |
+                                  </ui:fragment>
+                                  <ui:fragment rendered="#{userController.user.role ne 'guest'}">
+                                    <h:commandLink action="#{postController.editPost(c)}" value="Edit"/>
+                                    |
+                                    <h:commandLink action="#{postController.deletePost(c.id)}" value="Hapus" onclick="return delPost();"/>
+                                  </ui:fragment>
+                              </p>
+                          </h:form>
+                        </li>
+                      </ui:fragment>
+                  </ui:repeat>
+
+              </ul>
+            </nav>
+        </div>
+    </div>
+    
+    <ui:insert id="footer">
+        <ui:include src="/templates/footer.xhtml"/>
+    </ui:insert>
+
+</div>
+<script type="text/javascript">
+  function delPost(){
+      var x;
+      if(confirm("Apakah Anda yakin menghapus post ini?")){
+        x = "Post ini telah dihapus";
+      }else{
+        x = "Post tidak jadi dihapus";
+        return false;
+      }
+  }
+</script>
+</h:body>
+</html>

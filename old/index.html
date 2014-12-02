@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="Deskripsi Blog">
+<meta name="author" content="Judul Blog">
+
+<link rel="stylesheet" type="text/css" href="assets/css/screen.css" />
+<link rel="stylesheet" type="text/css" href="assets/css/simple-blog.css" />
+<link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
+
+<!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<title>Simple Blog | Login</title>
+
+</head>
+
+<body class="default">
+<div class="wrapper">
+
+<nav class="nav">
+    <a style="border:none;" id="logo" href="index.html"><h1>Simple<span>-</span>Blog</h1></a>
+    <ul class="nav-primary">
+        <li><a href="new_post.html">+ Tambah Post</a></li>
+        <li>Guest <a id="_toggle-login" href="#">(Login)</a></li>
+    </ul>
+    <div id="login-dropdown">
+        <form action="index.html">
+            <input type="text" id="_username" placeholder="username" />
+            </br>
+            <input type="password" id="_password" placeholder="password" />
+            </br>
+            <p class="alert" style="margin-bottom: 0px; margin-left: 5px; font-size: 80%; color: #ff0000;"></p>
+            <div style="clear: both">
+                <input type="checkbox" style="float:left; margin-top: 13px" id="_remember-me" />
+                <label for="_remember-me" style="font-size: 80%">Remember Me</label>
+            </div>
+            <input type="submit" class="submit-button" value="login" />
+        </form>
+    </div>
+</nav>
+
+<script>
+var button = document.getElementById("_toggle-login");
+button.onclick = function() {
+    var d = document.getElementById("login-dropdown");
+    d.style.display = (d.style.display == "none") ? "block" : "none";
+    var u = document.getElementById("_username");
+    u.focus();
+}
+</script>
+
+<div id="home">
+    <div>
+        <div class="posts">
+                <nav class="art-list">
+                    <ul class="art-list-body">
+                        <li class="art-list-item">
+                                <div class="art-list-item-title-and-time">
+                                        <h2 class="art-list-title"><a href="post.html">Apa itu Simple Blog?</a></h2>
+                                        <div class="art-list-time">15 Juli 2014</div>
+                                        <div class="art-list-time"><span style="color:#F40034;">&#10029;</span> Featured</div>
+                                </div>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis repudiandae quae natus quos alias eos repellendus a obcaecati cupiditate similique quibusdam, atque omnis illum, minus ex dolorem facilis tempora deserunt! &hellip;</p>
+                                <p>
+                                    <a href="#">Edit</a> | <a href="#">Hapus</a>
+                                </p>
+                        </li>
+
+                        <li class="art-list-item">
+                                <div class="art-list-item-title-and-time">
+                                        <h2 class="art-list-title"><a href="post.html">Siapa dibalik Simple Blog?</a></h2>
+                                        <div class="art-list-time">11 Juli 2014</div>
+                                </div>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis repudiandae quae natus quos alias eos repellendus a obcaecati cupiditate similique quibusdam, atque omnis illum, minus ex dolorem facilis tempora deserunt! &hellip;</p>
+                                <p>
+                                    <a href="#">Edit</a> | <a href="#">Hapus</a>
+                                </p>
+                        </li>
+                    </ul>
+                </nav>
+        </div>
+</div>
+
+<footer class="footer">
+        <div class="back-to-top"><a href="">Back to top</a></div>
+        <!-- <div class="footer-nav"><p></p></div> -->
+        <div class="psi">&Psi;</div>
+        <aside class="offsite-links">
+                Asisten IF3110 /
+                <a class="rss-link" href="#rss">RSS</a> /
+                <br>
+                <a class="twitter-link" href="http://twitter.com/YoGiiSinaga">Yogi</a> /
+                <a class="twitter-link" href="http://twitter.com/sonnylazuardi">Sonny</a> /
+                <a class="twitter-link" href="http://twitter.com/fathanpranaya">Fathan</a> /
+                <br>
+                <a class="twitter-link" href="#">Renusa</a> /
+                <a class="twitter-link" href="#">Kelvin</a> /
+                <a class="twitter-link" href="#">Yanuar</a> /
+                
+        </aside>
+</footer>
+
+</div>
+
+</body>
+</html>

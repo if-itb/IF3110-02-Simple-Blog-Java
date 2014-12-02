@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+    <h:body>
+        <ui:composition>
+<nav class="nav">
+    <h:link id="logo" outcome="index"><h1>Simple<span>-</span>Blog</h1></h:link>
+    <ul class="nav-primary">
+        <ui:fragment rendered="#{userController.user.role eq 'admin' or userController.user.role eq 'owner'}">
+            <li><h:link outcome="new_post">+ Tambah Post</h:link></li>
+        </ui:fragment>
+        <ui:fragment rendered="#{userController.user.role eq 'admin'}">
+            <li><h:link outcome="user_management">&Psi; Manajemen User</h:link></li>
+        </ui:fragment>
+        <ui:fragment rendered="#{userController.user.role eq 'admin' or userController.user.role eq 'editor'}">
+            <li><h:link outcome="unpublished_post">UnpublishedPost</h:link></li>
+        </ui:fragment>
+        <ui:fragment rendered="#{userController.user.role eq 'admin' or userController.user.role eq 'editor'}">
+            <li><h:link outcome="deleted_post">DeletedPost</h:link></li>
+        </ui:fragment>
+        <ui:fragment rendered="#{userController.user.role eq 'guest'}">
+            <li>Guest <a id="_toggle-login" href="#">(Login)</a></li>
+        </ui:fragment>
+        <ui:fragment rendered="#{userController.user.role ne 'guest'}">
+            <h:form id="_logout-form" style="display: none">
+                <h:commandLink id="_logout"
+                               action="#{userController.logout()}"/>
+            </h:form>
+            <li>
+                #{userController.user.username}
+                <h:link value="(Logout)" id="_logout-link" />
+            </li>
+        </ui:fragment>
+    </ul>
+    <ui:fragment rendered="#{userController.user.role eq 'guest'}">
+        <div id="login-dropdown">
+            <h:form id="_login-form">
+                <h:inputText p:type="text" id="_username" p:placeholder="username"
+                             value="#{userController.dummy.username}" />
+                <br/>
+                <h:inputText p:type="password" id="_password" p:placeholder="password"
+                             value="#{userController.dummy.password}" />
+                <br/>
+                <h:message for="_password" id="_message" class="alert" style="margin-bottom: 0px; margin-left: 5px; font-size: 80%; color: red"/>
+                <div style="clear: both">
+                    <h:selectBooleanCheckbox value="#{userController.rememberMe}" style="float:left; margin-top: 13px" id="_remember-me"/>
+                    <label for="_login-form:_remember-me" style="font-size: 80%">Remember Me</label>
+                </div>
+                <h:commandButton class="submit-button" action="#{userController.login()}" value="login" />
+            </h:form>
+        </div>
+        <script>
+document.addEventListener('DOMContentLoaded', function(){
+    var loginDropdown = document.getElementById("login-dropdown");
+    loginDropdown.style.display = "#{userController.invalidLogin ? 'block' : 'none'}";
+    #{userController.invalidLogin ? 'document.getElementById("_login-form:_username").focus();' : ''}
+    // toggling login form
+    document.getElementById("_toggle-login").onclick = function() {
+        loginDropdown.style.display = (loginDropdown.style.display === "none") ? "block" : "none";
+        document.getElementById("_login-form:_username").focus();
+    };
+});
+        </script>
+    </ui:fragment>
+    <ui:fragment rendered="#{userController.user.role ne 'guest'}">
+        <script>
+document.addEventListener('DOMContentLoaded', function(){
+    // connecting link to commandLink
+    document.getElementById("_logout-link").onclick = function() {
+        document.getElementById('_logout-form:_logout').click();
+        return false;
+    };
+});
+        </script>
+    </ui:fragment>
+</nav>
+        </ui:composition>
+    </h:body>
+</html>
+

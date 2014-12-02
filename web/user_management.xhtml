@@ -1,0 +1,226 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<h:head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="Deskripsi Blog" />
+    <meta name="author" content="Judul Blog" />
+
+    <h:outputStylesheet name="assets/css/screen.css"/>
+    <h:outputStylesheet name="assets/css/simple-blog.css"/>
+
+    <h:outputScript name="assets/js/simple-blog.js"/>
+    <!--<link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico" />-->
+    <title>Simple Blog | Manajemen User</title>
+</h:head>
+
+<h:body>
+<style>
+input, select {
+  margin: 0;
+  width: 50%;
+  font-family: sans-serif;
+  box-shadow: none;
+}
+select {
+  width: 54.5%;
+}
+input:focus, select:focus{
+  outline: none;
+}
+.style-1 input,
+.style-1 select {
+  padding: 10px;
+  border: solid 1px #dcdcdc;
+  transition: box-shadow 0.3s, border 0.3s; 
+}
+.style-1 input:focus,
+.style-1 select:focus {
+  border: solid 1px #707070;
+  box-shadow: 0 0 5px 1px #969696;
+}
+table, th, td {
+    border:1px solid black;
+    table-layout : auto;
+    border-collapse : collapse;
+    margin : auto;
+    margin-bottom: 30px;
+    width:auto;
+}
+th, td {
+    padding: 8px;
+}
+th{
+    align : center;
+}
+p{
+    font-size: 25px;
+}
+</style>
+<div class="wrapper">
+    <ui:insert id="header">
+        <ui:include src="/templates/header.xhtml"/>
+    </ui:insert>
+
+    <div id="home">
+    <div class="posts">
+        <nav class="art-list">
+            <!--GET ALL USER FROM DATABASE -->
+            <div style="float:left;width:50%;margin-top:30px">
+                <h3 align="center">User List</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Username</th>		
+                            <th>Role</th>		
+                            <th>Email</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <ui:repeat value="#{userController.userList}" var="u">
+                        <tr id="row-#{u.id}">
+                            <td>#{u.id}</td>
+                            <td>#{u.username}</td>		
+                            <td>#{u.role}</td>
+                            <td>#{u.email}</td>
+                            <td>
+                                <a href="#" style="color: #000" onclick="editUser(#{u.id})">Edit</a><br/>
+                                <a href="#" onclick="deleteUser(#{u.id})">Delete</a>
+                            </td>
+                        </tr>
+                    </ui:repeat>
+                </table>
+                <h:form id="_delete-user-form" style="display:none">
+                    <h:inputText id="_id" binding="#{_id}"/>
+                    <h:commandButton id="_submit" action="#{userController.removeUser(_id.value)}"/>
+                </h:form>
+            </div>
+            <div id="_add-user-div" style="display:block;float:right;width:50%;position:relative;left:30px;margin-top:30px">
+                <h3 align="center">Add User</h3>
+                <h:form id="_add-user-form" class="input-list style-1 clearfix">
+                    <h:outputLabel for="_username">Username</h:outputLabel>
+                    <h:inputText id="_username" binding="#{username2}" p:required="true"/>
+                    
+                    <h:outputLabel for="_password">Password</h:outputLabel>
+                    <h:inputSecret id="_password" binding="#{password2}" p:required="true"/>
+                    
+                    <h:outputLabel for="_email">Email</h:outputLabel>
+                    <h:inputText id="_email" binding="#{email2}" p:required="true"/>
+                    
+                    <h:outputLabel for="_role">Role</h:outputLabel>
+                    <h:selectOneMenu id="_role" binding="#{role2}">
+                        <f:selectItem itemValue="admin" itemLabel="Admin"/>
+                        <f:selectItem itemValue="owner" itemLabel="Owner"/>
+                        <f:selectItem itemValue="editor" itemLabel="Editor"/>
+                    </h:selectOneMenu>
+                    <br/>
+                    
+                    <h:message for="_username" id="_message" class="alert" style="margin-bottom: 0px; margin-left: 115px; color: red"/>
+                    
+                    <h:commandButton id="_submit" action="#{userController.addUser(username2.value, password2.value, email2.value, role2.value)}"
+                                     style="margin: 10px 0px 30px 115px; width:100px;" value="Add User" class="submit-button" />
+                </h:form>
+            </div>
+            <div id="_edit-user-div" style="display:none;float:right;width:50%;position:relative;left:30px;margin-top:30px">
+                <h3 align="center">Edit User</h3>
+                <h:form id="_edit-user-form" class="input-list style-1 clearfix">
+                    <h:inputHidden id="_id" binding="#{id}"/>
+                    
+                    <h:outputLabel for="_username">Username</h:outputLabel>
+                    <h:inputText id="_username" binding="#{username3}" p:required="true"/>
+                    
+                    <h:outputLabel for="_password">Password</h:outputLabel>
+                    <h:inputSecret id="_password" binding="#{password3}"/>
+                    
+                    <h:outputLabel for="_email">Email</h:outputLabel>
+                    <h:inputText id="_email" binding="#{email3}" p:required="true"/>
+                    
+                    <h:outputLabel for="_role">Role</h:outputLabel>
+                    <h:selectOneMenu id="_role" binding="#{role3}">
+                        <f:selectItem itemValue="admin" itemLabel="Admin"/>
+                        <f:selectItem itemValue="owner" itemLabel="Owner"/>
+                        <f:selectItem itemValue="editor" itemLabel="Editor"/>
+                    </h:selectOneMenu>
+                    <br/>
+                    
+                    <h:message for="_username" id="_message" class="alert" style="margin-bottom: 0px; margin-left: 115px; color: red"/>
+                    
+                    <h:commandButton id="_submit" action="#{userController.modifyUser(id.value, username3.value, password3.value, email3.value, role3.value)}"
+                                     style="margin: 10px 0px 30px 115px; width:100px;" value="Edit User" class="submit-button" />
+                    <input type="submit" style="margin: 10px 0px 30px 15px; width:100px;" value="Cancel" onclick="return cancelEdit()"/>
+                </h:form>
+            </div>
+            <script>
+            </script>
+        </nav>
+    </div>
+</div>
+
+    <ui:insert id="footer">
+        <ui:include src="/templates/footer.xhtml"/>
+    </ui:insert>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+    var formAdd = document.getElementById("_add-user-div");
+    var formEdit = document.getElementById("_edit-user-div");
+    showEditForm = function() {
+        formAdd.style.display = 'none';
+        formEdit.style.display = 'block';
+    };
+    showAddForm = function() {
+        formAdd.style.display = 'block';
+        formEdit.style.display = 'none';
+    };
+    #{userController.invalidEdit ? 'showEditForm();' : ''}
+    editUser = function(id) {
+        showEditForm();
+        // find appropriate row in the table
+        var row = document.getElementById("row-"+id).cells;
+        var user = {
+            id: id,
+            username: row[1].innerHTML,
+            password: '',
+            email: row[3].innerHTML,
+            role: row[2].innerHTML
+        };
+        document.getElementById("_edit-user-form:_id").value = user.id;
+        document.getElementById("_edit-user-form:_username").value = user.username;
+        document.getElementById("_edit-user-form:_password").value = user.password;
+        document.getElementById("_edit-user-form:_email").value = user.email;
+        if (user.role === 'admin') {
+            document.getElementById("_edit-user-form:_role").selectedIndex = 0;
+        }
+        else if (user.role === 'owner') {
+            document.getElementById("_edit-user-form:_role").selectedIndex = 1;
+        }
+        else if (user.role === 'editor') {
+            document.getElementById("_edit-user-form:_role").selectedIndex = 2;
+        }
+        document.getElementById("_edit-user-form:_username").focus();
+        return false;
+    };
+    cancelEdit = function() {
+        showAddForm();
+        return false;
+    };
+    deleteUser = function(id) {
+        var row = document.getElementById("row-"+id).cells;
+        if (confirm("Apakah Anda yakin ingin menghapus user " + row[1].innerHTML + "?")) {
+            document.getElementById("_delete-user-form:_id").value = id;
+            document.getElementById("_delete-user-form:_submit").click();
+        }
+        return false;
+    };
+});
+</script>
+</h:body>
+</html>
