@@ -23,10 +23,12 @@
                                         By: #{item.author} | #{item.date}
                                     </p>
                                     <h:form>
-                                        <h:commandLink styleClass="pure-button" action="#{NavigationController.gotoEditPost(item.PID)}" >Edit Post</h:commandLink >
+                                        <h:commandLink  rendered="#{userBean.role == 1 || userBean.role == 2 || userBean.role == 3}"
+                                                        styleClass="pure-button" action="#{NavigationController.gotoEditPost(item.PID)}" >Edit Post</h:commandLink >
                                     </h:form>
                                     <h:form>
-                                        <h:commandLink styleClass="pure-button" 
+                                        <h:commandLink rendered="#{userBean.role == 1 || userBean.role == 2 || userBean.role == 3}"
+                                                         styleClass="pure-button" 
                                                          action="#{postDeleteBean.delete(item.PID)}"
                                                          onclick="return confirm('Are you sure you want delete this?')">Delete Post</h:commandLink >
                                     </h:form>

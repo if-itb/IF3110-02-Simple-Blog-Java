@@ -22,15 +22,14 @@
     
 </head>
 <body>
-    <div id="layout" class="pure-g">
+    <div  id="layout" class="pure-g">
         <div class="upper-menu">
             <nav class="nav">
                 <ul class="nav-list">
                     <li class="nav-item">
                         <h:form>
-                            <h:commandLink  
-                                           styleClass="pure-button" 
-                                           
+                            <h:commandLink styleClass="pure-button" 
+                                           rendered="#{userBean.role == 1 || userBean.role == 2}"
                                            action="#{NavigationController.gotoAddPost()}">New Post</h:commandLink>
                         </h:form>
                     </li>
@@ -41,13 +40,13 @@
                     </li>
                     <li class="nav-item">
                         <h:form>
-                            <h:commandLink 
+                            <h:commandLink rendered="#{userBean.role == 1 || userBean.role == 2 || userBean.role == 3}"
                                            styleClass="pure-button" action="#{NavigationController.gotoUnpublishedPost()}" >Unpublished Post</h:commandLink>
                         </h:form>
                     </li>
                     <li class="nav-item">
                         <h:form>
-                            <h:commandLink 
+                            <h:commandLink rendered="#{userBean.role == 2}"
                                            styleClass="pure-button" action="#{NavigationController.gotoListUser()}">List User</h:commandLink>
                         </h:form>
                     </li>
@@ -62,10 +61,14 @@
         <div class="sidebar">
             <div class="header">
                 <h1 class="brand-title">Simple Blog</h1>
-                <h2 class="brand-tagline">Blah blah blah, Tubes 2 WBD</h2>
+                <h2 class="brand-tagline">Tubes 2 WBD</h2>
+                <h3> Calvin Sadewa </h3>
+                <h3> Khoirunnisa Afifah </h3>
+                <h3> Joshua Bezaleel Abednego </h3>
             </div>
         </div>
         <div class="content">
+            <br/>
             <ui:insert name="content">Main Content </ui:insert>
         </div>
         <div class="footer">
