@@ -46,7 +46,7 @@ public class DateValidator implements Validator{
         Date tanggal;
         try {
             tanggal = formatter.parse((String) value);
-            if (tanggal.compareTo(Tanggal)<0) {
+            if (Tanggal.compareTo(tanggal)>-1) {
                 FacesMessage msg =
                         new FacesMessage(" Date validation failed.",
                         "Please put newer date");

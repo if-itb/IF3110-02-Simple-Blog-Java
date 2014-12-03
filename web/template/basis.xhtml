@@ -52,7 +52,14 @@
                     </li>
                     <li class="nav-item">
                         <h:form>
-                            <h:commandLink styleClass="pure-button" action="#{userBean.logout()}" >LOGOUT</h:commandLink>
+                            <h:commandLink rendered="#{userBean.role == 1 || userBean.role == 2 || userBean.role == 3}"
+                                styleClass="pure-button" action="#{userBean.logout()}" >LOGOUT</h:commandLink>
+                        </h:form>    
+                    </li>
+                    <li class="nav-item">
+                        <h:form>
+                            <h:commandLink rendered="#{userBean.role == 4}"
+                                styleClass="pure-button" action="#{userBean.logout()}" >LOGIN</h:commandLink>
                         </h:form>    
                     </li>
                 </ul>
@@ -62,24 +69,18 @@
             <div class="header">
                 <h1 class="brand-title">Simple Blog</h1>
                 <h2 class="brand-tagline">Tubes 2 WBD</h2>
-                <h3> Calvin Sadewa </h3>
-                <h3> Khoirunnisa Afifah </h3>
-                <h3> Joshua Bezaleel Abednego </h3>
+                <div class ="list-nama" >
+                    <h3> Calvin Sadewa </h3>
+                    <h3> Khoirunnisa Afifah </h3>
+                    <h3> Joshua Bezaleel Abednego </h3>
+                </div>
             </div>
         </div>
         <div class="content">
             <br/>
             <ui:insert name="content">Main Content </ui:insert>
         </div>
-        <div class="footer">
-            <div class="pure-menu pure-menu-horizontal pure-menu-open">
-                <ul>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Twitter</a></li>
-                    <li><a href="#">GitHub</a></li>
-                </ul>
-            </div>
-        </div>
+        
     </div>
 </body>
 </html>

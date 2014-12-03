@@ -21,15 +21,15 @@
                             <f:validator validatorId="usernameValidator" for="username"/>
                         </h:inputText>
                         <h:message for="username" style="color:red" />
-                        <br />
+                        <br /><br/>
                         <label>Password</label>
                         <br />
                         <h:inputSecret id="password" value="#{loginBean.password}" redisplay="true">
                             <f:validator validatorId="passwordValidator" for="password"/>
                         </h:inputSecret>
                         <h:message for="password" style="color:red" />
-                        <br/>
-                        <h:commandButton id="loginButton" value="Login" 
+                        <br/><br/>
+                        <h:commandButton class="pure-button" id="loginButton" value="Login" 
                                         action="#{loginBean.login()}" 
                         />
                     </fieldset>

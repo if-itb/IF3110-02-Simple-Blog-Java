@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+<f:view>
+    <h:head>
+        <title>Post title</title>
+        <f:metadata>
+            <f:viewParam name="id" value="#{Post.PID}"></f:viewParam>
+            <f:viewParam name="id" value="#{allKomentar.PID}"></f:viewParam>
+            <f:viewParam name="id" value="#{komentar.PID}"></f:viewParam>
+        </f:metadata>
+    </h:head>
+    <h:body>
+        <ui:composition template="template/basis.xhtml">
+            <ui:define name="content">
+                <section class="post">
+                    <header class="post-header">
+                        <h2 class="post-title">#{Post.fetchPost(param['id']).judul}</h2>
+
+                        <p class="post-meta">
+                            By #{Post.fetchPost(param['id']).author}
+                            | <time>#{Post.fetchPost(param['id']).date}</time>
+                        </p>
+                    </header>
+
+                    <div class="post-description">
+                        <p>
+                            #{Post.fetchPost(param['id']).konten}
+                        </p>
+                          
+                    </div>
+                </section>                
+            </ui:define>
+        </ui:composition>>
+    </h:body>
+</f:view>
+</html>

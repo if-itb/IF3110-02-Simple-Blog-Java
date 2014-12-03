@@ -41,10 +41,10 @@ and open the template in the editor.
                 <h1 class="content-subhead">Komentar</h1>
                 <section class="komentar">
                     <h:form class="pure-form" id="comment_form" onsubmit="return validateForm(#{komentar.email})"  >
-                        <label for="Nama" rendered="#{userBean.role == 4}">Nama:</label>
+                        <label for="Nama" rendered="#{userBean.role == 4}">Nama: </label>
                         <h:inputText id="Nama" value="#{komentar.nama}" rendered="#{userBean.role == 4}"/>
-                        <br/>
-                        <label for="Email" rendered="#{userBean.role == 4}">Email:</label>
+                        <br/><br/>
+                        <label for="Email" rendered="#{userBean.role == 4}">Email: </label>
                         <h:inputText id="Email" value="#{komentar.email}" rendered="#{userBean.role == 4}">
                             <f:validator validatorId="emailValidator" for="Email"/>
                         </h:inputText>
@@ -53,19 +53,20 @@ and open the template in the editor.
 
                         <label for="Komentar">Komentar:</label><br/>
                         <h:inputTextarea id="Komentar" rows="5" cols="50" value="#{komentar.komentar}"/>
-
-                        <h:commandButton> 
+                        <br/> <br/>
+                        <h:commandButton styleClass="pure-button" value="Kirim"> 
                             <f:ajax listener="#{addKomentar.add(komentar)}" 
                                     render="@form" 
                                     execute="Nama Email Komentar"> </f:ajax>
                         </h:commandButton>
-                        <div id="list-komentar"> #{allKomentar.PID}
-                        <ul  class="komentar-list">
+                        <br/><br/>
+                        <div id="list-komentar"> 
+                        <ul class="komentar-list">
                             <c:forEach var="komentar" items="#{allKomentar.getAllKomentar()}">
                                 <li>
-                                    <p class="Nama">#{komentar.tanggal} | #{komentar.nama}</p>
-                                        <br/>
-                                    <p class="post-meta">
+                                    <p class="komentar-nama">#{komentar.tanggal} | #{komentar.nama}</p>
+                                        
+                                    <p class="komentar-meta">
                                         #{komentar.komentar}
                                     </p>
                                 </li>

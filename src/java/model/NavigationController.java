@@ -56,6 +56,9 @@ public class NavigationController implements Serializable{
         return "View-Post_2.xhtml?id=" + post_id;
     }
     
+    public String gotoViewUnpublished(int post_id) {
+        return "View-Post_unpublished.xhtml?id=" + post_id;
+    }
     public String gotoEditPost() {
         return "Edit-Post.xhtml";
     }

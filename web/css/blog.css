@@ -34,16 +34,9 @@ h3 {
     width: 300px;
 }
 
-/*.pure-g{
-    position:relative;
-    min-height: 100%;
-    height:auto;
-    margin:0 auto -4em;
-}*/
-
 .upper-menu {
    float:right;
-   padding-left: 1cm;
+   margin-left: 2em;
    height: 80px;
    font-size: 14px;
    margin-bottom:1cm;
@@ -75,6 +68,20 @@ h3 {
     font-weight: 300;
     color: rgb(176, 202, 219);
 }
+.list-nama {
+    text-align: right;
+}
+
+.list-post pure-button {
+    display : inline;
+}
+
+.list-post-title {
+    font-size: 28px;
+    color: rgb(61, 79, 93);
+    margin-bottom: 0.1em;
+}
+
 
 .nav-list {
     margin: 0;
@@ -130,15 +137,10 @@ h3 {
     padding-bottom: 2em;
 }
 .post-title {
-    font-size: 2em;
-    color: #222;
-    margin-bottom: 0.2em;
-}
-.post-avatar {
-    border-radius: 50px;
-    float: right;
-    margin-left: 1em;
-}
+    font-size: 42px;
+    color: rgb(61, 79, 93);
+    margin-bottom: 0.1em;}
+
 .post-description {
     font-family: Georgia, "Cambria", serif;
     color: #444;
@@ -146,38 +148,21 @@ h3 {
 }
 .post-meta {
     color: #999;
-    font-size: 90%;
-    margin: 0;
+    font-size: 16px;
 }
 
-.post-category {
-    margin: 0 0.1em;
-    padding: 0.3em 1em;
-    color: #fff;
-    background: #999;
-    font-size: 80%;
-}
-.post-category-design {
-    background: #5aba59;
-}
-.post-category-pure {
-    background: #4d85d1;
-}
-.post-category-yui {
-    background: #8156a7;
-}
-.post-category-js {
-    background: #df2d4f;
+.error_message{
+    color :red;
 }
 
-.post-images {
-    margin: 1em 0;
+.komentar-title {
+    font-size: 20px;
+    color: rgb(61, 79, 93);
 }
-.post-image-meta {
-    margin-top: -3.5em;
-    margin-left: 1em;
-    color: #fff;
-    text-shadow: 0 1px 1px #333;
+
+.komentar-meta {
+    color: #999;
+    font-size: 16px;
 }
 
 .footer {
@@ -270,7 +255,9 @@ h3 {
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
-    user-select: none;
+    background: rgb(61, 79, 93) !important;
+   color: white !important;
+   margin-left: 10px;
 }
 
 
@@ -280,9 +267,6 @@ h3 {
     *font-size: 90%; /*IE 6/7 - To reduce IE's oversized button text*/
     *overflow: visible; /*IE 6/7 - Because of IE's overly large left/right padding on buttons */
     padding: 0.5em 1em;
-    color: #444; /* rgba not supported (IE 8) */
-    color: rgba(0, 0, 0, 0.80); /* rgba supported */
-    *color: #444; /* IE 6 & 7 */
     border: 1px solid #999;  /*IE 6/7/8*/
     border: none rgba(0, 0, 0, 0);  /*IE9 + everything else*/
     background-color: #E6E6E6;
@@ -507,7 +491,7 @@ since IE8 won't execute CSS that contains a CSS3 selector.
 }
 
 .komentar{
-    padding-left: 20px;
+    padding-left: 10px;
 }
 
 @media(min-width: 48em) {

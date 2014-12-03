@@ -19,19 +19,23 @@
                         <li>
                             <section class="list-post">
                                 <h3><a class="list-post-title" href="#{NavigationController.gotoViewPost(item.PID)}">#{item.judul}</a></h3>
-                                    <p class="post-meta">
+                                    <h4 class="post-meta">
                                         By: #{item.author} | #{item.date}
-                                    </p>
-                                    <h:form>
-                                        <h:commandLink  rendered="#{userBean.role == 1 || userBean.role == 2 || userBean.role == 3}"
-                                                        styleClass="pure-button" action="#{NavigationController.gotoEditPost(item.PID)}" >Edit Post</h:commandLink >
-                                    </h:form>
-                                    <h:form>
-                                        <h:commandLink rendered="#{userBean.role == 1 || userBean.role == 2 || userBean.role == 3}"
-                                                         styleClass="pure-button" 
-                                                         action="#{postDeleteBean.delete(item.PID)}"
-                                                         onclick="return confirm('Are you sure you want delete this?')">Delete Post</h:commandLink >
-                                    </h:form>
+                                    </h4><br/>
+                                    <h:panelGrid columns="2">
+                                        <h:form>
+                                            <h:commandButton  rendered="#{userBean.role == 1 || userBean.role == 2 || userBean.role == 3}"
+                                                            styleClass="pure-button" action="#{NavigationController.gotoEditPost(item.PID)}" 
+                                                            value="Edit Post"></h:commandButton>
+                                        </h:form>
+                                        <h:form>
+                                            <h:commandButton rendered="#{userBean.role == 1 || userBean.role == 2 || userBean.role == 3}"
+                                                             styleClass="pure-button" 
+                                                             action="#{postDeleteBean.delete(item.PID)}"
+                                                             onclick="return confirm('Are you sure you want delete this?')"
+                                                             value="Delete Post"></h:commandButton>
+                                        </h:form>
+                                    </h:panelGrid>
                             </section>
                         </li>
                     </c:forEach>
