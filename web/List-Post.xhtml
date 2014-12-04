@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+<f:view>
+    <h:head>
+        <title>List Post</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="template/basis.xhtml">
+            <ui:define name="content">
+                <h1 class="content-subhead">List Post</h1>
+                <ul>
+                    <c:forEach var="item" items="#{allPostBean.publishedPost}">
+                        <li>
+                            <section class="list-post">
+                                <h3><a class="list-post-title" href="#{NavigationController.gotoViewPost(item.PID)}">#{item.judul}</a></h3>
+                                    <h4 class="post-meta">
+                                        By: #{item.author} | #{item.date}
+                                    </h4><br/>
+                                    <h:panelGrid columns="2">
+                                        <h:form>
+                                            <h:commandButton  rendered="#{userBean.role == 1 || userBean.role == 2 || userBean.role == 3}"
+                                                            styleClass="pure-button" action="#{NavigationController.gotoEditPost(item.PID)}" 
+                                                            value="Edit Post"></h:commandButton>
+                                        </h:form>
+                                        <h:form>
+                                            <h:commandButton rendered="#{userBean.role == 1 || userBean.role == 2 || userBean.role == 3}"
+                                                             styleClass="pure-button" 
+                                                             action="#{postDeleteBean.delete(item.PID)}"
+                                                             onclick="return confirm('Are you sure you want delete this?')"
+                                                             value="Delete Post"></h:commandButton>
+                                        </h:form>
+                                    </h:panelGrid>
+                            </section>
+                        </li>
+                    </c:forEach>
+                </ul>
+            </ui:define>
+        </ui:composition>>
+    </h:body>
+</f:view>
+</html>

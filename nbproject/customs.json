@@ -1,0 +1,10 @@
+{
+    "attributes": {
+        "action": {
+            "context": "a"
+        }
+    },
+    "elements": {
+        "h:head": {}
+    }
+}

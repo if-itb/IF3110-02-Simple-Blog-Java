@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+<f:view>
+    <h:head>
+        <title> List User </title>
+    </h:head>
+    <h:body>
+        <ui:composition template="template/basis.xhtml">
+            <ui:define name="content">
+                <!-- TODO username validator -->
+                <h:messages id="error_message" globalOnly="true"></h:messages>
+                <div class="pure-g">
+                    <div class="pure-u-1-2" >
+                        <h:form id="edit_user" styleClass="pure-form pure-u-1-2">
+                            <fieldset>
+                                <h1 class="content-subhead">Edit User</h1>
+                                <label>Username</label> <br/>
+                                <h:inputText id="username" value="#{editUserBean.edited.username}">
+                                    <f:validator validatorId="usernameValidator" for="username"/>
+                                </h:inputText>
+                                <h:message styleClass="error_message" id="username_message" for="username" />
+                                <br/>
+                                <label>Password</label> <br/>
+                                <h:inputText id="password" value="#{editUserBean.edited.password}">
+                                    <f:validator validatorId="passwordValidator" for="password"/>
+                                </h:inputText>
+                                <h:message styleClass="error_message" id="password_message" for="password" />
+                                <br/>
+                                <label>Role</label> <br/>
+                                <h:selectOneMenu value="#{editUserBean.edited.role}">
+                                    <f:selectItem itemValue="#{editUserBean.edited.getAdmin()}" itemLabel="Admin" />
+                                    <f:selectItem itemValue="#{editUserBean.edited.getOwner()}" itemLabel="Owner" />
+                                    <f:selectItem itemValue="#{editUserBean.edited.getEditor()}" itemLabel="Editor" />
+                                </h:selectOneMenu>	
+                                <br />
+                                <label>Email</label>
+                                <br />
+                                <h:inputText id="email" value="#{editUserBean.edited.email}">
+                                    <f:validator validatorId="emailValidator" for="email"/>
+                                </h:inputText>
+                                <h:message styleClass="error_message" id="email_message" for="email" />
+                                <br/>
+                                <h:commandButton action="#{editUserBean.edit()}" value="EDIT">
+                                </h:commandButton>
+                            </fieldset>
+                        </h:form>
+                    </div>
+                    <div class="pure-u-1-2">
+                        <h:form id="add_user" styleClass="pure-form pure-u-1-2">
+                            <fieldset>
+                                <h1 class="content-subhead">Add User</h1>
+                                <label>Username</label> <br/>
+                                <h:inputText id="username" value="#{addUserBean.user.username}">
+                                    <f:validator validatorId="usernameValidator" for="username"/>
+                                </h:inputText>
+                                <h:message styleClass="error_message" id="username_message" for="username" />
+                                <br/>
+                                <label>Password</label> <br/>
+                                <h:inputText id="password" value="#{addUserBean.user.password}">
+                                    <f:validator validatorId="passwordValidator" for="password"/>
+                                </h:inputText>
+                                <h:message styleClass="error_message" id="password_message" for="password" />
+                                <br/>
+                                <label>Role</label> <br/>
+                                <h:selectOneMenu value="#{addUserBean.user.role}">
+                                    <f:selectItem itemValue="#{addUserBean.user.getAdmin()}" itemLabel="Admin" />
+                                    <f:selectItem itemValue="#{addUserBean.user.getOwner()}" itemLabel="Owner" />
+                                    <f:selectItem itemValue="#{addUserBean.user.getEditor()}" itemLabel="Editor" />
+                                </h:selectOneMenu>	
+                                <br />
+                                <label>Email</label>
+                                <br />
+                                <h:inputText id="email" value="#{addUserBean.user.email}">
+                                    <f:validator validatorId="emailValidator" for="email"/>
+                                </h:inputText>
+                                <h:message styleClass="error_message" id="email_message" for="email" />
+                                <br/>
+                                <h:commandButton action="#{addUserBean.add()}" value="ADD">
+                                </h:commandButton>
+                            </fieldset>
+                        </h:form>
+                    </div>
+                </div>
+                <h1 class="content-subhead">List User</h1>
+                <h:form id="user_table_wrapper">
+                <h:dataTable value="#{allUserBean.allUser}" var="user"
+                             id="user_table">
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Username" />
+                        </f:facet>
+                        <h:outputText value="#{user.username}" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Password" />
+                        </f:facet>
+                        <h:outputText value="#{user.password}" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Role" />
+                        </f:facet>
+                        <h:outputText value="#{user.roleName}" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Email" />
+                        </f:facet>
+                        <h:outputText value="#{user.email}" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Edit" />
+                        </f:facet>
+                        <h:commandButton action="#{editUserBean.setEdited(user)}" value="edit #{user.username}" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Delete" />
+                        </f:facet>
+                        <h:commandButton action="#{deleteUserBean.delete(user.username)}" value="delete #{user.username}">
+                        </h:commandButton>
+                    </h:column>
+                </h:dataTable>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</f:view>
+</html>

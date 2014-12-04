@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+<f:view>
+    <h:head>
+        <title>Post title</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="template/basis.xhtml">
+            <ui:define name="content">
+                <section class="post">
+                    <header class="post-header">
+                        <h2 class="post-title">#{Post.fetchPost(param['id']).judul}</h2>
+
+                        <p class="post-meta">
+                            By #{Post.fetchPost(param['id']).author}
+                            | <time>#{Post.fetchPost(param['id']).date}</time>
+                        </p>
+                    </header>
+
+                    <div class="post-description">
+                        <p>
+                            #{Post.fetchPost(param['id']).konten}
+                        </p>
+                          
+                    </div>
+                </section>
+                <h1 class="content-subhead">Komentar</h1>
+                <section class="komentar">
+                    
+                    <ul class="komentar-list">
+                        <c:forEach var="komentar" items="#{komentar.fetchComment(param['id'])}">
+                            <li>
+                                <p class="Nama">#{komentar.tanggal} | #{komentar.nama}</p>
+                                    <br/>
+                                <p class="post-meta">
+                                    #{komentar.komentar}
+                                </p>
+                            </li>
+                        </c:forEach>
+                    </ul>
+                </section>
+            </ui:define>
+        </ui:composition>>
+        <script type="text/javascript">
+            //<![CDATA[
+            function validateForm(email) {
+                console.log("email: " + email);
+                var re = "/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/";
+                if (re.test(email)) {
+                    return true;
+                }
+                else {
+                    alert("Masukkan email salah");
+                    return false;
+                }
+            }
+            //]]>
+        </script>
+    </h:body>
+</f:view>
+</html>
