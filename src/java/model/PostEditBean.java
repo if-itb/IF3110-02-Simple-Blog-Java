@@ -5,6 +5,8 @@
  */
 
 package model;
+
+
 /**
  *
  * @author pc asus
@@ -38,6 +40,5 @@ public class PostEditBean {
         DAO.PostDAO DB = DAO.DAOFactory.getInstance("javabase.jdbc").getPostDAO();
             DB.update(edited);
              return nb.gotoListPost()+ "?faces-redirect=true";
-       
     }
 }

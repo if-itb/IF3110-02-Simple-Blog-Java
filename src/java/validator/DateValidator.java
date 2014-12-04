@@ -6,19 +6,12 @@
 
 package validator;
 
-import java.lang.annotation.Documented;
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -43,6 +36,7 @@ public class DateValidator implements Validator{
         throws ValidatorException
     {
         DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        formatter.setLenient(false);
         Date tanggal;
         try {
             tanggal = formatter.parse((String) value);

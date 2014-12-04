@@ -19,35 +19,26 @@ and open the template in the editor.
     <h:body>
         <ui:composition template="template/basis.xhtml">
             <ui:define name="content">
-                <article class="art simple post">
-    
-    
-                      
-                        <div class="art-body">
-                            <div class="art-body-inner">
-                                <h2>Edit Post</h2>
-
-                                <div id="contact-area">
-                                    <h:form>
-                                        <label for="Judul">Judul:</label>
-                                        <h:inputText id="Judul" value="#{postEditBean.edited.judul}">                                        </h:inputText>
-                             
-                                        <label for="Tanggal">Tanggal:</label>
-                                        <h:inputText id="Tanggal" value="#{postEditBean.edited.date}">
-                                        </h:inputText>
-                                        <br> </br>
-                                        <label for="Konten">Konten:</label><br></br>
-                                        <h:inputTextarea rows="20" cols="50" id="Konten" value="#{postEditBean.edited.konten}">
-                                        </h:inputTextarea>
-
-                                        <h:commandButton styleClass="submit-button"
-                                               value="Submit" action="#{postEditBean.edit()}"/>
-                                    </h:form>
-                                </div>
-                            </div>
-                        </div>
-
-            </article>
+                <h1 class="content-subhead">Edit Post</h1>
+                <div id="contact-area">
+                    <h:form styleClass="pure-form">
+                        <label for="Judul">Judul: </label><br/>
+                        <h:inputText id="Judul" value="#{postEditBean.edited.judul}"></h:inputText>
+                        <br/><br/>
+                        <label for="Tanggal">Tanggal: </label><br/>
+                        <h:inputText id="Tanggal" value="#{postEditBean.edited.date}">
+                            <f:validator validatorId="dateValidator" for="Tanggal"/>
+                        </h:inputText>
+                        <h:message styleClass="error_message" id="date_message" for="Tanggal" />
+                        <p size ="10px" id="errmsg"></p>
+                        <label for="Konten">Konten:</label><br></br>
+                        <h:inputTextarea rows="20" cols="100" id="Konten" value="#{postEditBean.edited.konten}">
+                        </h:inputTextarea>
+                        <br/>
+                        <h:commandButton styleClass="pure-button"
+                               value="Submit" action="#{postEditBean.edit()}"/>
+                    </h:form>
+                </div>
             </ui:define>
         </ui:composition>>
     </h:body>
