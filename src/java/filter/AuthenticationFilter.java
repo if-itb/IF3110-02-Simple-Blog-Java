@@ -140,6 +140,7 @@ public class AuthenticationFilter implements Filter {
             else if ((user.getRole() == UserBean.getEditor())
                         && (reqURI.startsWith(nc.gotoEditPost())
                             || reqURI.startsWith(nc.gotoUnpublishedPost())
+                            || reqURI.startsWith(nc.gotoViewUnpublished())
                         )
                     )
                 chain.doFilter(request, response);

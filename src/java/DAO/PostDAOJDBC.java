@@ -231,6 +231,7 @@ public void update(Post post) throws DAOException {
         post.setDate(resultSet.getString("tanggal"));
         post.setAuthor(resultSet.getString("author"));
         post.setPID(resultSet.getInt("pid"));
+        post.setPublished(resultSet.getBoolean("published"));
         return post;
     }
 }

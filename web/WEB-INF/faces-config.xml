@@ -107,7 +107,7 @@
      <managed-bean>
         <managed-bean-name>postEditBean</managed-bean-name>
         <managed-bean-class>model.PostEditBean</managed-bean-class>
-        <managed-bean-scope>request</managed-bean-scope>
+        <managed-bean-scope>view</managed-bean-scope>
     </managed-bean>
      <managed-bean>
         <managed-bean-name>postDeleteBean</managed-bean-name>

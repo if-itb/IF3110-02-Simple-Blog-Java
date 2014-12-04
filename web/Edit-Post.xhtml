@@ -37,6 +37,9 @@ and open the template in the editor.
                         <br/>
                         <h:commandButton styleClass="pure-button"
                                value="Submit" action="#{postEditBean.edit()}"/>
+                        <h:commandButton styleClass="pure-button" value="Reload">
+                            <f:ajax listener="#{postEditBean.reload()}" render="@form"/>
+                        </h:commandButton>
                     </h:form>
                 </div>
             </ui:define>

@@ -19,6 +19,17 @@ public class PostEditBean {
      */
     public PostEditBean() {
         edited = new Post();
+        edited.setPublished(false);
+    }
+    
+    public void reload() {
+        DAO.PostDAO DB = DAO.DAOFactory.getInstance("javabase.jdbc").getPostDAO();
+        if (DB.find(edited.getPID()) != null) {
+            Post X;
+            X = DB.find(edited.getPID());
+            edited = X;
+            System.out.println("X="+X.getPID());
+        }
     }
 
     /**
@@ -36,6 +47,9 @@ public class PostEditBean {
     }
     
     public String edit() {
+        System.out.println("EDIT:"+edited.getPID());
+        System.out.println("Published:"+edited.isPublished());
+        
         NavigationController nb = new NavigationController();
         DAO.PostDAO DB = DAO.DAOFactory.getInstance("javabase.jdbc").getPostDAO();
             DB.update(edited);

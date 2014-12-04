@@ -39,10 +39,8 @@
                         </h:form>
                     </li>
                     <li class="nav-item">
-                        <h:form>
-                            <h:commandLink rendered="#{userBean.role == 1 || userBean.role == 2 || userBean.role == 3}"
-                                           styleClass="pure-button" action="#{NavigationController.gotoUnpublishedPost()}" >Unpublished Post</h:commandLink>
-                        </h:form>
+                            <h:link rendered="#{userBean.role == 1 || userBean.role == 2 || userBean.role == 3}"
+                                    styleClass="pure-button" outcome="#{NavigationController.gotoUnpublishedPost()}">Unpublished Post</h:link>
                     </li>
                     <li class="nav-item">
                         <h:form>
