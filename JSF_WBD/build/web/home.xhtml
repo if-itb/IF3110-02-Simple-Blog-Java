@@ -28,7 +28,7 @@
         <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico"></link>
         <title>Simple Blog</title>
     </h:head>
-    <h:body class="default">
+    <h:body class="default" rendered = "#{login.isValidationComplete()}" >
         <img src="assets/img/background.jpg" class="background"></img>
         <div class="wrapper">
             <nav class="nav">

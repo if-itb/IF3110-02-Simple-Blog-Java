@@ -70,6 +70,38 @@ public class TempPostView {
         response.sendRedirect("view_post.xhtml");
         
     }
+    
+    public void viewPost2(int pid) throws ClassNotFoundException, SQLException, IOException{
+        String host = "jdbc:mysql://localhost:3306/simple_blog_java?zeroDateTimeBehavior=convertToNull";
+        String user = "root";
+        String pwd = "";
+        
+        try {
+            Class.forName("com.mysql.jdbc.Driver").newInstance();
+        } catch (InstantiationException | IllegalAccessException ex) {
+            Logger.getLogger(Manager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Connection con = (Connection) DriverManager.getConnection(host, user, pwd);
+        Statement stmt = (Statement) con.createStatement(); 
+        String q = "SELECT * FROM tb_post WHERE pid=" + pid + ";";
+        System.out.println(q);
+        ResultSet rs = stmt.executeQuery(q);
+        if(rs.next()){
+            Judul = rs.getString("ptitle");
+            Konten = rs.getString("pcontent");
+            Pid = rs.getInt("pid");
+            Tanggal = rs.getDate("pdate").toString();
+
+        }else{
+            Judul = "Ga ada judul";
+            Konten = "Ga ada konten";
+        }
+        System.out.println("Judul : " + getJudul());
+        FacesContext context = FacesContext.getCurrentInstance();
+        HttpServletResponse response = (HttpServletResponse) context.getExternalContext().getResponse();
+        response.sendRedirect("view_post_2.xhtml");
+        
+    }
 
     public String getCmtNama() {
         return cmtNama;

@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
@@ -28,7 +29,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author Mochamad Lutfi F
  */
 @ManagedBean(name = "login",eager=true)
-@SessionScoped
+@ApplicationScoped
 public class login 
 { 
     private String username; 
@@ -42,7 +43,7 @@ public class login
     private String dbrole;
     private String SQLuser;
     private static final String COOKIE_NAME = "Cookie";
-    private static final int COOKIE_MAX_AGE = 1000;
+    private static final int COOKIE_MAX_AGE = 24*60*7;
     
     private User currentUser = new User();
 
@@ -86,6 +87,12 @@ public class login
         return dbrole.equals("owner");
     }
     
+    public boolean isCookieSet(Cookie cookie){
+        if(cookie.getName() == COOKIE_NAME)
+            return true;
+        else
+            return false;
+    }
     
       public void setCookie() {
         FacesContext context = FacesContext.getCurrentInstance();
@@ -147,8 +154,13 @@ public class login
     public void setPasswordValid(boolean isPasswordValid) 
         { this.isPasswordValid = isPasswordValid; } 
     /** * @return the validationComplete */ 
-    public boolean getValidationComplete() 
-        { return validationComplete; } 
+    public boolean isValidationComplete() 
+        { if(validationComplete==true){
+            return true;
+            }
+          else
+            return false;
+        } 
     /** * @param validationComplete the validationComplete to set */ 
     public void setValidationComplete(boolean validationComplete) 
         { this.validationComplete = validationComplete; } 
@@ -200,7 +212,7 @@ public class login
             }
             else
             {
-                validationComplete = true;
+              //  validationComplete = true;
                 FacesContext facesContext = FacesContext.getCurrentInstance();
                 facesContext.addMessage(null, new FacesMessage("Username atau Password salah!"));
                 return "";
@@ -208,13 +220,14 @@ public class login
         }
         else
         {
-            validationComplete = true;
+            //validationComplete = true;
             FacesContext facesContext = FacesContext.getCurrentInstance();
                 facesContext.addMessage(null, new FacesMessage("Username atau Password salah!"));
             return "";}
     } 
     
     public void logout() throws IOException {
+        dbrole = "null";
         ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
         externalContext.invalidateSession();
         externalContext.redirect(externalContext.getRequestContextPath() + "/loginuser.xhtml");

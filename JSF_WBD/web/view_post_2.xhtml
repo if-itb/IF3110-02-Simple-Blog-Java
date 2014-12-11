@@ -65,7 +65,7 @@
                         <h2>Komentar</h2>
 
                         <div id="contact-area">
-                            <h:form onsubmit="return validateemail()">
+                            <h:form>
                                 <h:outputText value="Nama:"/><br/>
                                 <h:inputText value="#{tempPostView.cmtNama}"/><br/>
 
@@ -132,18 +132,5 @@
               ga('create',ga_ua);ga('send','pageview');
         </script>
     </h:body>
-    <script type="text/javascript">
-        function validateemail(){
-        var email = document.getElementById('Email');
-         var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-            if (!filter.test(email.value)) {
-            alert('Please provide a valid email address');
-            email.focus;
-            return false;
-         }
-         else
-                return true;
-        }
-         </script>
 </html>
 

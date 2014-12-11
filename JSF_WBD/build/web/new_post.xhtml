@@ -5,6 +5,7 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:jsf="http://java.sun.com/jsf"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <f:subview id="subv" rendered="#{login.isAdmin()||login.isOwner()}">
     <h:head>
         <meta charset="utf-8"></meta>
         <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
@@ -30,7 +31,7 @@
         <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico"></link>
         <title>Simple Blog | Add Post </title>
     </h:head>
-    <h:body class="default">
+    <h:body class="default" rendered = "#{login.isValidationComplete()}">
         <img src="assets/img/background.jpg" class="background"></img>
         <div class="wrapper">
 
@@ -113,5 +114,7 @@
           }
          }
         </script>
+    </f:subview>
+    <f:subview id="apadeh" rendered="#{!login.isAdmin()||!login.isOwner()}"><p>Bukan admin/owner hayo</p></f:subview>
 </html>
 
