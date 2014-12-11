@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <meta charset="utf-8"></meta>
+        <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"></meta>
+        <meta name="description" content="Deskripsi Blog"></meta>
+        <meta name="author" content="Judul Blog"></meta>
+
+        <!-- Twitter Card -->
+        <meta name="twitter:card" content="summary"></meta>
+        <meta name="twitter:site" content="omfgitsasalmon"></meta>
+        <meta name="twitter:title" content="Simple Blog"></meta>
+        <meta name="twitter:description" content="Deskripsi Blog"></meta>
+        <meta name="twitter:creator" content="Simple Blog"></meta>
+        <meta name="twitter:image:src" content="{{! TODO: ADD GRAVATAR URL HERE }}"></meta>
+
+        <meta property="og:type" content="article"></meta>
+        <meta property="og:title" content="Simple Blog"></meta>
+        <meta property="og:description" content="Deskripsi Blog"></meta>
+        <meta property="og:image" content="{{! TODO: ADD GRAVATAR URL HERE }}"></meta>
+        <meta property="og:site_name" content="Simple Blog"></meta>
+
+        <link rel="stylesheet" type="text/css" href="assets/css/screen.css"></link>
+        <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico"></link>
+        <title>Simple Blog</title>
+    </h:head>
+    <h:body class="default">
+        <img src="assets/img/background.jpg" class="background"></img>
+        <div class="wrapper">
+            <nav class="nav">
+                <a style="border:none;" id="logo" href="index.xhtml"><h1>Simple<span>-</span>Blog</h1></a>
+                <ul class="nav-primary">
+                    <li><a href="login.xhtml">Login</a></li>
+                </ul>
+            </nav>
+
+            <div id="home">
+                <div class="posts">
+                    <nav class="art-list">
+                      <ul class="art-list-body">          
+                        <ui:repeat var="o" value="#{manager.publishedPosts}" varStatus="status">
+                            <li class="art-list-item">
+                                <div class="art-list-item-title-and-time">
+                                    <h:form>
+                                        <h2 class="art-list-title"><h:commandLink action="#{tempPostView.viewPost2(o.pid)}">#{o.judul}</h:commandLink></h2>
+                                    </h:form>
+                                    <div class="art-list-time">#{o.tanggal.toString()}</div>
+                                    <div class="art-list-time"><span style="color:#F40034;">&#10029;</span> Featured</div>
+                                </div>
+                                <p>#{o.konten} &hellip;</p>
+                                
+                            </li>
+                        </ui:repeat>                          
+                        
+
+
+                      </ul>
+                    </nav>
+                </div>
+            </div>
+
+            <footer class="footer">
+                <div class="back-to-top"><a href="">Back to top</a></div>
+                <!-- <div class="footer-nav"><p></p></div> -->
+                <div class="psi">&Psi;</div>
+                <aside class="offsite-links">
+                    Titra Wening Rachman /
+                    <a class="rss-link" href="#rss">13512004</a> /
+                    <br></br>
+                    <a class="twitter-link" href="#">Kanya Paramita</a> /
+                    <a class="twitter-link" href="#">13512072</a> /
+                    <br></br>
+                    <a class="twitter-link" href="#">M. Lutfi Fadlan</a> /
+                    <a class="twitter-link" href="#">13512087</a> /
+
+                </aside>
+            </footer>
+
+            </div>
+        
+        
+        
+       
+    </h:body>
+</html>
+

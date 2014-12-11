@@ -1,0 +1,123 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:jsf="http://java.sun.com/jsf"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <f:subview id="subv" rendered="#{login.isAdmin()||login.isEditor()}">
+    <h:head>
+        <meta charset="utf-8"></meta>
+        <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"></meta>
+        <meta name="description" content="Deskripsi Blog"></meta>
+        <meta name="author" content="Judul Blog"></meta>
+
+        <!-- Twitter Card -->
+        <meta name="twitter:card" content="summary"></meta>
+        <meta name="twitter:site" content="omfgitsasalmon"></meta>
+        <meta name="twitter:title" content="Simple Blog"></meta>
+        <meta name="twitter:description" content="Deskripsi Blog"></meta>
+        <meta name="twitter:creator" content="Simple Blog"></meta>
+        <meta name="twitter:image:src" content="{{! TODO: ADD GRAVATAR URL HERE }}"></meta>
+
+        <meta property="og:type" content="article"></meta>
+        <meta property="og:title" content="Simple Blog"></meta>
+        <meta property="og:description" content="Deskripsi Blog"></meta>
+        <meta property="og:image" content="{{! TODO: ADD GRAVATAR URL HERE }}"></meta>
+        <meta property="og:site_name" content="Simple Blog"></meta>
+
+        <link rel="stylesheet" type="text/css" href="assets/css/screen.css"></link>
+        <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico"></link>
+        <title>Simple Blog | Unpublished</title>
+    </h:head>
+    <h:body class="default" rendered = "#{login.isValidationComplete()}">
+        <img src="assets/img/background.jpg" class="background"></img>
+        <div class="wrapper">
+            <nav class="nav">
+                <a style="border:none;" id="logo" href="home.xhtml"><h1>Simple<span>-</span>Blog</h1></a>
+                <ul class="nav-primary">
+                    <ui:fragment rendered="#{login.isAdmin()||login.isOwner()}">
+                        <li><a href="new_post.xhtml">+ New Post</a></li>
+                    </ui:fragment>
+                    <ui:fragment rendered="#{login.isAdmin()||login.isEditor()}">
+                        <li><a href="unpublished.xhtml">Unpublished Posts</a></li>
+                    </ui:fragment>
+                    <ui:fragment rendered="#{login.isAdmin()}">
+                        <li><a href="manageuser.xhtml" >Manage Users</a></li>
+                    </ui:fragment>
+                    <li><a href="index.xhtml">Logout</a></li>
+                </ul>
+            </nav>
+
+            <div id="home">
+                <div class="posts">
+                    <nav class="art-list">
+                      <ul class="art-list-body">
+                          <ui:repeat var="o" value="#{manager.unPublishedPosts}" varStatus="status">
+                             <li class="art-list-item">
+                                 <div class="art-list-item-title-and-time">
+                                     <h:form>
+                                         <h2 class="art-list-title"><h:commandLink action="#{tempPostView.viewPost(o.pid)}">#{o.judul}</h:commandLink></h2>
+                                     </h:form>
+                                     <div class="art-list-time">#{o.tanggal.toString()}</div>
+                                     <div class="art-list-time"><span style="color:#F40034;">&#10029;</span> Featured</div>
+                                 </div>
+                                 <p>#{o.konten} &hellip;</p>
+                                 <p><h:form>
+                                         <h:commandLink action="#{manager.publishPost(o.pid)}">Publish</h:commandLink> | <h:commandLink action="#{tempPostEdit.editPost(o.pid)}">Edit</h:commandLink> | <h:commandLink action="#{manager.deletePost(o.pid)}" onclick="return confirmdel()">Delete</h:commandLink>
+                                 </h:form></p>
+                             </li>
+                         </ui:repeat>
+                          
+                      </ul>
+                    </nav>
+                </div>
+            </div>
+
+            <footer class="footer">
+                <div class="back-to-top"><a href="">Back to top</a></div>
+                <!-- <div class="footer-nav"><p></p></div> -->
+                <div class="psi">&Psi;</div>
+                <aside class="offsite-links">
+                    Titra Wening Rachman /
+                    <a class="rss-link" href="#rss">13512004</a> /
+                    <br></br>
+                    <a class="twitter-link" href="#">Kanya Paramita</a> /
+                    <a class="twitter-link" href="#">13512072</a> /
+                    <br></br>
+                    <a class="twitter-link" href="#">M. Lutfi Fadlan</a> /
+                    <a class="twitter-link" href="#">13512087</a> /
+
+                </aside>
+            </footer>
+
+            </div>
+        
+        
+        
+        
+<!--        <p>
+        Hello from Facelets, ini gw make JSF <br></br>
+        <b>Ini Bold</b><br></br>
+        <marquee> Ini ada text jalan - jalan. Hehehehehehe </marquee><br></br>
+        </p>
+        <h1>Text yang di bawah ini dateng dari bean:</h1>
+        <p>#{helloWorld.message}</p>-->
+    </h:body>
+    <script type="text/javascript">
+        function confirmdel(){
+                var retVal = confirm("Do you want to delete?");
+           if( retVal == true ){
+              alert("User wants to delete!");
+                  return true;
+           }else{
+              alert("User does not want to delete!");
+                  return false;
+           }
+        }
+    </script>
+        </f:subview>
+    <f:subview id="apadeh" rendered="#{!login.isAdmin()||!login.isEditor()}"><p>Bukan admin/editor hayo</p></f:subview>
+</html>
+
