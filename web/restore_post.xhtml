@@ -27,7 +27,7 @@
             <hr  margin-right="30%"></hr>
            
             <div class="content">
-                <h:form>
+                <h:form rendered="#{usersController.admin}">
 					<ui:repeat value="#{postsController.allDeletedPosts}" var="post">
 						<h:inputHidden value="#{post.id}" binding="#{restorepostid}" />         
 						<div class="post">

@@ -27,7 +27,7 @@
             <hr  margin-right="30%"></hr>
             
             <div class="content">
-                <h:form id="edituserform">
+                <h:form id="edituserform" rendered="#{usersController.admin}">
 					<h:messages style="color:red;" />
 					<h:inputHidden value="#{usersController.saved_id}" binding="#{edituserid}"></h:inputHidden>
 					<div class="forms">

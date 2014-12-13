@@ -30,7 +30,7 @@
             <div class="content">
                 <div class="newpost">
                     <div class="textfield">
-						<h:form id="post">
+						<h:form id="post" rendered="#{usersController.admin || usersController.owner}">
 							<h:messages style="color:red;" />
 							<h:inputHidden value="#{postsController.active_id}" binding="#{editpostid}"></h:inputHidden>	
                             Judul<br></br><h:inputText id="title" value="#{postsController.active_title}" binding="#{editposttitle}" required="true" requiredMessage="Please enter a title"></h:inputText>

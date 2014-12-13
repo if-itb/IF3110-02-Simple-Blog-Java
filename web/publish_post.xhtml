@@ -27,7 +27,7 @@
             <hr  margin-right="30%"></hr>
             
             <div class="content">
-                <h:form>
+                <h:form rendered="#{usersController.admin || usersController.editor}">
 					<ui:repeat value="#{postsController.allUnpublishedPosts}" var="post">
 						<h:inputHidden value="#{post.id}" binding="#{publishpostid}" />			
 						<div class="post">

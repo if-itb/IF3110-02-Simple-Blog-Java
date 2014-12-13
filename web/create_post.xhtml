@@ -6,7 +6,6 @@
         <title>Create Page</title>
 		<h:outputStylesheet library="css" name="mystyle.css"></h:outputStylesheet>
 		<h:outputScript library="js" name ="custom.js"></h:outputScript>
-		<script src="//tinymce.cachefly.net/4.1/tinymce.min.js"></script>
     </h:head>
 	
     <h:body>
@@ -30,7 +29,7 @@
 			<div class="content">
 				<div class="newpost">
 					<div class="textfield">
-						<h:form id="post" enctype="multipart/form-data">
+						<h:form id="post" enctype="multipart/form-data" rendered="#{usersController.admin || usersController.owner}">
 							<h:messages style="color:red;" />
 							Judul<br /><h:inputText id="title" binding="#{createposttitle}" required="true" requiredMessage="Please enter a title"></h:inputText>
 							<br /><br />
