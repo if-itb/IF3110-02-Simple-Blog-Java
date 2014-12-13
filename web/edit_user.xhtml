@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	  xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Edit Page</title>
+		<h:outputStylesheet library="css" name="mystyle.css"></h:outputStylesheet>
+    </h:head>
+	
+    <h:body>        
+        <div class="wrapper">
+            <div class="top">
+                <div class="title">      
+					<h:form>              
+						<h:commandLink action="index">SIMPLE<blue>-</blue>BLOG</h:commandLink>
+						<div class="signin">
+							<hide1><h:outputText value="#{usersController.loginUsername}"></h:outputText></hide1>
+							<hide2><h:commandLink action="#{usersController.logout()}" rendered="#{usersController.login}">logout</h:commandLink></hide2>
+							<hide2><h:commandLink action="login_user" rendered="#{!usersController.login}">login</h:commandLink></hide2>
+							<h:graphicImage name="img/user1.png" height="30px"></h:graphicImage>
+						</div>
+					</h:form>     
+                </div>
+            </div><!--end top-->
+            <hr  margin-right="30%"></hr>
+            
+            <div class="content">
+                <h:form id="edituserform" rendered="#{usersController.admin}">
+					<h:messages style="color:red;" />
+					<h:inputHidden value="#{usersController.saved_id}" binding="#{edituserid}"></h:inputHidden>
+					<div class="forms">
+						<blue><b>Edit User</b></blue>
+						<br /><br />
+						<div class="textfield">
+							email : <h:inputText id="email" value="#{usersController.saved_email}" binding="#{editemail}" required="true" requiredMessage="Please enter an email"></h:inputText>
+							<br /><br />
+							username : <h:inputText id="username" value="#{usersController.saved_username}" binding="#{editusername}" required="true" requiredMessage="Please enter a username"></h:inputText>
+							<br /><br />
+							password : <h:inputSecret id="password" value="#{usersController.saved_password}" binding="#{edituserpassword}" required="true" requiredMessage="Please enter a password"></h:inputSecret>
+							<br /><br />
+							role:
+							<h:selectOneMenu binding ="#{edituserrole}" value="#{usersController.saved_role}">
+								<f:selectItem itemValue="owner" itemLabel="owner"/>
+								<f:selectItem itemValue="editor" itemLabel="editor"/>
+								<f:selectItem itemValue="admin" itemLabel="admin"/>
+							</h:selectOneMenu>
+							<br /><br />
+							<h:commandButton onclick="return validateEmail()" action="#{usersController.updateUser(edituserid.value, editemail.value, editusername.value, edituserpassword.value, edituserrole.value)}" value="Update" ></h:commandButton>
+						</div>
+					</div>
+                </h:form>
+            </div>
+        </div> <!-- end wrapper -->
+		
+		<script type="text/javascript">
+			function validateEmail() {
+				console.log('ok');
+				var x = document.getElementById('edituserform:email');
+				var input_email = x.value;
+				var result = input_email.match(/^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$/g);
+				console.log(result);
+				if (result === null) {
+					alert('Email salah');
+					return false;
+				} 
+				return true;
+			}
+		</script>
+    </h:body>
+</html>

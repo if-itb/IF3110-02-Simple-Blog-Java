@@ -1,0 +1,122 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>View Page</title>
+		<h:outputStylesheet library="css" name="mystyle.css"></h:outputStylesheet>
+    </h:head>
+    <h:body>
+        <div class="wrapper">
+			<div class="top">
+				<div class="title">  
+					<h:form>
+					<h:commandLink action="index">SIMPLE<blue>-</blue>BLOG</h:commandLink>
+						<div class="signin">
+							<hide1><h:outputText value="#{usersController.loginUsername}"></h:outputText></hide1>
+							<hide2><h:commandLink action="#{usersController.logout()}" rendered="#{usersController.login}">logout</h:commandLink></hide2>
+							<hide2><h:commandLink action="login_user" rendered="#{!usersController.login}">login</h:commandLink></hide2>
+							<h:graphicImage name="img/user1.png" height="30px"></h:graphicImage>
+						</div>
+					</h:form>       
+				</div>
+			</div><!--end top-->
+			<hr  margin-right="30%"></hr>
+            
+			<div class="content">
+				<h:form id="comments">
+					<h:inputHidden value="#{postsController.active_id}" binding="#{viewpostid}" ></h:inputHidden>     	
+					<div class="judulpost">
+						<h:outputText id="title" value="#{postsController.getPost(viewpostid.value).title}" /><br></br>
+					</div>
+					<div class="tanggalpost">
+						<h:outputText id="date" value="#{postsController.getPost(viewpostid.value).date}">
+							<f:convertDateTime type="date" dateStyle="long" timeZone="GMT+7"/>
+						</h:outputText>
+					</div>
+					<div class="isipost">
+                                            <p><h:outputText id="content" value="#{postsController.getPost(viewpostid.value).content}" /></p>
+						<br /><br />
+						<hr></hr>
+						
+						<div class="h1komentar">
+							COMMENTS
+						</div>
+						
+						<div class="komenforms">
+							<h:messages id="errorMessages" style="color:red;" />
+							<div class="textfield">
+								<h:panelGroup rendered="#{!usersController.login}">
+									<h:outputLabel for="name" value="Name: " />
+									<br />
+									<h:inputText id="name" binding="#{createname}" required="true" requiredMessage="Please enter your name"></h:inputText>
+									<br /><br />
+									<h:outputLabel for="email" value="E-mail: " />
+									<br />
+									<h:inputText id="email" binding="#{createemail}" required="true" requiredMessage="Please enter your e-mail" ></h:inputText>
+									<br /><br />
+								</h:panelGroup>
+								<h:outputLabel for="comment" value="Comment: " />
+								<br />
+								<h:inputTextarea id="comment" binding="#{createcomment}" required="true" requiredMessage="Please enter your comment" rows="6" cols="50"></h:inputTextarea>
+								<br /><br />
+								<h:panelGroup rendered="#{usersController.login}">
+									<h:commandButton onclick="return validateEmail()" value="Create" action="#{commentsController.createComment(viewpostid.value, usersController.loginUsername, usersController.loginEmail, createcomment.value)}">
+										<f:ajax execute="@form" render="commentsTable"></f:ajax>
+									</h:commandButton>
+								</h:panelGroup>
+								<h:panelGroup rendered="#{!usersController.login}">
+									<h:commandButton onclick="return validateEmail()" value="Create" action="#{commentsController.createComment(viewpostid.value, createname.value, createemail.value, createcomment.value)}">
+										<f:ajax execute="@form" render="commentsTable"></f:ajax>
+									</h:commandButton>
+								</h:panelGroup>
+							</div>
+						</div>
+						<br />
+						<hr></hr>
+                                                <h:panelGroup id="commentsTable">
+						<ui:repeat value="#{commentsController.getAllComments(viewpostid.value)}" var="comment">
+							<div class="komentarbox">
+								<h:inputHidden value="#{comment.id}" binding="#{commentid}" />
+								<div class="komentarattr">
+									<div class="komentarname">
+										<b><h:outputText value="#{comment.name}" binding="#{commentname}" ></h:outputText></b>
+									</div>
+									<div class="komentartime">
+										<h:outputText value="#{comment.date}" binding="#{commentdate}" >
+											<f:convertDateTime type="date" dateStyle="long" timeZone="GMT+7"/>
+										</h:outputText>
+									</div>
+								</div>
+
+								<div class="komentarcontent">
+									<h:outputText value="#{comment.comment}" binding="#{commentcomment}" ></h:outputText>
+								</div>
+							</div>
+							<br />
+						</ui:repeat>
+                                                </h:panelGroup>
+					</div>
+				</h:form>
+			</div>
+			
+		</div> <!-- end wrapper -->
+		
+		<script type="text/javascript">
+			function validateEmail() {
+				console.log('ok');
+				var x = document.getElementById('comments:email');
+				var input_email = x.value;
+				var result = input_email.match(/^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$/g);
+				console.log(result);
+				if (result === null) {
+					alert('Email salah');
+					return false;
+				} 
+				return true;
+			}
+		</script>
+    </h:body>
+</html>

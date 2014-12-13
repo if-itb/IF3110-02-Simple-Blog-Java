@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title>Create Page</title>
+		<h:outputStylesheet library="css" name="mystyle.css"></h:outputStylesheet>
+		<h:outputScript library="js" name ="custom.js"></h:outputScript>
+    </h:head>
+	
+    <h:body>
+    <!--<textarea name="content" style="width:100%"></textarea>-->
+        <div class="wrapper">
+			<div class="top">
+				<div class="title">
+					<h:form>
+						<h:commandLink action="index">SIMPLE<blue>-</blue>BLOG</h:commandLink>
+						<div class="signin">
+							<hide1><h:outputText value="#{usersController.loginUsername}"></h:outputText></hide1>
+							<hide2><h:commandLink action="#{usersController.logout()}" rendered="#{usersController.login}">logout</h:commandLink></hide2>
+							<hide2><h:commandLink action="login_user" rendered="#{!usersController.login}">login</h:commandLink></hide2>
+							<h:graphicImage name="img/user1.png" height="30px"></h:graphicImage>
+						</div>
+					</h:form>
+				</div>
+			</div><!--end top-->
+			<hr margin-right="30%" />
+
+			<div class="content">
+				<div class="newpost">
+					<div class="textfield">
+						<h:form id="post" enctype="multipart/form-data" rendered="#{usersController.admin || usersController.owner}">
+							<h:messages style="color:red;" />
+							Judul<br /><h:inputText id="title" binding="#{createposttitle}" required="true" requiredMessage="Please enter a title"></h:inputText>
+							<br /><br />
+							Tanggal<br /><h:inputText id="date_temp" required="true" requiredMessage="Please enter a date"></h:inputText>
+							<h:inputHidden id = "date" binding="#{createpostdate}"></h:inputHidden>
+							<br /><br />
+							Content<br /><h:inputTextarea id="content" binding="#{createpostcontent}" required="true" requiredMessage="Please enter a content" cols="80" rows="10"></h:inputTextarea>
+							<br /><br />
+<!--							Gambar<br/><h:inputFile value="#{fileManagement.file1}"></h:inputFile>
+							<br/><br/>-->
+							<h:commandButton onclick = "return modifyDateToLong()" action="#{postsController.createPost(createposttitle.value, createpostdate.value, createpostcontent.value)}" value="Create"></h:commandButton>
+						</h:form>
+					</div>
+				</div>
+			</div> <!-- end content -->
+
+        </div>
+    </h:body>
+</html>

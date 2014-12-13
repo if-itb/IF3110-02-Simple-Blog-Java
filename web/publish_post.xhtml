@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Publish Page</title>
+        <h:outputStylesheet library="css" name="mystyle.css"></h:outputStylesheet>
+    </h:head>
+	
+    <h:body>
+        <div class="wrapper">            
+            <div class="top">
+                <div class="title">
+					<h:form>
+						<h:commandLink action="index">SIMPLE<blue>-</blue>BLOG</h:commandLink>
+						<div class="signin">
+							<hide1><h:outputText value="#{usersController.loginUsername}"></h:outputText></hide1>
+							<hide2><h:commandLink action="#{usersController.logout()}" rendered="#{usersController.login}">logout</h:commandLink></hide2>
+							<hide2><h:commandLink action="login_user" rendered="#{!usersController.login}">login</h:commandLink></hide2>
+							<h:graphicImage name="img/user1.png" height="30px"></h:graphicImage>
+						</div>
+					</h:form>       
+                </div>
+            </div><!--end top-->
+            <hr  margin-right="30%"></hr>
+            
+            <div class="content">
+                <h:form rendered="#{usersController.admin || usersController.editor}">
+					<ui:repeat value="#{postsController.allUnpublishedPosts}" var="post">
+						<h:inputHidden value="#{post.id}" binding="#{publishpostid}" />			
+						<div class="post">
+							<div class="post_attr">
+								<div class="post_title">
+									<h:outputText value="#{post.title}" binding="#{publishposttitle}" ></h:outputText>
+								</div>
+								<div class="post_date">
+									<h:outputText value="#{post.date}" binding="#{publishpostdate}" >
+										<f:convertDateTime type="date" dateStyle="long" timeZone="GMT+7"/>
+									</h:outputText>
+								</div>
+							</div>
+							<div class="post_content">
+								<h:outputText value="#{post.content}" binding="#{publishpostcontent}" ></h:outputText>
+								<br></br>
+								<opt>
+									<h:commandLink value="Edit" action="#{postsController.editPost(publishpostid.value, publishposttitle.value, publishpostdate.value, publishpostcontent.value, false)}" />
+									| 
+									<h:commandLink value="Publish" action="#{postsController.updatePost(publishpostid.value, publishposttitle.value, publishpostdate.value, publishpostcontent.value, true)}" ></h:commandLink>
+								</opt>
+							</div>
+						</div>
+					</ui:repeat>
+				</h:form>
+			</div>
+			
+        </div> <!-- end wrapper -->		
+    </h:body>
+</html>

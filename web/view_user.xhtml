@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>User Page</title>
+		<h:outputStylesheet library="css" name="mystyle.css"></h:outputStylesheet>
+    </h:head>
+	
+    <h:body>
+        <div class="wrapper">
+            <div class="top">
+                <div class="title">
+					<h:form>
+						<h:commandLink action="index">SIMPLE<blue>-</blue>BLOG</h:commandLink>
+						<div class="signin">
+							<hide1><h:outputText value="#{usersController.loginUsername}"></h:outputText></hide1>
+							<hide2><h:commandLink action="#{usersController.logout()}" rendered="#{usersController.login}">logout</h:commandLink></hide2>
+							<hide2><h:commandLink action="login_user" rendered="#{!usersController.login}">login</h:commandLink></hide2>
+							<h:graphicImage name="img/user1.png" height="30px"></h:graphicImage>
+						</div>
+					</h:form>      
+                </div>
+            </div><!--end top-->
+            <hr  margin-right="30%"></hr>
+            <div class="content">
+                <h:form rendered="#{usersController.admin}">
+					<div class="adduser">
+						<a href="create_user.xhtml">+ add user</a>
+					</div>
+					<div class="manageuser">       
+						<div class="listname">
+							<ul>
+								<h:dataTable value="#{usersController.allUsers}" var="user">
+									<h:inputHidden value="#{user.id}" binding="#{userid}" />
+									<h:column>
+										<role><h:outputText value="#{user.role}" binding="#{userrole}" ></h:outputText></role>
+									</h:column>
+									<h:column>
+										<h:outputText value="#{user.email}" binding="#{useremail}" ></h:outputText>
+									</h:column>&nbsp;
+									<h:column>
+										<h:outputText value="#{user.username}" binding="#{username}" ></h:outputText>
+									</h:column>&nbsp;
+									<h:column>
+										<h:commandLink action="#{usersController.editUser(userid.value, useremail.value, username.value, userpassword.value, userrole.value)}"><h:graphicImage name="img/edit1.png" height="17px" title="add new post"></h:graphicImage></h:commandLink>
+									</h:column>&nbsp;
+									<h:column>
+										<h:commandLink onclick="return confirm('Are you sure you want to delete this user?');" action="#{usersController.deleteUser(userid.value)}"><h:graphicImage name="img/delete1.png" height="17px" title="add new post"></h:graphicImage></h:commandLink>
+									</h:column>
+								</h:dataTable>
+							</ul>
+						</div>
+					</div>
+				</h:form>
+            </div>
+        </div> <!-- end wrapper -->
+    </h:body>
+</html>
