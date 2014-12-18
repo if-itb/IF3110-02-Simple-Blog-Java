@@ -1,0 +1,187 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">      
+    <h:head>
+        <title>Simple Blog</title>
+
+        <!-- Bootstrap Core CSS -->
+        <link href="css/bootstrap.css" rel="stylesheet"/>
+
+        <!-- Custom CSS -->
+        <link href="css/custom.css" rel="stylesheet"/>
+
+        <!-- Custom Fonts -->
+        <link href="font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+
+        <link href='http://fonts.googleapis.com/css?family=Yellowtail' rel='stylesheet' type='text/css'/>
+
+        <link href='http://fonts.googleapis.com/css?family=Raleway:400,300' rel='stylesheet' type='text/css'/>
+
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'/>
+    </h:head>
+    <h:body>
+        <!-- Navigation -->
+        <ui:include src="include/header.xhtml" />
+        <!-- Page Content -->
+        <div class="container">
+            <c:set var="post" value="#{PostData.getPost(param['id'])}" />
+            <span style="display:none" id="id">#{param['id']}</span>
+            <!-- Page Heading/Breadcrumbs -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">#{post.title}
+                        <small>by <a href="#">#{post.author.username}</a>
+                        </small>
+                    </h1>
+                    <ol class="breadcrumb">
+                        <li><h:link outcome="index" value="Home" />
+                        </li>
+                        <li class="active">#{post.title}</li>
+                    </ol>
+                </div>
+            </div>
+            <!-- /.row -->
+
+            <!-- Content Row -->
+            <div class="row">
+
+                <!-- Blog Post Content Column -->
+                <div class="col-lg-8">
+
+                    <!-- Blog Post -->
+
+                    <hr />
+
+                    <!-- Date/Time -->
+                    <dt><i class="fa fa-clock-o"></i>  Posted on #{post.date}</dt>
+
+                    <hr />
+
+                    <!-- Preview Image -->
+                    <h:graphicImage url="upload/#{post.image}" class="img-responsive" />
+
+                    <hr />
+
+                    <!-- Post Content -->
+                    <p>#{post.content}</p>
+
+                    <hr />
+
+                    <!-- Blog Comments -->
+
+                    <!-- Comments Form -->
+                    <div class="well">
+                        <h:form class="form-horizontal" role="form" id="comment_form">
+                            <c:set var="new_comment" value="#{Comment}" />
+                            <c:set var="author" value="#{UserData.userLoggedIn()}" />
+                            <h5>Add Comment</h5>
+                          <c:choose>
+                              <c:when test="#{UserData.is_logged_in()}" >
+                                  <input type="hidden" class="form-control" id="name" value="#{author.name}" required="true"/>
+                                  <input type="hidden" class="form-control" id="email" value="#{author.email}" required="true"/>
+                              </c:when>
+                              <c:otherwise>
+                          <div class="form-group">
+                            <label for="name" class="col-sm-2 control-label">Name</label>
+                            <div class="col-sm-9">
+                                <input type="name" class="form-control" id="name" required="true"/>
+                                <h:message for="name" class="label label-warning" />
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label for="email" class="col-sm-2 control-label">Email</label>
+                            <div class="col-sm-9">
+                                <input type="email" class="form-control" id="email" required="true"/>
+                                <h:message for="email" class="label label-warning" />
+                            </div>
+                          </div>
+                              </c:otherwise>
+                          </c:choose>
+                          <div class="form-group">
+                            <label for="content" class="col-sm-2 control-label">Comment</label>
+                            <div class="col-sm-9">
+                                <textarea class="form-control" id="content" required="true" requiredMessage="*Required"/>
+                                <h:message for="content" class="label label-warning" />
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button id="submit" type="submit" class="btn btn-primary" onclick="addComment();return false;">Publish</button>
+                            </div>
+                          </div>
+                        </h:form>
+                    </div>
+
+                    <hr />
+
+                    <!-- Posted Comments -->
+                    <div id="comment_list" />
+
+                </div>
+
+                <!-- Blog Sidebar Widgets Column -->
+                <div class="col-md-4">
+
+                    <!-- Blog Search Well
+                    <div class="well">
+                        <h4>Blog Search</h4>
+                        <div class="input-group">
+                            <input type="text" class="form-control">
+                            <span class="input-group-btn">
+                                <button class="btn btn-primary" type="button">Search</button>
+                            </span>
+                        </div>
+                        /.input-group 
+                    </div> -->
+
+                    <!-- Blog Categories Well -->
+                    <div class="well">
+                        <h4>Last Posts</h4>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                    <ui:repeat var="p" value="#{PostData.allPost}">
+                                        <div class="row" style="margin-top: 10px;">
+                                                <div class="col-xs-4">
+                                                    <h:graphicImage url="upload/#{p.image}" class="img-responsive" alt="" />
+                                                </div>
+                                                <div class="col-xs-8">
+                                                    <h4>
+                                                    <h:link outcome="post" value="#{p.title}">
+                                                        <f:param name="id" value="#{p.id}" />
+                                                    </h:link>
+                                                    </h4>
+                                                    by <a href="#">#{p.author.username}</a>
+                                                </div>
+                                        </div>
+                                    </ui:repeat>
+                            </div>
+                        </div>
+                        <!-- /.row -->
+                    </div>
+
+                </div>
+
+            </div>
+            <!-- /.row -->
+
+            <hr />
+
+            <!-- Footer -->
+            <footer>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <p>Copyright &copy; Your Website 2014</p>
+                    </div>
+                </div>
+            </footer>
+
+        </div>
+        <!-- /.container -->
+        <script type="text/javascript" src="js/comment.js"></script>
+    </h:body>
+</html>
+

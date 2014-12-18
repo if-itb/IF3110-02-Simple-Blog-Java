@@ -1,0 +1,106 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Simple Blog</title>
+
+        <!-- Bootstrap Core CSS -->
+        <link href="css/bootstrap.css" rel="stylesheet"/>
+
+        <!-- Custom CSS -->
+        <link href="css/custom.css" rel="stylesheet"/>
+
+        <!-- Custom Fonts -->
+        <link href="font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+
+        <link href='http://fonts.googleapis.com/css?family=Yellowtail' rel='stylesheet' type='text/css'/>
+
+        <link href='http://fonts.googleapis.com/css?family=Raleway:400,300' rel='stylesheet' type='text/css'/>
+
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'/>
+    </h:head>
+    <h:body>
+        <!-- Navigation -->
+        <ui:include src="include/header.xhtml" />
+        <!-- Page Content -->
+        <div class="container">
+            <div class="col-md-12">
+                <div class="row">
+                    <h1 class="page-header">Home
+                    </h1>
+                </div>
+            </div>
+            <!-- Blog Post Row -->
+            <c:choose>
+                <c:when test="#{UserData.userLoggedIn().role == 'admin'}">
+                    <c:set var="posts" value="#{PostData.allDraft}" />
+                </c:when>
+                <c:when test="#{UserData.userLoggedIn().role == 'editor'}">
+                    <c:set var="posts" value="#{PostData.allDraft}" />
+                </c:when>
+                <c:otherwise>
+                    <c:set var="posts" value="#{PostData.getDraftbyAuthor(UserData.userLoggedIn())}" />
+                </c:otherwise>
+            </c:choose>
+            <ui:repeat value="#{posts}" var="post">
+                <h:form>
+            <div class="row">
+                <div class="col-md-1 text-center">
+                    <p><i class="fa fa-file-text fa-4x"></i>
+                    </p>
+                    <p>#{post.date}</p>
+                </div>
+                <div class="col-md-5">
+                    <a href="post.xhtml?id=#{post.id}">
+                        <c:if test="#{post.image.length() == 0}" >
+                        <img class="img-responsive img-hover" src="http://placehold.it/600x300" alt=""/>
+                        </c:if>
+                        <c:if test="#{post.image != ''}" >
+                            <h:graphicImage url="upload/#{post.image}" class="img-responsive img-hover" />
+                        </c:if>
+                    </a>
+                </div>
+                <div class="col-md-6">
+                    <h3>
+                        <h:link outcome="post" value="#{post.title}">
+                            <f:param name="id" value="#{post.id}" />
+                        </h:link>
+                    </h3>
+                    <p>by <a href="#">#{post.author.username}</a>
+                    </p>
+                    <p>#{post.content}</p>
+                    <h:link outcome="edit_post">
+                        <f:param name="id" value="#{post.id}" />
+                        <span class="glyphicon glyphicon-pencil"></span>
+                    </h:link>
+                    <h:commandLink action="#{PostData.softDelPost(post)}" onclick="if (!confirm('Are you sure move this post to trash?')) return false;">
+                        <span class="glyphicon glyphicon-trash"></span>
+                    </h:commandLink>
+                    <h:commandLink action="#{PostData.publishPost(post)}">
+                        <span class="glyphicon glyphicon-globe"></span>
+                    </h:commandLink>
+                </div>
+            </div>
+        <!-- /.row -->
+            
+            <hr />
+                </h:form>
+            </ui:repeat>
+            <!-- Footer -->
+            <footer>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <p>Copyright <h:outputText value="&copy;" /> Your Website 2014</p>
+                    </div>
+                </div>
+            </footer>
+
+        </div>
+        <!-- /.container -->
+    </h:body>
+</html>
+

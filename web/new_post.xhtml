@@ -1,0 +1,144 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Simple Blog</title>
+
+        <!-- Bootstrap Core CSS -->
+        <link href="css/bootstrap.css" rel="stylesheet"/>
+
+        <!-- Custom CSS -->
+        <link href="css/custom.css" rel="stylesheet"/>
+
+        <!-- Custom Fonts -->
+        <link href="font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+
+        <link href='http://fonts.googleapis.com/css?family=Yellowtail' rel='stylesheet' type='text/css'/>
+
+        <link href='http://fonts.googleapis.com/css?family=Raleway:400,300' rel='stylesheet' type='text/css'/>
+
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'/>
+    </h:head>
+    <h:body>
+        <!-- Navigation -->
+        <ui:include src="include/header.xhtml" />
+        <!-- Page Content -->
+        <div class="container">
+            <!-- Blog Comments -->
+
+        <h1>Add Post</h1>
+
+                <!-- Comments Form -->
+                <div class="row">
+                <div class="well col-md-12">
+                    <h:form class="form-horizontal" role="form" enctype="multipart/form-data" id="post">
+                        <c:set var="post" value="#{Post}" />
+                      <div class="form-group">
+                        <label for="title" class="col-sm-2 control-label">Title</label>
+                        <div class="col-sm-9">
+                            <h:inputText class="form-control" id="title" value="#{post.title}" required="true" requiredMessage="*Required" />
+                            <h:message for="title" class="label label-warning" />
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="image" class="col-sm-2 control-label">Image</label>
+                        <div class="col-sm-9">
+                            <h:inputFile id="image" value="#{PostData.part}" required="true" requiredMessage="*Required" >
+                                <f:validator validatorId="FileUploadValidator" />
+                            </h:inputFile>
+                            <h:message for="image" class="label label-warning" />
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="date" class="col-sm-2 control-label">Date</label>
+                        <div class="col-sm-9">
+                            <h:inputText class="form-control" id="date" value="#{post.date}" required="true" requiredMessage="*Required" >
+                                <f:convertDateTime pattern="yyyy-MM-dd" />
+                            </h:inputText>
+                            <h:message for="date" class="label label-warning" />
+                            <div id="msg-date"></div>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="content" class="col-sm-2 control-label">Content</label>
+                        <div class="col-sm-9">
+                          <h:inputTextarea class="form-control" id="content" value="#{post.content}" required="true" requiredMessage="*Required" />
+                          <h:message for="content" class="label label-warning" />
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <c:set var="author" value="#{UserData.userLoggedIn()}" />
+                            <h:commandButton type="submit" class="btn btn-primary" value="Save" action="#{PostData.addPost(post, author, false)}" onclick="if(!validateDate()) return false; else return true;" />
+                            <h:commandButton type="submit" class="btn btn-primary" value="Publish" action="#{PostData.addPost(post, author, true)}" onclick="if(!validateDate()) return false; else return true;" />
+                        </div>
+                      </div>
+                    </h:form>
+                </div>
+            </div>
+            
+            <hr />
+            <!-- Footer -->
+            <footer>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <p>Copyright <h:outputText value="&copy;" /> Your Website 2014</p>
+                    </div>
+                </div>
+            </footer>
+
+        </div>
+        <!-- /.container -->
+        <script type="text/javascript">
+            //<![CDATA[
+            var now = new Date();
+            var day;
+            if (now.getDay() >= 10)
+            {
+                day = now.getDay();
+            }
+            else
+            {
+                day = "0" + now.getDay();
+            }
+            document.getElementById("post:date").value = now.getFullYear() + "-" + (now.getMonth()+1) + "-" + day;
+            function validateDate() {
+                var tanggal = document.getElementById("post:date").value;
+                var re = /^(19|20)\d\d[\-](0[1-9]|1[012])[\-](0[1-9]|[12][0-9]|3[01])$/;
+                if(re.test(tanggal))
+                {
+                    var d = new Date(tanggal);
+                    var n = new Date();
+                    if (!isNaN(d))
+                    {
+                        if (d >= n)
+                        {
+                            return true;
+                        }
+                        else
+                        {
+                            document.getElementById("msg-date").innerHTML = "<span class='label label-warning'>Date is not valid!</span>";
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        document.getElementById("msg-date").innerHTML = "<span class='label label-warning'>Date is not valid!</span>";
+                        return false;
+                    }
+                }
+                else
+                {
+                    document.getElementById("msg-date").innerHTML = "<span class='label label-warning'>Wrong format. Valid format : yyyy-mm-dd</span>";
+                    return false;
+                }
+            }
+            //]]>
+        </script>
+    </h:body>
+</html>
+
