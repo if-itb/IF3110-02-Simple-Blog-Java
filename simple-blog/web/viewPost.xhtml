@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <f:metadata>
+        <f:viewParam name="id" value="#{viewPostController.postId}"/>
+        <f:viewAction action="#{viewPostController.getPost()}"/>
+    </f:metadata>
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="mainTemplate.xhtml">
+            <ui:define name="content">
+        <article class="art simple post">
+    
+    <header class="art-header">
+        <div class="art-header-inner" style="margin-top: 0px; opacity: 1;">
+            <time class="art-time">#{viewPostController.viewPost.date}</time>
+            <h2 class="art-title">#{viewPostController.viewPost.title}</h2>
+            <p class="art-subtitle"></p>
+        </div>
+    </header>
+
+    <div class="art-body">
+        
+        <div class="art-body-inner">
+            <hr class="featured-article" />
+            <h:graphicImage library="images" name="#{viewPostController.postId}.png" width="630" height="420" style="horizontal-align: middle;"/>
+            <p>#{viewPostController.viewPost.content}</p>
+
+            <hr />
+            
+            <h2>Komentar</h2>
+            
+            <div id="contact-area">
+                <h:form id="Form" onsubmit="return false;">
+                    <label for="Nama">Nama:</label>
+                    <h:inputText id="Nama"  value="#{viewPostController.inputName}"/>
+                    <label for="Email">Email:</label>
+                    <h:inputText id="Email"  value="#{viewPostController.inputEmail}"/>
+                    <label for="Komentar">Komentar:</label><br></br>
+                    <h:inputTextarea id="Komentar" rows="20" cols="20" value="#{viewPostController.inputComment}"></h:inputTextarea>
+                    <h:commandButton value="Kirim" class="submit-button" onclick="return validateEmail();">
+                        <f:ajax  execute="Nama Email Komentar" render=":CommentList"></f:ajax>
+                    </h:commandButton>
+                </h:form>
+            </div>
+
+            <ul class="art-list-body">
+                <h:panelGroup id="CommentList">
+                <ui:repeat var="comment" value="#{viewPostController.comment}">
+                    <li class="art-list-item">
+                        <div class="art-list-item-title-and-time">
+                            <h2 class="art-list-title">#{comment.name}</h2>
+                            <div class="art-list-time">#{comment.date}</div>
+                        </div>
+                        <p>#{comment.content} &hellip;</p>
+                    </li>
+                </ui:repeat>
+                </h:panelGroup>
+            </ul>
+        </div>
+    </div>
+
+</article>
+            </ui:define>
+            <ui:define name="bottom">
+                <h:outputScript name="./js/emailValidation.js" />
+            </ui:define>
+    	</ui:composition>
+    </h:body>
+</html>

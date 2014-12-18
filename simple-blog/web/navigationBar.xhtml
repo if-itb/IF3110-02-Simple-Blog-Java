@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+    
+    <c:if test="#{!userController.isUsernamePasswordExist()}">
+        <h:form>
+            <h:inputText id="username"  value="#{userController.username}" a:placeholder="type your username"/>
+            <h:inputSecret id="password" value="#{userController.password}" a:placeholder="type your password"/>
+            <h:commandButton value="login" action="#{userController.actionLogin()}"/>
+        </h:form>
+    </c:if>
+    <c:if test="#{userController.isUsernamePasswordExist()}">
+        <p>
+            <h:form>
+                <c:if test="#{userController.isAdmin()}">
+                    <h:link value="Edit Database" outcome="ShowTable"></h:link>
+                    |
+                    <h:link value="Unpublished Post" outcome="publishPost"></h:link>
+                    |
+                    <h:link value="Deleted Post" outcome="deletedPost"></h:link>
+                    |
+                </c:if>
+                <c:if test="#{userController.isEditor()}">
+                    <h:link value="Unpublished Post" outcome="publishPost"></h:link>
+                    |
+                </c:if> 
+                <h:link value="Tambah Post" outcome="addPost" ></h:link>
+                |
+                <h:commandButton value="logout" action="#{userController.actionLogout()}"  />
+            </h:form>
+        </p>
+    </c:if>
+</html>

@@ -1,0 +1,12 @@
+# NetBeans specific #
+simple-blog/nbproject/
+simple-blog/nbproject/private/
+simple-blog/build/
+simple-blog/nbbuild/
+simple-blog/dist/
+simple-blog/nbdist/
+simple-blog/nbactions.xml
+simple-blog/nb-configuration.xml
+
+# Class Files #
+*.class

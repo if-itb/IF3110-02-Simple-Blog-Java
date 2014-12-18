@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <h:outputStylesheet name="./css/default.css"/>
+        <h:outputStylesheet name="./css/cssLayout.css"/>
+        <title>Simple Blog</title>
+    </h:head>
+
+    <h:body>
+
+        <div id="top">
+            <ui:insert name="top">
+                <nav class ="nav">
+                    <h:link style="border:none;" id="logo" outcome="index"><h1>Simple<span>-</span>Blog</h1></h:link>
+                    <ul class="nav-primary">
+                        <ui:include src="navigationBar.xhtml"/>
+                    </ul>
+                </nav>
+            </ui:insert>
+        </div>
+        <div id="content" class="center_content">
+            <ui:insert name="content">
+                
+            </ui:insert>
+        </div>
+        <div id="bottom">
+            <ui:insert name="bottom">
+                <footer class="footer">
+                    <div class="back-to-top"><a href="">Back to top</a></div>
+                    <!-- <div class="footer-nav"><p></p></div> -->
+                    <div class="psi">&Psi;</div>
+                    <aside class="offsite-links">
+                        Asisten IF3110 /
+                        <a class="rss-link" href="#rss">RSS</a> /
+                        <br/>
+                        <a class="twitter-link" href="http://twitter.com/YoGiiSinaga">Yogi</a> /
+                        <a class="twitter-link" href="http://twitter.com/sonnylazuardi">Sonny</a> /
+                        <a class="twitter-link" href="http://twitter.com/fathanpranaya">Fathan</a> /
+                        <br/>
+                        <a class="twitter-link" href="#">Renusa</a> /
+                        <a class="twitter-link" href="#">Kelvin</a> /
+                        <a class="twitter-link" href="#">Yanuar</a> /
+
+                    </aside>
+                </footer>
+            </ui:insert>
+        </div>
+
+    </h:body>
+
+</html>

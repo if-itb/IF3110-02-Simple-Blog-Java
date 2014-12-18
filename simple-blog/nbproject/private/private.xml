@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/D:/Project/Web/SimpleBlog2/IF3110-02-Simple-Blog-Java/simple-blog/src/java/simpleblog/model/ViewPost.java</file>
+            <file>file:/D:/Project/Web/SimpleBlog2/IF3110-02-Simple-Blog-Java/simple-blog/web/viewPost.xhtml</file>
+            <file>file:/D:/Project/Web/SimpleBlog2/IF3110-02-Simple-Blog-Java/simple-blog/web/navigationBar.xhtml</file>
+            <file>file:/D:/Project/Web/SimpleBlog2/IF3110-02-Simple-Blog-Java/simple-blog/src/java/simpleblog/DatabaseController.java</file>
+            <file>file:/D:/Project/Web/SimpleBlog2/IF3110-02-Simple-Blog-Java/simple-blog/web/WEB-INF/web.xml</file>
+            <file>file:/D:/Project/Web/SimpleBlog2/IF3110-02-Simple-Blog-Java/simple-blog/web/META-INF/context.xml</file>
+            <file>file:/D:/Project/Web/SimpleBlog2/IF3110-02-Simple-Blog-Java/simple-blog/src/java/simpleblog/model/CookieHelper.java</file>
+            <file>file:/D:/Project/Web/SimpleBlog2/IF3110-02-Simple-Blog-Java/simple-blog/web/resources/css/cssLayout.css</file>
+            <file>file:/D:/Project/Web/SimpleBlog2/IF3110-02-Simple-Blog-Java/simple-blog/nbproject/build-impl.xml</file>
+            <file>file:/D:/Project/Web/SimpleBlog2/IF3110-02-Simple-Blog-Java/simple-blog/web/resources/data/simple_blog.sql</file>
+            <file>file:/D:/Project/Web/SimpleBlog2/IF3110-02-Simple-Blog-Java/simple-blog/src/java/simpleblog/model/Post.java</file>
+            <file>file:/D:/Project/Web/SimpleBlog2/IF3110-02-Simple-Blog-Java/simple-blog/web/mainTemplate.xhtml</file>
+            <file>file:/D:/Project/Web/SimpleBlog2/IF3110-02-Simple-Blog-Java/simple-blog/src/java/simpleblog/ViewPostController.java</file>
+            <file>file:/D:/Project/Web/SimpleBlog2/IF3110-02-Simple-Blog-Java/simple-blog/src/java/simpleblog/model/Comment.java</file>
+            <file>file:/D:/Project/Web/SimpleBlog2/IF3110-02-Simple-Blog-Java/simple-blog/web/index.xhtml</file>
+            <file>file:/D:/Project/Web/SimpleBlog2/IF3110-02-Simple-Blog-Java/simple-blog/src/java/simpleblog/PostController.java</file>
+            <file>file:/D:/Project/Web/SimpleBlog2/IF3110-02-Simple-Blog-Java/simple-blog/web/resources/css/default.css</file>
+        </group>
+    </open-files>
+</project-private>

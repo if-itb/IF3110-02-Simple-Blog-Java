@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+    <f:metadata>
+        <f:viewParam name="post_id" value="#{postController.post_id}"/>
+        <f:viewAction action="#{postController.getDatabasePost()}" />
+    </f:metadata>
+    <h:body>
+        <ui:composition template="mainTemplate.xhtml">
+            <ui:define name="content">
+                <br></br>
+                <div class="art-body">
+                    <div class="art-body-inner">
+
+                        <div id="contact-area">
+                            <h:form onsubmit="return postValidation();" id="Form">
+                                <label for="Judul">Judul:</label>
+                                <h:inputText label="Judul" id="Judul" value="#{postController.post.title}"/>
+
+                                <label for="Tanggal">Tanggal:</label>
+                                <h:inputText label="Tanggal" id="Tanggal" a:placeholder="yyyy-mm-hh" value="#{postController.post.date}"/>
+
+                                <label for="Konten">Konten:</label><br></br>
+                                <h:inputTextarea label="Konten" rows="20" cols="20" id="Konten" value="#{postController.post.content}"></h:inputTextarea>
+
+                                <h:commandButton value="Simpan" action="#{postController.actionEditPost()}" class="submit-button"/>
+                            </h:form>
+                        </div>
+                    </div>
+                </div>
+            </ui:define>
+            <ui:define name="bottom">
+                <h:outputScript name="./js/postValidation.js" />
+            </ui:define>
+    	</ui:composition>
+    </h:body>
+</html>
+
