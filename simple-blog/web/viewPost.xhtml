@@ -31,8 +31,10 @@ and open the template in the editor.
     </header>
 
     <div class="art-body">
+        
         <div class="art-body-inner">
             <hr class="featured-article" />
+            <h:graphicImage library="images" name="#{viewPostController.postId}.png" width="630" height="420" style="horizontal-align: middle;"/>
             <p>#{viewPostController.viewPost.content}</p>
 
             <hr />

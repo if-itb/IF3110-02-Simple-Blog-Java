@@ -6,6 +6,11 @@
 
 package simpleblog;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -27,6 +32,8 @@ import javax.faces.context.FacesContext;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
+import javax.servlet.ServletContext;
+import javax.servlet.http.Part;
 import javax.sql.DataSource;
 import simpleblog.model.Post;
 import simpleblog.model.User;
@@ -43,6 +50,7 @@ public class PostController implements Serializable {
      private String date;
      private String content;
      private String post_id;
+     private Part image;
      private Post post;
      
     /**
@@ -132,7 +140,13 @@ public class PostController implements Serializable {
             PreparedStatement ps = con.prepareStatement(
                             "INSERT INTO post (user_id, title, date, content, status) VALUES ('"+ user.getId() +"','"+ title +"','"+ date +"','"+ content +"','0')");
             ps.executeUpdate();
+            ps = con.prepareStatement("SELECT LAST_INSERT_ID();");
+            ResultSet result = ps.executeQuery();
+            result.first();
+            uploadImage(result.getInt(1));
+            
             con.close();
+            
             ps.close();
             return true;
          } catch (Exception e) {
@@ -141,6 +155,60 @@ public class PostController implements Serializable {
          } 
     }
     
+
+    public void uploadImage(int imageId) throws IOException
+    {
+        String fileExtension = getFileExtension(getImage());
+        String basePath = "D:" + File.separator;
+        
+        File outputFilePath = new File(getImagePath()+ File.separator + "resources"+File.separator+"images" + File.separator + imageId + "." + fileExtension);
+        InputStream inputStream = null;
+	OutputStream outputStream = null;
+        System.out.println("Nama file " + outputFilePath.getAbsolutePath());
+        
+        try {
+            inputStream = image.getInputStream();
+            outputStream = new FileOutputStream(outputFilePath);
+
+            int read = 0;
+            final byte[] bytes = new byte[1024*1024*5];
+            while ((read = inputStream.read(bytes)) != -1) {
+                outputStream.write(bytes, 0, read);
+            }
+            
+        } catch (IOException e) {
+        } finally {
+            if (outputStream != null) {
+                outputStream.close();
+            }
+            if (inputStream != null) {
+                inputStream.close();
+            }
+        }
+    }
+    
+    public String getImagePath()
+    {
+        ExternalContext ctx;
+        ctx = FacesContext.getCurrentInstance().getExternalContext(); 
+        String absoluteWebPath = ctx.getRealPath("/");
+        return  absoluteWebPath;
+    }
+    
+    private String getFileExtension(Part part) {
+        final String partHeader = part.getHeader("content-disposition");
+        System.out.println("***** partHeader: " + partHeader);
+        for (String content : part.getHeader("content-disposition").split(";")) {
+            if (content.trim().startsWith("filename")) {
+                String fileName = content.substring(content.indexOf('=') + 1).trim().replace("\"", "");
+                String[] subFileName = fileName.split("\\.");
+                return subFileName[subFileName.length-1];
+            }
+        }
+        return null;
+    }
+    
+
     public boolean editPost() throws NamingException, SQLException{
          try {
             Date dates = new Date();
@@ -246,6 +314,15 @@ public class PostController implements Serializable {
     public void setPost_id(String post_id) {
         this.post_id = post_id;
     }
+
+    public Part getImage() {
+        return image;
+    }
+
+    public void setImage(Part image) {
+        this.image = image;
+    }
+
     
     public void softDelete(){
         try {
