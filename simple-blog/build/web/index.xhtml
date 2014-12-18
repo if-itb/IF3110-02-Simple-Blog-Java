@@ -35,7 +35,9 @@
                                             <f:param name="post_id" value="#{post.id}" />
                                         </h:link>
                                         <h:outputText value=" | " rendered="#{userController.showEditHapus(post.userId)}"/>
-                                        <h:link value="Hapus" rendered="#{userController.showEditHapus(post.userId)}"/>
+                                        <h:link value="hapus" onclick="ConfirmDeletePost()" outcome="redirectDeletePost" rendered="#{userController.showEditHapus(post.userId)}">
+                                            <f:param name="post_id" value="#{post.id}" />
+                                        </h:link>
                                     </p>
                                     
                                 </li>
@@ -43,6 +45,9 @@
                       </ul>
                     </nav>
                 </div>
+            </ui:define>
+            <ui:define name="bottom">
+                <h:outputScript name="./js/delete.js" />
             </ui:define>
     	</ui:composition>
     </h:body>

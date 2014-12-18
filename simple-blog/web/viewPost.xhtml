@@ -40,14 +40,14 @@ and open the template in the editor.
             <h2>Komentar</h2>
             
             <div id="contact-area">
-                <h:form>
+                <h:form id="Form" onsubmit="return false;">
                     <label for="Nama">Nama:</label>
                     <h:inputText id="Nama"  value="#{viewPostController.inputName}"/>
                     <label for="Email">Email:</label>
                     <h:inputText id="Email"  value="#{viewPostController.inputEmail}"/>
                     <label for="Komentar">Komentar:</label><br></br>
                     <h:inputTextarea id="Komentar" rows="20" cols="20" value="#{viewPostController.inputComment}"></h:inputTextarea>
-                    <h:commandButton value="Kirim" class="submit-button">
+                    <h:commandButton value="Kirim" class="submit-button" onclick="return validateEmail();">
                         <f:ajax  execute="Nama Email Komentar" render=":CommentList"></f:ajax>
                     </h:commandButton>
                 </h:form>
@@ -70,6 +70,9 @@ and open the template in the editor.
     </div>
 
 </article>
+            </ui:define>
+            <ui:define name="bottom">
+                <h:outputScript name="./js/emailValidation.js" />
             </ui:define>
     	</ui:composition>
     </h:body>
